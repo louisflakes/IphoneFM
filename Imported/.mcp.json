@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "kicad": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": ["kicad-mcp-pro", "--transport", "stdio"],
+      "env": {}
+    }
+  }
+}
