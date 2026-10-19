@@ -93,3 +93,19 @@ From AP2112 DS39724 Rev 2-2: typical application circuit and pin table (p2), fea
 - 3V3 rail total ≈ 12.6 µF (COUT + U1 11.4 µF + U2/U4 bypass).
 - Start-up: foldback short-circuit limit 50 mA at VOUT = 0 V (p1, p4) charges 12.6 µF to 3.3 V in ≈ 0.9 ms. All loads are in reset or standby then (U2 standby 40–60 µA, ENA1494 p2; U4 held in reset).
 - Apple ADG has no VBUS capacitance or inrush rule; the bus sees only CIN.
+
+## Chain 6: J1 USB-C receptacle
+
+From the GCT USB4105 drawing (pin table) and USB Type-C R2.5 (March 2026).
+
+| Ref / pin | Part | Value | Stock | Note |
+|---|---|---|---|---|
+| J1 | GCT USB4105-GF-A | USB 2.0 Type-C receptacle | 96,715 | VBUS pins 5 A total; 0.25 A per signal pin |
+| Rd on CC1 (A5) | Yageo RC0402FR-075K1L | 5.1 kΩ 1% to GND | 711,656 | Spec: 5.1 kΩ ±10% total incl. pin (Table 4-28 p246, Note 2) |
+| Rd on CC2 (B5) | Yageo RC0402FR-075K1L | 5.1 kΩ 1% to GND | 711,656 | **Fit only after checking the bridge adapter** (below) |
+| A6–B6, A7–B7 | — | Shorted, stub ≤ 3.5 mm | | p76 |
+| A8, B8 (SBU) | — | Not connected | | No USB4/Alt Mode → open (p150) |
+| Shell | — | GND | | GCT pin table |
+
+- **Adapter check (Adafruit 6367):** a source turns on VBUS only when it sees Rd on exactly one CC pin; Rd on both means debug-accessory mode or no attach (p186). A normal cable carries one CC wire (p366), but Adafruit only says the 6367 "connects ... the power delivery (CC) pins". Check with a meter whether both CC pins pass straight through. If they do, fit only the Rd on the CC pin the adapter connects in our fixed orientation.
+- **CC sensing (firmware):** ADC1 8-bit with ≥ 546 ns sampling suits a ~5 kΩ source (DS14217 Table 104, p215). Bands: default 0.277–0.612 V, 1.5 A 0.746–1.164 V, 3.0 A 1.369–2.042 V; thresholds 0.613/0.745 V and 1.165/1.368 V (Table 4-36, p255).

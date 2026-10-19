@@ -40,7 +40,7 @@ Open the wiring diagrams in a browser. The netlist table under each diagram is t
 1. Part numbers for the remaining chains (Si4704, MCU decoupling, power, USB-C, RF switch, controls). Crystals and the LV2285 chain are done: see [`design/plan-c/bom.md`](design/plan-c/bom.md).
 2. Pick an RP-SMA antenna for 88–108 MHz.
 3. Check transmit level against FCC §15.239 (250 µV/m at 3 m).
-4. Verify on hardware: a blank U535 enters the bootloader with BOOT0 held; which slider direction is TX; the LV2285 runs from the MCU's 76 kHz drive.
+4. Verify on hardware: a blank U535 enters the bootloader with BOOT0 held; which slider direction is TX; the LV2285 runs from the MCU's 76 kHz drive; whether the Adafruit 6367 bridge passes one or both CC pins (decides whether to fit CC2's Rd).
 6. Board outline, layout and MagSafe enclosure.
 7. Firmware: UAC2 asynchronous audio with feedback, SAI receive, I²C drivers, LED PWM, CC sensing, mode handling.
 
