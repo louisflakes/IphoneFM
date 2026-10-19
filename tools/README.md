@@ -5,6 +5,7 @@
 | `stock.py <keyword>…` | Search DigiKey and Mouser for stock and price |
 | `dk_cat.py <categoryId> <out.json>` | Dump every in-stock DigiKey product in a category |
 | `dk_pn.py <MPN>…` | Exact DigiKey part lookup: stock, status, key specs |
+| `dk_find.py "<keywords>" Param=value…` | In-stock DigiKey search filtered by parameters |
 | `jlc.py <keyword>…` | Search the JLCPCB assembly library (LCSC stock); no key needed |
 | `freq.py` | Parse DigiKey frequency strings (`covers_fm()`) |
 | `shot.cjs <page.html> <out.png>` | Screenshot a wiring diagram with Playwright |

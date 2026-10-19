@@ -61,3 +61,20 @@ Values from the SSOP application schematic and BOM (Si4704/05-D60 Rev 1.2 p17–
 | I²C pull-ups (×2) | Yageo RC0402FR-076K8L | 6.8 kΩ | 228,152 | Was 3.3 kΩ. U4 VOL is specified at ≤ 500 µA (p5); 6.8 kΩ = 0.49 mA. Rise ≈ 288 ns at 50 pF, inside U4's 300 ns (p7) and U2's 1000 ns (ENA1494 p9) |
 | Pins 9, 10, 12 | — | GND | | p17, p27 |
 | Pins 6, 7, 11 (LPI), 23, 24 | — | Not connected | | 6/7 per p27; LPI and analog outputs unused |
+
+## Chain 4: U1 STM32U535 support parts
+
+From DS14217 Rev 5: Figure 23 power scheme (p127), Figure 37 NRST (p212), I/O characteristics (p203).
+
+| Ref / pin | Part | Value | Stock | Note |
+|---|---|---|---|---|
+| U1 | ST STM32U535CEU6 | MCU, UFQFPN48 | 1,394 | |
+| VDD 24, 36, 48 (×3) | Murata GRM155R71C104KA88J | 100 nF X7R 0402 | 7,438,959 | One per pin |
+| VDD bulk | Yageo CC0805KRX5R7BB106 | 10 µF X5R 16 V 0805 | 512,367 | One for all VDD pins |
+| VDDA 9 | Murata GRM155R71C104KA88J + TDK C1608X7R1C105K080AC | 100 nF + 1 µF X7R | 7,438,959 / 1,062,271 | VREF+ bonded to VDDA on this package |
+| VCAP 22 | Murata GRM21BR71C475KE51L | 4.7 µF X7R 16 V 0805 | 166,059 | Needs ESR < 20 mΩ at 3 MHz and ≥ 10 V (p127). ESR not yet verified: Murata's data site blocks automated access |
+| NRST 7 | Murata GRM155R71C104KA88J | 100 nF | 7,438,959 | Close to the pin; internal 40 kΩ pull-up (p211) |
+| BOOT0 44 pull-down | Yageo RC0402FR-0710KL | 10 kΩ | 10,493,057 | No internal pull-down at reset; ≤ 500 nA leakage → ~5 mV (p203) |
+| VBAT 1 | — | Tied to 3V3 | | Figure 23 shows no VBAT cap; UM3062 p24 ties VBAT to VDD |
+| SWD pads | — | SWCLK, SWDIO, NRST, 3V3, GND | | Backup programming only |
+| PC13 (tune down) | — | Internal pull-down, 30–50 kΩ | | p203 |
