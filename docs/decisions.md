@@ -27,3 +27,5 @@ Each decision is backed by a primary source (datasheet page or spec section). Ne
 | Legacy stock | Buy LV2285VB and SVC710 together, enough for the whole run | Both are end-of-life with remaining distributor stock | DigiKey, 2026-10-19 |
 | USB-C CC | Rd fitted on both CC pins | A standard C-to-C cable carries one CC wire, so the source sees one Rd (it attaches only with exactly one). A straight-through adapter would need CC2's Rd removed | Type-C R2.5 Table 3-11 p84, p186 |
 | Board | PCB thickness 1.6 mm | The SW1 slider drawing assumes it; no other part specifies a thickness | SLW-158562-5A-RA-N-D p2 |
+| ESD | USBLC6-2SC6 on D+/D−/VBUS, TPD1E05U06 on each CC, bidirectional TPD1E0B04 on the antenna | Both connectors are user-touchable; the RF switch is only 2 kV HBM | USBLC6-2 p1–2 · TPD1E05U06, TPD1E0B04 datasheets · PE42421 p2 |
+| TX filter | 5th-order 50 Ω low-pass (33 p, 100 n, 56 p, 100 n, 33 p) after the TX DC block | LV2285 gives no harmonic spec; §15.239(c) needs out-of-channel emissions under §15.209. Computed 23–34 dB at the 2nd harmonic | 47 CFR §15.239, §15.209 |

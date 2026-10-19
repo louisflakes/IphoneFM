@@ -173,3 +173,28 @@ From the Broadcom ASCB-WTF0 datasheet (ASCB-WTF0-DS101): pinout (p2), ratings (p
 - LED power ≤ 23 mW per chip vs 60/80/64 mW abs max (p3).
 - U1 pins must be open-drain with pulls off. A pin driving high could reverse-bias the LED as VBUS collapses at unplug; the datasheet does not allow reverse bias (p3).
 - U1 side: ≤ 7.3 mA per pin keeps VOL ≤ 0.4 V (spec'd to 8 mA, DS14217 p205); all pins are 5 V tolerant (FT); total sink ≪ 120 mA (p130).
+
+## Chain 11: ESD protection
+
+| Ref | Part | Protects | Stock | Checked against |
+|---|---|---|---|---|
+| U6 | ST USBLC6-2SC6 (SOT-23-6) | D+ (I/O1, pins 1/6), D− (I/O2, pins 3/4), VBUS (pin 5); GND pin 2 | 100,644 | ST datasheet (REV 2 mirror) p1–2: 2.5–3.5 pF per line, fine for 12 Mbit/s full-speed USB. VBUS: 5 V stand-off, ≥ 6 V breakdown; VBUS is ≤ 5.5 V so it never conducts (leakage may exceed the 1 µA spec near 5.5 V, harmless). IEC 61000-4-2 level 4 |
+| D3, D4 | TI TPD1E05U06DPYR | CC1, CC2 at J1 | 588,786 | TI datasheet: unidirectional (CC is never negative), 5.5 V stand-off vs ≤ 2.04 V on CC, 0.42–0.5 pF, ≤ 10 nA leakage (adds µV across Rd, so the ±10% Rd budget is untouched), ±12 kV contact |
+| D5 | TI TPD1E0B04DPLR (0201) | ANT, at J2 | 172,096 | TI datasheet: bidirectional (RF swings both ways; a one-way diode would clip it), ±3.6 V stand-off vs ≤ 1.5 V peak TX (LV2285 max ≈ 120 dBµV), 0.13–0.15 pF (≈ 10 kΩ at 100 MHz), ≤ 10 nA, ±8 kV contact. U5 behind it is only 2 kV HBM (PE42421 p2) |
+
+## Chain 12: FL1 transmit low-pass filter
+
+Between the 1 nF DC block after U2 pin 12 and U5 RF2. 5th-order Chebyshev, 0.1 dB ripple, 115 MHz cutoff, designed for 50 Ω.
+
+| Position | Part | Value | Stock |
+|---|---|---|---|
+| C (shunt, input) | Murata GRM1555C1H330JA01D | 33 pF C0G | 879,573 |
+| L (series) | Coilcraft 0805CS-101XJRC | 100 nH, SRF 1.25 GHz | 9,836 |
+| C (shunt, middle) | Murata GRM1555C1H560JA01D | 56 pF C0G | 755,897 |
+| L (series) | Coilcraft 0805CS-101XJRC | 100 nH | 9,836 |
+| C (shunt, output) | Murata GRM1555C1H330JA01D | 33 pF C0G | 879,573 |
+
+- Computed with these standard values: ≤ 0.1 dB loss at 88–108 MHz with ideal parts, ≈ 0.7 dB assuming inductor Q = 40 (Coilcraft specifies Q only at 500 MHz); 23–34 dB down at 176–216 MHz (2nd harmonic); ≥ 43 dB from 264 MHz.
+- Why: FCC §15.239(c) requires emissions outside the 200 kHz channel to meet §15.209, and the LV2285 datasheet gives no harmonic spec.
+- Both sides: DC is already blocked upstream, and U5 RF2 must be at 0 V DC (PE42421 p8), so the shunt caps see no DC. Power ≤ ~23 mW → ~21 mA rms in the inductors vs 400 mA rating.
+- The LV2285 output is not 50 Ω, so the real response will shift. Tune on the bench; the inductor pads take 0 Ω jumpers if no filter is wanted.
