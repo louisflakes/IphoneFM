@@ -127,3 +127,20 @@ From the PE42421 datasheet (DOC-33214-1.03): recommended operating conditions (p
 - Supply: our 3V3 is 3.3 V ±1.5% (AP2112 p1), so VDD at the pin is 3.23–3.34 V. That can be up to 40 mV over the 3.3 V recommended maximum, but far below the 4.0 V absolute maximum (p2). Accepted.
 - CTRL levels: high ≥ 0.7 × VDD, low ≤ 0.3 × VDD (p2). The slider gives 3.3 V or 0 V; U1 PB0 leakage ≤ 500 nA adds ≤ 50 mV across 100 kΩ (DS14217 p202).
 - Not fitted: the eval board's 0.25 pF shunt on RFC. It tunes 1–2 GHz loss (p3 note 2); at 100 MHz it is ≈ 6.4 kΩ and does nothing.
+
+## Chain 8: SW1 TX/RX slider
+
+From the Same Sky SLW-158562-5A-RA-N-D datasheet (09/12/2024): specifications (p1), drawing and schematic (p2).
+
+| Ref / pin | Part | Value | Stock | Note |
+|---|---|---|---|---|
+| SW1 | Same Sky SLW-158562-5A-RA-N-D | DPDT, non-shorting, right angle | 3,009 | Pins unnumbered on the drawing; middle row = COM |
+| Pole A COM | — | RF_MODE node | | 100 kΩ pull-down + 1 kΩ to U5 CTRL + U1 PB0 (chain 7) |
+| Pole A throws | — | 3V3 (TX), GND (RX) | | Which slide direction is TX: check on a real part |
+| Pole B | — | Not connected | | Spare |
+| Frame tabs (×2) | — | GND | | ESD path for the exposed steel frame (engineering choice) |
+
+- Electrical: 33 µA at 3.3 V vs a 300 mA / 50 V DC rating; contact resistance ≤ 100 mΩ, specified at ≤ 100 mA (p1).
+- Non-shorting (p2), so 3V3 and GND never connect during travel.
+- Operating −20 to 70 °C, the narrowest range on the board. Life 10,000 cycles.
+- Mechanical: the drawing assumes a 1.6 mm PCB (p2); actuator centre 3.7 mm above the board, 5 mm past the edge, 4 mm travel.
