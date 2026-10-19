@@ -53,5 +53,6 @@ Open the wiring diagrams in a browser. The netlist table under each diagram is t
 | `docs/decisions.md` | Design decisions and their sources |
 | `docs/reference-designs.md` | Existing FM transmitter designs, for patterns only |
 | `docs/datasheets/` | Every datasheet and spec the design was checked against, with an index |
-| `tools/` | DigiKey stock scripts and diagram screenshot script |
+| `tools/` | DigiKey stock scripts, diagram screenshot script, KiCad setup |
+| `.mcp.json` | KiCad MCP server for Claude Code |
 | `Imported/` | Notes from an earlier session, kept for later reference |

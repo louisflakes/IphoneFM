@@ -9,7 +9,10 @@
 | `jlc.py <keyword>…` | Search the JLCPCB assembly library (LCSC stock); no key needed |
 | `freq.py` | Parse DigiKey frequency strings (`covers_fm()`) |
 | `shot.cjs <page.html> <out.png>` | Screenshot a wiring diagram with Playwright |
+| `setup-kicad.sh` | Install KiCad 10 and pre-cache the KiCad MCP server (Ubuntu 24.04, as root) |
 
 API keys come from environment variables (`DIGIKEY_CLIENT_ID`, `DIGIKEY_CLIENT_SECRET`, `MOUSER_API_KEY`). Never commit keys.
 DigiKey limits a search to offset + limit ≤ 300, so `dk_cat.py` can truncate large categories.
 `shot.cjs` loads Playwright from `PLAYWRIGHT_MODULE` if set, else `playwright`, and needs absolute paths.
+
+The KiCad MCP server ([kicad-mcp-pro](https://github.com/oaslananka/kicad-mcp-pro)) is registered in `../.mcp.json`: read-only `default` profile, 24 review tools. It needs KiCad from `setup-kicad.sh`.
