@@ -72,9 +72,24 @@ From DS14217 Rev 5: Figure 23 power scheme (p127), Figure 37 NRST (p212), I/O ch
 | VDD 24, 36, 48 (×3) | Murata GRM155R71C104KA88J | 100 nF X7R 0402 | 7,438,959 | One per pin |
 | VDD bulk | Yageo CC0805KRX5R7BB106 | 10 µF X5R 16 V 0805 | 512,367 | One for all VDD pins |
 | VDDA 9 | Murata GRM155R71C104KA88J + TDK C1608X7R1C105K080AC | 100 nF + 1 µF X7R | 7,438,959 / 1,062,271 | VREF+ bonded to VDDA on this package |
-| VCAP 22 | Murata GRM21BR71C475KE51L | 4.7 µF X7R 16 V 0805 | 166,059 | Needs ESR < 20 mΩ at 3 MHz and ≥ 10 V (p127). ESR not yet verified: Murata's data site blocks automated access |
+| VCAP 22 | Murata GRM21BR71C475KE51L | 4.7 µF ±10% X7R 16 V 0805 | 166,059 | Meets ≥ 10 V and ±20% (p127; Murata product sheet). ESR < 20 mΩ at 3 MHz accepted for an X7R MLCC without the curve: the limit rules out tantalum/electrolytic |
 | NRST 7 | Murata GRM155R71C104KA88J | 100 nF | 7,438,959 | Close to the pin; internal 40 kΩ pull-up (p211) |
 | BOOT0 44 pull-down | Yageo RC0402FR-0710KL | 10 kΩ | 10,493,057 | No internal pull-down at reset; ≤ 500 nA leakage → ~5 mV (p203) |
 | VBAT 1 | — | Tied to 3V3 | | Figure 23 shows no VBAT cap; UM3062 p24 ties VBAT to VDD |
 | SWD pads | — | SWCLK, SWDIO, NRST, 3V3, GND | | Backup programming only |
 | PC13 (tune down) | — | Internal pull-down, 30–50 kΩ | | p203 |
+
+## Chain 5: U3 AP2112K-3.3 regulator
+
+From AP2112 DS39724 Rev 2-2: typical application circuit and pin table (p2), features (p1), 3.3 V electrical characteristics.
+
+| Ref / pin | Part | Value | Stock | Note |
+|---|---|---|---|---|
+| U3 | Diodes AP2112K-3.3TRG1 | 3.3 V 600 mA LDO, SOT-25 | 428,301 | VIN 1, GND 2, EN 3, NC 4, VOUT 5 |
+| CIN (VIN 1) | TDK C1608X7R1C105K080AC | 1 µF X7R 16 V 0603 | 1,062,271 | p2; X7R/X5R recommended (Note 4). Only capacitance on VBUS |
+| COUT (VOUT 5) | TDK C1608X7R1C105K080AC | 1 µF X7R 16 V 0603 | 1,062,271 | p2; stable with ≥ 1 µF, no maximum given (p1) |
+| EN 3 | — | Tied to VIN | | Internal 3 MΩ pull-down (p2 block diagram) |
+
+- 3V3 rail total ≈ 12.6 µF (COUT + U1 11.4 µF + U2/U4 bypass).
+- Start-up: foldback short-circuit limit 50 mA at VOUT = 0 V (p1, p4) charges 12.6 µF to 3.3 V in ≈ 0.9 ms. All loads are in reset or standby then (U2 standby 40–60 µA, ENA1494 p2; U4 held in reset).
+- Apple ADG has no VBUS capacitance or inrush rule; the bus sees only CIN.
