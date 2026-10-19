@@ -42,3 +42,22 @@ Values from the 88–108 MHz, 75 µs application circuit (ENA1494 p4) unless not
 | Pin 20 | Murata GRM188R71A225KE15D | 2.2 µF X7R 10 V 0603 | 416,961 | Auto-sleep ≈ 70 s (45–300 s, p2) |
 | Pin 22 drive | Yageo RC0402FR-072K2L, RC0402FR-071KL, Murata GRM155R71H103KA88D | 2.2 kΩ series, 1 kΩ to GND, 10 nF series | 123,395 / 3,538,473 / 4,003,430 | From U1 PB8 TIM16, replaces the obsolete 76 kHz crystal |
 | Pins 2, 21, 23 | — | Not connected | | 2/23 unused in I²C mode (p7); 21 is the oscillator output |
+
+## Chain 3: U4 Si4704 receiver
+
+Values from the SSOP application schematic and BOM (Si4704/05-D60 Rev 1.2 p17–18) unless noted.
+
+| Ref / pin | Part | Value | Stock | Note |
+|---|---|---|---|---|
+| U4 | Skyworks SI4704-D60-GUR | FM receiver, SSOP-24 | 2,500 | |
+| C1 (pin 22 ↔ 21) | Murata GRM155R71H223KA12D | 22 nF X7R 0402 | 244,384 | Between DBYP and VA, close to VA (not to GND) |
+| C4 (pin 20) | Murata GRM155R71C104KA88J | 100 nF X7R 0402 | 7,438,959 | VD to GND |
+| C2 (pin 8) | Murata GRM1555C1H102JA01D | 1 nF C0G | 4,655,333 | FMI coupling; also keeps U5 RF1 free of DC (PE42421 p8) |
+| R1 (pin 1 DOUT) | Yageo RC0402FR-07604RL | 604 Ω 1% | 58,904 | Datasheet 600 Ω, not a standard value |
+| R2 (pin 2 DFS) | Panasonic ERJ-2RKF2001X | 2 kΩ 1% | 3,482,510 | |
+| R3 (pin 3 DCLK) | Panasonic ERJ-2RKF2001X | 2 kΩ 1% | 3,482,510 | DCLK ≥ 26 ns period (p10); ours ≈ 325 ns |
+| C9 (DFS, U1 side of R2) | Murata GRM1555C1H3R3CA01D | 3.3 pF C0G | 279,629 | Datasheet 2–5 pF, noise mitigation |
+| RX_RST pull-down | Yageo RC0402FR-0710KL | 10 kΩ | 10,493,057 | Holds U4 in reset until firmware runs |
+| I²C pull-ups (×2) | Yageo RC0402FR-076K8L | 6.8 kΩ | 228,152 | Was 3.3 kΩ. U4 VOL is specified at ≤ 500 µA (p5); 6.8 kΩ = 0.49 mA. Rise ≈ 288 ns at 50 pF, inside U4's 300 ns (p7) and U2's 1000 ns (ENA1494 p9) |
+| Pins 9, 10, 12 | — | GND | | p17, p27 |
+| Pins 6, 7, 11 (LPI), 23, 24 | — | Not connected | | 6/7 per p27; LPI and analog outputs unused |
