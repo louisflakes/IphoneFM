@@ -41,7 +41,7 @@ Open the wiring diagrams in a browser. The netlist table under each diagram is t
 2. Pick an RP-SMA antenna for 88–108 MHz.
 3. Check transmit level against FCC §15.239 (250 µV/m at 3 m).
 4. Verify on hardware: a blank U535 enters the bootloader with BOOT0 held; which slider direction is TX; the LV2285 runs from the MCU's 76 kHz drive.
-5. Board outline, layout and MagSafe enclosure.
+5. Board outline, layout and MagSafe enclosure. Board thickness: 1.6 mm, the only thickness any part specifies (SW1 slider drawing, SLW-158562-5A-RA-N-D p2); RP-SMA legs are 3.90 mm (TE drawing).
 6. Firmware: UAC2 asynchronous audio with feedback, SAI receive, I²C drivers, LED PWM, CC sensing, mode handling.
 
 ## Repository layout

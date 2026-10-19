@@ -26,3 +26,4 @@ Each decision is backed by a primary source (datasheet page or spec section). Ne
 | Clocks | SYSCLK 152 MHz | 152 MHz ÷ 2000 = 76.000 kHz exactly; LED PWM becomes ≈ 148 kHz | ENA1494 p2 |
 | Legacy stock | Buy LV2285VB and SVC710 together, enough for the whole run | Both are end-of-life with remaining distributor stock | DigiKey, 2026-10-19 |
 | USB-C CC | Rd fitted on both CC pins | A standard C-to-C cable carries one CC wire, so the source sees one Rd (it attaches only with exactly one). A straight-through adapter would need CC2's Rd removed | Type-C R2.5 Table 3-11 p84, p186 |
+| Board | PCB thickness 1.6 mm | The SW1 slider drawing assumes it; no other part specifies a thickness | SLW-158562-5A-RA-N-D p2 |
