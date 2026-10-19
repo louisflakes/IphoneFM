@@ -88,7 +88,7 @@ const NETS = [
     between: "Rd 5.1 kΩ 1 % to GND (Yageo RC0402FR-075K1L); spec is ±10 % total incl. the pin. PA0 is a high-Z analog input from reset and has no bootloader role. ADC: 8-bit, ≥ 546 ns sample for ~5 kΩ source; bands USB 0.277–0.612 V, 1.5 A 0.746–1.164 V, 3 A 1.369–2.042 V", src: "Type-C R2.5 p161, Table 4-28 p246, Table 4-36 p255 · DS14217 p99, p215 (Table 104) · AN2606 p386–388",
     paths: [[[-186, 180], [190, 180]]], parts: [[-40, "5.1k↓"]] },
   { name: "CC2", layer: "usb", from: "J1 B5 (CC2)", to: "U1 PA1 / ADC1_IN6 (11)",
-    between: "Rd 5.1 kΩ 1 % to GND (Yageo RC0402FR-075K1L), own resistor. Not PA7: its bootloader pull-down would drag Rd below 4.59 kΩ. ADAPTER CHECK: a source only turns on VBUS with Rd on exactly one CC pin; if the Adafruit 6367 passes both CC pins, fit only the Rd on the pin it connects", src: "Type-C R2.5 p161, p186, Table 4-28 p246, p366 · DS14217 p99 · AN2606 p387",
+    between: "Rd 5.1 kΩ 1 % to GND (Yageo RC0402FR-075K1L), own resistor. Not PA7: its bootloader pull-down would drag Rd below 4.59 kΩ. Fitted: a standard C-to-C cable carries one CC wire (A5↔A5), so the source sees one Rd. Only a straight-through adapter wiring B5↔B5 would need this Rd removed (Rd/Rd blocks attach)", src: "Type-C R2.5 Table 3-11 p84, p161, p186, Table 4-28 p246, p366 · DS14217 p99 · AN2606 p387",
     paths: [[[-186, 220], [190, 220]]], parts: [[-40, "5.1k↓"]] },
   { name: "VBUS", layer: "power", from: "J1 A4, A9, B4, B9 (bussed)", to: "U3 VIN (1), EN (3) · D1 anodes (1, 3, 5)",
     between: "CIN 1 µF X7R 16 V (TDK C1608X7R1C105K080AC) to GND at U3 VIN — the only VBUS capacitance; EN tied to VIN (internal 3 MΩ pull-down). D1 runs from VBUS, not 3V3: blue/green VF can reach 3.2 V, and LED current skips U3", src: "AP2112 p2, p4 · Type-C p41 · ASCB-WTF0 p2–3",
@@ -163,8 +163,8 @@ const NETS = [
     between: "1 nF series coupling cap (Si4704 C2). U5 isolates RF2→RF1 by ≈ 85 dB typ at 100 MHz (≥ 29 dB min at 1 GHz); ~11 dB keeps FMI under its 0.4 Vpk max", src: "PE42421 p3, p5 · Si4704 p15, p17–18",
     paths: [], parts: [] },
   { name: "RF_MODE", layer: "ctrl", from: "SW1 pole A COM (middle pin)", to: "U5 CTRL (4) · U1 PB0 (18)",
-    between: "SW1 pole A: one throw = 3V3 → TX (RFC↔RF2), other throw = GND → RX (RFC↔RF1); confirm slide direction on a real part. 100 kΩ to GND holds RX during break-before-make travel. Firmware reads PB0: TX → U4 held in reset; RX → U2 off", src: "SLW-158562-5A-RA-N-D p1–2 · PE42421 p2, p4 · DS14217 p101",
-    paths: [[[450, 1220], [650, 1220]]], parts: [[550, "100k↓"]] },
+    between: "SW1 pole A: one throw = 3V3 → TX (RFC↔RF2), other throw = GND → RX (RFC↔RF1); confirm slide direction on a real part. 100 kΩ to GND (RC0402FR-07100KL) holds RX during break-before-make travel; then 1 kΩ series into CTRL (RC0402FR-071KL), as on the eval board. CTRL high ≥ 0.7·VDD, low ≤ 0.3·VDD. Firmware reads PB0 (≤ 500 nA leakage = 50 mV on 100 kΩ): TX → U4 held in reset; RX → U2 off", src: "SLW-158562-5A-RA-N-D p1–2 · PE42421 p2, p4, p7 (Figure 12) · DS14217 p101, p202",
+    paths: [[[450, 1220], [650, 1220]]], parts: [[540, "100k↓"], [608, "1k"]] },
 ];
 
 // ---- Data: parts. pins: side L/R, y, num (shown on pin), name, net (joined) or ext (local label), fn, src ----
@@ -242,7 +242,7 @@ const D1 = { ref: "D1", title: "ASCB-WTF0", sub: "D1 · RGB PLCC-6", x0: -110, x
 
 const U5 = { ref: "U5", title: "PE42421", sub: "U5 · RF switch · SC-70-6", x0: 680, x1: 880, ty: 1240, y0: 1160, y1: 1355, pw: 30, pins: [
   { side: "L", y: 1220, num: "4", name: "CTRL", net: "RF_MODE", src: "PE42421 p4 (high = RFC↔RF2), p8" },
-  { side: "L", y: 1295, num: "6", name: "VDD", net: "3V3", ext: ["▲ 3V3 rail", "single-pin control mode"], src: "PE42421 p2, p4, p8" },
+  { side: "L", y: 1295, num: "6", name: "VDD", net: "3V3", ext: ["▲ 3V3 via 1 kΩ", "as eval board (p7)"], src: "PE42421 p2, p4, p7 (Figure 12: 1 kΩ series, no bypass cap), p8. IDD 9–20 µA → 9–20 mV drop; VDD 3.23–3.34 V vs 3.3 V recommended max, 4.0 V abs max" },
   { side: "L", y: 1335, num: "2", name: "GND", layer: "gnd", ext: ["GND", ""], src: "PE42421 p8" },
   { side: "R", y: 1180, num: "5", name: "RFC", net: "ANT", src: "PE42421 p8" },
   { side: "R", y: 1295, num: "3", name: "RF2", net: "TX_RF", ext: ["◂ TX_RF (TX)", "from U2 pin 12 via 1 nF"], src: "PE42421 p8" },

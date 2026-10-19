@@ -25,4 +25,4 @@ Each decision is backed by a primary source (datasheet page or spec section). Ne
 | U2 76 kHz | Drive pin 22 from U1 TIM16 (PB8) through 2.2 k/1 k + 10 nF; pin 21 open | No 76 kHz crystal is buyable (DigiKey, Findchips, JLCPCB/LCSC); pin 22 is a self-biased 0.7 V input clamped to 0–2.8 V | ENA1494 p2, p7 |
 | Clocks | SYSCLK 152 MHz | 152 MHz ÷ 2000 = 76.000 kHz exactly; LED PWM becomes ≈ 148 kHz | ENA1494 p2 |
 | Legacy stock | Buy LV2285VB and SVC710 together, enough for the whole run | Both are end-of-life with remaining distributor stock | DigiKey, 2026-10-19 |
-| USB-C CC | Rd footprints on both CC pins; fit CC2's only if the bridge adapter carries a single CC wire | A source attaches only with Rd on exactly one CC pin; Rd/Rd is debug-accessory mode | Type-C R2.5 p186, p366 |
+| USB-C CC | Rd fitted on both CC pins | A standard C-to-C cable carries one CC wire, so the source sees one Rd (it attaches only with exactly one). A straight-through adapter would need CC2's Rd removed | Type-C R2.5 Table 3-11 p84, p186 |

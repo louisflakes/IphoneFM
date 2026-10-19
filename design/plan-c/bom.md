@@ -102,10 +102,28 @@ From the GCT USB4105 drawing (pin table) and USB Type-C R2.5 (March 2026).
 |---|---|---|---|---|
 | J1 | GCT USB4105-GF-A | USB 2.0 Type-C receptacle | 96,715 | VBUS pins 5 A total; 0.25 A per signal pin |
 | Rd on CC1 (A5) | Yageo RC0402FR-075K1L | 5.1 kΩ 1% to GND | 711,656 | Spec: 5.1 kΩ ±10% total incl. pin (Table 4-28 p246, Note 2) |
-| Rd on CC2 (B5) | Yageo RC0402FR-075K1L | 5.1 kΩ 1% to GND | 711,656 | **Fit only after checking the bridge adapter** (below) |
+| Rd on CC2 (B5) | Yageo RC0402FR-075K1L | 5.1 kΩ 1% to GND | 711,656 | Fitted (standard practice) |
 | A6–B6, A7–B7 | — | Shorted, stub ≤ 3.5 mm | | p76 |
 | A8, B8 (SBU) | — | Not connected | | No USB4/Alt Mode → open (p150) |
 | Shell | — | GND | | GCT pin table |
 
-- **Adapter check (Adafruit 6367):** a source turns on VBUS only when it sees Rd on exactly one CC pin; Rd on both means debug-accessory mode or no attach (p186). A normal cable carries one CC wire (p366), but Adafruit only says the 6367 "connects ... the power delivery (CC) pins". Check with a meter whether both CC pins pass straight through. If they do, fit only the Rd on the CC pin the adapter connects in our fixed orientation.
+- **Bridge cable:** a standard USB 2.0 C-to-C cable carries one CC wire, A5↔A5; B5 is VCONN for e-marked cables only and is not wired through (Table 3-11, p84). So the source sees exactly one Rd, which it needs to attach (p186). The Adafruit 6367 is treated as a standard short cable. Only a straight-through adapter wiring B5↔B5 would need CC2's Rd removed.
 - **CC sensing (firmware):** ADC1 8-bit with ≥ 546 ns sampling suits a ~5 kΩ source (DS14217 Table 104, p215). Bands: default 0.277–0.612 V, 1.5 A 0.746–1.164 V, 3.0 A 1.369–2.042 V; thresholds 0.613/0.745 V and 1.165/1.368 V (Table 4-36, p255).
+
+## Chain 7: U5 PE42421 RF switch and mode line
+
+From the PE42421 datasheet (DOC-33214-1.03): recommended operating conditions (p2), truth table (p4), evaluation board schematic (p7, Figure 12), pin descriptions (p8).
+
+| Ref / pin | Part | Value | Stock | Note |
+|---|---|---|---|---|
+| U5 | pSemi PE42421SCAA-Z | SPDT RF switch, SC-70-6 | 134,343 | |
+| VDD 6 series | Yageo RC0402FR-071KL | 1 kΩ from 3V3 | 3,538,297 | As on the eval board; no bypass cap there. IDD 9–20 µA → 9–20 mV drop |
+| CTRL 4 series | Yageo RC0402FR-071KL | 1 kΩ from the RF_MODE node | 3,538,297 | As on the eval board |
+| RF_MODE pull-down | Yageo RC0402FR-07100KL | 100 kΩ to GND | 6,066,869 | Holds RX (CTRL low) while the slider is between contacts |
+| RFC 5 | — | Direct to J2 centre pin | | Must be 0 V DC (p8); a passive antenna is |
+| RF1 1, RF2 3 | — | Through the 1 nF caps already listed (chains 2 and 3) | | DC blocks |
+| GND 2 | — | Short trace to the ground plane | | p8 |
+
+- Supply: our 3V3 is 3.3 V ±1.5% (AP2112 p1), so VDD at the pin is 3.23–3.34 V. That can be up to 40 mV over the 3.3 V recommended maximum, but far below the 4.0 V absolute maximum (p2). Accepted.
+- CTRL levels: high ≥ 0.7 × VDD, low ≤ 0.3 × VDD (p2). The slider gives 3.3 V or 0 V; U1 PB0 leakage ≤ 500 nA adds ≤ 50 mV across 100 kΩ (DS14217 p202).
+- Not fitted: the eval board's 0.25 pF shunt on RFC. It tunes 1–2 GHz loss (p3 note 2); at 100 MHz it is ≈ 6.4 kΩ and does nothing.
