@@ -144,3 +144,32 @@ From the Same Sky SLW-158562-5A-RA-N-D datasheet (09/12/2024): specifications (p
 - Non-shorting (p2), so 3V3 and GND never connect during travel.
 - Operating −20 to 70 °C, the narrowest range on the board. Life 10,000 cycles.
 - Mechanical: the drawing assumes a 1.6 mm PCB (p2); actuator centre 3.7 mm above the board, 5 mm past the edge, 4 mm travel.
+
+## Chain 9: SW2, SW3 buttons
+
+From the Same Sky TS02 datasheet (11/03/2025): specifications (p1), LCR drawing and schematic (p3).
+
+| Ref / pin | Part | Value | Stock | Note |
+|---|---|---|---|---|
+| SW2 (tune up / bootloader) | Same Sky TS02-66-110-BK-160-LCR-D | Tactile, 11 mm actuator, 160 gf | 2,083 | Pins 1·2 to 3V3, pins 3·4 to U1 PH3-BOOT0 (10 kΩ pull-down, chain 4) |
+| SW3 (tune down) | Same Sky TS02-66-110-BK-160-LCR-D | Same | 2,083 | Pins 1·2 to 3V3, pins 3·4 to U1 PC13 (internal pull-down) |
+
+- Rated 0.01–50 mA at 1–12 V DC (p1). SW2 carries 0.33 mA; SW3 66–110 µA (PC13 pull-down 30–50 kΩ, DS14217 p203). Both inside the rating, including its 10 µA minimum.
+- LCR drawing (p3): pins 1–2 and 3–4 joined; footprint 6.5 × 4.5 mm, Ø1.0 mm holes; leads 3.5 mm.
+- Operating −30 to 80 °C; 80,000-cycle life for 160 gf models.
+
+## Chain 10: D1 RGB LED
+
+From the Broadcom ASCB-WTF0 datasheet (ASCB-WTF0-DS101): pinout (p2), ratings (p3), derating (p7, Figure 10).
+
+| Ref / pin | Part | Value | Stock | Note |
+|---|---|---|---|---|
+| D1 | Broadcom ASCB-WTF0-0A30A | RGB, PLCC-6, independent chips | 25,847 | Anodes 1/3/5 to VBUS; cathodes 2/4/6 via resistors to U1 |
+| Red series | Yageo RC0402FR-07510RL | 510 Ω | 367,569 | To PB4; ≤ 7.0 mA, ≤ 25 mW in the resistor |
+| Green series | Panasonic ERJ-2RKF3900X | 390 Ω, 0.1 W | 191,245 | To PB5; ≤ 7.3 mA, ≤ 21 mW |
+| Blue series | Panasonic ERJ-2RKF3900X | 390 Ω, 0.1 W | 191,245 | To PB1; ≤ 7.3 mA, ≤ 21 mW |
+
+- Currents ≤ 7.3 mA vs abs max 25/25/20 mA (R/G/B, p3). With all three on, Figure 10 derates to ≈ 17/13/11 mA at 70 °C ambient, the board's upper limit (SW1). Above that, blue would need less current.
+- LED power ≤ 23 mW per chip vs 60/80/64 mW abs max (p3).
+- U1 pins must be open-drain with pulls off. A pin driving high could reverse-bias the LED as VBUS collapses at unplug; the datasheet does not allow reverse bias (p3).
+- U1 side: ≤ 7.3 mA per pin keeps VOL ≤ 0.4 V (spec'd to 8 mA, DS14217 p205); all pins are 5 V tolerant (FT); total sink ≪ 120 mA (p130).

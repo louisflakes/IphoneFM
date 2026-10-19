@@ -37,7 +37,7 @@ Open the wiring diagrams in a browser. The netlist table under each diagram is t
 
 ## Open items
 
-1. Part numbers for the remaining chains (RF switch path, controls, LED). Done so far: crystals, LV2285, Si4704, MCU, regulator, USB-C; see [`design/plan-c/bom.md`](design/plan-c/bom.md).
+1. Done: every chain has part numbers checked against its datasheet; see [`design/plan-c/bom.md`](design/plan-c/bom.md). Still open from earlier: ESD protection, a TX low-pass filter footprint.
 2. Pick an RP-SMA antenna for 88–108 MHz.
 3. Check transmit level against FCC §15.239 (250 µV/m at 3 m).
 4. Verify on hardware: a blank U535 enters the bootloader with BOOT0 held; which slider direction is TX; the LV2285 runs from the MCU's 76 kHz drive.
