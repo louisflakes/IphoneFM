@@ -52,5 +52,6 @@ Open the wiring diagrams in a browser. The netlist table under each diagram is t
 | `design/archive/` | Plans A and B, no longer developed |
 | `docs/decisions.md` | Design decisions and their sources |
 | `docs/reference-designs.md` | Existing FM transmitter designs, for patterns only |
+| `docs/datasheets/` | Every datasheet and spec the design was checked against, with an index |
 | `tools/` | DigiKey stock scripts and diagram screenshot script |
 | `Imported/` | Notes from an earlier session, kept for later reference |
