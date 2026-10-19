@@ -1,0 +1,315 @@
+<title>iPhone FM Wiring</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: one schematic sheet — layer chips on top, the drawing in the middle, pin detail and netlist under it. */
+:root {
+  --paper: #f3f5f7; --sheet: #ffffff; --ink: #18202a; --muted: #5b6676; --line: #cfd6df;
+  --chip: #26303c; --chip-ink: #e8edf3; --pin: #b9c2cd;
+  --audio: #2563c9; --rf: #c8332b; --power: #c7740a; --ctrl: #1d8a4e; --clock: #7a3fc4; --sleep: #0f8a8a; --gnd: #8a94a2; --usb: #b0306f; --led: #8a6d00;
+  --sans: "Archivo", system-ui, sans-serif; --mono: "JetBrains Mono", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #10151b; --sheet: #161d25; --ink: #e6ebf1; --muted: #93a0b1; --line: #2b3643;
+  --chip: #0b1016; --chip-ink: #dbe3ec; --pin: #4a5666;
+  --audio: #6b9cf0; --rf: #f0726a; --power: #f0a446; --ctrl: #4fc485; --clock: #b48cf0; --sleep: #3cc9c9; --gnd: #7d8898; --usb: #ec74ad; --led: #e3c34a;
+  color-scheme: dark } }
+:root[data-theme="dark"] {
+  --paper: #10151b; --sheet: #161d25; --ink: #e6ebf1; --muted: #93a0b1; --line: #2b3643;
+  --chip: #0b1016; --chip-ink: #dbe3ec; --pin: #4a5666;
+  --audio: #6b9cf0; --rf: #f0726a; --power: #f0a446; --ctrl: #4fc485; --clock: #b48cf0; --sleep: #3cc9c9; --gnd: #7d8898; --usb: #ec74ad; --led: #e3c34a;
+  color-scheme: dark }
+body { background: var(--paper); color: var(--ink); font-family: var(--sans); }
+.wrap { max-width: 1400px; margin: 0 auto; padding-block: 24px 40px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 16px; }
+header h1 { font-size: 1.5rem; margin: 0; text-wrap: balance; }
+header p { margin: 4px 0 0; color: var(--muted); max-width: 75ch; line-height: 1.5; }
+.layers { display: flex; flex-wrap: wrap; gap: 8px; }
+.layers button { font: 600 0.8rem var(--sans); letter-spacing: 0.02em; padding: 6px 12px; border-radius: 999px;
+  border: 1.5px solid var(--c); background: var(--c); color: var(--sheet); cursor: pointer; }
+.layers button[aria-pressed="false"] { background: transparent; color: var(--c); }
+.layers button.util { --c: var(--muted); }
+.layers button:focus-visible, .pin:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.sheet { background: var(--sheet); border: 1px solid var(--line); border-radius: 8px; overflow-x: auto; }
+svg { display: block; width: 100%; min-width: 1200px; height: auto; }
+svg text { font-family: var(--mono); }
+.detail { background: var(--sheet); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; min-height: 3.5em; line-height: 1.5; }
+.detail b { font-family: var(--mono); }
+.muted { color: var(--muted); }
+h2 { font-size: 1.05rem; margin: 8px 0 0; }
+.tablewrap { overflow-x: auto; background: var(--sheet); border: 1px solid var(--line); border-radius: 8px; }
+table { border-collapse: collapse; width: 100%; font-size: 0.85rem; }
+th, td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-weight: 600; color: var(--muted); font-size: 0.75rem; letter-spacing: 0.04em; text-transform: uppercase; }
+td.net { font-family: var(--mono); font-weight: 600; white-space: nowrap; }
+td.net i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; background: var(--c); }
+footer { color: var(--muted); font-size: 0.85rem; line-height: 1.5; }
+footer a { color: inherit; }
+@media (prefers-reduced-motion: no-preference) { .fade { transition: opacity .15s; } .pinrect { transition: fill .15s; } }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>iPhone FM wiring</h1>
+    <p>J1 USB-C socket (GCT USB4105) → U3 3.3 V LDO (AP2112K-3.3) → U1 STM32F072 (LQFP48) → U2 LV2285VB FM transmitter. Lines are nets between parts; short stubs are parts local to one chip. A “▲ 3V3 rail” label means the pin is wired to the 3.3 V rail from U3 (shown as a label, not a line, to avoid crossing wires). Toggle layers, tap a pin for its datasheet source.</p>
+  </header>
+  <div class="layers" id="layers" role="group" aria-label="Layers"></div>
+  <div class="sheet"><svg id="sheet" viewBox="0 0 1880 745" role="img" aria-label="USB-C socket, regulator, STM32F072 and LV2285VB wiring"></svg></div>
+  <div class="detail" id="detail">Tap a pin.</div>
+  <h2>Netlist</h2>
+  <div class="tablewrap"><table><thead><tr><th>Net</th><th>From</th><th>To</th><th>In between</th><th>Source</th></tr></thead><tbody id="netlist"></tbody></table></div>
+  <footer>Sources: <a href="https://datasheet.lcsc.com/datasheet/pdf/aaf9ba5a5acc70222fbd7624956da41a.pdf">LV2285VB ENA1494</a> · STM32F072 DS9826 Rev 6 · <a href="https://www.diodes.com/assets/Datasheets/AP2112.pdf">AP2112 DS39724 Rev 2-2</a> · <a href="https://gct.co/files/drawings/usb4105.pdf">GCT USB4105 drawing</a> · <a href="https://www.usb.org/document-library/usb-type-cr-cable-and-connector-specification-release-23">USB Type-C R2.5</a> · <a href="https://developer.apple.com/accessories/Accessory-Design-Guidelines.pdf">Apple ADG</a>. Net routes are drawn by hand; the netlist table is the source of truth.</footer>
+</div>
+
+<script>
+const LAYERS = [
+  { id: "audio", name: "Audio", color: "--audio" },
+  { id: "ctrl", name: "Control", color: "--ctrl" },
+  { id: "power", name: "Power", color: "--power" },
+  { id: "usb", name: "USB", color: "--usb" },
+  { id: "rf", name: "RF", color: "--rf" },
+  { id: "clock", name: "Clocks", color: "--clock" },
+  { id: "sleep", name: "Auto-sleep", color: "--sleep" },
+  { id: "led", name: "LED", color: "--led" },
+  { id: "gnd", name: "Ground", color: "--gnd" },
+];
+
+// ---- Data: nets between parts (the netlist). paths: polylines in sheet coordinates; parts sit on the first segment of the first path ----
+const NETS = [
+  { name: "USB_DP", layer: "usb", from: "J1 A6 + B6 (D+)", to: "U1 PA12 / USB_DP (33)",
+    between: "A6–B6 short ≤ 3.5 mm at the socket", src: "Type-C R2.5 p76 · U1 p41",
+    paths: [[[-186, 100], [190, 100]]], parts: [] },
+  { name: "USB_DM", layer: "usb", from: "J1 A7 + B7 (D−)", to: "U1 PA11 / USB_DM (32)",
+    between: "A7–B7 short ≤ 3.5 mm at the socket", src: "Type-C R2.5 p76 · U1 p41",
+    paths: [[[-186, 140], [190, 140]]], parts: [] },
+  { name: "CC1", layer: "usb", from: "J1 A5 (CC1)", to: "U1 PA0 / ADC_IN0 (10)",
+    between: "5.1 kΩ 1 % to GND (own resistor, not tied to CC2)", src: "Type-C R2.5 p161, Table 4-28 p246 · Apple ADG p386 · U1 p37",
+    paths: [[[-186, 180], [190, 180]]], parts: [[-40, "5.1k↓"]] },
+  { name: "CC2", layer: "usb", from: "J1 B5 (CC2)", to: "U1 PA6 / ADC_IN6 (16)",
+    between: "5.1 kΩ 1 % to GND (own resistor, not tied to CC1)", src: "Type-C R2.5 p161, Table 4-28 p246 · U1 p38",
+    paths: [[[-186, 220], [190, 220]]], parts: [[-40, "5.1k↓"]] },
+  { name: "VBUS", layer: "power", from: "J1 A4, A9, B4, B9 (bussed)", to: "U3 VIN (1), EN (3)",
+    between: "1 µF X5R/X7R to GND; EN tied to VIN (internal 3 MΩ pull-down)", src: "AP2112 p2, p4 · Type-C p41",
+    paths: [[[-186, 300], [-120, 300], [-120, 560], [-90, 560]], [[-120, 560], [-120, 600], [-90, 600]]], parts: [[-160, "1µF↓"]] },
+  { name: "3V3", layer: "power", from: "U3 VOUT (5)", to: "U1 VDD (24, 48), VDDA (9), VDDIO2 (36) · U2 VCC (6), I2CSW (19)",
+    between: "1 µF X5R/X7R to GND at VOUT; VDDIO2 also powers USB pins PA11/PA12", src: "AP2112 p2, p8 · U1 p40, p43 (+ note 3) · U2 p2, p7",
+    paths: [[[90, 560], [140, 560], [140, 280], [190, 280]], [[140, 320], [190, 320]], [[140, 360], [190, 360]]], parts: [[115, "1µF↓"]] },
+  { name: "AUDIO_L", layer: "audio", from: "U1 PA4 / DAC_OUT1 (14)", to: "U2 L-INPUT (1)",
+    between: "1 µF coupling · 51 kΩ ∥ 1.5 nF pre-emphasis (75 µs)", src: "U2 p4, p5 · U1 p38",
+    paths: [[[450, 124], [690, 124]]], parts: [[530, "1 µF"], [615, "51k∥1.5n"]] },
+  { name: "AUDIO_R", layer: "audio", from: "U1 PA5 / DAC_OUT2 (15)", to: "U2 R-INPUT (24)",
+    between: "1 µF coupling · 51 kΩ ∥ 1.5 nF pre-emphasis (75 µs)", src: "U2 p4, p5 · U1 p38",
+    paths: [[[450, 60], [1090, 60], [1090, 124], [1050, 124]]], parts: [[530, "1 µF"], [615, "51k∥1.5n"]] },
+  { name: "I2C_SDA", layer: "ctrl", from: "U1 PB14 / I2C2_SDA (27)", to: "U2 SDA (18)",
+    between: "3.3 kΩ pull-up to 3V3 · 100 kHz max", src: "U2 p9, p11 · U1 p40",
+    paths: [[[450, 660], [1330, 660], [1330, 376], [1050, 376]]], parts: [[1200, "3.3k↑"]] },
+  { name: "I2C_SCL", layer: "ctrl", from: "U1 PB13 / I2C2_SCL (26)", to: "U2 SCL (17)",
+    between: "3.3 kΩ pull-up to 3V3 · 100 kHz max", src: "U2 p9, p11 · U1 p40",
+    paths: [[[450, 700], [1370, 700], [1370, 418], [1050, 418]]], parts: [[1200, "3.3k↑"]] },
+  { name: "GND", layer: "gnd", from: "J1 A1, A12, B1, B12, shell · U3 GND (2)", to: "U1 VSS (23, 47), VSSA (8) · U2 3, 5, 9, 13, 15",
+    between: "common ground", src: "GCT drawing · AP2112 p2 · U1 p37, p39, p43 · U2 p3", paths: [], parts: [] },
+];
+
+// ---- Data: parts. pins: side L/R, y, num (shown on pin), name, net (joined) or ext (local label), fn, src ----
+const J1 = { ref: "J1", title: "USB-C", sub: "J1 · USB4105", x0: -330, x1: -230, y0: 60, y1: 420, ty: 375, pw: 44, pins: [
+  { side: "R", y: 100, num: "A6 B6", name: "D+", net: "USB_DP", src: "GCT drawing pin table" },
+  { side: "R", y: 140, num: "A7 B7", name: "D−", net: "USB_DM", src: "GCT drawing pin table" },
+  { side: "R", y: 180, num: "A5", name: "CC1", net: "CC1", src: "GCT drawing pin table" },
+  { side: "R", y: 220, num: "B5", name: "CC2", net: "CC2", src: "GCT drawing pin table" },
+  { side: "R", y: 300, num: "VBUS", name: "A4 A9 B4 B9", net: "VBUS", src: "GCT drawing pin table" },
+  { side: "R", y: 260, num: "GND", name: "A1 A12 B1 B12", layer: "gnd", ext: ["GND", "+ shell"], src: "GCT drawing pin table" },
+] };
+const U3 = { ref: "U3", title: "AP2112K", sub: "U3 · 3.3 V LDO", x0: -60, x1: 60, ty: 672, y0: 535, y1: 700, pw: 30, pins: [
+  { side: "L", y: 560, num: "1", name: "VIN", net: "VBUS", src: "AP2112 p2" },
+  { side: "L", y: 600, num: "3", name: "EN", net: "VBUS", src: "AP2112 p2; 3 MΩ pull-down p8" },
+  { side: "L", y: 640, num: "2", name: "GND", layer: "gnd", ext: ["GND", ""], src: "AP2112 p2" },
+  { side: "R", y: 560, num: "5", name: "VOUT", net: "3V3", src: "AP2112 p2" },
+] };
+const U1 = { ref: "U1", title: "STM32F072", sub: "U1 · LQFP48", x0: 220, x1: 420, ty: 490, y0: 30, y1: 725, pw: 30, pins: [
+  { side: "R", y: 60, num: "15", name: "PA5 · DAC_OUT2", net: "AUDIO_R", src: "DS9826 p38" },
+  { side: "R", y: 124, num: "14", name: "PA4 · DAC_OUT1", net: "AUDIO_L", src: "DS9826 p38" },
+  { side: "R", y: 660, num: "27", name: "PB14 · I2C2_SDA", net: "I2C_SDA", src: "DS9826 p40" },
+  { side: "R", y: 700, num: "26", name: "PB13 · I2C2_SCL", net: "I2C_SCL", src: "DS9826 p40" },
+  { side: "L", y: 100, num: "33", name: "PA12 · USB_DP", net: "USB_DP", src: "DS9826 p41" },
+  { side: "L", y: 140, num: "32", name: "PA11 · USB_DM", net: "USB_DM", src: "DS9826 p41" },
+  { side: "L", y: 180, num: "10", name: "PA0 · ADC_IN0", net: "CC1", src: "DS9826 p37" },
+  { side: "L", y: 220, num: "16", name: "PA6 · ADC_IN6", net: "CC2", src: "DS9826 p38" },
+  { side: "L", y: 280, num: "24", name: "VDD", net: "3V3", src: "DS9826 p40" },
+  { side: "L", y: 320, num: "9", name: "VDDA", net: "3V3", src: "DS9826 p37; DAC needs 2.4–3.6 V p53" },
+  { side: "L", y: 360, num: "36", name: "VDDIO2", net: "3V3", src: "DS9826 p41; powers PA8–PA12 p43" },
+  { side: "L", y: 400, num: "8", name: "VSSA", layer: "gnd", src: "DS9826 p37; net GND" },
+  { side: "L", y: 600, num: "11", name: "PA1 · TIM2_CH2", layer: "led", ext: ["RGB LED", "PWM"], src: "DS9826 p38" },
+  { side: "L", y: 640, num: "12", name: "PA2 · TIM2_CH3", layer: "led", ext: ["RGB LED", "PWM"], src: "DS9826 p38" },
+  { side: "L", y: 680, num: "13", name: "PA3 · TIM2_CH4", layer: "led", ext: ["RGB LED", "PWM"], src: "DS9826 p38" },
+] };
+
+// U2 LV2285VB: physical pinout (net = joined; ext = local part label)
+const U2 = [
+  { n: 1, name: "L-INPUT", layer: "audio", net: "AUDIO_L", fn: "Left channel input. AC coupling and pre-emphasis R+C required.", pg: 5 },
+  { n: 2, name: "L-CONT", layer: "ctrl", ext: ["Not used", "I²C mode"], fn: "Sanyo audio-control data input. Unused in I²C mode.", pg: 5 },
+  { n: 3, name: "GND", layer: "gnd", ext: ["GND", ""], fn: "Ground.", pg: 5 },
+  { n: 4, name: "MPX+B", layer: "power", ext: ["2.8 V LDO out", "decoupling, see p4"], fn: "LDO regulator output. External decoupling required.", pg: 5 },
+  { n: 5, name: "GND", layer: "gnd", ext: ["GND", ""], fn: "Ground.", pg: 5 },
+  { n: 6, name: "VCC", layer: "power", net: "3V3", ext: ["▲ 3V3 rail", "from U3 VOUT"], fn: "Supply, 3.3 V recommended (2.8–5.5 V).", pg: 2 },
+  { n: 7, name: "COMP OUT", layer: "audio", ext: ["Stereo MPX out", "test point"], fn: "Stereo-modulated composite output.", pg: 5 },
+  { n: 8, name: "CP OUT", layer: "rf", ext: ["PLL loop filter", "values on p4"], fn: "Charge pump current output (30 µA).", pg: 5 },
+  { n: 9, name: "GND", layer: "gnd", ext: ["GND", ""], fn: "Ground.", pg: 5 },
+  { n: 10, name: "VCO", layer: "rf", ext: ["VCO tank", "88–108 MHz set, p4"], fn: "Colpitts oscillator transistor base.", pg: 6 },
+  { n: 11, name: "RF+B", layer: "power", ext: ["2.8 V LDO out (RF)", "inductor to pin 12"], fn: "LDO regulator output for RF blocks.", pg: 6 },
+  { n: 12, name: "RF OUT", layer: "rf", ext: ["RF out → antenna", "inductor to pin 11"], fn: "Collector output; inductor between pins 11 and 12 sets resonance and biases pin 12.", pg: 6 },
+  { n: 13, name: "GND", layer: "gnd", ext: ["GND", ""], fn: "Ground.", pg: 6 },
+  { n: 14, name: "PLL+B", layer: "power", ext: ["2.8 V LDO out (PLL)", "100 nF, p4"], fn: "LDO regulator output for digital blocks.", pg: 6 },
+  { n: 15, name: "GND", layer: "gnd", ext: ["GND", ""], fn: "Ground.", pg: 6 },
+  { n: 16, name: "XTAL", layer: "clock", ext: ["16 MHz crystal", "Epson TSX-3225, 12 pF (p4)"], fn: "16 MHz PLL reference crystal. Kept local: U1's USB-trimmed clock steps 0.14 % (≈137 kHz at 98 MHz).", pg: 6 },
+  { n: 17, name: "SCL", layer: "ctrl", net: "I2C_SCL", fn: "I²C clock input, 100 kHz max.", pg: 6 },
+  { n: 18, name: "SDA", layer: "ctrl", net: "I2C_SDA", fn: "I²C data input. Address 1101000, write-only.", pg: 7 },
+  { n: 19, name: "I2CSW", layer: "power", net: "3V3", ext: ["▲ 3V3 rail", "tied high = I²C mode"], fn: "VCC = I²C on pins 17/18; GND = audio-control I/F.", pg: 7 },
+  { n: 20, name: "TC", layer: "sleep", ext: ["Sleep timer C", "2.2 µF ≈ 70 s"], fn: "Auto-sleep turn-off time capacitor.", pg: 7 },
+  { n: 21, name: "76k OUT", layer: "clock", ext: ["Stereo pilot clock", ""], fn: "76 kHz crystal between pins 21 and 22.", pg: 7 },
+  { n: 22, name: "76k IN", layer: "clock", ext: ["76 kHz crystal", "across pins 21–22"], fn: "76 kHz crystal input.", pg: 7 },
+  { n: 23, name: "R-CONT", layer: "ctrl", ext: ["Not used", "I²C mode"], fn: "Sanyo audio-control clock input. Unused in I²C mode.", pg: 7 },
+  { n: 24, name: "R-INPUT", layer: "audio", net: "AUDIO_R", fn: "Right channel input; same as pin 1.", pg: 5 },
+];
+
+// ---- Drawing ----
+const NS = "http://www.w3.org/2000/svg";
+const sheetEl = document.getElementById("sheet");
+const svg = document.createElementNS(NS, "g");
+svg.setAttribute("transform", "translate(400,0)"); // sheet x = -400 … 1480
+sheetEl.appendChild(svg);
+const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); (parent || svg).appendChild(e); return e; };
+const on = new Set(LAYERS.map(l => l.id));
+const col = id => `var(${LAYERS.find(l => l.id === id).color})`;
+const netLayer = name => NETS.find(n => n.name === name).layer;
+const items = [];
+const detail = html => document.getElementById("detail").innerHTML = html;
+
+function label(g, x, y, anchor, lines) {
+  el("text", { x, y: lines[1] ? y - 2 : y + 4, "text-anchor": anchor, "font-size": 12, "font-weight": 600, fill: "var(--ink)" }, g).textContent = lines[0];
+  if (lines[1]) el("text", { x, y: y + 12, "text-anchor": anchor, "font-size": 10.5, fill: "var(--muted)" }, g).textContent = lines[1];
+}
+function pinBox(g, x, y, text, w) {
+  const r = el("rect", { class: "pinrect", x, y: y - 9, width: w, height: 18, rx: 2 }, g);
+  el("text", { x: x + w / 2, y: y + 4, "text-anchor": "middle", "font-size": text.length > 3 ? 9.5 : 11, "font-weight": 600, fill: "var(--sheet)" }, g).textContent = text;
+  return r;
+}
+function clickable(g, aria, show) {
+  g.setAttribute("class", "pin"); g.setAttribute("tabindex", 0); g.setAttribute("role", "button"); g.setAttribute("aria-label", aria);
+  g.style.cursor = "pointer";
+  g.addEventListener("click", show);
+  g.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); show(); } });
+}
+function stub(g, x0, y, dir, layer, lines) {
+  const x1 = x0 + dir * 40;
+  el("line", { x1: x0, y1: y, x2: x1, y2: y, stroke: col(layer), "stroke-width": 2 }, g);
+  el("circle", { cx: x1, cy: y, r: 3, fill: col(layer) }, g);
+  label(g, x1 + dir * 8, y, dir < 0 ? "end" : "start", lines);
+}
+
+// Block-style parts (J1, U3, U1): only the pins in use are drawn
+function block(b) {
+  el("rect", { x: b.x0, y: b.y0, width: b.x1 - b.x0, height: b.y1 - b.y0, rx: 6, fill: "var(--chip)" });
+  const cy = b.ty || (b.y0 + b.y1) / 2;
+  el("text", { x: (b.x0 + b.x1) / 2, y: cy, "text-anchor": "middle", fill: "var(--chip-ink)", "font-size": b.x1 - b.x0 > 150 ? 20 : 14, "font-weight": 600 }).textContent = b.title;
+  el("text", { x: (b.x0 + b.x1) / 2, y: cy + 18, "text-anchor": "middle", fill: "var(--chip-ink)", "font-size": 10.5, opacity: 0.7 }).textContent = b.sub;
+  b.pins.forEach(p => {
+    const g = el("g", {}), R = p.side === "R";
+    const px = R ? b.x1 : b.x0 - b.pw;
+    const rect = pinBox(g, px, p.y, p.num, b.pw);
+    el("text", { x: R ? b.x1 - 8 : b.x0 + 8, y: p.y + 4, "text-anchor": R ? "end" : "start", "font-size": 11, fill: "var(--chip-ink)" }, g).textContent = p.name;
+    const layer = p.net ? netLayer(p.net) : p.layer;
+    if (p.ext) { const ext = el("g", { class: "fade" }, g); stub(ext, R ? px + b.pw : px, p.y, R ? 1 : -1, layer, p.ext); items.push({ layer, fade: ext }); }
+    items.push({ layer, pinrect: rect });
+    clickable(g, `${b.ref} pin ${p.num} ${p.name}`, () => detail(`<b>${b.ref} pin ${p.num} · ${p.name}</b>${p.net ? " — net " + p.net : ""} <span class="muted">(${p.src})</span>`));
+  });
+}
+[J1, U3, U1].forEach(block);
+
+// U2 chip: full SSOP-24 pinout
+const CX0 = 720, CX1 = 1020, CY0 = 90, PITCH = 42;
+const pinY = i => CY0 + 34 + i * PITCH;
+el("rect", { x: CX0, y: CY0, width: CX1 - CX0, height: 12 * PITCH + 26, rx: 6, fill: "var(--chip)" });
+el("circle", { cx: CX0 + 22, cy: CY0 + 18, r: 6, fill: "none", stroke: "var(--chip-ink)", "stroke-width": 1.5 });
+el("text", { x: (CX0 + CX1) / 2, y: CY0 + 6 * PITCH + 20, "text-anchor": "middle", fill: "var(--chip-ink)", "font-size": 20, "font-weight": 600 }).textContent = "LV2285VB";
+el("text", { x: (CX0 + CX1) / 2, y: CY0 + 6 * PITCH + 42, "text-anchor": "middle", fill: "var(--chip-ink)", "font-size": 12, opacity: 0.7 }).textContent = "U2 · SSOP-24";
+U2.forEach(p => {
+  const left = p.n <= 12, i = left ? p.n - 1 : 24 - p.n, y = pinY(i);
+  const g = el("g", {});
+  const px = left ? CX0 - 30 : CX1;
+  const rect = pinBox(g, px, y, String(p.n), 30);
+  el("text", { x: left ? CX0 + 10 : CX1 - 10, y: y + 4, "text-anchor": left ? "start" : "end", "font-size": 12, fill: "var(--chip-ink)" }, g).textContent = p.name;
+  const layer = p.net ? netLayer(p.net) : p.layer;
+  if (p.ext) {
+    const ext = el("g", { class: "fade" }, g);
+    const sx0 = left ? px : px + 30, dir = left ? -1 : 1;
+    el("line", { x1: sx0, y1: y, x2: sx0 + dir * 60, y2: y, stroke: col(layer), "stroke-width": 2 }, ext);
+    el("circle", { cx: sx0 + dir * 60, cy: y, r: 3, fill: col(layer) }, ext);
+    label(ext, sx0 + dir * 68, y, left ? "end" : "start", p.ext);
+    items.push({ layer, fade: ext });
+  }
+  items.push({ layer, pinrect: rect });
+  clickable(g, `U2 pin ${p.n} ${p.name}`, () => detail(`<b>U2 pin ${p.n} · ${p.name}</b>${p.net ? " — net " + p.net : ""} — ${p.fn} <span class="muted">(ENA1494 p${p.pg})</span>`));
+});
+
+// Local part glyphs on U2: inductor 11–12, 76 kHz crystal 21–22
+{ const x = CX0 - 60, y0 = pinY(10), y1 = pinY(11), g = el("g", { class: "fade" });
+  let d = `M${x} ${y0} `; const n = 4, h = (y1 - y0) / n;
+  for (let k = 0; k < n; k++) d += `a ${h / 2} ${h / 2} 0 0 0 0 ${h} `;
+  el("path", { d, fill: "none", stroke: "var(--rf)", "stroke-width": 2 }, g);
+  items.push({ layer: "rf", fade: g }); }
+{ const x = CX1 + 60, y0 = pinY(2), y1 = pinY(3), m = (y0 + y1) / 2, g = el("g", { class: "fade" }), s = "var(--clock)";
+  el("line", { x1: x, y1: y0, x2: x, y2: m - 10, stroke: s, "stroke-width": 2 }, g);
+  el("line", { x1: x, y1: m + 10, x2: x, y2: y1, stroke: s, "stroke-width": 2 }, g);
+  el("line", { x1: x - 9, y1: m - 10, x2: x + 9, y2: m - 10, stroke: s, "stroke-width": 2 }, g);
+  el("line", { x1: x - 9, y1: m + 10, x2: x + 9, y2: m + 10, stroke: s, "stroke-width": 2 }, g);
+  el("rect", { x: x - 6, y: m - 6, width: 12, height: 12, fill: "var(--sheet)", stroke: s, "stroke-width": 2 }, g);
+  items.push({ layer: "clock", fade: g }); }
+
+// Nets: polylines, junction dots where a branch starts, inline part markers, net name
+NETS.forEach(n => {
+  if (!n.paths.length) return;
+  const g = el("g", { class: "fade" });
+  n.paths.forEach((pts, k) => {
+    el("polyline", { points: pts.map(p => p.join(",")).join(" "), fill: "none", stroke: col(n.layer), "stroke-width": 2.5, "stroke-linejoin": "round" }, g);
+    if (k > 0) el("circle", { cx: pts[0][0], cy: pts[0][1], r: 4, fill: col(n.layer) }, g);
+  });
+  const y = n.paths[0][0][1];
+  n.parts.forEach(([x, t]) => {
+    el("rect", { x: x - 22, y: y - 7, width: 44, height: 14, rx: 2, fill: "var(--sheet)", stroke: col(n.layer), "stroke-width": 2 }, g);
+    el("text", { x, y: y - 12, "text-anchor": "middle", "font-size": 10.5, fill: "var(--muted)" }, g).textContent = t;
+  });
+  const [lx, ly] = n.paths[0][0];
+  el("text", { x: lx + (lx < 0 ? 40 : 40), y: ly + 16, "font-size": 10.5, "font-weight": 600, fill: col(n.layer) }, g).textContent = n.name;
+  items.push({ layer: n.layer, fade: g });
+});
+
+// Netlist table
+document.getElementById("netlist").innerHTML = NETS.map(n =>
+  `<tr><td class="net" style="--c:${col(n.layer)}"><i></i>${n.name}</td><td>${n.from}</td><td>${n.to}</td><td>${n.between}</td><td class="muted">${n.src}</td></tr>`).join("");
+
+// Layers
+function render() {
+  items.forEach(it => {
+    const vis = on.has(it.layer);
+    if (it.pinrect) it.pinrect.setAttribute("fill", vis ? col(it.layer) : "var(--pin)");
+    if (it.fade) it.fade.style.opacity = vis ? 1 : 0;
+  });
+  document.querySelectorAll("#layers button[data-id]").forEach(b => b.setAttribute("aria-pressed", on.has(b.dataset.id)));
+  try { localStorage.setItem("lv2285-layers-v3", JSON.stringify([...on])); } catch (e) {}
+}
+const bar = document.getElementById("layers");
+LAYERS.forEach(l => {
+  const b = document.createElement("button");
+  b.type = "button"; b.dataset.id = l.id; b.textContent = l.name; b.style.setProperty("--c", `var(${l.color})`);
+  b.addEventListener("click", () => { on.has(l.id) ? on.delete(l.id) : on.add(l.id); render(); });
+  bar.appendChild(b);
+});
+[["All", () => LAYERS.forEach(l => on.add(l.id))], ["None", () => on.clear()]].forEach(([t, f]) => {
+  const b = document.createElement("button"); b.type = "button"; b.className = "util"; b.textContent = t;
+  b.setAttribute("aria-pressed", "false"); b.addEventListener("click", () => { f(); render(); }); bar.appendChild(b);
+});
+try { const s = JSON.parse(localStorage.getItem("lv2285-layers-v3")); if (Array.isArray(s)) { on.clear(); s.forEach(x => on.add(x)); } } catch (e) {}
+render();
+</script>
