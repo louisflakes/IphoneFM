@@ -37,11 +37,10 @@ Open the wiring diagrams in a browser. The netlist table under each diagram is t
 
 ## Open items
 
-1. Pick the 32.768 kHz crystal (U1) and the LV2285's 76 kHz crystal, with load capacitors.
-2. Pick part numbers for local passives (LV2285 tuning set, Si4704 bypass, MCU decoupling). Values are on the diagram.
-3. Pick an RP-SMA antenna for 88–108 MHz.
-4. Check transmit level against FCC §15.239 (250 µV/m at 3 m).
-5. Verify on hardware: a blank U535 enters the bootloader with BOOT0 held; which slider direction is TX.
+1. Part numbers for the remaining chains (Si4704, MCU decoupling, power, USB-C, RF switch, controls). Crystals and the LV2285 chain are done: see [`design/plan-c/bom.md`](design/plan-c/bom.md).
+2. Pick an RP-SMA antenna for 88–108 MHz.
+3. Check transmit level against FCC §15.239 (250 µV/m at 3 m).
+4. Verify on hardware: a blank U535 enters the bootloader with BOOT0 held; which slider direction is TX; the LV2285 runs from the MCU's 76 kHz drive.
 6. Board outline, layout and MagSafe enclosure.
 7. Firmware: UAC2 asynchronous audio with feedback, SAI receive, I²C drivers, LED PWM, CC sensing, mode handling.
 

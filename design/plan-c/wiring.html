@@ -98,7 +98,7 @@ const NETS = [
     between: "1 µF at U3 VOUT. At U1: 100 nF per VDD pin + one 10 µF; VDDA 100 nF + 1 µF; VBAT tied to 3V3 like ST’s Nucleo. No VDDUSB pin on this package (bonded to VDD inside), so 3V3 must stay 3.0–3.6 V. VREF+ is bonded to VDDA: keep VREFBUF off", src: "AP2112 p2, p8 · DS14217 p32–33, p86, p127 · UM3062 p24 · U2 p2, p7 · Si4704 p4, p27",
     paths: [[[90, 560], [140, 560], [140, 280], [190, 280]], [[140, 320], [190, 320]], [[140, 360], [190, 360]]], parts: [[115, "1µF↓"]] },
   { name: "AUDIO_L", layer: "audio", from: "U1 PA4 / DAC1_OUT1 (14)", to: "U2 L-INPUT (1)",
-    between: "1 µF coupling · 51 kΩ ∥ 1.5 nF pre-emphasis (75 µs); DAC buffer on: load ≥ 5 kΩ, swing 0.2 V to VDDA − 0.2 V", src: "U2 p4, p5 · DS14217 p100, p225",
+    between: "1 µF coupling · 51 kΩ ∥ 1.5 nF pre-emphasis (75 µs); DAC buffer on: load ≥ 5 kΩ, swing 0.2 V to VDDA − 0.2 V. Firmware caps DAC at ≤ 780 mVrms (U2 max 900 mVrms)", src: "U2 p2, p4, p5, p10 · DS14217 p100, p225",
     paths: [[[450, 124], [690, 124]]], parts: [[530, "1 µF"], [615, "51k∥1.5n"]] },
   { name: "AUDIO_R", layer: "audio", from: "U1 PA5 / DAC1_OUT2 (15)", to: "U2 R-INPUT (24)",
     between: "1 µF coupling · 51 kΩ ∥ 1.5 nF pre-emphasis (75 µs); DAC buffer on: load ≥ 5 kΩ", src: "U2 p4, p5 · DS14217 p100, p225",
@@ -125,7 +125,7 @@ const NETS = [
     between: "active low; 10 kΩ to GND holds U4 in reset until firmware runs. GPO1/GPO2 internal pulls select 2-wire mode at RST rise", src: "DS14217 p102 · Si4704 p24, p27",
     paths: [[[450, 1040], [690, 1040]]], parts: [[570, "10k↓"]] },
   { name: "LED_R", layer: "led", from: "D1 red cathode (2)", to: "U1 PB4 / TIM3_CH1 (40)",
-    between: "510 Ω series. U1 pin is an open-drain switch to GND, internal pulls off (pin sees up to VBUS). ≤ 7.0 mA worst case, ~4.9 mA typical. PWM 10-bit ≈ 156 kHz", src: "ASCB-WTF0 p2–3 · DS14217 p111, p130 (Table 29 note 5, Table 30), p205, p243",
+    between: "510 Ω series. U1 pin is an open-drain switch to GND, internal pulls off (pin sees up to VBUS). ≤ 7.0 mA worst case, ~4.9 mA typical. PWM 10-bit ≈ 148 kHz (SYSCLK 152 MHz)", src: "ASCB-WTF0 p2–3 · DS14217 p111, p130 (Table 29 note 5, Table 30), p205, p243",
     paths: [[[30, 770], [190, 770]]], parts: [[140, "510Ω"]] },
   { name: "LED_G", layer: "led", from: "D1 green cathode (4)", to: "U1 PB5 / TIM3_CH2 (41)",
     between: "390 Ω series, open-drain sink. ≤ 7.3 mA worst case, ~5.1 mA typical, ≥ 2.9 mA at VBUS 4.75 V and VF 3.2 V", src: "ASCB-WTF0 p2–3 · DS14217 p112, p130, p205",
@@ -135,6 +135,18 @@ const NETS = [
     paths: [[[30, 842], [190, 842]]], parts: [[140, "390Ω"]] },
   { name: "GND", layer: "gnd", from: "J1 A1, A12, B1, B12, shell · U3 GND (2) · U1 VSS (23, 35, 47), VSSA (8), exposed pad", to: "U2 3, 5, 9, 13, 15 · U4 GND (13, 14), RFGND (9), SEN (16), NC 10/12 · U5 GND (2) · J2 4 legs · SW1 RX throw, frame tabs",
     between: "common ground; U1 pad soldered to GND; U4 SEN to GND sets I²C address 0x11", src: "GCT drawing · AP2112 p2 · DS14217 p86, p268 · U2 p3 · Si4704 p17, p27 · AN332 p124 · PE42421 p8 · CONREVSMA002-G drawing · SLW-158562-5A-RA-N-D p2", paths: [], parts: [] },
+  { name: "OSC76", layer: "clock", from: "U1 PB8 / TIM16_CH1 (45)", to: "U2 76k OSC IN (22)",
+    between: "76.000 kHz square (SYSCLK 152 MHz ÷ 2000). 2.2 kΩ series, 1 kΩ to GND, 10 nF series → ≈ 1 Vpp at pin 22 around its 0.7 V self-bias, inside its 0–2.8 V clamps. Pin 21 open. Replaces the obsolete 76 kHz crystal; first board confirms", src: "U2 p2, p4, p7 · DS14217 p112",
+    paths: [], parts: [] },
+  { name: "VCO_MOD", layer: "rf", from: "U2 COMPOSITE OUT (7)", to: "D2 SVC710 anode (1)",
+    between: "220 pF to GND. The composite (stereo MPX) signal moves the varactor: this is the FM modulation", src: "U2 p4, p5 · SVC710 ENA0605A p1",
+    paths: [], parts: [] },
+  { name: "VCO_TUNE", layer: "rf", from: "U2 CP OUT (8)", to: "D2 SVC710 cathode (3) · #4 82 pF",
+    between: "Loop filter at pin 8: 510 Ω + 15 µF (tantalum) to GND, 100 nF to GND; then 10 kΩ to the D2 cathode", src: "U2 p4",
+    paths: [], parts: [] },
+  { name: "VCO_TANK", layer: "rf", from: "U2 VCO (10)", to: "#3 270 pF → node: #5 100 nH to GND, #4 82 pF to D2 cathode",
+    between: "88–108 MHz set: #3 270 pF, #4 82 pF, #5 100 nH (C0G caps, Coilcraft 0805CS-101XJRC). D2 = onsemi SVC710-TL-E (obsolete, 80k in stock)", src: "U2 p4 · SVC710 p1–2",
+    paths: [], parts: [] },
   { name: "BTN_UP", layer: "ctrl", from: "SW2 pins 3·4", to: "U1 PH3-BOOT0 (44)",
     between: "SW2 pins 1·2 to 3V3; 10 kΩ to GND at U1. Held at plug-in → ROM USB bootloader; afterwards a GPIO (tune up). ≈ 0.33 mA pressed", src: "TS02 p2 · DS14217 p29, p112 · AN2606 p30 · UM3062 p28",
     paths: [], parts: [] },
@@ -170,7 +182,7 @@ const U3 = { ref: "U3", title: "AP2112K", sub: "U3 · 3.3 V LDO", x0: -60, x1: 6
   { side: "L", y: 640, num: "2", name: "GND", layer: "gnd", ext: ["GND", ""], src: "AP2112 p2" },
   { side: "R", y: 560, num: "5", name: "VOUT", net: "3V3", src: "AP2112 p2" },
 ] };
-const U1 = { ref: "U1", title: "STM32U535CEU6", sub: "U1 · UFQFPN48 (Plan C)", x0: 220, x1: 420, ty: 480, y0: 30, y1: 1110, pw: 30, pins: [
+const U1 = { ref: "U1", title: "STM32U535CEU6", sub: "U1 · UFQFPN48 (Plan C)", x0: 220, x1: 420, ty: 480, y0: 30, y1: 1135, pw: 30, pins: [
   { side: "R", y: 60, num: "15", name: "PA5 · DAC1_OUT2", net: "AUDIO_R", src: "DS14217 p100" },
   { side: "R", y: 124, num: "14", name: "PA4 · DAC1_OUT1", net: "AUDIO_L", src: "DS14217 p100" },
   { side: "R", y: 660, num: "27", name: "PB14 · I2C2_SDA", net: "I2C_SDA", src: "DS14217 p104" },
@@ -180,6 +192,7 @@ const U1 = { ref: "U1", title: "STM32U535CEU6", sub: "U1 · UFQFPN48 (Plan C)", 
   { side: "R", y: 960, num: "31", name: "PA10 · SAI1_SD_A", net: "SAI_SD", src: "DS14217 p107" },
   { side: "R", y: 1000, num: "12", name: "PA2 · LSCO", net: "RX_RCLK", src: "DS14217 p45, p99" },
   { side: "R", y: 1040, num: "20", name: "PB2 · GPIO", net: "RX_RST", src: "DS14217 p102" },
+  { side: "R", y: 1114, num: "45", name: "PB8 · TIM16_CH1", net: "OSC76", ext: ["▸ OSC76 to U2 pin 22", "76.000 kHz square"], src: "DS14217 p112" },
   { side: "R", y: 622, num: "18", name: "PB0 · GPIO", net: "RF_MODE", ext: ["◂ RF_MODE", "from SW1 COM (TX = high)"], src: "DS14217 p101" },
   { side: "L", y: 100, num: "33", name: "PA12 · USB_DP", net: "USB_DP", src: "DS14217 p107" },
   { side: "L", y: 140, num: "32", name: "PA11 · USB_DM", net: "USB_DM", src: "DS14217 p107" },
@@ -199,8 +212,8 @@ const U1 = { ref: "U1", title: "STM32U535CEU6", sub: "U1 · UFQFPN48 (Plan C)", 
   { side: "L", y: 926, num: "2", name: "PC13", net: "BTN_DN", ext: ["◂ BTN_DN (SW3)", "internal pull-down"], src: "DS14217 p97, p113 note 2" },
   { side: "L", y: 966, num: "37", name: "PA14 SWCLK", layer: "ctrl", ext: ["SWD pad", "backup only"], src: "DS14217 p108" },
   { side: "L", y: 1006, num: "34", name: "PA13 SWDIO", layer: "ctrl", ext: ["SWD pad", "backup only"], src: "DS14217 p108" },
-  { side: "L", y: 1046, num: "3", name: "PC14-OSC32_IN", layer: "clock", ext: ["32.768 kHz crystal", "for U4 RCLK"], src: "DS14217 p98, p188–189" },
-  { side: "L", y: 1082, num: "4", name: "PC15-OSC32_OUT", layer: "clock", ext: ["32.768 kHz crystal", ""], src: "DS14217 p98, p188–189" },
+  { side: "L", y: 1046, num: "3", name: "PC14-OSC32_IN", layer: "clock", ext: ["Y1 ABS07-32.768KHZ-7-T", "5.6 pF C0G ↓ (also U4 RCLK)"], src: "DS14217 p98, p188–189 · ABS07 p1. LSEDRV ≥ medium-high: crystal gmcrit ≈ 0.96 µA/V vs 1.7 limit" },
+  { side: "L", y: 1082, num: "4", name: "PC15-OSC32_OUT", layer: "clock", ext: ["Y1 (other end)", "5.6 pF C0G ↓"], src: "DS14217 p98, p188–189 · ABS07 p1" },
 ] };
 const U4 = { ref: "U4", title: "Si4704", sub: "U4 · FM receiver · SSOP-24", x0: 720, x1: 1020, ty: 945, y0: 775, y1: 1095, pw: 30, pins: [
   { side: "L", y: 880, num: "3", name: "GPO3/DCLK", net: "SAI_SCK", src: "Si4704 p27" },
@@ -259,25 +272,25 @@ const U2 = [
   { n: 1, name: "L-INPUT", layer: "audio", net: "AUDIO_L", fn: "Left channel input. AC coupling and pre-emphasis R+C required.", pg: 5 },
   { n: 2, name: "L-CONT", layer: "ctrl", ext: ["Not used", "I²C mode"], fn: "Sanyo audio-control data input. Unused in I²C mode.", pg: 5 },
   { n: 3, name: "GND", layer: "gnd", ext: ["GND", ""], fn: "Ground.", pg: 5 },
-  { n: 4, name: "MPX+B", layer: "power", ext: ["2.8 V LDO out", "decoupling, see p4"], fn: "LDO regulator output. External decoupling required.", pg: 5 },
+  { n: 4, name: "MPX+B", layer: "power", ext: ["10 µF tant. ↓", "T491A106K010AT (p4)"], fn: "LDO regulator output. 10 µF polarized to GND, as drawn on p4.", pg: 5 },
   { n: 5, name: "GND", layer: "gnd", ext: ["GND", ""], fn: "Ground.", pg: 5 },
-  { n: 6, name: "VCC", layer: "power", net: "3V3", ext: ["▲ 3V3 rail", "from U3 VOUT"], fn: "Supply, 3.3 V recommended (2.8–5.5 V).", pg: 2 },
-  { n: 7, name: "COMP OUT", layer: "audio", ext: ["Stereo MPX out", "test point"], fn: "Stereo-modulated composite output.", pg: 5 },
-  { n: 8, name: "CP OUT", layer: "rf", ext: ["PLL loop filter", "values on p4"], fn: "Charge pump current output (30 µA).", pg: 5 },
+  { n: 6, name: "VCC", layer: "power", net: "3V3", ext: ["▲ 3V3 rail", "100 nF at pin (p11)"], fn: "Supply, 3.3 V. 100 nF to GND at the pin, as in the AC test circuit (p11).", pg: 2 },
+  { n: 7, name: "COMP OUT", layer: "rf", net: "VCO_MOD", ext: ["▸ D2 anode (modulation)", "220 pF ↓ (p4)"], fn: "Stereo composite output. Drives the varactor D2 anode: this is the FM modulation. 220 pF to GND (p4).", pg: 5 },
+  { n: 8, name: "CP OUT", layer: "rf", net: "VCO_TUNE", ext: ["Loop filter → D2", "510Ω+15µF, 100nF, 10k (p4)"], fn: "Charge pump output (30 µA). Loop filter: 510 Ω + 15 µF to GND, 100 nF to GND, then 10 kΩ to the D2 cathode (p4).", pg: 5 },
   { n: 9, name: "GND", layer: "gnd", ext: ["GND", ""], fn: "Ground.", pg: 5 },
-  { n: 10, name: "VCO", layer: "rf", ext: ["VCO tank", "88–108 MHz set, p4"], fn: "Colpitts oscillator transistor base.", pg: 6 },
-  { n: 11, name: "RF+B", layer: "power", ext: ["2.8 V LDO out (RF)", "inductor to pin 12"], fn: "LDO regulator output for RF blocks.", pg: 6 },
+  { n: 10, name: "VCO", layer: "rf", net: "VCO_TANK", ext: ["VCO tank + D2 SVC710", "270p, 82p, 100 nH (p4)"], fn: "Colpitts base. 270 pF (#3) to a node with 100 nH (#5) to GND and 82 pF (#4) to the D2 cathode (p4, 88–108 MHz set).", pg: 6 },
+  { n: 11, name: "RF+B", layer: "power", ext: ["100 nF ↓; 330 nH to 12", "0805CS-331XJRC (p4)"], fn: "LDO output for RF blocks. 100 nF to GND; 330 nH (#6) to pin 12 (p4).", pg: 6 },
   { n: 12, name: "RF OUT", layer: "rf", net: "TX_RF", ext: ["▸ TX_RF to U5 RF2", "1 nF; inductor to pin 11"], fn: "Collector output; inductor between pins 11 and 12 sets resonance and biases pin 12.", pg: 6 },
   { n: 13, name: "GND", layer: "gnd", ext: ["GND", ""], fn: "Ground.", pg: 6 },
-  { n: 14, name: "PLL+B", layer: "power", ext: ["2.8 V LDO out (PLL)", "100 nF, p4"], fn: "LDO regulator output for digital blocks.", pg: 6 },
+  { n: 14, name: "PLL+B", layer: "power", ext: ["100 nF ↓", "p4"], fn: "LDO regulator output for digital blocks. 100 nF to GND (p4).", pg: 6 },
   { n: 15, name: "GND", layer: "gnd", ext: ["GND", ""], fn: "Ground.", pg: 6 },
-  { n: 16, name: "XTAL", layer: "clock", ext: ["16 MHz crystal", "Epson TSX-3225, 12 pF (p4)"], fn: "16 MHz PLL reference crystal. Kept local: U1's USB-trimmed clock steps 0.14 % (≈137 kHz at 98 MHz).", pg: 6 },
+  { n: 16, name: "XTAL", layer: "clock", ext: ["12 pF → 16 MHz → GND", "TSX-3225 16.0000MF09Z-AC0"], fn: "16 MHz PLL reference: 12 pF series cap to the crystal, crystal to GND (p4). Kept local: U1 has no matching low-jitter clock.", pg: 6 },
   { n: 17, name: "SCL", layer: "ctrl", net: "I2C_SCL", fn: "I²C clock input, 100 kHz max.", pg: 6 },
   { n: 18, name: "SDA", layer: "ctrl", net: "I2C_SDA", fn: "I²C data input. Address 1101000, write-only.", pg: 7 },
   { n: 19, name: "I2CSW", layer: "power", net: "3V3", ext: ["▲ 3V3 rail", "tied high = I²C mode"], fn: "VCC = I²C on pins 17/18; GND = audio-control I/F.", pg: 7 },
-  { n: 20, name: "TC", layer: "sleep", ext: ["Sleep timer C", "2.2 µF ≈ 70 s"], fn: "Auto-sleep turn-off time capacitor.", pg: 7 },
-  { n: 21, name: "76k OUT", layer: "clock", ext: ["Stereo pilot clock", ""], fn: "76 kHz crystal between pins 21 and 22.", pg: 7 },
-  { n: 22, name: "76k IN", layer: "clock", ext: ["76 kHz crystal", "across pins 21–22"], fn: "76 kHz crystal input.", pg: 7 },
+  { n: 20, name: "TC", layer: "sleep", ext: ["2.2 µF ↓ (auto-sleep)", "≈ 70 s turn-off (p2)"], fn: "Auto-sleep turn-off time capacitor: 2.2 µF ≈ 70 s typ (45–300 s, p2).", pg: 7 },
+  { n: 21, name: "76k OUT", layer: "clock", ext: ["Not connected", "osc output, left open"], fn: "76 kHz oscillator output. Left open: the oscillator is driven from pin 22 instead of a crystal.", pg: 7 },
+  { n: 22, name: "76k IN", layer: "clock", net: "OSC76", ext: ["◂ OSC76 from U1 PB8", "2.2k/1k + 10 nF (p7)"], fn: "76 kHz oscillator input (self-biased 0.7 V, p7). Driven by U1 TIM16 at 76.000 kHz instead of the obsolete 76 kHz crystal.", pg: 7 },
   { n: 23, name: "R-CONT", layer: "ctrl", ext: ["Not used", "I²C mode"], fn: "Sanyo audio-control clock input. Unused in I²C mode.", pg: 7 },
   { n: 24, name: "R-INPUT", layer: "audio", net: "AUDIO_R", fn: "Right channel input; same as pin 1.", pg: 5 },
 ];
@@ -362,20 +375,12 @@ U2.forEach(p => {
   clickable(g, `U2 pin ${p.n} ${p.name}`, () => detail(`<b>U2 pin ${p.n} · ${p.name}</b>${p.net ? " — net " + p.net : ""} — ${p.fn} <span class="muted">(ENA1494 p${p.pg})</span>`));
 });
 
-// Local part glyphs on U2: inductor 11–12, 76 kHz crystal 21–22
+// Local part glyph on U2: inductor 11–12
 { const x = CX0 - 60, y0 = pinY(10), y1 = pinY(11), g = el("g", { class: "fade" });
   let d = `M${x} ${y0} `; const n = 4, h = (y1 - y0) / n;
   for (let k = 0; k < n; k++) d += `a ${h / 2} ${h / 2} 0 0 0 0 ${h} `;
   el("path", { d, fill: "none", stroke: "var(--rf)", "stroke-width": 2 }, g);
   items.push({ layer: "rf", fade: g }); }
-{ const x = CX1 + 60, y0 = pinY(2), y1 = pinY(3), m = (y0 + y1) / 2, g = el("g", { class: "fade" }), s = "var(--clock)";
-  el("line", { x1: x, y1: y0, x2: x, y2: m - 10, stroke: s, "stroke-width": 2 }, g);
-  el("line", { x1: x, y1: m + 10, x2: x, y2: y1, stroke: s, "stroke-width": 2 }, g);
-  el("line", { x1: x - 9, y1: m - 10, x2: x + 9, y2: m - 10, stroke: s, "stroke-width": 2 }, g);
-  el("line", { x1: x - 9, y1: m + 10, x2: x + 9, y2: m + 10, stroke: s, "stroke-width": 2 }, g);
-  el("rect", { x: x - 6, y: m - 6, width: 12, height: 12, fill: "var(--sheet)", stroke: s, "stroke-width": 2 }, g);
-  items.push({ layer: "clock", fade: g }); }
-
 // Nets: polylines, junction dots where a branch starts, inline part markers, net name
 NETS.forEach(n => {
   if (!n.paths.length) return;
