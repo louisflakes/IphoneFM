@@ -54,14 +54,21 @@ Values from the SSOP application schematic and BOM (Si4704/05-D60 Rev 1.2 p17–
 | C1 (pin 22 ↔ 21) | Murata GRM155R71H223KA12D | 22 nF X7R 0402 | 244,384 | Between DBYP and VA, close to VA (not to GND) |
 | C4 (pin 20) | Murata GRM155R71C104KA88J | 100 nF X7R 0402 | 7,438,959 | VD to GND |
 | C2 (pin 8) | Murata GRM1555C1H102JA01D | 1 nF C0G | 4,655,333 | FMI coupling; also keeps U5 RF1 free of DC (PE42421 p8) |
+| C5 (FMI side of FB1) | — | Pad only, not fitted | | AN383 option 1 keeps the pad for option 2 (p7) |
+| FB1 (C2 → FMI) | Murata BLM15GA750SN1D | Ferrite bead, 75 Ω ±25% at 100 MHz, 200 mA, ≤ 1.3 Ω DC, 0402 | 340,990 | VCO emissions filter (AN383 p7, p9). No DC through it (C2 blocks). BLM15G spec p1 (ratings), p2 (body 1.0 × 0.5 × 0.5), p6 (land a 0.4, b 1.2, c 0.5) |
+| C14 (pin 8 to GND) | Murata GJM1555C1H6R0CB01D | 6 pF ±0.25 pF C0G 0402 | 91,801 | VCO emissions filter (AN383 p7). GRM1555C1H6R0 is "Not For New Designs"; GJM is active, same 1.0 × 0.5 × 0.5 body |
+| C15 (pin 5 GPO1), C18 (pin 4 GPO2) | Murata GRM1555C1H330JA01D | 33 pF C0G 0402 to GND | 882,503 | VCO emissions filter at the GPO pins (AN383 p8, Table 4 option 1). R19/R20 not needed: the pins have no other connection |
 | R1 (pin 1 DOUT) | Yageo RC0402FR-07604RL | 604 Ω 1% | 58,904 | Datasheet 600 Ω, not a standard value |
 | R2 (pin 2 DFS) | Panasonic ERJ-2RKF2001X | 2 kΩ 1% | 3,482,510 | |
 | R3 (pin 3 DCLK) | Panasonic ERJ-2RKF2001X | 2 kΩ 1% | 3,482,510 | DCLK ≥ 26 ns period (p10); ours ≈ 325 ns |
 | C9 (DFS, U1 side of R2) | Murata GRM1555C1H3R3CA01D | 3.3 pF C0G | 279,629 | Datasheet 2–5 pF, noise mitigation |
 | RX_RST pull-down | Yageo RC0402FR-0710KL | 10 kΩ | 10,493,057 | Holds U4 in reset until firmware runs |
 | I²C pull-ups (×2) | Yageo RC0402FR-076K8L | 6.8 kΩ | 228,152 | Was 3.3 kΩ. U4 VOL is specified at ≤ 500 µA (p5); 6.8 kΩ = 0.49 mA. Rise ≈ 288 ns at 50 pF, inside U4's 300 ns (p7) and U2's 1000 ns (ENA1494 p9) |
-| Pins 9, 10, 12 | — | GND | | p17, p27 |
-| Pins 6, 7, 11 (LPI), 23, 24 | — | Not connected | | 6/7 per p27; LPI and analog outputs unused |
+| Pins 9, 10, 11 (LPI), 12 | — | GND | | p17, p27; LPI unused, so routed to GND/RFGND (AN383 p8, p17) |
+| Pins 4 (GPO2), 5 (GPO1) | — | Floating except C18/C15 | | On-chip pulls select 2-wire mode at RST rise (p24, Table 13). Firmware holds RST low ≥ 1 ms: 100 µs minimum when floating (p6 note 4), and 33 pF on 1 MΩ gives τ ≈ 33 µs |
+| Pins 6, 7, 23, 24 | — | Not connected | | 6/7 per p27; analog outputs unused |
+
+- FMI filter loss (estimate): FB1 and C14 cost about 2 dB of signal at FMI from a 50 Ω antenna. If the bench shows the emissions margin isn't needed, FB1 takes a 0 Ω and C14 is left off.
 
 ## Chain 4: U1 STM32U535 support parts
 
@@ -108,7 +115,7 @@ From the GCT USB4105 drawing (pin table) and USB Type-C R2.5 (March 2026).
 | A8, B8 (SBU) | — | Not connected | | No USB4/Alt Mode → open (p150) |
 | Shell | — | GND | | GCT pin table |
 
-- **Bridge cable:** a standard USB 2.0 C-to-C cable carries one CC wire, A5↔A5; B5 is VCONN for e-marked cables only and is not wired through (Table 3-11, p84). So the source sees exactly one Rd, which it needs to attach (p186). The Adafruit 6367 is treated as a standard short cable. Only a straight-through adapter wiring B5↔B5 would need CC2's Rd removed.
+- **Phone cable:** a very short, flexible standard USB-C cable (chosen 2026-10-20 in place of the Adafruit 6367 bridge, for slack in the fit). A standard USB 2.0 C-to-C cable carries one CC wire, A5↔A5; B5 is VCONN for e-marked cables only and is not wired through (Table 3-11, p84). So the source sees exactly one Rd, which it needs to attach (p186). Only a straight-through adapter wiring B5↔B5 would need CC2's Rd removed.
 - **CC sensing (firmware):** ADC1 8-bit with ≥ 546 ns sampling suits a ~5 kΩ source (DS14217 Table 104, p215). Bands: default 0.277–0.612 V, 1.5 A 0.746–1.164 V, 3.0 A 1.369–2.042 V; thresholds 0.613/0.745 V and 1.165/1.368 V (Table 4-36, p255).
 
 ## Chain 7: U5 PE42421 RF switch and mode line
@@ -199,3 +206,15 @@ Between the 1 nF DC block after U2 pin 12 and U5 RF2. 5th-order Chebyshev, 0.1 d
 - Why: FCC §15.239(c) requires emissions outside the 200 kHz channel to meet §15.209, and the LV2285 datasheet gives no harmonic spec.
 - Both sides: DC is already blocked upstream, and U5 RF2 must be at 0 V DC (PE42421 p8), so the shunt caps see no DC. Power ≤ ~23 mW → ~21 mA rms in the inductors vs 400 mA rating.
 - The LV2285 output is not 50 Ω, so the real response will shift. Tune on the bench; the inductor pads take 0 Ω jumpers if no filter is wanted.
+
+## Chain 13: Test pads
+
+Planned before layout (HHG p48; [PCB design workflow](../../docs/pcb-design-workflow.md) §4). None on RF nets.
+
+| Ref | Net | Use |
+|---|---|---|
+| TP1 | VBUS | Supply from the phone |
+| TP2 | 3V3 | Regulator output |
+| TP3 | GND | Probe ground |
+| TP4 | OSC76, at U2 pin 22 | Check that the LV2285 runs from U1's 76 kHz drive |
+| TP5 | RF_MODE | Check which slide direction is TX |

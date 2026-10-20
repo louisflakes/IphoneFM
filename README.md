@@ -1,7 +1,7 @@
 # IphoneFM
 
 A MagSafe accessory for the iPhone 17 Pro that transmits and receives FM (88–108 MHz).
-The board lies flat on the back of the phone and connects through a short USB-C plug-to-plug bridge (Adafruit 6367).
+The board lies flat on the back of the phone and connects to the phone through a very short, flexible USB-C cable.
 The iPhone sees a USB audio device: it sends audio to transmit, or plays audio the board receives.
 Transmit and receive are half duplex, selected by a TX/RX slider.
 
@@ -41,7 +41,7 @@ Open the wiring diagrams in a browser. The netlist table under each diagram is t
 2. Pick an RP-SMA antenna for 88–108 MHz.
 3. Check transmit level against FCC §15.239 (250 µV/m at 3 m).
 4. Verify on hardware: a blank U535 enters the bootloader with BOOT0 held; which slider direction is TX; the LV2285 runs from the MCU's 76 kHz drive.
-5. Board outline, layout and MagSafe enclosure. Board thickness: 1.6 mm, the only thickness any part specifies (SW1 slider drawing, SLW-158562-5A-RA-N-D p2); RP-SMA legs are 3.90 mm (TE drawing).
+5. Board outline, layout and MagSafe enclosure. Board envelope (held for now): 46.45 × 71.40 mm, ½ in in from the phone's sides and ¾ in up from its bottom edge, set by the user over Apple's no-metal zones. The layout sketch is [`design/plan-c/layout.html`](design/plan-c/layout.html); Apple's keepouts and the phone outline it overlays are in `local/apple/`, which stays on the design PC (git-ignored; Apple's drawings say not to republish). Board thickness: 1.6 mm, the only thickness any part specifies (SW1 slider drawing, SLW-158562-5A-RA-N-D p2); RP-SMA legs are 3.90 mm (TE drawing).
 6. Firmware: UAC2 asynchronous audio with feedback, SAI receive, I²C drivers, LED PWM, CC sensing, mode handling.
 7. RX front end: with a true 50 Ω antenna (item 2), the 1 nF C2 into U4 FMI is enough. FMI is a high-impedance input (~4–6 kΩ in parallel with ~4–6 pF, AN383 p51–52), which a 50 Ω source drives with almost no loss. AN383's matching inductor (100–400 nH, AN383 p18–23, p37–38, p50–53) is for high-impedance antennas: headphone wires, cables and short whips. The USB FM Radio reference uses 56 nH because its antenna is a telescopic whip ([docs/reference-designs.md](docs/reference-designs.md)). Only if a short whip is chosen does FMI need a matching inductor, and any added voltage gain at FMI means rechecking TX leakage against the 0.4 Vpk limit (wiring.html, RX_RF).
 
@@ -49,7 +49,7 @@ Open the wiring diagrams in a browser. The netlist table under each diagram is t
 
 | Path | Contents |
 |---|---|
-| `design/plan-c/` | Active wiring diagram and netlist, BOM, passive package table |
+| `design/plan-c/` | Active wiring diagram and netlist, BOM, passive package table, board layout sketch |
 | `design/archive/` | Plans A and B, no longer developed |
 | `docs/decisions.md` | Design decisions and their sources |
 | `docs/pcb-design-workflow.md` | PCB capture and layout workflow and rules, cited to reference books, with conflicts flagged |

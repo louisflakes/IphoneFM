@@ -1,0 +1,311 @@
+<meta charset="utf-8">
+<title>iPhone FM Layout C</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Board sketch: the phone, the board envelope and a tray of the major parts, all in mm. Parts are not placed yet. */
+:root {
+  --paper: #f3f5f7; --sheet: #ffffff; --ink: #18202a; --muted: #5b6676; --line: #cfd6df;
+  --grid: #e7ebf0; --grid-major: #d3dae2; --phone: #18202a; --board: #1d8a4e; --board-fill: rgba(29, 138, 78, 0.12); --warn: #c8332b; --phone-detail: #9aa4b1; --magsafe: #2563c9; --magsafe-fill: rgba(37, 99, 201, 0.10); --pad: #c7740a; --body: rgba(24, 32, 42, 0.06); --body-line: #18202a;
+  --sans: "Archivo", system-ui, sans-serif; --mono: "JetBrains Mono", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #10151b; --sheet: #161d25; --ink: #e6ebf1; --muted: #93a0b1; --line: #2b3643;
+  --grid: #1c252f; --grid-major: #283340; --phone: #e6ebf1; --board: #4fc485; --board-fill: rgba(79, 196, 133, 0.14); --warn: #f0726a; --phone-detail: #5b6676; --magsafe: #6b9cf0; --magsafe-fill: rgba(107, 156, 240, 0.12); --pad: #f0a446; --body: rgba(230, 235, 241, 0.06); --body-line: #e6ebf1;
+  color-scheme: dark } }
+:root[data-theme="dark"] {
+  --paper: #10151b; --sheet: #161d25; --ink: #e6ebf1; --muted: #93a0b1; --line: #2b3643;
+  --grid: #1c252f; --grid-major: #283340; --phone: #e6ebf1; --board: #4fc485; --board-fill: rgba(79, 196, 133, 0.14); --warn: #f0726a; --phone-detail: #5b6676; --magsafe: #6b9cf0; --magsafe-fill: rgba(107, 156, 240, 0.12); --pad: #f0a446; --body: rgba(230, 235, 241, 0.06); --body-line: #e6ebf1;
+  color-scheme: dark }
+body { background: var(--paper); color: var(--ink); font-family: var(--sans); margin: 0; }
+.wrap { max-width: 1400px; margin: 0 auto; padding-block: 24px 40px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 16px; }
+header h1 { font-size: 1.5rem; margin: 0; text-wrap: balance; }
+header p { margin: 4px 0 0; color: var(--muted); max-width: 75ch; line-height: 1.5; }
+.controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.controls button { font: 600 0.8rem var(--sans); letter-spacing: 0.02em; padding: 6px 12px; border-radius: 999px;
+  border: 1.5px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer; }
+.controls button[aria-pressed="true"] { background: var(--ink); color: var(--sheet); }
+.controls button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.controls .readout { font: 0.85rem var(--mono); color: var(--muted); margin-left: auto; }
+.main { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
+.sheet { overflow-x: auto; }
+.sheet { background: var(--sheet); border: 1px solid var(--line); border-radius: 8px; padding: 8px; }
+svg { display: block; width: 100%; min-width: 640px; height: auto; }
+svg text { font-family: var(--mono); }
+.panel { background: var(--sheet); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; line-height: 1.5; font-size: 0.9rem; }
+.panel h2 { font-size: 1rem; margin: 0 0 6px; }
+.panel h2 + p { margin-top: 0; }
+.panel table { border-collapse: collapse; width: 100%; font-size: 0.82rem; margin: 6px 0 10px; }
+.panel th, .panel td { text-align: left; padding: 4px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.panel th { color: var(--muted); font-weight: 600; font-size: 0.72rem; letter-spacing: 0.04em; text-transform: uppercase; }
+.panel td.n { font-family: var(--mono); white-space: nowrap; }
+.panel ul { margin: 4px 0 10px; padding-left: 18px; }
+.warn { color: var(--warn); }
+.muted { color: var(--muted); }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>iPhone FM board sketch — Plan C</h1>
+    <p>The phone (outline, camera plateau, MagSafe ring), the board envelope, and a tray of the major parts at true size (bodies and recommended land patterns, top view). Parts are not placed yet. Looking at the back of the phone with the camera at top left; x runs from the camera-side long edge, y down from the top edge.</p>
+  </header>
+  <div class="controls" role="group" aria-label="View">
+    <button type="button" data-side="top">Top side</button>
+    <button type="button" data-side="bottom">Bottom side (phone side, mirrored)</button>
+    <button type="button" id="gridBtn">Grid</button>
+    <span class="readout" id="readout">x —, y — mm</span>
+  </div>
+  <div class="main">
+    <div class="sheet"><svg id="sk" role="img" aria-label="Phone outline and board envelope, to scale"></svg></div>
+    <div class="panel" id="panel"></div>
+  </div>
+</div>
+
+<!-- Apple's dimensions stay off GitHub: this file is in the git-ignored local/ folder on the design PC. -->
+<script src="../../local/apple/phone-outline.js" charset="utf-8"></script>
+<script>
+// ---- Data: board envelope (mm, phone back coordinates). Derived 2026-10-20; the full derivation is in local/apple/fit-notes.md ----
+const ENVELOPE = [[12.70, 59.56], [59.15, 59.56], [59.15, 130.96], [12.70, 130.96]]; // user's rectangle, 2026-10-20
+const AXIS = (6.35 + 65.50) / 2; // mirror line for the bottom view: the envelope's (and phone's) centreline
+// ---- Data: major parts, true size, top view (as placed on the board), mm, origin at the part centre ----
+// body: outline shapes; pads: recommended land pattern; pin1: marker position. Each entry cites its drawing.
+const quadPads = ({ n, pitch, padL, padW, span }) => {
+  // QFN/QFP: n pads per side, numbered counter-clockwise from the top of the left side
+  const c = span / 2 - padL / 2, o = (n - 1) / 2 * pitch, P = [];
+  for (let i = 0; i < n; i++) P.push({ x: -c, y: -o + i * pitch, w: padL, h: padW });
+  for (let i = 0; i < n; i++) P.push({ x: -o + i * pitch, y: c, w: padW, h: padL });
+  for (let i = 0; i < n; i++) P.push({ x: c, y: o - i * pitch, w: padL, h: padW });
+  for (let i = 0; i < n; i++) P.push({ x: o - i * pitch, y: -c, w: padW, h: padL });
+  return P;
+};
+const dualRow = ({ n, pitch, w, y0, y1 }) => {
+  // Two horizontal rows (SOIC/SSOP style): pins 1…n left to right along the bottom, n+1…2n right to left along the top.
+  // y0…y1: pad or lead extent from the centre line outward (mm)
+  const o = (n - 1) / 2 * pitch, P = [], h = y1 - y0, c = (y0 + y1) / 2;
+  for (let i = 0; i < n; i++) P.push({ x: -o + i * pitch, y: c, w, h });
+  for (let i = 0; i < n; i++) P.push({ x: o - i * pitch, y: -c, w, h });
+  return P;
+};
+const dualCol = ({ n, pitch, h, x0, x1 }) => {
+  // Two vertical columns (SOIC/SSOP style): pins 1…n top to bottom on the left, n+1…2n bottom to top on the right.
+  // x0…x1: pad extent from the centre line outward (mm); h: pad size along the pitch
+  const o = (n - 1) / 2 * pitch, P = [], w = x1 - x0, c = (x0 + x1) / 2;
+  for (let i = 0; i < n; i++) P.push({ x: -c, y: -o + i * pitch, w, h });
+  for (let i = 0; i < n; i++) P.push({ x: c, y: o - i * pitch, w, h });
+  return P;
+};
+const PARTS = [
+  { ref: "U1", fn: "MCU", mpn: "ST / STM32U535CEU6", pkg: "UFQFPN48, 7 × 7 mm, 0.5 mm pitch",
+    body: [{ t: "rect", w: 7.0, h: 7.0, r: 0.15 }],
+    pads: [...quadPads({ n: 12, pitch: 0.5, padL: 0.55, padW: 0.30, span: 7.30 }), { x: 0, y: 0, w: 5.60, h: 5.60 }],
+    pin1: [-4.1, -4.1], src: "DS14217 Rev 5 p268 (Table 140: D = E = 7.00, A 0.55 typ) and p269 (Figure 74 footprint: 0.30 × 0.55 pads, span 7.30, exposed pad 5.60)" },
+  { ref: "U2", fn: "FM Transmitter", mpn: "onsemi / LV2285VB", pkg: "SSOP24 (225 mil), 6.5 × 4.4 mm body, 0.5 mm pitch; leads shown (no land pattern published)",
+    body: [{ t: "rect", w: 6.5, h: 4.4, r: 0.1 }],
+    pads: dualRow({ n: 12, pitch: 0.5, w: 0.22, y0: 2.2, y1: 3.2 }),
+    pin1: [-2.45, 1.25], src: "ENA1494 p3 Package Dimensions (typ): body 6.5 × 4.4, 6.4 over leads, pitch 0.5, lead 0.22, 1.5 max tall" },
+  { ref: "U4", fn: "FM Receiver", mpn: "Skyworks / Si4704-D60-GU", pkg: "SSOP-24 (JEDEC MO-137 AE), 8.65 × 3.90 mm body, 0.635 mm pitch",
+    body: [{ t: "rect", w: 3.90, h: 8.65, r: 0.1 }],
+    pads: dualCol({ n: 12, pitch: 0.635, h: 0.35, x0: 2.625 - 0.775, x1: 2.625 + 0.775 }),
+    pin1: [-1.3, -3.7], src: "Si4704/05-D60 Rev 1.2 p30 (Table 15: D 8.65, E1 3.90, E 6.00, e 0.635, A 1.75 max) and p33 (Table 17 land pattern: C 5.20–5.30, X 0.30–0.40, Y1 1.50–1.60; midpoints drawn)" },
+  { ref: "U3", fn: "3.3 V Regulator", mpn: "Diodes / AP2112K-3.3", pkg: "SOT25 (SOT-23-5), 3.00 × 1.60 mm body, 0.95 mm pitch",
+    body: [{ t: "rect", w: 3.00, h: 1.60, r: 0.08 }],
+    pads: [...[-0.95, 0, 0.95].map(x => ({ x, y: 1.2, w: 0.55, h: 0.80 })), ...[0.95, -0.95].map(x => ({ x, y: -1.2, w: 0.55, h: 0.80 }))],
+    pin1: [-1.75, 1.75], src: "AP2112 DS39724 Rev 2-2 p1 (SOT25 top-view pinout: 1 VIN, 2 GND, 3 EN | 5 VOUT, 4 NC; drawn rotated so 1–3 run along the bottom) and p14: SOT25 outline (H 3.00, B 1.60, C 2.80, K 1.10 typ) and suggested pad layout (Z 3.20, G 1.60, X 0.55, Y 0.80, C1 2.40, C2 0.95)" },
+  { ref: "U5", fn: "RF Switch", mpn: "pSemi / PE42421", pkg: "SC-70-6, 2.10 × 1.25 mm body, 0.65 mm pitch",
+    body: [{ t: "rect", w: 2.10, h: 1.25, r: 0.06 }],
+    pads: dualRow({ n: 3, pitch: 0.65, w: 0.40, y0: 0.70, y1: 1.20 }),
+    pin1: [-1.35, 1.35], src: "PE42421 DOC-33214-1.03 p9 Figure 14: body 2.10 × 1.25, 2.10 over leads, 0.90 tall; recommended land pattern rows 1.90 apart, pads 0.40 min × 0.50 min (minimums drawn)" },
+  { ref: "U6", fn: "USB ESD Protection", mpn: "ST / USBLC6-2SC6", pkg: "SOT23-6L, 2.93 × 1.63 mm body, 0.95 mm pitch",
+    body: [{ t: "rect", w: 2.925, h: 1.625, r: 0.08 }],
+    pads: dualRow({ n: 3, pitch: 0.95, w: 0.60, y0: 0.55, y1: 1.75 }),
+    pin1: [-1.75, 2.05], src: "USBLC6-2 Rev 2 p10: Figure 22 (D 2.80–3.05, E 1.50–1.75, H 2.60–3.00, A 1.45 max; midpoints drawn) and Figure 23 footprint (0.60 × 1.20 pads, 0.95 pitch, 3.50 outer, 1.10 gap)" },
+  { ref: "J1", fn: "USB-C Receptacle", mpn: "GCT / USB4105-GF-A", pkg: "USB 2.0 Type-C, top mount, 8.94 × 7.35 mm body, front at the board edge",
+    body: [{ t: "rect", w: 8.94, h: 7.35, r: 0.3 }],
+    pads: [
+      ...[[-3.20, 0.60], [-2.40, 0.60], [-1.75, 0.30], [-1.25, 0.30], [-0.75, 0.30], [-0.25, 0.30], [0.25, 0.30], [0.75, 0.30], [1.25, 0.30], [1.75, 0.30], [2.40, 0.60], [3.20, 0.60]]
+        .map(([x, w]) => ({ x, y: -3.68, w, h: 1.15 })),
+      ...[-4.32, 4.32].map(x => ({ x, y: -3.105, w: 1.00, h: 2.10, round: true, slot: [0.60, 1.70] })),
+      ...[-4.32, 4.32].map(x => ({ x, y: 1.075, w: 1.00, h: 1.80, round: true, slot: [0.60, 1.40] })),
+      ...[-2.89, 2.89].map(x => ({ x, y: -2.605, w: 0.65, h: 0.65, npth: true })),
+    ],
+    edge: 3.675, src: "GCT USB4105 drawing Rev B4 sheet 1: body 8.94 × 7.35, 3.31 tall; recommended PCB layout (component side): 12 pads 1.15 long (4 × 0.60, 8 × 0.30, 0.50 pitch), shell slots 1.00 × 2.10 (0.60 × 1.70 drill) and 1.00 × 1.80 (0.60 × 1.40), 2 × Ø0.65 holes 5.78 apart; rear slots 2.60 from the PCB edge, front slots 4.18 beyond them, holes 3.68 beyond them" },
+  { ref: "J2", fn: "Antenna Connector", mpn: "TE / CONREVSMA002-G", pkg: "RP-SMA female, right angle, through hole; 7.00 mm square base, barrel 8.2 mm past it",
+    body: [{ t: "rect", w: 7.00, h: 7.00, r: 0.1 }, { t: "rect", y: 4.80, w: 6.1, h: 2.60, dash: "0.5 0.3" }, { t: "rect", y: 8.90, w: 5.34, h: 5.60, r: 0.2 }],
+    pads: [{ x: 0, y: 0, w: 1.40, h: 1.40, drill: 1.40 }, ...[[-2.55, -2.55], [2.55, -2.55], [-2.55, 2.55], [2.55, 2.55]].map(([x, y]) => ({ x, y, w: 1.50, h: 1.50, drill: 1.50 }))],
+    src: "TE CONREVSMA002-G drawing Rev A: 15.20 long overall, 7.00 square base, collar 2.60 long, 1/4-36 thread Ø5.34, pin axis 6.60 above the board, 13.90 tall incl. 3.90 legs; recommended footprint: centre Ø1.40, 4 × Ø1.50 legs 5.10 apart (holes only, no copper ring given). Collar width 6.1 is measured off the drawing, not dimensioned" },
+  { ref: "SW1", fn: "TX/RX Slide Switch", mpn: "Same Sky / SLW-158562-5A-RA-N-D", pkg: "DPDT right-angle slide, through hole; 15.1 × 6.2 mm body, actuator 3 × 5 mm past it, 4 mm travel",
+    body: [{ t: "rect", w: 15.1, h: 6.2, r: 0.2 }, { t: "rect", x: -2.0, y: 5.6, w: 3.0, h: 5.0 }, { t: "rect", x: 2.0, y: 5.6, w: 3.0, h: 5.0, dash: "0.5 0.3" }],
+    pads: [...[-4, 0, 4].flatMap(x => [-1.25, 1.25].map(y => ({ x, y, w: 0.85, h: 0.85, drill: 0.85 }))),
+      { x: -6.5, y: -2.9, w: 1.5, h: 0.7, dslot: true }, { x: 6.5, y: 2.9, w: 1.5, h: 0.7, dslot: true }],
+    edge: 3.1, src: "SLW-158562-5A-RA-N-D (09/12/2024) p2: body 15.1 × 6.2 × 8.5 tall, actuator 3 wide, 5 past the body, 4 travel (solid and dashed: the two positions), centre 3.7 above the board; recommended PCB layout (top view): 6 holes in 2 rows 2.5 apart at 4 pitch, frame tab slots 1.5 × 0.7 at ±6.5, 5.8 apart. Hole size not dimensioned: Ø0.85 measured off the drawing (pins 0.5 × 0.3)" },
+  { ref: "SW2, SW3", n: 2, fn: "Tactile Button", mpn: "Same Sky / TS02-66-110-BK-160-LCR-D", pkg: "6 × 6 mm tactile, through hole, Ø3.5 stem, leads crimped out to 7.9 mm",
+    body: [{ t: "rect", w: 6.0, h: 6.0, r: 0.2 }, { t: "circle", x: 0, y: 0, r: 1.75 },
+      ...[[-1, -1], [1, -1], [-1, 1], [1, 1]].map(([sxn, syn]) => ({ t: "rect", x: sxn * 3.475, y: syn * 2.25, w: 0.95, h: 0.7 }))],
+    pads: [[-3.25, -2.25], [3.25, -2.25], [-3.25, 2.25], [3.25, 2.25]].map(([x, y]) => ({ x, y, w: 1.0, h: 1.0, drill: 1.0 })),
+    pin1: [-4.4, -2.25], src: "TS02 (11/03/2025) p3, LCR version: body 6 square, stem Ø3.5, leads 7.9 ± 0.3 over the crimp, 6.5 lead pitch, 3.5 lead length; recommended PCB layout (top view): 4 × Ø1 holes, 6.5 × 4.5. Pins 1–2 and 3–4 are joined" },
+  { ref: "D1", fn: "RGB Status LED", mpn: "Broadcom / ASCB-WTF0-0A30A", pkg: "PLCC-6 (2727), 2.80 × 2.70 mm, 3.00 mm tall with lens",
+    body: [{ t: "rect", w: 2.80, h: 2.70, r: 0.1 }],
+    pads: [-1.125, 1.125].flatMap(x => [-0.9, 0, 0.9].map(y => ({ x, y, w: 0.95, h: 0.5 }))),
+    pin1: [-1.95, -0.9], src: "ASCB-WTF0-DS101 p2 Figure 1 (2.80 × 2.70 × 3.00; pins 1/3/5 left, 2/4/6 right) and p7 Figure 12 soldering pad pattern (0.95 × 0.5 pads, 0.4 gaps, 1.3 between columns)" },
+  { ref: "Y1", fn: "32.768 kHz Crystal", mpn: "Abracon / ABS07-32.768KHZ-7-T", pkg: "3.2 × 1.5 × 0.9 mm SMD, 2 pads",
+    body: [{ t: "rect", w: 3.2, h: 1.5, r: 0.15 }],
+    pads: [-1.25, 1.25].map(x => ({ x, y: 0, w: 1.1, h: 1.9 })),
+    src: "ABS07 p4: body 3.2 × 1.5, H 0.9 max; recommended land pattern 1.1 × 1.9 pads, 1.4 apart" },
+  { ref: "Y2", fn: "16 MHz Crystal", mpn: "Epson / TSX-3225 16.0000MF09Z-AC0", pkg: "3.2 × 2.5 × 0.6 mm SMD, 4 pads",
+    body: [{ t: "rect", w: 3.2, h: 2.5, r: 0.1 }],
+    pads: [-1.1, 1.1].flatMap(x => [-0.8, 0.8].map(y => ({ x, y, w: 1.40, h: 1.15 }))),
+    pin1: [-2.15, 1.6], src: "Y2_Epson_TSX-3225 p1: body 3.2 ± 0.15 × 2.5 ± 0.15 × 0.6 max; footprint 4 pads 1.4 × 1.15 at 2.2 × 1.6 pitch; top view #1 bottom left, #2 bottom right, #3 top right, #4 top left; #1/#3 crystal, #2/#4 cover (ground)" },
+];
+const PHONE = window.PHONE_OUTLINE || null;
+const VIEW = { x0: -12, y0: -12, x1: 196, y1: 162 };
+const TRAY = { x0: 90, x1: 192, y0: 4 };
+
+// ---- Drawing ----
+const NS = "http://www.w3.org/2000/svg";
+const sk = document.getElementById("sk");
+sk.setAttribute("viewBox", `${VIEW.x0} ${VIEW.y0} ${VIEW.x1 - VIEW.x0} ${VIEW.y1 - VIEW.y0}`);
+const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); (parent || sk).appendChild(e); return e; };
+const state = { side: "top", grid: true };
+try { const s = JSON.parse(localStorage.getItem("fmc-layout-v1")); if (s && (s.side === "top" || s.side === "bottom")) Object.assign(state, s); } catch (e) {}
+const sx = x => state.side === "top" ? x : 2 * AXIS - x; // phone x → drawing x
+const f2 = v => v.toFixed(2);
+
+function roundedRect(w, h, r) {
+  // Outline in phone coordinates, then mapped through sx (mirroring keeps the shape)
+  const a = sx(0), b = sx(w), x0 = Math.min(a, b), x1 = Math.max(a, b);
+  return `M${x0 + r} 0 H${x1 - r} A${r} ${r} 0 0 1 ${x1} ${r} V${h - r} A${r} ${r} 0 0 1 ${x1 - r} ${h} H${x0 + r} A${r} ${r} 0 0 1 ${x0} ${h - r} V${r} A${r} ${r} 0 0 1 ${x0 + r} 0 Z`;
+}
+
+function draw() {
+  sk.replaceChildren();
+  el("rect", { x: VIEW.x0, y: VIEW.y0, width: VIEW.x1 - VIEW.x0, height: VIEW.y1 - VIEW.y0, fill: "var(--sheet)" });
+  if (state.grid) {
+    for (let x = -10; x <= 192; x++) {
+      const major = x % 10 === 0, X = x <= 82 ? sx(x) : x;
+      el("line", { x1: X, y1: -10, x2: X, y2: 160, stroke: major ? "var(--grid-major)" : "var(--grid)", "stroke-width": major ? 0.18 : 0.08 });
+      if (major && x >= 0 && x <= 70) el("text", { x: X, y: -6.5, "text-anchor": "middle", "font-size": 2.4, fill: "var(--muted)" }).textContent = x;
+    }
+    for (let y = -10; y <= 160; y++) {
+      const major = y % 10 === 0;
+      el("line", { x1: -10, y1: y, x2: 192, y2: y, stroke: major ? "var(--grid-major)" : "var(--grid)", "stroke-width": major ? 0.18 : 0.08 });
+      if (major && y >= 0 && y <= 150) el("text", { x: -7, y: y + 0.8, "text-anchor": "end", "font-size": 2.4, fill: "var(--muted)" }).textContent = y;
+    }
+  }
+  if (PHONE) {
+    if (PHONE.back) {
+      // Apple's rear-view linework: camera plateau, lenses, flash, mic, sensor, buttons
+      const g = el("g", { transform: state.side === "top" ? "" : `translate(${2 * AXIS} 0) scale(-1 1)`, fill: "none", stroke: "var(--phone-detail)", "stroke-width": 0.12 });
+      PHONE.back.forEach(d => el("path", { d }, g));
+    }
+    el("path", { d: roundedRect(PHONE.w, PHONE.h, PHONE.r), fill: "none", stroke: "var(--phone)", "stroke-width": 0.35 });
+    if (PHONE.magsafe) {
+      const m = PHONE.magsafe, cx = sx(m.cx);
+      el("path", { d: `M${cx - m.od / 2} ${m.cy} a${m.od / 2} ${m.od / 2} 0 1 0 ${m.od} 0 a${m.od / 2} ${m.od / 2} 0 1 0 ${-m.od} 0 Z M${cx - m.id / 2} ${m.cy} a${m.id / 2} ${m.id / 2} 0 1 1 ${m.id} 0 a${m.id / 2} ${m.id / 2} 0 1 1 ${-m.id} 0 Z`,
+        fill: "var(--magsafe-fill)", "fill-rule": "evenodd", stroke: "var(--magsafe)", "stroke-width": 0.25 });
+      el("path", { d: `M${cx - 1.5} ${m.cy} H${cx + 1.5} M${cx} ${m.cy - 1.5} V${m.cy + 1.5}`, stroke: "var(--magsafe)", "stroke-width": 0.2 });
+      el("text", { x: cx, y: m.cy - m.od / 2 - 1.2, "text-anchor": "middle", "font-size": 2.2, fill: "var(--magsafe)" }).textContent = `MagSafe ring Ø${f2(m.od)}/${f2(m.id)}`;
+    }
+    el("text", { x: sx(PHONE.w / 2), y: PHONE.h + 6, "text-anchor": "middle", "font-size": 2.8, "font-weight": 600, fill: "var(--ink)" })
+      .textContent = `${PHONE.name} back · ${f2(PHONE.w)} × ${f2(PHONE.h)} mm`;
+    el("text", { x: sx(PHONE.r), y: -2, "text-anchor": state.side === "top" ? "start" : "end", "font-size": 2.4, fill: "var(--muted)" })
+      .textContent = "camera end";
+  }
+  drawTray();
+  el("polygon", { points: ENVELOPE.map(([x, y]) => `${sx(x)},${y}`).join(" "), fill: "var(--board-fill)", stroke: "var(--board)", "stroke-width": 0.35, "stroke-linejoin": "miter" });
+  el("text", { x: sx(AXIS), y: 62.8, "text-anchor": "middle", "font-size": 2.8, "font-weight": 600, fill: "var(--board)" }).textContent = "Board envelope";
+  el("text", { x: sx(AXIS), y: 66.2, "text-anchor": "middle", "font-size": 2.2, fill: "var(--board)" })
+    .textContent = state.side === "top" ? "top side (away from phone)" : "bottom side (phone side)";
+  document.querySelectorAll("[data-side]").forEach(b => b.setAttribute("aria-pressed", b.dataset.side === state.side));
+  document.getElementById("gridBtn").setAttribute("aria-pressed", state.grid);
+  try { localStorage.setItem("fmc-layout-v1", JSON.stringify(state)); } catch (e) {}
+}
+
+// ---- Parts tray: flowed in rows to the right of the phone, never mirrored ----
+function bbox(p) {
+  let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+  const add = (a, b, c, d) => { x0 = Math.min(x0, a); y0 = Math.min(y0, b); x1 = Math.max(x1, c); y1 = Math.max(y1, d); };
+  p.body.forEach(b => b.t === "circle" ? add(b.x - b.r, b.y - b.r, b.x + b.r, b.y + b.r) : add((b.x || 0) - b.w / 2, (b.y || 0) - b.h / 2, (b.x || 0) + b.w / 2, (b.y || 0) + b.h / 2));
+  p.pads.forEach(d => add(d.x - d.w / 2, d.y - d.h / 2, d.x + d.w / 2, d.y + d.h / 2));
+  return { x0, y0, x1, y1 };
+}
+function drawTray() {
+  el("text", { x: TRAY.x0, y: TRAY.y0 - 1, "font-size": 2.8, "font-weight": 600, fill: "var(--ink)" }).textContent = "Major parts, true size (not placed)";
+  // Pass 1: fill rows left to right; pass 2: draw each part centred in its slot, labels aligned along the row
+  const GAP = 4, LABEL = 6, rows = [[]];
+  let x = TRAY.x0;
+  PARTS.forEach(p => {
+    const b = bbox(p), w = b.x1 - b.x0, h = b.y1 - b.y0;
+    // monospace labels: about 0.6 × font size per character
+    const slot = Math.max(w, (p.fn.length + 3) * 0.6 * 2.0, (p.mpn.length + 2) * 0.6 * 1.6);
+    if (x + slot > TRAY.x1 && rows[rows.length - 1].length) { rows.push([]); x = TRAY.x0; }
+    rows[rows.length - 1].push({ p, b, w, h, slot, x });
+    x += slot + GAP;
+  });
+  let y = TRAY.y0 + 4;
+  rows.forEach(row => {
+    const rowH = Math.max(...row.map(r => r.h));
+    row.forEach(({ p, b, w, h, slot, x }) => drawPart(p, b, x + (slot - w) / 2, y + (rowH - h) / 2, x + slot / 2, y + rowH));
+    y += rowH + LABEL + GAP;
+  });
+}
+function drawPart(p, b, px, py, tx, ty) {
+  const g = el("g", { transform: `translate(${px - b.x0} ${py - b.y0})` });
+  p.body.forEach(s => s.t === "circle"
+    ? el("circle", { cx: s.x, cy: s.y, r: s.r, fill: "var(--body)", stroke: "var(--body-line)", "stroke-width": 0.12, "stroke-dasharray": s.dash || null }, g)
+    : el("rect", { x: (s.x || 0) - s.w / 2, y: (s.y || 0) - s.h / 2, width: s.w, height: s.h, rx: s.r || 0, fill: "var(--body)", stroke: "var(--body-line)", "stroke-width": 0.12, "stroke-dasharray": s.dash || null }, g));
+  p.pads.filter(d => !d.npth && !d.drill && !d.dslot).forEach(d => el(d.hole ? "circle" : "rect", d.hole
+    ? { cx: d.x, cy: d.y, r: d.w / 2, fill: "var(--pad)" }
+    : { x: d.x - d.w / 2, y: d.y - d.h / 2, width: d.w, height: d.h, rx: d.round ? Math.min(d.w, d.h) / 2 : 0.04, fill: "var(--pad)", opacity: 0.85 }, g));
+  // drilled holes: plated round holes and slots show the drill in the sheet colour; unplated holes are outlines only
+  p.pads.filter(d => d.hole).forEach(d => el("circle", { cx: d.x, cy: d.y, r: d.hole / 2, fill: "var(--sheet)" }, g));
+  p.pads.filter(d => d.slot).forEach(d => el("rect", { x: d.x - d.slot[0] / 2, y: d.y - d.slot[1] / 2, width: d.slot[0], height: d.slot[1], rx: Math.min(...d.slot) / 2, fill: "var(--sheet)" }, g));
+  p.pads.filter(d => d.drill).forEach(d => el("circle", { cx: d.x, cy: d.y, r: d.drill / 2, fill: "var(--sheet)", stroke: "var(--pad)", "stroke-width": 0.18 }, g));
+  p.pads.filter(d => d.dslot).forEach(d => el("rect", { x: d.x - d.w / 2, y: d.y - d.h / 2, width: d.w, height: d.h, rx: 0.1, fill: "var(--sheet)", stroke: "var(--pad)", "stroke-width": 0.18 }, g));
+  p.pads.filter(d => d.npth).forEach(d => el("circle", { cx: d.x, cy: d.y, r: d.w / 2, fill: "var(--sheet)", stroke: "var(--body-line)", "stroke-width": 0.1 }, g));
+  if (p.edge !== undefined) {
+    el("line", { x1: b.x0 - 1, y1: p.edge, x2: b.x1 + 1, y2: p.edge, stroke: "var(--board)", "stroke-width": 0.15, "stroke-dasharray": "0.6 0.4" }, g);
+    el("text", { x: b.x1 + 1.2, y: p.edge + 0.5, "font-size": 1.3, fill: "var(--board)" }, g).textContent = "board edge";
+  }
+  if (p.pin1) el("circle", { cx: p.pin1[0], cy: p.pin1[1], r: 0.3, fill: "var(--body-line)" }, g);
+  el("text", { x: tx, y: ty + 2.6, "text-anchor": "middle", "font-size": 2.0, "font-weight": 600, fill: "var(--ink)" }).textContent = p.fn + (p.n ? ` ×${p.n}` : "");
+  el("text", { x: tx, y: ty + 5.0, "text-anchor": "middle", "font-size": 1.6, fill: "var(--muted)" }).textContent = `(${p.mpn})`;
+}
+
+// ---- Panel ----
+const xs = ENVELOPE.map(p => p[0]), ys = ENVELOPE.map(p => p[1]);
+const area = Math.abs(ENVELOPE.reduce((s, [x, y], i) => { const [x2, y2] = ENVELOPE[(i + 1) % ENVELOPE.length]; return s + x * y2 - x2 * y; }, 0) / 2);
+document.getElementById("panel").innerHTML = `
+  <h2>Board envelope</h2>
+  <p>Where the board's copper and parts may go. ${f2(Math.max(...xs) - Math.min(...xs))} × ${f2(Math.max(...ys) - Math.min(...ys))} mm overall, ${area.toFixed(0)} mm².</p>
+  <table><thead><tr><th>Edge</th><th>Position</th><th>Set by</th></tr></thead><tbody>
+    <tr><td>Left, right</td><td class="n">x 12.70, 59.15</td><td>½ in from the phone's sides</td></tr>
+    <tr><td>Top</td><td class="n">y 59.56</td><td>Apple no-metal zone above y 58.01, + 1.55 (unchanged)</td></tr>
+    <tr><td>Bottom</td><td class="n">y 130.96</td><td>¾ in above the phone's bottom edge</td></tr>
+  </tbody></table>
+  <b>Rules it comes from</b>
+  <ul>
+    <li>Sides ½ in (12.7 mm) inside the phone's sides; bottom edge ¾ in (19.05 mm) above the phone's bottom edge (user, 2026-10-20).</li>
+    <li>Apple's no-metal zones below y 105 are knowingly overlapped, by the user's instruction: the block on the camera side and the arms of the bottom U band.</li>
+  </ul>
+  <b>Phone outline</b>
+  <p>${PHONE ? `${PHONE.src}.` : `<span class="warn">Not loaded.</span> It comes from <code>local/apple/phone-outline.js</code>, which stays on the design PC because Apple's drawing says not to republish it.`}</p>
+  <p class="muted">Derivation and Apple's keepouts: <code>local/apple/fit-notes.md</code> (git-ignored).</p>
+  <h2>Parts tray</h2>
+  <table><thead><tr><th>Ref</th><th>Part</th><th>Package</th><th>Source</th></tr></thead><tbody>
+    ${PARTS.map(p => `<tr><td class="n">${p.ref}</td><td>${p.fn} (${p.mpn})</td><td>${p.pkg}</td><td>${p.src}</td></tr>`).join("")}
+  </tbody></table>`;
+
+// ---- Controls ----
+document.querySelectorAll("[data-side]").forEach(b => b.addEventListener("click", () => { state.side = b.dataset.side; draw(); }));
+document.getElementById("gridBtn").addEventListener("click", () => { state.grid = !state.grid; draw(); });
+const readout = document.getElementById("readout");
+sk.addEventListener("pointermove", e => {
+  const pt = new DOMPoint(e.clientX, e.clientY).matrixTransform(sk.getScreenCTM().inverse());
+  readout.textContent = `x ${f2(sx(pt.x))}, y ${f2(pt.y)} mm`;
+});
+sk.addEventListener("pointerleave", () => { readout.textContent = "x —, y — mm"; });
+draw();
+</script>

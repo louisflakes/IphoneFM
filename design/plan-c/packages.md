@@ -14,7 +14,8 @@ Where a maker gives a range, **Drawn as** uses the midpoint.
 
 | Part(s) | Size | L × W × T | Terminal | Source |
 |---|---|---|---|---|
-| Murata GRM155 / GRM1555, all 13 values in the BOM | 0402 | 1.0 ±0.05 × 0.5 ±0.05 × 0.5 ±0.05 | 0.15–0.35 | Murata product page per part |
+| Murata GRM155 / GRM1555, all 13 values in the BOM, and GJM1555C1H6R0CB01D (C14) | 0402 | 1.0 ±0.05 × 0.5 ±0.05 × 0.5 ±0.05 | 0.15–0.35 | Murata product page per part; GJM spec sheet p2 |
+| Murata BLM15GA750SN1D (FB1) | 0402 | 1.0 ±0.05 × 0.5 ±0.05 × 0.5 ±0.05 | 0.25 ±0.1 | BLM15G reference spec p2 |
 | Yageo RC0402FR-07… | 0402 | 1.00 ±0.05 × 0.50 ±0.05 × 0.35 ±0.05 | I1 0.20 ±0.10, I2 0.25 ±0.10 | R_Yageo_RC_L_V14 p4, Table 1 |
 | Panasonic ERJ-2RKF… | 0402 | 1.00 ±0.05 × 0.50 ±0.05 × 0.35 ±0.05 | a 0.20 ±0.10, b 0.25 ±0.05 | R_Panasonic_ERJ_precision p4 |
 | TDK C1608X7R1C105K080AC | 0603 | 1.60 ±0.10 × 0.80 ±0.10 × 0.80 ±0.10 | B ≥ 0.20, G ≥ 0.30 | TDK product page |
@@ -32,7 +33,8 @@ Where a maker gives a range, **Drawn as** uses the midpoint.
 
 | Part(s) | Published | Drawn as: pad L × W, gap, pitch | Source |
 |---|---|---|---|
-| Murata GRM155 / GRM1555 (body ±0.05, "within ±0.10" row) | a 0.3–0.5 (gap), b 0.35–0.45 (pad L), c 0.4–0.6 (pad W) | 0.40 × 0.50, 0.40, 0.80 | MLCC_Murata_C02E p278, Table 2 |
+| Murata GRM155 / GRM1555 and GJM155 (body ±0.05, "within ±0.10" row) | a 0.3–0.5 (gap), b 0.35–0.45 (pad L), c 0.4–0.6 (pad W) | 0.40 × 0.50, 0.40, 0.80 | MLCC_Murata_C02E p278, Table 2 |
+| Murata BLM15G | a 0.4 (gap), b 1.2 (outer), c 0.5 (pad W) | 0.40 × 0.50, 0.40, 0.80 | BLM15G reference spec p6, §12.1 |
 | Yageo RC0402 | A 1.5 (outer), B 0.5 (gap), C 0.5 (pad L), D 0.6 (pad W); placement ±0.15 | 0.50 × 0.60, 0.50, 1.00 | R_Yageo_mounting_V10 p4, Table 1 |
 | Panasonic ERJ-2RK (1005) | a 0.5–0.6 (gap), b 1.4–1.6 (outer), c 0.4–0.6 (pad W) | 0.475 × 0.50, 0.55, 1.025 | R_Panasonic_land_pattern p1 |
 | TDK C1608 | PA, PB, PC each 0.60–0.80 | 0.70 × 0.70, 0.70, 1.40 | TDK product page |
@@ -51,7 +53,8 @@ Where a maker gives a range, **Drawn as** uses the midpoint.
 
 | Package | BOM uses |
 |---|---|
-| 0402 Murata | Y1 load caps; U1 VDD, VDDA and NRST 100 nF; U2 pins 1/24 (1.5 nF), 6, 7, 8, 10 tank, 11, 12, 14, 16, 22; U4 C1, C2, C4, C9; FL1 capacitors |
+| 0402 Murata | Y1 load caps; U1 VDD, VDDA and NRST 100 nF; U2 pins 1/24 (1.5 nF), 6, 7, 8, 10 tank, 11, 12, 14, 16, 22; U4 C1, C2, C4, C9, C14, C15, C18 (C5 pad only); FL1 capacitors |
+| 0402 Murata BLM15G | U4 FB1 |
 | 0402 Yageo RC | All 0402 resistors except the four Panasonic ones |
 | 0402 Panasonic ERJ-2RK | U4 R2, R3 (2 kΩ); D1 green and blue (390 Ω) |
 | 0603 TDK 1 µF | U2 pins 1, 24 coupling; U1 VDDA; U3 CIN, COUT |
