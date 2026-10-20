@@ -48,7 +48,7 @@ Open the wiring diagrams in a browser. The netlist table under each diagram is t
 
 | Path | Contents |
 |---|---|
-| `design/plan-c/` | Active wiring diagram and netlist |
+| `design/plan-c/` | Active wiring diagram and netlist, BOM, passive package table |
 | `design/archive/` | Plans A and B, no longer developed |
 | `docs/decisions.md` | Design decisions and their sources |
 | `docs/reference-designs.md` | Existing FM transmitter designs, for patterns only |

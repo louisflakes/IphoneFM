@@ -205,7 +205,7 @@ const U1 = { ref: "U1", title: "STM32U535CEU6", sub: "U1 · UFQFPN48 (Plan C)", 
   { side: "L", y: 400, num: "8", name: "VSSA", layer: "gnd", src: "DS14217 p99; net GND" },
   { side: "L", y: 440, num: "23", name: "VSS (23, 35, 47) + pad", layer: "gnd", src: "DS14217 p86, p268; net GND" },
   { side: "L", y: 626, num: "7", name: "NRST", layer: "ctrl", ext: ["100 nF ↓", "+ SWD pad"], src: "DS14217 p98, p211–212 (Figure 37): 0.1 µF close to the pin, internal 40 kΩ pull-up. GRM155R71C104KA88J" },
-  { side: "L", y: 730, num: "22", name: "VCAP", layer: "power", ext: ["4.7 µF X7R ↓", "GRM21BR71C475KE51L"], src: "DS14217 p33, p127: 4.7 µF ±20%, ESR < 20 mΩ at 3 MHz, ≥ 10 V. Murata 16 V X7R 0805; ESR at 3 MHz not yet verified from Murata data" },
+  { side: "L", y: 730, num: "22", name: "VCAP", layer: "power", ext: ["4.7 µF X7R ↓", "GRM21BR71C475KE51L"], src: "DS14217 p33, p127: 4.7 µF ±20%, ESR < 20 mΩ at 3 MHz, ≥ 10 V. Murata 16 V X7R 0805 meets voltage and ±10% (Murata product sheet). ESR accepted for an X7R MLCC without the curve: the limit rules out tantalum/electrolytic" },
   { side: "L", y: 770, num: "40", name: "PB4 · TIM3_CH1", net: "LED_R", src: "DS14217 p111 (FT_fa, 5 V tolerant)" },
   { side: "L", y: 806, num: "41", name: "PB5 · TIM3_CH2", net: "LED_G", src: "DS14217 p112 (FT_hav, 5 V tolerant)" },
   { side: "L", y: 842, num: "19", name: "PB1 · TIM3_CH4", net: "LED_B", src: "DS14217 p101 (FT_ha, 5 V tolerant)" },
@@ -260,12 +260,12 @@ const SW1 = { ref: "SW1", title: "SLW-158562", sub: "SW1 · TX/RX slider", x0: 3
   { side: "R", y: 1220, num: "A-C", name: "COM", net: "RF_MODE", src: "Same Sky SLW-158562-5A-RA-N-D p1–2 (middle pin = COM; non-shorting, so 3V3 never meets GND mid-slide). Operating −20 to 70 °C, the narrowest range on the board; 10,000-cycle life" },
 ] };
 const SW2 = { ref: "SW2", title: "TS02", sub: "SW2 · tune up", x0: -220, x1: -120, ty: 1236, y0: 1170, y1: 1262, pw: 30, pins: [
-  { side: "L", y: 1200, num: "1 2", name: "", net: "3V3", ext: ["▲ 3V3 rail", ""], src: "Same Sky TS02 p2 (1–2 joined)" },
-  { side: "R", y: 1200, num: "3 4", name: "", net: "BTN_UP", ext: ["▸ BTN_UP", "to U1 PH3-BOOT0 (44)"], src: "Same Sky TS02 p2 (3–4 joined)" },
+  { side: "L", y: 1200, num: "1 2", name: "", net: "3V3", ext: ["▲ 3V3 rail", ""], src: "Same Sky TS02 p3 (1–2 joined)" },
+  { side: "R", y: 1200, num: "3 4", name: "", net: "BTN_UP", ext: ["▸ BTN_UP", "to U1 PH3-BOOT0 (44)"], src: "Same Sky TS02 p3 (3–4 joined)" },
 ] };
 const SW3 = { ref: "SW3", title: "TS02", sub: "SW3 · tune down", x0: -220, x1: -120, ty: 1346, y0: 1280, y1: 1372, pw: 30, pins: [
-  { side: "L", y: 1310, num: "1 2", name: "", net: "3V3", ext: ["▲ 3V3 rail", ""], src: "Same Sky TS02 p2 (1–2 joined)" },
-  { side: "R", y: 1310, num: "3 4", name: "", net: "BTN_DN", ext: ["▸ BTN_DN", "to U1 PC13 (2)"], src: "Same Sky TS02 p2 (3–4 joined)" },
+  { side: "L", y: 1310, num: "1 2", name: "", net: "3V3", ext: ["▲ 3V3 rail", ""], src: "Same Sky TS02 p3 (1–2 joined)" },
+  { side: "R", y: 1310, num: "3 4", name: "", net: "BTN_DN", ext: ["▸ BTN_DN", "to U1 PC13 (2)"], src: "Same Sky TS02 p3 (3–4 joined)" },
 ] };
 
 // U2 LV2285VB: physical pinout (net = joined; ext = local part label)

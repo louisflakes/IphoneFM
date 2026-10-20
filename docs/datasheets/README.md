@@ -27,6 +27,23 @@ Every document the design was checked against. Page numbers cited in the [BOM](.
 | SW2-SW3_SameSky_TS02.pdf | Same Sky TS02 series (11/03/2025) | [sameskydevices.com](https://www.sameskydevices.com/product/resource/ts02.pdf) | Buttons, LCR drawing (p3) |
 | VCAP_Murata_GRM21BR71C475KE51_product_sheet.pdf | Murata product sheet, GRM21BR71C475KE51 | Provided by the user | VCAP cap voltage and tolerance |
 
+### Passive packages and land patterns (`plan-c/`)
+
+Used by the [package table](../../design/plan-c/packages.md).
+
+| File | Document | Source | Used for |
+|---|---|---|---|
+| MLCC_Murata_C02E_catalog_Jan2021.pdf | Murata Chip Multilayer Ceramic Capacitors catalog C02E (Jan. 18, 2021) | [DigiKey copy](https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/8942/490_Chip_Multilayer_CAT2021_MLCC.pdf) | GRM reflow land dimensions (Table 2, p278) |
+| MLCC_Yageo_CC_X5R_V32.pdf | Yageo CC X5R 4–50 V product specification V.32 (Sep. 16, 2026) | [yageogroup.com](https://yageogroup.com/content/datasheet/asset/file/UPY-GPHC_X5R_4V-TO-50V) | CC0805 10 µF body and thickness class (p2, p6, p8) |
+| MLCC_Yageo_general_data_V25.pdf | Yageo/Phycomp SMD MLCC general data V.25 (Mar. 4, 2020) | [DigiKey forum attachment](https://forum.digikey.com/t/yageo-smt-mlcc/36355) | CC reflow footprint (Table 10, p11) |
+| R_Yageo_RC_L_V14.pdf | Yageo RC_L chip resistor product specification V.14 (Nov. 14, 2025) | [yageogroup.com](https://yageogroup.com/content/datasheet/asset/file/PYU-RC_GROUP_51_ROHS_L) | RC0402 body (Table 1, p4) |
+| R_Yageo_mounting_V10.pdf | Yageo/Phycomp chip resistor mounting V.10 (Feb. 13, 2018) | [Octopart copy](https://sigma.octopart.com/138820526/technical_drawing/Yageo-RC0402FR-1310KL.pdf) | RC reflow footprint (Table 1, p4) |
+| R_Panasonic_ERJ_precision_AOA0000C304.pdf | Panasonic precision thick film chip resistors (29-May-25) | [industrial.panasonic.com](https://industrial.panasonic.com/cdbs/www-data/pdf/RDA0000/AOA0000C304.pdf) | ERJ-2RK body (p4) |
+| R_Panasonic_land_pattern_DMM0000COL17.pdf | Panasonic surface mount resistors land pattern (24-Dec-25) | [industrial.panasonic.com](https://industrial.panasonic.com/cdbs/www-data/pdf/RDM0000/DMM0000COL17.pdf) | ERJ 1005 land pattern (p1) |
+| L_Coilcraft_0805CS_Doc100.pdf | Coilcraft 0805CS, Document 100 (revised 08/05/22) | [coilcraft.com](https://www.coilcraft.com/getmedia/dd5f20e4-1ff7-43df-8317-b693eb2dce3e/0805cs.pdf) | Body and recommended land pattern (p2) |
+| Tant_KEMET_T491_T2005.pdf | KEMET T491 industrial MnO2, T2005 (2026-07-08) | [yageogroup.com](https://yageogroup.com/content/datasheet/asset/file/KEM_T2005_T491) | Case A body (p4), land dimensions (Table 2, p15) |
+| Y2_Epson_TSX-3225.pdf | Epson FA-238V / FA-238 / TSX-3225 (Rev. Dec. 2015) | [DigiKey copy](https://media.digikey.com/pdf/Data%20Sheets/Epson%20PDFs/FA-238(V),TSX-3225_Series_Rev_Dec_2015.pdf) | Y2 body and recommended footprint (p1) |
+
 ## Specs and Apple documents (`specs/`)
 
 | File | Document | Used for |
@@ -37,7 +54,7 @@ Every document the design was checked against. Page numbers cited in the [BOM](.
 | USB_Type-C_R2.0_Aug2019.pdf | USB Type-C Spec R2.0 (August 2019) | Earlier cross-check; superseded by R2.5 |
 | USB_PD_R3.2_V1.2_2026-08-19.pdf | USB Power Delivery R3.2 V1.2 (2026-08-19) | vSafe5V range, VBUS ripple |
 
-Web references not stored as files: [Apple TN3190 USB audio](https://developer.apple.com/documentation/technotes/tn3190-usb-audio-device-design-considerations), [47 CFR Part 15](https://www.ecfr.gov/current/title-47/chapter-I/subchapter-A/part-15) (§15.23, §15.203, §15.209, §15.239).
+Web references not stored as files: Murata product pages for each GRM part (body size and tolerance, e.g. [GRM155R71C104KA88](https://pim.murata.com/en-us/pim/details/?partNum=GRM155R71C104KA88%23)), [TDK C1608X7R1C105K080AC product page](https://product.tdk.com/en/search/capacitor/ceramic/mlcc/info?part_no=C1608X7R1C105K080AC) (body and recommended land pattern), [Apple TN3190 USB audio](https://developer.apple.com/documentation/technotes/tn3190-usb-audio-device-design-considerations), [47 CFR Part 15](https://www.ecfr.gov/current/title-47/chapter-I/subchapter-A/part-15) (§15.23, §15.203, §15.209, §15.239).
 
 ## Archived plans (`archive/`)
 

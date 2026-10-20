@@ -2,6 +2,7 @@
 
 Built one chain at a time, each checked against its datasheet. Stock is DigiKey, checked 2026-10-19.
 Chains not listed yet still show values only on the [wiring diagram](wiring.html).
+Passive body sizes and land patterns are in [packages.md](packages.md).
 
 ## Chain 1: U1 low-speed crystal (also clocks U4 RCLK)
 
