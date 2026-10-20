@@ -23,9 +23,11 @@ Every document the design was checked against. Page numbers cited in the [BOM](.
 | D2_SVC710_ENA0605A.pdf | onsemi SVC710, ENA0605A | [mirror](https://www.nyang-tech.com/datasheet/2027636947/onsemi/SVC710-TL-E.pdf) | Varactor in the LV2285 VCO |
 | Y1_Abracon_ABS07.pdf | Abracon ABS07 (revised 08-10-22) | [abracon.com](https://abracon.com/Resonators/ABS07.pdf) | 32.768 kHz crystal |
 | J1_GCT_USB4105.pdf, J1_GCT_USB4105_drawing.pdf | GCT USB4105 spec and drawing | [gct.co](https://gct.co/files/drawings/usb4105.pdf) | USB-C receptacle pinout |
-| J2_TE_CONREVSMA002-G_drawing.pdf | TE Linx CONREVSMA002-G drawing, rev A | Provided by the user | RP-SMA footprint, height |
+| J2_TE_CONSMA002-G_drawing.pdf | TE Linx CONSMA002-G customer drawing C-CONSMA002-G, rev A | [te.com](https://www.te.com/en/product-CONSMA002-G.html) (saved via the user's Chrome) | SMA jack footprint (4 × Ø1.5 on 5.1 square, Ø1.4 centre), 15.20 long, 13.90 tall incl. 3.90 legs; −40 to +85 °C, 0.57 N·m max torque |
+| J2_TE_CONREVSMA002-G_drawing.pdf | TE Linx CONREVSMA002-G drawing, rev A, superseded 2026-10-20 by CONSMA002-G | Provided by the user | RP-SMA footprint (identical to CONSMA002-G), height |
 | SW1_SameSky_SLW-158562-5A-RA-N-D.pdf | Same Sky SLW-158562-5A-RA-N-D (09/12/2024) | [sameskydevices.com](https://www.sameskydevices.com/product/resource/slw-158562-5a-ra-n-d.pdf) | TX/RX slider, 1.6 mm PCB note |
-| SW2-SW3_SameSky_TS02.pdf | Same Sky TS02 series (11/03/2025) | [sameskydevices.com](https://www.sameskydevices.com/product/resource/ts02.pdf) | Buttons, LCR drawing (p3) |
+| SW2-SW3_Panasonic_EVQP7_ANCTB21E.pdf | Panasonic side-operational SMD tactile switches, 3.5 × 2.9 mm, catalog ANCTB21E (2025-07) | [panasonic.com](https://api.pim.na.industrial.panasonic.com/file_stream/main/fileversion/245500) | Buttons EVQ-P7J01P: rating (p1), dimensions, circuit and land pattern (p2) |
+| SW2-SW3_SameSky_TS02.pdf | Same Sky TS02 series (11/03/2025), superseded 2026-10-20 by the EVQ-P7 | [sameskydevices.com](https://www.sameskydevices.com/product/resource/ts02.pdf) | Buttons, LCR drawing (p3) |
 | VCAP_Murata_GRM21BR71C475KE51_product_sheet.pdf | Murata product sheet, GRM21BR71C475KE51 | Provided by the user | VCAP cap voltage and tolerance |
 
 ### RF layout application notes (`plan-c/`)

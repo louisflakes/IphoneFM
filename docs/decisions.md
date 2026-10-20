@@ -17,7 +17,7 @@ Each decision is backed by a primary source (datasheet page or spec section). Ne
 | Bootloader safety | CC lines on PA0/PA1, not PA7 | PA7 gets a bootloader pull-down that would pull Rd out of tolerance | AN2606 p387 |
 | LED | Anode on VBUS, MCU sinks through 510/390/390 Ω | Blue/green VF up to 3.2 V leaves no headroom on 3.3 V | ASCB-WTF0 p3 · DS14217 p130, p205 |
 | LED | PWM at 10-bit ≈ 156 kHz | Above the FM stereo baseband (53 kHz) and RDS (57 kHz) | DS14217 p243 |
-| Antenna | RP-SMA, not standard SMA | §15.203 prohibits a standard antenna jack on a transmitter | 47 CFR §15.203 |
+| Antenna | Standard SMA jack (TE Linx CONSMA002-G), changed 2026-10-20 from RP-SMA | The chosen prototype antenna (GSG ANT500) is SMA male; an RP-SMA jack would need an adapter, which defeats the RP-SMA purpose anyway. §15.203 still applies to a certified product: it would need a permanently attached or uniquely coupled antenna | 47 CFR §15.203 |
 | RF path | PE42421 SPDT switch, one shared antenna | ≈ 85 dB typ isolation at 100 MHz protects the Si4704 (0.4 Vpk max) | PE42421 p3, p5 · Si4704 p15 |
 | TX/RX mode | Slider drives the RF switch directly; MCU reads it on PB0 | Physical position always matches the RF path | PE42421 p4 |
 | U1 crystal | ABS07 32.768 kHz, CL 7 pF, 5.6 pF load caps, LSEDRV ≥ medium-high | Low CL keeps start-up margin; worst case ≈ −92 ppm at 60 °C, inside U4's ±100 ppm | ABS07 p1 · DS14217 p188 · Si4704 p14 |

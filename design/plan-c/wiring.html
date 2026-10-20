@@ -57,11 +57,11 @@ footer a { color: inherit; }
     <p><b>Active plan.</b> Plans A and B are archived (design/archive/ in the repo). U1 is an STM32U535CEU6: Plan B’s headroom plus ST’s ROM USB bootloader, so it’s programmed over USB-C from the first plug-in (hold the tune-up/BOOT0 button). Lines are nets; short stubs are parts local to one chip; “▲ 3V3 rail” means wired to U3’s 3.3 V output. Tap a pin for its datasheet source.</p>
   </header>
   <div class="layers" id="layers" role="group" aria-label="Layers"></div>
-  <div class="sheet"><svg id="sheet" viewBox="0 0 1880 1420" role="img" aria-label="Plan C: USB-C socket, regulator, STM32U535, LV2285VB, Si4704, RF switch, RP-SMA and TX/RX slider wiring"></svg></div>
+  <div class="sheet"><svg id="sheet" viewBox="0 0 1880 1420" role="img" aria-label="Plan C: USB-C socket, regulator, STM32U535, LV2285VB, Si4704, RF switch, SMA and TX/RX slider wiring"></svg></div>
   <div class="detail" id="detail">Tap a pin.</div>
   <h2>Netlist</h2>
   <div class="tablewrap"><table><thead><tr><th>Net</th><th>From</th><th>To</th><th>In between</th><th>Source</th></tr></thead><tbody id="netlist"></tbody></table></div>
-  <footer>Sources: <a href="https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/8915/STM32U535CEU6QTR.pdf">STM32U535 DS14217 Rev 5</a> · ST AN2606 Rev 61 (bootloader) · <a href="https://download.kamami.pl/p1189216-um3062-stm32u5-nucleo64-board-mb1841-stmicroelectronics.pdf">UM3062 (Nucleo-U545)</a> · <a href="https://community.st.com/t5/stm32-mcus-products/stm32l562ce-48-pin-1-8v-usb/td-p/582434">ST community: 48-pin VDDUSB bonded to VDD</a> · <a href="https://docs.broadcom.com/doc/ASCB-WTF0-DS">Broadcom ASCB-WTF0</a> · <a href="https://www.psemi.com/pdf/datasheets/pe42421ds.pdf">pSemi PE42421</a> · Same Sky SLW-158562-5A-RA-N-D, TS02 · TE CONREVSMA002-G · <a href="https://www.skyworksinc.com/-/media/Skyworks/SL/documents/public/data-sheets/Si4704-05-D60.pdf">Si4704/05-D60 Rev 1.2</a> · <a href="https://www.skyworksinc.com/-/media/Skyworks/SL/documents/public/application-notes/AN332.pdf">AN332</a> · <a href="https://datasheet.lcsc.com/datasheet/pdf/aaf9ba5a5acc70222fbd7624956da41a.pdf">LV2285VB ENA1494</a> · <a href="https://www.diodes.com/assets/Datasheets/AP2112.pdf">AP2112</a> · <a href="https://gct.co/files/drawings/usb4105.pdf">GCT USB4105</a> · USB Type-C R2.5. Net routes are drawn by hand; the netlist table is the source of truth.</footer>
+  <footer>Sources: <a href="https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/8915/STM32U535CEU6QTR.pdf">STM32U535 DS14217 Rev 5</a> · ST AN2606 Rev 61 (bootloader) · <a href="https://download.kamami.pl/p1189216-um3062-stm32u5-nucleo64-board-mb1841-stmicroelectronics.pdf">UM3062 (Nucleo-U545)</a> · <a href="https://community.st.com/t5/stm32-mcus-products/stm32l562ce-48-pin-1-8v-usb/td-p/582434">ST community: 48-pin VDDUSB bonded to VDD</a> · <a href="https://docs.broadcom.com/doc/ASCB-WTF0-DS">Broadcom ASCB-WTF0</a> · <a href="https://www.psemi.com/pdf/datasheets/pe42421ds.pdf">pSemi PE42421</a> · Same Sky SLW-158562-5A-RA-N-D · Panasonic EVQ-P7 (ANCTB21E) · TE CONSMA002-G · <a href="https://www.skyworksinc.com/-/media/Skyworks/SL/documents/public/data-sheets/Si4704-05-D60.pdf">Si4704/05-D60 Rev 1.2</a> · <a href="https://www.skyworksinc.com/-/media/Skyworks/SL/documents/public/application-notes/AN332.pdf">AN332</a> · <a href="https://datasheet.lcsc.com/datasheet/pdf/aaf9ba5a5acc70222fbd7624956da41a.pdf">LV2285VB ENA1494</a> · <a href="https://www.diodes.com/assets/Datasheets/AP2112.pdf">AP2112</a> · <a href="https://gct.co/files/drawings/usb4105.pdf">GCT USB4105</a> · USB Type-C R2.5. Net routes are drawn by hand; the netlist table is the source of truth.</footer>
 </div>
 
 <script>
@@ -95,7 +95,7 @@ const NETS = [
     between: "ESD: U6 USBLC6-2SC6 pin 5 at J1 (5 V stand-off, ≥ 6 V breakdown; VBUS ≤ 5.5 V never conducts). CIN 1 µF X7R 16 V (TDK C1608X7R1C105K080AC) to GND at U3 VIN — the only VBUS capacitance; EN tied to VIN (internal 3 MΩ pull-down). D1 runs from VBUS, not 3V3: blue/green VF can reach 3.2 V, and LED current skips U3. TP1 test pad", src: "AP2112 p2, p4 · Type-C p41 · ASCB-WTF0 p2–3",
     paths: [[[-186, 300], [-120, 300], [-120, 560], [-90, 560]], [[-120, 560], [-120, 600], [-90, 600]],
       [[-120, 600], [-120, 720], [-170, 720], [-170, 842], [-140, 842]], [[-170, 770], [-140, 770]], [[-170, 806], [-140, 806]]], parts: [[-160, "1µF↓"]] },
-  { name: "3V3", layer: "power", from: "U3 VOUT (5)", to: "U1 VDD (24, 36, 48), VDDA (9), VBAT (1) · U2 VCC (6), I2CSW (19) · U4 VA (21), VD (20) · U5 VDD (6) · SW1 TX throw · SW2, SW3 pins 1·2",
+  { name: "3V3", layer: "power", from: "U3 VOUT (5)", to: "U1 VDD (24, 36, 48), VDDA (9), VBAT (1) · U2 VCC (6), I2CSW (19) · U4 VA (21), VD (20) · U5 VDD (6) · SW1 TX throw · SW2, SW3 pins 1·1′",
     between: "COUT 1 µF X7R (TDK C1608X7R1C105K080AC) at U3 VOUT; rail total ≈ 12.6 µF (AP2112 sets a 1 µF minimum, no maximum). Start-up: 50 mA foldback limit at 0 V charges it in ≈ 0.9 ms while every load is held in reset or standby. At U1: 100 nF per VDD pin + one 10 µF; VDDA 100 nF + 1 µF; VBAT tied to 3V3 like ST’s Nucleo. No VDDUSB pin on this package (bonded to VDD inside), so 3V3 must stay 3.0–3.6 V. VREF+ is bonded to VDDA: keep VREFBUF off. TP2 test pad", src: "AP2112 p1, p2, p4, p8 · DS14217 p32–33, p86, p127 · UM3062 p24 · U2 p2, p7 · Si4704 p4, p27",
     paths: [[[90, 560], [140, 560], [140, 280], [190, 280]], [[140, 320], [190, 320]], [[140, 360], [190, 360]]], parts: [[115, "1µF↓"]] },
   { name: "AUDIO_L", layer: "audio", from: "U1 PA4 / DAC1_OUT1 (14)", to: "U2 L-INPUT (1)",
@@ -148,20 +148,20 @@ const NETS = [
   { name: "VCO_TANK", layer: "rf", from: "U2 VCO (10)", to: "#3 270 pF → node: #5 100 nH to GND, #4 82 pF to D2 cathode",
     between: "88–108 MHz set: #3 270 pF, #4 82 pF, #5 100 nH (C0G caps, Coilcraft 0805CS-101XJRC). D2 = onsemi SVC710-TL-E (obsolete, 80k in stock)", src: "U2 p4 · SVC710 p1–2",
     paths: [], parts: [] },
-  { name: "BTN_UP", layer: "ctrl", from: "SW2 pins 3·4", to: "U1 PH3-BOOT0 (44)",
-    between: "SW2 pins 1·2 to 3V3; 10 kΩ to GND at U1. Held at plug-in → ROM USB bootloader; afterwards a GPIO (tune up). ≈ 0.33 mA pressed, inside TS02's 0.01–50 mA rating", src: "TS02 p1, p3 (LCR drawing: 1–2 and 3–4 joined) · DS14217 p29, p112 · AN2606 p30 · UM3062 p28",
+  { name: "BTN_UP", layer: "ctrl", from: "SW2 pins 2·2′", to: "U1 PH3-BOOT0 (44)",
+    between: "SW2 pins 1·1′ to 3V3; 10 kΩ to GND at U1. Held at plug-in → ROM USB bootloader; afterwards a GPIO (tune up). ≈ 0.33 mA pressed, inside the EVQ-P7's 10 µA–50 mA rating", src: "Panasonic ANCTB21E p1 (rating), p2 (EVQP7J circuit: 1–1′ and 2–2′ joined) · DS14217 p29, p112 · AN2606 p30 · UM3062 p28",
     paths: [], parts: [] },
-  { name: "BTN_DN", layer: "ctrl", from: "SW3 pins 3·4", to: "U1 PC13 (2)",
-    between: "SW3 pins 1·2 to 3V3; U1 internal pull-down 30–50 kΩ → 66–110 µA pressed, above TS02's 0.01 mA minimum. PC13 used as input only (output limits, note 2)", src: "TS02 p1, p3 · DS14217 p97, p113, p203",
+  { name: "BTN_DN", layer: "ctrl", from: "SW3 pins 2·2′", to: "U1 PC13 (2)",
+    between: "SW3 pins 1·1′ to 3V3; U1 internal pull-down 30–50 kΩ → 66–110 µA pressed, above the EVQ-P7's 10 µA minimum. PC13 used as input only (output limits, note 2)", src: "Panasonic ANCTB21E p1, p2 · DS14217 p97, p113, p203",
     paths: [], parts: [] },
-  { name: "ANT", layer: "rf", from: "J2 RP-SMA centre pin", to: "U5 RFC (5)",
+  { name: "ANT", layer: "rf", from: "J2 SMA centre pin", to: "U5 RFC (5)",
     between: "Short 50 Ω trace; U5 RF pins must sit at 0 V DC. ESD: D5 TI TPD1E0B04 at J2, bidirectional (RF swings both ways), ±3.6 V stand-off vs ≤ 1.5 Vpk TX, 0.15 pF (≈ 10 kΩ at 100 MHz), ±8 kV contact; U5 alone is 2 kV HBM", src: "CONREVSMA002-G drawing · PE42421 p2, p8 · TPD1E0B04 p1, Electrical Characteristics",
     paths: [[[910, 1180], [1026, 1180]]], parts: [[968, "ESD"]] },
   { name: "TX_RF", layer: "rf", from: "U2 RF OUT (12)", to: "U5 RF2 (3)",
-    between: "1 nF series DC block: pin 12 is biased through the inductor from RF+B (pin 11) and U5 RF pins must be at 0 V DC. Then FL1 low-pass, 5th-order Chebyshev for 50 Ω: 33 pF ↓, 100 nH, 56 pF ↓, 100 nH, 33 pF ↓ (C0G; Coilcraft 0805CS-101XJRC). Computed: ≤ 0.7 dB at 88–108 MHz, 23–34 dB at 176–216 MHz (2nd harmonic), ≥ 43 dB from 264 MHz. Inductor pads take 0 Ω if bench tests prefer no filter. Up to ~120 dBµV (≈ 1 V rms)", src: "U2 p2, p6 · PE42421 p8 · 47 CFR §15.239(c), §15.209",
+    between: "1 nF series DC block: pin 12 is biased through the inductor from RF+B (pin 11) and U5 RF pins must be at 0 V DC. Then FL1 low-pass, 5th-order Chebyshev for 50 Ω: 33 pF ↓, 100 nH, 56 pF ↓, 100 nH, 33 pF ↓ (C0G; Coilcraft 0805CS-101XJRC). Computed: ≤ 0.7 dB at 88–108 MHz, 23–34 dB at 176–216 MHz (2nd harmonic), ≥ 43 dB from 264 MHz. Up to ~120 dBµV (≈ 1 V rms)", src: "U2 p2, p6 · PE42421 p8 · 47 CFR §15.239(c), §15.209",
     paths: [], parts: [] },
   { name: "RX_RF", layer: "rf", from: "U5 RF1 (1)", to: "U4 FMI (8)",
-    between: "1 nF series coupling cap (Si4704 C2), then AN383’s VCO emissions filter, option 1 (the Si4704 VCO runs at 3–4 GHz, inside the FCC §15.33(b) measurement range): C5 pad to GND (not fitted), FB1 Murata BLM15GA750SN1D in series (75 Ω ±25% at 100 MHz; no DC flows, C2 blocks it), C14 6 pF C0G to GND at the pin (Murata GJM1555C1H6R0CB01D). Estimate: ≈ 2 dB less signal at FMI from a 50 Ω antenna; FB1 takes a 0 Ω and C14 can be left off if the bench says so. U5 isolates RF2→RF1 by ≈ 85 dB typ at 100 MHz (≥ 29 dB min at 1 GHz); ~11 dB keeps FMI under its 0.4 Vpk max", src: "PE42421 p3, p5 · Si4704 p15, p17–18 · AN383 p7, p9 (Figure 1), p17 · BLM15G spec p1, p6 · 47 CFR §15.33(b)",
+    between: "1 nF series coupling cap (Si4704 C2), then L1 150 nH to GND (Coilcraft 0805CS-151XJRC, FMI matching inductor; AN383 p37, p50–53: resonates the ≈ 15–21 pF at FMI at mid-band, centred for the ANT500 collapsed), then AN383’s VCO emissions filter, option 1 (the Si4704 VCO runs at 3–4 GHz, inside the FCC §15.33(b) measurement range): FB1 Murata BLM15GA750SN1D in series (75 Ω ±25% at 100 MHz; no DC flows, C2 blocks it), C14 6 pF C0G to GND at the pin (Murata GJM1555C1H6R0CB01D). Estimate: ≈ 2 dB less signal at FMI from a 50 Ω antenna; U5 isolates RF2→RF1 by ≈ 85 dB typ at 100 MHz (≥ 29 dB min at 1 GHz); ~11 dB keeps FMI under its 0.4 Vpk max", src: "PE42421 p3, p5 · Si4704 p15, p17–18 · AN383 p7, p9 (Figure 1), p17 · BLM15G spec p1, p6 · 47 CFR §15.33(b)",
     paths: [], parts: [] },
   { name: "RF_MODE", layer: "ctrl", from: "SW1 pole A COM (middle pin)", to: "U5 CTRL (4) · U1 PB0 (18)",
     between: "SW1 pole A: one throw = 3V3 → TX (RFC↔RF2), other throw = GND → RX (RFC↔RF1); confirm slide direction on a real part. 100 kΩ to GND (RC0402FR-07100KL) holds RX during break-before-make travel; then 1 kΩ series into CTRL (RC0402FR-071KL), as on the eval board. CTRL high ≥ 0.7·VDD, low ≤ 0.3·VDD. Firmware reads PB0 (≤ 500 nA leakage = 50 mV on 100 kΩ): TX → U4 held in reset; RX → U2 off. TP5 test pad, for checking which slide direction is TX", src: "SLW-158562-5A-RA-N-D p1–2 · PE42421 p2, p4, p7 (Figure 12) · DS14217 p101, p202",
@@ -230,7 +230,7 @@ const U4 = { ref: "U4", title: "Si4704", sub: "U4 · FM receiver · SSOP-24", x0
   { side: "R", y: 890, num: "21", name: "VA", net: "3V3", ext: ["▲ 3V3 rail", "C1 22 nF to DBYP (p17)"], src: "Si4704 p4, p17 (C1 sits between VA and DBYP, close to VA)" },
   { side: "R", y: 930, num: "20", name: "VD", net: "3V3", ext: ["▲ 3V3 rail", "C4 100 nF ↓ at pin (p17)"], src: "Si4704 p4, p17–18" },
   { side: "R", y: 970, num: "16", name: "SEN", layer: "gnd", ext: ["GND", "I²C address 0x11"], src: "AN332 p124" },
-  { side: "R", y: 1010, num: "8", name: "FMI", net: "RX_RF", ext: ["◂ RX_RF from U5 RF1", "C2 1 nF → FB1 → C14 6 pF ↓"], src: "Si4704 p17, p18, p27 · AN383 p7, p9, p17: C5 (not fitted) and C14 shunt, FB1 BLM15GA750SN1D series, as close to FMI as possible" },
+  { side: "R", y: 1010, num: "8", name: "FMI", net: "RX_RF", ext: ["◂ RX_RF from U5 RF1", "C2 1 nF → L1↓ → FB1 → C14↓"], src: "Si4704 p17, p18, p27 · AN383 p7, p9, p17: FB1 BLM15GA750SN1D series and C14 shunt, as close to FMI as possible (option 1; its empty C5 pad omitted)" },
   { side: "R", y: 1050, num: "22", name: "DBYP", layer: "power", ext: ["C1 22 nF to VA (21)", "GRM155R71H223KA12D"], src: "Si4704 p17–18, p27" },
 ] };
 
@@ -251,9 +251,9 @@ const U5 = { ref: "U5", title: "PE42421", sub: "U5 · RF switch · SC-70-6", x0:
   { side: "R", y: 1295, num: "3", name: "RF2", net: "TX_RF", ext: ["◂ TX_RF (TX)", "U2 pin 12 → 1 nF → LPF FL1"], src: "PE42421 p8" },
   { side: "R", y: 1335, num: "1", name: "RF1", net: "RX_RF", ext: ["▸ RX_RF (RX)", "to U4 FMI via 1 nF"], src: "PE42421 p8" },
 ] };
-const J2 = { ref: "J2", title: "RP-SMA", sub: "J2 · CONREVSMA002-G", x0: 1060, x1: 1190, ty: 1222, y0: 1150, y1: 1258, pw: 34, pins: [
-  { side: "L", y: 1180, num: "C", name: "centre", net: "ANT", src: "TE CONREVSMA002-G drawing (Ø1.40 pin hole)" },
-  { side: "R", y: 1180, num: "GND", name: "legs", layer: "gnd", ext: ["GND", "4 legs, 5.10 mm square"], src: "TE CONREVSMA002-G drawing" },
+const J2 = { ref: "J2", title: "SMA", sub: "J2 · CONSMA002-G", x0: 1060, x1: 1190, ty: 1222, y0: 1150, y1: 1258, pw: 34, pins: [
+  { side: "L", y: 1180, num: "C", name: "centre", net: "ANT", src: "TE C-CONSMA002-G drawing rev A (Ø1.4 centre pin hole)" },
+  { side: "R", y: 1180, num: "GND", name: "legs", layer: "gnd", ext: ["GND", "4 legs, 5.10 mm square"], src: "TE C-CONSMA002-G drawing rev A (4 × Ø1.5 legs, 5.1 square)" },
 ] };
 const SW1 = { ref: "SW1", title: "SLW-158562", sub: "SW1 · TX/RX slider", x0: 300, x1: 420, ty: 1378, y0: 1170, y1: 1400, pw: 34, pins: [
   { side: "L", y: 1200, num: "A-L", name: "TX", net: "3V3", ext: ["▲ 3V3 rail", "TX throw"], src: "Same Sky SLW-158562-5A-RA-N-D p1–2 (outer pin, row A; pins unnumbered). Carries 33 µA (3.3 V / 100 kΩ) vs 300 mA / 50 V rating; contact resistance ≤ 100 mΩ specified at ≤ 100 mA" },
@@ -262,13 +262,13 @@ const SW1 = { ref: "SW1", title: "SLW-158562", sub: "SW1 · TX/RX slider", x0: 3
   { side: "L", y: 1345, num: "TAB", name: "frame", layer: "gnd", ext: ["GND", "2 frame tabs"], src: "Same Sky SLW-158562-5A-RA-N-D p2: steel frame tabs, drawing assumes a 1.6 mm PCB. Grounded so the exposed metal frame has an ESD path (engineering choice, not a datasheet requirement)" },
   { side: "R", y: 1220, num: "A-C", name: "COM", net: "RF_MODE", src: "Same Sky SLW-158562-5A-RA-N-D p1–2 (middle pin = COM; non-shorting, so 3V3 never meets GND mid-slide). Operating −20 to 70 °C, the narrowest range on the board; 10,000-cycle life" },
 ] };
-const SW2 = { ref: "SW2", title: "TS02", sub: "SW2 · tune up", x0: -220, x1: -120, ty: 1236, y0: 1170, y1: 1262, pw: 30, pins: [
-  { side: "L", y: 1200, num: "1 2", name: "", net: "3V3", ext: ["▲ 3V3 rail", ""], src: "Same Sky TS02 p3 (1–2 joined)" },
-  { side: "R", y: 1200, num: "3 4", name: "", net: "BTN_UP", ext: ["▸ BTN_UP", "to U1 PH3-BOOT0 (44)"], src: "Same Sky TS02 p3 (3–4 joined)" },
+const SW2 = { ref: "SW2", title: "EVQ-P7", sub: "SW2 · tune up", x0: -220, x1: -120, ty: 1236, y0: 1170, y1: 1262, pw: 30, pins: [
+  { side: "L", y: 1200, num: "1 1′", name: "", net: "3V3", ext: ["▲ 3V3 rail", ""], src: "Panasonic ANCTB21E p2 (EVQP7J: 1–1′ joined)" },
+  { side: "R", y: 1200, num: "2 2′", name: "", net: "BTN_UP", ext: ["▸ BTN_UP", "to U1 PH3-BOOT0 (44)"], src: "Panasonic ANCTB21E p2 (2–2′ joined)" },
 ] };
-const SW3 = { ref: "SW3", title: "TS02", sub: "SW3 · tune down", x0: -220, x1: -120, ty: 1346, y0: 1280, y1: 1372, pw: 30, pins: [
-  { side: "L", y: 1310, num: "1 2", name: "", net: "3V3", ext: ["▲ 3V3 rail", ""], src: "Same Sky TS02 p3 (1–2 joined)" },
-  { side: "R", y: 1310, num: "3 4", name: "", net: "BTN_DN", ext: ["▸ BTN_DN", "to U1 PC13 (2)"], src: "Same Sky TS02 p3 (3–4 joined)" },
+const SW3 = { ref: "SW3", title: "EVQ-P7", sub: "SW3 · tune down", x0: -220, x1: -120, ty: 1346, y0: 1280, y1: 1372, pw: 30, pins: [
+  { side: "L", y: 1310, num: "1 1′", name: "", net: "3V3", ext: ["▲ 3V3 rail", ""], src: "Panasonic ANCTB21E p2 (EVQP7J: 1–1′ joined)" },
+  { side: "R", y: 1310, num: "2 2′", name: "", net: "BTN_DN", ext: ["▸ BTN_DN", "to U1 PC13 (2)"], src: "Panasonic ANCTB21E p2 (2–2′ joined)" },
 ] };
 
 // U2 LV2285VB: physical pinout (net = joined; ext = local part label)

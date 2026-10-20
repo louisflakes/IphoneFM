@@ -53,7 +53,7 @@ Where a maker gives a range, **Drawn as** uses the midpoint.
 
 | Package | BOM uses |
 |---|---|
-| 0402 Murata | Y1 load caps; U1 VDD, VDDA and NRST 100 nF; U2 pins 1/24 (1.5 nF), 6, 7, 8, 10 tank, 11, 12, 14, 16, 22; U4 C1, C2, C4, C9, C14, C15, C18 (C5 pad only); FL1 capacitors |
+| 0402 Murata | Y1 load caps; U1 VDD, VDDA and NRST 100 nF; U2 pins 1/24 (1.5 nF), 6, 7, 8, 10 tank, 11, 12, 14, 16, 22; U4 C1, C2, C4, C9, C14, C15, C18; FL1 capacitors |
 | 0402 Murata BLM15G | U4 FB1 |
 | 0402 Yageo RC | All 0402 resistors except the four Panasonic ones |
 | 0402 Panasonic ERJ-2RK | U4 R2, R3 (2 kΩ); D1 green and blue (390 Ω) |
@@ -61,6 +61,6 @@ Where a maker gives a range, **Drawn as** uses the midpoint.
 | 0603 Murata 2.2 µF | U2 pin 20 |
 | 0805 Murata 4.7 µF | U1 VCAP |
 | 0805 Yageo 10 µF | U1 VDD bulk |
-| 0805CS | U2 #5 and FL1 (100 nH ×3); U2 #6 (330 nH) |
+| 0805CS | U2 #5 and FL1 (100 nH ×3); U2 #6 (330 nH); U4 L1 (150 nH, FMI match) |
 | T491A | U2 pin 4 (10 µF) and pin 8 loop filter (15 µF); polarized |
 | TSX-3225 | Y2 |

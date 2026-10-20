@@ -54,7 +54,7 @@ Values from the SSOP application schematic and BOM (Si4704/05-D60 Rev 1.2 p17–
 | C1 (pin 22 ↔ 21) | Murata GRM155R71H223KA12D | 22 nF X7R 0402 | 244,384 | Between DBYP and VA, close to VA (not to GND) |
 | C4 (pin 20) | Murata GRM155R71C104KA88J | 100 nF X7R 0402 | 7,438,959 | VD to GND |
 | C2 (pin 8) | Murata GRM1555C1H102JA01D | 1 nF C0G | 4,655,333 | FMI coupling; also keeps U5 RF1 free of DC (PE42421 p8) |
-| C5 (FMI side of FB1) | — | Pad only, not fitted | | AN383 option 1 keeps the pad for option 2 (p7) |
+| L1 (C2–FB1 node to GND) | Coilcraft 0805CS-151XJRC | 150 nH ±5%, 0805 (Doc100 p1) | 29,684 | FMI matching inductor (AN383 p37 Figure 23; Appendix A p50–53): resonates the total FMI capacitance (antenna, trace, C14, LNA 4–6 pF) at mid-band. Best guess, centred for the ANT500 collapsed (its usual state): about 15–21 pF total (antenna ≈ 3–4 pF by the short-monopole estimate, C14 6, LNA 4–6, trace ≈ 2.5, ESD and switch ≈ 1) resonates at 98 MHz with 124–170 nH. The bench RSSI sweep (AN383 p52–53) may move it; 0805CS-121 and -181 are stocked. The Si4704's auto-tuning varactor is only on LPI (AN383 p34–35), so FMI needs this fixed L. No DC reaches it (C2 blocks); FMI sits at 0 V DC through FB1 and L1, as in AN383's circuit |
 | FB1 (C2 → FMI) | Murata BLM15GA750SN1D | Ferrite bead, 75 Ω ±25% at 100 MHz, 200 mA, ≤ 1.3 Ω DC, 0402 | 340,990 | VCO emissions filter (AN383 p7, p9). No DC through it (C2 blocks). BLM15G spec p1 (ratings), p2 (body 1.0 × 0.5 × 0.5), p6 (land a 0.4, b 1.2, c 0.5) |
 | C14 (pin 8 to GND) | Murata GJM1555C1H6R0CB01D | 6 pF ±0.25 pF C0G 0402 | 91,801 | VCO emissions filter (AN383 p7). GRM1555C1H6R0 is "Not For New Designs"; GJM is active, same 1.0 × 0.5 × 0.5 body |
 | C15 (pin 5 GPO1), C18 (pin 4 GPO2) | Murata GRM1555C1H330JA01D | 33 pF C0G 0402 to GND | 882,503 | VCO emissions filter at the GPO pins (AN383 p8, Table 4 option 1). R19/R20 not needed: the pins have no other connection |
@@ -68,7 +68,9 @@ Values from the SSOP application schematic and BOM (Si4704/05-D60 Rev 1.2 p17–
 | Pins 4 (GPO2), 5 (GPO1) | — | Floating except C18/C15 | | On-chip pulls select 2-wire mode at RST rise (p24, Table 13). Firmware holds RST low ≥ 1 ms: 100 µs minimum when floating (p6 note 4), and 33 pF on 1 MΩ gives τ ≈ 33 µs |
 | Pins 6, 7, 23, 24 | — | Not connected | | 6/7 per p27; analog outputs unused |
 
-- FMI filter loss (estimate): FB1 and C14 cost about 2 dB of signal at FMI from a 50 Ω antenna. If the bench shows the emissions margin isn't needed, FB1 takes a 0 Ω and C14 is left off.
+- TX leakage with L1 (estimate): U5 isolates RF2 to RF1 by about 85 dB typ at 100 MHz (PE42421 p3). Up to about 1.4 Vpk at RF2 (≈ 120 dBµV) gives about 80 µV at RF1; even with a 10× resonant voltage gain at FMI that is under 1 mV against the 0.4 Vpk limit. The datasheet gives no isolation minimum at 100 MHz, so check FMI in TX mode on the bench.
+- FMI filter loss (estimate): FB1 and C14 cost about 2 dB of signal at FMI from a 50 Ω antenna. Populated as listed.
+- AN383's option 1 leaves its C5 pad empty (p7); this board has no C5 pad, since every passive is populated (user, 2026-10-20).
 
 ## Chain 4: U1 STM32U535 support parts
 
@@ -134,7 +136,9 @@ From the PE42421 datasheet (DOC-33214-1.03): recommended operating conditions (p
 
 - Supply: our 3V3 is 3.3 V ±1.5% (AP2112 p1), so VDD at the pin is 3.23–3.34 V. That can be up to 40 mV over the 3.3 V recommended maximum, but far below the 4.0 V absolute maximum (p2). Accepted.
 - CTRL levels: high ≥ 0.7 × VDD, low ≤ 0.3 × VDD (p2). The slider gives 3.3 V or 0 V; U1 PB0 leakage ≤ 500 nA adds ≤ 50 mV across 100 kΩ (DS14217 p202).
-- Not fitted: the eval board's 0.25 pF shunt on RFC. It tunes 1–2 GHz loss (p3 note 2); at 100 MHz it is ≈ 6.4 kΩ and does nothing.
+- J2: TE Linx CONSMA002-G, SMA jack (female socket), right angle, through hole, 50 Ω, gold, 12.4 GHz ($5.34, 641 in stock). Replaces the RP-SMA CONREVSMA002-G (2026-10-20) so the antenna fits without an adapter. Its drawing (C-CONSMA002-G rev A) gives the same footprint and body as the CONREVSMA002-G: 4 × Ø1.5 legs on a 5.1 square, Ø1.4 centre, 7.0 square base, 15.20 long, 13.90 tall incl. 3.90 legs. Max torque 0.57 N·m (5 in·lb), −40 to +85 °C.
+- Antenna (off board, prototype): Great Scott Gadgets ANT500 (Adafruit 3584, $34.95), SMA male, 75 MHz–1 GHz, 20–88 cm, rotating shaft and elbow. Screws straight onto J2.
+- Not on this board: the eval board's 0.25 pF shunt on RFC. It tunes 1–2 GHz loss (p3 note 2); at 100 MHz it is ≈ 6.4 kΩ and does nothing.
 
 ## Chain 8: SW1 TX/RX slider
 
@@ -155,16 +159,18 @@ From the Same Sky SLW-158562-5A-RA-N-D datasheet (09/12/2024): specifications (p
 
 ## Chain 9: SW2, SW3 buttons
 
-From the Same Sky TS02 datasheet (11/03/2025): specifications (p1), LCR drawing and schematic (p3).
+Side-push (right-angle) SMD buttons, chosen 2026-10-20 so SW1, SW2 and SW3 can all exit the same board edge. From the Panasonic catalog ANCTB21E (2025-07): specifications (p1), EVQP7J dimensions, circuit and land pattern (p2).
 
 | Ref / pin | Part | Value | Stock | Note |
 |---|---|---|---|---|
-| SW2 (tune up / bootloader) | Same Sky TS02-66-110-BK-160-LCR-D | Tactile, 11 mm actuator, 160 gf | 2,083 | Pins 1·2 to 3V3, pins 3·4 to U1 PH3-BOOT0 (10 kΩ pull-down, chain 4) |
-| SW3 (tune down) | Same Sky TS02-66-110-BK-160-LCR-D | Same | 2,083 | Pins 1·2 to 3V3, pins 3·4 to U1 PC13 (internal pull-down) |
+| SW2 (tune up / bootloader) | Panasonic EVQ-P7J01P | Side-operated tactile, 1.6 N (163 gf), 3.5 × 2.9 × 1.35 mm, SMD | 67,315 | Pins 1·1′ to 3V3, pins 2·2′ to U1 PH3-BOOT0 (10 kΩ pull-down, chain 4) |
+| SW3 (tune down) | Panasonic EVQ-P7J01P | Same | 67,315 | Pins 1·1′ to 3V3, pins 2·2′ to U1 PC13 (internal pull-down) |
 
-- Rated 0.01–50 mA at 1–12 V DC (p1). SW2 carries 0.33 mA; SW3 66–110 µA (PC13 pull-down 30–50 kΩ, DS14217 p203). Both inside the rating, including its 10 µA minimum.
-- LCR drawing (p3): pins 1–2 and 3–4 joined; footprint 6.5 × 4.5 mm, Ø1.0 mm holes; leads 3.5 mm.
-- Operating −30 to 80 °C; 80,000-cycle life for 160 gf models.
+- Rated 10 µA at 2 V DC to 50 mA at 12 V DC, resistive (p1). SW2 carries 0.33 mA at 3.3 V; SW3 66–110 µA (PC13 pull-down 30–50 kΩ, DS14217 p203). Both inside the rating, including its 10 µA minimum.
+- Circuit (p2): 1–1′ and 2–2′ are joined pairs; the switch closes 1 to 2.
+- Land pattern (p2): 4 pads 1.4 × 1.05 mm, 5.0 outer by 2.5 overall, 2.2 and 0.4 gaps. The knob is 1.7 mm wide and stands 0.65 mm proud of the body.
+- Push strength 30 N for 1 minute, 100,000-cycle life, operating −20 to +70 °C, the same range as SW1 (p1).
+- Replaces the Same Sky TS02-66-110-BK-160-LCR-D (top-actuated, through hole). Its leads would have met the MagSafe ring (placement rule M7).
 
 ## Chain 10: D1 RGB LED
 
@@ -205,7 +211,7 @@ Between the 1 nF DC block after U2 pin 12 and U5 RF2. 5th-order Chebyshev, 0.1 d
 - Computed with these standard values: ≤ 0.1 dB loss at 88–108 MHz with ideal parts, ≈ 0.7 dB assuming inductor Q = 40 (Coilcraft specifies Q only at 500 MHz); 23–34 dB down at 176–216 MHz (2nd harmonic); ≥ 43 dB from 264 MHz.
 - Why: FCC §15.239(c) requires emissions outside the 200 kHz channel to meet §15.209, and the LV2285 datasheet gives no harmonic spec.
 - Both sides: DC is already blocked upstream, and U5 RF2 must be at 0 V DC (PE42421 p8), so the shunt caps see no DC. Power ≤ ~23 mW → ~21 mA rms in the inductors vs 400 mA rating.
-- The LV2285 output is not 50 Ω, so the real response will shift. Tune on the bench; the inductor pads take 0 Ω jumpers if no filter is wanted.
+- The LV2285 output is not 50 Ω, so the real response will shift. Populated as listed; the bench may tune the values.
 
 ## Chain 13: Test pads
 
