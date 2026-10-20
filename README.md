@@ -51,6 +51,7 @@ Open the wiring diagrams in a browser. The netlist table under each diagram is t
 | `design/plan-c/` | Active wiring diagram and netlist, BOM, passive package table |
 | `design/archive/` | Plans A and B, no longer developed |
 | `docs/decisions.md` | Design decisions and their sources |
+| `docs/pcb-design-workflow.md` | PCB capture and layout workflow and rules, cited to reference books, with conflicts flagged |
 | `docs/reference-designs.md` | Existing FM transmitter designs, for patterns only |
 | `docs/datasheets/` | Every datasheet and spec the design was checked against, with an index |
 | `tools/` | DigiKey stock scripts, diagram screenshot script, KiCad setup |
