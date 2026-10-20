@@ -13,6 +13,7 @@ Every document the design was checked against. Page numbers cited in the [BOM](.
 | U2_LV2285VB_ENA1494.pdf | onsemi/Sanyo LV2285VB, ENA1494 | [LCSC copy](https://datasheet.lcsc.com/datasheet/pdf/aaf9ba5a5acc70222fbd7624956da41a.pdf) | FM transmitter, application circuit (p4) |
 | U3_AP2112_DS39724_Rev2-2.pdf | Diodes AP2112, DS39724 Rev 2-2 | [diodes.com](https://www.diodes.com/assets/Datasheets/AP2112.pdf) | 3.3 V regulator |
 | U4_Si4704-05-D60_Rev1.2.pdf | Skyworks Si4704/05-D60 Rev 1.2 | [skyworksinc.com](https://www.skyworksinc.com/-/media/Skyworks/SL/documents/public/data-sheets/Si4704-05-D60.pdf) | FM receiver, SSOP schematic and BOM (p17–18) |
+| U4_Skyworks_AN383_antenna_layout.pdf | Skyworks AN383, Si47xx antenna, schematic, layout and design guidelines (207075A, Jan. 23, 2025) | [skyworksinc.com](https://www.skyworksinc.com/-/media/skyworks/sL/documents/public/application-notes/aN383.pdf) | Two-layer stackup and layout rules (p15–17), FMI front ends and matching inductor (§3–4, §7, Appendix A p50–54) |
 | U4_Skyworks_AN332_programming_guide.pdf | Skyworks AN332, Si47xx programming guide | [skyworksinc.com](https://www.skyworksinc.com/-/media/Skyworks/SL/documents/public/application-notes/AN332.pdf) | I²C address, digital audio |
 | U5_PE42421_DOC-33214-1.03.pdf | pSemi PE42421, DOC-33214-1.03 | [psemi.com](https://www.psemi.com/pdf/datasheets/pe42421ds.pdf) | RF switch, eval board (p7) |
 | U6_USBLC6-2_ST_Rev2.pdf | ST USBLC6-2, REV 2 (2005) | [mirror](https://www.danomsk.ru/upload/iblock/224/147401_7198d2f5ecc1d8bddd1f654c0b36a43b.pdf) | USB ESD (D+/D−/VBUS) |
@@ -26,6 +27,14 @@ Every document the design was checked against. Page numbers cited in the [BOM](.
 | SW1_SameSky_SLW-158562-5A-RA-N-D.pdf | Same Sky SLW-158562-5A-RA-N-D (09/12/2024) | [sameskydevices.com](https://www.sameskydevices.com/product/resource/slw-158562-5a-ra-n-d.pdf) | TX/RX slider, 1.6 mm PCB note |
 | SW2-SW3_SameSky_TS02.pdf | Same Sky TS02 series (11/03/2025) | [sameskydevices.com](https://www.sameskydevices.com/product/resource/ts02.pdf) | Buttons, LCR drawing (p3) |
 | VCAP_Murata_GRM21BR71C475KE51_product_sheet.pdf | Murata product sheet, GRM21BR71C475KE51 | Provided by the user | VCAP cap voltage and tolerance |
+
+### RF layout application notes (`plan-c/`)
+
+Used by the [PCB design workflow](../pcb-design-workflow.md). AN383 is listed above under U4.
+
+| File | Document | Source | Used for |
+|---|---|---|---|
+| Layout_ST_AN4169_sub-GHz_RF_layout.pdf | ST AN4169, PCB design guidelines for the SPIRIT1 transceiver (DocID023704 Rev 2, Feb. 2017) | [st.com](https://www.st.com/resource/en/application_note/an4169-pcb-design-guidelines-for-the-spirit1-transceiver-stmicroelectronics.pdf) (saved by the user) | Two- vs multi-layer RF boards (p5, p12), grounded coplanar lines (p6), decoupling and via parasitics (p7–8), RF capacitor/inductor choice (p8–9) |
 
 ### Passive packages and land patterns (`plan-c/`)
 
@@ -54,7 +63,7 @@ Used by the [package table](../../design/plan-c/packages.md).
 | USB_Type-C_R2.0_Aug2019.pdf | USB Type-C Spec R2.0 (August 2019) | Earlier cross-check; superseded by R2.5 |
 | USB_PD_R3.2_V1.2_2026-08-19.pdf | USB Power Delivery R3.2 V1.2 (2026-08-19) | vSafe5V range, VBUS ripple |
 
-Web references not stored as files: Murata product pages for each GRM part (body size and tolerance, e.g. [GRM155R71C104KA88](https://pim.murata.com/en-us/pim/details/?partNum=GRM155R71C104KA88%23)), [TDK C1608X7R1C105K080AC product page](https://product.tdk.com/en/search/capacitor/ceramic/mlcc/info?part_no=C1608X7R1C105K080AC) (body and recommended land pattern), [Apple TN3190 USB audio](https://developer.apple.com/documentation/technotes/tn3190-usb-audio-device-design-considerations), [47 CFR Part 15](https://www.ecfr.gov/current/title-47/chapter-I/subchapter-A/part-15) (§15.23, §15.203, §15.209, §15.239).
+Web references not stored as files: Murata product pages for each GRM part (body size and tolerance, e.g. [GRM155R71C104KA88](https://pim.murata.com/en-us/pim/details/?partNum=GRM155R71C104KA88%23)), [TDK C1608X7R1C105K080AC product page](https://product.tdk.com/en/search/capacitor/ceramic/mlcc/info?part_no=C1608X7R1C105K080AC) (body and recommended land pattern), [Analog Devices (Maxim), PCB layout guidelines for RF & mixed-signal (Sep. 14, 2011)](https://www.analog.com/en/resources/technical-articles/pcbs-layout-guidelines-for-rf--mixedsignal.html) (RF layout rules), [Apple TN3190 USB audio](https://developer.apple.com/documentation/technotes/tn3190-usb-audio-device-design-considerations), [47 CFR Part 15](https://www.ecfr.gov/current/title-47/chapter-I/subchapter-A/part-15) (§15.23, §15.203, §15.209, §15.239).
 
 ## Archived plans (`archive/`)
 
