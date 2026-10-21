@@ -61,8 +61,8 @@ Circuit as Plan C chain 5 (AP2112 DS39724 p1–2), already compared against thre
 | EN 3 | — | Tied to VIN | | Internal pull-down (p2) |
 | U1 VDD bulk | **Samsung CL21A106KOQNNNE** | 10 µF X5R 16 V ±10% 0805 | C1713, 836,963 | Replaces Yageo CC0805KRX5R7BB106 (JLC: 0). Samsung code 21 = 0805, A = X5R, 106 = 10 µF, Q = 1.25 mm (catalog p4–5) |
 
-- Load on 3V3 (estimate, to be summed in chain 12): MCU, Si4705, ADF4002 (5–6 mA, ADF4002 p3), 20 MHz oscillator (≤ 5 mA, YSO110TR p1), PE43711, oscillator and buffer. Well under the AP2112's 600 mA. The LED runs from VBUS.
-- Start-up (foldback, 50 mA into the rail capacitance) is re-checked in chain 12, once every block's capacitors are known.
+- Load on 3V3: about 96 mA transmitting and 62 mA receiving (chain 10). Well under the AP2112's 600 mA. The LED runs from VBUS.
+- Start-up (foldback, 50 mA into the rail capacitance) is checked in chain 10.
 - DC bias: the Samsung catalog gives no DC-bias curve. The output's ≥ 1 µF stability minimum (p1) is met with margin, because U1's 10 µF and every bypass capacitor sit on the same 3V3 rail. The 1 µF input capacitor follows the datasheet's typical circuit (p2), which sets no minimum for it.
 
 ## Chain 3: U1 STM32U535 support
@@ -90,11 +90,45 @@ Power pins as Plan C chain 4 (DS14217 Figure 23 power scheme p127, Figure 37 NRS
 | SAI1 sub-block A | — | I²S out to U2 (CLK, DATA, FS) at about 912 kSa/s | | Chain 5. Sub-block B receives U4's digital audio at 48 kHz; each sub-block has its own clock generator (DS14217 p80) |
 | SPI2 + GPIOs | — | U2 programming (CLK, DATA, LE), CE, MUXout | | Chain 5 |
 
-Removed from Plan C: Y1 (ABS07 32.768 kHz) and its two 5.6 pF capacitors; LSCO on PA2; TIM16 on PB8 (the LV2285 76 kHz drive). The full U1 pin map is redone when the schematic is drawn.
+Removed from Plan C: Y1 (ABS07 32.768 kHz) and its two 5.6 pF capacitors; LSCO on PA2; TIM16 on PB8 (the LV2285 76 kHz drive).
+
+**U1 pin map** (UFQFPN48). Checked against DS14217 Table 26 (p97–113, pin types and ADC channels), Tables 27–28 (p114–121, alternate functions) and the ROM bootloader's pins (AN2606 Table 165, p386–388). Drawn in [wiring.html](wiring.html).
+
+| Pin | Port | Function | Net / part | Note |
+|---|---|---|---|---|
+| 29 | PA8 | SAI1_SCK_A (AF13) | U2 FSK_DV (I²S CLK), 33 Ω | |
+| 30 | PA9 | SAI1_FS_A (AF13) | U2 FSK_D0 (I²S FS), 33 Ω | Bootloader USART1_TX: input until USART1 is detected |
+| 31 | PA10 | SAI1_SD_A (AF13) | U2 FSK_D1 (I²S DATA), 33 Ω | Bootloader USART1_RX: U2 is off (CE low), nothing drives it |
+| 26 | PB13 | SPI2_SCK (AF5) | U2 CLK | PB12–PB15 are the bootloader's SPI2 pins; U2 is off then |
+| 28 | PB15 | SPI2_MOSI (AF5) | U2 DATA | |
+| 25 | PB12 | GPIO out | U2 LE | |
+| 27 | PB14 | SPI2_MISO (AF5) / GPIO in | U2 MUXout, TP5 | Lock detect or register readback |
+| 20 | PB2 | GPIO out | U2 CE, 10 kΩ pull-down | No reset-state pull |
+| 39 | PB3 | SAI1_SCK_B (AF13) | U4 DCLK via 2 kΩ | |
+| 14 | PA4 | SAI1_FS_B (AF13) | U4 DFS via 2 kΩ, 3.3 pF | Bootloader SPI1_NSS; U4 in reset then |
+| 41 | PB5 | SAI1_SD_B (AF13) | U4 DOUT via 604 Ω | |
+| 45 | PB8 | TIM16_CH1 (AF14) | U4 RCLK, 32,787 Hz | |
+| 16 | PA6 | GPIO out | U4 RSTB, 10 kΩ pull-down | Not PB4 or PA15: their reset-state pull-ups would fight the pull-down |
+| 42 | PB6 | I2C1_SCL (AF4) | U4 SCLK, 6.8 kΩ pull-up | Bootloader I2C1 pins, idle high |
+| 43 | PB7 | I2C1_SDA (AF4) | U4 SDIO, 6.8 kΩ pull-up | |
+| 18 | PB0 | GPIO in | RF_MODE | |
+| 10 | PA0 | ADC1_IN5 | CC1 | |
+| 11 | PA1 | ADC1_IN6 | CC2 | |
+| 12 | PA2 | ADC1_IN7 | RV1 wiper | |
+| 13 | PA3 | ADC1_IN8 | RV2 wiper | |
+| 15 | PA5 | ADC1_IN10 | RV3 wiper | Bootloader SPI1_SCK; a static voltage never clocks it |
+| 40 | PB4 | TIM3_CH1 (AF2), open-drain | LED red via 510 Ω | 5 V tolerant (FT_fa) |
+| 21 | PB10 | TIM2_CH3 (AF1), open-drain | LED green via 390 Ω | FT_fhv; bootloader I2C2_SCL pull-up keeps the LED dark |
+| 19 | PB1 | TIM3_CH4 (AF2), open-drain | LED blue via 390 Ω | FT_ha |
+| 44 | PH3 | BOOT0 | SW2, 10 kΩ pull-down | |
+| 5 | PH0 | OSC_IN (HSE bypass) | Y2 via 33 Ω | |
+| 32, 33 | PA11, PA12 | USB_DM, USB_DP | J1 | |
+| 34, 37 | PA13, PA14 | SWDIO, SWCLK | SWD pads | |
+| 2, 6, 17, 38, 46 | PC13, PH1, PA7, PA15, PB9 | — | Spare, unconnected | PA7 (SPI1_MOSI) and PB9 (FDCAN1_TX) are bootloader pins, so they stay free |
 
 ## Chain 4: Y2 20 MHz reference oscillator (YXC OT322520MJBA4SL)
 
-One CMOS oscillator is the frequency reference for the whole board. It drives U1 (system clock and audio timing) and U2 (LMX2571 OSCin), and through U1's MCO, U4 (receiver reference).
+One CMOS oscillator is the frequency reference for the whole board. It drives U1 (system clock and audio timing) and U2 (LMX2571 OSCin), and through a U1 timer, U4 (receiver reference, chain 8).
 
 | Ref / pin | Part | Value | JLC | Note |
 |---|---|---|---|---|
@@ -105,7 +139,7 @@ One CMOS oscillator is the frequency reference for the whole board. It drives U1
 | — (pin 3 → U2 OSCin) | — | Direct | | Single-ended CMOS straight into OSCin, OSCin* unconnected (LMX2571 Table 37, p38; Figure 62, p44). The ADF4002's 10 nF coupling capacitor is gone |
 
 - Level at OSCin: Y2 swings 0 to 3.3 V, a CMOS square wave, which TI recommends for the best spurs and phase noise (LMX2571 p11).
-- Load: U1's OSC_IN plus U2's OSCin (about 1 pF typical, LMX2571 p38), well within the 15 pF Y2 is specified into (YSO110TR p1). U4's clock comes from U1's MCO, not from Y2.
+- Load: U1's OSC_IN plus U2's OSCin (about 1 pF typical, LMX2571 p38), well within the 15 pF Y2 is specified into (YSO110TR p1). U4's clock comes from a U1 timer, not from Y2.
 - Reference: LMX2571 Figure 62 (p44) drives OSCin straight from an XO.
 
 ## Chain 5: U2 LMX2571 synthesizer (D2: internal VCO, direct digital FM)
@@ -121,7 +155,7 @@ Chosen 2026-10-21 (see [modulation-strategies.md](modulation-strategies.md)). It
 |---|---|---|---|---|
 | U2 | TI LMX2571NJKR | Synthesizer, WQFN-36 6 × 6 mm | C440388, 139 | DigiKey 1,244 as second route |
 | Vcc3p3 1, 9, 20, 27 (×4) | Samsung CL05B104KO5NNNC | 100 nF each, at the pin | C1525 | "100 nF close to each of the power supply pins" (p54) |
-| VccIO 33 | Samsung CL05B104KO5NNNC | 100 nF | C1525 | Figure 62 |
+| VccIO 15, 33 (×2) | Samsung CL05B104KO5NNNC | 3V3, 100 nF each | C1525 | Both pins are VccIO and connect to 3.3 V (pin table, p4). Pin 15 was missing here until the wiring page was drawn |
 | VcpExt 32 | — + Samsung CL05B104KO5NNNC | 3V3, 100 nF | C1525 | Must be powered in synthesizer mode too, 3.3 V or 5 V (p53, p54) |
 | Bypass1 2, Bypass2 3 | Samsung CL05B104KO5NNNC | 100 nF each | C1525 | Pin table (p3) |
 | VrefVCO 22 | Samsung CL05B104KO5NNNC | 100 nF | C1525 | Figure 62 |
@@ -285,5 +319,5 @@ The LED allows 5 V reverse voltage (p3), so the unplug case that worried Plan C'
   - **After setup (≤ 500 mA):** at most about 111 mA from VBUS.
 - **Regulator:** 600 mA rating; dissipation about (5 − 3.3) × 0.1 A ≈ 0.17 W.
 - **Start-up:**
-  - **3V3 capacitance:** about 24 µF. That is U3's 1 µF, U1's 10 µF + 3 × 100 nF + VDDA's 1.1 µF, Y2's 10 µF + 100 nF, U2's six 100 nF supply caps, U7's 1 µF and U4's 122 nF. U2's VregVCO/Bypass caps sit behind its internal regulators.
+  - **3V3 capacitance:** about 24 µF. That is U3's 1 µF, U1's 10 µF + 3 × 100 nF + VDDA's 1.1 µF, Y2's 10 µF + 100 nF, U2's seven 100 nF supply caps, U7's 1 µF and U4's 122 nF. U2's VregVCO/Bypass caps sit behind its internal regulators.
   - **Ramp time:** the AP2112's 50 mA fold-back current (Plan C chain 5) charges it to 3.3 V in about 1.6 ms, or about 1.8 ms with Y2 already running. Every other load is off or in reset at that point.
