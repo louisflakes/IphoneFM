@@ -58,6 +58,8 @@ Board orientation: looking at the back of the phone, camera at top left. The **t
 | R6 | Solid ground under the RF parts; U2's DAP and U7's pad stitched to it | AN4169 p12; LMX2571 p53 | No digital nets through the RF area |
 | R7 | **Changed.** U1, its clock and the I²S/SPI lines kept off U4's input; the continuous I²S stream to U2 runs short (33 Ω at U1) | AN383 p15–16; netlist FSK_* | U1 outside the RF area |
 
+| R8 | **New.** Keep the I²S clock (FSK_CLK, R6 to U2 pin 4) and every other switching line away from U2's loop filter (C24, R5, C25 at pin 25) and from OSCin (pin 34). Consider a separate OSCin ground return to cut crosstalk spurs. TI's layout example is on p56 | LMX2571 p55 (Layout Guidelines), p56 (Figure 87) | Loop filter and OSCin clear of switching traces |
+
 ## Clocks and decoupling
 
 | # | Rule | Source | Check |
