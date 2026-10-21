@@ -97,3 +97,79 @@ Lock the PLL, then freeze the tuning voltage with a sample-and-hold while transm
 - **A** can't meet 10 Hz with practical parts.
 
 Datasheets saved: `PLL_TI_LMX2571_SNAS654A.pdf`, `AN_TI_SNAA309_LMX2571_FSK.pdf`.
+
+## D2 in depth: LMX2571 with its internal VCO (2026-10-21)
+
+All page numbers are from SNAS654A unless noted.
+
+### Features beyond FSK, and what each does for us
+
+| Feature | Where | Use here |
+|---|---|---|
+| Direct digital FM (FSK I²S mode, arbitrary-level FSK) | p10, p13, p35–37; SNAA309 | The MCU streams the stereo signal as frequency steps. Deviation is the same on every channel, and the response runs from DC up to the loop bandwidth |
+| **Output auto-mute** (OUTBUF_AUTOMUTE, on at reset) | p23 | Outputs stay muted until the PLL locks, at power-up and after every frequency change. **Replaces the MMBT3904 lock gate.** It does not mute if lock is lost later, so firmware also watches lock detect on MUXout |
+| **Programmable output power** (OUTBUF_TX_PWR, 0–31) | p42 Figure 61 | About −18 to +3 dBm. Firmware power control (~20 dB) on top of the DIP-switch attenuator (31.5 dB) |
+| Output buffer type: push-pull or open-drain | p42 Table 38 | Push-pull is a square wave: 3rd harmonic about −12 dBc at 480 MHz. Open-drain with an LC pull-up brings the 3rd–5th down to about −18 to −40 dBc. FL1 still follows |
+| Two outputs, built-in T/R switch, two stored frequencies (F1/F2) switched by the TrCtl pin | p10, p37 | Available. In receive mode the chip should be powered down with CE, so its carrier can't interfere with the Si4705 |
+| Integrated LDOs; single 3.3 V supply; logic accepts 1.8 V | p10, p54 | No low-noise regulator needed. VcpExt still needs 3.3 V or 5 V in synthesizer mode (p54) |
+| Third and fourth loop-filter poles inside the chip, programmable | p11 | Only a 3-part filter on the board |
+| MULT reference multiplier (up to ×6 before it adds noise) | p11, p42 | Raises the phase-detector frequency. Needed for the deviation plan below. Requires an XO, not a crystal, which we already have |
+| Register readback on MUXout; lock detect | p14, p23 | Firmware can confirm configuration and lock |
+| VCO calibration holds over −40 to +85 °C | p12 | No recalibration while running |
+| 24-bit delta-sigma, programmable order and dithering | p11 | Spur tuning if needed |
+
+### Frequency plan
+
+- **VCO:** 4300–5376 MHz (p6).
+- **Output dividers:** CHDIV1 (4–7) × CHDIV2 (1–64) (p12).
+- **Divider ÷56** covers 88.1–95.9 MHz. **÷48** covers 96.1–107.9 MHz (it reaches from 89.6 MHz). **÷40** is unused.
+
+### Deviation headroom (checked for all 100 US channels)
+
+- **Step size:** steps = round(f_dev × DEN / f_PD) × CHDIV / prescaler (Equation 4, p35). One step must stay within ±32,767, and the channel's fractional numerator must stay at least one full swing away from 0 and from DEN (SNAA309 §6.2).
+- **Target:** ±100 kHz, which is ±75 kHz plus margin.
+- **At 20 MHz alone:** 13 channels fail.
+- **With two reference settings,** picked per channel by firmware, every channel passes:
+  - **f_PD = 40 MHz** (MULT ×2) with DEN = 400,000.
+  - **f_PD = 100 MHz** (MULT ×5) with DEN = 1,000,000.
+- **Resolution:** one step is 3.6 Hz at the output on ÷56 (4.2 Hz on ÷48). ±75 kHz is about ±21,000 steps, roughly 15 bits.
+
+### Loop filter (first pass; to be finalised in TI's PLLatinum Sim)
+
+Second-order passive filter, 60° phase margin, internal VCO about 56 MHz/V (p6):
+
+| Loop bandwidth | C1 | C2 | R2 | Charge pump (f_PD 40 / 100 MHz) | Gain / phase at 15 kHz | Gain / phase at 53 kHz |
+|---|---|---|---|---|---|---|
+| 250 kHz | ~110 pF | ~1.4 nF | ~1.6 kΩ | 2.19 / 0.94 mA | +0.11 dB, −0.2° | +0.96 dB, −4.9° |
+| 400 kHz | ~105 pF | ~1.35 nF | ~1.1 kΩ | 5.31 / 2.19 mA | +0.04 dB, −0.0° | +0.48 dB, −1.5° |
+
+- **One filter for both settings:** firmware scales the charge-pump current with the reference setting (programmable in 312.5 µA steps up to about 7.2 mA, p5), so a single filter serves both.
+- **Stereo:** the small lift near 53 kHz affects stereo separation. It's fixed in the MCU with a short pre-equaliser, since the loop response is known.
+
+### Sample rate
+
+- **The constraint:** sample-and-hold images of the stereo signal land near f_s − 53 kHz. If that's inside the loop bandwidth, it becomes out-of-channel FM.
+- **The fix:** stream at about **912 kSa/s** (48 × 19 kHz), interpolated in the MCU. The first image then sits about 860 kHz out, beyond a 250–400 kHz loop.
+- **Interfaces:** I²S needs at least 17 clocks per frame, so about 15.5 MHz, well under the LMX2571's 100 MHz (p13). STM32U535 SAI1 runs each sub-block master with its own clock generator (DS14217 p80): one streams to the LMX2571, the other receives from the Si4705 at 48 kHz.
+
+### What D2 changes on the board
+
+- **Removed:**
+  - U2 ADF4002 and its RF sample network.
+  - Chain 5's oscillator, buffer and lock gate: Q1, Q2, Q3, D2 1SV322, L1, and their resistors and capacitors.
+  - The DAC-to-varicap audio path.
+- **Added:**
+  - LMX2571, with 100 nF on Vcc3p3, VccIO, VcpExt and Bypass, and 100 nF + 2.2 µF on VrefVCO/VregVCO (Figure 62, p44).
+  - The 3-part loop filter.
+  - A 100 pF output coupling capacitor (or the open-drain LC pull-up).
+  - MCU lines: SPI (CLK, DATA, LE) and SAI-A (CLK, FS, DATA), plus CE, MUXout and TrCtl.
+- **Unchanged:** Y2 (now also feeding OSCin), the PE43711 and DIP switch, FL1, U5, J2 and D5, the receiver, USB and the MCU.
+- **The DAC is freed:** it no longer carries transmit audio.
+
+### Still open for D2
+
+- Loop filter and spurs in PLLatinum Sim.
+- Push-pull or open-drain output, and the FL1 re-check for square-wave harmonics.
+- The stereo pre-equaliser.
+- Powering the LMX2571 down in receive mode.
+- Stock: JLC 139 (LMX2571NJKR), with DigiKey as the second route.
