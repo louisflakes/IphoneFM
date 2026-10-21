@@ -183,4 +183,4 @@ Why the references don't hit this:
 - **Range:** the ÷30 divider gives the PLL about ±0.9 MHz of fine range, enough to absorb temperature drift. Firmware nudges the coarse DAC if the loop voltage drifts toward its limits.
 - **Bass:** with a 30 Hz loop, bass below about 60 Hz rolls off. Firmware can pre-boost it if needed.
 
-Waiting on the user's choice before values are fixed.
+Superseded 2026-10-21: the requirement is flat 10 Hz–25 kHz audio, which rules out the 30 Hz loop above. Five strategies are compared in [modulation-strategies.md](modulation-strategies.md). Waiting on the user's choice before values are fixed.
