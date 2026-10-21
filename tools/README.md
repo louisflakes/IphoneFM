@@ -9,6 +9,7 @@
 | `jlc.py <keyword>…` | Search the JLCPCB assembly library (LCSC stock); no key needed |
 | `freq.py` | Parse DigiKey frequency strings (`covers_fm()`) |
 | `shot.cjs <page.html> <out.png>` | Screenshot a wiring diagram with Playwright |
+| `netcheck.py [--bom] [--sync-bom]` | Check `design/analog-fm/netlist.json` (designators, part numbers, JLC codes, sizes) against itself and `bom.md`; `--bom` prints the grouped BOM, `--sync-bom` rewrites the designator line at the top of each BOM chain |
 | `setup-kicad.sh` | Install KiCad 10 and pre-cache the KiCad MCP server (Ubuntu 24.04, as root) |
 
 API keys come from environment variables (`DIGIKEY_CLIENT_ID`, `DIGIKEY_CLIENT_SECRET`, `MOUSER_API_KEY`). Never commit keys.
