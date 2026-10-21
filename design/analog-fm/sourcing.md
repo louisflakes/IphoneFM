@@ -22,7 +22,7 @@ These were checked against their datasheets in Plan C ([bom.md](../plan-c/bom.md
 | U6 | ST USBLC6-2SC6 | C7519, 43,433 | — | Checked (Plan C) |
 | SW2 | Panasonic EVQ-P7J01P (BOOT button only now) | C2828254, 9,729 | — | Checked (Plan C) |
 | D3, D4 | TI TPD1E05U06DPYR | C436349, 75,628 | — | Checked (Plan C) |
-| Y1 | Abracon ABS07-32.768KHZ-7-T | C276424, 6,180 | — | Checked (Plan C) |
+| Y1 | Abracon ABS07-32.768KHZ-7-T | C276424, 6,180 | — | **Removed** (bom.md chain 3): U4's reference clock now comes from Y2 through U1's MCO |
 | FB1 | Murata BLM15GA750SN1D | C113009, 18,883 | — | Checked (Plan C) |
 
 ## 2. Replacements for Plan C parts

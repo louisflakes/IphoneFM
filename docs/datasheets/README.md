@@ -108,6 +108,7 @@ Saved 2026-10-20. LCSC copies come from LCSC's datasheet server (`datasheet.lcsc
 | SW_ShouHan_2.54-6P-TPCB.pdf | Shou Han 2.54-6P TPCB piano DIP drawing (2020-05-24), not used: 7 mm tall | LCSC copy (C6331173) | — |
 | Q_onsemi_MMBT3904.pdf | onsemi MMBT3904L | LCSC copy (C81464) | Buffer lock-gate |
 | C_Samsung_MLCC_catalog_2015_excerpt.pdf | Samsung Electro-Mechanics MLCC catalog (Nov. 2015): part numbering (p4–5) and standard capacitors | LCSC copy (C59782, C1713) | JLC replacements for Plan C capacitors |
+| FB_Murata_BLM15AG_ENFA0018.pdf | Murata BLM15AG ferrite beads, spec ENFA0018 | [murata.com](https://pim.murata.com/asset/pim4/ferriteBeadInductortypefilter/ENFA0018_PDF_FERRITEBEADINDUCTORTYPEFILTER) | VDDA ferrite (BLM15AG601SN1D) |
 | POT_Alps_RK10J.pdf | Alps RK10J/RK14J knob-type potentiometers (catalog p389–394) | LCSC copy (C351175) | Tuning thumbwheels (RK10J11R0A0H) |
 | SW_Diptronics_RV4AF-10R-V-B.pdf | Diptronics R(H)(V)(M)(S) rotary coded switch series, not used: replaced by thumbwheels | LCSC copy (C82589) | — |
 | PLL_ADI_ADF4002.pdf | Analog Devices ADF4002 Rev. D (2006–2015) | Provided by the user (analog.com resets scripted downloads) | PLL synthesizer |
