@@ -12,16 +12,23 @@ Board orientation: looking at the back of the phone, camera at top left. The **t
 - J2 on a side edge opposite the user controls, as low as the board allows; the antenna turns up along the phone's edge.
 - Edge controls come out of the board's edges, not its top face (right-angle parts).
 
+## User feedback on the first analog-FM layouts (2026-10-21)
+
+- Layout 1 (wheels down the side) over layout 2.
+- Wheels as far out over the edge as they go, so they have room to spin, and lower on the board: the top wheel was at the very top. SW1 moves down to make room.
+- D1 to the top right, out of the control area.
+- SW3 on the top edge on the midline, parallel to J1, levers facing out through the top edge (towards the user, not into the board).
+
 ## Mechanical and user access
 
 | # | Rule | Source | Check |
 |---|---|---|---|
 | M1 | J1 (USB-C) on the bottom edge, exactly on the midline, front flush with the board edge | User; HRO TYPE-C-31-M-12 drawing (PCB edge line) | 0.00 mm off the midline |
 | M2 | J2 (SMA) on the side edge opposite the user controls, as low as it goes, barrel out sideways. Unchanged from Plan C | User (2026-10-20, 2026-10-21) | J2's footprint ends 0.5 mm above the bottom edge |
-| M3 | **Changed.** The user controls are SW1 (TX/RX slider) and RV1–RV3 (the three tuning wheels). Their actuators reach past a board edge, and they don't share an edge with J2. The tune-up and tune-down buttons are gone: the wheels replaced them | User (wheels chosen 2026-10-20; right-angle controls 2026-10-21) | Each control's edge line on a board edge |
-| M4 | **New.** SW3 (power DIP) is a bench setting, not a daily control: on an edge, levers facing out, next to U7 so the six control lines stay short | User (side-actuated DIP, 2026-10-21); netlist ATT_C16…C0_5 | SW3 on an edge, near U7 |
+| M3 | **Changed.** The user controls are SW1 (TX/RX slider) and RV1–RV3 (the three tuning wheels), on the left edge. The wheels stand as far past the edge as their mounting lands allow (2.9 mm of rim), with room between them to spin; they don't share an edge with J2. The tune-up and tune-down buttons are gone: the wheels replaced them | User (wheels chosen 2026-10-20; right-angle controls 2026-10-21) | Each control's edge line on a board edge |
+| M4 | **New.** SW3 (power DIP) is a bench setting: on the top edge on the midline, parallel to J1, levers facing out of the board. Its six lines to U7 carry static DC levels, so their length doesn't matter | User (2026-10-21); netlist ATT_C16…C0_5 | SW3 on the top edge, levers outward |
 | M5 | **Changed.** SW2 is now only the BOOT button, pressed while plugging in. It sits on the bottom edge next to J1, so one hand can hold it while the cable goes in | DS14217 p29 · AN2606 p30 (BOOT0 sampled at reset) | SW2 on the bottom edge |
-| M6 | D1 is top-emitting (0.6 mm tall, XL-1615RGBC-RF p8): it goes next to the user controls under a light pipe in the enclosure's top face | XL-1615RGBC-RF p8 | D1 near SW1 |
+| M6 | D1 is top-emitting (0.6 mm tall, XL-1615RGBC-RF p8): top right of the board, under a light pipe in the enclosure's top face | User (2026-10-21); XL-1615RGBC-RF p8 | D1 at the top right |
 | M7 | All parts on the top side; the bottom faces the phone and the magnet ring | HHG p38–39; ADG R31 p279 | Nothing on the bottom |
 | M8 | Through-hole leads stay off the magnet ring (Ø46.0–54.1). Only J2 has them now: 3.5 mm legs, about 1.9 mm out of the bottom of a 1.6 mm board. SW1's two locating posts don't go through | BWSMA-KWE-Z001 p6; MSK12C02 p1; ADG R31 p278–279 | No through-hole leads over the ring |
 | M9 | Tallest top-side parts set the enclosure height: J2 9.5 mm (axis 6.4), SW3 4.1, J1 3.26, RV1–RV3 2.5, SW1 about 1.4 | BWSMA p6; TDP p3; HRO p1; RK10J p2; MSK12C02 p1 | Heights noted for the enclosure |

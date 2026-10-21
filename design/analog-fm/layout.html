@@ -178,7 +178,7 @@ const PARTS = [
   { ref: "RV1, RV2, RV3", n: 3, fn: "Tuning Wheel", mpn: "Alps / RK10J11R0A0H", pkg: "Thumbwheel potentiometer, reflow SMD, Ø14 mm knurled wheel lying flat, 2.5 mm tall",
     body: [{ t: "rect", y: -2.45, w: 10.4, h: 12.1, r: 0.3 }, { t: "circle", x: 0, y: 0, r: 7.0 }],
     pads: [...[-4, -2, 0, 2, 4].map(x => ({ x, y: -9.0, w: 1.2, h: 1.4 })), ...[-6.1, 6.1].map(x => ({ x, y: 2.9, w: 2.2, h: 1.4 }))],
-    edge: 6.0, src: "POT_Alps_RK10J p2 (RK10J1□R, reflow type): Ø14 wheel, frame 10.4 wide and 14 over the ears, terminals 9.5 below the knob centre, 2.5 tall; PCB lands 5 × 1.2 wide at 2 mm pitch and 2 × 2.2 × 1.4 mounting lands 10 mm apart (inner edges). The land rows' distance from the knob centre (about 9.0 and 2.9) is read off the drawing, not dimensioned. The rim faces local +y; board edge drawn 6.0 from the centre, so 1 mm of wheel stands past it" },
+    edge: 4.1, src: "POT_Alps_RK10J p2 (RK10J1□R, reflow type): Ø14 wheel, frame 10.4 wide and 14 over the ears, terminals 9.5 below the knob centre, 2.5 tall; PCB lands 5 × 1.2 wide at 2 mm pitch and 2 × 2.2 × 1.4 mounting lands 10 mm apart (inner edges). The land rows' distance from the knob centre (about 9.0 and 2.9) is read off the drawing, not dimensioned. The rim faces local +y. Board edge drawn 4.1 from the centre, the closest the rim-side mounting lands allow with 0.5 mm copper clearance, so 2.9 mm of wheel stands past it" },
   { ref: "D1", fn: "RGB Status LED", mpn: "XINGLIGHT / XL-1615RGBC-RF", pkg: "1.6 × 1.5 × 0.6 mm, top-emitting, 4 pads",
     body: [{ t: "rect", w: 1.6, h: 1.5, r: 0.05 }],
     pads: [-0.625, 0.625].flatMap(x => [-0.475, 0.475].map(y => ({ x, y, w: 0.45, h: 0.65 }))),
@@ -187,22 +187,23 @@ const PARTS = [
 // ---- Data: placement concepts. Each entry: [ref, x, y, rotation°] in phone back coordinates (part centre).
 // Rotation is clockwise as drawn. Actuators, barrels and wheel rims point along local +y: 0° = down, -90° = right, 90° = left, 180° = up.
 const LAYOUTS = {
-  1: { name: "1 · Wheels down the side", idea: [
-      "All three tuning wheels stacked down the left edge, rims standing 1 mm past it, with the status LED and the TX/RX slider below them: one control strip for the thumb, J2 opposite on the right edge as before.",
-      "The transmit chain runs down the right side in signal order: U2 (synthesizer) at the top right, U7 (attenuator) below it with its DIP switch on the right edge beside it, FL1 down the right side, then U5 and J2 at the bottom right.",
-      "U1 sits in the middle, a few mm from the wheels' terminals (its ADC inputs) and close to Y2, which feeds both U1 and U2. U4 (receiver) sits low and left of U5, away from U2 at the top.",
-      "J1 on the midline with U6 above it and U3 to its left; the BOOT button on the bottom edge beside J1, pressed while the cable goes in."],
-    place: [["RV1", 18.70, 67.0, 90], ["RV2", 18.70, 83.5, 90], ["RV3", 18.70, 100.0, 90], ["D1", 15.5, 110.0, 0], ["SW1", 14.65, 119.0, 90],
-      ["J1", 35.925, 127.285, 0], ["SW2", 25.5, 129.21, 0], ["U6", 35.925, 119.0, 0], ["U3", 26.0, 120.5, 0],
-      ["J2", 55.10, 126.9, -90], ["U5", 47.0, 125.0, 0], ["SW3", 54.20, 86.0, -90], ["U7", 45.5, 86.0, 0], ["U2", 46.0, 70.5, 0],
-      ["Y2", 39.5, 79.5, 0], ["U1", 35.5, 93.0, 0], ["U4", 38.5, 113.0, 0]] },
+  1: { name: "1 · Wheels down the side (revised)", idea: [
+      "Revised with the user's notes (2026-10-21). The three wheels sit as far out as their mounting lands allow, 2.9 mm of rim past the left edge, and lower on the board, 17 mm apart, so each has room to spin. The TX/RX slider moved to the bottom of the left edge to make room.",
+      "The DIP switch is on the top edge on the midline, parallel to J1, with its levers facing out through the top edge. Its six lines to U7 only carry static DC levels, so their length doesn't matter.",
+      "The status LED (D1) is at the top right, away from the controls.",
+      "The transmit chain still runs down the right side in signal order: U2 (synthesizer) at the upper right, U7 (attenuator) below it, FL1 down the right side, then U5 and J2 at the bottom right. U1 sits in the middle near Y2, which feeds both U1 and U2. U4 (receiver) sits low and left of U5, away from U2.",
+      "J1 on the midline with U6 above it; U3 above U6 and to its left; the BOOT button on the bottom edge beside J1."],
+    place: [["RV1", 16.80, 78.0, 90], ["RV2", 16.80, 95.0, 90], ["RV3", 16.80, 112.0, 90], ["SW1", 14.65, 125.5, 90], ["D1", 56.0, 63.0, 0],
+      ["SW3", 35.925, 64.51, 180], ["J1", 35.925, 127.285, 0], ["SW2", 25.5, 129.21, 0], ["U6", 35.925, 119.0, 0], ["U3", 30.5, 114.5, 0],
+      ["J2", 55.10, 126.9, -90], ["U5", 47.0, 125.0, 0], ["U7", 46.0, 94.0, 0], ["U2", 46.0, 76.0, 0],
+      ["Y2", 39.5, 84.0, 0], ["U1", 35.5, 93.0, 0], ["U4", 38.5, 113.0, 0]] },
   2: { name: "2 · Wheels across the top", idea: [
-      "The three wheels side by side across the top edge (towards the camera), read left to right like the three digits, rims 1 mm past the edge. They fill the band that was sparse in Plan C.",
+      "The three wheels side by side across the top edge (towards the camera), read left to right like the three digits, rims 2.9 mm past the edge. They fill the band that was sparse in Plan C.",
       "The TX/RX slider and status LED on the left edge, the DIP switch on the right edge, J2 low on the right as before.",
       "Under the wheel band: U1 left of centre, Y2 between U1 and U2, U2 right of centre, then U7 beside the DIP switch, FL1 down the right side to U5 and J2.",
       "U4 low in the middle, near U5 and away from U2; J1, U6, U3 and the BOOT button along the bottom as in layout 1.",
       "The envelope is 46.45 mm wide, so three 14 mm wheels leave only 1.6 mm between neighbours' mounting lands. That is the one failed check below: fine for assembly, but the wheels sit close for a thumb."],
-    place: [["RV1", 19.925, 65.56, 180], ["RV2", 35.925, 65.56, 180], ["RV3", 51.925, 65.56, 180], ["D1", 15.5, 84.0, 0], ["SW1", 14.65, 93.0, 90],
+    place: [["RV1", 19.925, 63.66, 180], ["RV2", 35.925, 63.66, 180], ["RV3", 51.925, 63.66, 180], ["D1", 15.5, 84.0, 0], ["SW1", 14.65, 93.0, 90],
       ["J1", 35.925, 127.285, 0], ["SW2", 25.5, 129.21, 0], ["U6", 35.925, 119.0, 0], ["U3", 26.0, 120.5, 0],
       ["J2", 55.10, 126.9, -90], ["U5", 47.0, 125.0, 0], ["SW3", 54.20, 103.0, -90], ["U7", 45.5, 103.0, 0], ["U2", 46.5, 86.0, 0],
       ["Y2", 38.0, 86.0, 0], ["U1", 28.5, 96.0, 0], ["U4", 37.5, 113.0, 0]] },
@@ -405,9 +406,11 @@ function checks(L) {
     `Controls exit ${ctl.map(r => `${r} ${sideOf(r)}`).join(", ")}; J2 exits the ${j2s} edge`);
   const j2low = BOARD.y1 - boardBox(P.J2, footBox(partFor("J2"))).y1;
   add("M2", j2low <= 0.55, `J2's footprint ends ${j2low.toFixed(2)} mm above the board's bottom edge`);
-  add("M4", !!sideOf("SW3") && dist("SW3", "U7") <= 12, `SW3 on the ${sideOf("SW3")} edge, ${dist("SW3", "U7").toFixed(1)} mm from U7 (limit 12)`);
+  const levers = toBoard(P.SW3, 0, 1), lv = [levers[0] - P.SW3[1], levers[1] - P.SW3[2]], sw3s = sideOf("SW3");
+  const outward = { left: [-1, 0], right: [1, 0], top: [0, -1], bottom: [0, 1] }[sw3s] || [0, 0];
+  add("M4", !!sw3s && Math.abs(lv[0] - outward[0]) < 0.01 && Math.abs(lv[1] - outward[1]) < 0.01, `SW3 on the ${sw3s} edge, levers facing ${lv[1] < -0.5 ? "up" : lv[1] > 0.5 ? "down" : lv[0] < 0 ? "left" : "right"}, out of the board; ${dist("SW3", "U7").toFixed(1)} mm from U7 (static lines)`);
   add("M5", sideOf("SW2") === "bottom" && dist("SW2", "J1") <= 15, `SW2 (BOOT) on the ${sideOf("SW2")} edge, ${dist("SW2", "J1").toFixed(1)} mm from J1`);
-  add("M6", dist("D1", "SW1") <= 15, `D1 ${dist("D1", "SW1").toFixed(1)} mm from SW1`);
+  add("M6", null, `D1 at x ${P.D1[1].toFixed(1)}, y ${P.D1[2].toFixed(1)}`);
   if (PHONE && PHONE.magsafe) {
     // Through-hole leads must not land on the magnet ring (annulus + 0.5 mm); inside its hole the gap to the wall is 1.85 mm
     const m = PHONE.magsafe, rIn = m.id / 2 - 0.5, rOut = m.od / 2 + 0.5, hit = [], trim = [];
