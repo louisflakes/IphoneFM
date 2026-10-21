@@ -85,6 +85,104 @@ if "--sync-bom" in sys.argv:
 stale = [m.group(1) for m in chain_re.finditer(bom_text) if (m.group(2) or "").strip() != designator_line(int(m.group(1)))]
 check(not stale, "bom.md designator lines match netlist.json" + (f": out of date in chain {', '.join(stale)} (run with --sync-bom)" if stale else ""))
 
+# ---- Nets: every pin of every part ----
+nets = doc.get("nets", {})
+no_map = [p["ref"] for p in parts if "pinmap" not in p]
+check(not no_map, "Every part has a pin map" + (f": missing on {', '.join(no_map)}" if no_map else ""))
+count = [f"{p['ref']} {len(p['pinmap'])}/{p['pins']}" for p in parts if "pinmap" in p and len(p["pinmap"]) != p["pins"]]
+check(not count, f"Pin coverage: every part's map has exactly its datasheet pin count ({sum(p['pins'] for p in parts)} pins)" + (f": {', '.join(count)}" if count else ""))
+
+members = {}
+for p in parts:
+    for pin, d in p.get("pinmap", {}).items():
+        members.setdefault(d["net"], []).append(f"{p['ref']}.{pin}")
+used = set(members) - {"NC"}
+undescribed, unused = sorted(used - set(nets)), sorted(set(nets) - used)
+check(not undescribed and not unused, f"Every net is described and used ({len(used)} nets)"
+      + (f": undescribed {', '.join(undescribed)}" if undescribed else "") + (f"; described but unused {', '.join(unused)}" if unused else ""))
+
+single = [n for n in used if n not in doc.get("pad_nets", []) and len({m.split('.')[0] for m in members[n]} - {r for r in refs if r.startswith("TP")}) < 2]
+check(not single, "Every net joins at least two parts (test pads don't count; SWD pads listed in pad_nets)" + (f": {', '.join(sorted(single))}" if single else ""))
+
+shorted = [p["ref"] for p in parts if p["pins"] == 2 and "pinmap" in p and len({d["net"] for d in p["pinmap"].values()}) < 2 and p["ref"][0] in "CRLF"]
+check(not shorted, "No two-pin passive has both ends on one net" + (f": {', '.join(shorted)}" if shorted else ""))
+
+SUPPLY = re.compile(r"^(VDD|VDDA|VBAT|VA|VD|VIN|Vcc3p3|VccIO|VcpExt)$")
+GROUND = re.compile(r"^(GND|VSS|VSSA|RFGND|Exposed pad|DAP)$")
+bad_pwr = [f"{p['ref']}.{k} {d['name']}→{d['net']}" for p in parts for k, d in p.get("pinmap", {}).items()
+           if "name" in d and ((SUPPLY.match(d["name"]) and d["net"] in ("NC", "GND")) or (GROUND.match(d["name"]) and d["net"] != "GND")
+                               or (d["name"] == "NC" and d["net"] != "NC"))]
+check(not bad_pwr, "Supply pins powered, ground pins on GND, NC pins open" + (f": {', '.join(bad_pwr)}" if bad_pwr else ""))
+
+far = []
+for p in parts:
+    lt = p.get("local_to", "")
+    if "." in lt:
+        ref, pin = lt.split(".", 1)
+        target = by_ref[ref].get("pinmap", {}).get(pin, {}).get("net")
+        mine = {d["net"] for d in p.get("pinmap", {}).values()}
+        if target is None or target not in mine:
+            far.append(f"{p['ref']} vs {lt} ({target})")
+check(not far, "Every part placed 'local_to' a pin shares a net with it" + (f": {', '.join(far)}" if far else ""))
+
+# ---- The wiring page must agree pin by pin ----
+WIRING = os.path.join(DESIGN, "wiring.html")
+w = open(WIRING, encoding="utf-8").read()
+w_nets = set(re.findall(r'\{ name: "([A-Z0-9_]+)", layer:', w)) | {"ATT_" + c for c in re.findall(r'\["(C[0-9_]+)", \d+, \d+, \d+, "', w)} | {f"WHEEL{n}" for n in (1, 2, 3)}
+missing_w = sorted(n for n in w_nets if n not in nets)
+check(not missing_w, f"Every net on the wiring page exists in netlist.json ({len(w_nets)} nets)" + (f": {', '.join(missing_w)}" if missing_w else ""))
+
+
+def pin_ids(num, name):
+    tokens = num.replace("′", "'").split()
+    if tokens and all(re.fullmatch(r"\d+'?|[AB]\d+", t) for t in tokens):
+        return tokens
+    ids = []
+    for a, b in re.findall(r"(\d+)(?:–(\d+))?", name):
+        ids += [str(k) for k in range(int(a), int(b) + 1)] if b else [a]
+    return ids + (["DAP"] if "DAP" in name else []) + (["EP"] if "pad" in name else [])
+
+
+segment = doc.get("page_segments", {})
+mismatch, compared, skipped = [], 0, []
+for ref, body in re.findall(r'const \w+ = \{ ref: "(\w+)",(.*?)\] \};', w, re.S):
+    if ref not in by_ref:
+        continue
+    pm = by_ref[ref]["pinmap"]
+    for line in re.findall(r"\{ side: [^\n]*", body):
+        if 'num: "' not in line:
+            continue  # generated rows (U7/SW3 attenuator bits) are covered by the net-name check
+        num = re.search(r'num: "([^"]*)"', line).group(1)
+        name = re.search(r'name: "([^"]*)"', line).group(1)
+        net = re.search(r'net: "([^"]*)"', line)
+        layer = re.search(r'layer: "([^"]*)"', line)
+        ext = re.search(r'ext: \["([^"]*)"', line)
+        if net:
+            ok = lambda j: segment.get(j, j) == net.group(1)
+        elif ext and ext.group(1).startswith("▲ 3V3"):
+            ok = lambda j: j in ("3V3", "RX_VDD", "U5_VDD")
+        elif layer and layer.group(1) in ("gnd", "rf") and (num in ("NC", "OPEN") or (ext and ext.group(1).startswith("Not connected"))):
+            ok = lambda j: j == "NC"
+        elif layer and layer.group(1) == "gnd":
+            ok = lambda j: j == "GND"
+        else:
+            continue
+        ids = [i for i in pin_ids(num, name) if i in pm]
+        if not ids:  # pins the page groups or names differently: J1's paired contacts, SW1's tab pin 4, J2's centre and legs
+            usb = set(re.findall(r"[AB]\d+", num + " " + name))
+            norm = lambda t: t.lower().rstrip("s")
+            ids = [k for k, v in pm.items() if (usb and usb & set(re.findall(r"[AB]\d+", k))) or (k[:len(num)] == num and k[len(num):].isalpha())
+                   or (name and norm(v.get("name", "")) == norm(name))]
+        if not ids:
+            skipped.append(f"{ref} {num}")
+        for i in ids:
+            compared += 1
+            if not ok(pm[i]["net"]):
+                mismatch.append(f"{ref}.{i} page {net.group(1) if net else (ext.group(1) if ext else layer.group(1))} vs JSON {pm[i]['net']}")
+check(not mismatch, f"Wiring page and netlist.json agree on {compared} pins" + (f": {'; '.join(mismatch)}" if mismatch else ""))
+if skipped:
+    print(f"      not compared (pin names differ between the two files): {', '.join(skipped)}")
+
 kinds = {}
 for r in refs:
     kinds[ref_key(r)[0]] = kinds.get(ref_key(r)[0], 0) + 1

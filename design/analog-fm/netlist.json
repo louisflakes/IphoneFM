@@ -1,9 +1,12 @@
 {
- "about": "IphoneFM analog FM (D2). Every placed part with its designator; nets follow in step 2. Source of truth for the parts list: edit this file, then run python tools/netcheck.py.",
+ "about": "IphoneFM analog FM (D2). Every placed part with its designator, and every pin with its net. Source of truth: edit this file, then run python tools/netcheck.py.",
  "notes": [
   "Designators U1-U7, J1, J2, SW1-SW3, D1, D3-D5, Y2, RV1-RV3, FB1-FB3, L1 and TP1-TP5 keep the names already used in bom.md, wiring.html and layout.html; gaps (D2, Y1) are parts dropped in earlier revisions.",
   "Passives are numbered by chain order. ds_name gives the datasheet's own name where bom.md used it, so C24 is the LMX2571's loop-filter C1 and C32 is the Si4705's C1.",
-  "local_to names the pin a part must sit next to, for the placement check."
+  "local_to names the pin a part must sit next to, for the placement check.",
+  "pinmap gives every pin of every part and the net it joins; \"NC\" marks a pin left open on purpose. A series part splits a net: the U1 side carries the suffix _MCU, a cathode side _K.",
+  "pad_nets join one part and a test pad only, on purpose (the SWD debug pads).",
+  "page_segments: the wiring page draws a net through its series parts (a resistor, capacitor, filter or ferrite) as one line; this maps each JSON net segment to the page net it belongs to."
  ],
  "parts": [
   {
@@ -16,7 +19,74 @@
    "pins": 16,
    "chain": 1,
    "function": "USB-C socket",
-   "pads_note": "12 signal pads + 4 shell slots"
+   "pads_note": "12 signal pads + 4 shell slots",
+   "pinmap": {
+    "A1B12": {
+     "name": "GND",
+     "net": "GND"
+    },
+    "A4B9": {
+     "name": "VBUS",
+     "net": "VBUS"
+    },
+    "A5": {
+     "name": "CC1",
+     "net": "CC1"
+    },
+    "A6": {
+     "name": "DP1",
+     "net": "USB_DP"
+    },
+    "A7": {
+     "name": "DN1",
+     "net": "USB_DM"
+    },
+    "A8": {
+     "name": "SBU1",
+     "net": "NC"
+    },
+    "B5": {
+     "name": "CC2",
+     "net": "CC2"
+    },
+    "B6": {
+     "name": "DP2",
+     "net": "USB_DP"
+    },
+    "B7": {
+     "name": "DN2",
+     "net": "USB_DM"
+    },
+    "B8": {
+     "name": "SBU2",
+     "net": "NC"
+    },
+    "B4A9": {
+     "name": "VBUS",
+     "net": "VBUS"
+    },
+    "B1A12": {
+     "name": "GND",
+     "net": "GND"
+    },
+    "SH1": {
+     "name": "Shell",
+     "net": "GND"
+    },
+    "SH2": {
+     "name": "Shell",
+     "net": "GND"
+    },
+    "SH3": {
+     "name": "Shell",
+     "net": "GND"
+    },
+    "SH4": {
+     "name": "Shell",
+     "net": "GND"
+    }
+   },
+   "pin_source": "HRO TYPE-C-31-M-12 p1 pin table"
   },
   {
    "ref": "R1",
@@ -28,7 +98,15 @@
    "pins": 2,
    "chain": 1,
    "function": "CC1 Rd to GND",
-   "local_to": "J1.A5"
+   "local_to": "J1.A5",
+   "pinmap": {
+    "1": {
+     "net": "CC1"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "R2",
@@ -40,7 +118,15 @@
    "pins": 2,
    "chain": 1,
    "function": "CC2 Rd to GND",
-   "local_to": "J1.B5"
+   "local_to": "J1.B5",
+   "pinmap": {
+    "1": {
+     "net": "CC2"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "D3",
@@ -52,7 +138,18 @@
    "pins": 2,
    "chain": 1,
    "function": "CC1 ESD",
-   "local_to": "J1.A5"
+   "local_to": "J1.A5",
+   "pinmap": {
+    "1": {
+     "name": "IO",
+     "net": "CC1"
+    },
+    "2": {
+     "name": "GND",
+     "net": "GND"
+    }
+   },
+   "pin_source": "TPD1E05U06 p3"
   },
   {
    "ref": "D4",
@@ -64,7 +161,18 @@
    "pins": 2,
    "chain": 1,
    "function": "CC2 ESD",
-   "local_to": "J1.B5"
+   "local_to": "J1.B5",
+   "pinmap": {
+    "1": {
+     "name": "IO",
+     "net": "CC2"
+    },
+    "2": {
+     "name": "GND",
+     "net": "GND"
+    }
+   },
+   "pin_source": "TPD1E05U06 p3"
   },
   {
    "ref": "U6",
@@ -76,7 +184,34 @@
    "pins": 6,
    "chain": 1,
    "function": "D+, D−, VBUS ESD",
-   "local_to": "J1"
+   "local_to": "J1",
+   "pinmap": {
+    "1": {
+     "name": "I/O1",
+     "net": "USB_DP"
+    },
+    "2": {
+     "name": "GND",
+     "net": "GND"
+    },
+    "3": {
+     "name": "I/O2",
+     "net": "USB_DM"
+    },
+    "4": {
+     "name": "I/O2",
+     "net": "USB_DM"
+    },
+    "5": {
+     "name": "VBUS",
+     "net": "VBUS"
+    },
+    "6": {
+     "name": "I/O1",
+     "net": "USB_DP"
+    }
+   },
+   "pin_source": "USBLC6-2 Rev 2 p1-2 (flow-through: 1/6 and 3/4 carry the same line)"
   },
   {
    "ref": "U3",
@@ -87,7 +222,30 @@
    "package": "SOT-25",
    "pins": 5,
    "chain": 2,
-   "function": "3.3 V regulator"
+   "function": "3.3 V regulator",
+   "pinmap": {
+    "1": {
+     "name": "VIN",
+     "net": "VBUS"
+    },
+    "2": {
+     "name": "GND",
+     "net": "GND"
+    },
+    "3": {
+     "name": "EN",
+     "net": "VBUS"
+    },
+    "4": {
+     "name": "NC",
+     "net": "NC"
+    },
+    "5": {
+     "name": "VOUT",
+     "net": "3V3"
+    }
+   },
+   "pin_source": "AP2112 DS39724 p2"
   },
   {
    "ref": "C1",
@@ -99,7 +257,15 @@
    "pins": 2,
    "chain": 2,
    "function": "U3 input",
-   "local_to": "U3.1"
+   "local_to": "U3.1",
+   "pinmap": {
+    "1": {
+     "net": "VBUS"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "C2",
@@ -111,7 +277,15 @@
    "pins": 2,
    "chain": 2,
    "function": "U3 output",
-   "local_to": "U3.5"
+   "local_to": "U3.5",
+   "pinmap": {
+    "1": {
+     "net": "3V3"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "C3",
@@ -123,7 +297,15 @@
    "pins": 2,
    "chain": 2,
    "function": "3V3 bulk at U1",
-   "local_to": "U1.24"
+   "local_to": "U1.24",
+   "pinmap": {
+    "1": {
+     "net": "3V3"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "U1",
@@ -136,7 +318,206 @@
    "chain": 3,
    "function": "MCU",
    "sourcing": "global (DigiKey)",
-   "pads_note": "48 pins + exposed pad"
+   "pads_note": "48 pins + exposed pad",
+   "pinmap": {
+    "1": {
+     "name": "VBAT",
+     "net": "3V3"
+    },
+    "2": {
+     "name": "PC13",
+     "net": "NC"
+    },
+    "3": {
+     "name": "PC14-OSC32_IN",
+     "net": "NC"
+    },
+    "4": {
+     "name": "PC15-OSC32_OUT",
+     "net": "NC"
+    },
+    "5": {
+     "name": "PH0-OSC_IN",
+     "net": "REF20_MCU"
+    },
+    "6": {
+     "name": "PH1-OSC_OUT",
+     "net": "NC"
+    },
+    "7": {
+     "name": "NRST",
+     "net": "NRST"
+    },
+    "8": {
+     "name": "VSSA",
+     "net": "GND"
+    },
+    "9": {
+     "name": "VDDA",
+     "net": "VDDA"
+    },
+    "10": {
+     "name": "PA0",
+     "net": "CC1"
+    },
+    "11": {
+     "name": "PA1",
+     "net": "CC2"
+    },
+    "12": {
+     "name": "PA2",
+     "net": "WHEEL1"
+    },
+    "13": {
+     "name": "PA3",
+     "net": "WHEEL2"
+    },
+    "14": {
+     "name": "PA4",
+     "net": "RX_FS_MCU"
+    },
+    "15": {
+     "name": "PA5",
+     "net": "WHEEL3"
+    },
+    "16": {
+     "name": "PA6",
+     "net": "RX_RST"
+    },
+    "17": {
+     "name": "PA7",
+     "net": "NC"
+    },
+    "18": {
+     "name": "PB0",
+     "net": "RF_MODE"
+    },
+    "19": {
+     "name": "PB1",
+     "net": "LED_B"
+    },
+    "20": {
+     "name": "PB2",
+     "net": "LMX_CE"
+    },
+    "21": {
+     "name": "PB10",
+     "net": "LED_G"
+    },
+    "22": {
+     "name": "VCAP",
+     "net": "VCAP"
+    },
+    "23": {
+     "name": "VSS",
+     "net": "GND"
+    },
+    "24": {
+     "name": "VDD",
+     "net": "3V3"
+    },
+    "25": {
+     "name": "PB12",
+     "net": "LMX_LE"
+    },
+    "26": {
+     "name": "PB13",
+     "net": "LMX_CLK"
+    },
+    "27": {
+     "name": "PB14",
+     "net": "LMX_MUX"
+    },
+    "28": {
+     "name": "PB15",
+     "net": "LMX_DATA"
+    },
+    "29": {
+     "name": "PA8",
+     "net": "FSK_CLK_MCU"
+    },
+    "30": {
+     "name": "PA9",
+     "net": "FSK_FS_MCU"
+    },
+    "31": {
+     "name": "PA10",
+     "net": "FSK_DATA_MCU"
+    },
+    "32": {
+     "name": "PA11",
+     "net": "USB_DM"
+    },
+    "33": {
+     "name": "PA12",
+     "net": "USB_DP"
+    },
+    "34": {
+     "name": "PA13",
+     "net": "SWDIO"
+    },
+    "35": {
+     "name": "VSS",
+     "net": "GND"
+    },
+    "36": {
+     "name": "VDD",
+     "net": "3V3"
+    },
+    "37": {
+     "name": "PA14",
+     "net": "SWCLK"
+    },
+    "38": {
+     "name": "PA15",
+     "net": "NC"
+    },
+    "39": {
+     "name": "PB3",
+     "net": "RX_SCK_MCU"
+    },
+    "40": {
+     "name": "PB4",
+     "net": "LED_R"
+    },
+    "41": {
+     "name": "PB5",
+     "net": "RX_SD_MCU"
+    },
+    "42": {
+     "name": "PB6",
+     "net": "I2C_SCL"
+    },
+    "43": {
+     "name": "PB7",
+     "net": "I2C_SDA"
+    },
+    "44": {
+     "name": "PH3-BOOT0",
+     "net": "BOOT0"
+    },
+    "45": {
+     "name": "PB8",
+     "net": "RX_RCLK"
+    },
+    "46": {
+     "name": "PB9",
+     "net": "NC"
+    },
+    "47": {
+     "name": "VSS",
+     "net": "GND"
+    },
+    "48": {
+     "name": "VDD",
+     "net": "3V3"
+    },
+    "EP": {
+     "name": "Exposed pad",
+     "net": "GND"
+    }
+   },
+   "pin_source": "DS14217 Figure 10 p86 (UFQFPN48 pinout); functions per the U1 pin map in bom.md chain 3"
   },
   {
    "ref": "C4",
@@ -148,7 +529,15 @@
    "pins": 2,
    "chain": 3,
    "function": "U1 VDD bypass",
-   "local_to": "U1.24"
+   "local_to": "U1.24",
+   "pinmap": {
+    "1": {
+     "net": "3V3"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "C5",
@@ -160,7 +549,15 @@
    "pins": 2,
    "chain": 3,
    "function": "U1 VDD bypass",
-   "local_to": "U1.36"
+   "local_to": "U1.36",
+   "pinmap": {
+    "1": {
+     "net": "3V3"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "C6",
@@ -172,7 +569,15 @@
    "pins": 2,
    "chain": 3,
    "function": "U1 VDD bypass",
-   "local_to": "U1.48"
+   "local_to": "U1.48",
+   "pinmap": {
+    "1": {
+     "net": "3V3"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "FB2",
@@ -184,7 +589,15 @@
    "pins": 2,
    "chain": 3,
    "function": "3V3 to VDDA filter",
-   "local_to": "U1.9"
+   "local_to": "U1.9",
+   "pinmap": {
+    "1": {
+     "net": "3V3"
+    },
+    "2": {
+     "net": "VDDA"
+    }
+   }
   },
   {
    "ref": "C7",
@@ -196,7 +609,15 @@
    "pins": 2,
    "chain": 3,
    "function": "U1 VDDA bypass",
-   "local_to": "U1.9"
+   "local_to": "U1.9",
+   "pinmap": {
+    "1": {
+     "net": "VDDA"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "C8",
@@ -208,7 +629,15 @@
    "pins": 2,
    "chain": 3,
    "function": "U1 VDDA bulk",
-   "local_to": "U1.9"
+   "local_to": "U1.9",
+   "pinmap": {
+    "1": {
+     "net": "VDDA"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "C9",
@@ -220,7 +649,15 @@
    "pins": 2,
    "chain": 3,
    "function": "U1 VCAP",
-   "local_to": "U1.22"
+   "local_to": "U1.22",
+   "pinmap": {
+    "1": {
+     "net": "VCAP"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "C10",
@@ -232,7 +669,15 @@
    "pins": 2,
    "chain": 3,
    "function": "U1 NRST filter",
-   "local_to": "U1.7"
+   "local_to": "U1.7",
+   "pinmap": {
+    "1": {
+     "net": "NRST"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "R3",
@@ -244,7 +689,15 @@
    "pins": 2,
    "chain": 3,
    "function": "BOOT0 pull-down",
-   "local_to": "U1.44"
+   "local_to": "U1.44",
+   "pinmap": {
+    "1": {
+     "net": "BOOT0"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "Y2",
@@ -255,7 +708,26 @@
    "package": "3225 4-pad",
    "pins": 4,
    "chain": 4,
-   "function": "Reference oscillator"
+   "function": "Reference oscillator",
+   "pinmap": {
+    "1": {
+     "name": "Tri-state",
+     "net": "3V3"
+    },
+    "2": {
+     "name": "GND",
+     "net": "GND"
+    },
+    "3": {
+     "name": "OUT",
+     "net": "REF20"
+    },
+    "4": {
+     "name": "VDD",
+     "net": "3V3"
+    }
+   },
+   "pin_source": "YSO110TR p2"
   },
   {
    "ref": "C11",
@@ -267,7 +739,15 @@
    "pins": 2,
    "chain": 4,
    "function": "Y2 VDD bypass",
-   "local_to": "Y2.4"
+   "local_to": "Y2.4",
+   "pinmap": {
+    "1": {
+     "net": "3V3"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "C12",
@@ -279,7 +759,15 @@
    "pins": 2,
    "chain": 4,
    "function": "Y2 VDD bulk",
-   "local_to": "Y2.4"
+   "local_to": "Y2.4",
+   "pinmap": {
+    "1": {
+     "net": "3V3"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "R4",
@@ -292,7 +780,15 @@
    "chain": 4,
    "function": "REF20 source termination to U1 PH0",
    "local_to": "Y2.3",
-   "ds_name": "R4"
+   "ds_name": "R4",
+   "pinmap": {
+    "1": {
+     "net": "REF20"
+    },
+    "2": {
+     "net": "REF20_MCU"
+    }
+   }
   },
   {
    "ref": "U2",
@@ -304,7 +800,158 @@
    "pins": 37,
    "chain": 5,
    "function": "FM synthesizer (transmitter)",
-   "pads_note": "36 pins + DAP"
+   "pads_note": "36 pins + DAP",
+   "pinmap": {
+    "1": {
+     "name": "Vcc3p3",
+     "net": "3V3"
+    },
+    "2": {
+     "name": "Bypass1",
+     "net": "LMX_BYP1"
+    },
+    "3": {
+     "name": "Bypass2",
+     "net": "LMX_BYP2"
+    },
+    "4": {
+     "name": "FSK_DV",
+     "net": "FSK_CLK"
+    },
+    "5": {
+     "name": "FSK_D2",
+     "net": "GND"
+    },
+    "6": {
+     "name": "FSK_D1",
+     "net": "FSK_DATA"
+    },
+    "7": {
+     "name": "FSK_D0",
+     "net": "FSK_FS"
+    },
+    "8": {
+     "name": "NC",
+     "net": "NC"
+    },
+    "9": {
+     "name": "Vcc3p3",
+     "net": "3V3"
+    },
+    "10": {
+     "name": "MUXout",
+     "net": "LMX_MUX"
+    },
+    "11": {
+     "name": "CLK",
+     "net": "LMX_CLK"
+    },
+    "12": {
+     "name": "DATA",
+     "net": "LMX_DATA"
+    },
+    "13": {
+     "name": "LE",
+     "net": "LMX_LE"
+    },
+    "14": {
+     "name": "NC",
+     "net": "NC"
+    },
+    "15": {
+     "name": "VccIO",
+     "net": "3V3"
+    },
+    "16": {
+     "name": "RFoutRx",
+     "net": "NC"
+    },
+    "17": {
+     "name": "RFoutTx",
+     "net": "LMX_RF"
+    },
+    "18": {
+     "name": "TrCtl",
+     "net": "GND"
+    },
+    "19": {
+     "name": "CE",
+     "net": "LMX_CE"
+    },
+    "20": {
+     "name": "Vcc3p3",
+     "net": "3V3"
+    },
+    "21": {
+     "name": "VregVCO",
+     "net": "LMX_VREGVCO"
+    },
+    "22": {
+     "name": "VrefVCO",
+     "net": "LMX_VREFVCO"
+    },
+    "23": {
+     "name": "GND",
+     "net": "GND"
+    },
+    "24": {
+     "name": "Fin",
+     "net": "NC"
+    },
+    "25": {
+     "name": "CPout",
+     "net": "CP_LOOP"
+    },
+    "26": {
+     "name": "NC",
+     "net": "NC"
+    },
+    "27": {
+     "name": "Vcc3p3",
+     "net": "3V3"
+    },
+    "28": {
+     "name": "FLout2",
+     "net": "NC"
+    },
+    "29": {
+     "name": "FLout1",
+     "net": "NC"
+    },
+    "30": {
+     "name": "CPoutExt",
+     "net": "NC"
+    },
+    "31": {
+     "name": "GND",
+     "net": "GND"
+    },
+    "32": {
+     "name": "VcpExt",
+     "net": "3V3"
+    },
+    "33": {
+     "name": "VccIO",
+     "net": "3V3"
+    },
+    "34": {
+     "name": "OSCin",
+     "net": "REF20"
+    },
+    "35": {
+     "name": "GND",
+     "net": "GND"
+    },
+    "36": {
+     "name": "OSCin*",
+     "net": "NC"
+    },
+    "DAP": {
+     "name": "DAP",
+     "net": "GND"
+    }
+   },
+   "pin_source": "LMX2571 SNAS654A pin functions p3-4"
   },
   {
    "ref": "C13",
@@ -316,7 +963,15 @@
    "pins": 2,
    "chain": 5,
    "function": "U2 Vcc3p3 bypass",
-   "local_to": "U2.1"
+   "local_to": "U2.1",
+   "pinmap": {
+    "1": {
+     "net": "3V3"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "C14",
@@ -328,7 +983,15 @@
    "pins": 2,
    "chain": 5,
    "function": "U2 Vcc3p3 bypass",
-   "local_to": "U2.9"
+   "local_to": "U2.9",
+   "pinmap": {
+    "1": {
+     "net": "3V3"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "C15",
@@ -340,7 +1003,15 @@
    "pins": 2,
    "chain": 5,
    "function": "U2 Vcc3p3 bypass",
-   "local_to": "U2.20"
+   "local_to": "U2.20",
+   "pinmap": {
+    "1": {
+     "net": "3V3"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "C16",
@@ -352,7 +1023,15 @@
    "pins": 2,
    "chain": 5,
    "function": "U2 Vcc3p3 bypass",
-   "local_to": "U2.27"
+   "local_to": "U2.27",
+   "pinmap": {
+    "1": {
+     "net": "3V3"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "C17",
@@ -364,7 +1043,15 @@
    "pins": 2,
    "chain": 5,
    "function": "U2 VccIO bypass",
-   "local_to": "U2.15"
+   "local_to": "U2.15",
+   "pinmap": {
+    "1": {
+     "net": "3V3"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "C18",
@@ -376,7 +1063,15 @@
    "pins": 2,
    "chain": 5,
    "function": "U2 VccIO bypass",
-   "local_to": "U2.33"
+   "local_to": "U2.33",
+   "pinmap": {
+    "1": {
+     "net": "3V3"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "C19",
@@ -388,7 +1083,15 @@
    "pins": 2,
    "chain": 5,
    "function": "U2 VcpExt bypass",
-   "local_to": "U2.32"
+   "local_to": "U2.32",
+   "pinmap": {
+    "1": {
+     "net": "3V3"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "C20",
@@ -400,7 +1103,15 @@
    "pins": 2,
    "chain": 5,
    "function": "U2 Bypass1",
-   "local_to": "U2.2"
+   "local_to": "U2.2",
+   "pinmap": {
+    "1": {
+     "net": "LMX_BYP1"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "C21",
@@ -412,7 +1123,15 @@
    "pins": 2,
    "chain": 5,
    "function": "U2 Bypass2",
-   "local_to": "U2.3"
+   "local_to": "U2.3",
+   "pinmap": {
+    "1": {
+     "net": "LMX_BYP2"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "C22",
@@ -424,7 +1143,15 @@
    "pins": 2,
    "chain": 5,
    "function": "U2 VrefVCO",
-   "local_to": "U2.22"
+   "local_to": "U2.22",
+   "pinmap": {
+    "1": {
+     "net": "LMX_VREFVCO"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "C23",
@@ -436,7 +1163,15 @@
    "pins": 2,
    "chain": 5,
    "function": "U2 VregVCO",
-   "local_to": "U2.21"
+   "local_to": "U2.21",
+   "pinmap": {
+    "1": {
+     "net": "LMX_VREGVCO"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "C24",
@@ -449,7 +1184,15 @@
    "chain": 5,
    "function": "Loop filter shunt C1",
    "local_to": "U2.25",
-   "ds_name": "C1 (LMX2571 loop filter)"
+   "ds_name": "C1 (LMX2571 loop filter)",
+   "pinmap": {
+    "1": {
+     "net": "CP_LOOP"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "R5",
@@ -462,7 +1205,15 @@
    "chain": 5,
    "function": "Loop filter R2",
    "local_to": "U2.25",
-   "ds_name": "R2 (LMX2571 loop filter)"
+   "ds_name": "R2 (LMX2571 loop filter)",
+   "pinmap": {
+    "1": {
+     "net": "CP_LOOP"
+    },
+    "2": {
+     "net": "LOOP_RC"
+    }
+   }
   },
   {
    "ref": "C25",
@@ -474,8 +1225,16 @@
    "pins": 2,
    "chain": 5,
    "function": "Loop filter C2",
-   "local_to": "U2.25",
-   "ds_name": "C2 (LMX2571 loop filter)"
+   "local_to": "R5.2",
+   "ds_name": "C2 (LMX2571 loop filter)",
+   "pinmap": {
+    "1": {
+     "net": "LOOP_RC"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "C26",
@@ -487,7 +1246,15 @@
    "pins": 2,
    "chain": 5,
    "function": "RFoutTx DC block to U7 RF1",
-   "local_to": "U2.17"
+   "local_to": "U2.17",
+   "pinmap": {
+    "1": {
+     "net": "LMX_RF"
+    },
+    "2": {
+     "net": "ATT_IN"
+    }
+   }
   },
   {
    "ref": "R6",
@@ -499,7 +1266,15 @@
    "pins": 2,
    "chain": 5,
    "function": "FSK_CLK series",
-   "local_to": "U1.29"
+   "local_to": "U1.29",
+   "pinmap": {
+    "1": {
+     "net": "FSK_CLK_MCU"
+    },
+    "2": {
+     "net": "FSK_CLK"
+    }
+   }
   },
   {
    "ref": "R7",
@@ -511,7 +1286,15 @@
    "pins": 2,
    "chain": 5,
    "function": "FSK_FS series",
-   "local_to": "U1.30"
+   "local_to": "U1.30",
+   "pinmap": {
+    "1": {
+     "net": "FSK_FS_MCU"
+    },
+    "2": {
+     "net": "FSK_FS"
+    }
+   }
   },
   {
    "ref": "R8",
@@ -523,7 +1306,15 @@
    "pins": 2,
    "chain": 5,
    "function": "FSK_DATA series",
-   "local_to": "U1.31"
+   "local_to": "U1.31",
+   "pinmap": {
+    "1": {
+     "net": "FSK_DATA_MCU"
+    },
+    "2": {
+     "net": "FSK_DATA"
+    }
+   }
   },
   {
    "ref": "R9",
@@ -535,7 +1326,15 @@
    "pins": 2,
    "chain": 5,
    "function": "U2 CE pull-down",
-   "local_to": "U2.19"
+   "local_to": "U2.19",
+   "pinmap": {
+    "1": {
+     "net": "LMX_CE"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "U7",
@@ -547,7 +1346,110 @@
    "pins": 25,
    "chain": 6,
    "function": "TX power attenuator",
-   "pads_note": "24 pins + exposed pad"
+   "pads_note": "24 pins + exposed pad",
+   "pinmap": {
+    "1": {
+     "name": "C0.25",
+     "net": "GND"
+    },
+    "2": {
+     "name": "VDD",
+     "net": "3V3"
+    },
+    "3": {
+     "name": "P/S",
+     "net": "GND"
+    },
+    "4": {
+     "name": "GND",
+     "net": "GND"
+    },
+    "5": {
+     "name": "RF1",
+     "net": "ATT_IN"
+    },
+    "6": {
+     "name": "GND",
+     "net": "GND"
+    },
+    "7": {
+     "name": "GND",
+     "net": "GND"
+    },
+    "8": {
+     "name": "GND",
+     "net": "GND"
+    },
+    "9": {
+     "name": "GND",
+     "net": "GND"
+    },
+    "10": {
+     "name": "GND",
+     "net": "GND"
+    },
+    "11": {
+     "name": "GND",
+     "net": "GND"
+    },
+    "12": {
+     "name": "GND",
+     "net": "GND"
+    },
+    "13": {
+     "name": "GND",
+     "net": "GND"
+    },
+    "14": {
+     "name": "RF2",
+     "net": "TX_RF_ATT"
+    },
+    "15": {
+     "name": "GND",
+     "net": "GND"
+    },
+    "16": {
+     "name": "LE",
+     "net": "3V3"
+    },
+    "17": {
+     "name": "CLK",
+     "net": "GND"
+    },
+    "18": {
+     "name": "SI",
+     "net": "GND"
+    },
+    "19": {
+     "name": "C16",
+     "net": "ATT_C16"
+    },
+    "20": {
+     "name": "C8",
+     "net": "ATT_C8"
+    },
+    "21": {
+     "name": "C4",
+     "net": "ATT_C4"
+    },
+    "22": {
+     "name": "C2",
+     "net": "ATT_C2"
+    },
+    "23": {
+     "name": "C1",
+     "net": "ATT_C1"
+    },
+    "24": {
+     "name": "C0.5",
+     "net": "ATT_C0_5"
+    },
+    "EP": {
+     "name": "Exposed pad",
+     "net": "GND"
+    }
+   },
+   "pin_source": "PE43711 DOC-84940-8 Table 9 p28"
   },
   {
    "ref": "C27",
@@ -559,7 +1461,15 @@
    "pins": 2,
    "chain": 6,
    "function": "U7 VDD bypass",
-   "local_to": "U7.2"
+   "local_to": "U7.2",
+   "pinmap": {
+    "1": {
+     "net": "3V3"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "R10",
@@ -571,7 +1481,15 @@
    "pins": 2,
    "chain": 6,
    "function": "U7 C16 pull-down",
-   "local_to": "U7.19"
+   "local_to": "U7.19",
+   "pinmap": {
+    "1": {
+     "net": "ATT_C16"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "R11",
@@ -583,7 +1501,15 @@
    "pins": 2,
    "chain": 6,
    "function": "U7 C8 pull-down",
-   "local_to": "U7.20"
+   "local_to": "U7.20",
+   "pinmap": {
+    "1": {
+     "net": "ATT_C8"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "R12",
@@ -595,7 +1521,15 @@
    "pins": 2,
    "chain": 6,
    "function": "U7 C4 pull-down",
-   "local_to": "U7.21"
+   "local_to": "U7.21",
+   "pinmap": {
+    "1": {
+     "net": "ATT_C4"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "R13",
@@ -607,7 +1541,15 @@
    "pins": 2,
    "chain": 6,
    "function": "U7 C2 pull-down",
-   "local_to": "U7.22"
+   "local_to": "U7.22",
+   "pinmap": {
+    "1": {
+     "net": "ATT_C2"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "R14",
@@ -619,7 +1561,15 @@
    "pins": 2,
    "chain": 6,
    "function": "U7 C1 pull-down",
-   "local_to": "U7.23"
+   "local_to": "U7.23",
+   "pinmap": {
+    "1": {
+     "net": "ATT_C1"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "R15",
@@ -631,7 +1581,15 @@
    "pins": 2,
    "chain": 6,
    "function": "U7 C0.5 pull-down",
-   "local_to": "U7.24"
+   "local_to": "U7.24",
+   "pinmap": {
+    "1": {
+     "net": "ATT_C0_5"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "SW3",
@@ -643,7 +1601,58 @@
    "pins": 12,
    "chain": 6,
    "function": "TX power DIP switch",
-   "sourcing": "global (DigiKey)"
+   "sourcing": "global (DigiKey)",
+   "pinmap": {
+    "1": {
+     "name": "Switch 1",
+     "net": "ATT_C16"
+    },
+    "2": {
+     "name": "Switch 2",
+     "net": "ATT_C8"
+    },
+    "3": {
+     "name": "Switch 3",
+     "net": "ATT_C4"
+    },
+    "4": {
+     "name": "Switch 4",
+     "net": "ATT_C2"
+    },
+    "5": {
+     "name": "Switch 5",
+     "net": "ATT_C1"
+    },
+    "6": {
+     "name": "Switch 6",
+     "net": "ATT_C0_5"
+    },
+    "7": {
+     "name": "Switch 6",
+     "net": "3V3"
+    },
+    "8": {
+     "name": "Switch 5",
+     "net": "3V3"
+    },
+    "9": {
+     "name": "Switch 4",
+     "net": "3V3"
+    },
+    "10": {
+     "name": "Switch 3",
+     "net": "3V3"
+    },
+    "11": {
+     "name": "Switch 2",
+     "net": "3V3"
+    },
+    "12": {
+     "name": "Switch 1",
+     "net": "3V3"
+    }
+   },
+   "pin_source": "C&K TDP p3 (SPST x6). Pin numbering assumed standard DIP (switch n between pins n and 13-n); confirm against the KiCad footprint"
   },
   {
    "ref": "C28",
@@ -656,7 +1665,15 @@
    "chain": 7,
    "function": "FL1 shunt 1",
    "local_to": "U7.14",
-   "ds_name": "FL1 C1"
+   "ds_name": "FL1 C1",
+   "pinmap": {
+    "1": {
+     "net": "TX_RF_ATT"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "L2",
@@ -668,7 +1685,15 @@
    "pins": 2,
    "chain": 7,
    "function": "FL1 series 1",
-   "ds_name": "FL1 L1"
+   "ds_name": "FL1 L1",
+   "pinmap": {
+    "1": {
+     "net": "TX_RF_ATT"
+    },
+    "2": {
+     "net": "TX_LPF_MID"
+    }
+   }
   },
   {
    "ref": "C29",
@@ -680,7 +1705,15 @@
    "pins": 2,
    "chain": 7,
    "function": "FL1 shunt 2",
-   "ds_name": "FL1 C2"
+   "ds_name": "FL1 C2",
+   "pinmap": {
+    "1": {
+     "net": "TX_LPF_MID"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "L3",
@@ -692,7 +1725,15 @@
    "pins": 2,
    "chain": 7,
    "function": "FL1 series 2",
-   "ds_name": "FL1 L2"
+   "ds_name": "FL1 L2",
+   "pinmap": {
+    "1": {
+     "net": "TX_LPF_MID"
+    },
+    "2": {
+     "net": "TX_RF"
+    }
+   }
   },
   {
    "ref": "C30",
@@ -705,7 +1746,15 @@
    "chain": 7,
    "function": "FL1 shunt 3",
    "local_to": "U5.3",
-   "ds_name": "FL1 C3"
+   "ds_name": "FL1 C3",
+   "pinmap": {
+    "1": {
+     "net": "TX_RF"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "U5",
@@ -716,7 +1765,34 @@
    "package": "SC-70-6",
    "pins": 6,
    "chain": 7,
-   "function": "TX/RX antenna switch"
+   "function": "TX/RX antenna switch",
+   "pinmap": {
+    "1": {
+     "name": "RF1",
+     "net": "RX_RF"
+    },
+    "2": {
+     "name": "GND",
+     "net": "GND"
+    },
+    "3": {
+     "name": "RF2",
+     "net": "TX_RF"
+    },
+    "4": {
+     "name": "CTRL",
+     "net": "RF_CTRL"
+    },
+    "5": {
+     "name": "RFC",
+     "net": "ANT"
+    },
+    "6": {
+     "name": "VDD",
+     "net": "U5_VDD"
+    }
+   },
+   "pin_source": "PE42421 p8"
   },
   {
    "ref": "R16",
@@ -728,7 +1804,15 @@
    "pins": 2,
    "chain": 7,
    "function": "U5 VDD series",
-   "local_to": "U5.6"
+   "local_to": "U5.6",
+   "pinmap": {
+    "1": {
+     "net": "3V3"
+    },
+    "2": {
+     "net": "U5_VDD"
+    }
+   }
   },
   {
    "ref": "R17",
@@ -740,7 +1824,15 @@
    "pins": 2,
    "chain": 7,
    "function": "U5 CTRL series",
-   "local_to": "U5.4"
+   "local_to": "U5.4",
+   "pinmap": {
+    "1": {
+     "net": "RF_MODE"
+    },
+    "2": {
+     "net": "RF_CTRL"
+    }
+   }
   },
   {
    "ref": "C31",
@@ -752,7 +1844,15 @@
    "pins": 2,
    "chain": 7,
    "function": "U5 CTRL filter",
-   "local_to": "U5.4"
+   "local_to": "U5.4",
+   "pinmap": {
+    "1": {
+     "net": "RF_CTRL"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "R18",
@@ -764,7 +1864,15 @@
    "pins": 2,
    "chain": 7,
    "function": "RF_MODE pull-down",
-   "local_to": "SW1.2"
+   "local_to": "SW1.2",
+   "pinmap": {
+    "1": {
+     "net": "RF_MODE"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "SW1",
@@ -776,7 +1884,38 @@
    "pins": 7,
    "chain": 7,
    "function": "TX/RX slider",
-   "pads_note": "3 terminals + 4 tab pads (pin 4)"
+   "pads_note": "3 terminals + 4 tab pads (pin 4)",
+   "pinmap": {
+    "1": {
+     "name": "Throw (TX)",
+     "net": "3V3"
+    },
+    "2": {
+     "name": "Common",
+     "net": "RF_MODE"
+    },
+    "3": {
+     "name": "Throw (RX)",
+     "net": "GND"
+    },
+    "4a": {
+     "name": "Tab",
+     "net": "GND"
+    },
+    "4b": {
+     "name": "Tab",
+     "net": "GND"
+    },
+    "4c": {
+     "name": "Tab",
+     "net": "GND"
+    },
+    "4d": {
+     "name": "Tab",
+     "net": "GND"
+    }
+   },
+   "pin_source": "MSK12C02 drawing p1 (pin 4 is the four frame tabs)"
   },
   {
    "ref": "J2",
@@ -787,7 +1926,30 @@
    "package": "SMA right-angle, through hole",
    "pins": 5,
    "chain": 7,
-   "function": "Antenna connector"
+   "function": "Antenna connector",
+   "pinmap": {
+    "1": {
+     "name": "Centre",
+     "net": "ANT"
+    },
+    "2": {
+     "name": "Leg",
+     "net": "GND"
+    },
+    "3": {
+     "name": "Leg",
+     "net": "GND"
+    },
+    "4": {
+     "name": "Leg",
+     "net": "GND"
+    },
+    "5": {
+     "name": "Leg",
+     "net": "GND"
+    }
+   },
+   "pin_source": "BWSMA-KWE-Z001 p6"
   },
   {
    "ref": "D5",
@@ -799,7 +1961,18 @@
    "pins": 2,
    "chain": 7,
    "function": "Antenna ESD",
-   "local_to": "J2"
+   "local_to": "J2",
+   "pinmap": {
+    "1": {
+     "name": "IO",
+     "net": "ANT"
+    },
+    "2": {
+     "name": "IO",
+     "net": "GND"
+    }
+   },
+   "pin_source": "RClamp0521P p1 (bidirectional)"
   },
   {
    "ref": "U4",
@@ -811,7 +1984,94 @@
    "pins": 21,
    "chain": 8,
    "function": "FM receiver",
-   "pads_note": "20 pins + exposed pad"
+   "pads_note": "20 pins + exposed pad",
+   "pinmap": {
+    "1": {
+     "name": "NC",
+     "net": "NC"
+    },
+    "2": {
+     "name": "FMI",
+     "net": "FMI"
+    },
+    "3": {
+     "name": "RFGND",
+     "net": "GND"
+    },
+    "4": {
+     "name": "LPI",
+     "net": "GND"
+    },
+    "5": {
+     "name": "RSTB",
+     "net": "RX_RST"
+    },
+    "6": {
+     "name": "SENB",
+     "net": "GND"
+    },
+    "7": {
+     "name": "SCLK",
+     "net": "I2C_SCL"
+    },
+    "8": {
+     "name": "SDIO",
+     "net": "I2C_SDA"
+    },
+    "9": {
+     "name": "RCLK",
+     "net": "RX_RCLK"
+    },
+    "10": {
+     "name": "VD",
+     "net": "RX_VDD"
+    },
+    "11": {
+     "name": "VA",
+     "net": "RX_VDD"
+    },
+    "12": {
+     "name": "GND",
+     "net": "GND"
+    },
+    "13": {
+     "name": "ROUT",
+     "net": "GND"
+    },
+    "14": {
+     "name": "LOUT",
+     "net": "GND"
+    },
+    "15": {
+     "name": "DOUT",
+     "net": "RX_SD"
+    },
+    "16": {
+     "name": "DFS",
+     "net": "RX_FS"
+    },
+    "17": {
+     "name": "GPO3/DCLK",
+     "net": "RX_SCK"
+    },
+    "18": {
+     "name": "GPO2/INT",
+     "net": "RX_GPO2"
+    },
+    "19": {
+     "name": "GPO1",
+     "net": "RX_GPO1"
+    },
+    "20": {
+     "name": "NC",
+     "net": "NC"
+    },
+    "EP": {
+     "name": "Exposed pad",
+     "net": "GND"
+    }
+   },
+   "pin_source": "Si4704/05-D60 Rev 1.2 p16 (QFN typical application schematic)"
   },
   {
    "ref": "FB3",
@@ -823,7 +2083,15 @@
    "pins": 2,
    "chain": 8,
    "function": "3V3 to U4 VA/VD filter",
-   "local_to": "U4.11"
+   "local_to": "U4.11",
+   "pinmap": {
+    "1": {
+     "net": "3V3"
+    },
+    "2": {
+     "net": "RX_VDD"
+    }
+   }
   },
   {
    "ref": "C32",
@@ -836,7 +2104,15 @@
    "chain": 8,
    "function": "U4 VA bypass",
    "local_to": "U4.11",
-   "ds_name": "C1 (Si4705)"
+   "ds_name": "C1 (Si4705)",
+   "pinmap": {
+    "1": {
+     "net": "RX_VDD"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "C33",
@@ -849,7 +2125,15 @@
    "chain": 8,
    "function": "U4 VD bypass",
    "local_to": "U4.10",
-   "ds_name": "C4 (Si4705)"
+   "ds_name": "C4 (Si4705)",
+   "pinmap": {
+    "1": {
+     "net": "RX_VDD"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "C34",
@@ -862,7 +2146,15 @@
    "chain": 8,
    "function": "FMI coupling",
    "local_to": "U5.1",
-   "ds_name": "C2 (Si4705)"
+   "ds_name": "C2 (Si4705)",
+   "pinmap": {
+    "1": {
+     "net": "RX_RF"
+    },
+    "2": {
+     "net": "FMI_MATCH"
+    }
+   }
   },
   {
    "ref": "L1",
@@ -874,7 +2166,15 @@
    "pins": 2,
    "chain": 8,
    "function": "FMI matching inductor",
-   "ds_name": "L1 (Si4705)"
+   "ds_name": "L1 (Si4705)",
+   "pinmap": {
+    "1": {
+     "net": "FMI_MATCH"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "FB1",
@@ -887,7 +2187,15 @@
    "chain": 8,
    "function": "FMI emissions filter",
    "local_to": "U4.2",
-   "ds_name": "FB1 (AN383)"
+   "ds_name": "FB1 (AN383)",
+   "pinmap": {
+    "1": {
+     "net": "FMI_MATCH"
+    },
+    "2": {
+     "net": "FMI"
+    }
+   }
   },
   {
    "ref": "C35",
@@ -900,7 +2208,15 @@
    "chain": 8,
    "function": "FMI emissions filter shunt",
    "local_to": "U4.2",
-   "ds_name": "C14 (AN383)"
+   "ds_name": "C14 (AN383)",
+   "pinmap": {
+    "1": {
+     "net": "FMI"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "R19",
@@ -912,7 +2228,15 @@
    "pins": 2,
    "chain": 8,
    "function": "U4 RSTB pull-down",
-   "local_to": "U4.5"
+   "local_to": "U4.5",
+   "pinmap": {
+    "1": {
+     "net": "RX_RST"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "R20",
@@ -924,7 +2248,15 @@
    "pins": 2,
    "chain": 8,
    "function": "I²C SCL pull-up",
-   "local_to": "U4.7"
+   "local_to": "U4.7",
+   "pinmap": {
+    "1": {
+     "net": "I2C_SCL"
+    },
+    "2": {
+     "net": "3V3"
+    }
+   }
   },
   {
    "ref": "R21",
@@ -936,7 +2268,15 @@
    "pins": 2,
    "chain": 8,
    "function": "I²C SDA pull-up",
-   "local_to": "U4.8"
+   "local_to": "U4.8",
+   "pinmap": {
+    "1": {
+     "net": "I2C_SDA"
+    },
+    "2": {
+     "net": "3V3"
+    }
+   }
   },
   {
    "ref": "R22",
@@ -949,7 +2289,15 @@
    "chain": 8,
    "function": "DOUT series",
    "local_to": "U4.15",
-   "ds_name": "R1 (Si4705)"
+   "ds_name": "R1 (Si4705)",
+   "pinmap": {
+    "1": {
+     "net": "RX_SD"
+    },
+    "2": {
+     "net": "RX_SD_MCU"
+    }
+   }
   },
   {
    "ref": "R23",
@@ -962,7 +2310,15 @@
    "chain": 8,
    "function": "DFS series",
    "local_to": "U4.16",
-   "ds_name": "R2 (Si4705)"
+   "ds_name": "R2 (Si4705)",
+   "pinmap": {
+    "1": {
+     "net": "RX_FS"
+    },
+    "2": {
+     "net": "RX_FS_MCU"
+    }
+   }
   },
   {
    "ref": "C36",
@@ -975,7 +2331,15 @@
    "chain": 8,
    "function": "DFS filter at U1",
    "local_to": "U1.14",
-   "ds_name": "C9 (Si4705)"
+   "ds_name": "C9 (Si4705)",
+   "pinmap": {
+    "1": {
+     "net": "RX_FS_MCU"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "R24",
@@ -988,7 +2352,15 @@
    "chain": 8,
    "function": "DCLK series",
    "local_to": "U4.17",
-   "ds_name": "R3 (Si4705)"
+   "ds_name": "R3 (Si4705)",
+   "pinmap": {
+    "1": {
+     "net": "RX_SCK"
+    },
+    "2": {
+     "net": "RX_SCK_MCU"
+    }
+   }
   },
   {
    "ref": "C37",
@@ -1001,7 +2373,15 @@
    "chain": 8,
    "function": "GPO2/INT filter",
    "local_to": "U4.18",
-   "ds_name": "C18 (AN383)"
+   "ds_name": "C18 (AN383)",
+   "pinmap": {
+    "1": {
+     "net": "RX_GPO2"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "C38",
@@ -1014,7 +2394,15 @@
    "chain": 8,
    "function": "GPO1 filter",
    "local_to": "U4.19",
-   "ds_name": "C15 (AN383)"
+   "ds_name": "C15 (AN383)",
+   "pinmap": {
+    "1": {
+     "net": "RX_GPO1"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "RV1",
@@ -1026,7 +2414,38 @@
    "pins": 7,
    "chain": 9,
    "function": "Tuning wheel 1",
-   "pads_note": "3 terminals + 2 dummy + 2 mounting lands"
+   "pads_note": "3 terminals + 2 dummy + 2 mounting lands",
+   "pinmap": {
+    "1": {
+     "name": "CW end",
+     "net": "3V3"
+    },
+    "2": {
+     "name": "Wiper",
+     "net": "WHEEL1"
+    },
+    "3": {
+     "name": "CCW end",
+     "net": "GND"
+    },
+    "D1": {
+     "name": "Dummy",
+     "net": "GND"
+    },
+    "D2": {
+     "name": "Dummy",
+     "net": "GND"
+    },
+    "M1": {
+     "name": "Mounting",
+     "net": "GND"
+    },
+    "M2": {
+     "name": "Mounting",
+     "net": "GND"
+    }
+   },
+   "pin_source": "Alps RK10J p2-3 (reflow type terminal layout; dummy and mounting lands to GND)"
   },
   {
    "ref": "C39",
@@ -1038,7 +2457,15 @@
    "pins": 2,
    "chain": 9,
    "function": "Wheel 1 ADC reservoir",
-   "local_to": "U1.12"
+   "local_to": "U1.12",
+   "pinmap": {
+    "1": {
+     "net": "WHEEL1"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "RV2",
@@ -1050,7 +2477,38 @@
    "pins": 7,
    "chain": 9,
    "function": "Tuning wheel 2",
-   "pads_note": "3 terminals + 2 dummy + 2 mounting lands"
+   "pads_note": "3 terminals + 2 dummy + 2 mounting lands",
+   "pinmap": {
+    "1": {
+     "name": "CW end",
+     "net": "3V3"
+    },
+    "2": {
+     "name": "Wiper",
+     "net": "WHEEL2"
+    },
+    "3": {
+     "name": "CCW end",
+     "net": "GND"
+    },
+    "D1": {
+     "name": "Dummy",
+     "net": "GND"
+    },
+    "D2": {
+     "name": "Dummy",
+     "net": "GND"
+    },
+    "M1": {
+     "name": "Mounting",
+     "net": "GND"
+    },
+    "M2": {
+     "name": "Mounting",
+     "net": "GND"
+    }
+   },
+   "pin_source": "Alps RK10J p2-3 (reflow type terminal layout; dummy and mounting lands to GND)"
   },
   {
    "ref": "C40",
@@ -1062,7 +2520,15 @@
    "pins": 2,
    "chain": 9,
    "function": "Wheel 2 ADC reservoir",
-   "local_to": "U1.13"
+   "local_to": "U1.13",
+   "pinmap": {
+    "1": {
+     "net": "WHEEL2"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "RV3",
@@ -1074,7 +2540,38 @@
    "pins": 7,
    "chain": 9,
    "function": "Tuning wheel 3",
-   "pads_note": "3 terminals + 2 dummy + 2 mounting lands"
+   "pads_note": "3 terminals + 2 dummy + 2 mounting lands",
+   "pinmap": {
+    "1": {
+     "name": "CW end",
+     "net": "3V3"
+    },
+    "2": {
+     "name": "Wiper",
+     "net": "WHEEL3"
+    },
+    "3": {
+     "name": "CCW end",
+     "net": "GND"
+    },
+    "D1": {
+     "name": "Dummy",
+     "net": "GND"
+    },
+    "D2": {
+     "name": "Dummy",
+     "net": "GND"
+    },
+    "M1": {
+     "name": "Mounting",
+     "net": "GND"
+    },
+    "M2": {
+     "name": "Mounting",
+     "net": "GND"
+    }
+   },
+   "pin_source": "Alps RK10J p2-3 (reflow type terminal layout; dummy and mounting lands to GND)"
   },
   {
    "ref": "C41",
@@ -1086,7 +2583,15 @@
    "pins": 2,
    "chain": 9,
    "function": "Wheel 3 ADC reservoir",
-   "local_to": "U1.15"
+   "local_to": "U1.15",
+   "pinmap": {
+    "1": {
+     "net": "WHEEL3"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "SW2",
@@ -1098,7 +2603,26 @@
    "pins": 4,
    "chain": 9,
    "function": "BOOT button",
-   "pads_note": "1, 1′, 2, 2′"
+   "pads_note": "1, 1′, 2, 2′",
+   "pinmap": {
+    "1": {
+     "name": "A",
+     "net": "3V3"
+    },
+    "1'": {
+     "name": "A",
+     "net": "3V3"
+    },
+    "2": {
+     "name": "B",
+     "net": "BOOT0"
+    },
+    "2'": {
+     "name": "B",
+     "net": "BOOT0"
+    }
+   },
+   "pin_source": "Panasonic EVQ-P7 p2 (1-1' and 2-2' joined inside)"
   },
   {
    "ref": "D1",
@@ -1109,7 +2633,26 @@
    "package": "1615 4-pad",
    "pins": 4,
    "chain": 9,
-   "function": "Status LED"
+   "function": "Status LED",
+   "pinmap": {
+    "1": {
+     "name": "R cathode",
+     "net": "LED_R_K"
+    },
+    "2": {
+     "name": "Common anode",
+     "net": "VBUS"
+    },
+    "3": {
+     "name": "G cathode",
+     "net": "LED_G_K"
+    },
+    "4": {
+     "name": "B cathode",
+     "net": "LED_B_K"
+    }
+   },
+   "pin_source": "XL-1615RGBC-RF p8"
   },
   {
    "ref": "R25",
@@ -1121,7 +2664,15 @@
    "pins": 2,
    "chain": 9,
    "function": "LED red series",
-   "local_to": "D1.1"
+   "local_to": "D1.1",
+   "pinmap": {
+    "1": {
+     "net": "LED_R"
+    },
+    "2": {
+     "net": "LED_R_K"
+    }
+   }
   },
   {
    "ref": "R26",
@@ -1133,7 +2684,15 @@
    "pins": 2,
    "chain": 9,
    "function": "LED green series",
-   "local_to": "D1.3"
+   "local_to": "D1.3",
+   "pinmap": {
+    "1": {
+     "net": "LED_G"
+    },
+    "2": {
+     "net": "LED_G_K"
+    }
+   }
   },
   {
    "ref": "R27",
@@ -1145,7 +2704,15 @@
    "pins": 2,
    "chain": 9,
    "function": "LED blue series",
-   "local_to": "D1.4"
+   "local_to": "D1.4",
+   "pinmap": {
+    "1": {
+     "net": "LED_B"
+    },
+    "2": {
+     "net": "LED_B_K"
+    }
+   }
   },
   {
    "ref": "TP1",
@@ -1157,7 +2724,12 @@
    "pins": 1,
    "chain": 10,
    "function": "Test pad VBUS",
-   "assembly": "bare copper, not a part"
+   "assembly": "bare copper, not a part",
+   "pinmap": {
+    "1": {
+     "net": "VBUS"
+    }
+   }
   },
   {
    "ref": "TP2",
@@ -1169,7 +2741,12 @@
    "pins": 1,
    "chain": 10,
    "function": "Test pad 3V3",
-   "assembly": "bare copper, not a part"
+   "assembly": "bare copper, not a part",
+   "pinmap": {
+    "1": {
+     "net": "3V3"
+    }
+   }
   },
   {
    "ref": "TP3",
@@ -1181,7 +2758,12 @@
    "pins": 1,
    "chain": 10,
    "function": "Test pad GND",
-   "assembly": "bare copper, not a part"
+   "assembly": "bare copper, not a part",
+   "pinmap": {
+    "1": {
+     "net": "GND"
+    }
+   }
   },
   {
    "ref": "TP4",
@@ -1193,7 +2775,12 @@
    "pins": 1,
    "chain": 10,
    "function": "Test pad RF_MODE",
-   "assembly": "bare copper, not a part"
+   "assembly": "bare copper, not a part",
+   "pinmap": {
+    "1": {
+     "net": "RF_MODE"
+    }
+   }
   },
   {
    "ref": "TP5",
@@ -1205,7 +2792,161 @@
    "pins": 1,
    "chain": 10,
    "function": "Test pad LMX_MUX",
-   "assembly": "bare copper, not a part"
+   "assembly": "bare copper, not a part",
+   "pinmap": {
+    "1": {
+     "net": "LMX_MUX"
+    }
+   }
+  },
+  {
+   "ref": "TP6",
+   "value": "NRST",
+   "mpn": "",
+   "maker": "",
+   "lcsc": "",
+   "package": "test pad, top side",
+   "pins": 1,
+   "chain": 10,
+   "function": "SWD pad NRST",
+   "assembly": "bare copper, not a part",
+   "pinmap": {
+    "1": {
+     "net": "NRST"
+    }
+   }
+  },
+  {
+   "ref": "TP7",
+   "value": "SWCLK",
+   "mpn": "",
+   "maker": "",
+   "lcsc": "",
+   "package": "test pad, top side",
+   "pins": 1,
+   "chain": 10,
+   "function": "SWD pad SWCLK",
+   "assembly": "bare copper, not a part",
+   "pinmap": {
+    "1": {
+     "net": "SWCLK"
+    }
+   }
+  },
+  {
+   "ref": "TP8",
+   "value": "SWDIO",
+   "mpn": "",
+   "maker": "",
+   "lcsc": "",
+   "package": "test pad, top side",
+   "pins": 1,
+   "chain": 10,
+   "function": "SWD pad SWDIO",
+   "assembly": "bare copper, not a part",
+   "pinmap": {
+    "1": {
+     "net": "SWDIO"
+    }
+   }
   }
- ]
+ ],
+ "nets": {
+  "GND": "Ground plane",
+  "VBUS": "USB 5 V from J1",
+  "3V3": "U3 output, every 3.3 V load",
+  "VDDA": "U1 analog supply after FB2",
+  "RX_VDD": "U4 VA/VD after FB3",
+  "VCAP": "U1 core regulator capacitor",
+  "NRST": "U1 reset, with SWD pad",
+  "SWDIO": "SWD pad",
+  "SWCLK": "SWD pad",
+  "BOOT0": "U1 boot select, SW2 to 3V3",
+  "USB_DP": "USB D+ (J1 A6/B6, U6, U1)",
+  "USB_DM": "USB D- (J1 A7/B7, U6, U1)",
+  "CC1": "USB-C CC1 sense",
+  "CC2": "USB-C CC2 sense",
+  "REF20": "20 MHz from Y2 to U2 OSCin and R4",
+  "REF20_MCU": "20 MHz into U1 PH0, after R4",
+  "FSK_CLK_MCU": "I2S bit clock at U1, before R6",
+  "FSK_CLK": "I2S bit clock at U2 FSK_DV",
+  "FSK_FS_MCU": "I2S frame sync at U1, before R7",
+  "FSK_FS": "I2S frame sync at U2 FSK_D0",
+  "FSK_DATA_MCU": "I2S data at U1, before R8",
+  "FSK_DATA": "I2S data at U2 FSK_D1",
+  "LMX_CLK": "U2 MICROWIRE clock",
+  "LMX_DATA": "U2 MICROWIRE data",
+  "LMX_LE": "U2 latch enable",
+  "LMX_MUX": "U2 MUXout to U1 and TP5",
+  "LMX_CE": "U2 chip enable, R9 pull-down",
+  "LMX_BYP1": "U2 Bypass1 capacitor",
+  "LMX_BYP2": "U2 Bypass2 capacitor",
+  "LMX_VREFVCO": "U2 VrefVCO capacitor",
+  "LMX_VREGVCO": "U2 VregVCO capacitor",
+  "CP_LOOP": "U2 CPout, loop filter node",
+  "LOOP_RC": "Loop filter R5-C25 node",
+  "LMX_RF": "U2 RFoutTx before C26",
+  "ATT_IN": "U7 RF1 after C26",
+  "ATT_C16": "U7 16 dB bit, SW3 switch 1",
+  "ATT_C8": "U7 8 dB bit, SW3 switch 2",
+  "ATT_C4": "U7 4 dB bit, SW3 switch 3",
+  "ATT_C2": "U7 2 dB bit, SW3 switch 4",
+  "ATT_C1": "U7 1 dB bit, SW3 switch 5",
+  "ATT_C0_5": "U7 0.5 dB bit, SW3 switch 6",
+  "TX_RF_ATT": "U7 RF2, FL1 input",
+  "TX_LPF_MID": "FL1 middle node",
+  "TX_RF": "FL1 output to U5 RF2",
+  "ANT": "U5 RFC to J2 and D5",
+  "RX_RF": "U5 RF1 to C34",
+  "FMI_MATCH": "C34-L1-FB1 node",
+  "FMI": "U4 FMI after FB1",
+  "RF_MODE": "SW1 common: 3V3 = TX, GND = RX; to U1 PB0, R17, TP4",
+  "RF_CTRL": "U5 CTRL after R17",
+  "U5_VDD": "U5 VDD after R16",
+  "RX_SCK": "DCLK at U4",
+  "RX_SCK_MCU": "DCLK at U1, after R24",
+  "RX_FS": "DFS at U4",
+  "RX_FS_MCU": "DFS at U1, after R23, with C36",
+  "RX_SD": "DOUT at U4",
+  "RX_SD_MCU": "DOUT at U1, after R22",
+  "RX_RCLK": "32,787 Hz from U1 TIM16 to U4 RCLK",
+  "RX_RST": "U4 reset, R19 pull-down",
+  "RX_GPO1": "U4 GPO1 filter cap",
+  "RX_GPO2": "U4 GPO2/INT filter cap",
+  "I2C_SCL": "I2C clock U1-U4, R20 pull-up",
+  "I2C_SDA": "I2C data U1-U4, R21 pull-up",
+  "WHEEL1": "RV1 wiper to U1 PA2",
+  "WHEEL2": "RV2 wiper to U1 PA3",
+  "WHEEL3": "RV3 wiper to U1 PA5",
+  "LED_R": "U1 PB4 to R25",
+  "LED_G": "U1 PB10 to R26",
+  "LED_B": "U1 PB1 to R27",
+  "LED_R_K": "R25 to D1 red cathode",
+  "LED_G_K": "R26 to D1 green cathode",
+  "LED_B_K": "R27 to D1 blue cathode"
+ },
+ "pad_nets": [
+  "SWCLK",
+  "SWDIO"
+ ],
+ "page_segments": {
+  "ATT_IN": "LMX_RF",
+  "TX_RF_ATT": "TX_RF",
+  "TX_LPF_MID": "TX_RF",
+  "FMI_MATCH": "RX_RF",
+  "FMI": "RX_RF",
+  "RF_CTRL": "RF_MODE",
+  "LOOP_RC": "CP_LOOP",
+  "U5_VDD": "3V3",
+  "LED_R_K": "LED_R",
+  "LED_G_K": "LED_G",
+  "LED_B_K": "LED_B",
+  "REF20_MCU": "REF20",
+  "FSK_CLK_MCU": "FSK_CLK",
+  "FSK_FS_MCU": "FSK_FS",
+  "FSK_DATA_MCU": "FSK_DATA",
+  "RX_SCK_MCU": "RX_SCK",
+  "RX_FS_MCU": "RX_FS",
+  "RX_SD_MCU": "RX_SD"
+ }
 }

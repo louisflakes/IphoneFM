@@ -315,7 +315,7 @@ The LED allows 5 V reverse voltage (p3), so the unplug case that worried Plan C'
 
 ## Chain 10: Test pads and power budget
 
-**Designators:** TP1 Test pad VBUS; TP2 Test pad 3V3; TP3 Test pad GND; TP4 Test pad RF_MODE; TP5 Test pad LMX_MUX.
+**Designators:** TP1 Test pad VBUS; TP2 Test pad 3V3; TP3 Test pad GND; TP4 Test pad RF_MODE; TP5 Test pad LMX_MUX; TP6 SWD pad NRST; TP7 SWD pad SWCLK; TP8 SWD pad SWDIO.
 
 **Test pads:** none on RF nets (Plan C chain 13 rule).
 - TP1 VBUS
@@ -323,6 +323,7 @@ The LED allows 5 V reverse voltage (p3), so the unplug case that worried Plan C'
 - TP3 GND
 - TP4 RF_MODE: which slide direction is TX
 - TP5 U2 MUXout: PLL lock
+- TP6 NRST, TP7 SWCLK, TP8 SWDIO: backup programming with a debugger, alongside TP2 (3V3) and TP3 (GND). These were on the wiring page but missing from this list until the netlist check
 
 **3V3 current** (maximum or high-setting figures):
 
