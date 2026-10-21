@@ -54,7 +54,7 @@ footer a { color: inherit; }
 <div class="wrap">
   <header>
     <h1>IphoneFM wiring — analog FM (D2)</h1>
-    <p><b>Active design.</b> Plan C is archived (design/plan-c/ in the repo). The LMX2571’s internal VCO makes the carrier and U1 streams the FM deviation to it over I²S, so there is no analog modulator. The power level comes from a DIP switch on a step attenuator, and receive is the Si4705 as before. U1’s pins were checked against DS14217 Tables 26–28 and the ROM bootloader’s pins (AN2606 Table 165). Lines are nets; short stubs are parts local to one chip; “▲ 3V3” means wired to U3’s 3.3 V output. Tap a pin for its datasheet source. Still open before layout: the loop filter and spurs in TI PLLatinum Sim.</p>
+    <p><b>Active design.</b> Plan C is archived (design/plan-c/ in the repo). The LMX2571’s internal VCO makes the carrier and U1 streams the FM deviation to it over I²S, so there is no analog modulator. The power level comes from a DIP switch on a step attenuator, and receive is the Si4705 as before. U1’s pins were checked against DS14217 Tables 26–28 and the ROM bootloader’s pins (AN2606 Table 165). Lines are nets; short stubs are parts local to one chip; “▲ 3V3” means wired to U3’s 3.3 V output. Tap a pin for its datasheet source.</p>
   </header>
   <div class="layers" id="layers" role="group" aria-label="Layers"></div>
   <div class="sheet"><svg id="sheet" viewBox="0 0 2360 1570" role="img" aria-label="Analog FM D2: USB-C socket, regulator, STM32U535, 20 MHz oscillator, LMX2571 synthesizer, PE43711 attenuator with DIP switch, low-pass filter, RF switch, SMA, Si4705 receiver, slider, wheels and LED wiring"></svg></div>
@@ -132,7 +132,7 @@ const NETS = [
     between: "10 kΩ to GND (RC0402FR-0710KL): U2 stays off until firmware enables it, and is off while receiving so its carrier can’t reach U4", src: "LMX2571 p3 · DS14217 p102 · bom chain 5",
     paths: [[[500, 380], [736, 380]]], parts: [[610, "10k↓"]] },
   { name: "CP_LOOP", layer: "rf", from: "U2 CPout (25)", to: "Loop filter to GND (local)",
-    between: "C1 100 pF C0G (CL05C101JB5NNNC) to GND; R2 1.1 kΩ (ERJ-2RKF1101X) + C2 1.5 nF C0G (GRM1555C1H152JA01D) to GND. Internal R3/R4 bypassed. 300–405 kHz loop at 61–62° phase margin, charge-pump current set per reference. Confirm in PLLatinum Sim before layout", src: "LMX2571 p3, p5–6, Figure 62 p44 · bom chain 5", paths: [], parts: [] },
+    between: "C1 100 pF C0G (CL05C101JB5NNNC) to GND; R2 1.1 kΩ (ERJ-2RKF1101X) + C2 1.5 nF C0G (GRM1555C1H152JA01D) to GND. Internal R3/R4 bypassed. 300–405 kHz loop at 61–62° phase margin, charge-pump current set per reference; fine-tuned on the bench in firmware", src: "LMX2571 p3, p5–6, Figure 62 p44 · bom chain 5", paths: [], parts: [] },
   { name: "LMX_RF", layer: "rf", from: "U2 RFoutTx (17)", to: "U7 RF1 (5)",
     between: "100 pF C0G series (CL05C101JB5NNNC): the push-pull output needs only a DC block, and U7’s RF pins must be at 0 V DC. ≈ −18 to +3 dBm programmable; OUTBUF_AUTOMUTE keeps it muted until lock", src: "LMX2571 Table 38 p42 · PE43711 Table 9 p28 · bom chain 5",
     paths: [[[1074, 80], [1196, 80]]], parts: [[1135, "100p"]] },

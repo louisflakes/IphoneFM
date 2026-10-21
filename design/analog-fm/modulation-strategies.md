@@ -168,7 +168,7 @@ Second-order passive filter, 60° phase margin, internal VCO about 56 MHz/V (p6)
 
 ### Still open for D2
 
-- Loop filter and spurs in PLLatinum Sim.
+- ~~Loop filter and spurs in PLLatinum Sim~~: not needed before ordering. The values are bench-tunable and spurs are fixed in firmware (bom.md chain 5).
 - Push-pull or open-drain output, and the FL1 re-check for square-wave harmonics.
 - The stereo pre-equaliser.
 - Powering the LMX2571 down in receive mode.

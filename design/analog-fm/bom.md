@@ -181,7 +181,7 @@ Chosen 2026-10-21 (see [modulation-strategies.md](modulation-strategies.md)). It
 - **Model:** C1 = 100 pF, R2 = 1.1 kΩ, C2 = 1.5 nF, checked against the internal VCO's gain (56 MHz/V typical at 4.8 GHz, p6, swept 40–75 MHz/V) and both reference settings (f_PD 40 MHz, N ≈ 123–130; f_PD 100 MHz, N ≈ 49–52).
 - **Result:** firmware picks the charge-pump current per setting (2.2–5.3 mA, in 312.5 µA steps, p5), which gives a 300–405 kHz loop at 61–62° phase margin.
 - **Audio response:** +0.05–0.07 dB at 15 kHz. At 53 kHz, +0.5–0.7 dB and −1.7° to −2.5°; the MCU removes this with a fixed pre-equaliser.
-- **Still to do:** confirm in TI's PLLatinum Sim, including spurs, before layout.
+- **Tuning:** set on the bench. The charge-pump current is a firmware setting, and any spur on a channel is fixed by giving that channel the other reference setting. Neither needs a hardware change.
 
 **Firmware set-up** (from the datasheet, recorded here so the hardware choices make sense):
 - **Synthesizer mode.** Output divider 56 for 88.1–95.9 MHz, 48 for 96.1–107.9 MHz.
