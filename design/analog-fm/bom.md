@@ -15,7 +15,7 @@ Reference designs are read with a small connectivity script on their KiCad files
 | 3 | U1 STM32U535 support (VDDA filter, clock source) | **Done** |
 | 4 | Y2 20 MHz reference oscillator | **Done** |
 | 5 | Oscillator, varicap, buffer, lock gate | **Done** |
-| 6 | U2 ADF4002 PLL and loop filter | — |
+| 6 | U2 ADF4002 PLL and loop filter | **Open: tuning architecture** |
 | 7 | PE43711 attenuator and DIP switch | — |
 | 8 | FL1 low-pass, DC block, U5 RF switch, J2, D5 | — |
 | 9 | U4 Si4705 receiver (QFN) | — |
@@ -157,3 +157,30 @@ The 2 m [STM32 + ADF4002 transceiver](https://github.com/Zachnad0/KICAD_VHF-FM-2
 | R16 (3V3 → Q3 base) | Yageo RC0402FR-0710KL | 10 kΩ pull-up | C60490 | Buffer muted from power-up until firmware releases it |
 
 Bench items: the tune voltage at 88.1 and 107.9 MHz (target about 1.7 V and 3.4 V), the RFINA level, the buffer output level, and the per-channel modulation sensitivity for the firmware's audio-level table.
+
+## Chain 6: U2 ADF4002 PLL and loop filter (open: tuning architecture)
+
+**Finding (2026-10-21): the loop filter can't be built directly around this oscillator.**
+- **Constraint:** the loop must be much slower than the lowest audio, or it cancels the modulation. Published FM PLL designs use 20–30 Hz or less (chain 5 references).
+- **Tuning gain:** the ADF4002's smallest charge-pump current is 0.294 mA (RSET 11 kΩ, Figure 18, p13). Chain 5's oscillator tunes at about 13 MHz/V, with N ≈ 980 at a 100 kHz comparison frequency.
+- **Result:** a standard second-order passive loop filter (phase margin 60°) then needs:
+
+| Option | Loop bandwidth | C1 (shunt) | C2 (with R2) | R2 |
+|---|---|---|---|---|
+| Direct | 15 Hz | 118 µF | 1,520 µF | 26 Ω |
+| Direct | 50 Hz | 11 µF | 137 µF | 87 Ω |
+| PLL through a ÷30 resistor divider, coarse tune from U1's DAC channel 2 | 30 Hz | 1.0 µF | 12.7 µF | 1.6 kΩ |
+| PLL through a ÷100 divider, coarse tune from DAC channel 2 | 15 Hz | 1.2 µF | 15 µF | 2.6 kΩ |
+
+Why the references don't hit this:
+- **ADF4002 datasheet and HELIOS:** both lock a VCXO (ADF4002 Figure 21, p17; HELIOS reference board). A VCXO's tuning gain is about 1000× smaller than an LC oscillator's.
+- **pira.cz:** uses a low-current TSA5511 and still needs 100 µF capacitors in its loop.
+- **LV2285 (Plan C):** its loop filter was 15 µF tantalum + 510 Ω + 100 nF.
+
+**Proposed fix (coarse + fine tuning):** the varicap bias is the sum of two paths.
+- **Coarse:** U1's DAC channel 2, unused since the DAC chip was dropped. It's heavily RC-filtered (about 1 Hz) so DAC noise can't reach the carrier, and set per channel from a calibration table.
+- **Fine:** the PLL loop filter, through a resistor divider. The PLL then sees a VCXO-sized tuning gain, which brings the loop filter down to about 1 µF and 13–15 µF. The 15 µF is the same tantalum value the LV2285 used.
+- **Range:** the ÷30 divider gives the PLL about ±0.9 MHz of fine range, enough to absorb temperature drift. Firmware nudges the coarse DAC if the loop voltage drifts toward its limits.
+- **Bass:** with a 30 Hz loop, bass below about 60 Hz rolls off. Firmware can pre-boost it if needed.
+
+Waiting on the user's choice before values are fixed.
