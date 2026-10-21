@@ -24,7 +24,7 @@ Each decision is backed by a primary source (datasheet page or spec section). Ne
 | U2 modulation | Pin 7 drives an SVC710 varactor in the VCO tank; it is not a test point | Corrects Plans A–C; the p4 application circuit shows it | ENA1494 p4 |
 | U2 76 kHz | Drive pin 22 from U1 TIM16 (PB8) through 2.2 k/1 k + 10 nF; pin 21 open | No 76 kHz crystal is buyable (DigiKey, Findchips, JLCPCB/LCSC); pin 22 is a self-biased 0.7 V input clamped to 0–2.8 V | ENA1494 p2, p7 |
 | Clocks | SYSCLK 152 MHz | 152 MHz ÷ 2000 = 76.000 kHz exactly; LED PWM becomes ≈ 148 kHz | ENA1494 p2 |
-| Legacy stock | Buy LV2285VB and SVC710 together, enough for the whole run | Both are end-of-life with remaining distributor stock | DigiKey, 2026-10-19 |
+| Legacy stock | **Open (2026-10-20).** The earlier plan, to buy LV2285VB and SVC710 for "the whole run", assumed a production run. The build is about 6 units at most (user, 2026-10-20). Authorized stock has 149-piece (U2) and 1,572-piece (SVC710) minimums at DigiKey, or a $250 minimum order at Rochester Electronics | Both are end-of-life; only Rochester resells them | DigiKey, Octopart, rocelec.com, 2026-10-20 |
 | USB-C CC | Rd fitted on both CC pins | A standard C-to-C cable carries one CC wire, so the source sees one Rd (it attaches only with exactly one). A straight-through adapter would need CC2's Rd removed | Type-C R2.5 Table 3-11 p84, p186 |
 | Board | PCB thickness 1.6 mm | The SW1 slider drawing assumes it; no other part specifies a thickness | SLW-158562-5A-RA-N-D p2 |
 | ESD | USBLC6-2SC6 on D+/D−/VBUS, TPD1E05U06 on each CC, bidirectional TPD1E0B04 on the antenna | Both connectors are user-touchable; the RF switch is only 2 kV HBM | USBLC6-2 p1–2 · TPD1E05U06, TPD1E0B04 datasheets · PE42421 p2 |

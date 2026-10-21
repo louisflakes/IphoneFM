@@ -86,3 +86,29 @@ Web references not stored as files: Murata product pages for each GRM part (body
 | QBLP679E-RGB-3053.pdf | QT Brightek 5050 RGB LED | Specified only at 20 mA |
 | XL-5050RGBC.pdf | XINGLIGHT 5050 RGB LED | Specified only at 20 mA |
 | Wurth_452404020202_slide_switch.pdf | Würth WS-SLTV slide switch (provided by the user) | Top-actuated; replaced by a right-angle slider |
+
+## Analog FM rendition (`analog-fm/`)
+
+Saved 2026-10-20. LCSC copies come from LCSC's datasheet server (`datasheet.lcsc.com`), the copy JLCPCB links for each part.
+
+| File | Document | Source | Used for |
+|---|---|---|---|
+| ESD_Semtech_RClamp0521P.pdf | Semtech RClamp0521PA | LCSC copy (C117554) | Antenna ESD (D5) |
+| L_Murata_LQW18AN_JELF243A-0024.pdf | Murata LQW18AN reference spec JELF243A-0024AC-01 | [murata.com](https://pim.murata.com/asset/pim4/inductor/JELF243A-0024_PDF_INDUCTOR) | L1, FL1 inductors |
+| Q_onsemi_MMBTH10LT1.pdf | onsemi MMBTH10L | LCSC copy (C16204) | Oscillator and buffer transistors |
+| VAR_Toshiba_1SV281.pdf | Toshiba 1SV281 (2014-03-01) | LCSC copy (C146317) | VCO varactor |
+| J1_HRO_TYPE-C-31-M-12.pdf | Korean Hroparts TYPE-C-31-M-12 drawing (2020-12-08) | LCSC copy (C165948) | USB-C receptacle |
+| J2_BAT_BWSMA-KWE-Z001.pdf | BAT Wireless BWSMA-KWE-Z001 (July-2-2025-A01) | LCSC copy (C496551) | SMA jack |
+| SW1_ShouHan_MSK12C02.pdf | Shou Han MSK12C02 drawing | LCSC copy (C431540) | TX/RX slide switch |
+| D1_XINGLIGHT_XL-1615RGBC-RF.pdf | XINGLIGHT XL-1615RGBC-RF | LCSC copy (C965840) | RGB LED |
+| XO_YXC_OT322520MJBA4SL.pdf | YXC YSO110TR family | LCSC copy (C725987) | 20 MHz PLL reference |
+| ATT_pSemi_PE43711.pdf | pSemi PE43711 RF digital step attenuator, DOC-84940-8 (05/2026) | [psemi.com](https://www.psemi.com/pdf/datasheets/pe43711ds.pdf) | Adjustable TX power (direct parallel mode, p6, p8) |
+| SW_CK_TDP_series.pdf | C&K TDP series side-actuated half-pitch DIP switches (rev. CM.06/17/25) | [littelfuse.com](https://www.littelfuse.com/assetdocs/littelfuse-c-k-dip-tdp-series-datasheet?assetguid=738f2d91-170d-4173-a51c-2c80edfa4e19) (saved via the user's Chrome) | RF power DIP switch (TDP06H1SBD1) |
+| SW_kangshen_DSHP06TSGER.pdf | Kangshen DSHP06TSGER drawing (2017-03-24) | LCSC copy (C3293146) | Fallback RF power DIP switch (top-actuated) |
+| SW_ShouHan_2.54-6P-TPCB.pdf | Shou Han 2.54-6P TPCB piano DIP drawing (2020-05-24), not used: 7 mm tall | LCSC copy (C6331173) | — |
+| Q_onsemi_MMBT3904.pdf | onsemi MMBT3904L | LCSC copy (C81464) | Buffer lock-gate |
+| POT_Alps_RK10J.pdf | Alps RK10J/RK14J knob-type potentiometers (catalog p389–394) | LCSC copy (C351175) | Tuning thumbwheels (RK10J11R0A0H) |
+| SW_Diptronics_RV4AF-10R-V-B.pdf | Diptronics R(H)(V)(M)(S) rotary coded switch series, not used: replaced by thumbwheels | LCSC copy (C82589) | — |
+| PLL_ADI_ADF4002.pdf | Analog Devices ADF4002 Rev. D (2006–2015) | Provided by the user (analog.com resets scripted downloads) | PLL synthesizer |
+| SW_BIWIN_R9310R0H-X.pdf | BIWIN R9 series (Oct. 2016), not used: low stock | LCSC copy (C3294689) | — |
+
