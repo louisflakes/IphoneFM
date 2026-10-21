@@ -15,8 +15,8 @@ Reference designs are read with a small connectivity script on their KiCad files
 | 3 | U1 STM32U535 support (VDDA filter, clock source) | **Done** |
 | 4 | Y2 20 MHz reference oscillator | **Done** (updated for D2) |
 | 5 | U2 LMX2571 synthesizer | **Done** |
-| 6 | U7 PE43711 attenuator and SW3 DIP switch | — |
-| 7 | FL1 low-pass, DC block, U5 RF switch, J2, D5 | — |
+| 6 | U7 PE43711 attenuator and SW3 DIP switch | **Done** |
+| 7 | FL1 low-pass, U5 RF switch, J2, D5 | **Done** |
 | 8 | U4 Si4705 receiver (QFN) | — |
 | 9 | Controls: thumbwheels, slider, BOOT button, LED | — |
 | 10 | Test pads and power budget | — |
@@ -155,3 +155,56 @@ Chosen 2026-10-21 (see [modulation-strategies.md](modulation-strategies.md)). It
 - **Modulation:** FSK I²S mode at about 912 kSa/s.
 - **Output:** push-pull buffer, OUTBUF_AUTOMUTE on (default).
 - **Power-on sequence:** R60 down to R0 (p15).
+
+## Chain 6: U7 PE43711 attenuator and SW3 DIP switch
+
+**References:**
+- **PE43711 datasheet DOC-84940-8:** pin table (Table 9, p28), parallel truth table (Table 4, p6), programming modes and power-up behaviour (p8).
+- **[bgelb/gpsrx](https://github.com/bgelb/gpsrx):** a GPS receiver that runs the PE43711 in serial mode. It bypasses VDD with 1 µF, ties its unused parallel inputs low through 1 kΩ, and feeds RF1 through a 1 nF DC block.
+- No published design uses direct parallel mode with switches. The datasheet describes that mode as "ideal for manual control… using hardwire, switches, or jumpers" (p8).
+
+| Ref / pin | Part | Value | JLC | Note |
+|---|---|---|---|---|
+| U7 | pSemi PE43711B-Z | DSA, QFN-24 4 × 4 mm | C470929, 1,737 | |
+| VDD 2 | Samsung CL10B105KO8NNNC | 3V3, 1 µF to GND | C59782 | As gpsrx. 2.3–5.5 V (p3) |
+| P/S 3 | — | GND | | Parallel interface (p8) |
+| LE 16 | — | 3V3 | | Direct parallel mode: the control pins act immediately (p8) |
+| CLK 17, SI 18 | — | GND | | Serial interface unused |
+| C0.25 (D0) 1 | — | GND | | "Ground… if not in use" (Table 9 note 1) |
+| C16, C8, C4, C2, C1, C0.5 (pins 19–24) | Yageo RC0402FR-0710KL ×6 | 10 kΩ pull-down each | C60490 | So an open switch reads low (p8: floating pins at power-up give minimum attenuation) |
+| SW3 | C&K TDP06H1SBD1 | 6-position side-actuated DIP | Global sourcing (DigiKey 1,180) | One side of every switch on 3V3. Switch 1 → C16 … switch 6 → C0.5. Silkscreen 16 / 8 / 4 / 2 / 1 / 0.5 dB. 0.33 mA per closed switch, within its 25 mA rating |
+| RF1 5 | — | From U2 RFoutTx through the 100 pF in chain 5 | | RF pins must be at 0 V DC (Table 9 note 2) |
+| RF2 14 | — | To FL1 (chain 7) | | 0 V DC |
+| GND 4, 6–13, 15, pad | — | GND | | |
+
+- **Power-up:** in direct mode the part sits at maximum attenuation for about 400 µs, then takes the switches' setting (p8).
+- **Levels:** U2 delivers at most about +3 dBm (LMX2571 p42), far below the +28 dBm input limit (PE43711 p3). The insertion loss is about 1.5 dB at 0 dB (p4).
+- **Range:** with U2's programmable output (about −18 to +3 dBm), the board can deliver about +1.5 dBm down to −51 dBm into FL1, before filter and switch loss.
+
+## Chain 7: TX low-pass FL1, U5 RF switch, J2 SMA, D5 antenna ESD
+
+Circuits as Plan C chains 7, 11 and 12. U5 is compared against four published designs, and the antenna ESD position against three, in reference-check.md. What changes:
+- **FL1 now sees a true 50 Ω source** (the attenuator), as it was designed for.
+- **The DC block after FL1 is dropped.** Both ends are now at 0 V DC: U7's RF pins (Table 9 note 2) and U5's RF pins (PE42421 p8). Plan C needed it only because the LV2285 output sat at a DC voltage.
+- **The 1 nF filter capacitor on U5's control pin is added,** closing reference-check U5 gap 1.
+
+| Ref / pin | Part | Value | JLC | Note |
+|---|---|---|---|---|
+| FL1 C (shunt, ×2) | Samsung CL05C330JB5NNNC | 33 pF C0G 0402 | C70465, 312,114 | Replaces Murata GRM1555C1H330JA01D (JLC: 0) |
+| FL1 C (shunt, middle) | **Yageo CC0402JRNPO9BN560** | 56 pF C0G (NP0) ±5% 50 V 0402 | C107007, 630,922 | Replaces Murata GRM1555C1H560JA01D (JLC: 0) |
+| FL1 L (series, ×2) | Murata LQW18ANR10G00D | 100 nH ±2%, Q ≥ 34 at 150 MHz | C98088, 43,869 | Sourcing replacement for the Coilcraft part |
+| U5 | pSemi PE42421SCAA-Z | SPDT RF switch | C470893, 677 | |
+| U5 VDD 6 | Yageo RC0402FR-071KL | 1 kΩ from 3V3 | C106235 | Eval board (PE42421 p7) |
+| U5 CTRL 4 | Yageo RC0402FR-071KL + Murata GRM1555C1H102JA01D | 1 kΩ series, then 1 nF C0G to GND at the pin | C106235 / C76947 | 1 nF added (reference-check U5 gap 1; LoRaPP and Electronic Cats both fit it) |
+| RF_MODE | Yageo RC0402FR-07100KL | 100 kΩ pull-down | C60491 | Holds receive while the slider is between contacts |
+| SW1 | Shou Han MSK12C02 | SPDT slide switch | C431540, 195,730 | Common to RF_MODE; throws to 3V3 (TX) and GND (RX). U1 reads RF_MODE (Plan C PB0) and powers U2 down in receive |
+| U5 RF2 3 | — | From FL1 | | TX |
+| U5 RF1 1 | — | To U4 through C2 1 nF (chain 8) | | RX |
+| U5 RFC 5 | — | To J2 centre | | 0 V DC (p8) |
+| J2 | BAT Wireless BWSMA-KWE-Z001 | SMA jack, right angle | C496551, 129,042 | Footprint 5.1 mm square, Ø1.4 holes (drawing p6) |
+| D5 | Semtech RClamp0521PATCT | Antenna line to GND, at J2 | C117554, 91,372 | Bidirectional, 0.3–0.5 pF, 5 V stand-off (p1–2) |
+
+**Harmonics** (estimate):
+- **At U2:** the push-pull output's harmonics are about −30 dBc (2nd), −12 dBc (3rd) and −16 dBc (5th) (LMX2571 Table 38, p42, measured at 480 MHz).
+- **After FL1** (23–34 dB at the 2nd, ≥ 43 dB from 264 MHz; Plan C chain 12): about ≤ −53 dBc (2nd), ≤ −55 dBc (3rd), ≤ −59 dBc (5th).
+- **Margin:** U2's open-drain output with an LC pull-up (Table 38) is the step to take if the bench wants more.
