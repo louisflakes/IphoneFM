@@ -1,0 +1,506 @@
+<meta charset="utf-8">
+<title>IphoneFM Layout D2</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Board sketch: the phone, the board envelope and a tray of the major parts, all in mm. Two placement concepts (1, 2) put the major parts on the envelope; passives and traces come later. */
+:root {
+  --paper: #f3f5f7; --sheet: #ffffff; --ink: #18202a; --muted: #5b6676; --line: #cfd6df;
+  --grid: #e7ebf0; --grid-major: #d3dae2; --phone: #18202a; --board: #1d8a4e; --board-fill: rgba(29, 138, 78, 0.12); --warn: #c8332b; --fail-fill: rgba(200, 51, 43, 0.12); --ant: #7a3fc4; --ant-fill: rgba(122, 63, 196, 0.12); --phone-detail: #9aa4b1; --magsafe: #2563c9; --magsafe-fill: rgba(37, 99, 201, 0.10); --pad: #c7740a; --body: rgba(24, 32, 42, 0.06); --body-line: #18202a;
+  --sans: "Archivo", system-ui, sans-serif; --mono: "JetBrains Mono", ui-monospace, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #10151b; --sheet: #161d25; --ink: #e6ebf1; --muted: #93a0b1; --line: #2b3643;
+  --grid: #1c252f; --grid-major: #283340; --phone: #e6ebf1; --board: #4fc485; --board-fill: rgba(79, 196, 133, 0.14); --warn: #f0726a; --fail-fill: rgba(240, 114, 106, 0.16); --ant: #b48cf0; --ant-fill: rgba(180, 140, 240, 0.14); --phone-detail: #5b6676; --magsafe: #6b9cf0; --magsafe-fill: rgba(107, 156, 240, 0.12); --pad: #f0a446; --body: rgba(230, 235, 241, 0.06); --body-line: #e6ebf1;
+  color-scheme: dark } }
+:root[data-theme="dark"] {
+  --paper: #10151b; --sheet: #161d25; --ink: #e6ebf1; --muted: #93a0b1; --line: #2b3643;
+  --grid: #1c252f; --grid-major: #283340; --phone: #e6ebf1; --board: #4fc485; --board-fill: rgba(79, 196, 133, 0.14); --warn: #f0726a; --fail-fill: rgba(240, 114, 106, 0.16); --ant: #b48cf0; --ant-fill: rgba(180, 140, 240, 0.14); --phone-detail: #5b6676; --magsafe: #6b9cf0; --magsafe-fill: rgba(107, 156, 240, 0.12); --pad: #f0a446; --body: rgba(230, 235, 241, 0.06); --body-line: #e6ebf1;
+  color-scheme: dark }
+body { background: var(--paper); color: var(--ink); font-family: var(--sans); margin: 0; }
+.wrap { max-width: 1400px; margin: 0 auto; padding-block: 24px 40px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  display: grid; gap: 16px; }
+header h1 { font-size: 1.5rem; margin: 0; text-wrap: balance; }
+header p { margin: 4px 0 0; color: var(--muted); max-width: 75ch; line-height: 1.5; }
+.controls { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.controls button { font: 600 0.8rem var(--sans); letter-spacing: 0.02em; padding: 6px 12px; border-radius: 999px;
+  border: 1.5px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer; }
+.controls button[aria-pressed="true"] { background: var(--ink); color: var(--sheet); }
+.controls button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.controls .sep { width: 1px; align-self: stretch; background: var(--line); margin: 0 4px; }
+.controls .readout { font: 0.85rem var(--mono); color: var(--muted); margin-left: auto; }
+.main { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; }
+.sheet { overflow-x: auto; }
+.sheet { background: var(--sheet); border: 1px solid var(--line); border-radius: 8px; padding: 8px; }
+svg { display: block; width: 100%; min-width: 640px; height: auto; }
+svg text { font-family: var(--mono); }
+.panel { background: var(--sheet); border: 1px solid var(--line); border-radius: 8px; padding: 12px 16px; line-height: 1.5; font-size: 0.9rem; }
+.panel h2 { font-size: 1rem; margin: 0 0 6px; }
+.panel h2 + p { margin-top: 0; }
+.panel table { border-collapse: collapse; width: 100%; font-size: 0.82rem; margin: 6px 0 10px; }
+.panel th, .panel td { text-align: left; padding: 4px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
+.panel th { color: var(--muted); font-weight: 600; font-size: 0.72rem; letter-spacing: 0.04em; text-transform: uppercase; }
+.panel td.n { font-family: var(--mono); white-space: nowrap; }
+.panel ul { margin: 4px 0 10px; padding-left: 18px; }
+.warn { color: var(--warn); }
+.pass, .fail, .note { font: 600 0.72rem var(--sans); padding: 1px 8px; border-radius: 999px; white-space: nowrap; }
+.pass { background: var(--board-fill); color: var(--board); }
+.fail { background: var(--fail-fill); color: var(--warn); }
+.note { background: var(--body); color: var(--muted); }
+.muted { color: var(--muted); }
+</style>
+
+<div class="wrap">
+  <header>
+    <h1>IphoneFM board sketch — analog FM (D2)</h1>
+    <p>The phone (outline, camera plateau, MagSafe ring), the unchanged board envelope, and a tray of the analog-FM parts at true size (bodies and recommended land patterns, top view). Layouts 1 and 2 are two first placements to refine; the antenna placement is kept from Plan C. Looking at the back of the phone with the camera at top left; x runs from the camera-side long edge, y down from the top edge. Dashed green lines in the tray mark where each edge part meets the board edge.</p>
+  </header>
+  <div class="controls" role="group" aria-label="View">
+    <button type="button" data-side="top">Top side</button>
+    <button type="button" data-side="bottom">Bottom side (phone side, mirrored)</button>
+    <button type="button" id="gridBtn">Grid</button>
+    <span class="sep" aria-hidden="true"></span>
+    <button type="button" data-layout="none">Parts tray</button>
+    <button type="button" data-layout="1">Layout 1</button>
+    <button type="button" data-layout="2">Layout 2</button>
+    <span class="sep" aria-hidden="true"></span>
+    <button type="button" data-ant="none">No antenna</button>
+    <button type="button" data-ant="collapsed">Antenna collapsed</button>
+    <button type="button" data-ant="extended">Antenna extended</button>
+    <span class="readout" id="readout">x —, y — mm</span>
+  </div>
+  <div class="main">
+    <div class="sheet"><svg id="sk" role="img" aria-label="Phone outline and board envelope, to scale"></svg></div>
+    <div class="panel" id="layoutPanel"></div>
+    <div class="panel" id="panel"></div>
+  </div>
+</div>
+
+<!-- Apple's dimensions stay off GitHub: this file is in the git-ignored local/ folder on the design PC. -->
+<script src="../../local/apple/phone-outline.js" charset="utf-8"></script>
+<script>
+// ---- Data: board envelope (mm, phone back coordinates). Derived 2026-10-20; the full derivation is in local/apple/fit-notes.md ----
+const ENVELOPE = [[12.70, 59.56], [59.15, 59.56], [59.15, 130.96], [12.70, 130.96]]; // user's rectangle, 2026-10-20
+const AXIS = (6.35 + 65.50) / 2; // mirror line for the bottom view: the envelope's (and phone's) centreline
+// ---- Data: major parts, true size, top view (as placed on the board), mm, origin at the part centre ----
+// body: outline shapes; pads: recommended land pattern; pin1: marker position. Each entry cites its drawing.
+const quadPads = ({ n, pitch, padL, padW, span }) => {
+  // QFN/QFP: n pads per side, numbered counter-clockwise from the top of the left side
+  const c = span / 2 - padL / 2, o = (n - 1) / 2 * pitch, P = [];
+  for (let i = 0; i < n; i++) P.push({ x: -c, y: -o + i * pitch, w: padL, h: padW });
+  for (let i = 0; i < n; i++) P.push({ x: -o + i * pitch, y: c, w: padW, h: padL });
+  for (let i = 0; i < n; i++) P.push({ x: c, y: o - i * pitch, w: padL, h: padW });
+  for (let i = 0; i < n; i++) P.push({ x: o - i * pitch, y: -c, w: padW, h: padL });
+  return P;
+};
+const dualRow = ({ n, pitch, w, y0, y1 }) => {
+  // Two horizontal rows (SOIC/SSOP style): pins 1…n left to right along the bottom, n+1…2n right to left along the top.
+  // y0…y1: pad or lead extent from the centre line outward (mm)
+  const o = (n - 1) / 2 * pitch, P = [], h = y1 - y0, c = (y0 + y1) / 2;
+  for (let i = 0; i < n; i++) P.push({ x: -o + i * pitch, y: c, w, h });
+  for (let i = 0; i < n; i++) P.push({ x: o - i * pitch, y: -c, w, h });
+  return P;
+};
+const dualCol = ({ n, pitch, h, x0, x1 }) => {
+  // Two vertical columns (SOIC/SSOP style): pins 1…n top to bottom on the left, n+1…2n bottom to top on the right.
+  // x0…x1: pad extent from the centre line outward (mm); h: pad size along the pitch
+  const o = (n - 1) / 2 * pitch, P = [], w = x1 - x0, c = (x0 + x1) / 2;
+  for (let i = 0; i < n; i++) P.push({ x: -c, y: -o + i * pitch, w, h });
+  for (let i = 0; i < n; i++) P.push({ x: c, y: o - i * pitch, w, h });
+  return P;
+};
+const PARTS = [
+  { ref: "U1", fn: "MCU", mpn: "ST / STM32U535CEU6", pkg: "UFQFPN48, 7 × 7 mm, 0.5 mm pitch",
+    body: [{ t: "rect", w: 7.0, h: 7.0, r: 0.15 }],
+    pads: [...quadPads({ n: 12, pitch: 0.5, padL: 0.55, padW: 0.30, span: 7.30 }), { x: 0, y: 0, w: 5.60, h: 5.60 }],
+    pin1: [-4.1, -4.1], src: "DS14217 Rev 5 p268 (Table 140: D = E = 7.00, A 0.55 typ) and p269 (Figure 74 footprint: 0.30 × 0.55 pads, span 7.30, exposed pad 5.60)" },
+  { ref: "U2", fn: "FM Synthesizer (transmitter)", mpn: "TI / LMX2571NJKR", pkg: "WQFN-36, 6 × 6 × 0.8 mm, 0.5 mm pitch",
+    body: [{ t: "rect", w: 6.0, h: 6.0, r: 0.15 }],
+    pads: [...quadPads({ n: 9, pitch: 0.5, padL: 0.6, padW: 0.25, span: 6.4 }), { x: 0, y: 0, w: 4.6, h: 4.6 }],
+    pin1: [-3.6, -3.6], src: "SNAS654A p61 (NJK0036A): body 6.00 ± 0.1, 0.8 max tall, 36 pins 0.25 wide at 0.5 pitch, exposed pad 4.6; recommended land pattern 0.25 × 0.6 pads on 5.8 mm centres, 4.6 mm centre pad" },
+  { ref: "U7", fn: "Step Attenuator", mpn: "pSemi / PE43711B-Z", pkg: "QFN-24, 4 × 4 × 0.85 mm, 0.5 mm pitch",
+    body: [{ t: "rect", w: 4.0, h: 4.0, r: 0.1 }],
+    pads: [...quadPads({ n: 6, pitch: 0.5, padL: 0.6, padW: 0.3, span: 4.4 }), { x: 0, y: 0, w: 2.75, h: 2.75 }],
+    pin1: [-2.6, -2.6], src: "DOC-84940-8 p29 Figure 36: body 4.00 × 4.00 × 0.85, exposed pad 2.70; recommended land pattern 0.30 × 0.60 pads at 0.50, 4.40 outer, 2.75 centre pad" },
+  { ref: "U4", fn: "FM Receiver", mpn: "Skyworks / Si4705-D60-GM", pkg: "QFN-20, 3 × 3 × 0.55 mm, 0.5 mm pitch",
+    body: [{ t: "rect", w: 3.0, h: 3.0, r: 0.08 }],
+    pads: [
+      ...[-0.75, -0.25, 0.25, 0.75].flatMap(o => [{ x: -1.355, y: o, w: 0.61, h: 0.28 }, { x: 1.355, y: o, w: 0.61, h: 0.28 }, { x: o, y: -1.355, w: 0.28, h: 0.61 }, { x: o, y: 1.355, w: 0.28, h: 0.61 }]),
+      ...[[-1.265, -1.265], [1.265, -1.265], [-1.265, 1.265], [1.265, 1.265]].map(([x, y]) => ({ x, y, w: 0.34, h: 0.34 })),
+      { x: 0, y: 0, w: 1.7, h: 1.7 }],
+    pin1: [-1.9, -1.9], src: "Si4704/05-D60 Rev 1.2 p29 (Table 14: D = E = 3.00, A 0.55, e 0.50, D2 = E2 1.70) and p31–32 (Table 16 land pattern: 16 pads 0.28 × 0.61 on 2.71 mm centres, 4 corner pads 0.34 square at f 2.53, centre pad 1.60–1.80)" },
+  { ref: "U3", fn: "3.3 V Regulator", mpn: "Diodes / AP2112K-3.3", pkg: "SOT25 (SOT-23-5), 3.00 × 1.60 mm body, 0.95 mm pitch",
+    body: [{ t: "rect", w: 3.00, h: 1.60, r: 0.08 }],
+    pads: [...[-0.95, 0, 0.95].map(x => ({ x, y: 1.2, w: 0.55, h: 0.80 })), ...[0.95, -0.95].map(x => ({ x, y: -1.2, w: 0.55, h: 0.80 }))],
+    pin1: [-1.75, 1.75], src: "AP2112 DS39724 Rev 2-2 p1 (SOT25 pinout) and p14 (outline and suggested pad layout: X 0.55, Y 0.80, C1 2.40, C2 0.95)" },
+  { ref: "U5", fn: "RF Switch", mpn: "pSemi / PE42421", pkg: "SC-70-6, 2.10 × 1.25 mm body, 0.65 mm pitch",
+    body: [{ t: "rect", w: 2.10, h: 1.25, r: 0.06 }],
+    pads: dualRow({ n: 3, pitch: 0.65, w: 0.40, y0: 0.70, y1: 1.20 }),
+    pin1: [-1.35, 1.35], src: "PE42421 DOC-33214-1.03 p9 Figure 14: body 2.10 × 1.25, land pattern rows 1.90 apart, pads 0.40 × 0.50 min" },
+  { ref: "U6", fn: "USB ESD Protection", mpn: "ST / USBLC6-2SC6", pkg: "SOT23-6L, 2.93 × 1.63 mm body, 0.95 mm pitch",
+    body: [{ t: "rect", w: 2.925, h: 1.625, r: 0.08 }],
+    pads: dualRow({ n: 3, pitch: 0.95, w: 0.60, y0: 0.55, y1: 1.75 }),
+    pin1: [-1.75, 2.05], src: "USBLC6-2 Rev 2 p10: Figure 22 outline and Figure 23 footprint (0.60 × 1.20 pads, 0.95 pitch)" },
+  { ref: "Y2", fn: "20 MHz Reference Oscillator", mpn: "YXC / OT322520MJBA4SL", pkg: "3.2 × 2.5 × 1.2 mm SMD, 4 pads",
+    body: [{ t: "rect", w: 3.2, h: 2.5, r: 0.1 }],
+    pads: [-1.05, 1.05].flatMap(x => [-0.95, 0.95].map(y => ({ x, y, w: 1.3, h: 1.2 }))),
+    pin1: [-2.1, 1.65], src: "YSO110TR p3 (3.2 × 2.5: body 3.2 × 2.5 ± 0.10, 1.2 max tall; recommended pattern 1.3 × 1.2 pads, 0.8 and 0.7 gaps) and p2 (#1 tri-state bottom left, #2 GND, #3 OUT, #4 VDD top left)" },
+  { ref: "J1", fn: "USB-C Receptacle", mpn: "HRO / TYPE-C-31-M-12", pkg: "USB 2.0 Type-C, top mount, 8.94 × 7.35 × 3.26 mm, front at the board edge",
+    body: [{ t: "rect", w: 8.94, h: 7.35, r: 0.3 }],
+    pads: [
+      ...[[-3.20, 0.60], [-2.40, 0.60], [-1.75, 0.30], [-1.25, 0.30], [-0.75, 0.30], [-0.25, 0.30], [0.25, 0.30], [0.75, 0.30], [1.25, 0.30], [1.75, 0.30], [2.40, 0.60], [3.20, 0.60]]
+        .map(([x, w]) => ({ x, y: -3.68, w, h: 1.15 })),
+      ...[-4.325, 4.325].map(x => ({ x, y: -3.105, w: 1.00, h: 2.00, round: true, slot: [0.60, 1.70] })),
+      ...[-4.325, 4.325].map(x => ({ x, y: 1.075, w: 1.00, h: 1.70, round: true, slot: [0.60, 1.40] })),
+      ...[-2.89, 2.89].map(x => ({ x, y: -2.605, w: 0.60, h: 0.60, npth: true })),
+    ],
+    edge: 3.675, src: "HRO TYPE-C-31-M-12 drawing p1: body 8.94 × 7.35, 3.26 tall; recommended layout 4 × 0.60 + 8 × 0.30 pads at 0.50 pitch, shell slots 8.65 apart (0.6 × 1.7 and 0.6 × 1.4 drills, rows 4.18 apart), 2 × Ø0.60 holes 5.78 apart, PCB edge at the body front. Pad for pad the same pattern as Plan C's GCT USB4105" },
+  { ref: "J2", fn: "Antenna Connector", mpn: "BAT Wireless / BWSMA-KWE-Z001", pkg: "SMA jack, right angle, through hole; 6 mm square base, barrel 8.5 mm past it",
+    body: [{ t: "rect", w: 6.0, h: 6.0, r: 0.1 }, { t: "rect", y: 7.25, w: 6.2, h: 8.5, r: 0.2 }],
+    pads: [{ x: 0, y: 0, w: 2.0, h: 2.0, hole: 1.4 }, ...[[-2.55, -2.55], [2.55, -2.55], [-2.55, 2.55], [2.55, 2.55]].map(([x, y]) => ({ x, y, w: 2.0, h: 2.0, hole: 1.4 }))],
+    edge: 4.05, tht: 1.9, src: "BWSMA-KWE-Z001 p6: base 6 × 6, 14.5 long overall (barrel 8.5 past the base, Ø6.2 thread), axis 6.4 above the board, 9.5 tall, 3.5 mm legs; PCB layout 5 × Ø1.4 holes, legs on a 5.1 mm square. Lands drawn at hole + 0.6 (KHA p135). The leg lands reach 0.55 past the base front, so the board edge sits 0.5 beyond them: base front 1.05 inside the edge" },
+  { ref: "SW1", fn: "TX/RX Slide Switch", mpn: "Shou Han / MSK12C02", pkg: "SPDT side-operated slide, SMD; 8.0 × 2.8 mm with tabs, handle 1.3 × 1.45 mm, 1.6 mm travel",
+    body: [{ t: "rect", w: 8.0, h: 2.8, r: 0.1 }, { t: "rect", x: -0.8, y: 2.125, w: 1.3, h: 1.45, r: 0.1 }, { t: "rect", x: 0.8, y: 2.125, w: 1.3, h: 1.45, r: 0.1, dash: "0.4 0.25" }],
+    pads: [...[-2.25, -0.75, 2.25].map(x => ({ x, y: -1.94, w: 0.6, h: 1.3 })),
+      ...[-3.675, 3.675].flatMap(x => [-1.1, 1.1].map(y => ({ x, y, w: 1.05, h: 0.7 }))),
+      ...[-1.5, 1.5].map(x => ({ x, y: 0, w: 0.85, h: 0.85, npth: true }))],
+    edge: 1.95, src: "MSK12C02 drawing p1: body 8 ± 0.2 over the tabs × 2.8, handle 1.3 wide standing 1.45 proud, 1.6 travel (solid and dashed: the two positions); mounting reference: terminals ③ ② ① 0.6 × 1.3 at 1.5 and 3 spacing, 4 tab pads 1.05 × 0.7 (6.3 inner, 8.4 outer, 2.2 apart), 2 × Ø0.85 post holes 3 apart (post positions read off the drawing). The tab pads reach 0.05 past the body face, so the board edge sits 0.5 beyond them: handle 0.9 past the edge. The handle faces local +y" },
+  { ref: "SW2", fn: "BOOT Button", mpn: "Panasonic / EVQ-P7J01P", pkg: "Side-operated SMD tactile, 3.5 × 2.9 × 1.35 mm, 1.6 N",
+    body: [{ t: "rect", w: 3.5, h: 2.9, r: 0.1 }, { t: "rect", y: 1.775, w: 1.7, h: 0.65 }],
+    pads: [-1.8, 1.8].flatMap(x => [-0.725, 0.725].map(y => ({ x, y, w: 1.4, h: 1.05 }))),
+    edge: 1.75, src: "Panasonic ANCTB21E (2025-07) p2, EVQP7J: body 3.5 × 2.9 × 1.35, knob 1.7 wide standing 0.65 proud; land pattern 4 pads 1.4 × 1.05. The knob faces local +y; knob 0.35 past the board edge" },
+  { ref: "SW3", fn: "TX Power DIP Switch", mpn: "C&K / TDP06H1SBD1", pkg: "6-position half-pitch side-actuated SMD DIP, 8.74 × 6.0 × 4.1 mm, extended levers",
+    body: [{ t: "rect", w: 8.74, h: 6.0, r: 0.1 }, ...[-3.175, -1.905, -0.635, 0.635, 1.905, 3.175].map(x => ({ t: "rect", x, y: 3.3, w: 0.6, h: 0.6 }))],
+    pads: [-3.175, -1.905, -0.635, 0.635, 1.905, 3.175].flatMap(x => [-3.81, 3.81].map(y => ({ x, y, w: 0.76, h: 1.27 }))),
+    edge: 4.95, src: "C&K TDP series p3 (TDP06H1SBD1, extended actuator, no top tape): DIM A 8.74, body 6.0 deep, 8.12 over the gull-wing leads, 4.1 tall, levers 0.6 past the body face; footprint 0.76 × 1.27 pads at 1.27 pitch, rows 7.62 apart (6.35 inner, 8.89 outer). Lever width drawn 0.6 (not dimensioned). Leads run on both long sides, so the board edge sits 0.5 beyond the outer pads: lever tips 1.35 inside the edge, reached through an enclosure slot" },
+  { ref: "RV1, RV2, RV3", n: 3, fn: "Tuning Wheel", mpn: "Alps / RK10J11R0A0H", pkg: "Thumbwheel potentiometer, reflow SMD, Ø14 mm knurled wheel lying flat, 2.5 mm tall",
+    body: [{ t: "rect", y: -2.45, w: 10.4, h: 12.1, r: 0.3 }, { t: "circle", x: 0, y: 0, r: 7.0 }],
+    pads: [...[-4, -2, 0, 2, 4].map(x => ({ x, y: -9.0, w: 1.2, h: 1.4 })), ...[-6.1, 6.1].map(x => ({ x, y: 2.9, w: 2.2, h: 1.4 }))],
+    edge: 6.0, src: "POT_Alps_RK10J p2 (RK10J1□R, reflow type): Ø14 wheel, frame 10.4 wide and 14 over the ears, terminals 9.5 below the knob centre, 2.5 tall; PCB lands 5 × 1.2 wide at 2 mm pitch and 2 × 2.2 × 1.4 mounting lands 10 mm apart (inner edges). The land rows' distance from the knob centre (about 9.0 and 2.9) is read off the drawing, not dimensioned. The rim faces local +y; board edge drawn 6.0 from the centre, so 1 mm of wheel stands past it" },
+  { ref: "D1", fn: "RGB Status LED", mpn: "XINGLIGHT / XL-1615RGBC-RF", pkg: "1.6 × 1.5 × 0.6 mm, top-emitting, 4 pads",
+    body: [{ t: "rect", w: 1.6, h: 1.5, r: 0.05 }],
+    pads: [-0.625, 0.625].flatMap(x => [-0.475, 0.475].map(y => ({ x, y, w: 0.45, h: 0.65 }))),
+    pin1: [-1.15, -0.9], src: "XL-1615RGBC-RF p8: body 1.6 × 1.5 × 0.6; recommended pattern 0.45 × 0.65 pads, 0.8 and 0.3 gaps; pin 1 (R) top left, 2 (common anode) bottom left, 3 (G) top right, 4 (B) bottom right" },
+];
+// ---- Data: placement concepts. Each entry: [ref, x, y, rotation°] in phone back coordinates (part centre).
+// Rotation is clockwise as drawn. Actuators, barrels and wheel rims point along local +y: 0° = down, -90° = right, 90° = left, 180° = up.
+const LAYOUTS = {
+  1: { name: "1 · Wheels down the side", idea: [
+      "All three tuning wheels stacked down the left edge, rims standing 1 mm past it, with the status LED and the TX/RX slider below them: one control strip for the thumb, J2 opposite on the right edge as before.",
+      "The transmit chain runs down the right side in signal order: U2 (synthesizer) at the top right, U7 (attenuator) below it with its DIP switch on the right edge beside it, FL1 down the right side, then U5 and J2 at the bottom right.",
+      "U1 sits in the middle, a few mm from the wheels' terminals (its ADC inputs) and close to Y2, which feeds both U1 and U2. U4 (receiver) sits low and left of U5, away from U2 at the top.",
+      "J1 on the midline with U6 above it and U3 to its left; the BOOT button on the bottom edge beside J1, pressed while the cable goes in."],
+    place: [["RV1", 18.70, 67.0, 90], ["RV2", 18.70, 83.5, 90], ["RV3", 18.70, 100.0, 90], ["D1", 15.5, 110.0, 0], ["SW1", 14.65, 119.0, 90],
+      ["J1", 35.925, 127.285, 0], ["SW2", 25.5, 129.21, 0], ["U6", 35.925, 119.0, 0], ["U3", 26.0, 120.5, 0],
+      ["J2", 55.10, 126.9, -90], ["U5", 47.0, 125.0, 0], ["SW3", 54.20, 86.0, -90], ["U7", 45.5, 86.0, 0], ["U2", 46.0, 70.5, 0],
+      ["Y2", 39.5, 79.5, 0], ["U1", 35.5, 93.0, 0], ["U4", 38.5, 113.0, 0]] },
+  2: { name: "2 · Wheels across the top", idea: [
+      "The three wheels side by side across the top edge (towards the camera), read left to right like the three digits, rims 1 mm past the edge. They fill the band that was sparse in Plan C.",
+      "The TX/RX slider and status LED on the left edge, the DIP switch on the right edge, J2 low on the right as before.",
+      "Under the wheel band: U1 left of centre, Y2 between U1 and U2, U2 right of centre, then U7 beside the DIP switch, FL1 down the right side to U5 and J2.",
+      "U4 low in the middle, near U5 and away from U2; J1, U6, U3 and the BOOT button along the bottom as in layout 1.",
+      "The envelope is 46.45 mm wide, so three 14 mm wheels leave only 1.6 mm between neighbours' mounting lands. That is the one failed check below: fine for assembly, but the wheels sit close for a thumb."],
+    place: [["RV1", 19.925, 65.56, 180], ["RV2", 35.925, 65.56, 180], ["RV3", 51.925, 65.56, 180], ["D1", 15.5, 84.0, 0], ["SW1", 14.65, 93.0, 90],
+      ["J1", 35.925, 127.285, 0], ["SW2", 25.5, 129.21, 0], ["U6", 35.925, 119.0, 0], ["U3", 26.0, 120.5, 0],
+      ["J2", 55.10, 126.9, -90], ["U5", 47.0, 125.0, 0], ["SW3", 54.20, 103.0, -90], ["U7", 45.5, 103.0, 0], ["U2", 46.5, 86.0, 0],
+      ["Y2", 38.0, 86.0, 0], ["U1", 28.5, 96.0, 0], ["U4", 37.5, 113.0, 0]] },
+};
+// ---- Data: the antenna on J2 (GSG ANT500). Only the total lengths are published (Adafruit 3584; GSG): 20 cm to 88 cm (7–34 in).
+// Assumed for the drawing, not published: the plug, rotating shaft and elbow put the whip axis 12 mm past J2's barrel tip, and the whip is 6 mm thick.
+const ANTENNA = { name: "GSG ANT500", lengths: { collapsed: 200, extended: 880 }, elbow: 12, dia: 6, barrelTip: 11.5 };
+const partFor = ref => PARTS.find(p => p.ref.split(", ").includes(ref));
+const PHONE = window.PHONE_OUTLINE || null;
+const VIEW = { x0: -12, y0: -12, x1: 196, y1: 162 };
+const TRAY = { x0: 90, x1: 192, y0: 4 };
+
+// ---- Drawing ----
+const NS = "http://www.w3.org/2000/svg";
+const sk = document.getElementById("sk");
+sk.setAttribute("viewBox", `${VIEW.x0} ${VIEW.y0} ${VIEW.x1 - VIEW.x0} ${VIEW.y1 - VIEW.y0}`);
+const el = (tag, attrs, parent) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); (parent || sk).appendChild(e); return e; };
+const state = { side: "top", grid: true, layout: "none", ant: "collapsed" };
+try { const s = JSON.parse(localStorage.getItem("fmd2-layout-v1")); if (s && (s.side === "top" || s.side === "bottom")) Object.assign(state, s); if (!LAYOUTS[state.layout] && state.layout !== "none") state.layout = "none"; } catch (e) {}
+const sx = x => state.side === "top" ? x : 2 * AXIS - x; // phone x → drawing x
+const f2 = v => v.toFixed(2);
+
+function roundedRect(w, h, r) {
+  // Outline in phone coordinates, then mapped through sx (mirroring keeps the shape)
+  const a = sx(0), b = sx(w), x0 = Math.min(a, b), x1 = Math.max(a, b);
+  return `M${x0 + r} 0 H${x1 - r} A${r} ${r} 0 0 1 ${x1} ${r} V${h - r} A${r} ${r} 0 0 1 ${x1 - r} ${h} H${x0 + r} A${r} ${r} 0 0 1 ${x0} ${h - r} V${r} A${r} ${r} 0 0 1 ${x0 + r} 0 Z`;
+}
+
+function draw() {
+  sk.replaceChildren();
+  const A = antennaGeom();
+  const y0 = A ? Math.min(VIEW.y0, A.top[1] - 15) : VIEW.y0;
+  const x0 = A ? Math.min(VIEW.x0, Math.min(sx(A.el[0]), sx(A.tip0[0])) - 16) : VIEW.x0;
+  sk.setAttribute("viewBox", `${x0} ${y0} ${VIEW.x1 - x0} ${VIEW.y1 - y0}`);
+  el("rect", { x: x0, y: y0, width: VIEW.x1 - x0, height: VIEW.y1 - y0, fill: "var(--sheet)" });
+  if (state.grid) {
+    for (let x = -10; x <= 192; x++) {
+      const major = x % 10 === 0, X = x <= 82 ? sx(x) : x;
+      el("line", { x1: X, y1: y0 + 2, x2: X, y2: 160, stroke: major ? "var(--grid-major)" : "var(--grid)", "stroke-width": major ? 0.18 : 0.08 });
+      if (major && x >= 0 && x <= 70) el("text", { x: X, y: -6.5, "text-anchor": "middle", "font-size": 2.4, fill: "var(--muted)" }).textContent = x;
+    }
+    for (let y = Math.ceil(y0 / 10) * 10; y <= 160; y++) {
+      const major = y % 10 === 0;
+      el("line", { x1: -10, y1: y, x2: 192, y2: y, stroke: major ? "var(--grid-major)" : "var(--grid)", "stroke-width": major ? 0.18 : 0.08 });
+      if (major && y >= 0 && y <= 150) el("text", { x: -7, y: y + 0.8, "text-anchor": "end", "font-size": 2.4, fill: "var(--muted)" }).textContent = y;
+    }
+  }
+  if (PHONE) {
+    if (PHONE.back) {
+      // Apple's rear-view linework: camera plateau, lenses, flash, mic, sensor, buttons
+      const g = el("g", { transform: state.side === "top" ? "" : `translate(${2 * AXIS} 0) scale(-1 1)`, fill: "none", stroke: "var(--phone-detail)", "stroke-width": 0.12 });
+      PHONE.back.forEach(d => el("path", { d }, g));
+    }
+    el("path", { d: roundedRect(PHONE.w, PHONE.h, PHONE.r), fill: "none", stroke: "var(--phone)", "stroke-width": 0.35 });
+    if (PHONE.magsafe) {
+      const m = PHONE.magsafe, cx = sx(m.cx);
+      el("path", { d: `M${cx - m.od / 2} ${m.cy} a${m.od / 2} ${m.od / 2} 0 1 0 ${m.od} 0 a${m.od / 2} ${m.od / 2} 0 1 0 ${-m.od} 0 Z M${cx - m.id / 2} ${m.cy} a${m.id / 2} ${m.id / 2} 0 1 1 ${m.id} 0 a${m.id / 2} ${m.id / 2} 0 1 1 ${-m.id} 0 Z`,
+        fill: "var(--magsafe-fill)", "fill-rule": "evenodd", stroke: "var(--magsafe)", "stroke-width": 0.25 });
+      el("path", { d: `M${cx - 1.5} ${m.cy} H${cx + 1.5} M${cx} ${m.cy - 1.5} V${m.cy + 1.5}`, stroke: "var(--magsafe)", "stroke-width": 0.2 });
+      el("text", { x: cx, y: m.cy - m.od / 2 - 1.2, "text-anchor": "middle", "font-size": 2.2, fill: "var(--magsafe)" }).textContent = `MagSafe ring Ø${f2(m.od)}/${f2(m.id)}`;
+    }
+    el("text", { x: sx(PHONE.w / 2), y: PHONE.h + 6, "text-anchor": "middle", "font-size": 2.8, "font-weight": 600, fill: "var(--ink)" })
+      .textContent = `${PHONE.name} back · ${f2(PHONE.w)} × ${f2(PHONE.h)} mm`;
+    el("text", { x: sx(PHONE.r), y: -2, "text-anchor": state.side === "top" ? "start" : "end", "font-size": 2.4, fill: "var(--muted)" })
+      .textContent = "camera end";
+  }
+  drawTray();
+  el("polygon", { points: ENVELOPE.map(([x, y]) => `${sx(x)},${y}`).join(" "), fill: "var(--board-fill)", stroke: "var(--board)", "stroke-width": 0.35, "stroke-linejoin": "miter" });
+  if (state.layout === "none") {
+    el("text", { x: sx(AXIS), y: 62.8, "text-anchor": "middle", "font-size": 2.8, "font-weight": 600, fill: "var(--board)" }).textContent = "Board envelope";
+    el("text", { x: sx(AXIS), y: 66.2, "text-anchor": "middle", "font-size": 2.2, fill: "var(--board)" })
+      .textContent = state.side === "top" ? "top side (away from phone)" : "bottom side (phone side)";
+  } else { drawPlaced(); drawAntenna(); }
+  document.querySelectorAll("[data-layout]").forEach(b => b.setAttribute("aria-pressed", b.dataset.layout === state.layout));
+  document.querySelectorAll("[data-ant]").forEach(b => b.setAttribute("aria-pressed", b.dataset.ant === state.ant));
+  renderLayoutPanel();
+  document.querySelectorAll("[data-side]").forEach(b => b.setAttribute("aria-pressed", b.dataset.side === state.side));
+  document.getElementById("gridBtn").setAttribute("aria-pressed", state.grid);
+  try { localStorage.setItem("fmd2-layout-v1", JSON.stringify(state)); } catch (e) {}
+}
+
+// ---- Parts tray: flowed in rows to the right of the phone, never mirrored ----
+function bbox(p) {
+  let x0 = Infinity, y0 = Infinity, x1 = -Infinity, y1 = -Infinity;
+  const add = (a, b, c, d) => { x0 = Math.min(x0, a); y0 = Math.min(y0, b); x1 = Math.max(x1, c); y1 = Math.max(y1, d); };
+  p.body.forEach(b => b.t === "circle" ? add(b.x - b.r, b.y - b.r, b.x + b.r, b.y + b.r) : add((b.x || 0) - b.w / 2, (b.y || 0) - b.h / 2, (b.x || 0) + b.w / 2, (b.y || 0) + b.h / 2));
+  p.pads.forEach(d => add(d.x - d.w / 2, d.y - d.h / 2, d.x + d.w / 2, d.y + d.h / 2));
+  return { x0, y0, x1, y1 };
+}
+function drawTray() {
+  el("text", { x: TRAY.x0, y: TRAY.y0 - 1, "font-size": 2.8, "font-weight": 600, fill: "var(--ink)" }).textContent = "Major parts, true size (not placed)";
+  // Pass 1: fill rows left to right; pass 2: draw each part centred in its slot, labels aligned along the row
+  const GAP = 4, LABEL = 6, rows = [[]];
+  let x = TRAY.x0;
+  PARTS.forEach(p => {
+    const b = bbox(p), w = b.x1 - b.x0, h = b.y1 - b.y0;
+    // monospace labels: about 0.6 × font size per character
+    const slot = Math.max(w, (p.fn.length + 3) * 0.6 * 2.0, (p.mpn.length + 2) * 0.6 * 1.6);
+    if (x + slot > TRAY.x1 && rows[rows.length - 1].length) { rows.push([]); x = TRAY.x0; }
+    rows[rows.length - 1].push({ p, b, w, h, slot, x });
+    x += slot + GAP;
+  });
+  let y = TRAY.y0 + 4;
+  rows.forEach(row => {
+    const rowH = Math.max(...row.map(r => r.h));
+    row.forEach(({ p, b, w, h, slot, x }) => drawPart(p, b, x + (slot - w) / 2, y + (rowH - h) / 2, x + slot / 2, y + rowH));
+    y += rowH + LABEL + GAP;
+  });
+}
+function drawPart(p, b, px, py, tx, ty) {
+  const g = el("g", { transform: `translate(${px - b.x0} ${py - b.y0})` });
+  partGraphics(p, b, g, true);
+  el("text", { x: tx, y: ty + 2.6, "text-anchor": "middle", "font-size": 2.0, "font-weight": 600, fill: "var(--ink)" }).textContent = p.fn + (p.n ? ` ×${p.n}` : "");
+  el("text", { x: tx, y: ty + 5.0, "text-anchor": "middle", "font-size": 1.6, fill: "var(--muted)" }).textContent = `(${p.mpn})`;
+}
+function partGraphics(p, b, g, edgeLabel) {
+  p.body.forEach(s => s.t === "circle"
+    ? el("circle", { cx: s.x, cy: s.y, r: s.r, fill: "var(--body)", stroke: "var(--body-line)", "stroke-width": 0.12, "stroke-dasharray": s.dash || null }, g)
+    : el("rect", { x: (s.x || 0) - s.w / 2, y: (s.y || 0) - s.h / 2, width: s.w, height: s.h, rx: s.r || 0, fill: "var(--body)", stroke: "var(--body-line)", "stroke-width": 0.12, "stroke-dasharray": s.dash || null }, g));
+  p.pads.filter(d => !d.npth).forEach(d => el(d.hole ? "circle" : "rect", d.hole
+    ? { cx: d.x, cy: d.y, r: d.w / 2, fill: "var(--pad)" }
+    : { x: d.x - d.w / 2, y: d.y - d.h / 2, width: d.w, height: d.h, rx: d.round ? Math.min(d.w, d.h) / 2 : 0.04, fill: "var(--pad)", opacity: 0.85 }, g));
+  // drilled holes: plated round holes and slots show the drill in the sheet colour; unplated holes are outlines only
+  p.pads.filter(d => d.hole).forEach(d => el("circle", { cx: d.x, cy: d.y, r: d.hole / 2, fill: "var(--sheet)" }, g));
+  p.pads.filter(d => d.slot).forEach(d => el("rect", { x: d.x - d.slot[0] / 2, y: d.y - d.slot[1] / 2, width: d.slot[0], height: d.slot[1], rx: Math.min(...d.slot) / 2, fill: "var(--sheet)" }, g));
+  p.pads.filter(d => d.npth).forEach(d => el("circle", { cx: d.x, cy: d.y, r: d.w / 2, fill: "var(--sheet)", stroke: "var(--body-line)", "stroke-width": 0.1 }, g));
+  if (p.edge !== undefined) {
+    el("line", { x1: b.x0 - 1, y1: p.edge, x2: b.x1 + 1, y2: p.edge, stroke: "var(--board)", "stroke-width": 0.15, "stroke-dasharray": "0.6 0.4" }, g);
+    if (edgeLabel) el("text", { x: b.x1 + 1.2, y: p.edge + 0.5, "font-size": 1.3, fill: "var(--board)" }, g).textContent = "board edge";
+  }
+  if (p.pin1) el("circle", { cx: p.pin1[0], cy: p.pin1[1], r: 0.3, fill: "var(--body-line)" }, g);
+}
+
+// ---- Placed parts and checks ----
+const rotPt = (x, y, deg) => { const a = deg * Math.PI / 180, c = Math.cos(a), s = Math.sin(a); return [x * c - y * s, x * s + y * c]; };
+const toBoard = ([, X, Y, R], x, y) => { const [u, v] = rotPt(x, y, R); return [X + u, Y + v]; };
+function boardBox(pl, local) {
+  const pts = [[local.x0, local.y0], [local.x1, local.y0], [local.x0, local.y1], [local.x1, local.y1]].map(([x, y]) => toBoard(pl, x, y));
+  return { x0: Math.min(...pts.map(q => q[0])), y0: Math.min(...pts.map(q => q[1])), x1: Math.max(...pts.map(q => q[0])), y1: Math.max(...pts.map(q => q[1])) };
+}
+// What must sit on the board: the pads and the main body (J2's barrel and SW1's actuator overhang the edge)
+const footBox = p => bbox({ body: [p.body[0]], pads: p.pads });
+// Antenna geometry in phone coordinates: barrel tip, elbow (whip axis) and tip; the whip turns up towards the camera end
+function antennaGeom(L = LAYOUTS[state.layout]) {
+  if (!L || state.ant === "none") return null;
+  const pl = L.place.find(q => q[0] === "J2"), [dx, dy] = rotPt(0, 1, pl[3]);
+  const tip0 = toBoard(pl, 0, ANTENNA.barrelTip), el = [tip0[0] + dx * ANTENNA.elbow, tip0[1] + dy * ANTENNA.elbow];
+  const len = ANTENNA.lengths[state.ant], top = [el[0], el[1] - (len - ANTENNA.elbow)];
+  return { tip0, el, top, len, dir: [dx, dy] };
+}
+function drawAntenna() {
+  const A = antennaGeom(); if (!A) return;
+  const g = el("g", {}), d = ANTENNA.dia;
+  // plug + elbow along the barrel, then the whip upwards
+  const [x0, x1] = [sx(A.tip0[0]), sx(A.el[0])];
+  el("rect", { x: Math.min(x0, x1), y: A.el[1] - d / 2, width: Math.abs(x1 - x0) + d / 2, height: d, rx: 1, fill: "var(--ant-fill)", stroke: "var(--ant)", "stroke-width": 0.25, "stroke-dasharray": "0.8 0.5" }, g);
+  el("rect", { x: x1 - d / 2, y: A.top[1], width: d, height: A.el[1] - A.top[1] + d / 2, rx: d / 2, fill: "var(--ant-fill)", stroke: "var(--ant)", "stroke-width": 0.3 }, g);
+  // dimension: total length, and the user's limit line (tip no more than half the phone's height above its top)
+  const outward = x1 > sx(AXIS) ? 1 : -1, dimX = x1 + outward * (d + 3);
+  el("path", { d: `M${dimX} ${A.el[1]} V${A.top[1]} M${dimX - 1.5} ${A.el[1]} H${dimX + 1.5} M${dimX - 1.5} ${A.top[1]} H${dimX + 1.5}`, stroke: "var(--ant)", "stroke-width": 0.25, fill: "none" }, g);
+  const fs = state.ant === "extended" ? 9 : 2.6, ty = (A.el[1] + A.top[1]) / 2, tx = dimX + (dimX > x1 ? 1 : -1) * (fs * 0.9);
+  el("text", { x: tx, y: ty, "text-anchor": "middle", "font-size": fs, "font-weight": 600, fill: "var(--ant)", transform: `rotate(-90 ${tx} ${ty})` })
+    .textContent = `${ANTENNA.name} ${state.ant}: ${A.len} mm`;
+  if (PHONE) {
+    const lim = -PHONE.h / 2;
+    el("line", { x1: sx(-6), y1: lim, x2: sx(PHONE.w + 6), y2: lim, stroke: "var(--warn)", "stroke-width": state.ant === "extended" ? 0.8 : 0.3, "stroke-dasharray": "2 1.2" }, g);
+    el("text", { x: sx(PHONE.w / 2), y: lim - 1.5, "text-anchor": "middle", "font-size": state.ant === "extended" ? 7 : 2.4, fill: "var(--warn)" }).textContent = "limit: ½ phone height above its top";
+  }
+}
+function drawPlaced() {
+  const L = LAYOUTS[state.layout]; if (!L) return;
+  L.place.forEach(pl => {
+    const [ref, X, Y, R] = pl, p = partFor(ref);
+    const g = el("g", { transform: state.side === "top" ? `translate(${X} ${Y}) rotate(${R})` : `translate(${sx(X)} ${Y}) scale(-1 1) rotate(${R})` });
+    partGraphics(p, bbox(p), g, false);
+    el("text", { x: sx(X), y: Y + 0.6, "text-anchor": "middle", "font-size": 1.7, "font-weight": 700, fill: "var(--ink)", stroke: "var(--sheet)", "stroke-width": 0.35, "paint-order": "stroke" }).textContent = ref;
+  });
+}
+const BOARD = { x0: 12.70, y0: 59.56, x1: 59.15, y1: 130.96 };
+function checks(L) {
+  const out = [], P = Object.fromEntries(L.place.map(pl => [pl[0], pl]));
+  const add = (id, ok, text) => out.push({ id, ok, text });
+  const uniq = a => [...new Set(a)];
+  const dist = (a, b) => Math.hypot(P[a][1] - P[b][1], P[a][2] - P[b][2]);
+  const off = L.place.filter(pl => { const b = boardBox(pl, footBox(partFor(pl[0]))); return b.x0 < BOARD.x0 - 0.01 || b.y0 < BOARD.y0 - 0.01 || b.x1 > BOARD.x1 + 0.01 || b.y1 > BOARD.y1 + 0.01; }).map(pl => pl[0]);
+  add("Envelope", !off.length, off.length ? `Off the board: ${off.join(", ")}` : "Every footprint and main body is inside the envelope");
+  const boxes = L.place.map(pl => ({ ref: pl[0], b: boardBox(pl, footBox(partFor(pl[0]))) })), clash = [];
+  for (let i = 0; i < boxes.length; i++) for (let j = i + 1; j < boxes.length; j++) {
+    const a = boxes[i].b, c = boxes[j].b, m = 0.25;
+    if (a.x0 < c.x1 + m && c.x0 < a.x1 + m && a.y0 < c.y1 + m && c.y0 < a.y1 + m) clash.push(`${boxes[i].ref}–${boxes[j].ref}`);
+  }
+  add("M11", !clash.length, clash.length ? `Closer than 0.25 mm: ${clash.join(", ")}` : "No two parts closer than 0.25 mm");
+  const sideOf = ref => { const pl = P[ref], [x, y] = toBoard(pl, 0, partFor(ref).edge);
+    return Math.abs(x - BOARD.x0) < 0.05 ? "left" : Math.abs(x - BOARD.x1) < 0.05 ? "right" : Math.abs(y - BOARD.y1) < 0.05 ? "bottom" : Math.abs(y - BOARD.y0) < 0.05 ? "top" : null; };
+  const edgeRefs = L.place.map(pl => pl[0]).filter(r => partFor(r).edge !== undefined), edgeBad = edgeRefs.filter(r => !sideOf(r));
+  add("M1–M5", !edgeBad.length, edgeBad.length ? `Not on a board edge: ${edgeBad.join(", ")}` : `${edgeRefs.join(", ")} sit on board edges`);
+  add("M1", sideOf("J1") === "bottom" && Math.abs(P.J1[1] - AXIS) < 0.005, `J1 on the ${sideOf("J1")} edge, ${Math.abs(P.J1[1] - AXIS).toFixed(2)} mm off the envelope midline`);
+  const ctl = ["SW1", "RV1", "RV2", "RV3"], j2s = sideOf("J2");
+  add("M2–M3", ctl.every(r => sideOf(r) !== j2s) && j2s !== "bottom" && j2s !== "top",
+    `Controls exit ${ctl.map(r => `${r} ${sideOf(r)}`).join(", ")}; J2 exits the ${j2s} edge`);
+  const j2low = BOARD.y1 - boardBox(P.J2, footBox(partFor("J2"))).y1;
+  add("M2", j2low <= 0.55, `J2's footprint ends ${j2low.toFixed(2)} mm above the board's bottom edge`);
+  add("M4", !!sideOf("SW3") && dist("SW3", "U7") <= 12, `SW3 on the ${sideOf("SW3")} edge, ${dist("SW3", "U7").toFixed(1)} mm from U7 (limit 12)`);
+  add("M5", sideOf("SW2") === "bottom" && dist("SW2", "J1") <= 15, `SW2 (BOOT) on the ${sideOf("SW2")} edge, ${dist("SW2", "J1").toFixed(1)} mm from J1`);
+  add("M6", dist("D1", "SW1") <= 15, `D1 ${dist("D1", "SW1").toFixed(1)} mm from SW1`);
+  if (PHONE && PHONE.magsafe) {
+    // Through-hole leads must not land on the magnet ring (annulus + 0.5 mm); inside its hole the gap to the wall is 1.85 mm
+    const m = PHONE.magsafe, rIn = m.id / 2 - 0.5, rOut = m.od / 2 + 0.5, hit = [], trim = [];
+    L.place.filter(pl => partFor(pl[0]).tht).forEach(pl => {
+      const p = partFor(pl[0]);
+      p.pads.filter(d => d.hole || d.slot).forEach(d => {
+        const [x, y] = toBoard(pl, d.x, d.y), r = Math.hypot(x - m.cx, y - m.cy), e = Math.max(d.w, d.h) / 2;
+        if (r + e > rIn && r - e < rOut) hit.push(pl[0]); else if (r + e <= rIn && p.tht > 1.85) trim.push(pl[0]);
+      });
+    });
+    add("M8", !hit.length, hit.length ? `Through-hole leads over the magnet ring: ${uniq(hit).join(", ")}` : "No through-hole leads over the magnet ring");
+    if (trim.length) add("M8", null, `${uniq(trim).join(", ")} sit inside the ring's hole, where the gap to the enclosure wall is 1.85 mm: trim their leads, which stick out ${partFor(trim[0]).tht} mm`);
+  }
+  // Proximity, centre to centre; the limits are my working numbers, not from a source
+  [["R1", "U5", "J2", 10, "U5 near J2"], ["R2", "U4", "U5", 16, "U4 near U5"], ["R3", "U2", "U7", 20, "U2 near U7"], ["R3", "U7", "U5", 45, "U7 to U5 (the path includes FL1)"],
+   ["P5", "Y2", "U2", 12, "Y2 at U2"], ["P5", "Y2", "U1", 16, "Y2 at U1"], ["P4", "U6", "J1", 12, "U6 at J1"], ["P3", "U3", "J1", 15, "U3 near J1"]]
+    .forEach(([id, a, b, d, t]) => add(id, dist(a, b) <= d, `${t}: ${dist(a, b).toFixed(1)} mm centre to centre (limit ${d})`));
+  const gap = (a, b) => { const A = boardBox(P[a], footBox(partFor(a))), B = boardBox(P[b], footBox(partFor(b)));
+    return Math.hypot(Math.max(0, A.x0 - B.x1, B.x0 - A.x1), Math.max(0, A.y0 - B.y1, B.y0 - A.y1)); };
+  const refs = L.place.map(pl => pl[0]), ics = ["U1", "U2", "U4"], tight = [], icTight = [];
+  for (let i = 0; i < refs.length; i++) for (let k = i + 1; k < refs.length; k++) {
+    const a = refs[i], b = refs[k], g = gap(a, b);
+    if (ics.includes(a) && ics.includes(b)) { if (g < 8) icTight.push(`${a}–${b} ${g.toFixed(1)}`); }
+    else if (g < 2) tight.push(`${a}–${b} ${g.toFixed(1)}`);
+  }
+  const icMin = Math.min(...ics.flatMap((a, i) => ics.slice(i + 1).map(b => gap(a, b))));
+  add("M11", !icTight.length, icTight.length ? `Main ICs closer than 8 mm edge to edge: ${icTight.join(", ")} mm` : `Main ICs (U1, U2, U4) at least ${icMin.toFixed(1)} mm apart edge to edge (8 required)`);
+  add("M11", !tight.length, tight.length ? `Parts closer than 2 mm edge to edge: ${tight.join(", ")} mm` : "Every part at least 2 mm from its neighbours");
+  if (PHONE) {
+    const saved = state.ant;
+    for (const mode of ["collapsed", "extended"]) {
+      state.ant = mode; const A = antennaGeom(L); if (!A) continue;
+      const x = A.el[0], half = ANTENNA.dia / 2, above = -A.top[1], lim = PHONE.h / 2;
+      if (mode === "collapsed") add("Antenna", above <= lim, `Collapsed (${A.len} mm): tip ${above.toFixed(0)} mm above the phone's top, limit ${lim.toFixed(0)} (½ phone height)`);
+      else add("Antenna", null, `Extended (${A.len} mm): tip ${above.toFixed(0)} mm above the phone's top, past the limit by design when pulled out`);
+      if (mode === "collapsed") {
+        const out = x - half >= PHONE.w || x + half <= 0;
+        const gapSide = x >= PHONE.w / 2 ? x - half - PHONE.w : -(x + half);
+        const hits = (PHONE.imaging || []).filter(f => Math.abs(x - f.cx) < f.d / 2 + half).map(f => f.n);
+        add("Antenna", !hits.length, `Whip axis at x ${x.toFixed(1)}: ${out ? `${gapSide.toFixed(1)} mm outside the phone's side` : `${(-gapSide).toFixed(1)} mm inside the phone's side, over its back`}${hits.length ? `; crosses ${hits.join(", ")} (Apple: do not obstruct imaging features)` : "; clear of the cameras, flash and sensor"}`);
+      }
+    }
+    state.ant = saved;
+    add("Antenna", null, "Assumed, not published: whip axis 12 mm past J2's barrel tip (plug + elbow), whip 6 mm thick");
+  }
+  add("R4", dist("U2", "U4") >= 10, `U2 (TX) to U4 (RX): ${dist("U2", "U4").toFixed(1)} mm apart (at least 10)`);
+  return out;
+}
+
+// ---- Panel ----
+const xs = ENVELOPE.map(p => p[0]), ys = ENVELOPE.map(p => p[1]);
+const area = Math.abs(ENVELOPE.reduce((s, [x, y], i) => { const [x2, y2] = ENVELOPE[(i + 1) % ENVELOPE.length]; return s + x * y2 - x2 * y; }, 0) / 2);
+function renderLayoutPanel() {
+  const box = document.getElementById("layoutPanel"); if (!box) return;
+  const L = LAYOUTS[state.layout];
+  if (!L) { box.innerHTML = "<h2>Layouts</h2><p>Pick Layout 1 or 2 to place the major parts on the envelope.</p>"; return; }
+  const badge = ok => ok === true ? '<span class="pass">Pass</span>' : ok === false ? '<span class="fail">Fail</span>' : '<span class="note">Note</span>';
+  const rows = checks(L).map(c => `<tr><td class="n">${c.id}</td><td>${badge(c.ok)}</td><td>${c.text}</td></tr>`).join("");
+  box.innerHTML = `<h2>Layout ${L.name}</h2><ul>${L.idea.map(t => `<li>${t}</li>`).join("")}</ul>
+    <b>Checks against the placement rules</b> <span class="muted">(rule IDs from design/analog-fm/placement-rules.md; the others are checked by eye)</span>
+    <table><thead><tr><th>Rule</th><th>Result</th><th>Detail</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+document.getElementById("panel").innerHTML = `
+  <h2>Board envelope</h2>
+  <p>Where the board's copper and parts may go. ${f2(Math.max(...xs) - Math.min(...xs))} × ${f2(Math.max(...ys) - Math.min(...ys))} mm overall, ${area.toFixed(0)} mm².</p>
+  <table><thead><tr><th>Edge</th><th>Position</th><th>Set by</th></tr></thead><tbody>
+    <tr><td>Left, right</td><td class="n">x 12.70, 59.15</td><td>½ in from the phone's sides</td></tr>
+    <tr><td>Top</td><td class="n">y 59.56</td><td>Apple no-metal zone above y 58.01, + 1.55 (unchanged)</td></tr>
+    <tr><td>Bottom</td><td class="n">y 130.96</td><td>¾ in above the phone's bottom edge</td></tr>
+  </tbody></table>
+  <b>Rules it comes from</b>
+  <ul>
+    <li>Sides ½ in (12.7 mm) inside the phone's sides; bottom edge ¾ in (19.05 mm) above the phone's bottom edge (user, 2026-10-20).</li>
+    <li>Apple's no-metal zones below y 105 are knowingly overlapped, by the user's instruction: the block on the camera side and the arms of the bottom U band.</li>
+  </ul>
+  <b>Phone outline</b>
+  <p>${PHONE ? `${PHONE.src}.` : `<span class="warn">Not loaded.</span> It comes from <code>local/apple/phone-outline.js</code>, which stays on the design PC because Apple's drawing says not to republish it.`}</p>
+  <p class="muted">Derivation and Apple's keepouts: <code>local/apple/fit-notes.md</code> (git-ignored).</p>
+  <h2>Parts tray</h2>
+  <table><thead><tr><th>Ref</th><th>Part</th><th>Package</th><th>Source</th></tr></thead><tbody>
+    ${PARTS.map(p => `<tr><td class="n">${p.ref}</td><td>${p.fn} (${p.mpn})</td><td>${p.pkg}</td><td>${p.src}</td></tr>`).join("")}
+  </tbody></table>`;
+
+// ---- Controls ----
+document.querySelectorAll("[data-side]").forEach(b => b.addEventListener("click", () => { state.side = b.dataset.side; draw(); }));
+document.getElementById("gridBtn").addEventListener("click", () => { state.grid = !state.grid; draw(); });
+document.querySelectorAll("[data-layout]").forEach(b => b.addEventListener("click", () => { state.layout = b.dataset.layout; draw(); }));
+document.querySelectorAll("[data-ant]").forEach(b => b.addEventListener("click", () => { state.ant = b.dataset.ant; draw(); }));
+const readout = document.getElementById("readout");
+sk.addEventListener("pointermove", e => {
+  const pt = new DOMPoint(e.clientX, e.clientY).matrixTransform(sk.getScreenCTM().inverse());
+  readout.textContent = `x ${f2(sx(pt.x))}, y ${f2(pt.y)} mm`;
+});
+sk.addEventListener("pointerleave", () => { readout.textContent = "x —, y — mm"; });
+draw();
+</script>

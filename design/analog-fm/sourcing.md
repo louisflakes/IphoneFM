@@ -75,6 +75,6 @@ RF power is set after the synthesizer and is independent of deviation. The chain
 | DIP pull-downs ×6 | Yageo RC0402FR-0710KL, 10 kΩ | C60490, 5,416,054 | One per attenuator control line, so an off switch reads low. 0.33 mA when on, well inside the switch rating | Plan C part |
 | ~~Buffer lock-gate~~ | ~~onsemi MMBT3904LT1G~~ | | Replaced by the LMX2571's output auto-mute (p23) plus firmware lock monitoring | Dropped |
 
-**Height check:** the DIP switch (4.1 mm) is lower than the SMA jack (6 mm body, J2 drawing p6), the tallest part, so it doesn't set the enclosure height. It is taller than the USB-C socket (3.26 mm, J1 drawing) and the thumbwheels (2.5 mm, `POT_Alps_RK10J.pdf` p2). It sits at the board edge with its levers facing out, like the slider; the enclosure needs a slot there.
+**Height check:** the DIP switch (4.1 mm) is lower than the SMA jack (9.5 mm tall with its axis 6.4 mm up, J2 drawing p6), the tallest part, so it doesn't set the enclosure height. It is taller than the USB-C socket (3.26 mm, J1 drawing) and the thumbwheels (2.5 mm, `POT_Alps_RK10J.pdf` p2). It sits at the board edge with its levers facing out, like the slider; the enclosure needs a slot there.
 
 
