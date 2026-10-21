@@ -14,7 +14,7 @@ Reference designs are read with a small connectivity script on their KiCad files
 | 2 | U3 3.3 V regulator and bulk capacitors | **Done** |
 | 3 | U1 STM32U535 support (VDDA filter, clock source) | **Done** |
 | 4 | Y2 20 MHz reference oscillator | **Done** |
-| 5 | Oscillator, modulation varactor, buffer, lock gate | — |
+| 5 | Oscillator, varicap, buffer, lock gate | **Done** |
 | 6 | U2 ADF4002 PLL and loop filter | — |
 | 7 | PE43711 attenuator and DIP switch | — |
 | 8 | FL1 low-pass, DC block, U5 RF switch, J2, D5 | — |
@@ -105,3 +105,55 @@ One CMOS oscillator is the frequency reference for the whole board. It drives U1
 - Level at REFIN: Y2 swings 0 to 3.3 V, inside REFIN's 0.8 V p-p to VDD (ADF4002 p3).
 - Load: U1's OSC_IN plus U2's REFIN (10 pF max, ADF4002 p3), about the 15 pF Y2 is specified into (YSO110TR p1). U4's clock comes from U1's MCO, not from Y2, to keep Y2's load there.
 - Reference designs: [HELIOS](https://github.com/JoshCrouch/HELIOS) reference board (ADF4002 locking a 100 MHz VCXO), REFIN AC-coupled through 10 nF; ADF4002 datasheet Figure 21 (p17), reference straight into REFIN.
+
+## Chain 5: Oscillator, buffer and lock gate
+
+**Topology** follows the published 5 W PLL FM transmitter from pira.cz ([schematic](https://www.pira.cz/entx4.htm), the TSA5511 + PIC design):
+- **Oscillator:** a common-base Colpitts. The base is held at RF ground, and the collector carries the LC tank.
+- **Varicap:** couples into the tank through 330 pF. The tune voltage and the audio are summed onto it through resistors.
+- **PLL sample:** taken from the oscillator's emitter.
+- **Buffer:** a common-emitter stage.
+
+Two more published designs use the same single-varicap scheme, with audio superimposed on the tune voltage and the PLL loop held below audio:
+- **Gamma Electronics PLL stereo transmitter** ([page](https://www.gammaelectronics.xyz/transmitter-projects-DIY_8.html)): loop bandwidth under 20 Hz.
+- **Broadcast Warehouse PLL kits** ([review](https://radio.xtreamlab.net/bc-ware-1w-pll.html)): one BB809 is both "audio modulator" and "VCO control element".
+
+The 2 m [STM32 + ADF4002 transceiver](https://github.com/Zachnad0/KICAD_VHF-FM-2m-TxRx-STM32) plans the same thing (README: loop "~30 Hz to avoid suppression of audio FM"), though its schematic has no values yet. So **the separate modulation varicap mentioned earlier is dropped**. Firmware scales the audio level per channel, because modulation sensitivity varies across the band.
+
+**Varicap change: 1SV281 → 1SV322.**
+- **1SV281 doesn't fit.** Its guaranteed capacitance is 15–17 pF at 1 V and 7.3–8.7 pF at 4 V. Even two in parallel cover 88–108 MHz only if the tank's other capacitance stays under about 7 pF. The Colpitts feedback capacitors alone take about 6 pF.
+- **1SV322 does.** Toshiba's 1SV322 is guaranteed 26.5–29.5 pF at 1 V and 6.0–7.1 pF at 4 V, ratio ≥ 4.0, rs ≤ 0.8 Ω at 100 MHz, 10 V max (`VAR_Toshiba_1SV322.pdf` p1).
+- **Tank check (worst case):** with L1 = 120 nH, about 9 pF of fixed capacitance, and the varicap seen through 330 pF, the tank spans about 78–115 MHz between 1 and 4 V. 88 MHz falls near 1.7 V and 108 MHz near 3.4 V, inside the ADF4002's 0.5 V to VP − 0.5 V linear charge-pump range (ADF4002 p3).
+- **Caveat:** the datasheet is watermarked "Not Recommended for New Design". DigiKey still has 6,000 active at buy-1, and JLC doesn't list it, so it comes through global sourcing.
+
+**Modulation sensitivity** (estimate from the 1SV322 curve, p2): about 13 MHz/V at mid-band. So ±75 kHz deviation needs only about ±6 mV at the varicap.
+- **Audio attenuation:** a 1 MΩ / 10 kΩ divider attenuates the DAC's audio by about 100:1. That puts full deviation near ±0.6 V at the DAC, leaving headroom.
+- **Noise:** the divider's thermal noise (about 3 µV over 53 kHz) works out to roughly 40 Hz rms of deviation, about 65 dB below ±75 kHz.
+
+| Ref | Part | Value | JLC | Note |
+|---|---|---|---|---|
+| R5 (3V3 → VCC_VCO) | Yageo RC0402FR-0710RL | 10 Ω | C138066, 946,391 | Supply filter for oscillator and buffer; with 10 µF, corner ≈ 1.6 kHz. The pira design gives its oscillator a separate regulator |
+| C (VCC_VCO) | Samsung CL21A106KOQNNNE + CL05B104KO5NNNC | 10 µF + 100 nF | C1713 / C1525 | At L1's supply end |
+| Q1 | onsemi MMBTH10LT1G | VHF NPN oscillator | C16204, 2,858 | fT ≥ 650 MHz at 100 MHz (MMBTH10 p2) |
+| R6, R7 (Q1 base divider) | Yageo RC0402FR-0710KL | 10 kΩ / 10 kΩ | C60490 | pira R1/R2. Base ≈ 1.6 V |
+| C (Q1 base) | Samsung CL05B103KB5NNNC | 10 nF to GND | C15195 | Base at RF ground (pira C1) |
+| R8 (Q1 emitter) | Yageo RC0402FR-07270RL | 270 Ω to GND | C163474, 224,286 | pira R3. About 3 mA |
+| C (Q1 collector–emitter) | Samsung CL05C150JB5NNNC | 15 pF C0G | C86285, 87,112 | pira C2 (feedback) |
+| C (Q1 emitter–GND) | Samsung CL05C100JB5NNNC | 10 pF C0G | C32949, 1,736,580 | pira C3 (feedback) |
+| L1 (VCC_VCO → Q1 collector) | **Murata LQW18ANR12G00D** | 120 nH ±2%, Q ≥ 32 at 150 MHz, SRF ≥ 1.6 GHz | C86138, 12,530 | Tank (LQW18AN spec p3) |
+| C (collector → varicap) | Samsung CL05C331JB5NNNC | 330 pF C0G | C13533, 266,791 | pira C5 |
+| D2 | **Toshiba 1SV322(TPH3,F)** | Varicap; cathode to the 330 pF node, anode to GND | Global sourcing (DigiKey 6,000) | See above |
+| R9 (loop filter → varicap cathode) | Yageo RC0402FR-0710KL | 10 kΩ | C60490 | Feeds the tune voltage; keeps RF off the loop filter |
+| R10 + C (audio → varicap cathode) | Yageo RC0402FR-071ML + Samsung CL05B104KO5NNNC | 1 MΩ + 100 nF in series | C138033 / C1525 | ≈ 1/100 with R9. High-pass 1.6 Hz. Audio comes from the DAC filter (chain 10) |
+| R11 + C (Q1 emitter → U2 RFINA) | Yageo RC0402FR-07220RL + Samsung CL05C150JB5NNNC | 220 Ω + 15 pF in series | C112291 / C86285 | The PLL sample, as pira's 680 Ω + 15 pF. Lowered to 220 Ω because the ADF4002 needs −10 to 0 dBm (p3); its input is about 500 Ω per pin (Figure 11, p8). Estimate about −4 dBm; check on the bench |
+| C (Q1 emitter → Q2 base) | Samsung CL05C220JB5NNNC | 22 pF C0G | C70464, 250,294 | pira C8 |
+| Q2 | onsemi MMBTH10LT1G | Buffer, common emitter | C16204 | |
+| R12 (Q2 collector → base) | Yageo RC0402FR-0718KL | 18 kΩ | C138044, 971,385 | Collector-feedback bias; with hFE ≥ 60 (p2), Ic ≈ 4 mA, VCE ≈ 2 V |
+| R13 (VCC_VCO → Q2 collector) | Yageo RC0402FR-07270RL | 270 Ω | C163474 | |
+| R14 + C (Q2 emitter) | Yageo RC0402FR-0747RL + Samsung CL05B103KB5NNNC | 47 Ω ∥ 10 nF to GND | C137973 / C15195 | pira R8 + C9 |
+| C (Q2 collector → U7 RF1) | Murata GRM1555C1H102JA01D | 1 nF C0G, series | C76947, 880,292 | The PE43711's RF pins must be at 0 V DC (PE43711 p1, p28); Q2's collector sits near 2.2 V |
+| Q3 (lock gate) | onsemi MMBT3904LT1G | Collector to Q2 base, emitter to GND | C81464 | VCE(sat) ≤ 0.2 V (p2), below Q2's turn-on, so the buffer is off |
+| R15 (MCU GPIO → Q3 base) | Yageo RC0402FR-0710KL | 10 kΩ | C60490 | Driven low by firmware once U2 reports lock (MUXOUT) |
+| R16 (3V3 → Q3 base) | Yageo RC0402FR-0710KL | 10 kΩ pull-up | C60490 | Buffer muted from power-up until firmware releases it |
+
+Bench items: the tune voltage at 88.1 and 107.9 MHz (target about 1.7 V and 3.4 V), the RFINA level, the buffer output level, and the per-channel modulation sensitivity for the firmware's audio-level table.

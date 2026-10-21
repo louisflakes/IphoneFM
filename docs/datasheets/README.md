@@ -96,7 +96,8 @@ Saved 2026-10-20. LCSC copies come from LCSC's datasheet server (`datasheet.lcsc
 | ESD_Semtech_RClamp0521P.pdf | Semtech RClamp0521PA | LCSC copy (C117554) | Antenna ESD (D5) |
 | L_Murata_LQW18AN_JELF243A-0024.pdf | Murata LQW18AN reference spec JELF243A-0024AC-01 | [murata.com](https://pim.murata.com/asset/pim4/inductor/JELF243A-0024_PDF_INDUCTOR) | L1, FL1 inductors |
 | Q_onsemi_MMBTH10LT1.pdf | onsemi MMBTH10L | LCSC copy (C16204) | Oscillator and buffer transistors |
-| VAR_Toshiba_1SV281.pdf | Toshiba 1SV281 (2014-03-01) | LCSC copy (C146317) | VCO varactor |
+| VAR_Toshiba_1SV322.pdf | Toshiba 1SV322 (2014-03-01, watermarked Not Recommended for New Design) | toshiba.semicon-storage.com (saved via the user's Chrome) | VCO varicap (D2) |
+| VAR_Toshiba_1SV281.pdf | Toshiba 1SV281 (2014-03-01), not used: tuning ratio too small | LCSC copy (C146317) | — |
 | J1_HRO_TYPE-C-31-M-12.pdf | Korean Hroparts TYPE-C-31-M-12 drawing (2020-12-08) | LCSC copy (C165948) | USB-C receptacle |
 | J2_BAT_BWSMA-KWE-Z001.pdf | BAT Wireless BWSMA-KWE-Z001 (July-2-2025-A01) | LCSC copy (C496551) | SMA jack |
 | SW1_ShouHan_MSK12C02.pdf | Shou Han MSK12C02 drawing | LCSC copy (C431540) | TX/RX slide switch |
