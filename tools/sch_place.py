@@ -29,6 +29,8 @@ FOOT = {("R", "0402"): "Resistor_SMD:R_0402_1005Metric", ("C", "0402"): "Capacit
 # Chains drawn where the sheet plan puts them (sheet-plan.md): FL1 between U7 and U5, the RX front end in its own zone,
 # and U2's loop filter as a compact group at CPout. (x, y, rotation); rotation 90 = horizontal.
 MANUAL = {
+    # chain 1: R2 hangs from the CC2 line just right of J1, R1 from the CC1 line beyond D4 (sch_layout.py)
+    "R2": (63.5, 67.31, 0), "R1": (114.3, 64.77, 0),
     # U2 loop filter at CPout (pin 25 ends at 353.06, 81.28): R5 in line, C25 to GND after it, C24 to GND below the pin
     "R5": (363.22, 81.28, 90), "C25": (370.84, 86.36, 0), "C24": (358.14, 93.98, 0),
     # C26 in line between U2 RFoutTx (353.06, 73.66) and U7 RF1 (388.62, 83.82)

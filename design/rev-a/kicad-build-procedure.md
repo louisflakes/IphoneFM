@@ -49,7 +49,7 @@ Symbols (each checked pin by pin against its datasheet before use, because ERC c
 - [x] 1.18 Give every symbol its designator, value, MPN and LCSC code from netlist.json, without letting KiCad renumber them [HHG p27, p34; KHA p106].
 
 Wiring (one bom.md chain per step):
-- [ ] 1.19 Wire the power symbols for VBUS, 3V3, VDDA, RX_VDD and GND [EES p37].
+- [x] 1.19 Wire the power symbols for VBUS, 3V3, VDDA, RX_VDD and GND [EES p37].
 - [ ] 1.20 Wire chain 1: J1, the CC resistors and the USB ESD parts.
 - [ ] 1.21 Wire chain 2: U3 and its capacitors.
 - [ ] 1.22 Wire chain 3: U1's supply, reset, boot and debug pins.
