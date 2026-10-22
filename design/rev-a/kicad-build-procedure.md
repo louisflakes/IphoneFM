@@ -40,7 +40,7 @@ Symbols (each checked pin by pin against its datasheet before use, because ERC c
 - [x] 1.9 Place U6 (USBLC6-2SC6) and check its 6 pins against p1–2.
 - [x] 1.10 Place U7 (PE43711) and check all 24 pins and the pad against Table 9 p28.
 - [x] 1.11 Place Y2 (20 MHz oscillator) and check its 4 pins against YSO110TR p2.
-- [ ] 1.12 Place J1 (USB-C) and check its contacts and shell against the HRO drawing.
+- [x] 1.12 Place J1 (USB-C) and check its contacts and shell against the HRO drawing.
 - [ ] 1.13 Place J2 (SMA) and check its centre pin and legs against the BAT Wireless drawing.
 - [ ] 1.14 Place SW1, SW2 and SW3 and check their pins against their drawings, confirming the DIP switch's numbering.
 - [ ] 1.15 Place RV1–RV3 and check their terminals, dummy pins and mounting lands against the Alps drawing.
