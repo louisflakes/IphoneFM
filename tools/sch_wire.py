@@ -28,6 +28,8 @@ for _k, _net in enumerate(["ATT_C16", "ATT_C8", "ATT_C4", "ATT_C2", "ATT_C1", "A
     _y, _x, _s = 132.08 + 2.54 * _k, 321.31 + 12.7 * _k, 355.6 + 2.54 * _k
     _yf = (170.18, 167.64, 165.1, 162.56, 162.56, 165.1)[_k]
     PATHS[_net] = [(403.86, _y), (_x, _y), (_x, _yf), (_s, _yf), (_s, 177.8)]
+# nets wired across a zone boundary because their parts meet at it
+WIRE_ACROSS = {"TX_RF_ATT"}  # U7 RF2 feeds FL1 directly
 LEAVE = {("U6", "6"), ("U6", "4")}  # USBLC6 pass-through pins, on toward U1
 RAILS = {"VBUS", "3V3", "VDDA", "RX_VDD", "GND"}  # drawn with power symbols (sch_power.py)
 BEND, CROSS, TEXT = 3, 25, 6  # extra cost, in grid steps, of a turn, a crossing and a step through text
@@ -258,7 +260,7 @@ def main():
     for (ref, num), net in pin_net.items():
         if net in SKIP | RAILS or (ref, num) in LEAVE:
             continue
-        groups.setdefault((net, zone_of(placed[ref])), []).append((ref, num))
+        groups.setdefault((net, "across" if net in WIRE_ACROSS else zone_of(placed[ref])), []).append((ref, num))
     nets = {}
     for (net, zone), members in groups.items():
         if min(drawn_in(r, net) or 99 for r, _ in members) == chain:

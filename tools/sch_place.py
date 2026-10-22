@@ -29,6 +29,11 @@ FOOT = {("R", "0402"): "Resistor_SMD:R_0402_1005Metric", ("C", "0402"): "Capacit
 # Chains drawn where the sheet plan puts them (sheet-plan.md): FL1 between U7 and U5, the RX front end in its own zone,
 # and U2's loop filter as a compact group at CPout. (x, y, rotation); rotation 90 = horizontal.
 MANUAL = {
+    # chain 7: FL1 on one line at U7 RF2's height (127): C28 down, L2 on, C29 down, L3 on, C30 down, then on into U5 RF2;
+    # R16 straight on U5 VDD; R17 into CTRL with C31 down (text left); R18 pulls SW1's common down
+    "C28": (444.5, 130.81, 0), "L2": (455.93, 127.0, 90), "C29": (464.82, 130.81, 0), "L3": (476.25, 127.0, 90),
+    "C30": (485.14, 130.81, 0), "R16": (530.86, 113.03, 0), "R17": (502.92, 134.62, 90), "C31": (510.54, 138.43, 0, True),
+    "R18": (119.38, 367.03, 0),
     # chain 6: U7 pull-downs, one per control line, each hanging in the gap left as the lines below it turn down to SW3
     "R10": (327.66, 135.89, 0), "R11": (340.36, 138.43, 0), "R12": (353.06, 140.97, 0),
     "R13": (365.76, 143.51, 0), "R14": (378.46, 146.05, 0), "R15": (391.16, 148.59, 0),
@@ -55,8 +60,6 @@ MANUAL = {
     "C1": (105.41, 46.99, 0, True), "C2": (135.89, 46.99, 0),
     # chain 1: R2 hangs from the CC2 line just right of J1, R1 from the CC1 line beyond D4 (sch_layout.py)
     "R2": (63.5, 67.31, 0), "R1": (114.3, 64.77, 0),
-    # FL1 along y 83.82 from U7 RF2 (424.18) toward U5: shunt C, series L, shunt C, series L, shunt C
-    "C28": (444.5, 88.9, 0), "L2": (452.12, 83.82, 90), "C29": (459.74, 88.9, 0), "L3": (467.36, 83.82, 90), "C30": (474.98, 88.9, 0),
     # RX front end zone, right to left at U4 FMI's height (289.56): C34 series, L1 shunt, FB1 series, C35 shunt
     "C34": (487.68, 289.56, 90), "L1": (477.52, 294.64, 0), "FB1": (467.36, 289.56, 90), "C35": (457.2, 294.64, 0),
 }
