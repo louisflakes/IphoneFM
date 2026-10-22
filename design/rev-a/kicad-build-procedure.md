@@ -50,7 +50,7 @@ Symbols (each checked pin by pin against its datasheet before use, because ERC c
 
 Wiring (one bom.md chain per step):
 - [x] 1.19 Wire the power symbols for VBUS, 3V3, VDDA, RX_VDD and GND [EES p37].
-- [ ] 1.20 Wire chain 1: J1, the CC resistors and the USB ESD parts.
+- [x] 1.20 Wire chain 1: J1, the CC resistors and the USB ESD parts.
 - [ ] 1.21 Wire chain 2: U3 and its capacitors.
 - [ ] 1.22 Wire chain 3: U1's supply, reset, boot and debug pins.
 - [ ] 1.23 Wire chain 4: Y2, its capacitors and R4.
