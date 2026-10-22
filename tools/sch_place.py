@@ -29,6 +29,8 @@ FOOT = {("R", "0402"): "Resistor_SMD:R_0402_1005Metric", ("C", "0402"): "Capacit
 # Chains drawn where the sheet plan puts them (sheet-plan.md): FL1 between U7 and U5, the RX front end in its own zone,
 # and U2's loop filter as a compact group at CPout. (x, y, rotation); rotation 90 = horizontal.
 MANUAL = {
+    # chain 4: a 3V3 line above Y2 with C12 (text left) and C11 hanging from it; R4 straight off Y2 OUT
+    "C12": (215.9, 31.75, 0, True), "C11": (231.14, 31.75, 0), "R4": (248.92, 50.8, 90),
     # chain 3: the shunt caps on U1 PA2-PA5 lie on their pin rows in two staggered columns, ground ends run right to one
     # bar (sch_power WIRED_RAILS); R6-R8 straight off PA8 and stepped down off PA9, PA10
     "C39": (248.92, 223.52, 90), "C40": (256.54, 226.06, 90), "C36": (248.92, 228.6, 90), "C41": (256.54, 231.14, 90),

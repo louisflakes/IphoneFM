@@ -10,6 +10,8 @@ from sch_power import balanced
 
 # ref: (x, y, rotation, (dx, dy) of the first visible field from the symbol; the next ones stack 2.54 mm below)
 LAYOUT = {
+    # chain 4: Y2 stays; its text moves to the lower right, clear of its pin names and below R4
+    "Y2": (223.52, 50.8, 0, (16.51, 6.35)),
     # chain 2: U3 stays; its text moves above the body, clear of the VIN and VOUT lines
     "U3": (120.65, 45.72, 0, (-7.62, -12.7)),
     # chain 1: U6 below J1 on the DM/DP rows; the CC ESD diodes turned so IO is on top, hanging from their CC lines
