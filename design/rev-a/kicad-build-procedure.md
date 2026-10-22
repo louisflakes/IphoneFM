@@ -69,7 +69,7 @@ Wiring (one bom.md chain per step):
 - [x] 1.34 Add layout notes on the sheet: decoupling at the pins, rule R8 for the I²S clock, and no thermal reliefs on the FMI shunt parts [BAC p3; AN383 p17; LMX2571 p55].
 
 Checks:
-- [ ] 1.35 Run ERC and fix everything until it reports zero errors, recording any deliberate exclusion with its reason [EES p74; KLAP p39].
+- [x] 1.35 Run ERC and fix everything until it reports zero errors, recording any deliberate exclusion with its reason [EES p74; KLAP p39].
   - ERC found 2 errors, both the deliberate U4 LOUT/ROUT tie to ground. Reviewed together with the user and confirmed harmless (AN383 p17; digital-only mode), then recorded as exclusions with that reason. ERC now reports 0 errors, 0 warnings (details in [verification.md](verification.md)).
 - [ ] 1.36 Export the netlist and run `kicadcheck.py --net` until every check passes.
 - [ ] 1.37 Export the BOM and run `kicadcheck.py --bom` until every check passes.
