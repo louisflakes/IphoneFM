@@ -21,13 +21,13 @@ WIRED_RAILS = {
     6: {"3V3": ("C27.1", ["U7.2"])},  # U7 VDD up to its decoupling cap
     5: {"3V3": ("C14.1", ["C15.1", "C17.1", "C19.1", "C18.1", "C13.1", "C16.1",  # U2 supply bus and its seven caps
                           "U2.1", "U2.9", "U2.20", "U2.27", "U2.15", "U2.33", "U2.32"]),
-        "GND": ("@370.84,106.68", ["C20.2", "C21.2", "C22.2", "C23.2"])},  # U2 bypass ladder
+        "GND": ("@381.0,104.14", ["C20.2", "C21.2", "C22.2", "C23.2"])},  # U2 bypass ladder
     4: {"3V3": ("C12.1", ["C11.1", "Y2.4"])},  # Y2 VDD tied into the line its decoupling caps hang from
     2: {"VBUS": ("C1.1", ["U3.1", "U3.3"]), "3V3": ("C2.1", ["U3.5"])},  # regulator in, past C1; out, past C2
     # U1 supply: a 3V3 bus over U1 with its decoupling caps and FB2; FB2 out to VDDA with C7, C8
     3: {"3V3": ("C3.1", ["C5.1", "C6.1", "C4.1", "FB2.1", "U1.1", "U1.24", "U1.36", "U1.48"]),
         "VDDA": ("C8.1", ["C7.1", "FB2.2", "U1.9"]),
-        "GND": ("@259.08,233.68", ["C39.2", "C40.2", "C36.2", "C41.2"])},  # an anchor "@x,y" is a free point: the bar's foot
+        "GND": ("@266.7,231.14", ["C39.2", "C40.2", "C36.2", "C41.2"])},  # an anchor "@x,y" is a free point: the bar's foot
 }
 WIRED = {tuple(p.split(".")) for rails in WIRED_RAILS.values() for _, pins in rails.values() for p in pins}
 STUB = 2.54

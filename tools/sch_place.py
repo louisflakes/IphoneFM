@@ -30,7 +30,7 @@ FOOT = {("R", "0402"): "Resistor_SMD:R_0402_1005Metric", ("C", "0402"): "Capacit
 # and U2's loop filter as a compact group at CPout. (x, y, rotation); rotation 90 = horizontal.
 MANUAL = {
     # chain 9: the LED resistors, R25 straight off the red cathode, R26 and R27 stepped down off green and blue
-    "R25": (124.46, 297.18, 90), "R26": (124.46, 309.88, 90), "R27": (124.46, 322.58, 90),
+    "R25": (121.92, 297.18, 90), "R26": (121.92, 309.88, 90), "R27": (121.92, 322.58, 90),
     # chain 8: U4's I2C pull-ups at the tops of two short columns; RSTB and the I2S lines turn down in a ribbon to R19
     # (pull-down) and the series resistors R24, R23, R22; GPO caps in a two-step staircase at the pins; FB3 from 3V3
     # down onto an RX_VDD line over U4 with C32, C33
@@ -39,9 +39,9 @@ MANUAL = {
     "C38": (350.52, 323.85, 0), "C37": (360.68, 326.39, 0),
     "FB3": (381.0, 262.89, 0, True), "C32": (388.62, 270.51, 0), "C33": (411.48, 270.51, 0),
     # chain 7: FL1 on one line at U7 RF2's height (127): C28 down, L2 on, C29 down, L3 on, C30 down, then on into U5 RF2;
-    # R16 straight on U5 VDD; R17 into CTRL with C31 down (text left); R18 pulls SW1's common down
+    # R16 beside U5 VDD on a short run; CTRL drops below the FL1 line to R17 and C31; R18 pulls SW1's common down
     "C28": (444.5, 130.81, 0), "L2": (455.93, 127.0, 90), "C29": (464.82, 130.81, 0), "L3": (476.25, 127.0, 90),
-    "C30": (485.14, 130.81, 0), "R16": (530.86, 113.03, 0), "R17": (502.92, 134.62, 90), "C31": (510.54, 138.43, 0, True),
+    "C30": (485.14, 130.81, 0), "R16": (541.02, 107.95, 0), "R17": (495.3, 147.32, 90), "C31": (505.46, 151.13, 0),
     "R18": (119.38, 367.03, 0),
     # chain 6: U7 pull-downs, one per control line, each hanging in the gap left as the lines below it turn down to SW3
     "R10": (327.66, 135.89, 0), "R11": (340.36, 138.43, 0), "R12": (353.06, 140.97, 0),
@@ -51,20 +51,20 @@ MANUAL = {
     # C26 on RFoutTx toward U7; bypass caps C20-C23 as a staggered ladder on one ground bar; R9 off CE, text left
     "C14": (299.72, 31.75, 0), "C15": (322.58, 31.75, 0), "C17": (347.98, 31.75, 0), "C19": (370.84, 31.75, 0),
     "C18": (299.72, 49.53, 0), "C13": (347.98, 49.53, 0), "C16": (370.84, 49.53, 0),
-    "C24": (356.87, 85.09, 0), "R5": (370.84, 81.28, 90), "C25": (374.65, 85.09, 0), "C26": (363.22, 73.66, 90),
-    "C20": (360.68, 96.52, 90), "C21": (368.3, 99.06, 90), "C22": (360.68, 101.6, 90), "C23": (368.3, 104.14, 90),
+    "C24": (356.87, 85.09, 0), "R5": (370.84, 81.28, 90), "C25": (374.65, 85.09, 0), "C26": (375.92, 73.66, 90),
+    "C20": (370.84, 96.52, 90), "C21": (378.46, 99.06, 90), "C22": (370.84, 101.6, 90), "C23": (378.46, 104.14, 90),
     "R9": (309.88, 107.95, 0, True),
     # chain 4: a 3V3 line above Y2 with C12 (text left) and C11 hanging from it; R4 straight off Y2 OUT
-    "C12": (215.9, 31.75, 0, True), "C11": (231.14, 31.75, 0), "R4": (248.92, 50.8, 90),
+    "C12": (215.9, 31.75, 0, True), "C11": (231.14, 31.75, 0), "R4": (254.0, 50.8, 90),
     # chain 3: the shunt caps on U1 PA2-PA5 lie on their pin rows in two staggered columns, ground ends run right to one
     # bar (sch_power WIRED_RAILS); R6-R8 straight off PA8 and stepped down off PA9, PA10
-    "C39": (248.92, 223.52, 90), "C40": (256.54, 226.06, 90), "C36": (248.92, 228.6, 90), "C41": (256.54, 231.14, 90),
-    "R6": (248.92, 238.76, 90), "R7": (269.24, 248.92, 90), "R8": (269.24, 259.08, 90),
+    "C39": (256.54, 223.52, 90), "C40": (264.16, 226.06, 90), "C36": (256.54, 228.6, 90), "C41": (264.16, 231.14, 90),
+    "R6": (281.94, 238.76, 90), "R7": (269.24, 248.92, 90), "R8": (269.24, 259.08, 90),
     # chain 3: U1 decoupling in a 2 x 2 block on the 3V3 bus over U1, FB2 then C7, C8 on the VDDA branch to its right;
     # C10 (NRST), R3 (BOOT0) and C9 (VCAP) hang from their lines on U1's left, text on the left
     "C3": (175.26, 184.15, 0), "C5": (198.12, 184.15, 0), "C6": (175.26, 201.93, 0), "C4": (198.12, 201.93, 0),
     "FB2": (243.84, 201.93, 0), "C7": (251.46, 209.55, 0), "C8": (274.32, 209.55, 0),
-    "C10": (187.96, 222.25, 0, True), "R3": (198.12, 237.49, 0, True), "C9": (200.66, 288.29, 0, True),
+    "C10": (187.96, 222.25, 0, True), "R3": (193.04, 237.49, 0, True), "C9": (200.66, 288.29, 0, True),
     # chain 2: C1 hangs from the VBUS line into U3 VIN (text on the left, clear of U3), C2 from the 3V3 line out of VOUT
     "C1": (105.41, 46.99, 0, True), "C2": (135.89, 46.99, 0),
     # chain 1: R2 hangs from the CC2 line just right of J1, R1 from the CC1 line beyond D4 (sch_layout.py)

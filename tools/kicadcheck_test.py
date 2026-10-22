@@ -39,8 +39,6 @@ def model():
     """{(ref, kicad_pin): net}, with NC pins as unconnected single-pin nets"""
     pins = {}
     for r, p in by_ref.items():
-        if r.startswith("TP"):
-            continue
         for pin, d in p["pinmap"].items():
             for k in kicad_pins(r, pin):
                 pins[(r, k)] = f"unconnected-({r}-Pad{k})" if d["net"] == "NC" else "/" + d["net"]
@@ -54,8 +52,6 @@ def q(s):
 def write_net(pins, path, lcsc=None):
     comps = []
     for r, p in by_ref.items():
-        if r.startswith("TP"):
-            continue
         code = (lcsc or {}).get(r, p["lcsc"])
         comps.append(f'(comp (ref {q(r)}) (value {q(p["value"])}) (footprint {q(FOOT.get(p["package"], "Lib:" + p["ref"]))})'
                      f' (fields (field (name "LCSC") {q(code)}) (field (name "MPN") {q(p["mpn"])})))')
@@ -70,7 +66,7 @@ def positions():
     """Board positions: the sketch for major parts; each other part 1.5 mm from the part it belongs next to"""
     pos = {r: (x + OFF[0], y + OFF[1]) for r, (x, y, _) in PLAN.items()}
     for r, p in by_ref.items():
-        if r in pos or r.startswith("TP"):
+        if r in pos:
             continue
         target = p.get("local_to", "U7").split(".")[0]
         tx, ty = pos.get(target, pos["U7"])

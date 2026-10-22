@@ -19,6 +19,7 @@
 | `sch_layout.py [--dry-run]` | Move chips, connectors and diodes to where a chain's wiring reads cleanly, with their visible fields stacked clear of the pins |
 | `sch_testpads.py [--dry-run]` | Place the test pads TP1–TP8 (out of the BOM): signal pads on the end of the line they test, power pads in the controls zone |
 | `sch_wire.py <chain> [--dry-run]` | Wire every net among one chain's parts (maze router on the 1.27 mm grid): never through a body, power symbol or another net's pin; nets may cross but never touch; reruns replace that chain's wires |
+| `sch_labels.py [--dry-run]` | Name every signal net with a local label carrying its `netlist.json` name, one per connected group (lone chip pins on a short stub), placed clear of parts, wires and text; the matching names join the groups. Reruns replace them |
 | `setup-kicad.sh` | Install KiCad 10 and pre-cache the KiCad MCP server (Ubuntu 24.04, as root) |
 
 API keys come from environment variables (`DIGIKEY_CLIENT_ID`, `DIGIKEY_CLIENT_SECRET`, `MOUSER_API_KEY`). Never commit keys.

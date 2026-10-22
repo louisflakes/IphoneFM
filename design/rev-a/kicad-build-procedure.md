@@ -60,7 +60,7 @@ Wiring (one bom.md chain per step):
 - [x] 1.26 Wire chain 7: FL1, U5, SW1, J2 and D5.
 - [x] 1.27 Wire chain 8: U4 and its front end, supply and digital lines.
 - [x] 1.28 Wire chain 9: the wheels, the BOOT button and the LED.
-- [ ] 1.29 Wire chain 10: the test pads TP1–TP8.
+- [x] 1.29 Wire chain 10: the test pads TP1–TP8.
 - [ ] 1.30 Label every net with its netlist.json name, one name per net [EES p31, p38].
 - [ ] 1.31 Put a PWR_FLAG on every rail fed from a connector or from a pin that isn't a power output, and on GND [EES p39, p77–78].
 - [ ] 1.32 Put a no-connect flag on every pin netlist.json marks NC [EES p39].

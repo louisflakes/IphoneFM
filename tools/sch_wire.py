@@ -31,13 +31,16 @@ for _k, _net in enumerate(["ATT_C16", "ATT_C8", "ATT_C4", "ATT_C2", "ATT_C1", "A
 # chain 8: U4's left-side lines (pin tips at x 365.76): I2C up to its pull-ups; RSTB and the I2S lines down in a ribbon
 # to R19 and the series resistors; the GPO lines straight into their caps
 PATHS.update({
+    # chain 7: U5 CTRL drops below the FL1 line to C31 and R17; U5 VDD runs up and across to R16
+    "RF_CTRL": [(515.62, 134.62), (513.08, 134.62), (513.08, 147.32), (499.11, 147.32)],
+    "U5_VDD": [(530.86, 116.84), (530.86, 111.76), (541.02, 111.76)],
     # chain 3: PA9 and PA10 step down to R7 and R8 right of the space PA11-PA15 need for their labels and test pads
     "FSK_FS_MCU": [(238.76, 241.3), (261.62, 241.3), (261.62, 248.92), (265.43, 248.92)],
     "FSK_DATA_MCU": [(238.76, 243.84), (259.08, 243.84), (259.08, 259.08), (265.43, 259.08)],
     # chain 9: the LED cathodes into their resistors, the lower two stepped down (blue's step nearest the LED)
-    "LED_R_K": [(137.16, 297.18), (128.27, 297.18)],
-    "LED_G_K": [(137.16, 302.26), (130.81, 302.26), (130.81, 309.88), (128.27, 309.88)],
-    "LED_B_K": [(137.16, 307.34), (133.35, 307.34), (133.35, 322.58), (128.27, 322.58)],
+    "LED_R_K": [(137.16, 297.18), (125.73, 297.18)],
+    "LED_G_K": [(137.16, 302.26), (130.81, 302.26), (130.81, 309.88), (125.73, 309.88)],
+    "LED_B_K": [(137.16, 307.34), (133.35, 307.34), (133.35, 322.58), (125.73, 322.58)],
     "I2C_SCL": [(365.76, 289.56), (358.14, 289.56), (358.14, 281.94)],
     "I2C_SDA": [(365.76, 292.1), (340.36, 292.1), (340.36, 284.48)],
     "RX_RST": [(365.76, 297.18), (298.45, 297.18), (298.45, 341.63)],
@@ -130,9 +133,9 @@ def text_cells(root):
             if just in ("left", "right") and rot in (90, 180):
                 just = "right" if just == "left" else "left"
             x0 = x if just == "left" else x - w if just == "right" else x - w / 2
-            c0, c1 = cell(x0, y - 0.7), cell(x0 + w, y + 0.7)
+            c0, c1 = cell(x0, y), cell(x0 + w, y)
             for cx in range(c0[0], c1[0] + 1):
-                for cy in range(c0[1], c1[1] + 1):
+                for cy in {round((y + dy) / G) for dy in (-0.6, 0, 0.6)}:  # 1.27 mm text: its own row, and a half row either side
                     cells.add((cx, cy))
     return cells
 
@@ -212,24 +215,9 @@ def zone_of(sym):
     return min(ZONES, key=lambda z: max(z[1] - x, 0, x - z[3]) + max(z[2] - y, 0, y - z[4]))[0]  # in a gutter: the nearest
 
 
-def main():
-    chain = int(sys.argv[1])
-    text = strip_chain(open(SCH, encoding="utf-8").read(), chain)
-    root = sexpr(text)
-    doc = json.load(open(NETLIST, encoding="utf-8"))
-    placed = {r: s for r, s in symbols_and_pins(root).items() if r and not r.startswith("#")}
-    parts = {p["ref"]: p for p in doc["parts"]}
-    body = bodies(root, placed)
-    # every sheet pin's net
-    pin_net = {}
-    for ref, p in parts.items():
-        if ref not in placed:
-            continue
-        for pin, d in p["pinmap"].items():
-            for c in candidates(pin, p):
-                if c in placed[ref]["pins"]:
-                    pin_net[(ref, c)] = d["net"]
-    # obstacles
+def obstacles(root, placed, body):
+    """Cells a wire or label must avoid: part bodies and pins (hard), power symbols with their names (hard), field
+    text (soft), and every wire already drawn (foreign: crossable at right angles, never along or at an end)"""
     hard = set()
     for ref, (x0, y0, x1, y1) in body.items():
         a, b = cell(x0, y0), cell(x1, y1)
@@ -262,6 +250,27 @@ def main():
         for c in line_cells(a, b):
             foreign[c] = horiz
         foreign_ends |= {a, b}
+    return hard, soft, pin_cell, foreign, foreign_ends
+
+
+def main():
+    chain = int(sys.argv[1])
+    text = strip_chain(open(SCH, encoding="utf-8").read(), chain)
+    root = sexpr(text)
+    doc = json.load(open(NETLIST, encoding="utf-8"))
+    placed = {r: s for r, s in symbols_and_pins(root).items() if r and not r.startswith("#")}
+    parts = {p["ref"]: p for p in doc["parts"]}
+    body = bodies(root, placed)
+    # every sheet pin's net
+    pin_net = {}
+    for ref, p in parts.items():
+        if ref not in placed:
+            continue
+        for pin, d in p["pinmap"].items():
+            for c in candidates(pin, p):
+                if c in placed[ref]["pins"]:
+                    pin_net[(ref, c)] = d["net"]
+    hard, soft, pin_cell, foreign, foreign_ends = obstacles(root, placed, body)
     # nets of this chain
     def drawn_in(ref, net):
         """The chain that draws this pin: a passive placed at another part's pin is wired to it with that part"""

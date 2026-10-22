@@ -178,7 +178,7 @@ def compare(ref_parts, ref_pins, k_pins, label, out, ref_names=None):
 
 
 def json_pins(by_ref):
-    return {(r, pin): d["net"] for r, p in by_ref.items() for pin, d in p.get("pinmap", {}).items() if not r.startswith("TP")}
+    return {(r, pin): d["net"] for r, p in by_ref.items() for pin, d in p.get("pinmap", {}).items()}  # test pads included: they are on the schematic and the board
 
 
 def check_fields(by_ref, kparts, label, out):
