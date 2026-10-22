@@ -29,6 +29,10 @@ FOOT = {("R", "0402"): "Resistor_SMD:R_0402_1005Metric", ("C", "0402"): "Capacit
 # Chains drawn where the sheet plan puts them (sheet-plan.md): FL1 between U7 and U5, the RX front end in its own zone,
 # and U2's loop filter as a compact group at CPout. (x, y, rotation); rotation 90 = horizontal.
 MANUAL = {
+    # chain 6: U7 pull-downs, one per control line, each hanging in the gap left as the lines below it turn down to SW3
+    "R10": (327.66, 135.89, 0), "R11": (340.36, 138.43, 0), "R12": (353.06, 140.97, 0),
+    "R13": (365.76, 143.51, 0), "R14": (378.46, 146.05, 0), "R15": (391.16, 148.59, 0),
+    "C27": (431.8, 113.03, 0),
     # chain 5: U2 supply caps in two rows on a 3V3 bus above U2; loop filter in a row on CPout (C24 down, R5 on, C25 down);
     # C26 on RFoutTx toward U7; bypass caps C20-C23 as a staggered ladder on one ground bar; R9 off CE, text left
     "C14": (299.72, 31.75, 0), "C15": (322.58, 31.75, 0), "C17": (347.98, 31.75, 0), "C19": (370.84, 31.75, 0),
@@ -81,6 +85,7 @@ def symbols_and_pins(root):
         lib_id = atom(s, "lib_id")
         at = kid(s, "at")
         x, y, r = float(at[1]), float(at[2]), float(at[3]) if len(at) > 3 else 0.0
+        mirror = atom(s, "mirror")  # KiCad turns the symbol first, then mirrors it on the sheet
         ref = next((p[2] for p in kids(s, "property") if p[1] == "Reference"), None)
         pins = {}
         for num, px, py, pa, ln in libpins.get(lib_id, []):
@@ -88,8 +93,12 @@ def symbols_and_pins(root):
             rx, ry = px * math.cos(a) - py * math.sin(a), px * math.sin(a) + py * math.cos(a)
             ang = math.radians(pa + r)
             out = (-round(math.cos(ang)), round(math.sin(ang)))  # outward from the body, in sheet (y-down) axes
+            if mirror == "y":
+                rx, out = -rx, (-out[0], out[1])
+            elif mirror == "x":
+                ry, out = -ry, (out[0], -out[1])
             pins[str(num)] = (x + rx, y - ry, out)
-        placed[ref] = {"lib_id": lib_id, "x": x, "y": y, "rot": r, "pins": pins}
+        placed[ref] = {"lib_id": lib_id, "x": x, "y": y, "rot": r, "mirror": mirror, "pins": pins}
     return placed
 
 
@@ -171,6 +180,8 @@ def upside_down(p):
 # parts stacked one grid step apart: the compact capacitor symbol, name and value on the part's own row past its ground bar
 INLINE = {"C39": 12.7, "C40": 5.08, "C36": 12.7, "C41": 5.08, "C20": 12.7, "C21": 5.08, "C22": 12.7, "C23": 5.08}  # ref: x of the name from the part's centre
 SMALL = "Device:C_Small"
+# pull-downs hanging side by side in a ribbon of lines (chain 6): name and value centred under the ground symbol
+BELOW = {"R10", "R11", "R12", "R13", "R14", "R15"}
 
 
 def block(ref, p, x, y, rot, left, sheet_uuid):
@@ -182,12 +193,15 @@ def block(ref, p, x, y, rot, left, sheet_uuid):
     just = "right" if (rot == 90) != left else "left"  # KiCad mirrors justification on a part turned 90 degrees
     if ref in INLINE:
         (rx, ry), (vx, vy) = (INLINE[ref], 0), (INLINE[ref] + 5.08, 0)
+    if ref in BELOW:  # name and value centred under the part's ground symbol
+        (rx, ry), (vx, vy), just = (0, 10.16), (0, 12.7), None
     if rot == 0 and upside_down(p):  # turned over so ground ends at the bottom and a supply at the top
-        rot, just = 180, ("right" if just == "left" else "left")
+        rot, just = 180, (just and ("right" if just == "left" else "left"))
+    jus = f" (justify {just})" if just else ""
     return (f'\t(symbol\n\t\t(lib_id "{lib}")\n\t\t(at {x:.2f} {y:.2f} {rot})\n\t\t(unit 1)\n\t\t(exclude_from_sim no)\n\t\t(in_bom yes)\n\t\t(on_board yes)\n\t\t(dnp no)\n'
             f'\t\t(uuid "{uuid.uuid4()}")\n'
-            f'\t\t(property "Reference" "{ref}"\n\t\t\t(at {x + rx:.2f} {y + ry:.2f} {rot % 180})\n\t\t\t(effects (font (size 1.27 1.27)) (justify {just}))\n\t\t)\n'
-            f'\t\t(property "Value" "{p["value"]}"\n\t\t\t(at {x + vx:.2f} {y + vy:.2f} {rot % 180})\n\t\t\t(effects (font (size 1.27 1.27)) (justify {just}))\n\t\t)\n'
+            f'\t\t(property "Reference" "{ref}"\n\t\t\t(at {x + rx:.2f} {y + ry:.2f} {rot % 180})\n\t\t\t(effects (font (size 1.27 1.27)){jus})\n\t\t)\n'
+            f'\t\t(property "Value" "{p["value"]}"\n\t\t\t(at {x + vx:.2f} {y + vy:.2f} {rot % 180})\n\t\t\t(effects (font (size 1.27 1.27)){jus})\n\t\t)\n'
             f'\t\t(property "Footprint" "{foot}"\n\t\t\t(at {x:.2f} {y:.2f} 0)\n\t\t\t(effects (font (size 1.27 1.27)) (hide yes))\n\t\t)\n'
             f'\t\t(property "Datasheet" "~"\n\t\t\t(at {x:.2f} {y:.2f} 0)\n\t\t\t(effects (font (size 1.27 1.27)) (hide yes))\n\t\t)\n'
             f'\t\t(instances\n\t\t\t(project "IphoneFM"\n\t\t\t\t(path "/{sheet_uuid}"\n\t\t\t\t\t(reference "{ref}") (unit 1)\n\t\t\t\t)\n\t\t\t)\n\t\t)\n\t)\n')

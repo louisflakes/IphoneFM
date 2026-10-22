@@ -8,10 +8,14 @@ import sys
 from sch_place import SCH
 from sch_power import balanced
 
-# ref: (x, y, rotation, (dx, dy) of the first visible field from the symbol; the next ones stack 2.54 mm below)
+# ref: (x, y, rotation, (dx, dy) of the first visible field from the symbol; the next ones stack 2.54 mm below);
+# a rotation written "270y" also mirrors the symbol left to right
 LAYOUT = {
-    # chain 5: U7 moves right to leave room for U2's loop filter and bypass ladder; its text goes above-left
-    "U7": (421.64, 101.6, 0, (-22.86, -38.1)),
+    # chain 6: U7 lower, so its six control lines can run left under U2 and turn down in a ribbon to SW3, with each
+    # pull-down hanging in the gap the lines below it leave; SW3 turned and mirrored so its contacts point up, 1 to 6
+    # left to right; U7's text to the lower right, SW3's to its right
+    "U7": (421.64, 144.78, 0, (15.24, 33.02)),
+    "SW3": (363.22, 185.42, "270y", (10.16, -2.54)),
     # chain 4: Y2 stays; its text moves to the lower right, clear of its pin names and below R4
     "Y2": (223.52, 50.8, 0, (16.51, 6.35)),
     # chain 2: U3 stays; its text moves above the body, clear of the VIN and VOUT lines
@@ -26,11 +30,14 @@ LAYOUT = {
 def main():
     text = open(SCH, encoding="utf-8").read()
     for ref, (x, y, rot, (fx, fy)) in LAYOUT.items():
+        mirror = "y" if str(rot).endswith("y") else None
+        rot = int(str(rot).rstrip("y"))
         m = re.search(r'\n\t\(symbol\n\t\t\(lib_id "[^"]+"\)(?:(?!\n\t\(symbol\n).)*?\(property "Reference" "%s"\n' % re.escape(ref), text, re.S)
         s = m.start() + 2
         e = balanced(text, s)
         blk = text[s:e]
-        blk = re.sub(r'^(\t\t\(at )[\d.-]+ [\d.-]+(?: [\d.-]+)?\)', lambda q: f"{q.group(1)}{x:.2f} {y:.2f} {rot})", blk, count=1, flags=re.M)
+        blk = re.sub(r'^(\t\t\(at )[\d.-]+ [\d.-]+(?: [\d.-]+)?\)\n(?:\t\t\(mirror [xy]\)\n)?',
+                     lambda q: f"{q.group(1)}{x:.2f} {y:.2f} {rot})\n" + (f"\t\t(mirror {mirror})\n" if mirror else ""), blk, count=1, flags=re.M)
         k = 0
 
         def field(q):
@@ -38,9 +45,9 @@ def main():
             body = q.group(0)
             if "(hide yes)" in body:
                 return re.sub(r'\(at [\d.-]+ [\d.-]+ [\d.-]+\)', f"(at {x:.2f} {y:.2f} 0)", body, count=1)
-            at = f"(at {x + fx:.2f} {y + fy + 2.54 * k:.2f} 0)"
+            at = f"(at {x + fx:.2f} {y + fy + 2.54 * k:.2f} {rot % 180})"  # reads left to right on a turned part
             k += 1
-            just = "right" if rot in (90, 180) else "left"  # KiCad mirrors justification on a turned part
+            just = "right" if (rot in (90, 180)) != bool(mirror) else "left"  # KiCad mirrors justification on a turned or mirrored part
             body = re.sub(r'\(at [\d.-]+ [\d.-]+ [\d.-]+\)', at, body, count=1)
             body = re.sub(r'\(effects \(font \(size 1\.27 1\.27\)\)(?: \(justify [a-z ]+\))?\)', f"(effects (font (size 1.27 1.27)) (justify {just}))", body, count=1)
             return body

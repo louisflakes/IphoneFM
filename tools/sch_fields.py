@@ -11,8 +11,8 @@ from sch_place import SCH, NETLIST, LIB, prefix
 FIELDS = (("MPN", "mpn"), ("LCSC", "lcsc"), ("Manufacturer", "maker"))
 
 
-def prop(name, val, x, y, effects):
-    return f'\t\t(property "{name}" "{val}"\n\t\t\t(at {x:.2f} {y:.2f} 0)\n\t\t\t{effects}\n\t\t)\n'
+def prop(name, val, x, y, effects, angle=0):
+    return f'\t\t(property "{name}" "{val}"\n\t\t\t(at {x:.2f} {y:.2f} {angle})\n\t\t\t{effects}\n\t\t)\n'
 
 
 def fill(block, p):
@@ -21,10 +21,10 @@ def fill(block, p):
     for name, _ in FIELDS:  # drop any earlier copy so a rerun gives the same result
         block = re.sub(r'\t\t\(property "%s" "[^"]*"\n.*?\n\t\t\)\n' % name, "", block, flags=re.S)
     x, y = (float(v) for v in re.search(r'\n\t\t\(at ([\d.-]+) ([\d.-]+)', block).groups())
-    vx, vy, veff = re.search(r'\(property "Value" "[^"]*"\n\t\t\t\(at ([\d.-]+) ([\d.-]+)[^)]*\)\n\t\t\t(\(effects .*\))\n', block).groups()
+    vx, vy, va, veff = re.search(r'\(property "Value" "[^"]*"\n\t\t\t\(at ([\d.-]+) ([\d.-]+) ?([\d.-]*)\)\n\t\t\t(\(effects .*\))\n', block).groups()
     hidden = "(effects (font (size 1.27 1.27)) (hide yes))"
     shown = prefix(ref) not in LIB
-    new = prop("MPN", p["mpn"], float(vx), float(vy) + 2.54, veff if shown else hidden)
+    new = prop("MPN", p["mpn"], float(vx), float(vy) + 2.54, veff if shown else hidden, va or 0)  # same angle as the value
     new += prop("LCSC", p["lcsc"], x, y, hidden) + prop("Manufacturer", p["maker"], x, y, hidden)
     k = block.index("\t\t(instances")
     return block[:k] + new + block[k:]

@@ -20,6 +20,14 @@ G = 1.27
 UID = "5e1c"
 SKIP = {"NC"}
 # pins left unwired for the step 1.30 net labels: a part's far side that carries the net on toward another chain
+# nets drawn along a given path instead of routed (absolute mm corners). Chain 6: U7's six control lines run left past
+# their pull-downs, turn down one column each (row k at R_k - 6.35 mm) and step across to SW3's contacts; the inner
+# lines turn first, so nothing crosses
+PATHS = {}
+for _k, _net in enumerate(["ATT_C16", "ATT_C8", "ATT_C4", "ATT_C2", "ATT_C1", "ATT_C0_5"]):
+    _y, _x, _s = 132.08 + 2.54 * _k, 321.31 + 12.7 * _k, 355.6 + 2.54 * _k
+    _yf = (170.18, 167.64, 165.1, 162.56, 162.56, 165.1)[_k]
+    PATHS[_net] = [(403.86, _y), (_x, _y), (_x, _yf), (_s, _yf), (_s, 177.8)]
 LEAVE = {("U6", "6"), ("U6", "4")}  # USBLC6 pass-through pins, on toward U1
 RAILS = {"VBUS", "3V3", "VDDA", "RX_VDD", "GND"}  # drawn with power symbols (sch_power.py)
 BEND, CROSS, TEXT = 3, 25, 6  # extra cost, in grid steps, of a turn, a crossing and a step through text
@@ -50,6 +58,10 @@ def strip_chain(text, chain):
 def to_sheet(sym, lx, ly):
     a = math.radians(sym["rot"])
     rx, ry = lx * math.cos(a) - ly * math.sin(a), lx * math.sin(a) + ly * math.cos(a)
+    if sym.get("mirror") == "y":
+        rx = -rx
+    elif sym.get("mirror") == "x":
+        ry = -ry
     return sym["x"] + rx, sym["y"] - ry
 
 
@@ -271,6 +283,18 @@ def main():
         tree = {pins[0][0]: [d for d in ((1, 0), (-1, 0), (0, 1), (0, -1)) if d != (-o0[0], -o0[1])]}
         edges = set()
         todo = pins[1:]
+        if net.split("@")[0] in PATHS:  # drawn as given, after checking it reaches every pin and touches nothing else
+            todo = []
+            pts = [cell(x, y) for x, y in PATHS[net.split("@")[0]]]
+            for a, b in zip(pts, pts[1:]):
+                run = line_cells(a, b)
+                for c, d in zip(run, run[1:]):
+                    edges.add((min(c, d), max(c, d)))
+            on = {c for e in edges for c in e}
+            bad = [c for c in on if (c in hard and c not in own_cells) or c in foreign or c in foreign_ends]
+            if not own_cells <= on or bad:
+                failed.append(f"{net} (path misses pins or touches {bad[:3]})")
+                continue
         while todo:
             todo.sort(key=lambda q: min(abs(q[0][0] - t[0]) + abs(q[0][1] - t[1]) for t in tree))
             dst, o = todo.pop(0)

@@ -55,7 +55,7 @@ Wiring (one bom.md chain per step):
 - [x] 1.21 Wire chain 2: U3 and its capacitors.
 - [x] 1.22 Wire chain 3: U1's supply, reset, boot and debug pins.
 - [x] 1.23 Wire chain 4: Y2, its capacitors and R4.
-- [ ] 1.24 Wire chain 5: U2, its supply capacitors, the loop filter and its control lines.
+- [x] 1.24 Wire chain 5: U2, its supply capacitors, the loop filter and its control lines.
 - [ ] 1.25 Wire chain 6: U7, its pull-downs and SW3.
 - [ ] 1.26 Wire chain 7: FL1, U5, SW1, J2 and D5.
 - [ ] 1.27 Wire chain 8: U4 and its front end, supply and digital lines.
