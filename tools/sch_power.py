@@ -17,6 +17,9 @@ SYMBOL = {"VBUS": ("VBUS", "up"), "3V3": ("+3V3", "up"), "VDDA": ("VDDA", "up"),
 UID = "50a7e500"
 # Rails drawn as wires within a chain (sch_wire.py): chain -> {net: (pin that carries the one power symbol, [pins wired to it])}
 WIRED_RAILS = {
+    5: {"3V3": ("C14.1", ["C15.1", "C17.1", "C19.1", "C18.1", "C13.1", "C16.1",  # U2 supply bus and its seven caps
+                          "U2.1", "U2.9", "U2.20", "U2.27", "U2.15", "U2.33", "U2.32"]),
+        "GND": ("@370.84,106.68", ["C20.2", "C21.2", "C22.2", "C23.2"])},  # U2 bypass ladder
     4: {"3V3": ("C12.1", ["C11.1", "Y2.4"])},  # Y2 VDD tied into the line its decoupling caps hang from
     2: {"VBUS": ("C1.1", ["U3.1", "U3.3"]), "3V3": ("C2.1", ["U3.5"])},  # regulator in, past C1; out, past C2
     # U1 supply: a 3V3 bus over U1 with its decoupling caps and FB2; FB2 out to VDDA with C7, C8

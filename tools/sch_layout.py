@@ -10,6 +10,8 @@ from sch_power import balanced
 
 # ref: (x, y, rotation, (dx, dy) of the first visible field from the symbol; the next ones stack 2.54 mm below)
 LAYOUT = {
+    # chain 5: U7 moves right to leave room for U2's loop filter and bypass ladder; its text goes above-left
+    "U7": (421.64, 101.6, 0, (-22.86, -38.1)),
     # chain 4: Y2 stays; its text moves to the lower right, clear of its pin names and below R4
     "Y2": (223.52, 50.8, 0, (16.51, 6.35)),
     # chain 2: U3 stays; its text moves above the body, clear of the VIN and VOUT lines

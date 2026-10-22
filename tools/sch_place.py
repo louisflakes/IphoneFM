@@ -29,6 +29,13 @@ FOOT = {("R", "0402"): "Resistor_SMD:R_0402_1005Metric", ("C", "0402"): "Capacit
 # Chains drawn where the sheet plan puts them (sheet-plan.md): FL1 between U7 and U5, the RX front end in its own zone,
 # and U2's loop filter as a compact group at CPout. (x, y, rotation); rotation 90 = horizontal.
 MANUAL = {
+    # chain 5: U2 supply caps in two rows on a 3V3 bus above U2; loop filter in a row on CPout (C24 down, R5 on, C25 down);
+    # C26 on RFoutTx toward U7; bypass caps C20-C23 as a staggered ladder on one ground bar; R9 off CE, text left
+    "C14": (299.72, 31.75, 0), "C15": (322.58, 31.75, 0), "C17": (347.98, 31.75, 0), "C19": (370.84, 31.75, 0),
+    "C18": (299.72, 49.53, 0), "C13": (347.98, 49.53, 0), "C16": (370.84, 49.53, 0),
+    "C24": (356.87, 85.09, 0), "R5": (370.84, 81.28, 90), "C25": (374.65, 85.09, 0), "C26": (363.22, 73.66, 90),
+    "C20": (360.68, 96.52, 90), "C21": (368.3, 99.06, 90), "C22": (360.68, 101.6, 90), "C23": (368.3, 104.14, 90),
+    "R9": (309.88, 107.95, 0, True),
     # chain 4: a 3V3 line above Y2 with C12 (text left) and C11 hanging from it; R4 straight off Y2 OUT
     "C12": (215.9, 31.75, 0, True), "C11": (231.14, 31.75, 0), "R4": (248.92, 50.8, 90),
     # chain 3: the shunt caps on U1 PA2-PA5 lie on their pin rows in two staggered columns, ground ends run right to one
@@ -44,10 +51,6 @@ MANUAL = {
     "C1": (105.41, 46.99, 0, True), "C2": (135.89, 46.99, 0),
     # chain 1: R2 hangs from the CC2 line just right of J1, R1 from the CC1 line beyond D4 (sch_layout.py)
     "R2": (63.5, 67.31, 0), "R1": (114.3, 64.77, 0),
-    # U2 loop filter at CPout (pin 25 ends at 353.06, 81.28): R5 in line, C25 to GND after it, C24 to GND below the pin
-    "R5": (363.22, 81.28, 90), "C25": (370.84, 86.36, 0), "C24": (358.14, 93.98, 0),
-    # C26 in line between U2 RFoutTx (353.06, 73.66) and U7 RF1 (388.62, 83.82)
-    "C26": (370.84, 73.66, 90),
     # FL1 along y 83.82 from U7 RF2 (424.18) toward U5: shunt C, series L, shunt C, series L, shunt C
     "C28": (444.5, 88.9, 0), "L2": (452.12, 83.82, 90), "C29": (459.74, 88.9, 0), "L3": (467.36, 83.82, 90), "C30": (474.98, 88.9, 0),
     # RX front end zone, right to left at U4 FMI's height (289.56): C34 series, L1 shunt, FB1 series, C35 shunt
@@ -166,7 +169,7 @@ def upside_down(p):
 
 
 # parts stacked one grid step apart: the compact capacitor symbol, name and value on the part's own row past its ground bar
-INLINE = {"C39": 12.7, "C40": 5.08, "C36": 12.7, "C41": 5.08}  # ref: x of the name from the part's centre
+INLINE = {"C39": 12.7, "C40": 5.08, "C36": 12.7, "C41": 5.08, "C20": 12.7, "C21": 5.08, "C22": 12.7, "C23": 5.08}  # ref: x of the name from the part's centre
 SMALL = "Device:C_Small"
 
 

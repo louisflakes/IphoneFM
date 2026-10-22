@@ -2,7 +2,8 @@
 A maze router joins each net's pins one at a time to the part of the net already drawn. It never passes through a part
 body, a power symbol or another net's pin, never turns or ends on another net's wire (so nets can cross but never touch),
 and avoids text where it can. A pin is never entered from its body side. Pins of parts in other chains are left for
-the net labels of step 1.30, except that a passive placed at a pin (local_to) is wired to that pin with its chain. Everything this tool draws for chain N has a uuid starting with UID + N, so a rerun of that
+the net labels of step 1.30 when they sit in another zone of the sheet; within a zone a net is wired whole, by the
+earliest chain that has a pin in it, and a passive placed at a pin (local_to) counts as being in that pin's chain. Everything this tool draws for chain N has a uuid starting with UID + N, so a rerun of that
 chain replaces it.
 Usage: python tools/sch_wire.py <chain> [--dry-run]"""
 import heapq
@@ -164,6 +165,20 @@ def route(src, dst, dst_in, hard, foreign, foreign_ends, soft, bound):
     return None
 
 
+# zones of the sheet (kicad/rev-a/sheet-plan.md), x0, y0, x1, y1 in mm; the first that holds a part's origin is its zone
+ZONES = [("clock", 158, 19, 288, 90), ("mcu", 158, 99, 288, 401), ("transmit", 297, 19, 431, 214),
+         ("receive", 297, 223, 431, 401), ("rf_out", 441, 19, 575, 214), ("rx_front", 441, 223, 575, 312),
+         ("usb", 19, 19, 167, 161), ("controls", 19, 170, 167, 401)]
+
+
+def zone_of(sym):
+    x, y = sym["x"], sym["y"]
+    for name, x0, y0, x1, y1 in ZONES:
+        if x0 <= x <= x1 and y0 <= y <= y1:
+            return name
+    return min(ZONES, key=lambda z: max(z[1] - x, 0, x - z[3]) + max(z[2] - y, 0, y - z[4]))[0]  # in a gutter: the nearest
+
+
 def main():
     chain = int(sys.argv[1])
     text = strip_chain(open(SCH, encoding="utf-8").read(), chain)
@@ -205,7 +220,7 @@ def main():
         c = cell(x, y)
         reach = 4 if d[0] == 0 else 3 + math.ceil(len(name) * CW / G)
         for i in range(1, reach + 1):  # a wire may meet the symbol's own pin tip from the side
-            for t in (-2, -1, 0, 1, 2):
+            for t in ((-1, 0, 1) if d[0] != 0 else (-2, -1, 0, 1, 2)):  # a sideways symbol stays within its own row
                 hard.add((c[0] + d[0] * i + (t if d[0] == 0 else 0), c[1] + d[1] * i + (t if d[0] != 0 else 0)))
     soft = text_cells(root)
     foreign, foreign_ends = {}, set()
@@ -225,10 +240,17 @@ def main():
                 return parts[tref].get("chain")
         return p.get("chain")
 
-    nets = {}
+    # a net is wired within each zone of the sheet and labelled between zones (step 1.30); each zone's part of a net
+    # is drawn by the earliest chain that has a pin in it
+    groups = {}
     for (ref, num), net in pin_net.items():
-        if ref in placed and drawn_in(ref, net) == chain and net not in SKIP | RAILS and (ref, num) not in LEAVE:
-            nets.setdefault(net, set()).add(pin_cell[(ref, num)])
+        if net in SKIP | RAILS or (ref, num) in LEAVE:
+            continue
+        groups.setdefault((net, zone_of(placed[ref])), []).append((ref, num))
+    nets = {}
+    for (net, zone), members in groups.items():
+        if min(drawn_in(r, net) or 99 for r, _ in members) == chain:
+            nets[f"{net}@{zone}"] = {pin_cell[m] for m in members}
     for net, (anchor, others) in WIRED_RAILS.get(chain, {}).items():  # rails this chain draws as wires
         for p in [anchor] + others:
             if p.startswith("@"):  # a free point under a power symbol: the wire arrives from above (ground) or below (supply)
