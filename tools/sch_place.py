@@ -18,7 +18,10 @@ SCH = os.path.join(ROOT, "kicad", "rev-a", "IphoneFM.kicad_sch")
 NETLIST = os.path.join(ROOT, "design", "rev-a", "netlist.json")
 G = 1.27
 CW = 1.1  # width of one 1.27 mm character, with a margin
+PWR_ROOM = 8.9  # half height of an upright passive with power symbols on its ends
+PIN_ROOM = 10.2  # stub, power symbol and its name beyond a chip pin on a rail
 RAILS = {"GND", "3V3", "VBUS"}
+SUPPLIES = {"VBUS", "3V3", "VDDA", "RX_VDD"}
 LIB = {"R": "Device:R", "C": "Device:C", "L": "Device:L", "FB": "Device:FerriteBead"}
 FOOT = {("R", "0402"): "Resistor_SMD:R_0402_1005Metric", ("C", "0402"): "Capacitor_SMD:C_0402_1005Metric",
         ("C", "0603"): "Capacitor_SMD:C_0603_1608Metric", ("C", "0805"): "Capacitor_SMD:C_0805_2012Metric",
@@ -90,11 +93,18 @@ def part_box(x, y, horizontal, w, left=False):
     # body plus its pins (7.62 mm long) and its reference/value text: above a horizontal part, beside a vertical one
     if horizontal:
         return (x - 5.08, y - 6.6, max(x + 5.08, x - 3.81 + w), y + 2.6)
-    return (x - 3.3 - w, y - 5.08, x + 2.6, y + 5.08) if left else (x - 2.6, y - 5.08, x + 3.3 + w, y + 5.08)
+    # upright parts mostly end on a rail: leave room above and below for its power symbol and name
+    return (x - 3.3 - w, y - PWR_ROOM, x + 2.6, y + PWR_ROOM) if left else (x - 2.6, y - PWR_ROOM, x + 3.3 + w, y + PWR_ROOM)
 
 
 def plan(doc, placed):
     boxes = [bbox_of(s) for r, s in placed.items() if s["pins"] and prefix(r) not in LIB]  # passives already on the sheet get re-placed
+    from sch_power import pin_nets  # room for the power symbol (and its stub) at every chip pin on a rail
+    for (r, num), net in pin_nets(doc, placed).items():
+        if prefix(r) not in LIB:
+            px, py, (ox, oy) = placed[r]["pins"][num]
+            ex, ey = px + ox * PIN_ROOM, py + oy * PIN_ROOM
+            boxes.append((min(px, ex) - 2.5, min(py, ey) - 2.5, max(px, ex) + 2.5, max(py, ey) + 2.5))
     out = {}
     passives = [p for p in doc["parts"] if prefix(p["ref"]) in LIB]
     order = sorted(passives, key=lambda p: (p["ref"] not in MANUAL, int(re.sub(r"\D", "", p["ref"]))))
@@ -134,6 +144,12 @@ def plan(doc, placed):
     return out
 
 
+def upside_down(p):
+    """Pin 1 is at the top of an upright R, C, L or FB: true when that puts ground on top or a supply below a signal"""
+    n1, n2 = p["pinmap"]["1"]["net"], p["pinmap"]["2"]["net"]
+    return n1 == "GND" or (n2 in SUPPLIES and n1 not in SUPPLIES)
+
+
 def block(ref, p, x, y, rot, left, sheet_uuid):
     lib = LIB[prefix(ref)]
     foot = FOOT.get((prefix(ref), p["package"]), "")
@@ -141,10 +157,12 @@ def block(ref, p, x, y, rot, left, sheet_uuid):
     s = -1 if left else 1
     (rx, ry), (vx, vy) = ((-3.81, -5.59), (-3.81, -3.81)) if rot == 90 else ((2.54 * s, -1.27), (2.54 * s, 1.27))
     just = "right" if (rot == 90) != left else "left"  # KiCad mirrors justification on a part turned 90 degrees
+    if rot == 0 and upside_down(p):  # turned over so ground ends at the bottom and a supply at the top
+        rot, just = 180, ("right" if just == "left" else "left")
     return (f'\t(symbol\n\t\t(lib_id "{lib}")\n\t\t(at {x:.2f} {y:.2f} {rot})\n\t\t(unit 1)\n\t\t(exclude_from_sim no)\n\t\t(in_bom yes)\n\t\t(on_board yes)\n\t\t(dnp no)\n'
             f'\t\t(uuid "{uuid.uuid4()}")\n'
-            f'\t\t(property "Reference" "{ref}"\n\t\t\t(at {x + rx:.2f} {y + ry:.2f} {rot})\n\t\t\t(effects (font (size 1.27 1.27)) (justify {just}))\n\t\t)\n'
-            f'\t\t(property "Value" "{p["value"]}"\n\t\t\t(at {x + vx:.2f} {y + vy:.2f} {rot})\n\t\t\t(effects (font (size 1.27 1.27)) (justify {just}))\n\t\t)\n'
+            f'\t\t(property "Reference" "{ref}"\n\t\t\t(at {x + rx:.2f} {y + ry:.2f} {rot % 180})\n\t\t\t(effects (font (size 1.27 1.27)) (justify {just}))\n\t\t)\n'
+            f'\t\t(property "Value" "{p["value"]}"\n\t\t\t(at {x + vx:.2f} {y + vy:.2f} {rot % 180})\n\t\t\t(effects (font (size 1.27 1.27)) (justify {just}))\n\t\t)\n'
             f'\t\t(property "Footprint" "{foot}"\n\t\t\t(at {x:.2f} {y:.2f} 0)\n\t\t\t(effects (font (size 1.27 1.27)) (hide yes))\n\t\t)\n'
             f'\t\t(property "Datasheet" "~"\n\t\t\t(at {x:.2f} {y:.2f} 0)\n\t\t\t(effects (font (size 1.27 1.27)) (hide yes))\n\t\t)\n'
             f'\t\t(instances\n\t\t\t(project "IphoneFM"\n\t\t\t\t(path "/{sheet_uuid}"\n\t\t\t\t\t(reference "{ref}") (unit 1)\n\t\t\t\t)\n\t\t\t)\n\t\t)\n\t)\n')
@@ -154,7 +172,7 @@ def main():
     text = open(SCH, encoding="utf-8").read()
     root = sexpr(text)
     doc = json.load(open(NETLIST, encoding="utf-8"))
-    placed = symbols_and_pins(root)
+    placed = {r: s for r, s in symbols_and_pins(root).items() if not r.startswith("#")}  # power symbols are redrawn by sch_power.py
     missing = [l for l in LIB.values() if not any(s[1] == l for s in kids(kid(root, "lib_symbols"), "symbol"))]
     if missing:
         raise SystemExit(f"Seed one of each first (embeds the library symbol): {', '.join(missing)}")
