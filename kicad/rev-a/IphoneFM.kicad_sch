@@ -13,6 +13,29 @@
 		(comment 2 "Source of truth: design/rev-a/netlist.json")
 	)
 	(lib_symbols
+	(symbol "IphoneFM:RK10J11R0A0H"
+		(pin_names (offset 1.016))
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "RV" (at -12.70 13.97 0) (effects (font (size 1.27 1.27)) (justify left bottom)))
+		(property "Value" "RK10J11R0A0H" (at -12.70 -13.97 0) (effects (font (size 1.27 1.27)) (justify left top)))
+		(property "Footprint" "" (at 0.00 0.00 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(property "Datasheet" "docs/datasheets/analog-fm/POT_Alps_RK10J.pdf" (at 0.00 0.00 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(property "Description" "Alps RK10J11R0A0H 10 kOhm thumbwheel potentiometer, reflow SMD, 14 mm wheel; dummy and mounting lands to GND. Pins from Alps RK10J p2-3" (at 0.00 0.00 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(symbol "RK10J11R0A0H_0_1"
+			(rectangle (start -12.70 10.16) (end 12.70 -10.16) (stroke (width 0.254) (type default)) (fill (type background)))
+		)
+		(symbol "RK10J11R0A0H_1_1"
+			(pin passive line (at 15.24 0.00 180) (length 2.54) (name "Wiper" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))
+			(pin passive line (at 0.00 12.70 270) (length 2.54) (name "CW end" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
+			(pin passive line (at -5.08 -12.70 90) (length 2.54) (name "CCW end" (effects (font (size 1.27 1.27)))) (number "3" (effects (font (size 1.27 1.27)))))
+			(pin passive line (at -2.54 -12.70 90) (length 2.54) (name "Dummy" (effects (font (size 1.27 1.27)))) (number "D1" (effects (font (size 1.27 1.27)))))
+			(pin passive line (at 0.00 -12.70 90) (length 2.54) (name "Dummy" (effects (font (size 1.27 1.27)))) (number "D2" (effects (font (size 1.27 1.27)))))
+			(pin passive line (at 2.54 -12.70 90) (length 2.54) (name "Mounting" (effects (font (size 1.27 1.27)))) (number "M1" (effects (font (size 1.27 1.27)))))
+			(pin passive line (at 5.08 -12.70 90) (length 2.54) (name "Mounting" (effects (font (size 1.27 1.27)))) (number "M2" (effects (font (size 1.27 1.27)))))
+		)
+	)
 	(symbol "Switch:SW_DIP_x06"
 		(pin_names
 			(offset 0)
@@ -4181,6 +4204,105 @@
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
 					(reference "SW3") (unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "IphoneFM:RK10J11R0A0H")
+		(at 96.52 198.12 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "f9f40d2e-f07d-401c-8a04-74e9abfbc9e8")
+		(property "Reference" "RV1"
+			(at 96.52 194.31 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "RK10J11R0A0H"
+			(at 96.52 201.93 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" ""
+			(at 96.52 198.12 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 96.52 198.12 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(instances
+			(project "IphoneFM"
+				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
+					(reference "RV1") (unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "IphoneFM:RK10J11R0A0H")
+		(at 96.52 236.22 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "64805eeb-e032-455e-99bf-f8e462e4608b")
+		(property "Reference" "RV2"
+			(at 96.52 232.41 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "RK10J11R0A0H"
+			(at 96.52 240.03 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" ""
+			(at 96.52 236.22 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 96.52 236.22 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(instances
+			(project "IphoneFM"
+				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
+					(reference "RV2") (unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "IphoneFM:RK10J11R0A0H")
+		(at 96.52 274.32 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "ace3013d-9de6-40c7-b256-ed6c2a59d3e0")
+		(property "Reference" "RV3"
+			(at 96.52 270.51 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "RK10J11R0A0H"
+			(at 96.52 278.13 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" ""
+			(at 96.52 274.32 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 96.52 274.32 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(instances
+			(project "IphoneFM"
+				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
+					(reference "RV3") (unit 1)
 				)
 			)
 		)
