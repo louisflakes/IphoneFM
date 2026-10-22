@@ -36,6 +36,14 @@ Drawing:
 - Use the IEEE/ASME reference designator conventions [HHG p27, p34; KHA p106].
 - Make the schematic readable by other people, and get it reviewed [BAC p3; HHG p28, p32].
 
+Wiring around a dense chip (our practice from the Rev A build, settled with the user 2026-10-22; no book covers it):
+- Wire each passive to the pin it serves together with that chip, even when the passive belongs to another chain. Its far side is wired later with its own chain, so nothing is drawn twice.
+- When neighbouring pins one grid step apart all need parts, rearrange the parts first; don't fall back to net labels. Labels are for nets that genuinely run between zones of the sheet, not a way around a crowded drawing.
+- Shunt caps on neighbouring pins: lay each cap on its side on its own pin row. Stagger them in two columns, so caps in one column are two rows apart. Run each ground end right along its own row to a single ground bar with one ground symbol at the foot. Put each cap's name and value on its own row past the bar. Use the compact capacitor symbol (KiCad `Device:C_Small`) so the stacked plates stay apart.
+- Series parts on neighbouring pins: run the first straight off its pin and step the others down, each with its own straight run.
+- Keep crossings rare. Where one can't be avoided (for example, a connector and a chip that order a pair of pins oppositely), a plain crossing with no dot is correct and reads fine.
+- Before calling a drawing problem a problem, try moving parts or stretching the runs, as you would by hand. A crowded drawing is not a design problem.
+
 Nets and power:
 - Each net gets one name; two different labels on one net is an ERC violation. Name priority is global label > power symbol > local label > hierarchical label > sheet pin [EES p31, p38].
 - Label scope: a local label connects within one sheet, a global label everywhere, a hierarchical label to its sheet pin [EES p31, p66].

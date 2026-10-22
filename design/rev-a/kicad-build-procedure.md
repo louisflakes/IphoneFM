@@ -12,6 +12,7 @@ The established order for turning the Rev A design into a board, broken into sin
 - Any change to the design goes into [netlist.json](netlist.json) first, then the page that explains it, then KiCad.
 - Claude makes changes through the KiCad MCP server where it can, and otherwise gives the user the exact menu path to click.
 - At each review checkpoint, the user sees a screenshot and the check results before the next phase starts.
+- When wiring a chain, also wire every passive placed at one of its chips' pins, and lay out crowded pins so they can be wired, as [docs/pcb-design-workflow.md](../../docs/pcb-design-workflow.md) §1 "Wiring around a dense chip" says. Net labels (step 1.30) join only nets that run between zones.
 - Schematic edits are written to the file, so the open schematic editor shows them only after File → Revert; while Claude works on the schematic, the user doesn't edit or save it in KiCad, so neither copy overwrites the other. Board edits go through KiCad's live API and appear directly.
 
 ## Phase 0: Constraints and fab rules
