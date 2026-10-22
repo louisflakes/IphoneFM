@@ -515,6 +515,63 @@
         "via_diameter": 0.6,
         "via_drill": 0.3,
         "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.2,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "Power",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 0,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.4,
+        "tuning_profile": "",
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.2,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "RF",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 1,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.92,
+        "tuning_profile": "",
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
+        "wire_width": 6
+      },
+      {
+        "bus_width": 12,
+        "clearance": 0.4,
+        "diff_pair_gap": 0.25,
+        "diff_pair_via_gap": 0.25,
+        "diff_pair_width": 0.2,
+        "line_style": 0,
+        "microvia_diameter": 0.3,
+        "microvia_drill": 0.1,
+        "name": "Clock",
+        "pcb_color": "rgba(0, 0, 0, 0.000)",
+        "priority": 2,
+        "schematic_color": "rgba(0, 0, 0, 0.000)",
+        "track_width": 0.2,
+        "tuning_profile": "",
+        "via_diameter": 0.6,
+        "via_drill": 0.3,
+        "wire_width": 6
       }
     ],
     "meta": {
@@ -522,7 +579,92 @@
     },
     "net_colors": {},
     "netclass_assignments": {},
-    "netclass_patterns": []
+    "netclass_patterns": [
+      {
+        "netclass": "Power",
+        "pattern": "VBUS"
+      },
+      {
+        "netclass": "Power",
+        "pattern": "3V3"
+      },
+      {
+        "netclass": "Power",
+        "pattern": "VDDA"
+      },
+      {
+        "netclass": "Power",
+        "pattern": "RX_VDD"
+      },
+      {
+        "netclass": "RF",
+        "pattern": "/ANT"
+      },
+      {
+        "netclass": "RF",
+        "pattern": "/LMX_RF"
+      },
+      {
+        "netclass": "RF",
+        "pattern": "/ATT_IN"
+      },
+      {
+        "netclass": "RF",
+        "pattern": "/TX_RF_ATT"
+      },
+      {
+        "netclass": "RF",
+        "pattern": "/TX_LPF_MID"
+      },
+      {
+        "netclass": "RF",
+        "pattern": "/TX_RF"
+      },
+      {
+        "netclass": "RF",
+        "pattern": "/RX_RF"
+      },
+      {
+        "netclass": "RF",
+        "pattern": "/FMI_MATCH"
+      },
+      {
+        "netclass": "RF",
+        "pattern": "/FMI"
+      },
+      {
+        "netclass": "Clock",
+        "pattern": "/FSK_CLK"
+      },
+      {
+        "netclass": "Clock",
+        "pattern": "/FSK_CLK_MCU"
+      },
+      {
+        "netclass": "Clock",
+        "pattern": "/REF20"
+      },
+      {
+        "netclass": "Clock",
+        "pattern": "/REF20_MCU"
+      },
+      {
+        "netclass": "Clock",
+        "pattern": "/RX_RCLK"
+      },
+      {
+        "netclass": "Clock",
+        "pattern": "/RX_SCK"
+      },
+      {
+        "netclass": "Clock",
+        "pattern": "/RX_SCK_MCU"
+      },
+      {
+        "netclass": "Clock",
+        "pattern": "/LMX_CLK"
+      }
+    ]
   },
   "pcbnew": {
     "last_paths": {
