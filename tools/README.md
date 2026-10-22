@@ -13,7 +13,7 @@
 | `kicadcheck.py --net/--bom/--pcb <file>` | Check KiCad's exported schematic netlist, BOM and board file against `netlist.json` and the Rev A placement: opens, shorts, missing pins, JLC codes, footprint sizes, sides, outline, positions. See `design/rev-a/verification.md` |
 | `kicadcheck_test.py` | Self-test for `kicadcheck.py`: synthetic files with deliberate faults, plus KiCad's StickHub demo |
 | `kicad_symbol.py` | `add_symbol()` builds a readable project symbol from a datasheet pin table into `kicad/rev-a/symbols/IphoneFM.kicad_sym` |
-| `sch_place.py [--dry-run]` | Place every passive on the Rev A schematic beside the pin its `local_to` names, clear of other parts and their text; needs one R, C, L and FB seeded first; upright parts are turned so ground is at the bottom and supplies on top, with room left for power symbols. Rerun order: `sch_testpads`, `sch_layout`, `sch_place`, `sch_fields`, `sch_power`, `sch_wire` per chain, `sch_flags`, `sch_labels`, `sch_noconnect` |
+| `sch_place.py [--dry-run]` | Place every passive on the Rev A schematic beside the pin its `local_to` names, clear of other parts and their text; needs one R, C, L and FB seeded first; upright parts are turned so ground is at the bottom and supplies on top, with room left for power symbols. Rerun order: `sch_testpads`, `sch_layout`, `sch_place`, `sch_fields`, `sch_power`, `sch_wire` per chain, `sch_flags`, `sch_labels`, `sch_noconnect`, `sch_notes`, `sch_pinids` |
 | `sch_fields.py [--dry-run]` | Write each symbol's value, MPN, LCSC code and manufacturer from `netlist.json` into the Rev A schematic, leaving designators as placed |
 | `sch_power.py [--dry-run]` | Wire a power symbol to every pin on VBUS, 3V3, VDDA, RX_VDD and GND (per `netlist.json`); neighbouring pins on one rail share a bar and one symbol; reruns replace its own drawing |
 | `sch_layout.py [--dry-run]` | Move chips, connectors and diodes to where a chain's wiring reads cleanly, with their visible fields stacked clear of the pins |
@@ -23,6 +23,7 @@
 | `sch_labels.py [--dry-run]` | Name every signal net with a local label carrying its `netlist.json` name, one per connected group (lone chip pins on a short stub), placed clear of parts, wires and text; the matching names join the groups. Reruns replace them |
 | `sch_noconnect.py [--dry-run]` | Put a no-connect flag (X) on every pin `netlist.json` marks NC |
 | `sch_notes.py [--dry-run]` | Write the layout notes block onto the Rev A schematic |
+| `sch_pinids.py [--dry-run]` | Give every symbol pin a fixed ID, as KiCad saves them, so ERC exclusions survive a reload; run last |
 | `setup-kicad.sh` | Install KiCad 10 and pre-cache the KiCad MCP server (Ubuntu 24.04, as root) |
 
 API keys come from environment variables (`DIGIKEY_CLIENT_ID`, `DIGIKEY_CLIENT_SECRET`, `MOUSER_API_KEY`). Never commit keys.

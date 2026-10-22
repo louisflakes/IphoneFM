@@ -263,7 +263,16 @@
     "equivalence_files": []
   },
   "erc": {
-    "erc_exclusions": [],
+    "erc_exclusions": [
+      [
+        "pin_to_pin|3962400|2971800|b2400809-e2fb-50ae-a5a3-826eb44201aa|2adcfd63-fb35-5131-85e3-5281af5a7965|/efee88c9-028d-4fdb-86e0-0a4145b330e1|/efee88c9-028d-4fdb-86e0-0a4145b330e1|/efee88c9-028d-4fdb-86e0-0a4145b330e1",
+        "Intended: U4 (Si4705) LOUT and ROUT are unused and tied to GND per Skyworks AN383 p17 (\"Tie unused pin(s) to GND\"). U1 starts U4 in digital-only mode (POWER_UP 0xB0), so the analog outputs never drive. Reviewed with the user at step 1.35, 2026-10-22."
+      ],
+      [
+        "pin_to_pin|3962400|2997200|690506f3-f547-5504-8fff-cef3fd55ecf9|b2400809-e2fb-50ae-a5a3-826eb44201aa|/efee88c9-028d-4fdb-86e0-0a4145b330e1|/efee88c9-028d-4fdb-86e0-0a4145b330e1|/efee88c9-028d-4fdb-86e0-0a4145b330e1",
+        "Intended: U4 (Si4705) LOUT and ROUT are unused and tied to GND per Skyworks AN383 p17 (\"Tie unused pin(s) to GND\"). U1 starts U4 in digital-only mode (POWER_UP 0xB0), so the analog outputs never drive. Reviewed with the user at step 1.35, 2026-10-22."
+      ]
+    ],
     "meta": {
       "version": 0
     },

@@ -6457,6 +6457,153 @@
 			(at 223.52 251.46 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "9192109a-1a19-5c86-bb03-a3ab345c1c72")
+		)
+		(pin "2"
+			(uuid "3424ff36-9d46-54be-b381-9cf42ceeb8ca")
+		)
+		(pin "3"
+			(uuid "1c61ac4e-e3dc-523c-a24f-d3f93da20970")
+		)
+		(pin "4"
+			(uuid "a8dc3993-3c53-51cf-9b06-07f07da73f85")
+		)
+		(pin "5"
+			(uuid "e8e94c39-79dd-5c92-8f57-fd4ea54f5cd0")
+		)
+		(pin "6"
+			(uuid "b8b1fe21-ee57-5192-9d28-bbbbf7246b9b")
+		)
+		(pin "7"
+			(uuid "f9235221-ab7f-5d47-a89e-6a5e525b59d1")
+		)
+		(pin "8"
+			(uuid "d81c072f-c1ab-501a-8be6-682df4024f46")
+		)
+		(pin "9"
+			(uuid "825775f4-95ab-5e85-847a-a34b71e11860")
+		)
+		(pin "10"
+			(uuid "971cf238-e710-5a55-9f29-e9e9c449595e")
+		)
+		(pin "11"
+			(uuid "dc8a81e4-5ba6-5941-b245-4251eb504b26")
+		)
+		(pin "12"
+			(uuid "936f03a4-416a-5d89-81e8-81f5f43fa56c")
+		)
+		(pin "13"
+			(uuid "208a3d34-969b-5010-809a-4df048c3e7bf")
+		)
+		(pin "14"
+			(uuid "78a7a987-48a3-5877-bcf7-f967f3a8164d")
+		)
+		(pin "15"
+			(uuid "e604590a-d4f0-5016-96a6-fdb885a37d67")
+		)
+		(pin "16"
+			(uuid "7c2020dd-26e5-5e5e-80ed-df214597fd84")
+		)
+		(pin "17"
+			(uuid "14354a9d-5d42-5445-8ad7-c2ca8fb0ee5b")
+		)
+		(pin "18"
+			(uuid "65c04870-e8e2-5deb-bb7c-00631f6519bd")
+		)
+		(pin "19"
+			(uuid "7bc1ce93-a1d6-571f-b12c-37922759bc69")
+		)
+		(pin "20"
+			(uuid "0e6be612-60bf-5ec3-a418-ac1a4b2baa27")
+		)
+		(pin "21"
+			(uuid "a125ad4c-d706-52dd-8a33-39b3ed0577a7")
+		)
+		(pin "22"
+			(uuid "1fe3c03c-3bf5-57be-b524-2a08a32f693a")
+		)
+		(pin "23"
+			(uuid "e7309ad3-b553-59eb-8c45-79df110bd690")
+		)
+		(pin "24"
+			(uuid "2a5bad16-bd80-59f8-94c4-82cd800142a9")
+		)
+		(pin "25"
+			(uuid "e78ff79b-cdc9-51d8-a87b-cafb85810747")
+		)
+		(pin "26"
+			(uuid "9c7fdc32-311e-55e1-bd3b-6b8b5af848f4")
+		)
+		(pin "27"
+			(uuid "831bb319-b4ad-5ad0-85eb-462380f0a812")
+		)
+		(pin "28"
+			(uuid "a892d544-0127-5686-bcf0-0bf4323e12c6")
+		)
+		(pin "29"
+			(uuid "95ec5c1e-f998-5833-8b9a-e7a4b7c552a5")
+		)
+		(pin "30"
+			(uuid "b90d9b0b-487e-5121-ada7-056f109db29b")
+		)
+		(pin "31"
+			(uuid "1f814e3a-b647-52c6-b7e8-ddf3c496734e")
+		)
+		(pin "32"
+			(uuid "713f24c9-42d1-564e-a38a-ba2f63abe1d9")
+		)
+		(pin "33"
+			(uuid "d951df7d-7c8c-501c-b9dc-e815953aad6a")
+		)
+		(pin "34"
+			(uuid "8985cdfb-e573-596d-8784-5411c5275e3a")
+		)
+		(pin "35"
+			(uuid "0f8bb597-d740-5fb7-9508-4e0fe0304f3e")
+		)
+		(pin "36"
+			(uuid "79e4a5b2-51c9-564e-a185-524328045ed7")
+		)
+		(pin "37"
+			(uuid "67854d12-97e6-5073-b432-ae645955997d")
+		)
+		(pin "38"
+			(uuid "b027136a-d93f-55fa-b5a2-489589aa9236")
+		)
+		(pin "39"
+			(uuid "4c0bab22-105b-57ae-a8d8-8e9ab37b9c4a")
+		)
+		(pin "40"
+			(uuid "4ea7bc7b-0e73-5d99-b993-d20e028b221c")
+		)
+		(pin "41"
+			(uuid "336766eb-865f-52ef-a4a1-f7b37c3ea43b")
+		)
+		(pin "42"
+			(uuid "53dc5467-2463-5c86-9155-5d196f578691")
+		)
+		(pin "43"
+			(uuid "f660f978-85f8-5b23-ba8b-f56d041f58cc")
+		)
+		(pin "44"
+			(uuid "64b44eb2-0684-58f0-a354-bb7d2b578635")
+		)
+		(pin "45"
+			(uuid "99e97407-4cbc-5568-b3ac-8c522efa1911")
+		)
+		(pin "46"
+			(uuid "3950b4e2-0a5e-5665-8731-cb4a749d8db2")
+		)
+		(pin "47"
+			(uuid "cdcc55bc-4a83-54d5-a3a8-56a8be655108")
+		)
+		(pin "48"
+			(uuid "8c431812-513f-5333-9a7a-605a5075b496")
+		)
+		(pin "49"
+			(uuid "48629849-d9ba-528c-8ef6-c9a841863fdc")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -6501,6 +6648,117 @@
 		(property "Manufacturer" "TI"
 			(at 337.82 88.90 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "34"
+			(uuid "47c96d89-f394-5b92-a76a-02889d3bb147")
+		)
+		(pin "36"
+			(uuid "4550c58f-ac05-55f8-a580-17d988c2b41c")
+		)
+		(pin "4"
+			(uuid "465a6c8e-b2d6-5a99-9faa-2a1ea90aa748")
+		)
+		(pin "7"
+			(uuid "536510cc-4018-559e-8bc7-fee58af68d47")
+		)
+		(pin "6"
+			(uuid "1d163134-7f1f-59d3-92dc-fbcc07994a96")
+		)
+		(pin "5"
+			(uuid "3a294be3-d2c5-5fdd-acb5-e8fa7c2bedb9")
+		)
+		(pin "11"
+			(uuid "f74916e5-fb90-5451-9600-0b0d12c7101c")
+		)
+		(pin "12"
+			(uuid "1d5f839e-aa8a-5e44-9418-110c87693a21")
+		)
+		(pin "13"
+			(uuid "55d8269d-eebe-5e9b-9f55-f897a179d0ee")
+		)
+		(pin "10"
+			(uuid "6430489a-e628-546b-b90b-e375d79ca911")
+		)
+		(pin "19"
+			(uuid "9185f17e-fc77-5e2b-a0cf-fbef8b8f4ed3")
+		)
+		(pin "18"
+			(uuid "bd029f42-7fbd-5aae-b69c-fb1661e0c653")
+		)
+		(pin "17"
+			(uuid "eb647c35-747a-5992-ac20-0b66c0707994")
+		)
+		(pin "16"
+			(uuid "41f7b959-164a-5fb0-beb3-89a3e009deba")
+		)
+		(pin "25"
+			(uuid "b5c55742-97ec-5247-82cf-ae65985200a6")
+		)
+		(pin "30"
+			(uuid "91d73e16-c37a-5cd5-9806-00c4a2e485e4")
+		)
+		(pin "24"
+			(uuid "cc346d13-f82f-5711-9a69-af08733d74ec")
+		)
+		(pin "29"
+			(uuid "ca75c8c2-8c46-546c-aacd-060c43cfeb49")
+		)
+		(pin "28"
+			(uuid "757eb331-4a1e-512d-8ab1-a37278095b0e")
+		)
+		(pin "2"
+			(uuid "a24d2e35-3718-5bfa-b415-4a89ae4be626")
+		)
+		(pin "3"
+			(uuid "e9035cac-803a-579c-bcfc-bb125285f9c8")
+		)
+		(pin "22"
+			(uuid "a979e3c8-da36-5292-bead-901d7b657e5b")
+		)
+		(pin "21"
+			(uuid "90d1bdb3-7799-531d-baa6-b9c99090203d")
+		)
+		(pin "1"
+			(uuid "f1ef1657-48e1-5480-aa50-5a94747961fa")
+		)
+		(pin "9"
+			(uuid "783c4875-0476-5c40-ad59-1824c18bed8c")
+		)
+		(pin "20"
+			(uuid "e5059f8c-a33e-57c9-b6bf-6c82c26641fb")
+		)
+		(pin "27"
+			(uuid "b22feaf8-0928-589b-98a2-56b5fa549cbc")
+		)
+		(pin "15"
+			(uuid "48a6dafd-9293-591e-a420-97febba84f54")
+		)
+		(pin "33"
+			(uuid "a62b398c-9a5f-5c10-84b7-c944f4be98c7")
+		)
+		(pin "32"
+			(uuid "992bde65-0359-51f1-9c73-1acca1902ebc")
+		)
+		(pin "23"
+			(uuid "8c37e556-7fe4-5d1d-85dd-721043971fad")
+		)
+		(pin "31"
+			(uuid "f5dbd0fc-e9c6-550f-a589-c83a7261e484")
+		)
+		(pin "35"
+			(uuid "41d76d89-f1fc-5c2d-9731-af2eff9f4a9a")
+		)
+		(pin "37"
+			(uuid "5f3a2dcc-c7ba-5b2c-b273-efbb657eb7a6")
+		)
+		(pin "8"
+			(uuid "aa9b5873-0b23-5b3f-87ef-71bdb5a833b8")
+		)
+		(pin "14"
+			(uuid "22ec5489-3187-5490-9c0f-538e424a2d02")
+		)
+		(pin "26"
+			(uuid "0068b6a8-f0e7-568c-bbb5-da1a63290bcc")
 		)
 		(instances
 			(project "IphoneFM"
@@ -6547,6 +6805,21 @@
 			(at 120.65 45.72 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "73f2fac7-f32c-5101-96a3-a5f746b7cffa")
+		)
+		(pin "2"
+			(uuid "2d691d23-8f1d-5cc5-9c50-84e14923b37c")
+		)
+		(pin "3"
+			(uuid "12048880-a5d6-56be-9dff-136c71c0ae80")
+		)
+		(pin "4"
+			(uuid "5174e35d-c5e4-5ae1-ae73-4d4c83f32513")
+		)
+		(pin "5"
+			(uuid "15b29cee-c2f8-51fa-91ee-eacc327f7001")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -6591,6 +6864,69 @@
 		(property "Manufacturer" "Skyworks"
 			(at 381.00 307.34 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "7"
+			(uuid "c81a8f77-f35b-5f35-9090-a1397d4f53da")
+		)
+		(pin "8"
+			(uuid "c3fa52c1-0e58-5063-854c-f8574322f001")
+		)
+		(pin "5"
+			(uuid "c9e146a7-8e6c-56d6-aeee-0569c9bed68a")
+		)
+		(pin "6"
+			(uuid "a78a4163-9555-59f2-96ca-1acd24f5840f")
+		)
+		(pin "9"
+			(uuid "d771abed-3e4f-5e0b-b8c8-c9ba2cf5a895")
+		)
+		(pin "17"
+			(uuid "abd1553e-aec2-5f80-9e4e-75591a7267d7")
+		)
+		(pin "16"
+			(uuid "eb2b6101-8b8c-51b3-a47b-6721454afb10")
+		)
+		(pin "15"
+			(uuid "851fb422-dbed-5727-84d1-016da2abb1f1")
+		)
+		(pin "19"
+			(uuid "00c0500d-7db9-5e2f-b9bf-1a2ffd344158")
+		)
+		(pin "18"
+			(uuid "f8ee5ac8-fd09-540d-bc44-7dcacac0511e")
+		)
+		(pin "2"
+			(uuid "ab235e65-9970-5f22-8e13-49b28d8142e7")
+		)
+		(pin "4"
+			(uuid "1ec925cc-d147-512b-a587-0488bda5cee5")
+		)
+		(pin "14"
+			(uuid "b2400809-e2fb-50ae-a5a3-826eb44201aa")
+		)
+		(pin "13"
+			(uuid "690506f3-f547-5504-8fff-cef3fd55ecf9")
+		)
+		(pin "11"
+			(uuid "122a724b-792d-59d6-ada3-db3905b23218")
+		)
+		(pin "10"
+			(uuid "7af51eb0-39c4-5a65-a610-460b50ae5583")
+		)
+		(pin "12"
+			(uuid "e79e2562-856f-53a5-ae01-23f63c2a7306")
+		)
+		(pin "3"
+			(uuid "06ab0176-e397-5e6e-b90e-eb1691a67e2d")
+		)
+		(pin "21"
+			(uuid "8ee38e35-41e7-53c8-9ee7-970a00db052a")
+		)
+		(pin "1"
+			(uuid "eeafe08f-3700-5760-bb03-167c6d644937")
+		)
+		(pin "20"
+			(uuid "b2b03083-a8db-5d6a-b9e6-f0e6bff4e338")
 		)
 		(instances
 			(project "IphoneFM"
@@ -6637,6 +6973,24 @@
 			(at 530.86 129.54 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "3"
+			(uuid "6393acf8-0b57-5f47-83e6-eff0430e5f21")
+		)
+		(pin "1"
+			(uuid "79084e3f-3ced-5a6e-8cc4-2f90b62c9af6")
+		)
+		(pin "4"
+			(uuid "09535628-d7e4-5cb6-8ab5-618e6f9e6f30")
+		)
+		(pin "5"
+			(uuid "fa8dafb6-053c-51d8-bfe7-6a085a0f1786")
+		)
+		(pin "6"
+			(uuid "84fa6305-12c9-535f-a939-55aad30de01e")
+		)
+		(pin "2"
+			(uuid "418a8d47-4161-5f6d-af1f-79b788c6b783")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -6681,6 +7035,24 @@
 		(property "Manufacturer" "ST"
 			(at 66.04 101.60 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "c6db15f1-69b3-5d9b-a6b1-60da1564b3a0")
+		)
+		(pin "2"
+			(uuid "43542085-06e7-5bab-962a-c2bd1920b4c5")
+		)
+		(pin "3"
+			(uuid "e7139341-c4e5-5aff-82d9-9cc6b05b0e73")
+		)
+		(pin "4"
+			(uuid "7cfe3435-249a-59d2-ab7a-7c7361df6cbf")
+		)
+		(pin "5"
+			(uuid "04148669-55c6-538e-a36c-67eb859d6777")
+		)
+		(pin "6"
+			(uuid "df5f5c25-5a32-5186-b86a-cc5129f36ad8")
 		)
 		(instances
 			(project "IphoneFM"
@@ -6727,6 +7099,81 @@
 			(at 421.64 144.78 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "5"
+			(uuid "750a9f70-7e90-5dc3-a438-bc48dd752e0c")
+		)
+		(pin "19"
+			(uuid "1bde7334-6d71-5647-b408-bbfeca77cc1a")
+		)
+		(pin "20"
+			(uuid "9e092d58-30c5-5574-adc3-adf1897c86c6")
+		)
+		(pin "21"
+			(uuid "7d689747-80e0-592d-969d-2874f07dca2d")
+		)
+		(pin "22"
+			(uuid "49518f32-52f4-54a9-b1b8-c7dd95bb9d5f")
+		)
+		(pin "23"
+			(uuid "5b4dbe0b-9e82-52e0-89ae-f7d02cd671f1")
+		)
+		(pin "24"
+			(uuid "fe8cc5e1-b109-5934-a0dd-0c3dda852a59")
+		)
+		(pin "1"
+			(uuid "a20dbba3-467c-50ed-9971-8026342f97f6")
+		)
+		(pin "3"
+			(uuid "7c5a472f-31e9-5053-b466-9896231a1457")
+		)
+		(pin "16"
+			(uuid "97703b7f-074e-5c2c-a88e-9af660de6f5b")
+		)
+		(pin "17"
+			(uuid "2c6a4fa1-8919-5ea8-aeaf-1546eca83bf8")
+		)
+		(pin "18"
+			(uuid "2711cda5-df44-5874-ab83-615584c38cbb")
+		)
+		(pin "14"
+			(uuid "0314cb6b-40fa-5e6f-a940-e5a89d2066e0")
+		)
+		(pin "2"
+			(uuid "7ffd2a7c-4802-5ec4-bb7d-45a7837b124f")
+		)
+		(pin "4"
+			(uuid "833743f4-7dc0-5222-bbfd-1ff164cb9da4")
+		)
+		(pin "6"
+			(uuid "32ecf2dd-77f5-57f8-a54d-b37ad1b45c1e")
+		)
+		(pin "7"
+			(uuid "9a0959ff-2159-578c-8aec-33e3e9f271d0")
+		)
+		(pin "8"
+			(uuid "334ee46c-2362-52e8-aa12-9e3dc881cc63")
+		)
+		(pin "9"
+			(uuid "4ae55f02-9fa2-5e9a-8325-af7d834530e1")
+		)
+		(pin "10"
+			(uuid "4f66531d-3557-5a43-9525-2e84cfbe62bc")
+		)
+		(pin "11"
+			(uuid "0509b98b-e2f3-5436-80b7-df989851a5f3")
+		)
+		(pin "12"
+			(uuid "11133e48-eedd-5b4c-8842-d48e7a239740")
+		)
+		(pin "13"
+			(uuid "7bd7d914-41b0-538e-945a-6f341f92c4c1")
+		)
+		(pin "15"
+			(uuid "46efc398-3a14-5754-aded-1219c41e5ca7")
+		)
+		(pin "25"
+			(uuid "c4a4edc2-f256-58ab-8d23-087efbdff074")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -6771,6 +7218,18 @@
 		(property "Manufacturer" "YXC"
 			(at 223.52 50.80 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "41a71e28-d1d6-5e22-aee0-695bb556c5f5")
+		)
+		(pin "3"
+			(uuid "834fc464-9719-53c2-bd07-f06bfa0aa430")
+		)
+		(pin "4"
+			(uuid "34be9cc9-7479-59aa-aceb-5474d65e9440")
+		)
+		(pin "2"
+			(uuid "d9d76236-9710-5117-9715-bef98159e380")
 		)
 		(instances
 			(project "IphoneFM"
@@ -6817,6 +7276,57 @@
 			(at 38.10 71.12 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "A1"
+			(uuid "d06dee61-8a4c-54a5-b560-c7ceb8fa47d2")
+		)
+		(pin "A4"
+			(uuid "f1aadf99-4ee5-59b4-9ae7-30502a9adda0")
+		)
+		(pin "A5"
+			(uuid "c6b03b8f-70ce-520e-8638-3db19f2773d5")
+		)
+		(pin "A6"
+			(uuid "5817b4fc-5422-5270-ab60-7df77926ad13")
+		)
+		(pin "A7"
+			(uuid "763f2cff-fc94-516b-96aa-d8171eb867e4")
+		)
+		(pin "A8"
+			(uuid "ad05f036-3fe7-5baf-b05f-ef6a690fab39")
+		)
+		(pin "A9"
+			(uuid "76a9bbb1-ce5d-50ca-874e-f9b039df9682")
+		)
+		(pin "A12"
+			(uuid "8d4dbb4b-8545-5bbc-9b05-5dae6238aa56")
+		)
+		(pin "B1"
+			(uuid "d72596af-d474-519a-896f-28b9003d234f")
+		)
+		(pin "B4"
+			(uuid "5ad71e84-247b-52fd-931b-d7e629214ba0")
+		)
+		(pin "B5"
+			(uuid "94f566f3-cdad-5cf4-8a6b-a57678848347")
+		)
+		(pin "B6"
+			(uuid "c3798fe8-413b-5aa2-99fb-504f2c94d24c")
+		)
+		(pin "B7"
+			(uuid "16ca8ee4-0e4d-5ff0-9267-77624c2b8b87")
+		)
+		(pin "B8"
+			(uuid "efe98c9a-10bc-5ee8-ad7f-42af176806e8")
+		)
+		(pin "B9"
+			(uuid "80e104cc-ccf7-509b-90ca-948ae7bdfa4c")
+		)
+		(pin "B12"
+			(uuid "1b65a495-dc88-5a36-8170-b7bebaf0f462")
+		)
+		(pin "SH"
+			(uuid "ca8788ee-78b8-5d2c-8df5-8dbefeba5650")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -6861,6 +7371,12 @@
 		(property "Manufacturer" "BAT Wireless"
 			(at 571.50 127.00 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "df1bb5d1-6a5a-5cf4-a837-756de31f58c0")
+		)
+		(pin "2"
+			(uuid "b4597f0e-675a-5bdb-9ea9-d65434cfb40d")
 		)
 		(instances
 			(project "IphoneFM"
@@ -6907,6 +7423,18 @@
 			(at 96.52 368.30 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "b87cfcf3-fa1c-5d62-85fd-611870fbcad7")
+		)
+		(pin "3"
+			(uuid "751003c0-552b-5572-8edc-5d1773239564")
+		)
+		(pin "2"
+			(uuid "8bf33393-d548-54e9-be21-3784a44333b5")
+		)
+		(pin "4"
+			(uuid "d5740f9a-fbb7-5857-bf80-afaaaef15c52")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -6951,6 +7479,12 @@
 		(property "Manufacturer" "Panasonic"
 			(at 96.52 335.28 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "f7c80fd0-1130-5eca-b1b9-0519889a0484")
+		)
+		(pin "2"
+			(uuid "da6a8118-079e-57d4-97b3-a16ca2155775")
 		)
 		(instances
 			(project "IphoneFM"
@@ -6998,6 +7532,42 @@
 			(at 363.22 185.42 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "8cb23916-015f-5c18-b367-a77745d07973")
+		)
+		(pin "2"
+			(uuid "8f099dd8-29ab-5fef-b0bc-5fe0a5f9e936")
+		)
+		(pin "3"
+			(uuid "d58c81c7-84d1-51c0-9fc5-8765f2a5a8de")
+		)
+		(pin "4"
+			(uuid "08d440c0-f829-53ce-868d-a149311c7d07")
+		)
+		(pin "5"
+			(uuid "64a0ff58-1ee0-5de5-a10d-26503c259ae6")
+		)
+		(pin "6"
+			(uuid "a68bcc62-0e7d-59b4-90d7-1c9ea1821a18")
+		)
+		(pin "7"
+			(uuid "e8acbde9-06ca-5e24-ade0-f00e3b688432")
+		)
+		(pin "8"
+			(uuid "58dba034-da6e-56f8-9aca-94d4bc69a2ed")
+		)
+		(pin "9"
+			(uuid "5d40ab9c-51da-5ad7-bcb5-b0c7ee3132bc")
+		)
+		(pin "10"
+			(uuid "0245de7d-402f-57c4-a24f-c45c1503beca")
+		)
+		(pin "11"
+			(uuid "21ee3171-50e1-5bf3-8bfd-45078b4758a8")
+		)
+		(pin "12"
+			(uuid "f4bca8c5-3cf4-5186-afdd-5fffef612168")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -7042,6 +7612,27 @@
 		(property "Manufacturer" "Alps"
 			(at 40.64 205.74 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "D1"
+			(uuid "9d1aed65-990c-57c5-a003-936e78accc44")
+		)
+		(pin "D2"
+			(uuid "041c4086-88e2-5a12-83d7-4fcc42a57afe")
+		)
+		(pin "M1"
+			(uuid "d511252d-783c-5fb5-a3f8-ea36a0ef8c58")
+		)
+		(pin "M2"
+			(uuid "5ddc8e01-90ea-542f-b8cb-4c076de45081")
+		)
+		(pin "2"
+			(uuid "e07c9003-9cc5-5a7b-8c9a-032efafc5820")
+		)
+		(pin "1"
+			(uuid "66ad57db-0881-5921-8d47-ebb4aca4f655")
+		)
+		(pin "3"
+			(uuid "38aa9ea3-2601-51c9-9bd6-c4e94be07f8f")
 		)
 		(instances
 			(project "IphoneFM"
@@ -7088,6 +7679,27 @@
 			(at 91.44 205.74 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "D1"
+			(uuid "da7e8a97-7380-597b-860c-0fd7ca163cda")
+		)
+		(pin "D2"
+			(uuid "87cc5d8c-345c-5346-b904-c67965c97f6b")
+		)
+		(pin "M1"
+			(uuid "3f07a331-5dea-5506-9d56-e533eb6fff8e")
+		)
+		(pin "M2"
+			(uuid "e321c1cf-8cb3-5116-a2e4-08ed6bb0231d")
+		)
+		(pin "2"
+			(uuid "966e4c51-a0a8-5063-be07-767c365ec58e")
+		)
+		(pin "1"
+			(uuid "d36b6b60-9761-5191-b97b-10528daaee08")
+		)
+		(pin "3"
+			(uuid "86f92513-eca5-58c2-8142-c1fb4afee8e5")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -7132,6 +7744,27 @@
 		(property "Manufacturer" "Alps"
 			(at 142.24 205.74 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "D1"
+			(uuid "cbcd637b-a34c-510d-9732-817671853a76")
+		)
+		(pin "D2"
+			(uuid "17c58779-dbbf-5d04-80ba-1a8d9cfa825a")
+		)
+		(pin "M1"
+			(uuid "4a68cf30-5c1e-5d08-a355-54215578a3bf")
+		)
+		(pin "M2"
+			(uuid "d4afa529-9d86-526b-b68e-2cdf7601234a")
+		)
+		(pin "2"
+			(uuid "f0dacfa4-17a4-50c3-9294-19ce98e2fd7a")
+		)
+		(pin "1"
+			(uuid "ee372f2c-85af-5b02-93a8-7b3dcfb7e2cc")
+		)
+		(pin "3"
+			(uuid "cb29b596-6896-509f-a085-3ee42e855c42")
 		)
 		(instances
 			(project "IphoneFM"
@@ -7178,6 +7811,18 @@
 			(at 142.24 302.26 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "0aa99bd9-e523-5967-8342-db5468ad476e")
+		)
+		(pin "2"
+			(uuid "906feec5-77ad-59ca-a48e-f56bb2a8a18e")
+		)
+		(pin "3"
+			(uuid "72a7c8e7-2a10-5184-8fa1-51529524d2c8")
+		)
+		(pin "4"
+			(uuid "99107420-d9fd-56bf-8037-9f3c6c4491e4")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -7222,6 +7867,12 @@
 		(property "Manufacturer" "TI"
 			(at 142.24 67.31 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "a51000de-0443-5423-956c-7887c1810978")
+		)
+		(pin "2"
+			(uuid "1157971a-63d6-51cc-9d9f-928cfc939f66")
 		)
 		(instances
 			(project "IphoneFM"
@@ -7268,6 +7919,12 @@
 			(at 93.98 69.85 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "ef6ea619-6153-5912-a799-91efef42b78c")
+		)
+		(pin "2"
+			(uuid "651cce8b-a871-5055-8402-e56e850ef6cd")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -7312,6 +7969,12 @@
 		(property "Manufacturer" "Semtech"
 			(at 552.45 130.81 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "64a1fb41-f13b-5835-9f7d-fba0f6adfd43")
+		)
+		(pin "2"
+			(uuid "52e4b0dd-c026-53d2-94e4-402b29f86d69")
 		)
 		(instances
 			(project "IphoneFM"
@@ -7358,6 +8021,9 @@
 			(at 40.64 254.00 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "5dd2e9f8-afae-53af-8de6-1e7dc0acd566")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -7402,6 +8068,9 @@
 		(property "Manufacturer" ""
 			(at 58.42 254.00 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "c8bb7a60-ccbc-5385-b7d3-e05cfd12c099")
 		)
 		(instances
 			(project "IphoneFM"
@@ -7448,6 +8117,9 @@
 			(at 76.20 257.81 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "167dd041-0d2d-5e8f-9327-2f7496cfed4a")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -7492,6 +8164,9 @@
 		(property "Manufacturer" ""
 			(at 127.00 363.22 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "f2fcd72d-d587-5bd9-aadb-37cfff963232")
 		)
 		(instances
 			(project "IphoneFM"
@@ -7538,6 +8213,9 @@
 			(at 304.80 101.60 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "dbbb1a69-ee5a-52ec-8b8c-21483f770844")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -7582,6 +8260,9 @@
 		(property "Manufacturer" ""
 			(at 182.88 218.44 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "8766df9a-db40-5882-9366-3b2fb26c1960")
 		)
 		(instances
 			(project "IphoneFM"
@@ -7628,6 +8309,9 @@
 			(at 248.92 254.00 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "ea6c4508-e6ea-5fdc-822a-2a29071c0ec3")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -7672,6 +8356,9 @@
 		(property "Manufacturer" ""
 			(at 243.84 251.46 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "c328415b-86b6-5fed-910d-77a506103bf7")
 		)
 		(instances
 			(project "IphoneFM"
@@ -7718,6 +8405,12 @@
 			(at 114.30 64.77 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "09290de1-f2ec-5e01-8a07-b89a7a282792")
+		)
+		(pin "2"
+			(uuid "c6d6e256-b8db-5bd3-afe4-d01e68a43095")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -7762,6 +8455,12 @@
 		(property "Manufacturer" "Samsung"
 			(at 105.41 46.99 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "be681472-3652-5882-8734-fb4196ba7364")
+		)
+		(pin "2"
+			(uuid "fdc42e8e-b61b-56ef-b93e-cc4a3aefbedd")
 		)
 		(instances
 			(project "IphoneFM"
@@ -7808,6 +8507,12 @@
 			(at 477.52 293.37 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "445d6f2e-d54e-5664-8fd7-9386e0456736")
+		)
+		(pin "2"
+			(uuid "2d40557c-b5db-53c0-b1a5-f0c14620d916")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -7852,6 +8557,12 @@
 		(property "Manufacturer" "Murata"
 			(at 467.36 289.56 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "ff63aef3-2c10-5aea-a88c-55acbebff797")
+		)
+		(pin "2"
+			(uuid "9a475495-3a2a-5eea-9382-12aeaec97cc7")
 		)
 		(instances
 			(project "IphoneFM"
@@ -7898,6 +8609,12 @@
 			(at 63.50 67.31 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "40b84d29-cae8-5cea-b984-841a3cbcfc3c")
+		)
+		(pin "2"
+			(uuid "340fbfcd-3858-52b5-af4d-baed214f7eae")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -7942,6 +8659,12 @@
 		(property "Manufacturer" "Samsung"
 			(at 135.89 46.99 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "e906cda2-9dcf-5799-94cb-cead35975e55")
+		)
+		(pin "2"
+			(uuid "62f762eb-34a4-5eaa-8389-5980206ae2f6")
 		)
 		(instances
 			(project "IphoneFM"
@@ -7988,6 +8711,12 @@
 			(at 243.84 201.93 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "a831f4bb-3a6d-5002-9a91-66cd9b9bc4b6")
+		)
+		(pin "2"
+			(uuid "6285a714-ff7d-51ba-b8d3-86241acfefc2")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -8032,6 +8761,12 @@
 		(property "Manufacturer" "Murata"
 			(at 455.93 127.00 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "79893f08-1686-5875-856b-e730e9cc68f5")
+		)
+		(pin "2"
+			(uuid "252d62a7-d599-526e-a433-1a2b75542c34")
 		)
 		(instances
 			(project "IphoneFM"
@@ -8078,6 +8813,12 @@
 			(at 175.26 184.15 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "8e0ea697-396d-58a1-8ec3-ed060e881b29")
+		)
+		(pin "2"
+			(uuid "e002a6bd-2937-5590-a51e-e7d594806a94")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -8122,6 +8863,12 @@
 		(property "Manufacturer" "Yageo"
 			(at 193.04 237.49 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "79a3bd68-a391-5f2a-9723-57cf9dca104a")
+		)
+		(pin "2"
+			(uuid "f90aeb1f-05e3-5e10-872e-4114d277adb4")
 		)
 		(instances
 			(project "IphoneFM"
@@ -8168,6 +8915,12 @@
 			(at 476.25 127.00 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "5adaccaa-9776-5f81-9c7e-7e44397313e6")
+		)
+		(pin "2"
+			(uuid "56a3314d-f50c-5c63-9a52-f85adb7a0611")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -8212,6 +8965,12 @@
 		(property "Manufacturer" "Murata"
 			(at 381.00 262.89 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "db8f2514-4bf3-539e-92a9-727af5839d28")
+		)
+		(pin "2"
+			(uuid "dffa8017-acb1-5942-88b6-d8ab4b8a0d8a")
 		)
 		(instances
 			(project "IphoneFM"
@@ -8258,6 +9017,12 @@
 			(at 198.12 201.93 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "fc52b190-e76d-5c7d-8693-66b033bc41df")
+		)
+		(pin "2"
+			(uuid "76855f9f-0d08-5b35-8800-a05eb50fe8be")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -8302,6 +9067,12 @@
 		(property "Manufacturer" "Yageo"
 			(at 254.00 50.80 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "fc3ca143-6466-5a85-b1f6-0f4f9ff27010")
+		)
+		(pin "2"
+			(uuid "59cc8493-6f91-5548-841d-8706b622b50c")
 		)
 		(instances
 			(project "IphoneFM"
@@ -8348,6 +9119,12 @@
 			(at 198.12 184.15 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "dcc86e72-f5e9-53ad-b846-8b754e2bebe1")
+		)
+		(pin "2"
+			(uuid "cdd36565-73f4-5310-9348-dfecfabb8f00")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -8392,6 +9169,12 @@
 		(property "Manufacturer" "Panasonic"
 			(at 370.84 81.28 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "30bc36c5-9b19-5c8e-bdb4-2d587ac657a7")
+		)
+		(pin "2"
+			(uuid "0647cb22-7d32-5162-9fe6-d69531b00bf9")
 		)
 		(instances
 			(project "IphoneFM"
@@ -8438,6 +9221,12 @@
 			(at 175.26 201.93 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "0925b492-e4d7-5e06-b5cd-8d7decaed2d5")
+		)
+		(pin "2"
+			(uuid "cf1a9acb-4ada-5b0c-afe6-0c19f886b9d2")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -8482,6 +9271,12 @@
 		(property "Manufacturer" "Yageo"
 			(at 281.94 238.76 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "bf7ee9ed-9269-5004-a522-d8e26128580b")
+		)
+		(pin "2"
+			(uuid "61809c66-d8cc-533f-b749-ed72ab668828")
 		)
 		(instances
 			(project "IphoneFM"
@@ -8528,6 +9323,12 @@
 			(at 251.46 209.55 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "63678873-8ad5-5297-be35-87379900f2bd")
+		)
+		(pin "2"
+			(uuid "30874c79-e8d1-5930-8ca5-53de7868f0e2")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -8572,6 +9373,12 @@
 		(property "Manufacturer" "Yageo"
 			(at 269.24 248.92 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "1e0e90cb-bde7-55bf-960f-1fe3c3545e7b")
+		)
+		(pin "2"
+			(uuid "cf5f275a-30d2-5a5b-b763-d14308fa1017")
 		)
 		(instances
 			(project "IphoneFM"
@@ -8618,6 +9425,12 @@
 			(at 274.32 209.55 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "a92fc6c4-f39a-5cfa-a1ac-5be76ebba47d")
+		)
+		(pin "2"
+			(uuid "bbc1c862-1b8f-59cc-aef6-6d229c20590c")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -8662,6 +9475,12 @@
 		(property "Manufacturer" "Yageo"
 			(at 269.24 259.08 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "83dd2c64-25f6-51fc-8f23-adc9fe582974")
+		)
+		(pin "2"
+			(uuid "8539092b-c1ce-5f94-b38b-d32a4776c4bd")
 		)
 		(instances
 			(project "IphoneFM"
@@ -8708,6 +9527,12 @@
 			(at 200.66 288.29 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "563f3577-9dc3-57f4-9c03-aa2ad1922ca0")
+		)
+		(pin "2"
+			(uuid "b3b765e4-5d9b-5d3c-ab64-e366d5503c2d")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -8752,6 +9577,12 @@
 		(property "Manufacturer" "Yageo"
 			(at 309.88 107.95 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "fb6bcd35-ac8a-5e72-9e46-2933b265b561")
+		)
+		(pin "2"
+			(uuid "8451b561-024a-59c4-be0f-c11f413c2f42")
 		)
 		(instances
 			(project "IphoneFM"
@@ -8798,6 +9629,12 @@
 			(at 187.96 222.25 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "026beb7e-b2f0-5903-af3d-836bdeaddea4")
+		)
+		(pin "2"
+			(uuid "50a5c9c8-99eb-57ce-94cc-286aab97843f")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -8842,6 +9679,12 @@
 		(property "Manufacturer" "Yageo"
 			(at 327.66 135.89 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "b827e858-00c9-5ba1-bdef-6d637cba0cd6")
+		)
+		(pin "2"
+			(uuid "3708dfbf-bacf-531f-ae95-c90c59e2ffcd")
 		)
 		(instances
 			(project "IphoneFM"
@@ -8888,6 +9731,12 @@
 			(at 231.14 31.75 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "b046a70d-b72f-5994-a4d9-b1bd066d204e")
+		)
+		(pin "2"
+			(uuid "408a49aa-666e-5d59-98d4-1da79d9a8d04")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -8932,6 +9781,12 @@
 		(property "Manufacturer" "Yageo"
 			(at 340.36 138.43 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "e99ad957-ef9a-5148-b0ef-1cf83ffa70ea")
+		)
+		(pin "2"
+			(uuid "6b355de5-60e7-5378-b7df-dde7cecfcd7e")
 		)
 		(instances
 			(project "IphoneFM"
@@ -8978,6 +9833,12 @@
 			(at 215.90 31.75 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "c03f2e98-d102-52b1-9919-497fd0684c14")
+		)
+		(pin "2"
+			(uuid "06747175-0c6b-5813-9a00-7a7fa10ce1d6")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -9022,6 +9883,12 @@
 		(property "Manufacturer" "Yageo"
 			(at 353.06 140.97 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "834edfb3-aa50-592c-beb3-9ef1f4dbd546")
+		)
+		(pin "2"
+			(uuid "360ac7d9-41cb-57b7-a2f6-7f09527a9d95")
 		)
 		(instances
 			(project "IphoneFM"
@@ -9068,6 +9935,12 @@
 			(at 347.98 49.53 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "37d74071-bb8e-5819-8e21-c7771e9b716d")
+		)
+		(pin "2"
+			(uuid "8ec3d147-8f4b-5cd9-96dd-ce3984ef0237")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -9112,6 +9985,12 @@
 		(property "Manufacturer" "Yageo"
 			(at 365.76 143.51 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "c072b26f-8239-58a2-a0f4-b07da570968e")
+		)
+		(pin "2"
+			(uuid "53a7a51a-44e8-57fa-889d-79552d3ebb72")
 		)
 		(instances
 			(project "IphoneFM"
@@ -9158,6 +10037,12 @@
 			(at 299.72 31.75 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "f8eb02a7-664f-5d20-b04f-44a6c0b4b399")
+		)
+		(pin "2"
+			(uuid "8606a686-87ac-5a56-a6fc-1010da22942e")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -9202,6 +10087,12 @@
 		(property "Manufacturer" "Yageo"
 			(at 378.46 146.05 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "b4644274-918e-59ea-a10e-a5e1a0530788")
+		)
+		(pin "2"
+			(uuid "53cd4276-df35-5926-a92c-eb5984ad30c2")
 		)
 		(instances
 			(project "IphoneFM"
@@ -9248,6 +10139,12 @@
 			(at 322.58 31.75 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "044db2f3-a88e-5738-be90-696adbc02bcf")
+		)
+		(pin "2"
+			(uuid "31bcbf79-f0f9-53d6-ab8e-dc745e61f530")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -9292,6 +10189,12 @@
 		(property "Manufacturer" "Yageo"
 			(at 391.16 148.59 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "87dfa30e-5b0d-571e-869c-755cb0210439")
+		)
+		(pin "2"
+			(uuid "b04b116c-7e2a-5016-a1c0-d64315da8b8e")
 		)
 		(instances
 			(project "IphoneFM"
@@ -9338,6 +10241,12 @@
 			(at 370.84 49.53 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "e71c331b-ceda-53a2-b705-0def89d47619")
+		)
+		(pin "2"
+			(uuid "911b1bf2-2e15-5873-84da-a0f58c9d1beb")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -9382,6 +10291,12 @@
 		(property "Manufacturer" "Yageo"
 			(at 541.02 107.95 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "ef4a5bfa-a73e-5a18-9688-213995bd1b1a")
+		)
+		(pin "2"
+			(uuid "00904770-7b61-53fc-a16f-d794299b8ee6")
 		)
 		(instances
 			(project "IphoneFM"
@@ -9428,6 +10343,12 @@
 			(at 347.98 31.75 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "842bb519-6f74-524a-8155-495f238c318b")
+		)
+		(pin "2"
+			(uuid "77c0ce87-f22d-5198-aab5-d97e78269a79")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -9472,6 +10393,12 @@
 		(property "Manufacturer" "Yageo"
 			(at 495.30 147.32 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "498838aa-2145-553b-a51f-dd0dc398d321")
+		)
+		(pin "2"
+			(uuid "6fe882d0-c609-5009-a59c-509a35e0b914")
 		)
 		(instances
 			(project "IphoneFM"
@@ -9518,6 +10445,12 @@
 			(at 299.72 49.53 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "bc0c266a-59bc-5e10-95c9-787403aaa6a7")
+		)
+		(pin "2"
+			(uuid "e845a2a0-29e5-5bdd-8568-e89022b2897b")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -9562,6 +10495,12 @@
 		(property "Manufacturer" "Yageo"
 			(at 119.38 367.03 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "1b74e8a1-030f-5876-b603-a2a7e4022173")
+		)
+		(pin "2"
+			(uuid "c5d59bc8-8d60-578d-aa88-255469eaaf67")
 		)
 		(instances
 			(project "IphoneFM"
@@ -9608,6 +10547,12 @@
 			(at 370.84 31.75 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "b2d331d9-0e09-5e59-bd71-d7dc67bb1401")
+		)
+		(pin "2"
+			(uuid "7ccff5cb-9b6a-5bfd-a6b8-1dd1c2d86e1a")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -9652,6 +10597,12 @@
 		(property "Manufacturer" "Yageo"
 			(at 298.45 345.44 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "4da3e378-f33c-5a8a-8014-6412bd0e5f53")
+		)
+		(pin "2"
+			(uuid "765f3c51-6a8e-570b-ab9c-f52a7ce9f70b")
 		)
 		(instances
 			(project "IphoneFM"
@@ -9698,6 +10649,12 @@
 			(at 370.84 96.52 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "7a8b2712-e512-5862-b51f-05052d8883a1")
+		)
+		(pin "2"
+			(uuid "47c2359b-2a49-5d09-8e3d-189bd875f53d")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -9742,6 +10699,12 @@
 		(property "Manufacturer" "Yageo"
 			(at 358.14 278.13 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "50242ec8-44b5-5fee-94d1-2a703727cae4")
+		)
+		(pin "2"
+			(uuid "d82c1f44-3124-57dc-bcc7-0248696f1f3f")
 		)
 		(instances
 			(project "IphoneFM"
@@ -9788,6 +10751,12 @@
 			(at 378.46 99.06 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "ac2fa960-e626-5203-a394-99b7ab8bf250")
+		)
+		(pin "2"
+			(uuid "f23c8f57-c082-5544-82e9-75d463222f8e")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -9832,6 +10801,12 @@
 		(property "Manufacturer" "Yageo"
 			(at 340.36 280.67 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "2aef6506-33d6-53bf-a9d2-dea6589ac0fd")
+		)
+		(pin "2"
+			(uuid "c58afdf8-0177-5af4-987b-efd55a293ba3")
 		)
 		(instances
 			(project "IphoneFM"
@@ -9878,6 +10853,12 @@
 			(at 370.84 101.60 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "c2246f45-8752-5196-8332-968810b7c80e")
+		)
+		(pin "2"
+			(uuid "96699ac7-8ab7-5fb3-aba6-b78ff1c85aae")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -9922,6 +10903,12 @@
 		(property "Manufacturer" "Yageo"
 			(at 340.36 345.44 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "caaf2af0-7fe1-52e7-a589-456ce20dc913")
+		)
+		(pin "2"
+			(uuid "1cdc5b24-cec8-501f-8020-f20ef06210c8")
 		)
 		(instances
 			(project "IphoneFM"
@@ -9968,6 +10955,12 @@
 			(at 378.46 104.14 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "df81e62c-0efd-55f3-816a-9d4396ae53ec")
+		)
+		(pin "2"
+			(uuid "98407ec6-7e8a-5d82-b30e-4251f037b031")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -10012,6 +11005,12 @@
 		(property "Manufacturer" "Panasonic"
 			(at 326.39 345.44 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "129a764c-bec6-5c8a-913c-5b85476d2687")
+		)
+		(pin "2"
+			(uuid "c6a34b0f-c57a-5181-9adb-8d23addcb0b7")
 		)
 		(instances
 			(project "IphoneFM"
@@ -10058,6 +11057,12 @@
 			(at 356.87 85.09 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "eca33d96-6e22-52b9-a358-3a912f39eb9d")
+		)
+		(pin "2"
+			(uuid "753995cb-51d2-5403-a83c-f549fa7c5b39")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -10102,6 +11107,12 @@
 		(property "Manufacturer" "Panasonic"
 			(at 312.42 345.44 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "18215c51-c8ac-5abd-bbf6-9bae2e0eb8fd")
+		)
+		(pin "2"
+			(uuid "308d4b47-814b-5acb-af71-6367e8d22db2")
 		)
 		(instances
 			(project "IphoneFM"
@@ -10148,6 +11159,12 @@
 			(at 374.65 85.09 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "c0e03353-c2bd-59ed-b4fd-4e36dbb204af")
+		)
+		(pin "2"
+			(uuid "693ca93d-d4e6-54a4-8a0d-7ab73b15cfda")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -10192,6 +11209,12 @@
 		(property "Manufacturer" "Yageo"
 			(at 121.92 297.18 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "ec9e3bbd-0837-512e-a66f-c65918f97d55")
+		)
+		(pin "2"
+			(uuid "6edd63c8-2167-5406-8c52-58d4d669d098")
 		)
 		(instances
 			(project "IphoneFM"
@@ -10238,6 +11261,12 @@
 			(at 375.92 73.66 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "aefc0482-4c9d-5fac-9bd4-387e449f400a")
+		)
+		(pin "2"
+			(uuid "b9cf746d-4194-523b-b823-89a3ca8056be")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -10282,6 +11311,12 @@
 		(property "Manufacturer" "Yageo"
 			(at 121.92 309.88 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "c176e22d-43f0-58a7-ad87-004df781ade1")
+		)
+		(pin "2"
+			(uuid "b0ff86ac-d08f-5a4e-a98b-e79a720065fd")
 		)
 		(instances
 			(project "IphoneFM"
@@ -10328,6 +11363,12 @@
 			(at 431.80 113.03 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "b54bf5b0-4cb0-5a06-95bc-6f3f35c50aa3")
+		)
+		(pin "2"
+			(uuid "2802d292-1ee5-5200-9386-75fe75f45406")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -10372,6 +11413,12 @@
 		(property "Manufacturer" "Yageo"
 			(at 121.92 322.58 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "664fc48b-da70-5ab5-bc5e-f08d2cb667f8")
+		)
+		(pin "2"
+			(uuid "48f0f266-7138-5b0f-8b15-ebf3b6dafe7d")
 		)
 		(instances
 			(project "IphoneFM"
@@ -10418,6 +11465,12 @@
 			(at 444.50 130.81 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "a737e985-bb96-5e44-a400-0421740e8d6b")
+		)
+		(pin "2"
+			(uuid "6d27ba0d-3365-52ca-943a-28bba18447d4")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -10462,6 +11515,12 @@
 		(property "Manufacturer" "Yageo"
 			(at 464.82 130.81 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "12535242-6a57-52ec-83dc-74404675afae")
+		)
+		(pin "2"
+			(uuid "de540cc5-56cf-58c3-a576-3bebf0ad4acf")
 		)
 		(instances
 			(project "IphoneFM"
@@ -10508,6 +11567,12 @@
 			(at 485.14 130.81 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "30c5ef61-f62d-55d7-a680-b817c933eddf")
+		)
+		(pin "2"
+			(uuid "48d0dd6a-383b-5e49-aaad-d99ef985003b")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -10552,6 +11617,12 @@
 		(property "Manufacturer" "Murata"
 			(at 505.46 151.13 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "6c45c24c-8545-5964-81e8-643b4eb6c973")
+		)
+		(pin "2"
+			(uuid "e4f29790-abd4-5f0a-80a5-9dcf3f066648")
 		)
 		(instances
 			(project "IphoneFM"
@@ -10598,6 +11669,12 @@
 			(at 388.62 270.51 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "53aa267f-cbc7-5399-a049-1956e0221a89")
+		)
+		(pin "2"
+			(uuid "db054595-6f32-5f44-adfa-d991f267c1e1")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -10642,6 +11719,12 @@
 		(property "Manufacturer" "Samsung"
 			(at 411.48 270.51 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "774f01e8-7a21-5b35-a2fa-0915a9d1bbd8")
+		)
+		(pin "2"
+			(uuid "1af68e7f-54fe-58f6-9454-21b8a6f26a2c")
 		)
 		(instances
 			(project "IphoneFM"
@@ -10688,6 +11771,12 @@
 			(at 487.68 289.56 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "776af300-ae97-5b38-a35a-2f1663d216b7")
+		)
+		(pin "2"
+			(uuid "10c8ae45-2d42-53e8-b012-7136a0d14978")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -10732,6 +11821,12 @@
 		(property "Manufacturer" "Murata"
 			(at 457.20 293.37 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "e91fcc33-2b5c-5379-a0e8-aad89bb55901")
+		)
+		(pin "2"
+			(uuid "e2b96408-7614-501e-80b5-be9b0fde37c0")
 		)
 		(instances
 			(project "IphoneFM"
@@ -10778,6 +11873,12 @@
 			(at 256.54 228.60 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "17b67f3b-120b-5c5f-9544-4af58a07d60d")
+		)
+		(pin "2"
+			(uuid "9814b402-7196-5076-bfea-e1d677c50857")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -10822,6 +11923,12 @@
 		(property "Manufacturer" "Samsung"
 			(at 360.68 326.39 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "ddaa30a2-2dc4-5cdf-8f5d-21271af4be02")
+		)
+		(pin "2"
+			(uuid "0d2241ef-faf9-5701-926d-9ac305dbdfd1")
 		)
 		(instances
 			(project "IphoneFM"
@@ -10868,6 +11975,12 @@
 			(at 350.52 323.85 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "faf72dc4-f107-525b-81f5-991e9ad5fed1")
+		)
+		(pin "2"
+			(uuid "476bf70f-09f1-5f6c-b086-e4e436870c79")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -10912,6 +12025,12 @@
 		(property "Manufacturer" "Samsung"
 			(at 256.54 223.52 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "b0b76fbb-ba62-5012-91ce-9b2434db2b62")
+		)
+		(pin "2"
+			(uuid "e84fe987-d59e-5ea9-a90a-8628d1a09a82")
 		)
 		(instances
 			(project "IphoneFM"
@@ -10958,6 +12077,12 @@
 			(at 264.16 226.06 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "d366c8a3-9f84-5143-b61e-b233c253c387")
+		)
+		(pin "2"
+			(uuid "36ca9a3a-5714-5c44-96b7-6a0a5ca4ee1b")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -11002,6 +12127,12 @@
 		(property "Manufacturer" "Samsung"
 			(at 264.16 231.14 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "eda0ae49-1506-5c3e-8c1d-a00215779733")
+		)
+		(pin "2"
+			(uuid "7a2493c9-13af-598c-a2cb-50afe49a0228")
 		)
 		(instances
 			(project "IphoneFM"
@@ -11051,6 +12182,9 @@
 			(at 226.06 294.64 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "e73a15bf-7a62-543f-81d1-19b9494ef2d7")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -11084,6 +12218,9 @@
 			(at 322.58 88.90 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "7aba23e0-801c-576f-b44a-d2c987c8d5d3")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -11116,6 +12253,9 @@
 		(property "Datasheet" ""
 			(at 322.58 106.68 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "e7afc3b5-371b-5c81-bc0a-618a388dd193")
 		)
 		(instances
 			(project "IphoneFM"
@@ -11185,6 +12325,9 @@
 			(at 335.28 119.38 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "5099b53e-896f-576b-b16b-bb34cf61a0fc")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -11217,6 +12360,9 @@
 		(property "Datasheet" ""
 			(at 120.65 53.34 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "6a0adf11-71ac-54b9-a875-76a781683980")
 		)
 		(instances
 			(project "IphoneFM"
@@ -11251,6 +12397,9 @@
 			(at 365.76 299.72 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "c62104a1-dfe0-5b93-8bb2-57a561681651")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -11283,6 +12432,9 @@
 		(property "Datasheet" ""
 			(at 396.24 292.10 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "bfb57e1d-e6ee-588e-9536-1da8122e29f9")
 		)
 		(instances
 			(project "IphoneFM"
@@ -11331,6 +12483,9 @@
 		(property "Datasheet" ""
 			(at 398.78 299.72 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "f90c01c9-4638-5cf7-89e7-37a464fedb25")
 		)
 		(instances
 			(project "IphoneFM"
@@ -11390,6 +12545,9 @@
 			(at 378.46 337.82 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "0aae6fbc-5f14-54cf-b6b8-8ce7f294152e")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -11422,6 +12580,9 @@
 		(property "Datasheet" ""
 			(at 530.86 142.24 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "ff14d634-18a4-5879-957f-c8719b35aed2")
 		)
 		(instances
 			(project "IphoneFM"
@@ -11456,6 +12617,9 @@
 			(at 66.04 109.22 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "885e6525-b084-52d6-8bfb-2802d3f467e7")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -11488,6 +12652,9 @@
 		(property "Datasheet" ""
 			(at 66.04 96.52 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "aaf87de9-b0f0-5a78-8e4f-caf2a3cbfbaa")
 		)
 		(instances
 			(project "IphoneFM"
@@ -11522,6 +12689,9 @@
 			(at 403.86 147.32 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "87a1d0f5-1bec-59a6-a6e5-77ceeac3ed38")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -11555,6 +12725,9 @@
 			(at 403.86 152.40 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "c1b33657-2742-51a9-8cbc-a1feefd63855")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -11587,6 +12760,9 @@
 		(property "Datasheet" ""
 			(at 403.86 154.94 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "6b6a95dd-c1eb-5cd1-bae1-a5ff3c98cefb")
 		)
 		(instances
 			(project "IphoneFM"
@@ -11635,6 +12811,9 @@
 		(property "Datasheet" ""
 			(at 401.32 160.02 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "6a0e89bf-012a-5e7c-8676-adbc93e4df3b")
 		)
 		(instances
 			(project "IphoneFM"
@@ -11774,6 +12953,9 @@
 			(at 421.64 175.26 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "f480d811-b7bc-5a39-b21a-79471d5f58bc")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -11806,6 +12988,9 @@
 		(property "Datasheet" ""
 			(at 208.28 50.80 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "a6af1bd4-0374-545d-9522-fbed7e701104")
 		)
 		(instances
 			(project "IphoneFM"
@@ -11840,6 +13025,9 @@
 			(at 223.52 60.96 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "a0ca014d-2368-57d7-8790-a38811188af9")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -11872,6 +13060,9 @@
 		(property "Datasheet" ""
 			(at 30.48 93.98 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "f78c187c-fb7a-5b19-a60a-98347b0e0900")
 		)
 		(instances
 			(project "IphoneFM"
@@ -11906,6 +13097,9 @@
 			(at 38.10 93.98 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "155dec5c-1af6-5098-9326-f8a464ba4f65")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -11938,6 +13132,9 @@
 		(property "Datasheet" ""
 			(at 53.34 55.88 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "69ff878b-c312-53f4-afc7-c8f0e9fb0790")
 		)
 		(instances
 			(project "IphoneFM"
@@ -11972,6 +13169,9 @@
 			(at 571.50 132.08 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "51005da2-b381-5b0a-b7f8-2d9bda420ccf")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -12004,6 +13204,9 @@
 		(property "Datasheet" ""
 			(at 81.28 363.22 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "e6a9e236-7d0f-54fb-9420-8f9ece45408a")
 		)
 		(instances
 			(project "IphoneFM"
@@ -12038,6 +13241,9 @@
 			(at 81.28 368.30 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "ec263e82-86c5-57ee-b7a7-95662a02f2c4")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -12071,6 +13277,9 @@
 			(at 96.52 378.46 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "0c0fd4dc-d1d6-5f31-b359-3a234ffa5b3c")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -12103,6 +13312,9 @@
 		(property "Datasheet" ""
 			(at 91.44 335.28 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "62a9e324-9b50-56c7-a9ed-380271191f37")
 		)
 		(instances
 			(project "IphoneFM"
@@ -12192,6 +13404,9 @@
 			(at 363.22 195.58 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "ec7d66dd-ef2c-5b72-8c3f-cb4a5e2257dd")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -12260,6 +13475,9 @@
 			(at 22.86 205.74 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "72ea05ce-16f4-5234-b6f7-7e2328c4f7df")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -12293,6 +13511,9 @@
 			(at 40.64 187.96 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "3f3ec58b-7ea4-5433-b126-84200eb8a127")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -12325,6 +13546,9 @@
 		(property "Datasheet" ""
 			(at 40.64 223.52 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "b207a0e3-3d54-5293-a446-9a01295f7dfd")
 		)
 		(instances
 			(project "IphoneFM"
@@ -12394,6 +13618,9 @@
 			(at 73.66 205.74 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "bef279da-8e15-5bbd-b903-0c03a499bd5b")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -12427,6 +13654,9 @@
 			(at 91.44 187.96 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "0c14a0ab-555d-586a-8941-e55902cb4a02")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -12459,6 +13689,9 @@
 		(property "Datasheet" ""
 			(at 91.44 223.52 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "a2825034-b63c-57f5-ba74-bd71ea861c1e")
 		)
 		(instances
 			(project "IphoneFM"
@@ -12528,6 +13761,9 @@
 			(at 124.46 205.74 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "07994efd-07a2-5326-916a-ad776982b2f4")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -12560,6 +13796,9 @@
 		(property "Datasheet" ""
 			(at 142.24 187.96 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "7280837f-dd2c-59e3-8a06-602980a9d681")
 		)
 		(instances
 			(project "IphoneFM"
@@ -12594,6 +13833,9 @@
 			(at 142.24 223.52 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "fa55eedf-e4e8-5edd-a0ae-a9ca9ad16eb6")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -12626,6 +13868,9 @@
 		(property "Datasheet" ""
 			(at 147.32 302.26 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "28f7049f-8d43-5cc4-bded-26e6bfc934a6")
 		)
 		(instances
 			(project "IphoneFM"
@@ -12660,6 +13905,9 @@
 			(at 137.16 67.31 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "649fd620-c88c-5bfe-a60c-5ab1745ad4c1")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -12692,6 +13940,9 @@
 		(property "Datasheet" ""
 			(at 88.90 69.85 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "2ebbeee4-f2e1-58bf-b3f6-c168505e7c0e")
 		)
 		(instances
 			(project "IphoneFM"
@@ -12726,6 +13977,9 @@
 			(at 552.45 134.62 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "84b387dc-5e31-5dd6-ba04-d3c849012fe3")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -12758,6 +14012,9 @@
 		(property "Datasheet" ""
 			(at 40.64 254.00 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "33a2d8ba-f29d-5fa5-a3ee-959831c75c36")
 		)
 		(instances
 			(project "IphoneFM"
@@ -12792,6 +14049,9 @@
 			(at 58.42 254.00 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "d1e43ac4-27e9-526a-8b75-44467fe72851")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -12824,6 +14084,9 @@
 		(property "Datasheet" ""
 			(at 76.20 257.81 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "8369fb53-711f-579d-9e79-d41a07943f33")
 		)
 		(instances
 			(project "IphoneFM"
@@ -12858,6 +14121,9 @@
 			(at 114.30 68.58 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "2d791d13-b207-5ce1-a86f-24d6a8f2c182")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -12890,6 +14156,9 @@
 		(property "Datasheet" ""
 			(at 105.41 43.18 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "24c62dd8-90e8-56ee-a30b-1cd8614e4781")
 		)
 		(instances
 			(project "IphoneFM"
@@ -12924,6 +14193,9 @@
 			(at 105.41 50.80 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "9dc9c21f-af8b-5332-8c2a-7190a6a9df72")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -12956,6 +14228,9 @@
 		(property "Datasheet" ""
 			(at 477.52 297.18 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "ee2a07dc-bf95-5afc-b425-80bd648c8337")
 		)
 		(instances
 			(project "IphoneFM"
@@ -12990,6 +14265,9 @@
 			(at 63.50 71.12 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "66b0fd3e-384f-5d9a-9751-67320b2b4f4d")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -13022,6 +14300,9 @@
 		(property "Datasheet" ""
 			(at 135.89 43.18 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "9d0e0440-b82f-5815-9b8e-48b346a83585")
 		)
 		(instances
 			(project "IphoneFM"
@@ -13056,6 +14337,9 @@
 			(at 135.89 50.80 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "efad64dc-bb12-5204-8ccf-eff185412915")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -13088,6 +14372,9 @@
 		(property "Datasheet" ""
 			(at 175.26 180.34 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "26b084c0-673e-5ce1-a70a-41b1188bfc37")
 		)
 		(instances
 			(project "IphoneFM"
@@ -13122,6 +14409,9 @@
 			(at 175.26 187.96 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "45db1918-1ed7-58ab-a593-37503869b718")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -13154,6 +14444,9 @@
 		(property "Datasheet" ""
 			(at 193.04 241.30 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "1bcf7523-d1d6-57fd-a60f-2fab1c804df2")
 		)
 		(instances
 			(project "IphoneFM"
@@ -13188,6 +14481,9 @@
 			(at 381.00 259.08 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "96e635f7-b2f4-59dd-b32c-cc07aed62c9e")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -13220,6 +14516,9 @@
 		(property "Datasheet" ""
 			(at 198.12 205.74 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "686e2eb2-5cbe-51c0-af72-4dc1230d13df")
 		)
 		(instances
 			(project "IphoneFM"
@@ -13254,6 +14553,9 @@
 			(at 198.12 187.96 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "c2d3980e-0f8f-5150-acb0-31d31f5e820d")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -13286,6 +14588,9 @@
 		(property "Datasheet" ""
 			(at 175.26 205.74 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "b4da8819-da23-57e9-b611-e95533dc4c35")
 		)
 		(instances
 			(project "IphoneFM"
@@ -13320,6 +14625,9 @@
 			(at 251.46 213.36 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "d856a383-9eb7-5f6d-9ae8-8cfd691d4d93")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -13352,6 +14660,9 @@
 		(property "Datasheet" ""
 			(at 274.32 205.74 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "0d46c981-d120-5f78-b3c2-be7442e13225")
 		)
 		(instances
 			(project "IphoneFM"
@@ -13386,6 +14697,9 @@
 			(at 274.32 213.36 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "d0b8a52b-0338-5267-b6fe-75c68b09cee1")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -13418,6 +14732,9 @@
 		(property "Datasheet" ""
 			(at 200.66 292.10 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "b0886b1c-e291-5b47-8044-b39630ab7952")
 		)
 		(instances
 			(project "IphoneFM"
@@ -13452,6 +14769,9 @@
 			(at 309.88 111.76 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "f7f6f938-26fa-5308-b976-aa8bcddb2508")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -13484,6 +14804,9 @@
 		(property "Datasheet" ""
 			(at 187.96 226.06 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "26e696d6-315d-556c-9c91-28c1f58f8d12")
 		)
 		(instances
 			(project "IphoneFM"
@@ -13518,6 +14841,9 @@
 			(at 327.66 139.70 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "4787af45-db67-57ec-a1a0-c55afa19d7ce")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -13550,6 +14876,9 @@
 		(property "Datasheet" ""
 			(at 231.14 35.56 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "d0158f92-534e-5e9b-9f4e-63ffcea483ea")
 		)
 		(instances
 			(project "IphoneFM"
@@ -13584,6 +14913,9 @@
 			(at 340.36 142.24 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "b1359070-933a-5725-9b83-42e9bc905f97")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -13616,6 +14948,9 @@
 		(property "Datasheet" ""
 			(at 215.90 27.94 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "d23428b5-efd7-5325-bfaf-e21880ea7d82")
 		)
 		(instances
 			(project "IphoneFM"
@@ -13650,6 +14985,9 @@
 			(at 215.90 35.56 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "c58cec49-f0bc-5a2e-8d67-7e610c22c94a")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -13682,6 +15020,9 @@
 		(property "Datasheet" ""
 			(at 353.06 144.78 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "877286f6-b180-5665-bad3-c8cb2c3b69a9")
 		)
 		(instances
 			(project "IphoneFM"
@@ -13716,6 +15057,9 @@
 			(at 347.98 53.34 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "6471370b-d7e7-588f-961a-3df6e7163892")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -13748,6 +15092,9 @@
 		(property "Datasheet" ""
 			(at 365.76 147.32 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "733a4fa0-7cd6-5944-967b-53b144a52c73")
 		)
 		(instances
 			(project "IphoneFM"
@@ -13782,6 +15129,9 @@
 			(at 299.72 27.94 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "d714aaf5-ee69-5c95-b039-3dbe24f69846")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -13814,6 +15164,9 @@
 		(property "Datasheet" ""
 			(at 299.72 35.56 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "02e81a32-0cd8-59fe-b16a-bdf845627811")
 		)
 		(instances
 			(project "IphoneFM"
@@ -13848,6 +15201,9 @@
 			(at 378.46 149.86 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "628120fb-6d8d-5403-8430-13b9e236449b")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -13880,6 +15236,9 @@
 		(property "Datasheet" ""
 			(at 322.58 35.56 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "cf50f3ac-8304-5c97-a515-f1bf701b9989")
 		)
 		(instances
 			(project "IphoneFM"
@@ -13914,6 +15273,9 @@
 			(at 391.16 152.40 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "ab44d584-426b-5437-9e22-15306790df69")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -13946,6 +15308,9 @@
 		(property "Datasheet" ""
 			(at 370.84 53.34 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "665bc92b-c385-5ab5-8945-2dc5724e88e7")
 		)
 		(instances
 			(project "IphoneFM"
@@ -13980,6 +15345,9 @@
 			(at 541.02 104.14 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "b12191bb-6c7d-5917-b697-ba47a9ad1d49")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -14012,6 +15380,9 @@
 		(property "Datasheet" ""
 			(at 347.98 35.56 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "44e95064-a47b-586c-aadc-1f3c1d85e6af")
 		)
 		(instances
 			(project "IphoneFM"
@@ -14046,6 +15417,9 @@
 			(at 299.72 53.34 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "0cf0cbd3-9b05-5c6f-a578-2c866849c271")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -14078,6 +15452,9 @@
 		(property "Datasheet" ""
 			(at 119.38 370.84 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "5e532d85-ce38-5468-ab49-c0a5242790bc")
 		)
 		(instances
 			(project "IphoneFM"
@@ -14112,6 +15489,9 @@
 			(at 370.84 35.56 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "408dc0d4-3883-5051-9163-aef782f3033e")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -14144,6 +15524,9 @@
 		(property "Datasheet" ""
 			(at 298.45 349.25 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "4823cb5f-ea43-5447-9a2d-0aecb63bcdec")
 		)
 		(instances
 			(project "IphoneFM"
@@ -14178,6 +15561,9 @@
 			(at 358.14 274.32 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "f6d6baa9-443a-58b5-b6cc-dcfad7a96c7c")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -14210,6 +15596,9 @@
 		(property "Datasheet" ""
 			(at 340.36 276.86 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "c0381569-8316-58da-b74a-0aaeb68055f4")
 		)
 		(instances
 			(project "IphoneFM"
@@ -14244,6 +15633,9 @@
 			(at 356.87 88.90 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "0afd6a02-cf4d-5e87-9d3a-ea058c085147")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -14276,6 +15668,9 @@
 		(property "Datasheet" ""
 			(at 374.65 88.90 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "8297face-0bfc-59f4-9031-4512325eb1cb")
 		)
 		(instances
 			(project "IphoneFM"
@@ -14310,6 +15705,9 @@
 			(at 431.80 109.22 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "0cd35a5d-4665-58db-b44b-857141887b32")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -14342,6 +15740,9 @@
 		(property "Datasheet" ""
 			(at 431.80 116.84 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "9321c439-da23-5ff5-b5b6-e2272e37d4b6")
 		)
 		(instances
 			(project "IphoneFM"
@@ -14376,6 +15777,9 @@
 			(at 444.50 134.62 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "3bc950e2-9a7a-5818-9abd-c3125cd90ca1")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -14408,6 +15812,9 @@
 		(property "Datasheet" ""
 			(at 464.82 134.62 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "df44c172-edfe-5dd9-bb00-3d053f872198")
 		)
 		(instances
 			(project "IphoneFM"
@@ -14442,6 +15849,9 @@
 			(at 485.14 134.62 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "63667a1a-cdb7-5b61-8d00-e7f6548f2cae")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -14474,6 +15884,9 @@
 		(property "Datasheet" ""
 			(at 505.46 154.94 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "7425e7df-6b43-5f3c-9c96-2a0700fdd8bd")
 		)
 		(instances
 			(project "IphoneFM"
@@ -14508,6 +15921,9 @@
 			(at 388.62 266.70 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "bd498a7a-2d49-5b0f-ab8d-86ce40ffdc45")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -14540,6 +15956,9 @@
 		(property "Datasheet" ""
 			(at 388.62 274.32 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "edff633c-f5fe-5f2a-a51d-42538dcdeca4")
 		)
 		(instances
 			(project "IphoneFM"
@@ -14574,6 +15993,9 @@
 			(at 411.48 274.32 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "18b43972-9e6b-55ca-b3b1-def7e5a1ea2a")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -14606,6 +16028,9 @@
 		(property "Datasheet" ""
 			(at 457.20 297.18 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "5a51b7ec-7563-5d79-9bfc-b27d47577438")
 		)
 		(instances
 			(project "IphoneFM"
@@ -14640,6 +16065,9 @@
 			(at 360.68 330.20 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "bc326dc8-e3ce-53cc-a1f2-3c22d86c102f")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -14672,6 +16100,9 @@
 		(property "Datasheet" ""
 			(at 350.52 327.66 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "16d58ff6-4ba2-5ac7-abf6-d299580c67cd")
 		)
 		(instances
 			(project "IphoneFM"
@@ -14706,6 +16137,9 @@
 			(at 381.00 104.14 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "da69b850-658e-5c3a-85a0-109f77eaf40f")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -14738,6 +16172,9 @@
 		(property "Datasheet" ""
 			(at 266.70 231.14 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "5da55cd7-9709-5f9e-a563-a2ad7d618498")
 		)
 		(instances
 			(project "IphoneFM"
@@ -16164,6 +17601,9 @@
 			(at 27.94 254.00 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "0649a9f6-d695-54aa-a850-8e0d3d43681f")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -16201,6 +17641,9 @@
 		(property "Datasheet" ""
 			(at 86.36 257.81 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "2adcfd63-fb35-5131-85e3-5281af5a7965")
 		)
 		(instances
 			(project "IphoneFM"
@@ -16240,6 +17683,9 @@
 			(at 281.94 205.74 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "2ae9732a-0bb4-56f1-9073-43e4b3b562a0")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -16278,6 +17724,9 @@
 			(at 416.56 266.70 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(pin "1"
+			(uuid "8644a509-1344-5d80-ab3b-846c1dc84caf")
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -16315,6 +17764,9 @@
 		(property "Datasheet" ""
 			(at 523.24 111.76 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(pin "1"
+			(uuid "853531b7-2150-5f29-b5cb-d31ab05fe795")
 		)
 		(instances
 			(project "IphoneFM"

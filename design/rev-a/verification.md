@@ -51,6 +51,17 @@ Net names may differ from netlist.json (KiCad's automatic names are fine); the c
 
 The order in which these run during the KiCad build is in [kicad-build-procedure.md](kicad-build-procedure.md).
 
+## KiCad's own rule check (ERC)
+
+Run with `kicad-cli sch erc --severity-all -o erc.rpt board.kicad_sch`. KiCad checks how pins are joined by their electrical type (two outputs fighting, an input nothing drives, a power pin with no source) and flags anything it can't tell is intended.
+
+**Schematic, step 1.35 (2026-10-22).** The finished schematic gave 2 errors and 0 warnings. Both were the same deliberate design choice, caught automatically: U4's unused analog audio outputs (LOUT, ROUT) tied to ground, which ERC sees as outputs shorted together and to a power source. We stopped at this step and looked at them together before going on:
+- U4 is the FM receiver. Its audio leaves through the digital I²S output to U1 and on over USB, so the analog outputs are unused.
+- Skyworks AN383 p17 says to "Tie unused pin(s) to GND".
+- U1 starts U4 in digital-only mode (POWER_UP 0xB0), so the analog outputs never drive into that ground.
+
+Both were confirmed harmless and recorded in KiCad as exclusions, with that reason attached to each. ERC now reports 0 errors and 0 warnings, and lists the two as excluded.
+
 ## Testing the checker: `python tools/kicadcheck_test.py`
 
 Before any KiCad work exists, the test builds KiCad-format files from netlist.json and the Rev A placement, which must pass, then breaks them one way at a time. Each break must be caught:
