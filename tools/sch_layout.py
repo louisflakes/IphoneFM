@@ -18,7 +18,7 @@ LAYOUT = {
     # chain 8: U4 right so its left-side lines have room to turn; its text below right
     "U4": (381.0, 307.34, 0, (17.78, 30.48)),
     # chain 7: U5 on the FL1 line (RF2 at 127), J2 at the end of it, D5 turned so its IO pin hangs from the antenna line
-    "U5": (530.86, 129.54, 0, (-25.4, -25.4)),
+    "U5": (530.86, 129.54, 0, (-38.1, -25.4)),
     "J2": (571.5, 127.0, 0, (-22.86, -13.97)),
     "D5": (552.45, 130.81, 270, (-3.81, 10.16)),
     "SW1": (96.52, 368.3, 0, (3.81, 11.43)),
