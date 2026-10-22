@@ -37,7 +37,7 @@ Symbols (each checked pin by pin against its datasheet before use, because ERC c
 - [x] 1.6 Place U3 (AP2112K-3.3) and check its 5 pins against DS39724 p2.
 - [x] 1.7 Place U4 (Si4705-D60-GM, QFN) and check all 20 pins and the pad against the datasheet's p16.
 - [x] 1.8 Place U5 (PE42421) and check its 6 pins against p8.
-- [ ] 1.9 Place U6 (USBLC6-2SC6) and check its 6 pins against p1–2.
+- [x] 1.9 Place U6 (USBLC6-2SC6) and check its 6 pins against p1–2.
 - [ ] 1.10 Place U7 (PE43711) and check all 24 pins and the pad against Table 9 p28.
 - [ ] 1.11 Place Y2 (20 MHz oscillator) and check its 4 pins against YSO110TR p2.
 - [ ] 1.12 Place J1 (USB-C) and check its contacts and shell against the HRO drawing.
