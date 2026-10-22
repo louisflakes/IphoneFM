@@ -65,7 +65,7 @@ Wiring (one bom.md chain per step):
 - [x] 1.31 Put a PWR_FLAG on every rail fed from a connector or from a pin that isn't a power output, and on GND [EES p39, p77–78].
 - [x] 1.32 Put a no-connect flag on every pin netlist.json marks NC [EES p39].
   - Each of the 21 pins was checked against its datasheet before its flag went on (2026-10-22): U3 pin 4 "NC: No Connection" (AP2112 pin table); U4 pins 1, 20 "No connect. Leave floating." (Si4705 §5.1); U2 NC 8, 14, 26 "Do not connect these pins", Fin "Leave it open… if not being used", CPoutExt/FLout1/FLout2 outputs for external-VCO mode only, OSCin* left open for a single-ended clock (SNAS654A Table 37), RFoutRx an output switched off in its registers; J1 A8/B8 are SBU1/SBU2 (HRO pin table), unused by USB 2.0; U1 PC13–15, PH1, PA7, PA15, PB9 spare, every pin in analog state after reset (DS14217 §3.9.6).
-- [ ] 1.33 Assign net classes for the RF nets, the clock and switching nets, and power [EES p39–44; HHG p64].
+- [x] 1.33 Assign net classes for the RF nets, the clock and switching nets, and power [EES p39–44; HHG p64].
 - [ ] 1.34 Add layout notes on the sheet: decoupling at the pins, rule R8 for the I²S clock, and no thermal reliefs on the FMI shunt parts [BAC p3; AN383 p17; LMX2571 p55].
 
 Checks:
@@ -137,7 +137,7 @@ Checks:
 
 - [ ] 6.1 Pour ground on both layers, pulled back at least 0.5 mm from the edge [BAC p20; conflict C3].
 - [ ] 6.2 Stitch the two pours with vias across the board, liberally through the RF area and along the RF lines [AN383 p15–16; ADI "Ground Planes"; BAC p22].
-- [ ] 6.3 Connect the FMI shunt parts to ground without thermal reliefs [AN383 p17].
+- [ ] 6.3 Connect the FMI shunt parts (C35, L1) and the GPO caps (C37, C38) to the top ground fill without thermal reliefs [AN383 p17].
 - [ ] 6.4 Remove dead copper [BAC p6, p11].
 - [ ] 6.5 Check the copper is roughly balanced between the two sides [HHG p61–62; KHA p135].
 - [ ] 6.6 **Review checkpoint:** the user reviews the pours.

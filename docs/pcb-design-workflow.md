@@ -151,7 +151,7 @@ RF and transmission lines:
 Si47xx receiver (U4), from AN383:
 - Put the Si47xx close to the antenna, and run the antenna trace over unbroken ground. A board trace adds about 3–4 pF per inch to the FMI node [AN383 p15, p17, p52].
 - Keep digital lines and RCLK away from the VCO pins and the audio outputs. Route power to the chip by trace, with the bypass cap between the chip and the supply via [AN383 p15–16].
-- Connect FMI shunt parts to the top ground fill directly, without thermal reliefs (AN383's emissions-mitigation checklist) [AN383 p17]; this overrides the general thermal-relief rule for those pads. Keep the top ground path from the shunt parts to system ground unbroken [AN383 p17].
+- Connect FMI shunt parts and the GPO shunt caps to the top ground fill directly, without thermal reliefs ("Do not use heat relief for these pad's GND connection", AN383's emissions-mitigation checklist) [AN383 p17]; this overrides the general thermal-relief rule for those pads. Keep the top ground path from the shunt parts to system ground unbroken [AN383 p17].
 - FMI is a voltage input of about 4–6 kΩ in parallel with 4–6 pF, which a 50 Ω source drives with little loss. AN383's matching inductor (LMATCH, typically 100–400 nH, chosen on the bench by an RSSI sweep) resonates the input capacitance for high-impedance antennas such as headphone wires, cables and short whips [AN383 p18–23, p37–38, p50–53]. Plan C's 50 Ω RP-SMA antenna needs only the 1 nF coupling cap (README open item 7).
 
 Thermal and soldering:

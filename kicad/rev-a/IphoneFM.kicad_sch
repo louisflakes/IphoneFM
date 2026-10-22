@@ -17083,6 +17083,12 @@
 		(at 386.08 335.28)
 		(uuid "0c0c0000-0000-4000-8000-000000000015")
 	)
+	(text "LAYOUT NOTES\n1. Decoupling: put each bypass capacitor right at the supply pin it serves,\n   with its ground pad straight into the ground fill [BAC p3].\n2. U2 (LMX2571): keep the I2S/FSK clock and every other switching line away from\n   the loop filter (C24, R5, C25) and from OSCin, pin 34 (rule R8) [LMX2571 p55].\n3. U4 (Si4705): ground pads of the FMI shunt parts (C35, L1) and the GPO caps\n   (C37, C38) go straight into the top ground fill, with no thermal reliefs and an\n   unbroken top-ground path to system ground [AN383 p17]."
+		(exclude_from_sim no)
+		(at 444.50 322.58 0)
+		(effects (font (size 1.27 1.27)) (justify left top))
+		(uuid "a07e5000-0000-4000-8000-000000000001")
+	)
 	(sheet_instances
 		(path "/"
 			(page "1")
