@@ -18,6 +18,9 @@ UID = "50a7e500"
 # Rails drawn as wires within a chain (sch_wire.py): chain -> {net: (pin that carries the one power symbol, [pins wired to it])}
 WIRED_RAILS = {
     2: {"VBUS": ("C1.1", ["U3.1", "U3.3"]), "3V3": ("C2.1", ["U3.5"])},  # regulator in, past C1; out, past C2
+    # U1 supply: a 3V3 bus over U1 with its decoupling caps and FB2; FB2 out to VDDA with C7, C8
+    3: {"3V3": ("C3.1", ["C5.1", "C6.1", "C4.1", "FB2.1", "U1.1", "U1.24", "U1.36", "U1.48"]),
+        "VDDA": ("C8.1", ["C7.1", "FB2.2", "U1.9"])},
 }
 WIRED = {tuple(p.split(".")) for rails in WIRED_RAILS.values() for _, pins in rails.values() for p in pins}
 STUB = 2.54

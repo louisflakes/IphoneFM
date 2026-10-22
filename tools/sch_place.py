@@ -29,6 +29,11 @@ FOOT = {("R", "0402"): "Resistor_SMD:R_0402_1005Metric", ("C", "0402"): "Capacit
 # Chains drawn where the sheet plan puts them (sheet-plan.md): FL1 between U7 and U5, the RX front end in its own zone,
 # and U2's loop filter as a compact group at CPout. (x, y, rotation); rotation 90 = horizontal.
 MANUAL = {
+    # chain 3: U1 decoupling in a 2 x 2 block on the 3V3 bus over U1, FB2 then C7, C8 on the VDDA branch to its right;
+    # C10 (NRST), R3 (BOOT0) and C9 (VCAP) hang from their lines on U1's left, text on the left
+    "C3": (175.26, 184.15, 0), "C5": (198.12, 184.15, 0), "C6": (175.26, 201.93, 0), "C4": (198.12, 201.93, 0),
+    "FB2": (243.84, 201.93, 0), "C7": (251.46, 209.55, 0), "C8": (274.32, 209.55, 0),
+    "C10": (187.96, 222.25, 0, True), "R3": (198.12, 237.49, 0, True), "C9": (200.66, 288.29, 0, True),
     # chain 2: C1 hangs from the VBUS line into U3 VIN (text on the left, clear of U3), C2 from the 3V3 line out of VOUT
     "C1": (105.41, 46.99, 0, True), "C2": (135.89, 46.99, 0),
     # chain 1: R2 hangs from the CC2 line just right of J1, R1 from the CC1 line beyond D4 (sch_layout.py)
