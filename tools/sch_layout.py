@@ -11,6 +11,10 @@ from sch_power import balanced
 # ref: (x, y, rotation, (dx, dy) of the first visible field from the symbol; the next ones stack 2.54 mm below);
 # a rotation written "270y" also mirrors the symbol left to right
 LAYOUT = {
+    # chain 9: the three wheels side by side across the controls zone, as on the board edge; text off the wheels, LED
+    # and BOOT button; SW2 down a little, clear of the LED_B line
+    "RV1": (40.64, 205.74, 0, (15.24, 2.54)), "RV2": (91.44, 205.74, 0, (15.24, 2.54)), "RV3": (142.24, 205.74, 0, (15.24, 2.54)),
+    "D1": (142.24, 302.26, 0, (-5.08, -15.24)), "SW2": (96.52, 335.28, 0, (-5.08, 5.08)),
     # chain 8: U4 right so its left-side lines have room to turn; its text below right
     "U4": (381.0, 307.34, 0, (17.78, 30.48)),
     # chain 7: U5 on the FL1 line (RF2 at 127), J2 at the end of it, D5 turned so its IO pin hangs from the antenna line

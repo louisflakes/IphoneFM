@@ -29,6 +29,8 @@ FOOT = {("R", "0402"): "Resistor_SMD:R_0402_1005Metric", ("C", "0402"): "Capacit
 # Chains drawn where the sheet plan puts them (sheet-plan.md): FL1 between U7 and U5, the RX front end in its own zone,
 # and U2's loop filter as a compact group at CPout. (x, y, rotation); rotation 90 = horizontal.
 MANUAL = {
+    # chain 9: the LED resistors, R25 straight off the red cathode, R26 and R27 stepped down off green and blue
+    "R25": (124.46, 297.18, 90), "R26": (124.46, 309.88, 90), "R27": (124.46, 322.58, 90),
     # chain 8: U4's I2C pull-ups at the tops of two short columns; RSTB and the I2S lines turn down in a ribbon to R19
     # (pull-down) and the series resistors R24, R23, R22; GPO caps in a two-step staircase at the pins; FB3 from 3V3
     # down onto an RX_VDD line over U4 with C32, C33

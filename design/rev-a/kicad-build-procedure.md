@@ -58,7 +58,7 @@ Wiring (one bom.md chain per step):
 - [x] 1.24 Wire chain 5: U2, its supply capacitors, the loop filter and its control lines.
 - [x] 1.25 Wire chain 6: U7, its pull-downs and SW3.
 - [x] 1.26 Wire chain 7: FL1, U5, SW1, J2 and D5.
-- [ ] 1.27 Wire chain 8: U4 and its front end, supply and digital lines.
+- [x] 1.27 Wire chain 8: U4 and its front end, supply and digital lines.
 - [ ] 1.28 Wire chain 9: the wheels, the BOOT button and the LED.
 - [ ] 1.29 Wire chain 10: the test pads TP1–TP8.
 - [ ] 1.30 Label every net with its netlist.json name, one name per net [EES p31, p38].

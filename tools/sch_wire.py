@@ -31,6 +31,10 @@ for _k, _net in enumerate(["ATT_C16", "ATT_C8", "ATT_C4", "ATT_C2", "ATT_C1", "A
 # chain 8: U4's left-side lines (pin tips at x 365.76): I2C up to its pull-ups; RSTB and the I2S lines down in a ribbon
 # to R19 and the series resistors; the GPO lines straight into their caps
 PATHS.update({
+    # chain 9: the LED cathodes into their resistors, the lower two stepped down (blue's step nearest the LED)
+    "LED_R_K": [(137.16, 297.18), (128.27, 297.18)],
+    "LED_G_K": [(137.16, 302.26), (130.81, 302.26), (130.81, 309.88), (128.27, 309.88)],
+    "LED_B_K": [(137.16, 307.34), (133.35, 307.34), (133.35, 322.58), (128.27, 322.58)],
     "I2C_SCL": [(365.76, 289.56), (358.14, 289.56), (358.14, 281.94)],
     "I2C_SDA": [(365.76, 292.1), (340.36, 292.1), (340.36, 284.48)],
     "RX_RST": [(365.76, 297.18), (298.45, 297.18), (298.45, 341.63)],
