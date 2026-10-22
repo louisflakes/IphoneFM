@@ -128,7 +128,7 @@ A step above JLC's minimums, never at them [HHG p15, p63–64]. These are what g
 | Clearance, copper to copper | 0.10 mm | **0.20 mm** | Twice the minimum; still fits the 0.5 mm-pitch QFN pads |
 | Track width, signals | 0.10 mm | **0.20 mm** | Twice the minimum; fans out of 0.25 mm QFN pads |
 | Track width, power (VBUS, 3V3, VDDA, RX_VDD) | | **0.40 mm** | Peak about 0.11 A; KHA gives 0.15 mm for 0.5 A at a 10 °C rise in 1 oz copper (p184), so 0.40 mm is ample and keeps the voltage drop small |
-| Track width, RF (ANT, TX and RX paths) | | **50 Ω line from step 0.6** | Grounded coplanar line [AN4169 p6, p11] |
+| Track width, RF (ANT, TX and RX paths) | | **0.92 mm, 0.20 mm gap (step 0.6)** | Grounded coplanar line [AN4169 p6, p11] |
 | Via drill / pad | 0.15 / 0.25 mm (0.2 mm drill preferred) | **0.30 / 0.60 mm** | A 0.15 mm ring; also JLC's standard via, at no extra cost |
 | PTH annular ring | 0.18 mm (0.25 recommended) | **0.25 mm** | JLC's recommended figure |
 | Hole to hole | 0.20 mm (vias), 0.45 mm (pads) | **0.50 mm** | Above both |
@@ -146,11 +146,32 @@ A step above JLC's minimums, never at them [HHG p15, p63–64]. These are what g
 |---|---|---|---|---|
 | Default | everything else | 0.20 mm | 0.20 mm | |
 | Power | VBUS, 3V3, VDDA, RX_VDD | 0.40 mm | 0.20 mm | |
-| RF | ANT, LMX_RF, ATT_IN, TX_RF_ATT, TX_LPF_MID, TX_RF, RX_RF, FMI_MATCH, FMI | from step 0.6 | from step 0.6 | 50 Ω grounded coplanar |
+| RF | ANT, LMX_RF, ATT_IN, TX_RF_ATT, TX_LPF_MID, TX_RF, RX_RF, FMI_MATCH, FMI | 0.92 mm | 0.20 mm | 50 Ω grounded coplanar (step 0.6) |
 | Clock | FSK_CLK(_MCU), REF20(_MCU), RX_RCLK, RX_SCK(_MCU), LMX_CLK | 0.20 mm | **0.40 mm** | Switching lines kept further from their neighbours [HHG p64; LMX2571 p55] |
 
 GND gets no class of its own; it's poured on both layers in phase 6.
 
 ## 50 Ω line for the antenna path (step 0.6)
 
-To do.
+Source: [JLCPCB Impedance Calculator](https://jlcpcb.com/pcb-impedance-calculator), run 2026-10-21. Settings: rigid, 2 layers, 1.6 mm, 1 oz outer copper; 50 Ω, coplanar single-ended (with solder mask), signal on L1 (top), reference L2 (bottom). JLC's stack-up for this is **JLC0216A**: 0.030 mm copper, 1.43 mm FR-4 core, 0.030 mm copper.
+
+| Gap, trace to ground copper | Trace width for 50 Ω |
+|---|---|
+| **0.20 mm** | **0.918 mm** |
+| 0.25 mm | 1.146 mm |
+| 0.30 mm | 1.317 mm |
+| 0.508 mm (calculator default) | 1.772 mm |
+
+**Chosen: a 0.92 mm trace with a 0.20 mm gap to the top ground pour, over the solid bottom ground.**
+- The 0.20 mm gap equals our general clearance rule (step 0.5), so the pour needs no special setting.
+- It gives the narrowest line, which suits the small RF pads it joins: U2's 0.25 mm pin, U5's 0.4 mm pads, 0402 parts. The line necks down at each pad. At 100 MHz that costs nothing: a few millimetres against a wavelength of about 1.75 m in this board, by my estimate.
+
+**Cross-check (my own, not JLC's):** a closed-form grounded-coplanar formula, using zero-thickness copper, no solder mask and εr 4.3–4.6, gives 54–56 Ω for 0.92 / 0.20 mm. Solder mask and copper thickness both pull it a few ohms lower, so the formula and JLC agree. The KiCad MCP server's simpler formula, which leaves out the bottom ground, gives 58 Ω; that one is a first-order estimate only.
+
+**How much it matters:** JLC doesn't control impedance on 2-layer boards, and our RF runs are a few centimetres, well under λ/10 at 108 MHz (conflict C9 in the workflow). So 50 Ω is the design target that keeps reflections negligible, not a tolerance we need the fab to hold.
+
+**How the line is built** [AN4169 p6, p11; ADI "Coplanar Waveguide"]:
+- Top-layer ground pour on both sides, with a row of stitching vias to the bottom ground along each side.
+- The bottom layer under the line is solid ground, with no other routing.
+
+This fills in the RF net class from step 0.5: track 0.92 mm, clearance 0.20 mm.

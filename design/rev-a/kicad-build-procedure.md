@@ -21,8 +21,8 @@ The established order for turning the Rev A design into a board, broken into sin
 - [x] 0.3 Read JLCPCB's current 2-layer PCB capabilities and record the trace, space, via, drill, annular ring, edge-clearance and silkscreen numbers we use in `kicad/rev-a/fab-rules.md`, with the source link [HHG p15, p63–65; BAC p4, p11].
 - [x] 0.4 Read JLCPCB's assembly rules (part spacing, edge clearance, fiducials) and add them to the same file [conflict C4].
 - [x] 0.5 Set our own design rules a step above JLC's minimums and write them beside the minimums [HHG p15, p63–64].
-- [ ] 0.6 Use JLC's impedance calculator to find the 50 Ω grounded-coplanar line width and gap for their 1.6 mm 2-layer stackup, and record it [AN4169 p6, p11; workflow "Gaps"].
-- [ ] 0.7 **Review checkpoint:** the user reviews fab-rules.md.
+- [x] 0.6 Use JLC's impedance calculator to find the 50 Ω grounded-coplanar line width and gap for their 1.6 mm 2-layer stackup, and record it [AN4169 p6, p11; workflow "Gaps"].
+- [x] 0.7 **Review checkpoint:** the user reviews fab-rules.md.
 
 ## Phase 1: Schematic
 
