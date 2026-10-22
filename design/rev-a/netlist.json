@@ -1924,7 +1924,7 @@
    "maker": "BAT Wireless",
    "lcsc": "C496551",
    "package": "SMA right-angle, through hole",
-   "pins": 5,
+   "pins": 2,
    "chain": 7,
    "function": "Antenna connector",
    "pinmap": {
@@ -1933,23 +1933,12 @@
      "net": "ANT"
     },
     "2": {
-     "name": "Leg",
-     "net": "GND"
-    },
-    "3": {
-     "name": "Leg",
-     "net": "GND"
-    },
-    "4": {
-     "name": "Leg",
-     "net": "GND"
-    },
-    "5": {
-     "name": "Leg",
+     "name": "Legs",
      "net": "GND"
     }
    },
-   "pin_source": "BWSMA-KWE-Z001 p6"
+   "pin_source": "BWSMA-KWE-Z001 p6; KiCad Connector:Conn_Coaxial (1 = centre, 2 = shell)",
+   "pads_note": "centre pin + 4 ground legs, all numbered pad 2 (KiCad coaxial convention)"
   },
   {
    "ref": "D5",
