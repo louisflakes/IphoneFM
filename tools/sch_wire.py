@@ -2,7 +2,7 @@
 A maze router joins each net's pins one at a time to the part of the net already drawn. It never passes through a part
 body, a power symbol or another net's pin, never turns or ends on another net's wire (so nets can cross but never touch),
 and avoids text where it can. A pin is never entered from its body side. Pins of parts in other chains are left for
-the net labels of step 1.30. Everything this tool draws for chain N has a uuid starting with UID + N, so a rerun of that
+the net labels of step 1.30, except that a series passive placed at a pin (local_to) is wired to that pin with its chain. Everything this tool draws for chain N has a uuid starting with UID + N, so a rerun of that
 chain replaces it.
 Usage: python tools/sch_wire.py <chain> [--dry-run]"""
 import heapq
@@ -215,10 +215,19 @@ def main():
             foreign[c] = horiz
         foreign_ends |= {a, b}
     # nets of this chain
-    mine = {r for r, p in parts.items() if p.get("chain") == chain and r in placed}
+    def drawn_in(ref, net):
+        """The chain that draws this pin: a series passive placed at another part's pin is wired to it with that part"""
+        p = parts[ref]
+        t = p.get("local_to", "")
+        if prefix(ref) in LIB and "." in t and not any(v["net"] in RAILS for v in p["pinmap"].values()):
+            tref, tpin = t.split(".", 1)
+            if parts[tref]["pinmap"].get(tpin, {}).get("net") == net:
+                return parts[tref].get("chain")
+        return p.get("chain")
+
     nets = {}
     for (ref, num), net in pin_net.items():
-        if ref in mine and net not in SKIP | RAILS and (ref, num) not in LEAVE:
+        if ref in placed and drawn_in(ref, net) == chain and net not in SKIP | RAILS and (ref, num) not in LEAVE:
             nets.setdefault(net, set()).add(pin_cell[(ref, num)])
     for net, (anchor, others) in WIRED_RAILS.get(chain, {}).items():  # rails this chain draws as wires
         for p in [anchor] + others:

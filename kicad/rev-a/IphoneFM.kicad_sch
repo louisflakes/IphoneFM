@@ -15062,14 +15062,49 @@
 		(uuid "5e1c0003-0000-4000-8000-00000000001e")
 	)
 	(wire
-		(pts (xy 198.12 228.60) (xy 198.12 233.68))
+		(pts (xy 245.11 238.76) (xy 238.76 238.76))
 		(stroke (width 0) (type default))
 		(uuid "5e1c0003-0000-4000-8000-00000000001f")
 	)
 	(wire
-		(pts (xy 198.12 228.60) (xy 208.28 228.60))
+		(pts (xy 245.11 248.92) (xy 243.84 248.92))
 		(stroke (width 0) (type default))
 		(uuid "5e1c0003-0000-4000-8000-000000000020")
+	)
+	(wire
+		(pts (xy 243.84 248.92) (xy 243.84 241.30))
+		(stroke (width 0) (type default))
+		(uuid "5e1c0003-0000-4000-8000-000000000021")
+	)
+	(wire
+		(pts (xy 243.84 241.30) (xy 238.76 241.30))
+		(stroke (width 0) (type default))
+		(uuid "5e1c0003-0000-4000-8000-000000000022")
+	)
+	(wire
+		(pts (xy 245.11 259.08) (xy 242.57 259.08))
+		(stroke (width 0) (type default))
+		(uuid "5e1c0003-0000-4000-8000-000000000023")
+	)
+	(wire
+		(pts (xy 238.76 243.84) (xy 242.57 243.84))
+		(stroke (width 0) (type default))
+		(uuid "5e1c0003-0000-4000-8000-000000000024")
+	)
+	(wire
+		(pts (xy 242.57 243.84) (xy 242.57 259.08))
+		(stroke (width 0) (type default))
+		(uuid "5e1c0003-0000-4000-8000-000000000025")
+	)
+	(wire
+		(pts (xy 198.12 228.60) (xy 198.12 233.68))
+		(stroke (width 0) (type default))
+		(uuid "5e1c0003-0000-4000-8000-000000000026")
+	)
+	(wire
+		(pts (xy 198.12 228.60) (xy 208.28 228.60))
+		(stroke (width 0) (type default))
+		(uuid "5e1c0003-0000-4000-8000-000000000027")
 	)
 	(sheet_instances
 		(path "/"
