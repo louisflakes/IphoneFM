@@ -27,7 +27,7 @@ The established order for turning the Rev A design into a board, broken into sin
 ## Phase 1: Schematic
 
 Setup:
-- [ ] 1.1 Open the schematic editor and set the page size, the 50 mil grid and the title block [EES p10].
+- [x] 1.1 Open the schematic editor and set the page size, the 50 mil grid and the title block [EES p10].
 - [ ] 1.2 Add field-name templates for MPN, LCSC and Manufacturer so every symbol carries them [EES p54].
 - [ ] 1.3 Plan one sheet laid out left to right in signal flow, with USB and power on the left, the MCU in the middle, transmit and receive to the right, and higher voltages toward the top [KHA p108; BAC p3].
 

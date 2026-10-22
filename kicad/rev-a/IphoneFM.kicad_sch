@@ -3,7 +3,7 @@
 	(generator "eeschema")
 	(generator_version "10.0")
 	(uuid "efee88c9-028d-4fdb-86e0-0a4145b330e1")
-	(paper "A4")
+	(paper "A2")
 	(title_block
 		(title "IphoneFM")
 		(date "2026-10-21")
