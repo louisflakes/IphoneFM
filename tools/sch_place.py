@@ -29,6 +29,8 @@ FOOT = {("R", "0402"): "Resistor_SMD:R_0402_1005Metric", ("C", "0402"): "Capacit
 # Chains drawn where the sheet plan puts them (sheet-plan.md): FL1 between U7 and U5, the RX front end in its own zone,
 # and U2's loop filter as a compact group at CPout. (x, y, rotation); rotation 90 = horizontal.
 MANUAL = {
+    # chain 2: C1 hangs from the VBUS line into U3 VIN (text on the left, clear of U3), C2 from the 3V3 line out of VOUT
+    "C1": (105.41, 46.99, 0, True), "C2": (135.89, 46.99, 0),
     # chain 1: R2 hangs from the CC2 line just right of J1, R1 from the CC1 line beyond D4 (sch_layout.py)
     "R2": (63.5, 67.31, 0), "R1": (114.3, 64.77, 0),
     # U2 loop filter at CPout (pin 25 ends at 353.06, 81.28): R5 in line, C25 to GND after it, C24 to GND below the pin
@@ -114,8 +116,8 @@ def plan(doc, placed):
         ref, nets = p["ref"], [d["net"] for d in p["pinmap"].values()]
         shunt = any(n in RAILS for n in nets)
         if ref in MANUAL:
-            x, y, rot = MANUAL[ref]
-            out[ref] = (x, y, rot, False); boxes.append(part_box(x, y, rot == 90, text_width(p))); continue
+            x, y, rot, *left = MANUAL[ref]
+            out[ref] = (x, y, rot, bool(left and left[0])); boxes.append(part_box(x, y, rot == 90, text_width(p), bool(left and left[0]))); continue
         tgt = p.get("local_to", "")
         if "." not in tgt or tgt.split(".")[0] not in out and (tgt.split(".")[0] not in placed or prefix(tgt.split(".")[0]) in LIB):
             raise SystemExit(f"{ref}: no placed target for local_to {tgt!r}; add it to MANUAL")

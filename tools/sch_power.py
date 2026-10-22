@@ -15,6 +15,11 @@ POWER_LIB = os.path.join(os.environ.get("KICAD_SYMBOLS", r"C:\Users\jakep\AppDat
 # netlist.json net -> (stock power symbol, its graphic points up (supply) or down (ground))
 SYMBOL = {"VBUS": ("VBUS", "up"), "3V3": ("+3V3", "up"), "VDDA": ("VDDA", "up"), "RX_VDD": ("VDDA", "up"), "GND": ("GND", "down")}
 UID = "50a7e500"
+# Rails drawn as wires within a chain (sch_wire.py): chain -> {net: (pin that carries the one power symbol, [pins wired to it])}
+WIRED_RAILS = {
+    2: {"VBUS": ("C1.1", ["U3.1", "U3.3"]), "3V3": ("C2.1", ["U3.5"])},  # regulator in, past C1; out, past C2
+}
+WIRED = {tuple(p.split(".")) for rails in WIRED_RAILS.values() for _, pins in rails.values() for p in pins}
 STUB = 2.54
 # KiCad turns a symbol counter-clockwise; the angle that makes the graphic point along the pin, per outward direction
 ROT = {"up": {(0, -1): 0, (-1, 0): 90, (0, 1): 180, (1, 0): 270},
@@ -49,7 +54,7 @@ def strip_previous(text):
 
 
 def pin_nets(doc, placed):
-    """{(ref, sheet pin number): net} for every pin on a rail"""
+    """{(ref, sheet pin number): net} for every pin on a rail that gets its own power symbol"""
     nets = {}
     for p in doc["parts"]:
         if p["ref"] not in placed:
@@ -57,7 +62,7 @@ def pin_nets(doc, placed):
         for pin, d in p["pinmap"].items():
             if d["net"] in SYMBOL:
                 for c in candidates(pin, p):
-                    if c in placed[p["ref"]]["pins"]:
+                    if c in placed[p["ref"]]["pins"] and (p["ref"], c) not in WIRED:
                         nets[(p["ref"], c)] = d["net"]
     return nets
 

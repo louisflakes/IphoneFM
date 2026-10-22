@@ -13,7 +13,7 @@ import sys
 
 from kicadcheck import sexpr, kids, kid, atom, candidates
 from sch_place import SCH, NETLIST, LIB, CW, prefix, symbols_and_pins
-from sch_power import balanced
+from sch_power import balanced, WIRED_RAILS
 
 G = 1.27
 UID = "5e1c"
@@ -204,7 +204,7 @@ def main():
         d = {0: (0, -1), 90: (-1, 0), 180: (0, 1), 270: (1, 0)}[r] if up else {0: (0, 1), 90: (1, 0), 180: (0, -1), 270: (-1, 0)}[r]
         c = cell(x, y)
         reach = 4 if d[0] == 0 else 3 + math.ceil(len(name) * CW / G)
-        for i in range(0, reach + 1):
+        for i in range(1, reach + 1):  # a wire may meet the symbol's own pin tip from the side
             for t in (-2, -1, 0, 1, 2):
                 hard.add((c[0] + d[0] * i + (t if d[0] == 0 else 0), c[1] + d[1] * i + (t if d[0] != 0 else 0)))
     soft = text_cells(root)
@@ -220,6 +220,10 @@ def main():
     for (ref, num), net in pin_net.items():
         if ref in mine and net not in SKIP | RAILS and (ref, num) not in LEAVE:
             nets.setdefault(net, set()).add(pin_cell[(ref, num)])
+    for net, (anchor, others) in WIRED_RAILS.get(chain, {}).items():  # rails this chain draws as wires
+        for p in [anchor] + others:
+            ref, num = p.split(".")
+            nets.setdefault(net, set()).add(pin_cell[(ref, num)])
     bound = (cell(15, 15)[0], cell(15, 15)[1], cell(580, 405)[0], cell(580, 405)[1])
     drawn, n, failed = [], 0, []
     for net in sorted(nets, key=lambda k: -len(nets[k])):
@@ -228,7 +232,8 @@ def main():
         if len(pins) < 2:
             continue
         own_cells = {c for c, _ in pins}
-        tree = {pins[0][0]: [pins[0][1]]}
+        o0 = pins[0][1]  # leave the first pin any way but back into its body
+        tree = {pins[0][0]: [d for d in ((1, 0), (-1, 0), (0, 1), (0, -1)) if d != (-o0[0], -o0[1])]}
         edges = set()
         todo = pins[1:]
         while todo:
