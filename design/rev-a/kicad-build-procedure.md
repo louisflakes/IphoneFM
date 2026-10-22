@@ -32,7 +32,7 @@ Setup:
 - [x] 1.3 Plan one sheet laid out left to right in signal flow, with USB and power on the left, the MCU in the middle, transmit and receive to the right, and higher voltages toward the top [KHA p108; BAC p3]. Plan: `kicad/rev-a/sheet-plan.md`.
 
 Symbols (each checked pin by pin against its datasheet before use, because ERC can't catch wrong pin numbers [HHG p33–34; EES p133]):
-- [ ] 1.4 Place U1 (STM32U535CEU6) and check all 48 pins and the exposed pad against DS14217 Figure 10.
+- [x] 1.4 Place U1 (STM32U535CEU6) and check all 48 pins and the exposed pad against DS14217 Figure 10.
 - [ ] 1.5 Place U2 (LMX2571) and check all 36 pins and the DAP against SNAS654A p3–4.
 - [ ] 1.6 Place U3 (AP2112K-3.3) and check its 5 pins against DS39724 p2.
 - [ ] 1.7 Place U4 (Si4705-D60-GM, QFN) and check all 20 pins and the pad against the datasheet's p16.
