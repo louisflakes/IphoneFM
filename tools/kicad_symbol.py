@@ -68,7 +68,7 @@ def add_symbol(name, sides, **kw):
     # drop an existing symbol of this name (balanced-paren scan)
     m = re.search(r'\n\t\(symbol "%s"\n' % re.escape(name), text)
     if m:
-        i, depth = m.start() + 1, 0
+        i, depth = m.start() + 2, 0  # i is the symbol's opening bracket
         for j in range(i, len(text)):
             depth += {"(": 1, ")": -1}.get(text[j], 0)
             if depth == 0:

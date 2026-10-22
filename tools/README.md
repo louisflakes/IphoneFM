@@ -12,6 +12,8 @@
 | `netcheck.py [--bom] [--sync-bom]` | Check `design/rev-a/netlist.json`: designators, part numbers, JLC codes and sizes; every pin of every part mapped to a net (pin coverage), nets that join only one part, shorted passives, unpowered supply pins; and pin-by-pin agreement with `bom.md` and `wiring.html`; `--bom` prints the grouped BOM, `--sync-bom` rewrites the designator line at the top of each BOM chain |
 | `kicadcheck.py --net/--bom/--pcb <file>` | Check KiCad's exported schematic netlist, BOM and board file against `netlist.json` and the Rev A placement: opens, shorts, missing pins, JLC codes, footprint sizes, sides, outline, positions. See `design/rev-a/verification.md` |
 | `kicadcheck_test.py` | Self-test for `kicadcheck.py`: synthetic files with deliberate faults, plus KiCad's StickHub demo |
+| `kicad_symbol.py` | `add_symbol()` builds a readable project symbol from a datasheet pin table into `kicad/rev-a/symbols/IphoneFM.kicad_sym` |
+| `sch_place.py [--dry-run]` | Place every passive on the Rev A schematic beside the pin its `local_to` names, clear of other parts and their text; needs one R, C, L and FB seeded first |
 | `setup-kicad.sh` | Install KiCad 10 and pre-cache the KiCad MCP server (Ubuntu 24.04, as root) |
 
 API keys come from environment variables (`DIGIKEY_CLIENT_ID`, `DIGIKEY_CLIENT_SECRET`, `MOUSER_API_KEY`). Never commit keys.
