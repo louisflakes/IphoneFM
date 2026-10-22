@@ -13,6 +13,43 @@
 		(comment 2 "Source of truth: design/rev-a/netlist.json")
 	)
 	(lib_symbols
+	(symbol "IphoneFM:Si4705-D60-GM"
+		(pin_names (offset 1.016))
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "U" (at -12.70 26.67 0) (effects (font (size 1.27 1.27)) (justify left bottom)))
+		(property "Value" "Si4705-D60-GM" (at -12.70 -26.67 0) (effects (font (size 1.27 1.27)) (justify left top)))
+		(property "Footprint" "" (at 0.00 0.00 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(property "Datasheet" "https://www.skyworksinc.com/-/media/Skyworks/SL/documents/public/data-sheets/Si4704-05-D60.pdf" (at 0.00 0.00 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(property "Description" "Skyworks Si4705-D60 FM broadcast receiver with RDS, digital audio out, QFN-20 3x3 mm. Pins from Si4704/05-D60 Rev 1.2 p16" (at 0.00 0.00 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(symbol "Si4705-D60-GM_0_1"
+			(rectangle (start -12.70 22.86) (end 12.70 -22.86) (stroke (width 0.254) (type default)) (fill (type background)))
+		)
+		(symbol "Si4705-D60-GM_1_1"
+			(pin input line (at -15.24 15.24 0) (length 2.54) (name "RSTB" (effects (font (size 1.27 1.27)))) (number "5" (effects (font (size 1.27 1.27)))))
+			(pin input line (at -15.24 12.70 0) (length 2.54) (name "SENB" (effects (font (size 1.27 1.27)))) (number "6" (effects (font (size 1.27 1.27)))))
+			(pin input line (at -15.24 10.16 0) (length 2.54) (name "SCLK" (effects (font (size 1.27 1.27)))) (number "7" (effects (font (size 1.27 1.27)))))
+			(pin bidirectional line (at -15.24 7.62 0) (length 2.54) (name "SDIO" (effects (font (size 1.27 1.27)))) (number "8" (effects (font (size 1.27 1.27)))))
+			(pin input line (at -15.24 2.54 0) (length 2.54) (name "RCLK" (effects (font (size 1.27 1.27)))) (number "9" (effects (font (size 1.27 1.27)))))
+			(pin bidirectional line (at -15.24 -0.00 0) (length 2.54) (name "GPO3/DCLK" (effects (font (size 1.27 1.27)))) (number "17" (effects (font (size 1.27 1.27)))))
+			(pin input line (at -15.24 -2.54 0) (length 2.54) (name "DFS" (effects (font (size 1.27 1.27)))) (number "16" (effects (font (size 1.27 1.27)))))
+			(pin output line (at -15.24 -5.08 0) (length 2.54) (name "DOUT" (effects (font (size 1.27 1.27)))) (number "15" (effects (font (size 1.27 1.27)))))
+			(pin bidirectional line (at -15.24 -10.16 0) (length 2.54) (name "GPO1" (effects (font (size 1.27 1.27)))) (number "19" (effects (font (size 1.27 1.27)))))
+			(pin bidirectional line (at -15.24 -12.70 0) (length 2.54) (name "GPO2/INT" (effects (font (size 1.27 1.27)))) (number "18" (effects (font (size 1.27 1.27)))))
+			(pin input line (at 15.24 15.24 180) (length 2.54) (name "FMI" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))
+			(pin input line (at 15.24 12.70 180) (length 2.54) (name "LPI" (effects (font (size 1.27 1.27)))) (number "4" (effects (font (size 1.27 1.27)))))
+			(pin output line (at 15.24 7.62 180) (length 2.54) (name "LOUT" (effects (font (size 1.27 1.27)))) (number "14" (effects (font (size 1.27 1.27)))))
+			(pin output line (at 15.24 5.08 180) (length 2.54) (name "ROUT" (effects (font (size 1.27 1.27)))) (number "13" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at 0.00 25.40 270) (length 2.54) (name "VA" (effects (font (size 1.27 1.27)))) (number "11" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at 2.54 25.40 270) (length 2.54) (name "VD" (effects (font (size 1.27 1.27)))) (number "10" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at -5.08 -25.40 90) (length 2.54) (name "GND" (effects (font (size 1.27 1.27)))) (number "12" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at -2.54 -25.40 90) (length 2.54) (name "RFGND" (effects (font (size 1.27 1.27)))) (number "3" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at 0.00 -25.40 90) (length 2.54) (name "EP" (effects (font (size 1.27 1.27)))) (number "21" (effects (font (size 1.27 1.27)))))
+			(pin no_connect line (at 2.54 -25.40 90) (length 2.54) (name "NC" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
+			(pin no_connect line (at 5.08 -25.40 90) (length 2.54) (name "NC" (effects (font (size 1.27 1.27)))) (number "20" (effects (font (size 1.27 1.27)))))
+		)
+	)
 	(symbol "Regulator_Linear:AP2112K-3.3"
 		(pin_names
 			(offset 0.254)
@@ -1661,6 +1698,39 @@
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
 					(reference "U3") (unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "IphoneFM:Si4705-D60-GM")
+		(at 365.76 304.8 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "3276cf8e-7ac2-427d-8152-8b1eaaee603e")
+		(property "Reference" "U4"
+			(at 365.76 300.99 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "SI4705-D60-GM"
+			(at 365.76 308.61 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" ""
+			(at 365.76 304.8 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 365.76 304.8 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(instances
+			(project "IphoneFM"
+				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
+					(reference "U4") (unit 1)
 				)
 			)
 		)
