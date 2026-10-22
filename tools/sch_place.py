@@ -29,6 +29,13 @@ FOOT = {("R", "0402"): "Resistor_SMD:R_0402_1005Metric", ("C", "0402"): "Capacit
 # Chains drawn where the sheet plan puts them (sheet-plan.md): FL1 between U7 and U5, the RX front end in its own zone,
 # and U2's loop filter as a compact group at CPout. (x, y, rotation); rotation 90 = horizontal.
 MANUAL = {
+    # chain 8: U4's I2C pull-ups at the tops of two short columns; RSTB and the I2S lines turn down in a ribbon to R19
+    # (pull-down) and the series resistors R24, R23, R22; GPO caps in a two-step staircase at the pins; FB3 from 3V3
+    # down onto an RX_VDD line over U4 with C32, C33
+    "R20": (358.14, 278.13, 0), "R21": (340.36, 280.67, 0),
+    "R19": (298.45, 345.44, 0), "R24": (312.42, 345.44, 0), "R23": (326.39, 345.44, 0), "R22": (340.36, 345.44, 0),
+    "C38": (350.52, 323.85, 0), "C37": (360.68, 326.39, 0),
+    "FB3": (381.0, 262.89, 0, True), "C32": (388.62, 270.51, 0), "C33": (411.48, 270.51, 0),
     # chain 7: FL1 on one line at U7 RF2's height (127): C28 down, L2 on, C29 down, L3 on, C30 down, then on into U5 RF2;
     # R16 straight on U5 VDD; R17 into CTRL with C31 down (text left); R18 pulls SW1's common down
     "C28": (444.5, 130.81, 0), "L2": (455.93, 127.0, 90), "C29": (464.82, 130.81, 0), "L3": (476.25, 127.0, 90),
@@ -61,7 +68,7 @@ MANUAL = {
     # chain 1: R2 hangs from the CC2 line just right of J1, R1 from the CC1 line beyond D4 (sch_layout.py)
     "R2": (63.5, 67.31, 0), "R1": (114.3, 64.77, 0),
     # RX front end zone, right to left at U4 FMI's height (289.56): C34 series, L1 shunt, FB1 series, C35 shunt
-    "C34": (487.68, 289.56, 90), "L1": (477.52, 294.64, 0), "FB1": (467.36, 289.56, 90), "C35": (457.2, 294.64, 0),
+    "C34": (487.68, 289.56, 270), "L1": (477.52, 293.37, 0), "FB1": (467.36, 289.56, 270), "C35": (457.2, 293.37, 0),
 }
 
 
@@ -143,7 +150,7 @@ def plan(doc, placed):
         shunt = any(n in RAILS for n in nets)
         if ref in MANUAL:
             x, y, rot, *left = MANUAL[ref]
-            out[ref] = (x, y, rot, bool(left and left[0])); boxes.append(part_box(x, y, rot == 90, text_width(p), bool(left and left[0]))); continue
+            out[ref] = (x, y, rot, bool(left and left[0])); boxes.append(part_box(x, y, rot in (90, 270), text_width(p), bool(left and left[0]))); continue
         tgt = p.get("local_to", "")
         if "." not in tgt or tgt.split(".")[0] not in out and (tgt.split(".")[0] not in placed or prefix(tgt.split(".")[0]) in LIB):
             raise SystemExit(f"{ref}: no placed target for local_to {tgt!r}; add it to MANUAL")
@@ -184,7 +191,7 @@ def upside_down(p):
 INLINE = {"C39": 12.7, "C40": 5.08, "C36": 12.7, "C41": 5.08, "C20": 12.7, "C21": 5.08, "C22": 12.7, "C23": 5.08}  # ref: x of the name from the part's centre
 SMALL = "Device:C_Small"
 # pull-downs hanging side by side in a ribbon of lines (chain 6): name and value centred under the ground symbol
-BELOW = {"R10", "R11", "R12", "R13", "R14", "R15"}
+BELOW = {"R10", "R11", "R12", "R13", "R14", "R15", "C37", "C38"}
 
 
 def block(ref, p, x, y, rot, left, sheet_uuid):
@@ -192,8 +199,8 @@ def block(ref, p, x, y, rot, left, sheet_uuid):
     foot = FOOT.get((prefix(ref), p["package"]), "")
     # text reads left to right in both orientations: above a horizontal part, beside a vertical one
     s = -1 if left else 1
-    (rx, ry), (vx, vy) = ((-3.81, -5.59), (-3.81, -3.81)) if rot == 90 else ((2.54 * s, -1.27), (2.54 * s, 1.27))
-    just = "right" if (rot == 90) != left else "left"  # KiCad mirrors justification on a part turned 90 degrees
+    (rx, ry), (vx, vy) = ((-3.81, -5.59), (-3.81, -3.81)) if rot in (90, 270) else ((2.54 * s, -1.27), (2.54 * s, 1.27))
+    just = "right" if (rot == 90) != left else "left"  # KiCad mirrors justification on a part turned 90 degrees (not 270)
     if ref in INLINE:
         (rx, ry), (vx, vy) = (INLINE[ref], 0), (INLINE[ref] + 5.08, 0)
     if ref in BELOW:  # name and value centred under the part's ground symbol

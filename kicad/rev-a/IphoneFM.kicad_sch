@@ -3909,36 +3909,36 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(property "Reference" "U" (at -12.70 26.67 0) (effects (font (size 1.27 1.27)) (justify left bottom)))
-		(property "Value" "Si4705-D60-GM" (at -12.70 -26.67 0) (effects (font (size 1.27 1.27)) (justify left top)))
+		(property "Reference" "U" (at -12.70 29.21 0) (effects (font (size 1.27 1.27)) (justify left bottom)))
+		(property "Value" "Si4705-D60-GM" (at -12.70 -29.21 0) (effects (font (size 1.27 1.27)) (justify left top)))
 		(property "Footprint" "" (at 0.00 0.00 0) (effects (font (size 1.27 1.27)) (hide yes)))
 		(property "Datasheet" "https://www.skyworksinc.com/-/media/Skyworks/SL/documents/public/data-sheets/Si4704-05-D60.pdf" (at 0.00 0.00 0) (effects (font (size 1.27 1.27)) (hide yes)))
 		(property "Description" "Skyworks Si4705-D60 FM broadcast receiver with RDS, digital audio out, QFN-20 3x3 mm. Pins from Si4704/05-D60 Rev 1.2 p16" (at 0.00 0.00 0) (effects (font (size 1.27 1.27)) (hide yes)))
 		(symbol "Si4705-D60-GM_0_1"
-			(rectangle (start -12.70 22.86) (end 12.70 -22.86) (stroke (width 0.254) (type default)) (fill (type background)))
+			(rectangle (start -12.70 25.40) (end 12.70 -25.40) (stroke (width 0.254) (type default)) (fill (type background)))
 		)
 		(symbol "Si4705-D60-GM_1_1"
-			(pin input line (at -15.24 15.24 0) (length 2.54) (name "RSTB" (effects (font (size 1.27 1.27)))) (number "5" (effects (font (size 1.27 1.27)))))
-			(pin input line (at -15.24 12.70 0) (length 2.54) (name "SENB" (effects (font (size 1.27 1.27)))) (number "6" (effects (font (size 1.27 1.27)))))
-			(pin input line (at -15.24 10.16 0) (length 2.54) (name "SCLK" (effects (font (size 1.27 1.27)))) (number "7" (effects (font (size 1.27 1.27)))))
-			(pin bidirectional line (at -15.24 7.62 0) (length 2.54) (name "SDIO" (effects (font (size 1.27 1.27)))) (number "8" (effects (font (size 1.27 1.27)))))
+			(pin input line (at -15.24 17.78 0) (length 2.54) (name "SCLK" (effects (font (size 1.27 1.27)))) (number "7" (effects (font (size 1.27 1.27)))))
+			(pin bidirectional line (at -15.24 15.24 0) (length 2.54) (name "SDIO" (effects (font (size 1.27 1.27)))) (number "8" (effects (font (size 1.27 1.27)))))
+			(pin input line (at -15.24 10.16 0) (length 2.54) (name "RSTB" (effects (font (size 1.27 1.27)))) (number "5" (effects (font (size 1.27 1.27)))))
+			(pin input line (at -15.24 7.62 0) (length 2.54) (name "SENB" (effects (font (size 1.27 1.27)))) (number "6" (effects (font (size 1.27 1.27)))))
 			(pin input line (at -15.24 2.54 0) (length 2.54) (name "RCLK" (effects (font (size 1.27 1.27)))) (number "9" (effects (font (size 1.27 1.27)))))
-			(pin bidirectional line (at -15.24 -0.00 0) (length 2.54) (name "GPO3/DCLK" (effects (font (size 1.27 1.27)))) (number "17" (effects (font (size 1.27 1.27)))))
-			(pin input line (at -15.24 -2.54 0) (length 2.54) (name "DFS" (effects (font (size 1.27 1.27)))) (number "16" (effects (font (size 1.27 1.27)))))
-			(pin output line (at -15.24 -5.08 0) (length 2.54) (name "DOUT" (effects (font (size 1.27 1.27)))) (number "15" (effects (font (size 1.27 1.27)))))
-			(pin bidirectional line (at -15.24 -10.16 0) (length 2.54) (name "GPO1" (effects (font (size 1.27 1.27)))) (number "19" (effects (font (size 1.27 1.27)))))
-			(pin bidirectional line (at -15.24 -12.70 0) (length 2.54) (name "GPO2/INT" (effects (font (size 1.27 1.27)))) (number "18" (effects (font (size 1.27 1.27)))))
-			(pin input line (at 15.24 15.24 180) (length 2.54) (name "FMI" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))
-			(pin input line (at 15.24 12.70 180) (length 2.54) (name "LPI" (effects (font (size 1.27 1.27)))) (number "4" (effects (font (size 1.27 1.27)))))
-			(pin output line (at 15.24 7.62 180) (length 2.54) (name "LOUT" (effects (font (size 1.27 1.27)))) (number "14" (effects (font (size 1.27 1.27)))))
-			(pin output line (at 15.24 5.08 180) (length 2.54) (name "ROUT" (effects (font (size 1.27 1.27)))) (number "13" (effects (font (size 1.27 1.27)))))
-			(pin power_in line (at 0.00 25.40 270) (length 2.54) (name "VA" (effects (font (size 1.27 1.27)))) (number "11" (effects (font (size 1.27 1.27)))))
-			(pin power_in line (at 2.54 25.40 270) (length 2.54) (name "VD" (effects (font (size 1.27 1.27)))) (number "10" (effects (font (size 1.27 1.27)))))
-			(pin power_in line (at -5.08 -25.40 90) (length 2.54) (name "GND" (effects (font (size 1.27 1.27)))) (number "12" (effects (font (size 1.27 1.27)))))
-			(pin power_in line (at -2.54 -25.40 90) (length 2.54) (name "RFGND" (effects (font (size 1.27 1.27)))) (number "3" (effects (font (size 1.27 1.27)))))
-			(pin power_in line (at 0.00 -25.40 90) (length 2.54) (name "EP" (effects (font (size 1.27 1.27)))) (number "21" (effects (font (size 1.27 1.27)))))
-			(pin no_connect line (at 2.54 -25.40 90) (length 2.54) (name "NC" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
-			(pin no_connect line (at 5.08 -25.40 90) (length 2.54) (name "NC" (effects (font (size 1.27 1.27)))) (number "20" (effects (font (size 1.27 1.27)))))
+			(pin bidirectional line (at -15.24 -2.54 0) (length 2.54) (name "GPO3/DCLK" (effects (font (size 1.27 1.27)))) (number "17" (effects (font (size 1.27 1.27)))))
+			(pin input line (at -15.24 -5.08 0) (length 2.54) (name "DFS" (effects (font (size 1.27 1.27)))) (number "16" (effects (font (size 1.27 1.27)))))
+			(pin output line (at -15.24 -7.62 0) (length 2.54) (name "DOUT" (effects (font (size 1.27 1.27)))) (number "15" (effects (font (size 1.27 1.27)))))
+			(pin bidirectional line (at -15.24 -12.70 0) (length 2.54) (name "GPO1" (effects (font (size 1.27 1.27)))) (number "19" (effects (font (size 1.27 1.27)))))
+			(pin bidirectional line (at -15.24 -15.24 0) (length 2.54) (name "GPO2/INT" (effects (font (size 1.27 1.27)))) (number "18" (effects (font (size 1.27 1.27)))))
+			(pin input line (at 15.24 17.78 180) (length 2.54) (name "FMI" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))
+			(pin input line (at 15.24 15.24 180) (length 2.54) (name "LPI" (effects (font (size 1.27 1.27)))) (number "4" (effects (font (size 1.27 1.27)))))
+			(pin output line (at 15.24 10.16 180) (length 2.54) (name "LOUT" (effects (font (size 1.27 1.27)))) (number "14" (effects (font (size 1.27 1.27)))))
+			(pin output line (at 15.24 7.62 180) (length 2.54) (name "ROUT" (effects (font (size 1.27 1.27)))) (number "13" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at 0.00 27.94 270) (length 2.54) (name "VA" (effects (font (size 1.27 1.27)))) (number "11" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at 2.54 27.94 270) (length 2.54) (name "VD" (effects (font (size 1.27 1.27)))) (number "10" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at -5.08 -27.94 90) (length 2.54) (name "GND" (effects (font (size 1.27 1.27)))) (number "12" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at -2.54 -27.94 90) (length 2.54) (name "RFGND" (effects (font (size 1.27 1.27)))) (number "3" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at 0.00 -27.94 90) (length 2.54) (name "EP" (effects (font (size 1.27 1.27)))) (number "21" (effects (font (size 1.27 1.27)))))
+			(pin no_connect line (at 2.54 -27.94 90) (length 2.54) (name "NC" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
+			(pin no_connect line (at 5.08 -27.94 90) (length 2.54) (name "NC" (effects (font (size 1.27 1.27)))) (number "20" (effects (font (size 1.27 1.27)))))
 		)
 	)
 	(symbol "Regulator_Linear:AP2112K-3.3"
@@ -6319,7 +6319,7 @@
 	)
 	(symbol
 		(lib_id "IphoneFM:Si4705-D60-GM")
-		(at 365.76 304.8 0)
+		(at 381.00 307.34 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -6327,31 +6327,31 @@
 		(dnp no)
 		(uuid "3276cf8e-7ac2-427d-8152-8b1eaaee603e")
 		(property "Reference" "U4"
-			(at 365.76 300.99 0)
-			(effects (font (size 1.27 1.27)))
+			(at 398.78 337.82 0)
+			(effects (font (size 1.27 1.27)) (justify left))
 		)
 		(property "Value" "FM receiver"
-			(at 365.76 308.61 0)
-			(effects (font (size 1.27 1.27)))
+			(at 398.78 340.36 0)
+			(effects (font (size 1.27 1.27)) (justify left))
 		)
 		(property "Footprint" ""
-			(at 365.76 304.8 0)
+			(at 381.00 307.34 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
-			(at 365.76 304.8 0)
+			(at 381.00 307.34 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "MPN" "SI4705-D60-GM"
-			(at 365.76 311.15 0)
-			(effects (font (size 1.27 1.27)))
+			(at 398.78 342.90 0)
+			(effects (font (size 1.27 1.27)) (justify left))
 		)
 		(property "LCSC" "C1526114"
-			(at 365.76 304.80 0)
+			(at 381.00 307.34 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Manufacturer" "Skyworks"
-			(at 365.76 304.80 0)
+			(at 381.00 307.34 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(instances
@@ -7091,7 +7091,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "e6bdf23d-5851-4de1-9cd1-ae9e42f1b894")
+		(uuid "1c302ca1-514a-406d-8ac5-185e0112e695")
 		(property "Reference" "R1"
 			(at 116.84 63.50 0)
 			(effects (font (size 1.27 1.27)) (justify left))
@@ -7136,7 +7136,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "ac2e22ba-3004-4364-b3fa-4f7e0112ee86")
+		(uuid "40d055a7-54f6-418b-8448-4cd1ba1ac53e")
 		(property "Reference" "C1"
 			(at 102.87 45.72 0)
 			(effects (font (size 1.27 1.27)) (justify right))
@@ -7175,39 +7175,39 @@
 	)
 	(symbol
 		(lib_id "Device:L")
-		(at 477.52 294.64 0)
+		(at 477.52 293.37 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "df1c4f57-fa98-4cd4-8647-55674b183ba5")
+		(uuid "a617442f-cac2-435f-aa01-a5ddd23e6465")
 		(property "Reference" "L1"
-			(at 480.06 293.37 0)
+			(at 480.06 292.10 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
 		(property "Value" "150 nH 2%"
-			(at 480.06 295.91 0)
+			(at 480.06 294.64 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
 		(property "Footprint" "Inductor_SMD:L_0603_1608Metric"
-			(at 477.52 294.64 0)
+			(at 477.52 293.37 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
-			(at 477.52 294.64 0)
+			(at 477.52 293.37 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "MPN" "LQW18ANR15G00D"
-			(at 480.06 298.45 0)
+			(at 480.06 297.18 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "LCSC" "C113131"
-			(at 477.52 294.64 0)
+			(at 477.52 293.37 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Manufacturer" "Murata"
-			(at 477.52 294.64 0)
+			(at 477.52 293.37 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(instances
@@ -7220,20 +7220,20 @@
 	)
 	(symbol
 		(lib_id "Device:FerriteBead")
-		(at 467.36 289.56 90)
+		(at 467.36 289.56 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "a4e439a3-8cbb-4661-afca-36fa57715473")
+		(uuid "7851d77a-d07e-4ff6-b211-ea9080308baf")
 		(property "Reference" "FB1"
 			(at 463.55 283.97 90)
-			(effects (font (size 1.27 1.27)) (justify right))
+			(effects (font (size 1.27 1.27)) (justify left))
 		)
 		(property "Value" "75 Ω at 100 MHz"
 			(at 463.55 285.75 90)
-			(effects (font (size 1.27 1.27)) (justify right))
+			(effects (font (size 1.27 1.27)) (justify left))
 		)
 		(property "Footprint" "Inductor_SMD:L_0402_1005Metric"
 			(at 467.36 289.56 0)
@@ -7271,7 +7271,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "e80102b1-d44d-4754-af00-cc5cdee2a170")
+		(uuid "7dcc5999-c4ff-4bbe-b758-4d835c93d6c4")
 		(property "Reference" "R2"
 			(at 66.04 66.04 0)
 			(effects (font (size 1.27 1.27)) (justify left))
@@ -7316,7 +7316,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "4ebcecd5-cfd6-4e93-83e2-70a016d7a6de")
+		(uuid "006dc49c-2e13-4b9e-a00d-cde4abb8cba6")
 		(property "Reference" "C2"
 			(at 138.43 45.72 0)
 			(effects (font (size 1.27 1.27)) (justify left))
@@ -7361,7 +7361,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "2ad73a1f-64e0-4099-9aa5-90648cad43fd")
+		(uuid "ab1bae00-45f6-41a5-bb70-0f7c004a8ad4")
 		(property "Reference" "FB2"
 			(at 246.38 200.66 0)
 			(effects (font (size 1.27 1.27)) (justify left))
@@ -7406,7 +7406,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "bca1e609-009e-4e54-8589-3375794e25c4")
+		(uuid "604cb7c3-6931-4840-b513-2493ec3118ee")
 		(property "Reference" "L2"
 			(at 452.12 121.41 90)
 			(effects (font (size 1.27 1.27)) (justify right))
@@ -7451,7 +7451,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "e3915601-9dfe-467f-a2e8-c1d87c1aa442")
+		(uuid "c7a50400-29bf-46b0-9bbe-4a3b557a3044")
 		(property "Reference" "C3"
 			(at 177.80 182.88 0)
 			(effects (font (size 1.27 1.27)) (justify left))
@@ -7496,7 +7496,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "a79ee2f1-550a-4c51-a4a6-8491c4fbed70")
+		(uuid "1400fd61-9c9f-44ef-beaf-a4e0a43002be")
 		(property "Reference" "R3"
 			(at 195.58 236.22 0)
 			(effects (font (size 1.27 1.27)) (justify right))
@@ -7541,7 +7541,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "8e3539b0-9cf2-443c-ac6e-28a5ce6db747")
+		(uuid "4118742b-31ca-43f4-8835-dbafa8dfd274")
 		(property "Reference" "L3"
 			(at 472.44 121.41 90)
 			(effects (font (size 1.27 1.27)) (justify right))
@@ -7579,6 +7579,51 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:FerriteBead")
+		(at 381.00 262.89 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "41c9339b-1b7a-4959-bd65-8f3ab0a91720")
+		(property "Reference" "FB3"
+			(at 378.46 261.62 0)
+			(effects (font (size 1.27 1.27)) (justify right))
+		)
+		(property "Value" "600 Ω at 100 MHz"
+			(at 378.46 264.16 0)
+			(effects (font (size 1.27 1.27)) (justify right))
+		)
+		(property "Footprint" "Inductor_SMD:L_0402_1005Metric"
+			(at 381.00 262.89 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 381.00 262.89 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "BLM15AG601SN1D"
+			(at 378.46 266.70 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C76884"
+			(at 381.00 262.89 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Murata"
+			(at 381.00 262.89 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(instances
+			(project "IphoneFM"
+				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
+					(reference "FB3") (unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 198.12 201.93 0)
 		(unit 1)
@@ -7586,7 +7631,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "9c57dbe3-3d0b-4388-a2b9-40adc2890a42")
+		(uuid "23ded0f0-49b3-4e9a-8168-e13da8f5024c")
 		(property "Reference" "C4"
 			(at 200.66 200.66 0)
 			(effects (font (size 1.27 1.27)) (justify left))
@@ -7631,7 +7676,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "5b6ed3c6-ae32-4971-b696-af64872db49d")
+		(uuid "240dc360-c3e6-45f5-bb65-877870ae01f0")
 		(property "Reference" "R4"
 			(at 245.11 45.21 90)
 			(effects (font (size 1.27 1.27)) (justify right))
@@ -7676,7 +7721,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "5fc711e3-9c47-4019-8e21-8594c91c3b61")
+		(uuid "64c01b4f-3810-410a-99a8-080fc1976325")
 		(property "Reference" "C5"
 			(at 200.66 182.88 0)
 			(effects (font (size 1.27 1.27)) (justify left))
@@ -7721,7 +7766,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "608db4c3-a088-4b7b-8886-290e9fa6f849")
+		(uuid "46b5ff0b-8a17-43ba-a3cf-e5acaba9d570")
 		(property "Reference" "R5"
 			(at 367.03 75.69 90)
 			(effects (font (size 1.27 1.27)) (justify right))
@@ -7766,7 +7811,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "e0d3db25-f72a-4ca6-951f-b94a16c2b343")
+		(uuid "8a68ca7a-1f95-4c37-9948-5d9419c1e8c9")
 		(property "Reference" "C6"
 			(at 177.80 200.66 0)
 			(effects (font (size 1.27 1.27)) (justify left))
@@ -7811,7 +7856,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "6b910600-83d3-4bb2-93f5-e079b01b33c5")
+		(uuid "e03ba1af-2f19-4002-b445-a50ff86e04ac")
 		(property "Reference" "R6"
 			(at 245.11 233.17 90)
 			(effects (font (size 1.27 1.27)) (justify right))
@@ -7856,7 +7901,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "977f5d60-0610-47e8-9939-8f373c2176e3")
+		(uuid "c1e1f428-7f8d-4c27-a9c5-d06388a354ad")
 		(property "Reference" "C7"
 			(at 254.00 208.28 0)
 			(effects (font (size 1.27 1.27)) (justify left))
@@ -7901,7 +7946,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "5d702034-6f86-4779-95e2-7d10bf057c79")
+		(uuid "a75b90dc-14ca-4274-8327-9c1846a2c793")
 		(property "Reference" "R7"
 			(at 245.11 243.33 90)
 			(effects (font (size 1.27 1.27)) (justify right))
@@ -7946,7 +7991,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "87c02f21-2a37-4be3-80f1-a31b538bd796")
+		(uuid "4fc6f1c8-e4c6-4453-88af-c3a47f52f142")
 		(property "Reference" "C8"
 			(at 276.86 208.28 0)
 			(effects (font (size 1.27 1.27)) (justify left))
@@ -7991,7 +8036,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "c8a9b7ef-44d1-4f90-9a96-837b30b4e048")
+		(uuid "864d79ec-7c54-4921-b452-8d1b5a37bdf0")
 		(property "Reference" "R8"
 			(at 245.11 253.49 90)
 			(effects (font (size 1.27 1.27)) (justify right))
@@ -8036,7 +8081,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "118cc24c-196d-4ec0-9455-7ff122868948")
+		(uuid "2218176a-4f49-463c-a06d-be9ed39e2f12")
 		(property "Reference" "C9"
 			(at 198.12 287.02 0)
 			(effects (font (size 1.27 1.27)) (justify right))
@@ -8081,7 +8126,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "79cdc346-a96d-4f40-a579-426a1b6cde0b")
+		(uuid "25ee73ae-e02d-4acf-9540-05d656ba6d62")
 		(property "Reference" "R9"
 			(at 307.34 106.68 0)
 			(effects (font (size 1.27 1.27)) (justify right))
@@ -8126,7 +8171,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "d74002a4-79b0-4203-bdf8-9da4abc7869e")
+		(uuid "f0f17e48-fed3-458d-a459-7e7bc7061c68")
 		(property "Reference" "C10"
 			(at 185.42 220.98 0)
 			(effects (font (size 1.27 1.27)) (justify right))
@@ -8171,7 +8216,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "c8084049-8814-4f9a-b6f5-cd61a61dc254")
+		(uuid "9104c5e3-de9d-4beb-80a5-013f4a396d8e")
 		(property "Reference" "R10"
 			(at 327.66 146.05 0)
 			(effects (font (size 1.27 1.27)))
@@ -8216,7 +8261,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "8cb8da34-7a4a-4e39-9f63-035e8629bfe5")
+		(uuid "b3097360-3bbe-488f-813b-4f1e1bfe5829")
 		(property "Reference" "C11"
 			(at 233.68 30.48 0)
 			(effects (font (size 1.27 1.27)) (justify left))
@@ -8261,7 +8306,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "3c0361aa-e88b-4d4f-8203-f5bd3345cb57")
+		(uuid "b0325cbc-c3cd-4624-b8a5-857be989594d")
 		(property "Reference" "R11"
 			(at 340.36 148.59 0)
 			(effects (font (size 1.27 1.27)))
@@ -8306,7 +8351,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "08fa168a-8a1b-4ca0-b80a-f165fbf97621")
+		(uuid "0dc24534-6532-4de1-a0a1-ca7e85d39383")
 		(property "Reference" "C12"
 			(at 213.36 30.48 0)
 			(effects (font (size 1.27 1.27)) (justify right))
@@ -8351,7 +8396,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "158cb6cf-151d-424f-a8a6-d78548c0fb85")
+		(uuid "3b465c7d-e0df-47f2-b980-760e05cdac76")
 		(property "Reference" "R12"
 			(at 353.06 151.13 0)
 			(effects (font (size 1.27 1.27)))
@@ -8396,7 +8441,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "d6fd1f57-a5ec-46c6-9aba-5447b9127ef3")
+		(uuid "61c75c04-60da-4e26-91b2-32abd9901222")
 		(property "Reference" "C13"
 			(at 350.52 48.26 0)
 			(effects (font (size 1.27 1.27)) (justify left))
@@ -8441,7 +8486,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "1f4fa3ce-d6fd-4023-91df-5ef72283bbd3")
+		(uuid "ee8d426e-17e5-4b02-a5ca-51b7e33716e9")
 		(property "Reference" "R13"
 			(at 365.76 153.67 0)
 			(effects (font (size 1.27 1.27)))
@@ -8486,7 +8531,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "3fbb9fd3-b884-49f5-b56f-11e450fc803c")
+		(uuid "9992393e-aa67-445e-b1e1-89d7cc1eeb78")
 		(property "Reference" "C14"
 			(at 302.26 30.48 0)
 			(effects (font (size 1.27 1.27)) (justify left))
@@ -8531,7 +8576,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "7e5fe82d-e47c-408f-83f4-936937d3eb06")
+		(uuid "3aa9975b-0fcf-49b9-836a-e04867fbcc47")
 		(property "Reference" "R14"
 			(at 378.46 156.21 0)
 			(effects (font (size 1.27 1.27)))
@@ -8576,7 +8621,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "b1f2d8e7-4857-49a2-b504-f43664c50fc5")
+		(uuid "1170e758-836a-4743-ab5d-9f88b864de6e")
 		(property "Reference" "C15"
 			(at 325.12 30.48 0)
 			(effects (font (size 1.27 1.27)) (justify left))
@@ -8621,7 +8666,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "aaff12fb-edbd-4288-87b6-9e0b53b51085")
+		(uuid "bb0f7f7c-7f74-424a-8b86-df2d5bdc9257")
 		(property "Reference" "R15"
 			(at 391.16 158.75 0)
 			(effects (font (size 1.27 1.27)))
@@ -8666,7 +8711,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "647f1bc0-db33-43b7-b098-3840e1a9e5b6")
+		(uuid "835b7d25-a708-4d2e-8dd6-a5b0fbd6464a")
 		(property "Reference" "C16"
 			(at 373.38 48.26 0)
 			(effects (font (size 1.27 1.27)) (justify left))
@@ -8711,7 +8756,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "08c1110e-7de0-410f-8c3a-2606f16ad77b")
+		(uuid "93fb0c46-57b9-4e78-810a-ab1b8a668b00")
 		(property "Reference" "R16"
 			(at 533.40 111.76 0)
 			(effects (font (size 1.27 1.27)) (justify left))
@@ -8756,7 +8801,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "17f97fe4-aba7-4be9-9f5f-d0360478c56a")
+		(uuid "d93bab52-da2e-457e-ab65-742401135af8")
 		(property "Reference" "C17"
 			(at 350.52 30.48 0)
 			(effects (font (size 1.27 1.27)) (justify left))
@@ -8801,7 +8846,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "839dbbb6-b06c-468e-9fb5-ee2eb982048a")
+		(uuid "646bc5a8-0d61-46f5-a9f8-618be45c4a90")
 		(property "Reference" "R17"
 			(at 499.11 129.03 90)
 			(effects (font (size 1.27 1.27)) (justify right))
@@ -8846,7 +8891,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "8a1a1b50-caeb-4836-8d02-58e84f2042ab")
+		(uuid "97656b9a-3954-4822-b8cb-186b38358123")
 		(property "Reference" "C18"
 			(at 302.26 48.26 0)
 			(effects (font (size 1.27 1.27)) (justify left))
@@ -8891,7 +8936,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "72de3a56-23a5-4127-9b31-fb00456c994a")
+		(uuid "59c2e041-9f85-45af-8b10-516951f73df6")
 		(property "Reference" "R18"
 			(at 121.92 365.76 0)
 			(effects (font (size 1.27 1.27)) (justify left))
@@ -8936,7 +8981,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "761781df-bd6f-48c5-a07e-0e7889b8fad8")
+		(uuid "519a4d51-cea7-42ee-8d14-6397446f600e")
 		(property "Reference" "C19"
 			(at 373.38 30.48 0)
 			(effects (font (size 1.27 1.27)) (justify left))
@@ -8974,6 +9019,51 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 298.45 345.44 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "20c289dd-eb24-4475-9edd-cac41354c3a4")
+		(property "Reference" "R19"
+			(at 300.99 344.17 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Value" "10 kΩ 1%"
+			(at 300.99 346.71 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 298.45 345.44 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 298.45 345.44 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "RC0402FR-0710KL"
+			(at 300.99 349.25 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C60490"
+			(at 298.45 345.44 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Yageo"
+			(at 298.45 345.44 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(instances
+			(project "IphoneFM"
+				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
+					(reference "R19") (unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C_Small")
 		(at 360.68 96.52 90)
 		(unit 1)
@@ -8981,7 +9071,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "c384f04e-fb67-448f-8fef-8c199232d93f")
+		(uuid "818fde5c-5162-4241-9eea-5bf8b2e5d567")
 		(property "Reference" "C20"
 			(at 373.38 96.52 90)
 			(effects (font (size 1.27 1.27)) (justify right))
@@ -9019,6 +9109,51 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 358.14 278.13 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "62082069-c34e-4d52-853c-79e5c0895730")
+		(property "Reference" "R20"
+			(at 360.68 276.86 0)
+			(effects (font (size 1.27 1.27)) (justify right))
+		)
+		(property "Value" "6.8 kΩ 1%"
+			(at 360.68 279.40 0)
+			(effects (font (size 1.27 1.27)) (justify right))
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 358.14 278.13 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 358.14 278.13 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "RC0402FR-076K8L"
+			(at 360.68 281.94 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C93940"
+			(at 358.14 278.13 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Yageo"
+			(at 358.14 278.13 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(instances
+			(project "IphoneFM"
+				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
+					(reference "R20") (unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C_Small")
 		(at 368.30 99.06 90)
 		(unit 1)
@@ -9026,7 +9161,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "b83af74d-d164-4320-9cce-1256f7b6370d")
+		(uuid "7adbfc64-fcdf-476d-ab8d-28d012f32ac5")
 		(property "Reference" "C21"
 			(at 373.38 99.06 90)
 			(effects (font (size 1.27 1.27)) (justify right))
@@ -9064,6 +9199,51 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 340.36 280.67 180)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "424775fc-cae1-4adc-9d43-ff618fc5dc40")
+		(property "Reference" "R21"
+			(at 342.90 279.40 0)
+			(effects (font (size 1.27 1.27)) (justify right))
+		)
+		(property "Value" "6.8 kΩ 1%"
+			(at 342.90 281.94 0)
+			(effects (font (size 1.27 1.27)) (justify right))
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 340.36 280.67 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 340.36 280.67 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "RC0402FR-076K8L"
+			(at 342.90 284.48 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C93940"
+			(at 340.36 280.67 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Yageo"
+			(at 340.36 280.67 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(instances
+			(project "IphoneFM"
+				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
+					(reference "R21") (unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C_Small")
 		(at 360.68 101.60 90)
 		(unit 1)
@@ -9071,7 +9251,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "0c654f50-7cf3-41c3-b99f-7a33b5425682")
+		(uuid "abb1616b-aa95-4b55-9785-bb0d76457f30")
 		(property "Reference" "C22"
 			(at 373.38 101.60 90)
 			(effects (font (size 1.27 1.27)) (justify right))
@@ -9109,6 +9289,51 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 340.36 345.44 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "26ee2aee-26cb-4d0b-a001-e3b6a6f89615")
+		(property "Reference" "R22"
+			(at 342.90 344.17 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Value" "604 Ω 1%"
+			(at 342.90 346.71 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 340.36 345.44 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 340.36 345.44 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "RC0402FR-07604RL"
+			(at 342.90 349.25 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C273693"
+			(at 340.36 345.44 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Yageo"
+			(at 340.36 345.44 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(instances
+			(project "IphoneFM"
+				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
+					(reference "R22") (unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C_Small")
 		(at 368.30 104.14 90)
 		(unit 1)
@@ -9116,7 +9341,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "cb49ef7c-6477-4a44-a49c-8f7499a266f6")
+		(uuid "2e5cf884-0ec1-4c06-9b5c-7e2a58d3d3d9")
 		(property "Reference" "C23"
 			(at 373.38 104.14 90)
 			(effects (font (size 1.27 1.27)) (justify right))
@@ -9154,6 +9379,51 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 326.39 345.44 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "4b411179-6478-4b15-bad9-f08b605465c4")
+		(property "Reference" "R23"
+			(at 328.93 344.17 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Value" "2 kΩ 1%"
+			(at 328.93 346.71 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 326.39 345.44 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 326.39 345.44 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "ERJ-2RKF2001X"
+			(at 328.93 349.25 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C413086"
+			(at 326.39 345.44 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Panasonic"
+			(at 326.39 345.44 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(instances
+			(project "IphoneFM"
+				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
+					(reference "R23") (unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 356.87 85.09 0)
 		(unit 1)
@@ -9161,7 +9431,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "302d29be-ab54-45f1-95b1-2ab0f70797af")
+		(uuid "d9af239e-afe7-4cd8-9f91-080d3551ec3e")
 		(property "Reference" "C24"
 			(at 359.41 83.82 0)
 			(effects (font (size 1.27 1.27)) (justify left))
@@ -9199,6 +9469,51 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:R")
+		(at 312.42 345.44 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "26de2a37-3b6f-43a0-90af-5c193c55864d")
+		(property "Reference" "R24"
+			(at 314.96 344.17 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Value" "2 kΩ 1%"
+			(at 314.96 346.71 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 312.42 345.44 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 312.42 345.44 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "ERJ-2RKF2001X"
+			(at 314.96 349.25 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C413086"
+			(at 312.42 345.44 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Panasonic"
+			(at 312.42 345.44 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(instances
+			(project "IphoneFM"
+				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
+					(reference "R24") (unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 374.65 85.09 0)
 		(unit 1)
@@ -9206,7 +9521,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "4e03c914-19a2-4a1a-81a9-4ab4c9440700")
+		(uuid "7ff8ccb6-4f05-43a0-bfb5-812aa3032289")
 		(property "Reference" "C25"
 			(at 377.19 83.82 0)
 			(effects (font (size 1.27 1.27)) (justify left))
@@ -9251,7 +9566,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "c375a0cc-8ddc-4545-92be-517d151e7907")
+		(uuid "bf8892af-d674-40ab-bd21-3592659171b4")
 		(property "Reference" "C26"
 			(at 359.41 68.07 90)
 			(effects (font (size 1.27 1.27)) (justify right))
@@ -9296,7 +9611,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "4cc049f7-a2c1-4e3b-9475-9e52ca7b990b")
+		(uuid "aa198064-ef75-4a0b-bf9d-b4ecc368dd4c")
 		(property "Reference" "C27"
 			(at 434.34 111.76 0)
 			(effects (font (size 1.27 1.27)) (justify left))
@@ -9341,7 +9656,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "8f46a383-fe39-49b5-b45d-537d45f73a22")
+		(uuid "6f5f02c5-8de5-4450-97a5-6152621eaa68")
 		(property "Reference" "C28"
 			(at 447.04 129.54 0)
 			(effects (font (size 1.27 1.27)) (justify left))
@@ -9386,7 +9701,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "c7d0610b-1819-47b6-be74-f971b98af586")
+		(uuid "bc0d6789-9e72-4e5c-b720-a8f3c29f2c8f")
 		(property "Reference" "C29"
 			(at 467.36 129.54 0)
 			(effects (font (size 1.27 1.27)) (justify left))
@@ -9431,7 +9746,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "6589fe6d-e9fb-4509-a2d1-b9ce9ca337f6")
+		(uuid "a04cc3bb-af3b-47e5-bf99-e6aecf40a1f0")
 		(property "Reference" "C30"
 			(at 487.68 129.54 0)
 			(effects (font (size 1.27 1.27)) (justify left))
@@ -9476,7 +9791,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "871e14b1-b6a4-4508-9062-d3cc5547c2ef")
+		(uuid "cb6d502e-956e-40ed-beae-ca7b953869f9")
 		(property "Reference" "C31"
 			(at 508.00 137.16 0)
 			(effects (font (size 1.27 1.27)) (justify right))
@@ -9515,20 +9830,110 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 487.68 289.56 90)
+		(at 388.62 270.51 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "0d199252-5a5b-4441-b903-29fea34e0bd0")
+		(uuid "fd70034f-700d-41b3-91a5-e798783b5040")
+		(property "Reference" "C32"
+			(at 391.16 269.24 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Value" "22 nF X7R 50 V"
+			(at 391.16 271.78 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 388.62 270.51 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 388.62 270.51 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "GRM155R71H223KA12D"
+			(at 391.16 274.32 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C77023"
+			(at 388.62 270.51 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Murata"
+			(at 388.62 270.51 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(instances
+			(project "IphoneFM"
+				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
+					(reference "C32") (unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 411.48 270.51 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "76d5a2e1-8102-4c78-aa65-e7708024b438")
+		(property "Reference" "C33"
+			(at 414.02 269.24 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Value" "100 nF X7R 16 V"
+			(at 414.02 271.78 0)
+			(effects (font (size 1.27 1.27)) (justify left))
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 411.48 270.51 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 411.48 270.51 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "CL05B104KO5NNNC"
+			(at 414.02 274.32 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C1525"
+			(at 411.48 270.51 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Samsung"
+			(at 411.48 270.51 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(instances
+			(project "IphoneFM"
+				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
+					(reference "C33") (unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 487.68 289.56 270)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "d93eb2a4-0ae9-443d-aded-bef56eee41ca")
 		(property "Reference" "C34"
 			(at 483.87 283.97 90)
-			(effects (font (size 1.27 1.27)) (justify right))
+			(effects (font (size 1.27 1.27)) (justify left))
 		)
 		(property "Value" "1 nF C0G"
 			(at 483.87 285.75 90)
-			(effects (font (size 1.27 1.27)) (justify right))
+			(effects (font (size 1.27 1.27)) (justify left))
 		)
 		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 487.68 289.56 0)
@@ -9560,39 +9965,39 @@
 	)
 	(symbol
 		(lib_id "Device:C")
-		(at 457.20 294.64 0)
+		(at 457.20 293.37 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "8a39597f-c63e-4f15-acf9-f6ecfa6d3ec7")
+		(uuid "e7afaa47-c052-48cf-9262-2859a847f3f9")
 		(property "Reference" "C35"
-			(at 459.74 293.37 0)
+			(at 459.74 292.10 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
 		(property "Value" "6 pF C0G"
-			(at 459.74 295.91 0)
+			(at 459.74 294.64 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
 		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
-			(at 457.20 294.64 0)
+			(at 457.20 293.37 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
-			(at 457.20 294.64 0)
+			(at 457.20 293.37 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "MPN" "GJM1555C1H6R0CB01D"
-			(at 459.74 298.45 0)
+			(at 459.74 297.18 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "LCSC" "C161330"
-			(at 457.20 294.64 0)
+			(at 457.20 293.37 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Manufacturer" "Murata"
-			(at 457.20 294.64 0)
+			(at 457.20 293.37 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(instances
@@ -9611,7 +10016,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "1367a7be-2a49-4407-8a4a-d6bf07b9a01c")
+		(uuid "c7743989-4419-4423-911d-6b576be885c6")
 		(property "Reference" "C36"
 			(at 261.62 228.60 90)
 			(effects (font (size 1.27 1.27)) (justify right))
@@ -9649,6 +10054,96 @@
 		)
 	)
 	(symbol
+		(lib_id "Device:C")
+		(at 360.68 326.39 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "76f784ad-40fb-4d40-9f8c-bfbadec53cfe")
+		(property "Reference" "C37"
+			(at 360.68 336.55 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "33 pF C0G"
+			(at 360.68 339.09 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 360.68 326.39 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 360.68 326.39 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "CL05C330JB5NNNC"
+			(at 360.68 341.63 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C70465"
+			(at 360.68 326.39 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Samsung"
+			(at 360.68 326.39 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(instances
+			(project "IphoneFM"
+				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
+					(reference "C37") (unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C")
+		(at 350.52 323.85 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b077bcd4-efdf-476d-abcd-8bb521f7fe3e")
+		(property "Reference" "C38"
+			(at 350.52 334.01 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "33 pF C0G"
+			(at 350.52 336.55 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+			(at 350.52 323.85 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 350.52 323.85 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "CL05C330JB5NNNC"
+			(at 350.52 339.09 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C70465"
+			(at 350.52 323.85 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Samsung"
+			(at 350.52 323.85 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(instances
+			(project "IphoneFM"
+				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
+					(reference "C38") (unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C_Small")
 		(at 248.92 223.52 90)
 		(unit 1)
@@ -9656,7 +10151,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "1873f013-1528-4967-8ff4-2c9640f65699")
+		(uuid "ab8eaa81-c101-414d-ba07-ae1d87a02c2d")
 		(property "Reference" "C39"
 			(at 261.62 223.52 90)
 			(effects (font (size 1.27 1.27)) (justify right))
@@ -9701,7 +10196,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "e6d81ee8-7a71-41c4-bfcc-5de7b5a882de")
+		(uuid "c5d3f301-0626-4d7c-b884-4dc0ef8af70e")
 		(property "Reference" "C40"
 			(at 261.62 226.06 90)
 			(effects (font (size 1.27 1.27)) (justify right))
@@ -9746,7 +10241,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "1506dd3e-25fd-4aee-b138-ce0edb424424")
+		(uuid "90e6c8c1-448d-4c8b-adea-c1dd516b9978")
 		(property "Reference" "C41"
 			(at 261.62 231.14 90)
 			(effects (font (size 1.27 1.27)) (justify right))
@@ -9784,321 +10279,6 @@
 		)
 	)
 	(symbol
-		(lib_id "Device:FerriteBead")
-		(at 365.76 256.54 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "dc657b20-a06c-4549-9a9e-79df6df42b5c")
-		(property "Reference" "FB3"
-			(at 368.30 255.27 0)
-			(effects (font (size 1.27 1.27)) (justify left))
-		)
-		(property "Value" "600 Ω at 100 MHz"
-			(at 368.30 257.81 0)
-			(effects (font (size 1.27 1.27)) (justify left))
-		)
-		(property "Footprint" "Inductor_SMD:L_0402_1005Metric"
-			(at 365.76 256.54 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Datasheet" "~"
-			(at 365.76 256.54 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "MPN" "BLM15AG601SN1D"
-			(at 368.30 260.35 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "LCSC" "C76884"
-			(at 365.76 256.54 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Manufacturer" "Murata"
-			(at 365.76 256.54 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(instances
-			(project "IphoneFM"
-				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "FB3") (unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 340.36 304.80 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "d04c2b21-c3de-47f5-a447-c761a2560559")
-		(property "Reference" "R19"
-			(at 337.82 303.53 0)
-			(effects (font (size 1.27 1.27)) (justify right))
-		)
-		(property "Value" "10 kΩ 1%"
-			(at 337.82 306.07 0)
-			(effects (font (size 1.27 1.27)) (justify right))
-		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
-			(at 340.36 304.80 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Datasheet" "~"
-			(at 340.36 304.80 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "MPN" "RC0402FR-0710KL"
-			(at 337.82 308.61 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "LCSC" "C60490"
-			(at 340.36 304.80 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Manufacturer" "Yageo"
-			(at 340.36 304.80 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(instances
-			(project "IphoneFM"
-				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "R19") (unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 340.36 279.40 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "56169699-7ff2-42e9-8085-9e0b1c58ed93")
-		(property "Reference" "R20"
-			(at 337.82 278.13 0)
-			(effects (font (size 1.27 1.27)) (justify left))
-		)
-		(property "Value" "6.8 kΩ 1%"
-			(at 337.82 280.67 0)
-			(effects (font (size 1.27 1.27)) (justify left))
-		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
-			(at 340.36 279.40 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Datasheet" "~"
-			(at 340.36 279.40 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "MPN" "RC0402FR-076K8L"
-			(at 337.82 283.21 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "LCSC" "C93940"
-			(at 340.36 279.40 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Manufacturer" "Yageo"
-			(at 340.36 279.40 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(instances
-			(project "IphoneFM"
-				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "R20") (unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 340.36 327.66 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "0b1aa129-b7ef-47e0-ac80-158dc1397f15")
-		(property "Reference" "R21"
-			(at 337.82 326.39 0)
-			(effects (font (size 1.27 1.27)) (justify left))
-		)
-		(property "Value" "6.8 kΩ 1%"
-			(at 337.82 328.93 0)
-			(effects (font (size 1.27 1.27)) (justify left))
-		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
-			(at 340.36 327.66 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Datasheet" "~"
-			(at 340.36 327.66 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "MPN" "RC0402FR-076K8L"
-			(at 337.82 331.47 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "LCSC" "C93940"
-			(at 340.36 327.66 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Manufacturer" "Yageo"
-			(at 340.36 327.66 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(instances
-			(project "IphoneFM"
-				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "R21") (unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 314.96 309.88 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "5c9941b5-5621-481f-bc8e-9fa58e41b8ab")
-		(property "Reference" "R22"
-			(at 311.15 304.29 90)
-			(effects (font (size 1.27 1.27)) (justify right))
-		)
-		(property "Value" "604 Ω 1%"
-			(at 311.15 306.07 90)
-			(effects (font (size 1.27 1.27)) (justify right))
-		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
-			(at 314.96 309.88 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Datasheet" "~"
-			(at 314.96 309.88 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "MPN" "RC0402FR-07604RL"
-			(at 311.15 308.61 90)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "LCSC" "C273693"
-			(at 314.96 309.88 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Manufacturer" "Yageo"
-			(at 314.96 309.88 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(instances
-			(project "IphoneFM"
-				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "R22") (unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 314.96 299.72 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "896694e8-be51-4540-8982-3d45744895b7")
-		(property "Reference" "R23"
-			(at 311.15 294.13 90)
-			(effects (font (size 1.27 1.27)) (justify right))
-		)
-		(property "Value" "2 kΩ 1%"
-			(at 311.15 295.91 90)
-			(effects (font (size 1.27 1.27)) (justify right))
-		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
-			(at 314.96 299.72 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Datasheet" "~"
-			(at 314.96 299.72 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "MPN" "ERJ-2RKF2001X"
-			(at 311.15 298.45 90)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "LCSC" "C413086"
-			(at 314.96 299.72 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Manufacturer" "Panasonic"
-			(at 314.96 299.72 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(instances
-			(project "IphoneFM"
-				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "R23") (unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:R")
-		(at 314.96 320.04 90)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "97cf7db9-36f5-4c26-8701-fe0bfefb9e97")
-		(property "Reference" "R24"
-			(at 311.15 314.45 90)
-			(effects (font (size 1.27 1.27)) (justify right))
-		)
-		(property "Value" "2 kΩ 1%"
-			(at 311.15 316.23 90)
-			(effects (font (size 1.27 1.27)) (justify right))
-		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
-			(at 314.96 320.04 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Datasheet" "~"
-			(at 314.96 320.04 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "MPN" "ERJ-2RKF2001X"
-			(at 311.15 318.77 90)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "LCSC" "C413086"
-			(at 314.96 320.04 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Manufacturer" "Panasonic"
-			(at 314.96 320.04 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(instances
-			(project "IphoneFM"
-				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "R24") (unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "Device:R")
 		(at 127.00 297.18 90)
 		(unit 1)
@@ -10106,7 +10286,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "da70960d-2ac4-4b04-9889-29de4aa15573")
+		(uuid "026538f4-7d32-47ca-b645-6baa71505572")
 		(property "Reference" "R25"
 			(at 123.19 291.59 90)
 			(effects (font (size 1.27 1.27)) (justify right))
@@ -10151,7 +10331,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "351335b6-fb6d-41b0-bdcc-4b94623213be")
+		(uuid "fd57a879-db1f-4fa2-b8e4-6c8b5312bfff")
 		(property "Reference" "R26"
 			(at 123.19 304.29 90)
 			(effects (font (size 1.27 1.27)) (justify right))
@@ -10196,7 +10376,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "c389db1a-b431-453b-86d0-4cae99608552")
+		(uuid "8e91da04-72ba-45ce-88fe-0c5759cfcd26")
 		(property "Reference" "R27"
 			(at 123.19 316.99 90)
 			(effects (font (size 1.27 1.27)) (justify right))
@@ -10229,186 +10409,6 @@
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
 					(reference "R27") (unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 396.24 269.24 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "18d616f4-c30b-4bfb-b4bb-93fb7f7f7758")
-		(property "Reference" "C32"
-			(at 398.78 267.97 0)
-			(effects (font (size 1.27 1.27)) (justify left))
-		)
-		(property "Value" "22 nF X7R 50 V"
-			(at 398.78 270.51 0)
-			(effects (font (size 1.27 1.27)) (justify left))
-		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
-			(at 396.24 269.24 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Datasheet" "~"
-			(at 396.24 269.24 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "MPN" "GRM155R71H223KA12D"
-			(at 398.78 273.05 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "LCSC" "C77023"
-			(at 396.24 269.24 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Manufacturer" "Murata"
-			(at 396.24 269.24 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(instances
-			(project "IphoneFM"
-				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "C32") (unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 337.82 256.54 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "c263efaa-66df-4f64-9862-5c6e0fe6ea73")
-		(property "Reference" "C33"
-			(at 340.36 255.27 0)
-			(effects (font (size 1.27 1.27)) (justify left))
-		)
-		(property "Value" "100 nF X7R 16 V"
-			(at 340.36 257.81 0)
-			(effects (font (size 1.27 1.27)) (justify left))
-		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
-			(at 337.82 256.54 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Datasheet" "~"
-			(at 337.82 256.54 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "MPN" "CL05B104KO5NNNC"
-			(at 340.36 260.35 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "LCSC" "C1525"
-			(at 337.82 256.54 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Manufacturer" "Samsung"
-			(at 337.82 256.54 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(instances
-			(project "IphoneFM"
-				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "C33") (unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 340.36 347.98 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "231ffbca-51d7-4603-be2d-64584cec7501")
-		(property "Reference" "C37"
-			(at 337.82 346.71 0)
-			(effects (font (size 1.27 1.27)) (justify right))
-		)
-		(property "Value" "33 pF C0G"
-			(at 337.82 349.25 0)
-			(effects (font (size 1.27 1.27)) (justify right))
-		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
-			(at 340.36 347.98 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Datasheet" "~"
-			(at 340.36 347.98 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "MPN" "CL05C330JB5NNNC"
-			(at 337.82 351.79 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "LCSC" "C70465"
-			(at 340.36 347.98 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Manufacturer" "Samsung"
-			(at 340.36 347.98 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(instances
-			(project "IphoneFM"
-				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "C37") (unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C")
-		(at 314.96 337.82 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "d65a0e7f-dcf7-4685-b314-7bcfc1de5fbe")
-		(property "Reference" "C38"
-			(at 312.42 336.55 0)
-			(effects (font (size 1.27 1.27)) (justify right))
-		)
-		(property "Value" "33 pF C0G"
-			(at 312.42 339.09 0)
-			(effects (font (size 1.27 1.27)) (justify right))
-		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
-			(at 314.96 337.82 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Datasheet" "~"
-			(at 314.96 337.82 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "MPN" "CL05C330JB5NNNC"
-			(at 312.42 341.63 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "LCSC" "C70465"
-			(at 314.96 337.82 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Manufacturer" "Samsung"
-			(at 314.96 337.82 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(instances
-			(project "IphoneFM"
-				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "C38") (unit 1)
 				)
 			)
 		)
@@ -10630,7 +10630,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 350.52 292.10 270)
+		(at 365.76 299.72 270)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10638,19 +10638,19 @@
 		(dnp no)
 		(uuid "50a7e500-0000-4000-8000-000000000010")
 		(property "Reference" "#PWR006"
-			(at 350.52 292.10 0)
+			(at 365.76 299.72 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Value" "GND"
-			(at 345.57 292.10 90)
+			(at 360.81 299.72 90)
 			(effects (font (size 1.27 1.27)))
 		)
 		(property "Footprint" ""
-			(at 350.52 292.10 0)
+			(at 365.76 299.72 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" ""
-			(at 350.52 292.10 0)
+			(at 365.76 299.72 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(instances
@@ -10663,7 +10663,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 381.00 292.10 90)
+		(at 396.24 292.10 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10671,19 +10671,19 @@
 		(dnp no)
 		(uuid "50a7e500-0000-4000-8000-000000000011")
 		(property "Reference" "#PWR007"
-			(at 381.00 292.10 0)
+			(at 396.24 292.10 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Value" "GND"
-			(at 385.95 292.10 90)
+			(at 401.19 292.10 90)
 			(effects (font (size 1.27 1.27)))
 		)
 		(property "Footprint" ""
-			(at 381.00 292.10 0)
+			(at 396.24 292.10 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" ""
-			(at 381.00 292.10 0)
+			(at 396.24 292.10 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(instances
@@ -10695,23 +10695,23 @@
 		)
 	)
 	(wire
-		(pts (xy 381.00 297.18) (xy 383.54 297.18))
+		(pts (xy 396.24 297.18) (xy 398.78 297.18))
 		(stroke (width 0) (type default))
 		(uuid "50a7e500-0000-4000-8000-000000000012")
 	)
 	(wire
-		(pts (xy 381.00 299.72) (xy 383.54 299.72))
+		(pts (xy 396.24 299.72) (xy 398.78 299.72))
 		(stroke (width 0) (type default))
 		(uuid "50a7e500-0000-4000-8000-000000000013")
 	)
 	(wire
-		(pts (xy 383.54 297.18) (xy 383.54 299.72))
+		(pts (xy 398.78 297.18) (xy 398.78 299.72))
 		(stroke (width 0) (type default))
 		(uuid "50a7e500-0000-4000-8000-000000000014")
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 383.54 299.72 90)
+		(at 398.78 299.72 90)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -10719,19 +10719,19 @@
 		(dnp no)
 		(uuid "50a7e500-0000-4000-8000-000000000015")
 		(property "Reference" "#PWR008"
-			(at 383.54 299.72 0)
+			(at 398.78 299.72 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Value" "GND"
-			(at 388.49 299.72 90)
+			(at 403.73 299.72 90)
 			(effects (font (size 1.27 1.27)))
 		)
 		(property "Footprint" ""
-			(at 383.54 299.72 0)
+			(at 398.78 299.72 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" ""
-			(at 383.54 299.72 0)
+			(at 398.78 299.72 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(instances
@@ -10743,107 +10743,59 @@
 		)
 	)
 	(wire
-		(pts (xy 365.76 279.40) (xy 365.76 276.86))
+		(pts (xy 375.92 335.28) (xy 375.92 337.82))
 		(stroke (width 0) (type default))
 		(uuid "50a7e500-0000-4000-8000-000000000016")
 	)
 	(wire
-		(pts (xy 368.30 279.40) (xy 368.30 276.86))
+		(pts (xy 378.46 335.28) (xy 378.46 337.82))
 		(stroke (width 0) (type default))
 		(uuid "50a7e500-0000-4000-8000-000000000017")
 	)
 	(wire
-		(pts (xy 365.76 276.86) (xy 368.30 276.86))
+		(pts (xy 381.00 335.28) (xy 381.00 337.82))
 		(stroke (width 0) (type default))
 		(uuid "50a7e500-0000-4000-8000-000000000018")
 	)
+	(wire
+		(pts (xy 375.92 337.82) (xy 378.46 337.82))
+		(stroke (width 0) (type default))
+		(uuid "50a7e500-0000-4000-8000-000000000019")
+	)
+	(wire
+		(pts (xy 378.46 337.82) (xy 381.00 337.82))
+		(stroke (width 0) (type default))
+		(uuid "50a7e500-0000-4000-8000-00000000001a")
+	)
 	(symbol
-		(lib_id "power:VDDA")
-		(at 368.30 276.86 0)
+		(lib_id "power:GND")
+		(at 378.46 337.82 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000019")
+		(uuid "50a7e500-0000-4000-8000-00000000001b")
 		(property "Reference" "#PWR009"
-			(at 368.30 276.86 0)
+			(at 378.46 337.82 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Value" "RX_VDD"
-			(at 368.30 273.30 0)
+		(property "Value" "GND"
+			(at 378.46 341.38 0)
 			(effects (font (size 1.27 1.27)))
 		)
 		(property "Footprint" ""
-			(at 368.30 276.86 0)
+			(at 378.46 337.82 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" ""
-			(at 368.30 276.86 0)
+			(at 378.46 337.82 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
 					(reference "#PWR009") (unit 1)
-				)
-			)
-		)
-	)
-	(wire
-		(pts (xy 360.68 330.20) (xy 360.68 332.74))
-		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-00000000001a")
-	)
-	(wire
-		(pts (xy 363.22 330.20) (xy 363.22 332.74))
-		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-00000000001b")
-	)
-	(wire
-		(pts (xy 365.76 330.20) (xy 365.76 332.74))
-		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-00000000001c")
-	)
-	(wire
-		(pts (xy 360.68 332.74) (xy 363.22 332.74))
-		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-00000000001d")
-	)
-	(wire
-		(pts (xy 363.22 332.74) (xy 365.76 332.74))
-		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-00000000001e")
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 363.22 332.74 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-00000000001f")
-		(property "Reference" "#PWR010"
-			(at 363.22 332.74 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Value" "GND"
-			(at 363.22 336.30 0)
-			(effects (font (size 1.27 1.27)))
-		)
-		(property "Footprint" ""
-			(at 363.22 332.74 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Datasheet" ""
-			(at 363.22 332.74 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(instances
-			(project "IphoneFM"
-				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR010") (unit 1)
 				)
 			)
 		)
@@ -10856,8 +10808,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000020")
-		(property "Reference" "#PWR011"
+		(uuid "50a7e500-0000-4000-8000-00000000001c")
+		(property "Reference" "#PWR010"
 			(at 530.86 142.24 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -10876,7 +10828,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR011") (unit 1)
+					(reference "#PWR010") (unit 1)
 				)
 			)
 		)
@@ -10889,8 +10841,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000021")
-		(property "Reference" "#PWR012"
+		(uuid "50a7e500-0000-4000-8000-00000000001d")
+		(property "Reference" "#PWR011"
 			(at 66.04 109.22 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -10909,7 +10861,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR012") (unit 1)
+					(reference "#PWR011") (unit 1)
 				)
 			)
 		)
@@ -10922,8 +10874,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000022")
-		(property "Reference" "#PWR013"
+		(uuid "50a7e500-0000-4000-8000-00000000001e")
+		(property "Reference" "#PWR012"
 			(at 66.04 96.52 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -10942,7 +10894,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR013") (unit 1)
+					(reference "#PWR012") (unit 1)
 				)
 			)
 		)
@@ -10955,8 +10907,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000023")
-		(property "Reference" "#PWR014"
+		(uuid "50a7e500-0000-4000-8000-00000000001f")
+		(property "Reference" "#PWR013"
 			(at 403.86 147.32 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -10975,7 +10927,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR014") (unit 1)
+					(reference "#PWR013") (unit 1)
 				)
 			)
 		)
@@ -10988,8 +10940,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000024")
-		(property "Reference" "#PWR015"
+		(uuid "50a7e500-0000-4000-8000-000000000020")
+		(property "Reference" "#PWR014"
 			(at 403.86 152.40 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11008,7 +10960,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR015") (unit 1)
+					(reference "#PWR014") (unit 1)
 				)
 			)
 		)
@@ -11021,8 +10973,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000025")
-		(property "Reference" "#PWR016"
+		(uuid "50a7e500-0000-4000-8000-000000000021")
+		(property "Reference" "#PWR015"
 			(at 403.86 154.94 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11041,7 +10993,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR016") (unit 1)
+					(reference "#PWR015") (unit 1)
 				)
 			)
 		)
@@ -11049,17 +11001,17 @@
 	(wire
 		(pts (xy 403.86 157.48) (xy 401.32 157.48))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-000000000026")
+		(uuid "50a7e500-0000-4000-8000-000000000022")
 	)
 	(wire
 		(pts (xy 403.86 160.02) (xy 401.32 160.02))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-000000000027")
+		(uuid "50a7e500-0000-4000-8000-000000000023")
 	)
 	(wire
 		(pts (xy 401.32 157.48) (xy 401.32 160.02))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-000000000028")
+		(uuid "50a7e500-0000-4000-8000-000000000024")
 	)
 	(symbol
 		(lib_id "power:GND")
@@ -11069,8 +11021,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000029")
-		(property "Reference" "#PWR017"
+		(uuid "50a7e500-0000-4000-8000-000000000025")
+		(property "Reference" "#PWR016"
 			(at 401.32 160.02 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11089,7 +11041,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR017") (unit 1)
+					(reference "#PWR016") (unit 1)
 				)
 			)
 		)
@@ -11097,107 +11049,107 @@
 	(wire
 		(pts (xy 408.94 172.72) (xy 408.94 175.26))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-00000000002a")
+		(uuid "50a7e500-0000-4000-8000-000000000026")
 	)
 	(wire
 		(pts (xy 411.48 172.72) (xy 411.48 175.26))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-00000000002b")
+		(uuid "50a7e500-0000-4000-8000-000000000027")
 	)
 	(wire
 		(pts (xy 414.02 172.72) (xy 414.02 175.26))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-00000000002c")
+		(uuid "50a7e500-0000-4000-8000-000000000028")
 	)
 	(wire
 		(pts (xy 416.56 172.72) (xy 416.56 175.26))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-00000000002d")
+		(uuid "50a7e500-0000-4000-8000-000000000029")
 	)
 	(wire
 		(pts (xy 419.10 172.72) (xy 419.10 175.26))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-00000000002e")
+		(uuid "50a7e500-0000-4000-8000-00000000002a")
 	)
 	(wire
 		(pts (xy 421.64 172.72) (xy 421.64 175.26))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-00000000002f")
+		(uuid "50a7e500-0000-4000-8000-00000000002b")
 	)
 	(wire
 		(pts (xy 424.18 172.72) (xy 424.18 175.26))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-000000000030")
+		(uuid "50a7e500-0000-4000-8000-00000000002c")
 	)
 	(wire
 		(pts (xy 426.72 172.72) (xy 426.72 175.26))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-000000000031")
+		(uuid "50a7e500-0000-4000-8000-00000000002d")
 	)
 	(wire
 		(pts (xy 429.26 172.72) (xy 429.26 175.26))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-000000000032")
+		(uuid "50a7e500-0000-4000-8000-00000000002e")
 	)
 	(wire
 		(pts (xy 431.80 172.72) (xy 431.80 175.26))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-000000000033")
+		(uuid "50a7e500-0000-4000-8000-00000000002f")
 	)
 	(wire
 		(pts (xy 434.34 172.72) (xy 434.34 175.26))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-000000000034")
+		(uuid "50a7e500-0000-4000-8000-000000000030")
 	)
 	(wire
 		(pts (xy 408.94 175.26) (xy 411.48 175.26))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-000000000035")
+		(uuid "50a7e500-0000-4000-8000-000000000031")
 	)
 	(wire
 		(pts (xy 411.48 175.26) (xy 414.02 175.26))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-000000000036")
+		(uuid "50a7e500-0000-4000-8000-000000000032")
 	)
 	(wire
 		(pts (xy 414.02 175.26) (xy 416.56 175.26))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-000000000037")
+		(uuid "50a7e500-0000-4000-8000-000000000033")
 	)
 	(wire
 		(pts (xy 416.56 175.26) (xy 419.10 175.26))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-000000000038")
+		(uuid "50a7e500-0000-4000-8000-000000000034")
 	)
 	(wire
 		(pts (xy 419.10 175.26) (xy 421.64 175.26))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-000000000039")
+		(uuid "50a7e500-0000-4000-8000-000000000035")
 	)
 	(wire
 		(pts (xy 421.64 175.26) (xy 424.18 175.26))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-00000000003a")
+		(uuid "50a7e500-0000-4000-8000-000000000036")
 	)
 	(wire
 		(pts (xy 424.18 175.26) (xy 426.72 175.26))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-00000000003b")
+		(uuid "50a7e500-0000-4000-8000-000000000037")
 	)
 	(wire
 		(pts (xy 426.72 175.26) (xy 429.26 175.26))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-00000000003c")
+		(uuid "50a7e500-0000-4000-8000-000000000038")
 	)
 	(wire
 		(pts (xy 429.26 175.26) (xy 431.80 175.26))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-00000000003d")
+		(uuid "50a7e500-0000-4000-8000-000000000039")
 	)
 	(wire
 		(pts (xy 431.80 175.26) (xy 434.34 175.26))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-00000000003e")
+		(uuid "50a7e500-0000-4000-8000-00000000003a")
 	)
 	(symbol
 		(lib_id "power:GND")
@@ -11207,8 +11159,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-00000000003f")
-		(property "Reference" "#PWR018"
+		(uuid "50a7e500-0000-4000-8000-00000000003b")
+		(property "Reference" "#PWR017"
 			(at 421.64 175.26 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11227,7 +11179,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR018") (unit 1)
+					(reference "#PWR017") (unit 1)
 				)
 			)
 		)
@@ -11240,8 +11192,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000040")
-		(property "Reference" "#PWR019"
+		(uuid "50a7e500-0000-4000-8000-00000000003c")
+		(property "Reference" "#PWR018"
 			(at 208.28 50.80 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11260,7 +11212,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR019") (unit 1)
+					(reference "#PWR018") (unit 1)
 				)
 			)
 		)
@@ -11273,8 +11225,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000041")
-		(property "Reference" "#PWR020"
+		(uuid "50a7e500-0000-4000-8000-00000000003d")
+		(property "Reference" "#PWR019"
 			(at 223.52 60.96 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11293,7 +11245,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR020") (unit 1)
+					(reference "#PWR019") (unit 1)
 				)
 			)
 		)
@@ -11306,8 +11258,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000042")
-		(property "Reference" "#PWR021"
+		(uuid "50a7e500-0000-4000-8000-00000000003e")
+		(property "Reference" "#PWR020"
 			(at 30.48 93.98 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11326,7 +11278,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR021") (unit 1)
+					(reference "#PWR020") (unit 1)
 				)
 			)
 		)
@@ -11339,8 +11291,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000043")
-		(property "Reference" "#PWR022"
+		(uuid "50a7e500-0000-4000-8000-00000000003f")
+		(property "Reference" "#PWR021"
 			(at 38.10 93.98 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11359,7 +11311,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR022") (unit 1)
+					(reference "#PWR021") (unit 1)
 				)
 			)
 		)
@@ -11372,8 +11324,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000044")
-		(property "Reference" "#PWR023"
+		(uuid "50a7e500-0000-4000-8000-000000000040")
+		(property "Reference" "#PWR022"
 			(at 53.34 55.88 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11392,7 +11344,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR023") (unit 1)
+					(reference "#PWR022") (unit 1)
 				)
 			)
 		)
@@ -11405,8 +11357,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000045")
-		(property "Reference" "#PWR024"
+		(uuid "50a7e500-0000-4000-8000-000000000041")
+		(property "Reference" "#PWR023"
 			(at 571.50 132.08 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11425,7 +11377,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR024") (unit 1)
+					(reference "#PWR023") (unit 1)
 				)
 			)
 		)
@@ -11438,8 +11390,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000046")
-		(property "Reference" "#PWR025"
+		(uuid "50a7e500-0000-4000-8000-000000000042")
+		(property "Reference" "#PWR024"
 			(at 81.28 363.22 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11458,7 +11410,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR025") (unit 1)
+					(reference "#PWR024") (unit 1)
 				)
 			)
 		)
@@ -11471,8 +11423,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000047")
-		(property "Reference" "#PWR026"
+		(uuid "50a7e500-0000-4000-8000-000000000043")
+		(property "Reference" "#PWR025"
 			(at 81.28 368.30 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11491,7 +11443,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR026") (unit 1)
+					(reference "#PWR025") (unit 1)
 				)
 			)
 		)
@@ -11504,8 +11456,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000048")
-		(property "Reference" "#PWR027"
+		(uuid "50a7e500-0000-4000-8000-000000000044")
+		(property "Reference" "#PWR026"
 			(at 96.52 378.46 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11524,7 +11476,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR027") (unit 1)
+					(reference "#PWR026") (unit 1)
 				)
 			)
 		)
@@ -11537,8 +11489,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000049")
-		(property "Reference" "#PWR028"
+		(uuid "50a7e500-0000-4000-8000-000000000045")
+		(property "Reference" "#PWR027"
 			(at 91.44 325.12 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11557,7 +11509,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR028") (unit 1)
+					(reference "#PWR027") (unit 1)
 				)
 			)
 		)
@@ -11565,57 +11517,57 @@
 	(wire
 		(pts (xy 355.60 193.04) (xy 355.60 195.58))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-00000000004a")
+		(uuid "50a7e500-0000-4000-8000-000000000046")
 	)
 	(wire
 		(pts (xy 358.14 193.04) (xy 358.14 195.58))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-00000000004b")
+		(uuid "50a7e500-0000-4000-8000-000000000047")
 	)
 	(wire
 		(pts (xy 360.68 193.04) (xy 360.68 195.58))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-00000000004c")
+		(uuid "50a7e500-0000-4000-8000-000000000048")
 	)
 	(wire
 		(pts (xy 363.22 193.04) (xy 363.22 195.58))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-00000000004d")
+		(uuid "50a7e500-0000-4000-8000-000000000049")
 	)
 	(wire
 		(pts (xy 365.76 193.04) (xy 365.76 195.58))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-00000000004e")
+		(uuid "50a7e500-0000-4000-8000-00000000004a")
 	)
 	(wire
 		(pts (xy 368.30 193.04) (xy 368.30 195.58))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-00000000004f")
+		(uuid "50a7e500-0000-4000-8000-00000000004b")
 	)
 	(wire
 		(pts (xy 355.60 195.58) (xy 358.14 195.58))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-000000000050")
+		(uuid "50a7e500-0000-4000-8000-00000000004c")
 	)
 	(wire
 		(pts (xy 358.14 195.58) (xy 360.68 195.58))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-000000000051")
+		(uuid "50a7e500-0000-4000-8000-00000000004d")
 	)
 	(wire
 		(pts (xy 360.68 195.58) (xy 363.22 195.58))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-000000000052")
+		(uuid "50a7e500-0000-4000-8000-00000000004e")
 	)
 	(wire
 		(pts (xy 363.22 195.58) (xy 365.76 195.58))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-000000000053")
+		(uuid "50a7e500-0000-4000-8000-00000000004f")
 	)
 	(wire
 		(pts (xy 365.76 195.58) (xy 368.30 195.58))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-000000000054")
+		(uuid "50a7e500-0000-4000-8000-000000000050")
 	)
 	(symbol
 		(lib_id "power:+3V3")
@@ -11625,8 +11577,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000055")
-		(property "Reference" "#PWR029"
+		(uuid "50a7e500-0000-4000-8000-000000000051")
+		(property "Reference" "#PWR028"
 			(at 363.22 195.58 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11645,7 +11597,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR029") (unit 1)
+					(reference "#PWR028") (unit 1)
 				)
 			)
 		)
@@ -11653,37 +11605,37 @@
 	(wire
 		(pts (xy 81.28 193.04) (xy 78.74 193.04))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-000000000056")
+		(uuid "50a7e500-0000-4000-8000-000000000052")
 	)
 	(wire
 		(pts (xy 81.28 195.58) (xy 78.74 195.58))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-000000000057")
+		(uuid "50a7e500-0000-4000-8000-000000000053")
 	)
 	(wire
 		(pts (xy 81.28 198.12) (xy 78.74 198.12))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-000000000058")
+		(uuid "50a7e500-0000-4000-8000-000000000054")
 	)
 	(wire
 		(pts (xy 81.28 200.66) (xy 78.74 200.66))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-000000000059")
+		(uuid "50a7e500-0000-4000-8000-000000000055")
 	)
 	(wire
 		(pts (xy 78.74 193.04) (xy 78.74 195.58))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-00000000005a")
+		(uuid "50a7e500-0000-4000-8000-000000000056")
 	)
 	(wire
 		(pts (xy 78.74 195.58) (xy 78.74 198.12))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-00000000005b")
+		(uuid "50a7e500-0000-4000-8000-000000000057")
 	)
 	(wire
 		(pts (xy 78.74 198.12) (xy 78.74 200.66))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-00000000005c")
+		(uuid "50a7e500-0000-4000-8000-000000000058")
 	)
 	(symbol
 		(lib_id "power:GND")
@@ -11693,8 +11645,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-00000000005d")
-		(property "Reference" "#PWR030"
+		(uuid "50a7e500-0000-4000-8000-000000000059")
+		(property "Reference" "#PWR029"
 			(at 78.74 198.12 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11713,7 +11665,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR030") (unit 1)
+					(reference "#PWR029") (unit 1)
 				)
 			)
 		)
@@ -11726,8 +11678,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-00000000005e")
-		(property "Reference" "#PWR031"
+		(uuid "50a7e500-0000-4000-8000-00000000005a")
+		(property "Reference" "#PWR030"
 			(at 96.52 180.34 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11746,7 +11698,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR031") (unit 1)
+					(reference "#PWR030") (unit 1)
 				)
 			)
 		)
@@ -11759,8 +11711,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-00000000005f")
-		(property "Reference" "#PWR032"
+		(uuid "50a7e500-0000-4000-8000-00000000005b")
+		(property "Reference" "#PWR031"
 			(at 96.52 215.90 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11779,7 +11731,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR032") (unit 1)
+					(reference "#PWR031") (unit 1)
 				)
 			)
 		)
@@ -11787,37 +11739,37 @@
 	(wire
 		(pts (xy 81.28 231.14) (xy 78.74 231.14))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-000000000060")
+		(uuid "50a7e500-0000-4000-8000-00000000005c")
 	)
 	(wire
 		(pts (xy 81.28 233.68) (xy 78.74 233.68))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-000000000061")
+		(uuid "50a7e500-0000-4000-8000-00000000005d")
 	)
 	(wire
 		(pts (xy 81.28 236.22) (xy 78.74 236.22))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-000000000062")
+		(uuid "50a7e500-0000-4000-8000-00000000005e")
 	)
 	(wire
 		(pts (xy 81.28 238.76) (xy 78.74 238.76))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-000000000063")
+		(uuid "50a7e500-0000-4000-8000-00000000005f")
 	)
 	(wire
 		(pts (xy 78.74 231.14) (xy 78.74 233.68))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-000000000064")
+		(uuid "50a7e500-0000-4000-8000-000000000060")
 	)
 	(wire
 		(pts (xy 78.74 233.68) (xy 78.74 236.22))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-000000000065")
+		(uuid "50a7e500-0000-4000-8000-000000000061")
 	)
 	(wire
 		(pts (xy 78.74 236.22) (xy 78.74 238.76))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-000000000066")
+		(uuid "50a7e500-0000-4000-8000-000000000062")
 	)
 	(symbol
 		(lib_id "power:GND")
@@ -11827,8 +11779,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000067")
-		(property "Reference" "#PWR033"
+		(uuid "50a7e500-0000-4000-8000-000000000063")
+		(property "Reference" "#PWR032"
 			(at 78.74 236.22 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11847,7 +11799,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR033") (unit 1)
+					(reference "#PWR032") (unit 1)
 				)
 			)
 		)
@@ -11860,8 +11812,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000068")
-		(property "Reference" "#PWR034"
+		(uuid "50a7e500-0000-4000-8000-000000000064")
+		(property "Reference" "#PWR033"
 			(at 96.52 218.44 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11880,7 +11832,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR034") (unit 1)
+					(reference "#PWR033") (unit 1)
 				)
 			)
 		)
@@ -11893,8 +11845,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000069")
-		(property "Reference" "#PWR035"
+		(uuid "50a7e500-0000-4000-8000-000000000065")
+		(property "Reference" "#PWR034"
 			(at 96.52 254.00 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11913,7 +11865,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR035") (unit 1)
+					(reference "#PWR034") (unit 1)
 				)
 			)
 		)
@@ -11921,37 +11873,37 @@
 	(wire
 		(pts (xy 81.28 269.24) (xy 78.74 269.24))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-00000000006a")
+		(uuid "50a7e500-0000-4000-8000-000000000066")
 	)
 	(wire
 		(pts (xy 81.28 271.78) (xy 78.74 271.78))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-00000000006b")
+		(uuid "50a7e500-0000-4000-8000-000000000067")
 	)
 	(wire
 		(pts (xy 81.28 274.32) (xy 78.74 274.32))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-00000000006c")
+		(uuid "50a7e500-0000-4000-8000-000000000068")
 	)
 	(wire
 		(pts (xy 81.28 276.86) (xy 78.74 276.86))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-00000000006d")
+		(uuid "50a7e500-0000-4000-8000-000000000069")
 	)
 	(wire
 		(pts (xy 78.74 269.24) (xy 78.74 271.78))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-00000000006e")
+		(uuid "50a7e500-0000-4000-8000-00000000006a")
 	)
 	(wire
 		(pts (xy 78.74 271.78) (xy 78.74 274.32))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-00000000006f")
+		(uuid "50a7e500-0000-4000-8000-00000000006b")
 	)
 	(wire
 		(pts (xy 78.74 274.32) (xy 78.74 276.86))
 		(stroke (width 0) (type default))
-		(uuid "50a7e500-0000-4000-8000-000000000070")
+		(uuid "50a7e500-0000-4000-8000-00000000006c")
 	)
 	(symbol
 		(lib_id "power:GND")
@@ -11961,8 +11913,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000071")
-		(property "Reference" "#PWR036"
+		(uuid "50a7e500-0000-4000-8000-00000000006d")
+		(property "Reference" "#PWR035"
 			(at 78.74 274.32 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11981,7 +11933,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR036") (unit 1)
+					(reference "#PWR035") (unit 1)
 				)
 			)
 		)
@@ -11994,8 +11946,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000072")
-		(property "Reference" "#PWR037"
+		(uuid "50a7e500-0000-4000-8000-00000000006e")
+		(property "Reference" "#PWR036"
 			(at 96.52 256.54 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -12014,7 +11966,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR037") (unit 1)
+					(reference "#PWR036") (unit 1)
 				)
 			)
 		)
@@ -12027,8 +11979,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000073")
-		(property "Reference" "#PWR038"
+		(uuid "50a7e500-0000-4000-8000-00000000006f")
+		(property "Reference" "#PWR037"
 			(at 96.52 292.10 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -12047,7 +11999,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR038") (unit 1)
+					(reference "#PWR037") (unit 1)
 				)
 			)
 		)
@@ -12060,8 +12012,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000074")
-		(property "Reference" "#PWR039"
+		(uuid "50a7e500-0000-4000-8000-000000000070")
+		(property "Reference" "#PWR038"
 			(at 147.32 302.26 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -12080,7 +12032,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR039") (unit 1)
+					(reference "#PWR038") (unit 1)
 				)
 			)
 		)
@@ -12093,8 +12045,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000075")
-		(property "Reference" "#PWR040"
+		(uuid "50a7e500-0000-4000-8000-000000000071")
+		(property "Reference" "#PWR039"
 			(at 137.16 67.31 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -12113,7 +12065,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR040") (unit 1)
+					(reference "#PWR039") (unit 1)
 				)
 			)
 		)
@@ -12126,8 +12078,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000076")
-		(property "Reference" "#PWR041"
+		(uuid "50a7e500-0000-4000-8000-000000000072")
+		(property "Reference" "#PWR040"
 			(at 88.90 69.85 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -12146,7 +12098,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR041") (unit 1)
+					(reference "#PWR040") (unit 1)
 				)
 			)
 		)
@@ -12159,8 +12111,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000077")
-		(property "Reference" "#PWR042"
+		(uuid "50a7e500-0000-4000-8000-000000000073")
+		(property "Reference" "#PWR041"
 			(at 552.45 134.62 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -12179,7 +12131,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR042") (unit 1)
+					(reference "#PWR041") (unit 1)
 				)
 			)
 		)
@@ -12192,8 +12144,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000078")
-		(property "Reference" "#PWR043"
+		(uuid "50a7e500-0000-4000-8000-000000000074")
+		(property "Reference" "#PWR042"
 			(at 114.30 68.58 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -12212,7 +12164,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR043") (unit 1)
+					(reference "#PWR042") (unit 1)
 				)
 			)
 		)
@@ -12225,8 +12177,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000079")
-		(property "Reference" "#PWR044"
+		(uuid "50a7e500-0000-4000-8000-000000000075")
+		(property "Reference" "#PWR043"
 			(at 105.41 43.18 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -12245,7 +12197,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR044") (unit 1)
+					(reference "#PWR043") (unit 1)
 				)
 			)
 		)
@@ -12258,8 +12210,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-00000000007a")
-		(property "Reference" "#PWR045"
+		(uuid "50a7e500-0000-4000-8000-000000000076")
+		(property "Reference" "#PWR044"
 			(at 105.41 50.80 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -12278,40 +12230,40 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR045") (unit 1)
+					(reference "#PWR044") (unit 1)
 				)
 			)
 		)
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 477.52 298.45 0)
+		(at 477.52 297.18 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-00000000007b")
-		(property "Reference" "#PWR046"
-			(at 477.52 298.45 0)
+		(uuid "50a7e500-0000-4000-8000-000000000077")
+		(property "Reference" "#PWR045"
+			(at 477.52 297.18 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Value" "GND"
-			(at 477.52 302.01 0)
+			(at 477.52 300.74 0)
 			(effects (font (size 1.27 1.27)))
 		)
 		(property "Footprint" ""
-			(at 477.52 298.45 0)
+			(at 477.52 297.18 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" ""
-			(at 477.52 298.45 0)
+			(at 477.52 297.18 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR046") (unit 1)
+					(reference "#PWR045") (unit 1)
 				)
 			)
 		)
@@ -12324,8 +12276,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-00000000007c")
-		(property "Reference" "#PWR047"
+		(uuid "50a7e500-0000-4000-8000-000000000078")
+		(property "Reference" "#PWR046"
 			(at 63.50 71.12 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -12344,7 +12296,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR047") (unit 1)
+					(reference "#PWR046") (unit 1)
 				)
 			)
 		)
@@ -12357,8 +12309,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-00000000007d")
-		(property "Reference" "#PWR048"
+		(uuid "50a7e500-0000-4000-8000-000000000079")
+		(property "Reference" "#PWR047"
 			(at 135.89 43.18 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -12377,7 +12329,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR048") (unit 1)
+					(reference "#PWR047") (unit 1)
 				)
 			)
 		)
@@ -12390,8 +12342,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-00000000007e")
-		(property "Reference" "#PWR049"
+		(uuid "50a7e500-0000-4000-8000-00000000007a")
+		(property "Reference" "#PWR048"
 			(at 135.89 50.80 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -12410,7 +12362,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR049") (unit 1)
+					(reference "#PWR048") (unit 1)
 				)
 			)
 		)
@@ -12423,8 +12375,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-00000000007f")
-		(property "Reference" "#PWR050"
+		(uuid "50a7e500-0000-4000-8000-00000000007b")
+		(property "Reference" "#PWR049"
 			(at 175.26 180.34 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -12443,7 +12395,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR050") (unit 1)
+					(reference "#PWR049") (unit 1)
 				)
 			)
 		)
@@ -12456,8 +12408,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000080")
-		(property "Reference" "#PWR051"
+		(uuid "50a7e500-0000-4000-8000-00000000007c")
+		(property "Reference" "#PWR050"
 			(at 175.26 187.96 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -12476,7 +12428,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR051") (unit 1)
+					(reference "#PWR050") (unit 1)
 				)
 			)
 		)
@@ -12489,8 +12441,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000081")
-		(property "Reference" "#PWR052"
+		(uuid "50a7e500-0000-4000-8000-00000000007d")
+		(property "Reference" "#PWR051"
 			(at 198.12 241.30 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -12509,6 +12461,39 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
+					(reference "#PWR051") (unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3V3")
+		(at 381.00 259.08 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "50a7e500-0000-4000-8000-00000000007e")
+		(property "Reference" "#PWR052"
+			(at 381.00 259.08 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "3V3"
+			(at 381.00 255.52 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" ""
+			(at 381.00 259.08 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" ""
+			(at 381.00 259.08 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(instances
+			(project "IphoneFM"
+				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
 					(reference "#PWR052") (unit 1)
 				)
 			)
@@ -12522,7 +12507,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000082")
+		(uuid "50a7e500-0000-4000-8000-00000000007f")
 		(property "Reference" "#PWR053"
 			(at 198.12 205.74 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
@@ -12555,7 +12540,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000083")
+		(uuid "50a7e500-0000-4000-8000-000000000080")
 		(property "Reference" "#PWR054"
 			(at 198.12 187.96 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
@@ -12588,7 +12573,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000084")
+		(uuid "50a7e500-0000-4000-8000-000000000081")
 		(property "Reference" "#PWR055"
 			(at 175.26 205.74 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
@@ -12621,7 +12606,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000085")
+		(uuid "50a7e500-0000-4000-8000-000000000082")
 		(property "Reference" "#PWR056"
 			(at 251.46 213.36 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
@@ -12654,7 +12639,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000086")
+		(uuid "50a7e500-0000-4000-8000-000000000083")
 		(property "Reference" "#PWR057"
 			(at 274.32 205.74 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
@@ -12687,7 +12672,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000087")
+		(uuid "50a7e500-0000-4000-8000-000000000084")
 		(property "Reference" "#PWR058"
 			(at 274.32 213.36 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
@@ -12720,7 +12705,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000088")
+		(uuid "50a7e500-0000-4000-8000-000000000085")
 		(property "Reference" "#PWR059"
 			(at 200.66 292.10 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
@@ -12753,7 +12738,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000089")
+		(uuid "50a7e500-0000-4000-8000-000000000086")
 		(property "Reference" "#PWR060"
 			(at 309.88 111.76 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
@@ -12786,7 +12771,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-00000000008a")
+		(uuid "50a7e500-0000-4000-8000-000000000087")
 		(property "Reference" "#PWR061"
 			(at 187.96 226.06 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
@@ -12819,7 +12804,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-00000000008b")
+		(uuid "50a7e500-0000-4000-8000-000000000088")
 		(property "Reference" "#PWR062"
 			(at 327.66 139.70 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
@@ -12852,7 +12837,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-00000000008c")
+		(uuid "50a7e500-0000-4000-8000-000000000089")
 		(property "Reference" "#PWR063"
 			(at 231.14 35.56 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
@@ -12885,7 +12870,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-00000000008d")
+		(uuid "50a7e500-0000-4000-8000-00000000008a")
 		(property "Reference" "#PWR064"
 			(at 340.36 142.24 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
@@ -12918,7 +12903,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-00000000008e")
+		(uuid "50a7e500-0000-4000-8000-00000000008b")
 		(property "Reference" "#PWR065"
 			(at 215.90 27.94 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
@@ -12951,7 +12936,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-00000000008f")
+		(uuid "50a7e500-0000-4000-8000-00000000008c")
 		(property "Reference" "#PWR066"
 			(at 215.90 35.56 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
@@ -12984,7 +12969,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000090")
+		(uuid "50a7e500-0000-4000-8000-00000000008d")
 		(property "Reference" "#PWR067"
 			(at 353.06 144.78 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
@@ -13017,7 +13002,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000091")
+		(uuid "50a7e500-0000-4000-8000-00000000008e")
 		(property "Reference" "#PWR068"
 			(at 347.98 53.34 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
@@ -13050,7 +13035,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000092")
+		(uuid "50a7e500-0000-4000-8000-00000000008f")
 		(property "Reference" "#PWR069"
 			(at 365.76 147.32 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
@@ -13083,7 +13068,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000093")
+		(uuid "50a7e500-0000-4000-8000-000000000090")
 		(property "Reference" "#PWR070"
 			(at 299.72 27.94 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
@@ -13116,7 +13101,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000094")
+		(uuid "50a7e500-0000-4000-8000-000000000091")
 		(property "Reference" "#PWR071"
 			(at 299.72 35.56 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
@@ -13149,7 +13134,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000095")
+		(uuid "50a7e500-0000-4000-8000-000000000092")
 		(property "Reference" "#PWR072"
 			(at 378.46 149.86 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
@@ -13182,7 +13167,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000096")
+		(uuid "50a7e500-0000-4000-8000-000000000093")
 		(property "Reference" "#PWR073"
 			(at 322.58 35.56 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
@@ -13215,7 +13200,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000097")
+		(uuid "50a7e500-0000-4000-8000-000000000094")
 		(property "Reference" "#PWR074"
 			(at 391.16 152.40 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
@@ -13248,7 +13233,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000098")
+		(uuid "50a7e500-0000-4000-8000-000000000095")
 		(property "Reference" "#PWR075"
 			(at 370.84 53.34 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
@@ -13281,7 +13266,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-000000000099")
+		(uuid "50a7e500-0000-4000-8000-000000000096")
 		(property "Reference" "#PWR076"
 			(at 530.86 109.22 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
@@ -13314,7 +13299,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-00000000009a")
+		(uuid "50a7e500-0000-4000-8000-000000000097")
 		(property "Reference" "#PWR077"
 			(at 347.98 35.56 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
@@ -13347,7 +13332,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-00000000009b")
+		(uuid "50a7e500-0000-4000-8000-000000000098")
 		(property "Reference" "#PWR078"
 			(at 299.72 53.34 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
@@ -13380,7 +13365,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-00000000009c")
+		(uuid "50a7e500-0000-4000-8000-000000000099")
 		(property "Reference" "#PWR079"
 			(at 119.38 370.84 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
@@ -13413,7 +13398,7 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-00000000009d")
+		(uuid "50a7e500-0000-4000-8000-00000000009a")
 		(property "Reference" "#PWR080"
 			(at 370.84 35.56 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
@@ -13440,6 +13425,105 @@
 	)
 	(symbol
 		(lib_id "power:GND")
+		(at 298.45 349.25 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "50a7e500-0000-4000-8000-00000000009b")
+		(property "Reference" "#PWR081"
+			(at 298.45 349.25 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "GND"
+			(at 298.45 352.81 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" ""
+			(at 298.45 349.25 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" ""
+			(at 298.45 349.25 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(instances
+			(project "IphoneFM"
+				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
+					(reference "#PWR081") (unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3V3")
+		(at 358.14 274.32 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "50a7e500-0000-4000-8000-00000000009c")
+		(property "Reference" "#PWR082"
+			(at 358.14 274.32 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "3V3"
+			(at 358.14 270.76 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" ""
+			(at 358.14 274.32 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" ""
+			(at 358.14 274.32 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(instances
+			(project "IphoneFM"
+				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
+					(reference "#PWR082") (unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:+3V3")
+		(at 340.36 276.86 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "50a7e500-0000-4000-8000-00000000009d")
+		(property "Reference" "#PWR083"
+			(at 340.36 276.86 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Value" "3V3"
+			(at 340.36 273.30 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" ""
+			(at 340.36 276.86 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" ""
+			(at 340.36 276.86 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(instances
+			(project "IphoneFM"
+				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
+					(reference "#PWR083") (unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
 		(at 356.87 88.90 0)
 		(unit 1)
 		(exclude_from_sim no)
@@ -13447,7 +13531,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "50a7e500-0000-4000-8000-00000000009e")
-		(property "Reference" "#PWR081"
+		(property "Reference" "#PWR084"
 			(at 356.87 88.90 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -13466,7 +13550,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR081") (unit 1)
+					(reference "#PWR084") (unit 1)
 				)
 			)
 		)
@@ -13480,7 +13564,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "50a7e500-0000-4000-8000-00000000009f")
-		(property "Reference" "#PWR082"
+		(property "Reference" "#PWR085"
 			(at 374.65 88.90 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -13499,7 +13583,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR082") (unit 1)
+					(reference "#PWR085") (unit 1)
 				)
 			)
 		)
@@ -13513,7 +13597,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "50a7e500-0000-4000-8000-0000000000a0")
-		(property "Reference" "#PWR083"
+		(property "Reference" "#PWR086"
 			(at 431.80 109.22 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -13532,7 +13616,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR083") (unit 1)
+					(reference "#PWR086") (unit 1)
 				)
 			)
 		)
@@ -13546,7 +13630,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "50a7e500-0000-4000-8000-0000000000a1")
-		(property "Reference" "#PWR084"
+		(property "Reference" "#PWR087"
 			(at 431.80 116.84 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -13565,7 +13649,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR084") (unit 1)
+					(reference "#PWR087") (unit 1)
 				)
 			)
 		)
@@ -13579,7 +13663,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "50a7e500-0000-4000-8000-0000000000a2")
-		(property "Reference" "#PWR085"
+		(property "Reference" "#PWR088"
 			(at 444.50 134.62 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -13598,7 +13682,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR085") (unit 1)
+					(reference "#PWR088") (unit 1)
 				)
 			)
 		)
@@ -13612,7 +13696,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "50a7e500-0000-4000-8000-0000000000a3")
-		(property "Reference" "#PWR086"
+		(property "Reference" "#PWR089"
 			(at 464.82 134.62 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -13631,7 +13715,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR086") (unit 1)
+					(reference "#PWR089") (unit 1)
 				)
 			)
 		)
@@ -13645,7 +13729,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "50a7e500-0000-4000-8000-0000000000a4")
-		(property "Reference" "#PWR087"
+		(property "Reference" "#PWR090"
 			(at 485.14 134.62 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -13664,7 +13748,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR087") (unit 1)
+					(reference "#PWR090") (unit 1)
 				)
 			)
 		)
@@ -13678,7 +13762,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "50a7e500-0000-4000-8000-0000000000a5")
-		(property "Reference" "#PWR088"
+		(property "Reference" "#PWR091"
 			(at 510.54 142.24 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -13697,133 +13781,34 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR088") (unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 457.20 298.45 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-0000000000a6")
-		(property "Reference" "#PWR089"
-			(at 457.20 298.45 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Value" "GND"
-			(at 457.20 302.01 0)
-			(effects (font (size 1.27 1.27)))
-		)
-		(property "Footprint" ""
-			(at 457.20 298.45 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Datasheet" ""
-			(at 457.20 298.45 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(instances
-			(project "IphoneFM"
-				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR089") (unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:+3V3")
-		(at 365.76 252.73 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-0000000000a7")
-		(property "Reference" "#PWR090"
-			(at 365.76 252.73 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Value" "3V3"
-			(at 365.76 249.17 0)
-			(effects (font (size 1.27 1.27)))
-		)
-		(property "Footprint" ""
-			(at 365.76 252.73 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Datasheet" ""
-			(at 365.76 252.73 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(instances
-			(project "IphoneFM"
-				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR090") (unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:VDDA")
-		(at 365.76 260.35 180)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-0000000000a8")
-		(property "Reference" "#PWR091"
-			(at 365.76 260.35 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Value" "RX_VDD"
-			(at 365.76 263.91 0)
-			(effects (font (size 1.27 1.27)))
-		)
-		(property "Footprint" ""
-			(at 365.76 260.35 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Datasheet" ""
-			(at 365.76 260.35 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(instances
-			(project "IphoneFM"
-				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
 					(reference "#PWR091") (unit 1)
 				)
 			)
 		)
 	)
 	(symbol
-		(lib_id "power:GND")
-		(at 340.36 308.61 0)
+		(lib_id "power:VDDA")
+		(at 388.62 266.70 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-0000000000a9")
+		(uuid "50a7e500-0000-4000-8000-0000000000a6")
 		(property "Reference" "#PWR092"
-			(at 340.36 308.61 0)
+			(at 388.62 266.70 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Value" "GND"
-			(at 340.36 312.17 0)
+		(property "Value" "RX_VDD"
+			(at 388.62 263.14 0)
 			(effects (font (size 1.27 1.27)))
 		)
 		(property "Footprint" ""
-			(at 340.36 308.61 0)
+			(at 388.62 266.70 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" ""
-			(at 340.36 308.61 0)
+			(at 388.62 266.70 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(instances
@@ -13835,28 +13820,28 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+3V3")
-		(at 340.36 275.59 0)
+		(lib_id "power:GND")
+		(at 388.62 274.32 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-0000000000aa")
+		(uuid "50a7e500-0000-4000-8000-0000000000a7")
 		(property "Reference" "#PWR093"
-			(at 340.36 275.59 0)
+			(at 388.62 274.32 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Value" "3V3"
-			(at 340.36 272.03 0)
+		(property "Value" "GND"
+			(at 388.62 277.88 0)
 			(effects (font (size 1.27 1.27)))
 		)
 		(property "Footprint" ""
-			(at 340.36 275.59 0)
+			(at 388.62 274.32 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" ""
-			(at 340.36 275.59 0)
+			(at 388.62 274.32 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(instances
@@ -13868,28 +13853,28 @@
 		)
 	)
 	(symbol
-		(lib_id "power:+3V3")
-		(at 340.36 323.85 0)
+		(lib_id "power:GND")
+		(at 411.48 274.32 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-0000000000ab")
+		(uuid "50a7e500-0000-4000-8000-0000000000a8")
 		(property "Reference" "#PWR094"
-			(at 340.36 323.85 0)
+			(at 411.48 274.32 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Value" "3V3"
-			(at 340.36 320.29 0)
+		(property "Value" "GND"
+			(at 411.48 277.88 0)
 			(effects (font (size 1.27 1.27)))
 		)
 		(property "Footprint" ""
-			(at 340.36 323.85 0)
+			(at 411.48 274.32 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" ""
-			(at 340.36 323.85 0)
+			(at 411.48 274.32 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(instances
@@ -13901,28 +13886,28 @@
 		)
 	)
 	(symbol
-		(lib_id "power:VDDA")
-		(at 396.24 265.43 0)
+		(lib_id "power:GND")
+		(at 457.20 297.18 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-0000000000ac")
+		(uuid "50a7e500-0000-4000-8000-0000000000a9")
 		(property "Reference" "#PWR095"
-			(at 396.24 265.43 0)
+			(at 457.20 297.18 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Value" "RX_VDD"
-			(at 396.24 261.87 0)
+		(property "Value" "GND"
+			(at 457.20 300.74 0)
 			(effects (font (size 1.27 1.27)))
 		)
 		(property "Footprint" ""
-			(at 396.24 265.43 0)
+			(at 457.20 297.18 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" ""
-			(at 396.24 265.43 0)
+			(at 457.20 297.18 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(instances
@@ -13935,27 +13920,27 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 396.24 273.05 0)
+		(at 360.68 330.20 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-0000000000ad")
+		(uuid "50a7e500-0000-4000-8000-0000000000aa")
 		(property "Reference" "#PWR096"
-			(at 396.24 273.05 0)
+			(at 360.68 330.20 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Value" "GND"
-			(at 396.24 276.61 0)
+			(at 360.68 333.76 0)
 			(effects (font (size 1.27 1.27)))
 		)
 		(property "Footprint" ""
-			(at 396.24 273.05 0)
+			(at 360.68 330.20 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" ""
-			(at 396.24 273.05 0)
+			(at 360.68 330.20 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(instances
@@ -13967,28 +13952,28 @@
 		)
 	)
 	(symbol
-		(lib_id "power:VDDA")
-		(at 337.82 252.73 0)
+		(lib_id "power:GND")
+		(at 350.52 327.66 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-0000000000ae")
+		(uuid "50a7e500-0000-4000-8000-0000000000ab")
 		(property "Reference" "#PWR097"
-			(at 337.82 252.73 0)
+			(at 350.52 327.66 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Value" "RX_VDD"
-			(at 337.82 249.17 0)
+		(property "Value" "GND"
+			(at 350.52 331.22 0)
 			(effects (font (size 1.27 1.27)))
 		)
 		(property "Footprint" ""
-			(at 337.82 252.73 0)
+			(at 350.52 327.66 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" ""
-			(at 337.82 252.73 0)
+			(at 350.52 327.66 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(instances
@@ -14001,113 +13986,14 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 337.82 260.35 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-0000000000af")
-		(property "Reference" "#PWR098"
-			(at 337.82 260.35 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Value" "GND"
-			(at 337.82 263.91 0)
-			(effects (font (size 1.27 1.27)))
-		)
-		(property "Footprint" ""
-			(at 337.82 260.35 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Datasheet" ""
-			(at 337.82 260.35 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(instances
-			(project "IphoneFM"
-				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR098") (unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 340.36 351.79 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-0000000000b0")
-		(property "Reference" "#PWR099"
-			(at 340.36 351.79 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Value" "GND"
-			(at 340.36 355.35 0)
-			(effects (font (size 1.27 1.27)))
-		)
-		(property "Footprint" ""
-			(at 340.36 351.79 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Datasheet" ""
-			(at 340.36 351.79 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(instances
-			(project "IphoneFM"
-				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR099") (unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
-		(at 314.96 341.63 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-0000000000b1")
-		(property "Reference" "#PWR100"
-			(at 314.96 341.63 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Value" "GND"
-			(at 314.96 345.19 0)
-			(effects (font (size 1.27 1.27)))
-		)
-		(property "Footprint" ""
-			(at 314.96 341.63 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(property "Datasheet" ""
-			(at 314.96 341.63 0)
-			(effects (font (size 1.27 1.27)) (hide yes))
-		)
-		(instances
-			(project "IphoneFM"
-				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR100") (unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "power:GND")
 		(at 370.84 106.68 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-0000000000b2")
-		(property "Reference" "#PWR101"
+		(uuid "50a7e500-0000-4000-8000-0000000000ac")
+		(property "Reference" "#PWR098"
 			(at 370.84 106.68 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -14126,7 +14012,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR101") (unit 1)
+					(reference "#PWR098") (unit 1)
 				)
 			)
 		)
@@ -14139,8 +14025,8 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(uuid "50a7e500-0000-4000-8000-0000000000b3")
-		(property "Reference" "#PWR102"
+		(uuid "50a7e500-0000-4000-8000-0000000000ad")
+		(property "Reference" "#PWR099"
 			(at 259.08 233.68 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -14159,7 +14045,7 @@
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
-					(reference "#PWR102") (unit 1)
+					(reference "#PWR099") (unit 1)
 				)
 			)
 		)
@@ -14168,133 +14054,133 @@
 		(at 78.74 195.58)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "50a7e500-0000-4000-8000-0000000000b4")
+		(uuid "50a7e500-0000-4000-8000-0000000000ae")
 	)
 	(junction
 		(at 78.74 198.12)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "50a7e500-0000-4000-8000-0000000000b5")
+		(uuid "50a7e500-0000-4000-8000-0000000000af")
 	)
 	(junction
 		(at 78.74 233.68)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "50a7e500-0000-4000-8000-0000000000b6")
+		(uuid "50a7e500-0000-4000-8000-0000000000b0")
 	)
 	(junction
 		(at 78.74 236.22)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "50a7e500-0000-4000-8000-0000000000b7")
+		(uuid "50a7e500-0000-4000-8000-0000000000b1")
 	)
 	(junction
 		(at 78.74 271.78)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "50a7e500-0000-4000-8000-0000000000b8")
+		(uuid "50a7e500-0000-4000-8000-0000000000b2")
 	)
 	(junction
 		(at 78.74 274.32)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "50a7e500-0000-4000-8000-0000000000b9")
+		(uuid "50a7e500-0000-4000-8000-0000000000b3")
 	)
 	(junction
 		(at 332.74 119.38)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "50a7e500-0000-4000-8000-0000000000ba")
+		(uuid "50a7e500-0000-4000-8000-0000000000b4")
 	)
 	(junction
 		(at 335.28 119.38)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "50a7e500-0000-4000-8000-0000000000bb")
+		(uuid "50a7e500-0000-4000-8000-0000000000b5")
 	)
 	(junction
 		(at 358.14 195.58)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "50a7e500-0000-4000-8000-0000000000bc")
+		(uuid "50a7e500-0000-4000-8000-0000000000b6")
 	)
 	(junction
 		(at 360.68 195.58)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "50a7e500-0000-4000-8000-0000000000bd")
+		(uuid "50a7e500-0000-4000-8000-0000000000b7")
 	)
 	(junction
 		(at 363.22 195.58)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "50a7e500-0000-4000-8000-0000000000be")
-	)
-	(junction
-		(at 363.22 332.74)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "50a7e500-0000-4000-8000-0000000000bf")
+		(uuid "50a7e500-0000-4000-8000-0000000000b8")
 	)
 	(junction
 		(at 365.76 195.58)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "50a7e500-0000-4000-8000-0000000000c0")
+		(uuid "50a7e500-0000-4000-8000-0000000000b9")
+	)
+	(junction
+		(at 378.46 337.82)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "50a7e500-0000-4000-8000-0000000000ba")
 	)
 	(junction
 		(at 411.48 175.26)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "50a7e500-0000-4000-8000-0000000000c1")
+		(uuid "50a7e500-0000-4000-8000-0000000000bb")
 	)
 	(junction
 		(at 414.02 175.26)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "50a7e500-0000-4000-8000-0000000000c2")
+		(uuid "50a7e500-0000-4000-8000-0000000000bc")
 	)
 	(junction
 		(at 416.56 175.26)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "50a7e500-0000-4000-8000-0000000000c3")
+		(uuid "50a7e500-0000-4000-8000-0000000000bd")
 	)
 	(junction
 		(at 419.10 175.26)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "50a7e500-0000-4000-8000-0000000000c4")
+		(uuid "50a7e500-0000-4000-8000-0000000000be")
 	)
 	(junction
 		(at 421.64 175.26)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "50a7e500-0000-4000-8000-0000000000c5")
+		(uuid "50a7e500-0000-4000-8000-0000000000bf")
 	)
 	(junction
 		(at 424.18 175.26)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "50a7e500-0000-4000-8000-0000000000c6")
+		(uuid "50a7e500-0000-4000-8000-0000000000c0")
 	)
 	(junction
 		(at 426.72 175.26)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "50a7e500-0000-4000-8000-0000000000c7")
+		(uuid "50a7e500-0000-4000-8000-0000000000c1")
 	)
 	(junction
 		(at 429.26 175.26)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "50a7e500-0000-4000-8000-0000000000c8")
+		(uuid "50a7e500-0000-4000-8000-0000000000c2")
 	)
 	(junction
 		(at 431.80 175.26)
 		(diameter 0)
 		(color 0 0 0 0)
-		(uuid "50a7e500-0000-4000-8000-0000000000c9")
+		(uuid "50a7e500-0000-4000-8000-0000000000c3")
 	)
 	(wire
 		(pts (xy 114.30 60.96) (xy 142.24 60.96))
@@ -15320,6 +15206,156 @@
 		(pts (xy 111.76 363.22) (xy 119.38 363.22))
 		(stroke (width 0) (type default))
 		(uuid "5e1c0007-0000-4000-8000-00000000000d")
+	)
+	(wire
+		(pts (xy 396.24 289.56) (xy 457.20 289.56))
+		(stroke (width 0) (type default))
+		(uuid "5e1c0008-0000-4000-8000-000000000001")
+	)
+	(wire
+		(pts (xy 463.55 289.56) (xy 457.20 289.56))
+		(stroke (width 0) (type default))
+		(uuid "5e1c0008-0000-4000-8000-000000000002")
+	)
+	(junction
+		(at 457.20 289.56)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5e1c0008-0000-4000-8000-000000000003")
+	)
+	(wire
+		(pts (xy 471.17 289.56) (xy 477.52 289.56))
+		(stroke (width 0) (type default))
+		(uuid "5e1c0008-0000-4000-8000-000000000004")
+	)
+	(wire
+		(pts (xy 483.87 289.56) (xy 477.52 289.56))
+		(stroke (width 0) (type default))
+		(uuid "5e1c0008-0000-4000-8000-000000000005")
+	)
+	(junction
+		(at 477.52 289.56)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5e1c0008-0000-4000-8000-000000000006")
+	)
+	(wire
+		(pts (xy 298.45 341.63) (xy 298.45 297.18))
+		(stroke (width 0) (type default))
+		(uuid "5e1c0008-0000-4000-8000-000000000007")
+	)
+	(wire
+		(pts (xy 365.76 297.18) (xy 298.45 297.18))
+		(stroke (width 0) (type default))
+		(uuid "5e1c0008-0000-4000-8000-000000000008")
+	)
+	(wire
+		(pts (xy 358.14 289.56) (xy 358.14 281.94))
+		(stroke (width 0) (type default))
+		(uuid "5e1c0008-0000-4000-8000-000000000009")
+	)
+	(wire
+		(pts (xy 358.14 289.56) (xy 365.76 289.56))
+		(stroke (width 0) (type default))
+		(uuid "5e1c0008-0000-4000-8000-00000000000a")
+	)
+	(wire
+		(pts (xy 340.36 284.48) (xy 340.36 292.10))
+		(stroke (width 0) (type default))
+		(uuid "5e1c0008-0000-4000-8000-00000000000b")
+	)
+	(wire
+		(pts (xy 340.36 292.10) (xy 365.76 292.10))
+		(stroke (width 0) (type default))
+		(uuid "5e1c0008-0000-4000-8000-00000000000c")
+	)
+	(wire
+		(pts (xy 365.76 314.96) (xy 340.36 314.96))
+		(stroke (width 0) (type default))
+		(uuid "5e1c0008-0000-4000-8000-00000000000d")
+	)
+	(wire
+		(pts (xy 340.36 341.63) (xy 340.36 314.96))
+		(stroke (width 0) (type default))
+		(uuid "5e1c0008-0000-4000-8000-00000000000e")
+	)
+	(wire
+		(pts (xy 326.39 312.42) (xy 365.76 312.42))
+		(stroke (width 0) (type default))
+		(uuid "5e1c0008-0000-4000-8000-00000000000f")
+	)
+	(wire
+		(pts (xy 326.39 312.42) (xy 326.39 341.63))
+		(stroke (width 0) (type default))
+		(uuid "5e1c0008-0000-4000-8000-000000000010")
+	)
+	(wire
+		(pts (xy 312.42 341.63) (xy 312.42 309.88))
+		(stroke (width 0) (type default))
+		(uuid "5e1c0008-0000-4000-8000-000000000011")
+	)
+	(wire
+		(pts (xy 365.76 309.88) (xy 312.42 309.88))
+		(stroke (width 0) (type default))
+		(uuid "5e1c0008-0000-4000-8000-000000000012")
+	)
+	(wire
+		(pts (xy 365.76 322.58) (xy 360.68 322.58))
+		(stroke (width 0) (type default))
+		(uuid "5e1c0008-0000-4000-8000-000000000013")
+	)
+	(wire
+		(pts (xy 350.52 320.04) (xy 365.76 320.04))
+		(stroke (width 0) (type default))
+		(uuid "5e1c0008-0000-4000-8000-000000000014")
+	)
+	(wire
+		(pts (xy 381.00 278.13) (xy 383.54 278.13))
+		(stroke (width 0) (type default))
+		(uuid "5e1c0008-0000-4000-8000-000000000015")
+	)
+	(wire
+		(pts (xy 381.00 278.13) (xy 381.00 266.70))
+		(stroke (width 0) (type default))
+		(uuid "5e1c0008-0000-4000-8000-000000000016")
+	)
+	(wire
+		(pts (xy 381.00 278.13) (xy 381.00 279.40))
+		(stroke (width 0) (type default))
+		(uuid "5e1c0008-0000-4000-8000-000000000017")
+	)
+	(wire
+		(pts (xy 388.62 266.70) (xy 381.00 266.70))
+		(stroke (width 0) (type default))
+		(uuid "5e1c0008-0000-4000-8000-000000000018")
+	)
+	(wire
+		(pts (xy 388.62 266.70) (xy 411.48 266.70))
+		(stroke (width 0) (type default))
+		(uuid "5e1c0008-0000-4000-8000-000000000019")
+	)
+	(wire
+		(pts (xy 383.54 279.40) (xy 383.54 278.13))
+		(stroke (width 0) (type default))
+		(uuid "5e1c0008-0000-4000-8000-00000000001a")
+	)
+	(junction
+		(at 388.62 266.70)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5e1c0008-0000-4000-8000-00000000001b")
+	)
+	(junction
+		(at 381.00 278.13)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5e1c0008-0000-4000-8000-00000000001c")
+	)
+	(junction
+		(at 381.00 266.70)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "5e1c0008-0000-4000-8000-00000000001d")
 	)
 	(sheet_instances
 		(path "/"

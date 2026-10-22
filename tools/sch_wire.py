@@ -28,8 +28,20 @@ for _k, _net in enumerate(["ATT_C16", "ATT_C8", "ATT_C4", "ATT_C2", "ATT_C1", "A
     _y, _x, _s = 132.08 + 2.54 * _k, 321.31 + 12.7 * _k, 355.6 + 2.54 * _k
     _yf = (170.18, 167.64, 165.1, 162.56, 162.56, 165.1)[_k]
     PATHS[_net] = [(403.86, _y), (_x, _y), (_x, _yf), (_s, _yf), (_s, 177.8)]
+# chain 8: U4's left-side lines (pin tips at x 365.76): I2C up to its pull-ups; RSTB and the I2S lines down in a ribbon
+# to R19 and the series resistors; the GPO lines straight into their caps
+PATHS.update({
+    "I2C_SCL": [(365.76, 289.56), (358.14, 289.56), (358.14, 281.94)],
+    "I2C_SDA": [(365.76, 292.1), (340.36, 292.1), (340.36, 284.48)],
+    "RX_RST": [(365.76, 297.18), (298.45, 297.18), (298.45, 341.63)],
+    "RX_SCK": [(365.76, 309.88), (312.42, 309.88), (312.42, 341.63)],
+    "RX_FS": [(365.76, 312.42), (326.39, 312.42), (326.39, 341.63)],
+    "RX_SD": [(365.76, 314.96), (340.36, 314.96), (340.36, 341.63)],
+    "RX_GPO1": [(365.76, 320.04), (350.52, 320.04)],
+    "RX_GPO2": [(365.76, 322.58), (360.68, 322.58)],
+})
 # nets wired across a zone boundary because their parts meet at it
-WIRE_ACROSS = {"TX_RF_ATT"}  # U7 RF2 feeds FL1 directly
+WIRE_ACROSS = {"TX_RF_ATT", "FMI"}  # U7 RF2 feeds FL1 directly; U4 FMI runs straight to its front end
 LEAVE = {("U6", "6"), ("U6", "4")}  # USBLC6 pass-through pins, on toward U1
 RAILS = {"VBUS", "3V3", "VDDA", "RX_VDD", "GND"}  # drawn with power symbols (sch_power.py)
 BEND, CROSS, TEXT = 3, 25, 6  # extra cost, in grid steps, of a turn, a crossing and a step through text

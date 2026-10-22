@@ -11,6 +11,8 @@ from sch_power import balanced
 # ref: (x, y, rotation, (dx, dy) of the first visible field from the symbol; the next ones stack 2.54 mm below);
 # a rotation written "270y" also mirrors the symbol left to right
 LAYOUT = {
+    # chain 8: U4 right so its left-side lines have room to turn; its text below right
+    "U4": (381.0, 307.34, 0, (17.78, 30.48)),
     # chain 7: U5 on the FL1 line (RF2 at 127), J2 at the end of it, D5 turned so its IO pin hangs from the antenna line
     "U5": (530.86, 129.54, 0, (-25.4, -25.4)),
     "J2": (571.5, 127.0, 0, (-22.86, -13.97)),
