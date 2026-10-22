@@ -10,11 +10,12 @@ The established order for turning the Rev A design into a board, broken into sin
 - Any change to the design goes into [netlist.json](netlist.json) first, then the page that explains it, then KiCad.
 - Claude makes changes through the KiCad MCP server where it can, and otherwise gives the user the exact menu path to click.
 - At each review checkpoint, the user sees a screenshot and the check results before the next phase starts.
+- Schematic edits are written to the file, so the open schematic editor shows them only after File → Revert; while Claude works on the schematic, the user doesn't edit or save it in KiCad, so neither copy overwrites the other. Board edits go through KiCad's live API and appear directly.
 
 ## Phase 0: Project and fab rules
 
-- [ ] 0.1 Create the KiCad 10 project `IphoneFM` in `kicad/rev-a/`.
-- [ ] 0.2 Fill in the title block: IphoneFM, Rev A, today's date, and the author.
+- [x] 0.1 Create the KiCad 10 project `IphoneFM` in `kicad/rev-a/`.
+- [x] 0.2 Fill in the title block: IphoneFM, Rev A, today's date, and the author (schematic done 2026-10-21; the board's title block is set in step 3.1).
 - [ ] 0.3 Read JLCPCB's current 2-layer PCB capabilities and record the trace, space, via, drill, annular ring, edge-clearance and silkscreen numbers we use in `kicad/rev-a/fab-rules.md`, with the source link [HHG p15, p63–65; BAC p4, p11].
 - [ ] 0.4 Read JLCPCB's assembly rules (part spacing, edge clearance, fiducials) and add them to the same file [conflict C4].
 - [ ] 0.5 Set our own design rules a step above JLC's minimums and write them beside the minimums [HHG p15, p63–64].
