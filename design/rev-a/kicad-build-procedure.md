@@ -72,7 +72,7 @@ Checks:
 - [x] 1.35 Run ERC and fix everything until it reports zero errors, recording any deliberate exclusion with its reason [EES p74; KLAP p39].
   - ERC found 2 errors, both the deliberate U4 LOUT/ROUT tie to ground. Reviewed together with the user and confirmed harmless (AN383 p17; digital-only mode), then recorded as exclusions with that reason. ERC now reports 0 errors, 0 warnings (details in [verification.md](verification.md)).
 - [x] 1.36 Export the netlist and run `kicadcheck.py --net` until every check passes.
-- [ ] 1.37 Export the BOM and run `kicadcheck.py --bom` until every check passes.
+- [x] 1.37 Export the BOM and run `kicadcheck.py --bom` until every check passes.
 - [ ] 1.38 **Review checkpoint:** the user reviews the whole sheet and the check results.
 
 ## Phase 2: Footprints
