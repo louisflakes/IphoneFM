@@ -2,7 +2,7 @@
 A maze router joins each net's pins one at a time to the part of the net already drawn. It never passes through a part
 body, a power symbol or another net's pin, never turns or ends on another net's wire (so nets can cross but never touch),
 and avoids text where it can. A pin is never entered from its body side. Pins of parts in other chains are left for
-the net labels of step 1.30, except that a series passive placed at a pin (local_to) is wired to that pin with its chain. Everything this tool draws for chain N has a uuid starting with UID + N, so a rerun of that
+the net labels of step 1.30, except that a passive placed at a pin (local_to) is wired to that pin with its chain. Everything this tool draws for chain N has a uuid starting with UID + N, so a rerun of that
 chain replaces it.
 Usage: python tools/sch_wire.py <chain> [--dry-run]"""
 import heapq
@@ -21,7 +21,7 @@ SKIP = {"NC"}
 # pins left unwired for the step 1.30 net labels: a part's far side that carries the net on toward another chain
 LEAVE = {("U6", "6"), ("U6", "4")}  # USBLC6 pass-through pins, on toward U1
 RAILS = {"VBUS", "3V3", "VDDA", "RX_VDD", "GND"}  # drawn with power symbols (sch_power.py)
-BEND, CROSS, TEXT = 3, 8, 6  # extra cost, in grid steps, of a turn, a crossing and a step through text
+BEND, CROSS, TEXT = 3, 25, 6  # extra cost, in grid steps, of a turn, a crossing and a step through text
 
 
 def cell(x, y):
@@ -216,10 +216,10 @@ def main():
         foreign_ends |= {a, b}
     # nets of this chain
     def drawn_in(ref, net):
-        """The chain that draws this pin: a series passive placed at another part's pin is wired to it with that part"""
+        """The chain that draws this pin: a passive placed at another part's pin is wired to it with that part"""
         p = parts[ref]
         t = p.get("local_to", "")
-        if prefix(ref) in LIB and "." in t and not any(v["net"] in RAILS for v in p["pinmap"].values()):
+        if prefix(ref) in LIB and "." in t:
             tref, tpin = t.split(".", 1)
             if parts[tref]["pinmap"].get(tpin, {}).get("net") == net:
                 return parts[tref].get("chain")
@@ -231,11 +231,15 @@ def main():
             nets.setdefault(net, set()).add(pin_cell[(ref, num)])
     for net, (anchor, others) in WIRED_RAILS.get(chain, {}).items():  # rails this chain draws as wires
         for p in [anchor] + others:
+            if p.startswith("@"):  # a free point under a power symbol: the wire arrives from above (ground) or below (supply)
+                x, y = (float(v) for v in p[1:].split(","))
+                nets.setdefault(net, set()).add((cell(x, y), (0, -1) if net == "GND" else (0, 1)))
+                continue
             ref, num = p.split(".")
             nets.setdefault(net, set()).add(pin_cell[(ref, num)])
     bound = (cell(15, 15)[0], cell(15, 15)[1], cell(580, 405)[0], cell(580, 405)[1])
     drawn, n, failed = [], 0, []
-    for net in sorted(nets, key=lambda k: -len(nets[k])):
+    for net in sorted(nets, key=lambda k: (k in RAILS, -len(nets[k]))):  # signals first, wired rails last
         pins = sorted(nets[net])
         pins = list({c: o for c, o in pins}.items())  # stacked pins share a cell
         if len(pins) < 2:

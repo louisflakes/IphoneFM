@@ -20,7 +20,8 @@ WIRED_RAILS = {
     2: {"VBUS": ("C1.1", ["U3.1", "U3.3"]), "3V3": ("C2.1", ["U3.5"])},  # regulator in, past C1; out, past C2
     # U1 supply: a 3V3 bus over U1 with its decoupling caps and FB2; FB2 out to VDDA with C7, C8
     3: {"3V3": ("C3.1", ["C5.1", "C6.1", "C4.1", "FB2.1", "U1.1", "U1.24", "U1.36", "U1.48"]),
-        "VDDA": ("C8.1", ["C7.1", "FB2.2", "U1.9"])},
+        "VDDA": ("C8.1", ["C7.1", "FB2.2", "U1.9"]),
+        "GND": ("@259.08,233.68", ["C39.2", "C40.2", "C36.2", "C41.2"])},  # an anchor "@x,y" is a free point: the bar's foot
 }
 WIRED = {tuple(p.split(".")) for rails in WIRED_RAILS.values() for _, pins in rails.values() for p in pins}
 STUB = 2.54
@@ -154,6 +155,12 @@ def main():
             at = stubs[len(stubs) // 2]
         n += 1; k += 1
         new.append(power(net, at, o, n, k, sheet_uuid))
+    for rails in WIRED_RAILS.values():  # a free-point anchor: the one symbol at the foot (or head) of a wired rail
+        for net, (anchor, _) in rails.items():
+            if anchor.startswith("@"):
+                at = tuple(float(v) for v in anchor[1:].split(","))
+                n += 1; k += 1
+                new.append(power(net, at, (0, 1) if SYMBOL[net][1] == "down" else (0, -1), n, k, sheet_uuid))
     for pt, c in sorted(ends.items()):
         if c >= 3:  # a stub meeting the bar from both sides is a T: mark it
             n += 1

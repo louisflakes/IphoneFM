@@ -29,6 +29,10 @@ FOOT = {("R", "0402"): "Resistor_SMD:R_0402_1005Metric", ("C", "0402"): "Capacit
 # Chains drawn where the sheet plan puts them (sheet-plan.md): FL1 between U7 and U5, the RX front end in its own zone,
 # and U2's loop filter as a compact group at CPout. (x, y, rotation); rotation 90 = horizontal.
 MANUAL = {
+    # chain 3: the shunt caps on U1 PA2-PA5 lie on their pin rows in two staggered columns, ground ends run right to one
+    # bar (sch_power WIRED_RAILS); R6-R8 straight off PA8 and stepped down off PA9, PA10
+    "C39": (248.92, 223.52, 90), "C40": (256.54, 226.06, 90), "C36": (248.92, 228.6, 90), "C41": (256.54, 231.14, 90),
+    "R6": (248.92, 238.76, 90), "R7": (248.92, 248.92, 90), "R8": (248.92, 259.08, 90),
     # chain 3: U1 decoupling in a 2 x 2 block on the 3V3 bus over U1, FB2 then C7, C8 on the VDDA branch to its right;
     # C10 (NRST), R3 (BOOT0) and C9 (VCAP) hang from their lines on U1's left, text on the left
     "C3": (175.26, 184.15, 0), "C5": (198.12, 184.15, 0), "C6": (175.26, 201.93, 0), "C4": (198.12, 201.93, 0),
@@ -159,13 +163,20 @@ def upside_down(p):
     return n1 == "GND" or (n2 in SUPPLIES and n1 not in SUPPLIES)
 
 
+# parts stacked one grid step apart: the compact capacitor symbol, name and value on the part's own row past its ground bar
+INLINE = {"C39": 12.7, "C40": 5.08, "C36": 12.7, "C41": 5.08}  # ref: x of the name from the part's centre
+SMALL = "Device:C_Small"
+
+
 def block(ref, p, x, y, rot, left, sheet_uuid):
-    lib = LIB[prefix(ref)]
+    lib = SMALL if ref in INLINE else LIB[prefix(ref)]
     foot = FOOT.get((prefix(ref), p["package"]), "")
     # text reads left to right in both orientations: above a horizontal part, beside a vertical one
     s = -1 if left else 1
     (rx, ry), (vx, vy) = ((-3.81, -5.59), (-3.81, -3.81)) if rot == 90 else ((2.54 * s, -1.27), (2.54 * s, 1.27))
     just = "right" if (rot == 90) != left else "left"  # KiCad mirrors justification on a part turned 90 degrees
+    if ref in INLINE:
+        (rx, ry), (vx, vy) = (INLINE[ref], 0), (INLINE[ref] + 5.08, 0)
     if rot == 0 and upside_down(p):  # turned over so ground ends at the bottom and a supply at the top
         rot, just = 180, ("right" if just == "left" else "left")
     return (f'\t(symbol\n\t\t(lib_id "{lib}")\n\t\t(at {x:.2f} {y:.2f} {rot})\n\t\t(unit 1)\n\t\t(exclude_from_sim no)\n\t\t(in_bom yes)\n\t\t(on_board yes)\n\t\t(dnp no)\n'
@@ -177,11 +188,27 @@ def block(ref, p, x, y, rot, left, sheet_uuid):
             f'\t\t(instances\n\t\t\t(project "IphoneFM"\n\t\t\t\t(path "/{sheet_uuid}"\n\t\t\t\t\t(reference "{ref}") (unit 1)\n\t\t\t\t)\n\t\t\t)\n\t\t)\n\t)\n')
 
 
+def embed_device(text, lib_id):
+    """Copy a symbol from KiCad's Device library into the sheet's lib_symbols if it isn't there yet"""
+    if f'(symbol "{lib_id}"' in text:
+        return text
+    from sch_power import POWER_LIB, balanced
+    name = lib_id.split(":")[1]
+    lib = open(os.path.join(os.path.dirname(POWER_LIB), "Device.kicad_sym"), encoding="utf-8").read()
+    m = re.search(r'\n\t\(symbol "%s"\n' % re.escape(name), lib)
+    blk = lib[m.start() + 2:balanced(lib, m.start() + 2)].replace(f'(symbol "{name}"', f'(symbol "{lib_id}"', 1)
+    s = text.index("\t(lib_symbols")
+    e = balanced(text, s + 1)
+    return text[:e - 1] + "\t" + blk.replace("\n", "\n\t") + "\n" + text[e - 1:]
+
+
 def main():
     text = open(SCH, encoding="utf-8").read()
     root = sexpr(text)
     doc = json.load(open(NETLIST, encoding="utf-8"))
     placed = {r: s for r, s in symbols_and_pins(root).items() if not r.startswith("#")}  # power symbols are redrawn by sch_power.py
+    text = embed_device(text, SMALL)
+    root = sexpr(text)
     missing = [l for l in LIB.values() if not any(s[1] == l for s in kids(kid(root, "lib_symbols"), "symbol"))]
     if missing:
         raise SystemExit(f"Seed one of each first (embeds the library symbol): {', '.join(missing)}")
