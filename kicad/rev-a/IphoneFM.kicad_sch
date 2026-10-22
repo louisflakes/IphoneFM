@@ -5507,7 +5507,7 @@
 			(at 223.52 247.65 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Value" "STM32U535CEU6"
+		(property "Value" "MCU"
 			(at 223.52 255.27 0)
 			(effects (font (size 1.27 1.27)))
 		)
@@ -5516,6 +5516,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 223.52 251.46 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "STM32U535CEU6"
+			(at 223.52 257.81 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "LCSC" "C22454224"
+			(at 223.52 251.46 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "ST"
 			(at 223.52 251.46 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -5540,7 +5552,7 @@
 			(at 337.82 85.09 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Value" "LMX2571NJKR"
+		(property "Value" "Synthesizer"
 			(at 337.82 92.71 0)
 			(effects (font (size 1.27 1.27)))
 		)
@@ -5550,6 +5562,18 @@
 		)
 		(property "Datasheet" "~"
 			(at 337.82 88.9 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "LMX2571NJKR"
+			(at 337.82 95.25 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "LCSC" "C440388"
+			(at 337.82 88.90 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "TI"
+			(at 337.82 88.90 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(instances
@@ -5573,7 +5597,7 @@
 			(at 120.65 41.91 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Value" "AP2112K-3.3TRG1"
+		(property "Value" "3.3 V 600 mA LDO"
 			(at 120.65 49.53 0)
 			(effects (font (size 1.27 1.27)))
 		)
@@ -5582,6 +5606,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 120.65 45.72 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "AP2112K-3.3TRG1"
+			(at 120.65 52.07 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "LCSC" "C51118"
+			(at 120.65 45.72 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Diodes"
 			(at 120.65 45.72 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -5606,7 +5642,7 @@
 			(at 365.76 300.99 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Value" "SI4705-D60-GM"
+		(property "Value" "FM receiver"
 			(at 365.76 308.61 0)
 			(effects (font (size 1.27 1.27)))
 		)
@@ -5616,6 +5652,18 @@
 		)
 		(property "Datasheet" "~"
 			(at 365.76 304.8 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "SI4705-D60-GM"
+			(at 365.76 311.15 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "LCSC" "C1526114"
+			(at 365.76 304.80 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Skyworks"
+			(at 365.76 304.80 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(instances
@@ -5639,7 +5687,7 @@
 			(at 520.7 148.59 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Value" "PE42421SCAA-Z"
+		(property "Value" "SPDT RF switch"
 			(at 520.7 156.21 0)
 			(effects (font (size 1.27 1.27)))
 		)
@@ -5649,6 +5697,18 @@
 		)
 		(property "Datasheet" "~"
 			(at 520.7 152.4 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "PE42421SCAA-Z"
+			(at 520.70 158.75 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "LCSC" "C470893"
+			(at 520.70 152.40 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "pSemi"
+			(at 520.70 152.40 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(instances
@@ -5672,7 +5732,7 @@
 			(at 73.66 90.17 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Value" "USBLC6-2SC6"
+		(property "Value" "USB ESD array"
 			(at 73.66 97.79 0)
 			(effects (font (size 1.27 1.27)))
 		)
@@ -5681,6 +5741,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 73.66 93.98 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "USBLC6-2SC6"
+			(at 73.66 100.33 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "LCSC" "C7519"
+			(at 73.66 93.98 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "ST"
 			(at 73.66 93.98 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -5705,7 +5777,7 @@
 			(at 406.4 97.79 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Value" "PE43711B-Z"
+		(property "Value" "Digital step attenuator"
 			(at 406.4 105.41 0)
 			(effects (font (size 1.27 1.27)))
 		)
@@ -5715,6 +5787,18 @@
 		)
 		(property "Datasheet" "~"
 			(at 406.4 101.6 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "PE43711B-Z"
+			(at 406.40 107.95 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "LCSC" "C470929"
+			(at 406.40 101.60 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "pSemi"
+			(at 406.40 101.60 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(instances
@@ -5738,7 +5822,7 @@
 			(at 223.52 46.99 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Value" "OT322520MJBA4SL 20MHz"
+		(property "Value" "20 MHz CMOS XO"
 			(at 223.52 54.61 0)
 			(effects (font (size 1.27 1.27)))
 		)
@@ -5748,6 +5832,18 @@
 		)
 		(property "Datasheet" "~"
 			(at 223.52 50.8 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "OT322520MJBA4SL"
+			(at 223.52 57.15 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "LCSC" "C725987"
+			(at 223.52 50.80 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "YXC"
+			(at 223.52 50.80 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(instances
@@ -5771,7 +5867,7 @@
 			(at 38.1 67.31 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Value" "TYPE-C-31-M-12"
+		(property "Value" "USB 2.0 Type-C"
 			(at 38.1 74.93 0)
 			(effects (font (size 1.27 1.27)))
 		)
@@ -5781,6 +5877,18 @@
 		)
 		(property "Datasheet" "~"
 			(at 38.1 71.12 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "TYPE-C-31-M-12"
+			(at 38.10 77.47 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "LCSC" "C165948"
+			(at 38.10 71.12 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Korean Hroparts"
+			(at 38.10 71.12 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(instances
@@ -5804,7 +5912,7 @@
 			(at 563.88 148.59 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Value" "BWSMA-KWE-Z001"
+		(property "Value" "SMA jack"
 			(at 563.88 156.21 0)
 			(effects (font (size 1.27 1.27)))
 		)
@@ -5814,6 +5922,18 @@
 		)
 		(property "Datasheet" "~"
 			(at 563.88 152.4 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "BWSMA-KWE-Z001"
+			(at 563.88 158.75 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "LCSC" "C496551"
+			(at 563.88 152.40 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "BAT Wireless"
+			(at 563.88 152.40 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(instances
@@ -5837,7 +5957,7 @@
 			(at 96.52 364.49 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Value" "MSK12C02"
+		(property "Value" "SPDT"
 			(at 96.52 372.11 0)
 			(effects (font (size 1.27 1.27)))
 		)
@@ -5847,6 +5967,18 @@
 		)
 		(property "Datasheet" "~"
 			(at 96.52 368.3 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "MSK12C02"
+			(at 96.52 374.65 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "LCSC" "C431540"
+			(at 96.52 368.30 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Shou Han"
+			(at 96.52 368.30 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(instances
@@ -5870,7 +6002,7 @@
 			(at 96.52 321.31 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Value" "EVQ-P7J01P"
+		(property "Value" "SPST"
 			(at 96.52 328.93 0)
 			(effects (font (size 1.27 1.27)))
 		)
@@ -5879,6 +6011,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 96.52 325.12 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "EVQ-P7J01P"
+			(at 96.52 331.47 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "LCSC" "C2828254"
+			(at 96.52 325.12 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Panasonic"
 			(at 96.52 325.12 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -5903,7 +6047,7 @@
 			(at 378.46 171.45 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Value" "TDP06H1SBD1"
+		(property "Value" "6 × SPST"
 			(at 378.46 179.07 0)
 			(effects (font (size 1.27 1.27)))
 		)
@@ -5912,6 +6056,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 378.46 175.26 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "TDP06H1SBD1"
+			(at 378.46 181.61 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "LCSC" "C221994"
+			(at 378.46 175.26 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "C&K"
 			(at 378.46 175.26 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -5936,7 +6092,7 @@
 			(at 96.52 194.31 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Value" "RK10J11R0A0H"
+		(property "Value" "10 kΩ 3B"
 			(at 96.52 201.93 0)
 			(effects (font (size 1.27 1.27)))
 		)
@@ -5945,6 +6101,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 96.52 198.12 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "RK10J11R0A0H"
+			(at 96.52 204.47 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "LCSC" "C470766"
+			(at 96.52 198.12 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Alps"
 			(at 96.52 198.12 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -5969,7 +6137,7 @@
 			(at 96.52 232.41 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Value" "RK10J11R0A0H"
+		(property "Value" "10 kΩ 3B"
 			(at 96.52 240.03 0)
 			(effects (font (size 1.27 1.27)))
 		)
@@ -5978,6 +6146,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 96.52 236.22 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "RK10J11R0A0H"
+			(at 96.52 242.57 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "LCSC" "C470766"
+			(at 96.52 236.22 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Alps"
 			(at 96.52 236.22 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -6002,7 +6182,7 @@
 			(at 96.52 270.51 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Value" "RK10J11R0A0H"
+		(property "Value" "10 kΩ 3B"
 			(at 96.52 278.13 0)
 			(effects (font (size 1.27 1.27)))
 		)
@@ -6011,6 +6191,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 96.52 274.32 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "RK10J11R0A0H"
+			(at 96.52 280.67 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "LCSC" "C470766"
+			(at 96.52 274.32 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Alps"
 			(at 96.52 274.32 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -6035,7 +6227,7 @@
 			(at 142.24 298.45 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Value" "XL-1615RGBC-RF"
+		(property "Value" "RGB LED, common anode"
 			(at 142.24 306.07 0)
 			(effects (font (size 1.27 1.27)))
 		)
@@ -6044,6 +6236,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 142.24 302.26 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "XL-1615RGBC-RF"
+			(at 142.24 308.61 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "LCSC" "C965840"
+			(at 142.24 302.26 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "XINGLIGHT"
 			(at 142.24 302.26 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -6068,7 +6272,7 @@
 			(at 60.96 120.65 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Value" "TPD1E05U06DPYR"
+		(property "Value" "ESD 5.5 V"
 			(at 60.96 128.27 0)
 			(effects (font (size 1.27 1.27)))
 		)
@@ -6077,6 +6281,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 60.96 124.46 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "TPD1E05U06DPYR"
+			(at 60.96 130.81 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "LCSC" "C436349"
+			(at 60.96 124.46 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "TI"
 			(at 60.96 124.46 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -6101,7 +6317,7 @@
 			(at 76.2 120.65 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Value" "TPD1E05U06DPYR"
+		(property "Value" "ESD 5.5 V"
 			(at 76.2 128.27 0)
 			(effects (font (size 1.27 1.27)))
 		)
@@ -6111,6 +6327,18 @@
 		)
 		(property "Datasheet" "~"
 			(at 76.2 124.46 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "TPD1E05U06DPYR"
+			(at 76.20 130.81 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "LCSC" "C436349"
+			(at 76.20 124.46 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "TI"
+			(at 76.20 124.46 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(instances
@@ -6134,7 +6362,7 @@
 			(at 551.18 173.99 90)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Value" "RCLAMP0521PATCT"
+		(property "Value" "ESD 5 V, 0.5 pF"
 			(at 551.18 181.61 90)
 			(effects (font (size 1.27 1.27)))
 		)
@@ -6144,6 +6372,18 @@
 		)
 		(property "Datasheet" "~"
 			(at 551.18 177.8 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "RCLAMP0521PATCT"
+			(at 551.18 184.15 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "LCSC" "C117554"
+			(at 551.18 177.80 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Semtech"
+			(at 551.18 177.80 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(instances
@@ -6176,6 +6416,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 477.52 294.64 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "LQW18ANR15G00D"
+			(at 480.06 298.45 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C113131"
+			(at 477.52 294.64 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Murata"
 			(at 477.52 294.64 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -6212,6 +6464,18 @@
 			(at 467.36 289.56 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "BLM15GA750SN1D"
+			(at 463.55 288.29 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C113009"
+			(at 467.36 289.56 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Murata"
+			(at 467.36 289.56 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -6242,6 +6506,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 452.12 83.82 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "LQW18ANR10G00D"
+			(at 448.31 82.55 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C98088"
+			(at 452.12 83.82 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Murata"
 			(at 452.12 83.82 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -6278,6 +6554,18 @@
 			(at 467.36 83.82 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "LQW18ANR10G00D"
+			(at 463.55 82.55 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C98088"
+			(at 467.36 83.82 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Murata"
+			(at 467.36 83.82 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -6308,6 +6596,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 363.22 81.28 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "ERJ-2RKF1101X"
+			(at 359.41 80.01 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C409028"
+			(at 363.22 81.28 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Panasonic"
 			(at 363.22 81.28 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -6344,6 +6644,18 @@
 			(at 358.14 93.98 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "CL05C101JB5NNNC"
+			(at 360.68 97.79 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C26409"
+			(at 358.14 93.98 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Samsung"
+			(at 358.14 93.98 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -6374,6 +6686,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 370.84 86.36 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "GRM1555C1H152JA01D"
+			(at 373.38 90.17 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C668348"
+			(at 370.84 86.36 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Murata"
 			(at 370.84 86.36 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -6410,6 +6734,18 @@
 			(at 370.84 73.66 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "CL05C101JB5NNNC"
+			(at 367.03 72.39 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C26409"
+			(at 370.84 73.66 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Samsung"
+			(at 370.84 73.66 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -6440,6 +6776,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 444.50 88.90 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "CL05C330JB5NNNC"
+			(at 447.04 92.71 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C70465"
+			(at 444.50 88.90 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Samsung"
 			(at 444.50 88.90 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -6476,6 +6824,18 @@
 			(at 459.74 88.90 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "CC0402JRNPO9BN560"
+			(at 462.28 92.71 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C107007"
+			(at 459.74 88.90 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Yageo"
+			(at 459.74 88.90 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -6506,6 +6866,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 474.98 88.90 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "CL05C330JB5NNNC"
+			(at 477.52 92.71 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C70465"
+			(at 474.98 88.90 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Samsung"
 			(at 474.98 88.90 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -6542,6 +6914,18 @@
 			(at 487.68 289.56 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "GRM1555C1H102JA01D"
+			(at 483.87 288.29 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C76947"
+			(at 487.68 289.56 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Murata"
+			(at 487.68 289.56 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -6572,6 +6956,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 457.20 294.64 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "GJM1555C1H6R0CB01D"
+			(at 459.74 298.45 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C161330"
+			(at 457.20 294.64 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Murata"
 			(at 457.20 294.64 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -6608,6 +7004,18 @@
 			(at 63.50 60.96 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "RC0402FR-075K1L"
+			(at 66.04 64.77 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C105872"
+			(at 63.50 60.96 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Yageo"
+			(at 63.50 60.96 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -6638,6 +7046,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 102.87 43.18 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "CL10B105KO8NNNC"
+			(at 100.33 46.99 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C59782"
+			(at 102.87 43.18 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Samsung"
 			(at 102.87 43.18 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -6674,6 +7094,18 @@
 			(at 63.50 78.74 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "RC0402FR-075K1L"
+			(at 66.04 82.55 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C105872"
+			(at 63.50 78.74 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Yageo"
+			(at 63.50 78.74 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -6704,6 +7136,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 138.43 43.18 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "CL10B105KO8NNNC"
+			(at 140.97 46.99 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C59782"
+			(at 138.43 43.18 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Samsung"
 			(at 138.43 43.18 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -6740,6 +7184,18 @@
 			(at 228.60 200.66 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "BLM15AG601SN1D"
+			(at 231.14 204.47 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C76884"
+			(at 228.60 200.66 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Murata"
+			(at 228.60 200.66 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -6770,6 +7226,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 205.74 200.66 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "CL21A106KOQNNNE"
+			(at 208.28 204.47 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C1713"
+			(at 205.74 200.66 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Samsung"
 			(at 205.74 200.66 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -6806,6 +7274,18 @@
 			(at 198.12 228.60 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "RC0402FR-0710KL"
+			(at 195.58 232.41 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C60490"
+			(at 198.12 228.60 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Yageo"
+			(at 198.12 228.60 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -6836,6 +7316,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 365.76 269.24 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "BLM15AG601SN1D"
+			(at 368.30 273.05 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C76884"
+			(at 365.76 269.24 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Murata"
 			(at 365.76 269.24 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -6872,6 +7364,18 @@
 			(at 220.98 187.96 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "CL05B104KO5NNNC"
+			(at 223.52 191.77 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C1525"
+			(at 220.98 187.96 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Samsung"
+			(at 220.98 187.96 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -6902,6 +7406,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 248.92 50.80 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "RC0402FR-0733RL"
+			(at 245.11 49.53 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C138002"
+			(at 248.92 50.80 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Yageo"
 			(at 248.92 50.80 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -6938,6 +7454,18 @@
 			(at 254.00 200.66 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "CL05B104KO5NNNC"
+			(at 256.54 204.47 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C1525"
+			(at 254.00 200.66 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Samsung"
+			(at 254.00 200.66 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -6968,6 +7496,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 248.92 187.96 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "CL05B104KO5NNNC"
+			(at 251.46 191.77 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C1525"
+			(at 248.92 187.96 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Samsung"
 			(at 248.92 187.96 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -7004,6 +7544,18 @@
 			(at 248.92 238.76 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "RC0402FR-0733RL"
+			(at 245.11 237.49 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C138002"
+			(at 248.92 238.76 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Yageo"
+			(at 248.92 238.76 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -7034,6 +7586,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 228.60 175.26 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "CL05B104KO5NNNC"
+			(at 231.14 179.07 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C1525"
+			(at 228.60 175.26 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Samsung"
 			(at 228.60 175.26 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -7070,6 +7634,18 @@
 			(at 248.92 248.92 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "RC0402FR-0733RL"
+			(at 245.11 247.65 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C138002"
+			(at 248.92 248.92 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Yageo"
+			(at 248.92 248.92 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -7100,6 +7676,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 198.12 187.96 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "CL10B105KO8NNNC"
+			(at 200.66 191.77 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C59782"
+			(at 198.12 187.96 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Samsung"
 			(at 198.12 187.96 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -7136,6 +7724,18 @@
 			(at 248.92 259.08 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "RC0402FR-0733RL"
+			(at 245.11 257.81 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C138002"
+			(at 248.92 259.08 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Yageo"
+			(at 248.92 259.08 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -7166,6 +7766,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 198.12 284.48 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "GRM21BR71C475KE51L"
+			(at 195.58 288.29 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C408144"
+			(at 198.12 284.48 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Murata"
 			(at 198.12 284.48 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -7202,6 +7814,18 @@
 			(at 312.42 104.14 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "RC0402FR-0710KL"
+			(at 309.88 107.95 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C60490"
+			(at 312.42 104.14 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Yageo"
+			(at 312.42 104.14 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -7232,6 +7856,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 198.12 210.82 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "CL05B104KO5NNNC"
+			(at 195.58 214.63 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C1525"
+			(at 198.12 210.82 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Samsung"
 			(at 198.12 210.82 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -7268,6 +7904,18 @@
 			(at 378.46 111.76 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "RC0402FR-0710KL"
+			(at 375.92 115.57 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C60490"
+			(at 378.46 111.76 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Yageo"
+			(at 378.46 111.76 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -7298,6 +7946,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 223.52 30.48 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "CL05B104KO5NNNC"
+			(at 226.06 34.29 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C1525"
+			(at 223.52 30.48 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Samsung"
 			(at 223.52 30.48 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -7334,6 +7994,18 @@
 			(at 378.46 60.96 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "RC0402FR-0710KL"
+			(at 375.92 64.77 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C60490"
+			(at 378.46 60.96 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Yageo"
+			(at 378.46 60.96 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -7364,6 +8036,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 200.66 30.48 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "CL21A106KOQNNNE"
+			(at 203.20 34.29 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C1713"
+			(at 200.66 30.48 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Samsung"
 			(at 200.66 30.48 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -7400,6 +8084,18 @@
 			(at 378.46 124.46 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "RC0402FR-0710KL"
+			(at 375.92 128.27 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C60490"
+			(at 378.46 124.46 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Yageo"
+			(at 378.46 124.46 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -7430,6 +8126,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 330.20 50.80 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "CL05B104KO5NNNC"
+			(at 332.74 54.61 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C1525"
+			(at 330.20 50.80 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Samsung"
 			(at 330.20 50.80 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -7466,6 +8174,18 @@
 			(at 353.06 127.00 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "RC0402FR-0710KL"
+			(at 350.52 130.81 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C60490"
+			(at 353.06 127.00 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Yageo"
+			(at 353.06 127.00 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -7496,6 +8216,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 332.74 38.10 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "CL05B104KO5NNNC"
+			(at 335.28 41.91 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C1525"
+			(at 332.74 38.10 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Samsung"
 			(at 332.74 38.10 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -7532,6 +8264,18 @@
 			(at 378.46 137.16 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "RC0402FR-0710KL"
+			(at 375.92 140.97 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C60490"
+			(at 378.46 137.16 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Yageo"
+			(at 378.46 137.16 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -7562,6 +8306,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 304.80 50.80 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "CL05B104KO5NNNC"
+			(at 307.34 54.61 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C1525"
+			(at 304.80 50.80 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Samsung"
 			(at 304.80 50.80 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -7598,6 +8354,18 @@
 			(at 353.06 139.70 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "RC0402FR-0710KL"
+			(at 350.52 143.51 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C60490"
+			(at 353.06 139.70 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Yageo"
+			(at 353.06 139.70 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -7628,6 +8396,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 360.68 38.10 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "CL05B104KO5NNNC"
+			(at 363.22 41.91 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C1525"
+			(at 360.68 38.10 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Samsung"
 			(at 360.68 38.10 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -7664,6 +8444,18 @@
 			(at 520.70 129.54 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "RC0402FR-071KL"
+			(at 523.24 133.35 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C106235"
+			(at 520.70 129.54 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Yageo"
+			(at 520.70 129.54 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -7694,6 +8486,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 340.36 25.40 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "CL05B104KO5NNNC"
+			(at 342.90 29.21 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C1525"
+			(at 340.36 25.40 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Samsung"
 			(at 340.36 25.40 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -7730,6 +8534,18 @@
 			(at 495.30 157.48 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "RC0402FR-071KL"
+			(at 491.49 156.21 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C106235"
+			(at 495.30 157.48 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Yageo"
+			(at 495.30 157.48 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -7760,6 +8576,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 365.76 25.40 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "CL05B104KO5NNNC"
+			(at 368.30 29.21 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C1525"
+			(at 365.76 25.40 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Samsung"
 			(at 365.76 25.40 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -7796,6 +8624,18 @@
 			(at 121.92 363.22 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "RC0402FR-07100KL"
+			(at 124.46 367.03 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C60491"
+			(at 121.92 363.22 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Yageo"
+			(at 121.92 363.22 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -7826,6 +8666,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 307.34 38.10 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "CL05B104KO5NNNC"
+			(at 309.88 41.91 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C1525"
+			(at 307.34 38.10 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Samsung"
 			(at 307.34 38.10 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -7862,6 +8714,18 @@
 			(at 340.36 289.56 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "RC0402FR-0710KL"
+			(at 337.82 293.37 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C60490"
+			(at 340.36 289.56 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Yageo"
+			(at 340.36 289.56 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -7892,6 +8756,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 388.62 66.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "CL05B104KO5NNNC"
+			(at 391.16 69.85 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C1525"
+			(at 388.62 66.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Samsung"
 			(at 388.62 66.04 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -7928,6 +8804,18 @@
 			(at 340.36 302.26 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "RC0402FR-076K8L"
+			(at 337.82 306.07 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C93940"
+			(at 340.36 302.26 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Yageo"
+			(at 340.36 302.26 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -7958,6 +8846,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 388.62 137.16 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "CL05B104KO5NNNC"
+			(at 391.16 140.97 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C1525"
+			(at 388.62 137.16 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Samsung"
 			(at 388.62 137.16 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -7994,6 +8894,18 @@
 			(at 340.36 320.04 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "RC0402FR-076K8L"
+			(at 337.82 323.85 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C93940"
+			(at 340.36 320.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Yageo"
+			(at 340.36 320.04 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -8024,6 +8936,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 363.22 154.94 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "CL05B104KO5NNNC"
+			(at 365.76 158.75 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C1525"
+			(at 363.22 154.94 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Samsung"
 			(at 363.22 154.94 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -8060,6 +8984,18 @@
 			(at 340.36 332.74 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "RC0402FR-07604RL"
+			(at 336.55 331.47 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C273693"
+			(at 340.36 332.74 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Yageo"
+			(at 340.36 332.74 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -8090,6 +9026,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 388.62 149.86 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "CL10A225KO8NNNC"
+			(at 391.16 153.67 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C23630"
+			(at 388.62 149.86 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Samsung"
 			(at 388.62 149.86 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -8126,6 +9074,18 @@
 			(at 340.36 276.86 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "ERJ-2RKF2001X"
+			(at 336.55 275.59 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C413086"
+			(at 340.36 276.86 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Panasonic"
+			(at 340.36 276.86 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -8156,6 +9116,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 314.96 304.80 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "ERJ-2RKF2001X"
+			(at 311.15 303.53 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C413086"
+			(at 314.96 304.80 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Panasonic"
 			(at 314.96 304.80 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -8192,6 +9164,18 @@
 			(at 127.00 297.18 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "RC0402FR-07510RL"
+			(at 123.19 295.91 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C276273"
+			(at 127.00 297.18 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Yageo"
+			(at 127.00 297.18 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -8222,6 +9206,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 127.00 309.88 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "RC0402FR-07390RL"
+			(at 123.19 308.61 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C137997"
+			(at 127.00 309.88 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Yageo"
 			(at 127.00 309.88 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -8258,6 +9254,18 @@
 			(at 414.02 63.50 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "CL10B105KO8NNNC"
+			(at 416.56 67.31 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C59782"
+			(at 414.02 63.50 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Samsung"
+			(at 414.02 63.50 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -8288,6 +9296,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 127.00 322.58 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "RC0402FR-07390RL"
+			(at 123.19 321.31 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C137997"
+			(at 127.00 322.58 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Yageo"
 			(at 127.00 322.58 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -8324,6 +9344,18 @@
 			(at 495.30 172.72 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "GRM1555C1H102JA01D"
+			(at 492.76 176.53 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C76947"
+			(at 495.30 172.72 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Murata"
+			(at 495.30 172.72 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -8354,6 +9386,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 365.76 256.54 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "GRM155R71H223KA12D"
+			(at 368.30 260.35 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C77023"
+			(at 365.76 256.54 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Murata"
 			(at 365.76 256.54 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -8390,6 +9434,18 @@
 			(at 391.16 269.24 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "CL05B104KO5NNNC"
+			(at 393.70 273.05 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C1525"
+			(at 391.16 269.24 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Samsung"
+			(at 391.16 269.24 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -8420,6 +9476,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 248.92 220.98 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "GRM1555C1H3R3CA01D"
+			(at 251.46 224.79 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C76968"
+			(at 248.92 220.98 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Murata"
 			(at 248.92 220.98 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -8456,6 +9524,18 @@
 			(at 327.66 332.74 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "CL05C330JB5NNNC"
+			(at 325.12 336.55 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C70465"
+			(at 327.66 332.74 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Samsung"
+			(at 327.66 332.74 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -8486,6 +9566,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 340.36 345.44 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "CL05C330JB5NNNC"
+			(at 337.82 349.25 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C70465"
+			(at 340.36 345.44 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Samsung"
 			(at 340.36 345.44 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -8522,6 +9614,18 @@
 			(at 261.62 238.76 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "CL05B104KO5NNNC"
+			(at 264.16 242.57 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C1525"
+			(at 261.62 238.76 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Samsung"
+			(at 261.62 238.76 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -8555,6 +9659,18 @@
 			(at 274.32 226.06 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
+		(property "MPN" "CL05B104KO5NNNC"
+			(at 276.86 229.87 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C1525"
+			(at 274.32 226.06 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Samsung"
+			(at 274.32 226.06 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
 		(instances
 			(project "IphoneFM"
 				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
@@ -8585,6 +9701,18 @@
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
 		(property "Datasheet" "~"
+			(at 261.62 254.00 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "MPN" "CL05B104KO5NNNC"
+			(at 264.16 257.81 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "LCSC" "C1525"
+			(at 261.62 254.00 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Manufacturer" "Samsung"
 			(at 261.62 254.00 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)

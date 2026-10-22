@@ -14,6 +14,7 @@
 | `kicadcheck_test.py` | Self-test for `kicadcheck.py`: synthetic files with deliberate faults, plus KiCad's StickHub demo |
 | `kicad_symbol.py` | `add_symbol()` builds a readable project symbol from a datasheet pin table into `kicad/rev-a/symbols/IphoneFM.kicad_sym` |
 | `sch_place.py [--dry-run]` | Place every passive on the Rev A schematic beside the pin its `local_to` names, clear of other parts and their text; needs one R, C, L and FB seeded first |
+| `sch_fields.py [--dry-run]` | Write each symbol's value, MPN, LCSC code and manufacturer from `netlist.json` into the Rev A schematic, leaving designators as placed |
 | `setup-kicad.sh` | Install KiCad 10 and pre-cache the KiCad MCP server (Ubuntu 24.04, as root) |
 
 API keys come from environment variables (`DIGIKEY_CLIENT_ID`, `DIGIKEY_CLIENT_SECRET`, `MOUSER_API_KEY`). Never commit keys.
