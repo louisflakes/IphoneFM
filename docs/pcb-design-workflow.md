@@ -60,7 +60,7 @@ Finishing:
 
 ## 2. Footprints
 
-- Start from the maker's land pattern and compare it with IPC-7351. Joints should meet J-STD-001 [HHG p35]. For this project the passive land patterns are recorded in [design/plan-c/packages.md](../design/plan-c/packages.md).
+- Start from the maker's land pattern and compare it with IPC-7351. Joints should meet J-STD-001 [HHG p35]. For this project the passive land patterns are recorded in [design/archive/plan-c/packages.md](../design/archive/plan-c/packages.md).
 - Paste layer is 1:1 with the land; leave stencil compensation to the assembler [HHG p96, p113].
 - Silkscreen: draw the body outline at real size, mark polarity and pin 1, keep ink off pads, use ≥0.25 mm (10 mil) line width, and print only designators [BAC p13; KHA p149].
 

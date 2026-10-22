@@ -10,7 +10,7 @@ How the design stays on the rails from here into KiCad. One file holds the truth
 |---|---|---|
 | [bom.md](bom.md) | Why each part and value was chosen, chain by chain | `netcheck.py` (part numbers; the designator line at the top of each chain) |
 | [wiring.html](wiring.html) | The wiring diagram and netlist table | `netcheck.py` (every net name; every pin it draws) |
-| [layout.html](layout.html) | True-size parts and the agreed placement (layout 1) | `kicadcheck.py --pcb` (positions on the real board) |
+| [layout.html](layout.html) | True-size parts and the agreed Rev A placement | `kicadcheck.py --pcb` (positions on the real board) |
 | [placement-rules.md](placement-rules.md) | Placement rules and the user's feedback | The checks in layout.html, then `kicadcheck.py --pcb` |
 
 Changing the design means editing netlist.json first, then the page that explains it, then running the checks.
@@ -45,13 +45,15 @@ python tools/kicadcheck.py --net board.net --bom board.csv --pcb board.kicad_pcb
 |---|---|
 | `--net` (schematic) | Every part present and nothing extra; every connected pin has a pad; no net broken in two (an open); no two nets joined (a short); NC pins open; LCSC codes and part numbers match; passive footprints the right size |
 | `--bom` | Every ordered part listed, nothing extra, codes and part numbers match |
-| `--pcb` (the board file) | The same connection checks on the board's own pads; every part on the top side; outline 46.45 × 71.40 mm; each sketched part within 1.5 mm of layout 1 (anchored on J1); each 'local_to' part within 4 mm of its pin's pad |
+| `--pcb` (the board file) | The same connection checks on the board's own pads; every part on the top side; outline 46.45 × 71.40 mm; each sketched part within 1.5 mm of the Rev A placement (anchored on J1); each 'local_to' part within 4 mm of its pin's pad |
 
 Net names may differ from netlist.json (KiCad's automatic names are fine); the check compares which pins are joined, and lists renamed nets as a note. Footprint pad numbering is matched loosely where footprints differ: a paired USB-C contact (A1B12) may be one pad or two, SW1's four tabs may all be pad 4, an exposed pad is usually the next number after the last pin.
 
+The order in which these run during the KiCad build is in [kicad-build-procedure.md](kicad-build-procedure.md).
+
 ## Testing the checker: `python tools/kicadcheck_test.py`
 
-Before any KiCad work exists, the test builds KiCad-format files from netlist.json and layout 1, which must pass, then breaks them one way at a time. Each break must be caught:
+Before any KiCad work exists, the test builds KiCad-format files from netlist.json and the Rev A placement, which must pass, then breaks them one way at a time. Each break must be caught:
 - U2 pin 15 removed
 - R21 moved onto I2C_SCL (a short)
 - U7's VDD taken off 3V3 (an open)

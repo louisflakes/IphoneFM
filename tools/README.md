@@ -9,8 +9,8 @@
 | `jlc.py <keyword>…` | Search the JLCPCB assembly library (LCSC stock); no key needed |
 | `freq.py` | Parse DigiKey frequency strings (`covers_fm()`) |
 | `shot.cjs <page.html> <out.png>` | Screenshot a wiring diagram with Playwright |
-| `netcheck.py [--bom] [--sync-bom]` | Check `design/analog-fm/netlist.json`: designators, part numbers, JLC codes and sizes; every pin of every part mapped to a net (pin coverage), nets that join only one part, shorted passives, unpowered supply pins; and pin-by-pin agreement with `bom.md` and `wiring.html`; `--bom` prints the grouped BOM, `--sync-bom` rewrites the designator line at the top of each BOM chain |
-| `kicadcheck.py --net/--bom/--pcb <file>` | Check KiCad's exported schematic netlist, BOM and board file against `netlist.json` and layout 1: opens, shorts, missing pins, JLC codes, footprint sizes, sides, outline, positions. See `design/analog-fm/verification.md` |
+| `netcheck.py [--bom] [--sync-bom]` | Check `design/rev-a/netlist.json`: designators, part numbers, JLC codes and sizes; every pin of every part mapped to a net (pin coverage), nets that join only one part, shorted passives, unpowered supply pins; and pin-by-pin agreement with `bom.md` and `wiring.html`; `--bom` prints the grouped BOM, `--sync-bom` rewrites the designator line at the top of each BOM chain |
+| `kicadcheck.py --net/--bom/--pcb <file>` | Check KiCad's exported schematic netlist, BOM and board file against `netlist.json` and the Rev A placement: opens, shorts, missing pins, JLC codes, footprint sizes, sides, outline, positions. See `design/rev-a/verification.md` |
 | `kicadcheck_test.py` | Self-test for `kicadcheck.py`: synthetic files with deliberate faults, plus KiCad's StickHub demo |
 | `setup-kicad.sh` | Install KiCad 10 and pre-cache the KiCad MCP server (Ubuntu 24.04, as root) |
 
@@ -18,4 +18,4 @@ API keys come from environment variables (`DIGIKEY_CLIENT_ID`, `DIGIKEY_CLIENT_S
 DigiKey limits a search to offset + limit ≤ 300, so `dk_cat.py` can truncate large categories.
 `shot.cjs` loads Playwright from `PLAYWRIGHT_MODULE` if set, else `playwright`, and needs absolute paths.
 
-The KiCad MCP server ([kicad-mcp-pro](https://github.com/oaslananka/kicad-mcp-pro)) is registered in `../.mcp.json`: read-only `default` profile, 24 review tools. It needs KiCad from `setup-kicad.sh`.
+The KiCad MCP server ([kicad-mcp-pro](https://github.com/oaslananka/kicad-mcp-pro)) is registered in `../.mcp.json` with the read-only `default` profile; on the design PC a local override runs it with the `full` profile in `write` mode, so Claude can edit the KiCad project. It needs KiCad from `setup-kicad.sh`.

@@ -1,5 +1,5 @@
 """Self-test for kicadcheck.py, runnable before any KiCad work exists.
-1. Builds KiCad-format files (schematic netlist, BOM, board) from netlist.json and layout 1, which must pass every check.
+1. Builds KiCad-format files (schematic netlist, BOM, board) from netlist.json and the Rev A placement, which must pass every check.
 2. Breaks them one way at a time (a missing pin, a short, an open, a wrong code, a moved part...), each of which must fail.
 3. If KiCad's demo projects are installed, reads a real exported netlist and board (StickHub) and checks they agree.
 Usage: python tools/kicadcheck_test.py"""
@@ -18,7 +18,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import kicadcheck as kc  # noqa: E402
 
 doc, by_ref = kc.read_reference()
-PLAN = kc.read_layout("1")
+PLAN = kc.read_layout("A")
 OFF = (100.0, 20.0)  # where the synthetic board sits in KiCad coordinates, relative to the phone-back sketch
 FOOT = {"0402": "Capacitor_SMD:C_0402_1005Metric", "0603": "Capacitor_SMD:C_0603_1608Metric", "0805": "Capacitor_SMD:C_0805_2012Metric"}
 
@@ -147,7 +147,12 @@ def main():
     if os.path.exists(cli) and os.path.isdir(src):
         work = os.path.join(tmp, "stickhub"); shutil.copytree(src, work)
         out = os.path.join(work, "s.net")
-        subprocess.run([cli, "sch", "export", "netlist", "--format", "kicadsexpr", "-o", out, os.path.join(work, "StickHub.kicad_sch")], check=True, capture_output=True)
+        r = subprocess.run([cli, "sch", "export", "netlist", "--format", "kicadsexpr", "-o", out, os.path.join(work, "StickHub.kicad_sch")], capture_output=True, text=True)
+        if r.returncode != 0 or not os.path.exists(out):
+            results.append(False)
+            print(f"WRONG real KiCad files: kicad-cli failed ({r.returncode}): {(r.stderr or r.stdout).strip()[:300]}")
+            shutil.rmtree(tmp, ignore_errors=True)
+            return 1
         parts, spins = kc.read_net(out)
         fps, _ = kc.read_pcb(os.path.join(work, "StickHub.kicad_pcb"))
         res = []

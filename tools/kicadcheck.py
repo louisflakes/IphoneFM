@@ -1,9 +1,9 @@
-"""Checks KiCad's own files against design/analog-fm/netlist.json (connections, parts, JLC codes) and the layout sketch (placement).
+"""Checks KiCad's own files against design/rev-a/netlist.json (connections, parts, JLC codes) and the Rev A placement in layout.html.
 Usage (from the repo root; exit code 1 if any check fails):
   python tools/kicadcheck.py --net board.net                 schematic netlist: kicad-cli sch export netlist --format kicadsexpr
   python tools/kicadcheck.py --bom board.csv                 schematic BOM:     kicad-cli sch export bom --fields "Reference,Value,Footprint,LCSC,MPN"
   python tools/kicadcheck.py --pcb board.kicad_pcb           the board itself: pads and their nets, positions, sides, outline
-  Options: --layout 1 (placement concept in layout.html to compare with), --tol 1.5 (mm, major-part position), --local 4 (mm, part to its pin)"""
+  Options: --layout A (placement in layout.html to compare with), --tol 1.5 (mm, major-part position), --local 4 (mm, part to its pin)"""
 import argparse
 import json
 import math
@@ -12,7 +12,7 @@ import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DESIGN = os.path.join(ROOT, "design", "analog-fm")
+DESIGN = os.path.join(ROOT, "design", "rev-a")
 ENVELOPE = (46.45, 71.40)  # board outline, mm (layout.html, unchanged since 2026-10-20)
 
 
@@ -267,7 +267,7 @@ def check_pcb(by_ref, fps, outline, layout_n, tol, local, out):
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--net"); ap.add_argument("--bom"); ap.add_argument("--pcb")
-    ap.add_argument("--layout", default="1"); ap.add_argument("--tol", type=float, default=1.5); ap.add_argument("--local", type=float, default=4.0)
+    ap.add_argument("--layout", default="A"); ap.add_argument("--tol", type=float, default=1.5); ap.add_argument("--local", type=float, default=4.0)
     a = ap.parse_args(argv)
     if not (a.net or a.bom or a.pcb):
         ap.error("give at least one of --net, --bom, --pcb")

@@ -1,7 +1,7 @@
 # Archived plans
 
 These plans branched off the main design and are no longer developed. They are kept as-is for reference.
-The active design is [Plan C](../plan-c/wiring.html).
+The active design is [Rev A](../rev-a/wiring.html). Plan C ([plan-c/](plan-c/)) was archived on 2026-10-21: its transmitter, the LV2285VB, is obsolete and needs a large minimum order.
 
 | Plan | MCU | Scope | Why archived |
 |---|---|---|---|

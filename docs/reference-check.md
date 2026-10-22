@@ -1,6 +1,6 @@
 # Plan C reference check
 
-An adversarial check of the [wiring diagram](../design/plan-c/wiring.html). For each key part, find 2–3 existing schematics or board designs that use the exact part number, compare how they wired it pin by pin, and record any gap against Plan C. Passive values may differ; the check is about purpose and function.
+An adversarial check of the [wiring diagram](../design/archive/plan-c/wiring.html). For each key part, find 2–3 existing schematics or board designs that use the exact part number, compare how they wired it pin by pin, and record any gap against Plan C. Passive values may differ; the check is about purpose and function.
 
 One part at a time, in the order below (highest risk first). Started 2026-10-20.
 

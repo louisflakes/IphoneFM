@@ -1,5 +1,5 @@
 <meta charset="utf-8">
-<title>IphoneFM Wiring D2</title>
+<title>IphoneFM Rev A Wiring</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
@@ -53,15 +53,15 @@ footer a { color: inherit; }
 
 <div class="wrap">
   <header>
-    <h1>IphoneFM wiring — analog FM (D2)</h1>
-    <p><b>Active design.</b> Plan C is archived (design/plan-c/ in the repo). The LMX2571’s internal VCO makes the carrier and U1 streams the FM deviation to it over I²S, so there is no analog modulator. The power level comes from a DIP switch on a step attenuator, and receive is the Si4705 as before. U1’s pins were checked against DS14217 Tables 26–28 and the ROM bootloader’s pins (AN2606 Table 165). Lines are nets; short stubs are parts local to one chip; “▲ 3V3” means wired to U3’s 3.3 V output. Tap a pin for its datasheet source.</p>
+    <h1>IphoneFM Rev A wiring</h1>
+    <p><b>Rev A, the active design</b> (analog FM, option D2). Plan C is archived (design/archive/plan-c/ in the repo). The LMX2571’s internal VCO makes the carrier and U1 streams the FM deviation to it over I²S, so there is no analog modulator. The power level comes from a DIP switch on a step attenuator, and receive is the Si4705 as before. U1’s pins were checked against DS14217 Tables 26–28 and the ROM bootloader’s pins (AN2606 Table 165). Lines are nets; short stubs are parts local to one chip; “▲ 3V3” means wired to U3’s 3.3 V output. Tap a pin for its datasheet source.</p>
   </header>
   <div class="layers" id="layers" role="group" aria-label="Layers"></div>
   <div class="sheet"><svg id="sheet" viewBox="0 0 2360 1570" role="img" aria-label="Analog FM D2: USB-C socket, regulator, STM32U535, 20 MHz oscillator, LMX2571 synthesizer, PE43711 attenuator with DIP switch, low-pass filter, RF switch, SMA, Si4705 receiver, slider, wheels and LED wiring"></svg></div>
   <div class="detail" id="detail">Tap a pin.</div>
   <h2>Netlist</h2>
   <div class="tablewrap"><table><thead><tr><th>Net</th><th>From</th><th>To</th><th>In between</th><th>Source</th></tr></thead><tbody id="netlist"></tbody></table></div>
-  <footer>Sources: <a href="https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/8915/STM32U535CEU6QTR.pdf">STM32U535 DS14217 Rev 5</a> · ST AN2606 Rev 61 (bootloader) · <a href="https://www.ti.com/lit/ds/symlink/lmx2571.pdf">TI LMX2571 SNAS654A</a> · TI SNAA309 (FSK I²S) · <a href="https://www.psemi.com/pdf/datasheets/pe43711ds.pdf">pSemi PE43711</a> · <a href="https://www.psemi.com/pdf/datasheets/pe42421ds.pdf">pSemi PE42421</a> · <a href="https://www.skyworksinc.com/-/media/Skyworks/SL/documents/public/data-sheets/Si4704-05-D60.pdf">Si4704/05-D60 Rev 1.2</a> · AN332 · AN383 · YXC OT322520MJBA4SL (YSO110TR) · <a href="https://www.diodes.com/assets/Datasheets/AP2112.pdf">AP2112</a> · HRO TYPE-C-31-M-12 · C&amp;K TDP series · Shou Han MSK12C02 · XINGLIGHT XL-1615RGBC-RF · Alps RK10J · Panasonic EVQ-P7 · Semtech RClamp0521P · BAT Wireless BWSMA-KWE-Z001 · USB Type-C R2.5. Every part and value is in design/analog-fm/bom.md (chains 1–10); designators come from design/analog-fm/netlist.json, checked by tools/netcheck.py; local copies of the datasheets in docs/datasheets/. Net routes are drawn by hand; the netlist table is the source of truth.</footer>
+  <footer>Sources: <a href="https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/8915/STM32U535CEU6QTR.pdf">STM32U535 DS14217 Rev 5</a> · ST AN2606 Rev 61 (bootloader) · <a href="https://www.ti.com/lit/ds/symlink/lmx2571.pdf">TI LMX2571 SNAS654A</a> · TI SNAA309 (FSK I²S) · <a href="https://www.psemi.com/pdf/datasheets/pe43711ds.pdf">pSemi PE43711</a> · <a href="https://www.psemi.com/pdf/datasheets/pe42421ds.pdf">pSemi PE42421</a> · <a href="https://www.skyworksinc.com/-/media/Skyworks/SL/documents/public/data-sheets/Si4704-05-D60.pdf">Si4704/05-D60 Rev 1.2</a> · AN332 · AN383 · YXC OT322520MJBA4SL (YSO110TR) · <a href="https://www.diodes.com/assets/Datasheets/AP2112.pdf">AP2112</a> · HRO TYPE-C-31-M-12 · C&amp;K TDP series · Shou Han MSK12C02 · XINGLIGHT XL-1615RGBC-RF · Alps RK10J · Panasonic EVQ-P7 · Semtech RClamp0521P · BAT Wireless BWSMA-KWE-Z001 · USB Type-C R2.5. Every part and value is in design/rev-a/bom.md (chains 1–10); designators come from design/rev-a/netlist.json, checked by tools/netcheck.py; local copies of the datasheets in docs/datasheets/. Net routes are drawn by hand; the netlist table is the source of truth.</footer>
 </div>
 
 <script>
@@ -431,7 +431,7 @@ function render() {
     if (it.fade) it.fade.style.opacity = vis ? 1 : 0;
   });
   document.querySelectorAll("#layers button[data-id]").forEach(b => b.setAttribute("aria-pressed", on.has(b.dataset.id)));
-  try { localStorage.setItem("fmd2-layers-v1", JSON.stringify([...on])); } catch (e) {}
+  try { localStorage.setItem("fm-reva-layers-v1", JSON.stringify([...on])); } catch (e) {}
 }
 const bar = document.getElementById("layers");
 LAYERS.forEach(l => {
@@ -444,6 +444,6 @@ LAYERS.forEach(l => {
   const b = document.createElement("button"); b.type = "button"; b.className = "util"; b.textContent = t;
   b.setAttribute("aria-pressed", "false"); b.addEventListener("click", () => { f(); render(); }); bar.appendChild(b);
 });
-try { const s = JSON.parse(localStorage.getItem("fmd2-layers-v1")); if (Array.isArray(s)) { on.clear(); s.forEach(x => on.add(x)); } } catch (e) {}
+try { const s = JSON.parse(localStorage.getItem("fm-reva-layers-v1")); if (Array.isArray(s)) { on.clear(); s.forEach(x => on.add(x)); } } catch (e) {}
 render();
 </script>

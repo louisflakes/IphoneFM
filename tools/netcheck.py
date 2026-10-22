@@ -1,4 +1,4 @@
-"""Checks design/analog-fm/netlist.json, the parts list (and later the nets) that every other design file is checked against.
+"""Checks design/rev-a/netlist.json, the parts list (and later the nets) that every other design file is checked against.
 Usage: python tools/netcheck.py            (from the repo root; exit code 1 if any check fails)
        python tools/netcheck.py --bom      also print the BOM grouped by part number"""
 import json
@@ -7,7 +7,7 @@ import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DESIGN = os.path.join(ROOT, "design", "analog-fm")
+DESIGN = os.path.join(ROOT, "design", "rev-a")
 NETLIST = os.path.join(DESIGN, "netlist.json")
 REQUIRED = ("ref", "value", "mpn", "maker", "lcsc", "package", "pins", "chain", "function")
 TOO_SMALL = ("0201", "01005")  # JLC economic assembly and the user's rule: nothing smaller than 0402

@@ -1,6 +1,6 @@
 # Analog FM placement rules
 
-The checklist for placing the analog-FM parts on the board envelope in [layout.html](layout.html), and for checking the placement afterwards. It carries over [Plan C's rules](../plan-c/placement-rules.md) and the user's feedback on the Plan C layouts. Rules that changed with the new parts are marked **New** or **Changed**.
+The checklist for placing the analog-FM parts on the board envelope in [layout.html](layout.html), and for checking the placement afterwards. It carries over [Plan C's rules](../archive/plan-c/placement-rules.md) and the user's feedback on the Plan C layouts. Rules that changed with the new parts are marked **New** or **Changed**.
 
 Board orientation: looking at the back of the phone, camera at top left. The **top side** of the board faces away from the phone; the **bottom side** faces the phone and the MagSafe ring. The envelope (x 12.70–59.15, y 59.56–130.96) and the antenna placement are fixed (user, 2026-10-21).
 

@@ -215,7 +215,7 @@ Between the 1 nF DC block after U2 pin 12 and U5 RF2. 5th-order Chebyshev, 0.1 d
 
 ## Chain 13: Test pads
 
-Planned before layout (HHG p48; [PCB design workflow](../../docs/pcb-design-workflow.md) §4). None on RF nets.
+Planned before layout (HHG p48; [PCB design workflow](../../../docs/pcb-design-workflow.md) §4). None on RF nets.
 
 | Ref | Net | Use |
 |---|---|---|

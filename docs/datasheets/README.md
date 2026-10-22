@@ -1,6 +1,6 @@
 # Datasheets and specs
 
-Every document the design was checked against. Page numbers cited in the [BOM](../../design/plan-c/bom.md), [decisions](../decisions.md) and the [wiring diagram](../../design/plan-c/wiring.html) refer to these files.
+Every document the design was checked against. Page numbers cited in the [BOM](../../design/archive/plan-c/bom.md), [decisions](../decisions.md) and the [wiring diagram](../../design/archive/plan-c/wiring.html) refer to these files.
 "Session download" means fetched during the design sessions; the original link was not kept.
 
 ## Plan C parts (`plan-c/`)
@@ -40,7 +40,7 @@ Used by the [PCB design workflow](../pcb-design-workflow.md). AN383 is listed ab
 
 ### Passive packages and land patterns (`plan-c/`)
 
-Used by the [package table](../../design/plan-c/packages.md).
+Used by the [package table](../../design/archive/plan-c/packages.md).
 
 | File | Document | Source | Used for |
 |---|---|---|---|

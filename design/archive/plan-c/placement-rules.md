@@ -1,7 +1,7 @@
 # Plan C placement rules
 
 A checklist for placing parts on the board envelope in [layout.html](layout.html), and for checking the placement afterwards.
-Each rule names where it comes from: **User** (set in conversation, 2026-10-20), a datasheet or app note, or the [PCB design workflow](../../docs/pcb-design-workflow.md) book tags (BAC, HHG, KHA).
+Each rule names where it comes from: **User** (set in conversation, 2026-10-20), a datasheet or app note, or the [PCB design workflow](../../../docs/pcb-design-workflow.md) book tags (BAC, HHG, KHA).
 
 Board orientation: looking at the back of the phone, camera at top left. The **top side** of the board faces away from the phone; the **bottom side** faces the phone and the MagSafe ring.
 
