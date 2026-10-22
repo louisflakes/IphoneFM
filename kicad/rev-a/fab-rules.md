@@ -121,7 +121,35 @@ Two more rules carry into later phases:
 
 ## Our design rules (step 0.5)
 
-To do.
+A step above JLC's minimums, never at them [HHG p15, p63–64]. These are what get entered in KiCad's Board Setup in phase 3, step 3.2.
+
+| Rule | JLC minimum | Ours | Why |
+|---|---|---|---|
+| Clearance, copper to copper | 0.10 mm | **0.20 mm** | Twice the minimum; still fits the 0.5 mm-pitch QFN pads |
+| Track width, signals | 0.10 mm | **0.20 mm** | Twice the minimum; fans out of 0.25 mm QFN pads |
+| Track width, power (VBUS, 3V3, VDDA, RX_VDD) | | **0.40 mm** | Peak about 0.11 A; KHA gives 0.15 mm for 0.5 A at a 10 °C rise in 1 oz copper (p184), so 0.40 mm is ample and keeps the voltage drop small |
+| Track width, RF (ANT, TX and RX paths) | | **50 Ω line from step 0.6** | Grounded coplanar line [AN4169 p6, p11] |
+| Via drill / pad | 0.15 / 0.25 mm (0.2 mm drill preferred) | **0.30 / 0.60 mm** | A 0.15 mm ring; also JLC's standard via, at no extra cost |
+| PTH annular ring | 0.18 mm (0.25 recommended) | **0.25 mm** | JLC's recommended figure |
+| Hole to hole | 0.20 mm (vias), 0.45 mm (pads) | **0.50 mm** | Above both |
+| Hole to copper | 0.20–0.28 mm | **0.30 mm** | Above JLC's PTH-to-track figure |
+| Copper to board edge | 0.20 mm | **0.50 mm** | The workflow's floor [HHG p105, p113; conflict C3]; the edge parts in layout.html were placed with 0.5 mm already |
+| Solder mask | 1:1, bridge 0.10 mm | **1:1 (0 expansion), 0.10 mm minimum bridge** | JLC opens the mask 1:1; KiCad's mask expansion set to 0 so their figure isn't added twice |
+| Silkscreen to pad | 0.15 mm | **0.20 mm** | |
+| Silkscreen lines (outlines, marks) | 0.15 mm | **0.25 mm** | The workflow's rule [BAC p13; KHA p149] |
+| Silkscreen text | 1.0 mm high, 0.15 mm stroke | **1.0 mm high, 0.15 mm stroke** | The board is small, so text stays at JLC's minimum height; a 0.25 mm stroke on 1 mm text would close up the letters |
+| Part body to body | about 0.3 mm | **0.3 mm courtyard gap; 2 mm in our own placement rule M11** | |
+
+### Net classes
+
+| Class | Nets | Track | Clearance | Why |
+|---|---|---|---|---|
+| Default | everything else | 0.20 mm | 0.20 mm | |
+| Power | VBUS, 3V3, VDDA, RX_VDD | 0.40 mm | 0.20 mm | |
+| RF | ANT, LMX_RF, ATT_IN, TX_RF_ATT, TX_LPF_MID, TX_RF, RX_RF, FMI_MATCH, FMI | from step 0.6 | from step 0.6 | 50 Ω grounded coplanar |
+| Clock | FSK_CLK(_MCU), REF20(_MCU), RX_RCLK, RX_SCK(_MCU), LMX_CLK | 0.20 mm | **0.40 mm** | Switching lines kept further from their neighbours [HHG p64; LMX2571 p55] |
+
+GND gets no class of its own; it's poured on both layers in phase 6.
 
 ## 50 Ω line for the antenna path (step 0.6)
 
