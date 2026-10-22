@@ -7,7 +7,7 @@ Coordinates are sheet millimetres from the top-left corner (x right, y down), in
 | Zone | x (mm) | y (mm) | Parts |
 |---|---|---|---|
 | USB and power | 19–167 | 19–161 | J1, U6, D3, D4, R1, R2, U3, C1–C3 |
-| Controls and LED | 19–167 | 170–401 | RV1–RV3, C39–C41, SW1, R18, SW2, R3, D1, R25–R27, TP1–TP8 |
+| Controls and LED | 19–167 | 170–401 | RV1–RV3, SW1, R18, SW2, D1, R25–R27, TP1–TP4 |
 | Clock | 158–288 | 19–90 | Y2, C11, C12, R4 |
 | MCU | 158–288 | 99–401 | U1, C4–C10, FB2, R6–R8 (at U1 on the board) |
 | Transmit | 297–431 | 19–214 | U2, C13–C26, R5, R9; U7, C27, SW3, R10–R15 |
@@ -19,3 +19,4 @@ Coordinates are sheet millimetres from the top-left corner (x right, y down), in
 Notes:
 - R3 (BOOT0 pull-down) sits with SW2 in Controls, at the U1 end of the BOOT0 label.
 - R18 (RF_MODE pull-down) sits with SW1; R17 and C31 sit at U5's CTRL pin in RF out.
+- Updated during wiring (2026-10-22): each signal test pad sits on the end of the line it tests (TP5 at U2 MUXout, TP6 past C10 on NRST, TP7/TP8 off U1 PA14/PA13, TP4 past R18); C39–C41 and R3 are drawn at U1, which they serve.

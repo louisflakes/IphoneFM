@@ -17,6 +17,7 @@
 | `sch_fields.py [--dry-run]` | Write each symbol's value, MPN, LCSC code and manufacturer from `netlist.json` into the Rev A schematic, leaving designators as placed |
 | `sch_power.py [--dry-run]` | Wire a power symbol to every pin on VBUS, 3V3, VDDA, RX_VDD and GND (per `netlist.json`); neighbouring pins on one rail share a bar and one symbol; reruns replace its own drawing |
 | `sch_layout.py [--dry-run]` | Move chips, connectors and diodes to where a chain's wiring reads cleanly, with their visible fields stacked clear of the pins |
+| `sch_testpads.py [--dry-run]` | Place the test pads TP1–TP8 (out of the BOM): signal pads on the end of the line they test, power pads in the controls zone |
 | `sch_wire.py <chain> [--dry-run]` | Wire every net among one chain's parts (maze router on the 1.27 mm grid): never through a body, power symbol or another net's pin; nets may cross but never touch; reruns replace that chain's wires |
 | `setup-kicad.sh` | Install KiCad 10 and pre-cache the KiCad MCP server (Ubuntu 24.04, as root) |
 

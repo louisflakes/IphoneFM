@@ -59,7 +59,7 @@ MANUAL = {
     # chain 3: the shunt caps on U1 PA2-PA5 lie on their pin rows in two staggered columns, ground ends run right to one
     # bar (sch_power WIRED_RAILS); R6-R8 straight off PA8 and stepped down off PA9, PA10
     "C39": (248.92, 223.52, 90), "C40": (256.54, 226.06, 90), "C36": (248.92, 228.6, 90), "C41": (256.54, 231.14, 90),
-    "R6": (248.92, 238.76, 90), "R7": (248.92, 248.92, 90), "R8": (248.92, 259.08, 90),
+    "R6": (248.92, 238.76, 90), "R7": (269.24, 248.92, 90), "R8": (269.24, 259.08, 90),
     # chain 3: U1 decoupling in a 2 x 2 block on the 3V3 bus over U1, FB2 then C7, C8 on the VDDA branch to its right;
     # C10 (NRST), R3 (BOOT0) and C9 (VCAP) hang from their lines on U1's left, text on the left
     "C3": (175.26, 184.15, 0), "C5": (198.12, 184.15, 0), "C6": (175.26, 201.93, 0), "C4": (198.12, 201.93, 0),
