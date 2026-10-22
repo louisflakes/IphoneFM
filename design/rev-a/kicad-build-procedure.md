@@ -4,6 +4,8 @@ The established order for turning the Rev A design into a board, broken into sin
 
 ## How we work through it
 
+- Reports name the phase as in the original order and the step by its number, e.g. "Phase 0 (constraints and fab rules), step 0.4".
+
 - Claude does exactly one step, reports what it did in a line or two with proof (a screenshot or a check's output), and waits for the user's OK.
 - A step is ticked only after the user agrees with it.
 - If a step turns up a problem, we stop and settle it before moving on; nothing is skipped quietly.
@@ -12,11 +14,11 @@ The established order for turning the Rev A design into a board, broken into sin
 - At each review checkpoint, the user sees a screenshot and the check results before the next phase starts.
 - Schematic edits are written to the file, so the open schematic editor shows them only after File → Revert; while Claude works on the schematic, the user doesn't edit or save it in KiCad, so neither copy overwrites the other. Board edits go through KiCad's live API and appear directly.
 
-## Phase 0: Project and fab rules
+## Phase 0: Constraints and fab rules
 
 - [x] 0.1 Create the KiCad 10 project `IphoneFM` in `kicad/rev-a/`.
 - [x] 0.2 Fill in the title block: IphoneFM, Rev A, today's date, and the author (schematic done 2026-10-21; the board's title block is set in step 3.1).
-- [ ] 0.3 Read JLCPCB's current 2-layer PCB capabilities and record the trace, space, via, drill, annular ring, edge-clearance and silkscreen numbers we use in `kicad/rev-a/fab-rules.md`, with the source link [HHG p15, p63–65; BAC p4, p11].
+- [x] 0.3 Read JLCPCB's current 2-layer PCB capabilities and record the trace, space, via, drill, annular ring, edge-clearance and silkscreen numbers we use in `kicad/rev-a/fab-rules.md`, with the source link [HHG p15, p63–65; BAC p4, p11].
 - [ ] 0.4 Read JLCPCB's assembly rules (part spacing, edge clearance, fiducials) and add them to the same file [conflict C4].
 - [ ] 0.5 Set our own design rules a step above JLC's minimums and write them beside the minimums [HHG p15, p63–64].
 - [ ] 0.6 Use JLC's impedance calculator to find the 50 Ω grounded-coplanar line width and gap for their 1.6 mm 2-layer stackup, and record it [AN4169 p6, p11; workflow "Gaps"].
@@ -138,7 +140,7 @@ Checks:
 - [ ] 6.5 Check the copper is roughly balanced between the two sides [HHG p61–62; KHA p135].
 - [ ] 6.6 **Review checkpoint:** the user reviews the pours.
 
-## Phase 7: Checks
+## Phase 7: DRC and the netlist comparison
 
 - [ ] 7.1 Run DRC against the JLC rules until it reports zero errors [BAC p17].
 - [ ] 7.2 Run DRC's schematic parity check until the board matches the schematic [KHA p236–238].
