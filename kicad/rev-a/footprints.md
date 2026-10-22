@@ -2,11 +2,13 @@
 
 Each part's footprint source, chosen in the order step 2.1 sets: KiCad's own library, then the maker's own land pattern, then LCSC/EasyEDA. A KiCad footprint named for the exact part is preferred over a generic one. Nothing here is final until step 2.2 has compared its pads with the datasheet's land pattern; that column records the result.
 
+**Follow up with the user at their 2.2 steps (asked 2026-10-22):** U4, whose KiCad footprint was drawn for a different Silicon Labs chip, and SW2, where KiCad has two Panasonic EVQ-P7 footprints and the right one must be confirmed.
+
 Sources: **KiCad (part)** is a KiCad library footprint named for this part; **KiCad (generic)** is a KiCad footprint for the package, used only if its pads match the maker's land pattern; **Maker** is drawn from the land pattern in the maker's datasheet. No part needs LCSC/EasyEDA.
 
 | Parts | Part number | Package | Source | Footprint | Datasheet land pattern | 2.2 check |
 |---|---|---|---|---|---|---|
-| J1 | HRO TYPE-C-31-M-12 | USB-C receptacle | KiCad (part) | Connector_USB:USB_C_Receptacle_HRO_TYPE-C-31-M-12 | J1_HRO_TYPE-C-31-M-12 p1 | |
+| J1 | HRO TYPE-C-31-M-12 | USB-C receptacle | KiCad (part), pads updated to the maker's 2020 layout | IphoneFM:USB_C_Receptacle_HRO_TYPE-C-31-M-12_2020 | J1_HRO_TYPE-C-31-M-12 p1 (2020-12-08) | Done 2026-10-22. KiCad's footprint follows HRO's 2015 drawing (archived copy in J1_HRO_TYPE-C-31-M-12_2015_superseded.pdf); HRO's 2020 drawing shortens the signal pads to 1.14 mm (0.50–1.64 mm behind the peg holes), moves the wide pads to ±2.40/±3.20 mm, makes the peg holes Ø0.60, the rear shell slots 0.6 × 1.4 mm in 0.9 × 1.7 pads and the front slot pads 0.9 × 2.0. The project copy (tools/fp_j1_hro2020.py) takes those values; outline, courtyard and 3D model are KiCad's. Board edge: 5.79 mm in front of the peg holes. Approved by the user |
 | U1 | ST STM32U535CEU6 | UFQFPN-48 7 × 7, EP | KiCad (generic) | Package_DFN_QFN:QFN-48-1EP_7x7mm_P0.5mm_EP5.6x5.6mm | DS14217 (UFQFPN48 package section) | |
 | U2 | TI LMX2571NJKR | WQFN-36 6 × 6, DAP (NJK) | Maker (no KiCad 6 × 6 QFN-36 matches TI's NJK yet) | to build from TI's NJK land pattern | SNAS654A (NJK0036A package section) | |
 | U3 | Diodes AP2112K-3.3TRG1 | SOT-25 | KiCad (generic) | Package_TO_SOT_SMD:SOT-23-5 | DS39724 (SOT25 land pattern) | |

@@ -77,7 +77,7 @@ Checks:
 
 ## Phase 2: Footprints
 
-- [ ] 2.1 Choose each part's footprint source in this order and record it: KiCad's library, then the maker's own, then LCSC/EasyEDA.
+- [x] 2.1 Choose each part's footprint source in this order and record it: KiCad's library, then the maker's own, then LCSC/EasyEDA.
 - [ ] 2.2 Compare each footprint's pads with its datasheet land pattern and the true-size drawing in layout.html, one part per step [HHG p35].
 - [ ] 2.3 Confirm every symbol pin number has a pad of the same number [EES p133].
 - [ ] 2.4 Check each footprint's silkscreen: real-size body outline, pin 1 and polarity marks, no ink on pads, lines at least 0.25 mm wide [BAC p13; KHA p149].
