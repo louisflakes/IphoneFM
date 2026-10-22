@@ -25,7 +25,7 @@ Sources: **KiCad (part)** is a KiCad library footprint named for this part; **Ki
 | RV1–RV3 | Alps RK10J11R0A0H | thumbwheel pot, reflow | Maker | to build from Alps' reflow land pattern | POT_Alps_RK10J p2–3 | |
 | TP1–TP8 | — | test pad, top side | KiCad (generic) | TestPoint:TestPoint_Pad_D1.5mm | — (our own size) | |
 | R (×27) | Yageo RC0402 / Panasonic ERJ-2R | 0402 | KiCad (generic, IPC) | Resistor_SMD:R_0402_1005Metric | R_Yageo_mounting, R_Panasonic_land_pattern | |
-| C (×35 in 0402) | Samsung, Murata, Yageo | 0402 | KiCad (generic, IPC) | Capacitor_SMD:C_0402_1005Metric | Murata / Samsung catalogs | |
+| C (×33 in 0402) | Samsung, Murata, Yageo | 0402 | KiCad (generic, IPC) | Capacitor_SMD:C_0402_1005Metric | Murata / Samsung catalogs | |
 | C1, C2, C8, C23, C27 | Samsung CL10 | 0603 | KiCad (generic, IPC) | Capacitor_SMD:C_0603_1608Metric | Samsung catalog | |
 | C3, C9, C12 | Samsung CL21, Murata GRM21 | 0805 | KiCad (generic, IPC) | Capacitor_SMD:C_0805_2012Metric | Samsung / Murata | |
 | L1–L3 | Murata LQW18AN | 0603 | KiCad (generic, IPC) | Inductor_SMD:L_0603_1608Metric | L_Murata_LQW18AN | |
