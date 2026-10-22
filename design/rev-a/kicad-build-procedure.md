@@ -29,7 +29,7 @@ The established order for turning the Rev A design into a board, broken into sin
 Setup:
 - [x] 1.1 Open the schematic editor and set the page size, the 50 mil grid and the title block [EES p10].
 - [x] 1.2 Add field-name templates for MPN, LCSC and Manufacturer so every symbol carries them [EES p54].
-- [ ] 1.3 Plan one sheet laid out left to right in signal flow, with USB and power on the left, the MCU in the middle, transmit and receive to the right, and higher voltages toward the top [KHA p108; BAC p3].
+- [x] 1.3 Plan one sheet laid out left to right in signal flow, with USB and power on the left, the MCU in the middle, transmit and receive to the right, and higher voltages toward the top [KHA p108; BAC p3]. Plan: `kicad/rev-a/sheet-plan.md`.
 
 Symbols (each checked pin by pin against its datasheet before use, because ERC can't catch wrong pin numbers [HHG p33–34; EES p133]):
 - [ ] 1.4 Place U1 (STM32U535CEU6) and check all 48 pins and the exposed pad against DS14217 Figure 10.
