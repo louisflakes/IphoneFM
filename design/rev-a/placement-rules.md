@@ -52,7 +52,7 @@ Board orientation: looking at the back of the phone, camera at top left. The **t
 |---|---|---|---|
 | R1 | U5 next to J2; ANT short, 50 Ω grounded coplanar | AN4169 p6, p11 | U5 within a few mm of J2 |
 | R2 | U4 close to U5 RF1; FB1 and C14 at FMI | AN383 p15, p17, p52 | Short RX_RF |
-| R3 | **Changed.** U2 → U7 → FL1 → U5 in a short line, U2's RF output away from its digital inputs | AN4169 p11; KHA p160 | Short TX path |
+| R3 | **Changed.** U2 → U7 → FL1 → U5 in a short line, U2's RF output away from its digital inputs. Since step 4.9 (the user's choice) the transmit line runs down the left of the RF section into U5 pin 3, with FL1 an L just west of U5, and U4 sits right of it above U5, so no RF lines cross (U5's pins run receive, transmit, antenna round the chip) | AN4169 p11; KHA p160 | Short TX path |
 | R4 | Transmit (U2, U7, FL1) and receive (U4) apart, with top-layer ground between | AN4169 p11 | U2 to U4 at least 10 mm |
 | R5 | FL1's two inductors at 90° to each other | AN4169 p9, p11–12 | Inductor orientations |
 | R6 | Solid ground under the RF parts; U2's DAP and U7's pad stitched to it | AN4169 p12; LMX2571 p53 | No digital nets through the RF area |

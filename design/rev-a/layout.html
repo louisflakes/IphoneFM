@@ -190,12 +190,12 @@ const LAYOUTS = {
       "Revised with the user's notes (2026-10-21). The three wheels sit as far out as their mounting lands allow, 1.9 mm of rim past the left edge (2.9 until step 4.5, when the rim-side peg slot moved them 1 mm in), and lower on the board, 17 mm apart, so each has room to spin. The TX/RX slider moved to the bottom of the left edge to make room.",
       "The DIP switch is on the top edge on the midline, parallel to J1, with its levers facing out through the top edge. Its six lines to U7 only carry static DC levels, so their length doesn't matter.",
       "The status LED (D1) is at the top right, away from the controls.",
-      "The transmit chain still runs down the right side in signal order: U2 (synthesizer) at the upper right, U7 (attenuator) below it, FL1 down the right side, then U5 and J2 at the bottom right. U1 sits in the middle near Y2, which feeds both U1 and U2. U4 (receiver) sits low and left of U5, away from U2.",
+      "The transmit chain still runs down the right side in signal order: U2 (synthesizer) at the upper right, U7 (attenuator) below it, then the transmit line down the left of the RF section to FL1, an L just west of U5, and U5 and J2 at the bottom right. U1 sits in the middle near Y2, which feeds both U1 and U2. U4 (receiver) sits right of the transmit line, above U5, away from U2. (Step 4.9, the user's choice: U5's pins run receive, transmit, antenna round the chip, so this is the arrangement where no RF lines cross; until then FL1 ran down the right and U4 sat left of U5.)",
       "J1 on the midline with U6 above it; U3 above U6 and to its left; the BOOT button on the bottom edge beside J1."],
     place: [["RV1", 17.80, 78.0, 90], ["RV2", 17.80, 95.0, 90], ["RV3", 17.80, 112.0, 90], ["SW1", 14.65, 125.5, 90], ["D1", 56.0, 63.0, 0],
       ["SW3", 35.925, 64.51, 180], ["J1", 35.925, 127.77, 0], ["SW2", 25.5, 129.21, 0], ["U6", 35.925, 119.0, 0], ["U3", 30.5, 114.5, 0],
-      ["J2", 54.99, 126.8, -90], ["U5", 47.0, 125.0, 0], ["U7", 46.0, 94.0, 0], ["U2", 46.0, 76.0, 0],
-      ["Y2", 39.5, 84.0, 0], ["U1", 35.5, 93.0, 0], ["U4", 38.5, 113.0, 0]] }
+      ["J2", 54.99, 126.8, -90], ["U5", 47.0, 125.0, 0], ["U7", 46.0, 94.0, 90], ["U2", 46.0, 76.0, 0],
+      ["Y2", 39.5, 84.0, 0], ["U1", 35.5, 93.0, 0], ["U4", 49.0, 109.5, 0]] }
 };
 // ---- Data: the antenna on J2 (GSG ANT500). Only the total lengths are published (Adafruit 3584; GSG): 20 cm to 88 cm (7–34 in).
 // Assumed for the drawing, not published: the plug, rotating shaft and elbow put the whip axis 12 mm past J2's barrel tip, and the whip is 6 mm thick.

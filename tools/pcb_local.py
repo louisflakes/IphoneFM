@@ -5,7 +5,8 @@ board (SNAS654A p55). Parts on one side are spread evenly about their pins with 
 with --outer go in a second row. A part local to one of those parts (C25 at R5.2) continues outward from it. A part
 that would touch anything already on the board steps out a row. Optionally moves the IC first.
 Usage (from the repository root, board open in KiCad):
-  python tools/pcb_local.py U2 [--at X Y ROT] [--outer R9,...] [--dry-run]"""
+  python tools/pcb_local.py U2 [--at X Y ROT] [--outer R9,...] [--skip C28,...] [--dry-run]
+--skip leaves parts out, for ones placed by hand (an RF filter's first shunt capacitor, say)."""
 import json
 import math
 import sys
@@ -64,6 +65,7 @@ def main():
     from kipy.geometry import Vector2, Angle
     ic_ref = sys.argv[1]
     outer = sys.argv[sys.argv.index("--outer") + 1].split(",") if "--outer" in sys.argv else []
+    skip = sys.argv[sys.argv.index("--skip") + 1].split(",") if "--skip" in sys.argv else []
     board = KiCad().get_board()
     fps = {fp.reference_field.text.value: fp for fp in board.get_footprints()}
     lib = {r: fp.definition.id.name for r, fp in fps.items()}
@@ -85,7 +87,7 @@ def main():
 
     parts = json.load(open("design/rev-a/netlist.json", encoding="utf-8"))["parts"]
     local = {p["ref"]: p.get("local_to", "") for p in parts}
-    direct = [r for r, lt in local.items() if lt.split(".")[0] == ic_ref]
+    direct = [r for r, lt in local.items() if lt.split(".")[0] == ic_ref and r not in skip]
     chained = [r for r, lt in local.items() if lt.split(".")[0] in direct]
 
     taken = [ic_box]
