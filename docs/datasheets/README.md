@@ -16,7 +16,7 @@ Every document the design was checked against. Page numbers cited in the [BOM](.
 | U4_Skyworks_AN383_antenna_layout.pdf | Skyworks AN383, Si47xx antenna, schematic, layout and design guidelines (207075A, Jan. 23, 2025) | [skyworksinc.com](https://www.skyworksinc.com/-/media/skyworks/sL/documents/public/application-notes/aN383.pdf) | Two-layer stackup and layout rules (p15–17), FMI front ends and matching inductor (§3–4, §7, Appendix A p50–54) |
 | U4_Skyworks_AN332_programming_guide.pdf | Skyworks AN332, Si47xx programming guide | [skyworksinc.com](https://www.skyworksinc.com/-/media/Skyworks/SL/documents/public/application-notes/AN332.pdf) | I²C address, digital audio |
 | U5_PE42421_DOC-33214-1.03.pdf | pSemi PE42421, DOC-33214-1.03 | [psemi.com](https://www.psemi.com/pdf/datasheets/pe42421ds.pdf) | RF switch, eval board (p7) |
-| U6_USBLC6-2_ST_Rev2.pdf | ST USBLC6-2, REV 2 (2005) | [mirror](https://www.danomsk.ru/upload/iblock/224/147401_7198d2f5ecc1d8bddd1f654c0b36a43b.pdf) | USB ESD (D+/D−/VBUS) |
+| U6_USBLC6-2_ST_DS4260_Rev7.pdf | ST USBLC6-2, DS4260 Rev 7 (December 2021); replaces a 2005 Rev 2 mirror copy | [st.com](https://www.st.com/resource/en/datasheet/usblc6-2.pdf) | USB ESD (D+/D−/VBUS) |
 | D3-D4_TPD1E05U06_TI.pdf | TI TPDxE05U06 | [ti.com](https://www.ti.com/lit/ds/symlink/tpd1e05u06.pdf) | CC ESD |
 | D5_TPD1E0B04_TI.pdf | TI TPD1E0B04 | [ti.com](https://www.ti.com/lit/ds/symlink/tpd1e0b04.pdf) | Antenna ESD |
 | D1_ASCB-WTF0_DS101.pdf | Broadcom ASCB-WTF0, ASCB-WTF0-DS101 | [broadcom.com](https://docs.broadcom.com/doc/ASCB-WTF0-DS) | RGB LED |
