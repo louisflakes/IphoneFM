@@ -93,6 +93,7 @@ Checks:
 - [x] 2.7 Re-run ERC, re-export the netlist and run `kicadcheck.py --net` again.
   - Run 2026-10-23 on the schematic with all footprints assigned: ERC 0 errors and 0 open warnings, with the two U4 LOUT/ROUT items still excluded (step 1.35); KiCad's netlist re-exported; `kicadcheck.py --net` 11 of 11 pass (every part present, every connected pin has a pad, no opens, no shorts, NC pins open, LCSC codes and part numbers match, passive footprint sizes right).
 - [ ] 2.8 **Review checkpoint:** the user reviews the footprint list and its sources.
+  - Review items agreed 2026-10-23, before starting: the built footprints (J1, U2, D1, SW3, RV1–RV3); departures from the makers (U4, Y2, larger IPC pads, D5 paste); interpreted pin numbering (D1, SW3, SW1, SW2); datasheets still from LCSC copies; trimmed silkscreen; and six not yet considered: footprint origins against JLC's placement point, through-hole J2 on an assembled board, missing 3D models, parts at the board edge, board-level holes and fiducials, and U4's 60 µm solder-mask clearance.
 
 ## Phase 3: Board setup
 
