@@ -1,0 +1,7 @@
+(version 1)
+# Step 3.2 rules KiCad's Board Setup has no field for (kicad/rev-a/fab-rules.md)
+(rule "Plated hole annular ring 0.25 mm"
+	(condition "A.Type == 'Pad' && A.Pad_Type == 'Through-hole'")
+	(constraint annular_width (min 0.25mm)))
+(rule "Courtyard gap 0.3 mm"
+	(constraint courtyard_clearance (min 0.3mm)))
