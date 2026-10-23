@@ -26,6 +26,8 @@
 | `sch_pinids.py [--dry-run]` | Give every symbol pin a fixed ID, as KiCad saves them, so ERC exclusions survive a reload; run last |
 | `fp_j1_hro2020.py` | Build J1's project footprint: KiCad's HRO USB-C footprint with pads and holes moved to HRO's 2020 drawing |
 | `fp_u2_ti_njk.py` | Build U2's project footprint to TI's NJK0036A land pattern (4.6 mm centre pad), on KiCad's QFN-36 outline and 3D model |
+| `fp_sw1_msk12c02.py` | Build SW1's project footprint: KiCad's MSK12C02 with the four tab pads numbered 4 to match the symbol |
+| `pinpad_check.py` | Step 2.3: check every Rev A symbol pin has a pad of the same number on its chosen footprint (and no pad lacks a pin) |
 | `fp_d1_xl1615.py` | Build D1's project footprint to Xinglight's XL-1615RGBC-RF soldering pattern (KiCad has none) |
 | `fp_sw3_tdp06.py` | Build SW3's project footprint: KiCad's KingTek 6-way DIP pads with C&K TDP06's real body and lever side |
 | `fp_rv_rk10j.py` | Build RV1–RV3's project footprint to Alps' RK10J reflow-type PC board drawing (KiCad has none) |
