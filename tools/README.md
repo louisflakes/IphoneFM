@@ -23,6 +23,7 @@
 | `sch_labels.py [--dry-run]` | Name every signal net with a local label carrying its `netlist.json` name, one per connected group (lone chip pins on a short stub), placed clear of parts, wires and text; the matching names join the groups. Reruns replace them |
 | `sch_noconnect.py [--dry-run]` | Put a no-connect flag (X) on every pin `netlist.json` marks NC |
 | `sch_notes.py [--dry-run]` | Write the layout notes block onto the Rev A schematic |
+| `sch_footprints.py [--dry-run]` | Step 2.6: write each part's IphoneFM footprint (from `footprints.md`, via `rev_a_footprints.py`) into its symbol's Footprint field |
 | `sch_pinids.py [--dry-run]` | Give every symbol pin a fixed ID, as KiCad saves them, so ERC exclusions survive a reload; run last |
 | `fp_j1_hro2020.py` | Build J1's project footprint: KiCad's HRO USB-C footprint with pads and holes moved to HRO's 2020 drawing |
 | `fp_u2_ti_njk.py` | Build U2's project footprint to TI's NJK0036A land pattern (4.6 mm centre pad), on KiCad's QFN-36 outline and 3D model |

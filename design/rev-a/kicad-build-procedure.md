@@ -89,6 +89,7 @@ Checks:
 - [x] 2.5 Check each paste layer is 1:1 with its pads [HHG p96, p113].
   - Checked 2026-10-23 with `tools/paste_check.py`: every soldered pad gets paste its own size, with no paste margins, except the centre pads, which get separate windows: U1, U2 and U7 about 65% (KiCad's pattern; TI and pSemi give none), U4 36% (KiCad's, the user's decision at 2.2). The test pads, J2's and the through-hole pins get none, as intended. One deviation found and fixed: KiCad's D_SOD-882 (D5) printed reduced paste, about 36% of each pad, from Nexperia's drawing; Semtech gives no stencil and TI prints 1:1 on the same-size D3/D4, so `tools/fp_d5_sod882.py` makes it 1:1. Re-check: 0 footprints with paste problems; silkscreen and pin-to-pad checks still pass.
 - [ ] 2.6 Assign the footprints in the footprint assignment tool, using its filters [EES p85–92].
+  - Done 2026-10-23 for all 102 symbols in one pass, at the user's suggestion, with `tools/sch_footprints.py` (writes each part's IphoneFM footprint from footprints.md into its Footprint field) rather than the assignment tool. 87 symbols already carried KiCad library names, none conflicting with the choices; 15 were empty. Checked with KiCad's own exports: the netlist lists 102 footprints, all IphoneFM, each with a file in IphoneFM.pretty; ERC unchanged (0 errors, the two U4 items excluded); `kicadcheck.py --net --bom` 17 of 17 pass.
 - [ ] 2.7 Re-run ERC, re-export the netlist and run `kicadcheck.py --net` again.
 - [ ] 2.8 **Review checkpoint:** the user reviews the footprint list and its sources.
 

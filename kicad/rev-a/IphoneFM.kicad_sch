@@ -6437,7 +6437,7 @@
 			(at 223.52 255.27 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Footprint" "Package_DFN_QFN:QFN-48-1EP_7x7mm_P0.5mm_EP5.6x5.6mm"
+		(property "Footprint" "IphoneFM:QFN-48-1EP_7x7mm_P0.5mm_EP5.6x5.6mm"
 			(at 223.52 251.46 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -6629,7 +6629,7 @@
 			(at 337.82 92.71 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Footprint" ""
+		(property "Footprint" "IphoneFM:TI_NJK0036A_WQFN-36-1EP_6x6mm_P0.5mm_EP4.6x4.6mm"
 			(at 337.82 88.9 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -6785,7 +6785,7 @@
 			(at 113.03 35.56 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-5"
+		(property "Footprint" "IphoneFM:SOT-23-5"
 			(at 120.65 45.72 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -6845,7 +6845,7 @@
 			(at 398.78 340.36 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" ""
+		(property "Footprint" "IphoneFM:SiliconLabs_QFN-20-1EP_3x3mm_P0.5mm_EP1.8x1.8mm"
 			(at 381.00 307.34 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -6953,7 +6953,7 @@
 			(at 492.76 106.68 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" ""
+		(property "Footprint" "IphoneFM:SOT-363_SC-70-6"
 			(at 530.86 129.54 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -7016,7 +7016,7 @@
 			(at 72.39 113.03 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-6"
+		(property "Footprint" "IphoneFM:SOT-23-6"
 			(at 66.04 101.60 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -7079,7 +7079,7 @@
 			(at 436.88 180.34 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" ""
+		(property "Footprint" "IphoneFM:QFN-24-1EP_4x4mm_P0.5mm_EP2.75x2.75mm"
 			(at 421.64 144.78 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -7199,7 +7199,7 @@
 			(at 240.03 59.69 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" ""
+		(property "Footprint" "IphoneFM:Oscillator_SMD_SiT_PQFN-4Pin_3.2x2.5mm"
 			(at 223.52 50.80 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -7256,7 +7256,7 @@
 			(at 38.1 74.93 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Footprint" ""
+		(property "Footprint" "IphoneFM:USB_C_Receptacle_HRO_TYPE-C-31-M-12_2020"
 			(at 38.1 71.12 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -7352,7 +7352,7 @@
 			(at 548.64 115.57 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" ""
+		(property "Footprint" "IphoneFM:SMA_BAT_Wireless_BWSMA-KWE-Z001"
 			(at 571.50 127.00 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -7403,7 +7403,7 @@
 			(at 100.33 382.27 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" ""
+		(property "Footprint" "IphoneFM:SW_SPDT_Shouhan_MSK12C02_Tabs4"
 			(at 96.52 368.30 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -7460,7 +7460,7 @@
 			(at 91.44 342.90 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" ""
+		(property "Footprint" "IphoneFM:SW_SPST_EVQP7A"
 			(at 96.52 335.28 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -7512,7 +7512,7 @@
 			(at 373.38 185.42 90)
 			(effects (font (size 1.27 1.27)) (justify right))
 		)
-		(property "Footprint" ""
+		(property "Footprint" "IphoneFM:SW_DIP_SPSTx06_Side_CK_TDP06H1SBD1_W7.62mm_P1.27mm"
 			(at 363.22 185.42 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -7593,7 +7593,7 @@
 			(at 55.88 210.82 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" ""
+		(property "Footprint" "IphoneFM:Potentiometer_Alps_RK10J_Reflow_Thumbwheel_14mm"
 			(at 40.64 205.74 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -7659,7 +7659,7 @@
 			(at 106.68 210.82 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" ""
+		(property "Footprint" "IphoneFM:Potentiometer_Alps_RK10J_Reflow_Thumbwheel_14mm"
 			(at 91.44 205.74 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -7725,7 +7725,7 @@
 			(at 157.48 210.82 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" ""
+		(property "Footprint" "IphoneFM:Potentiometer_Alps_RK10J_Reflow_Thumbwheel_14mm"
 			(at 142.24 205.74 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -7791,7 +7791,7 @@
 			(at 137.16 289.56 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" ""
+		(property "Footprint" "IphoneFM:LED_RGB_XINGLIGHT_XL-1615RGBC_1.6x1.5mm"
 			(at 142.24 302.26 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -7848,7 +7848,7 @@
 			(at 146.05 68.58 0)
 			(effects (font (size 1.27 1.27)) (justify right))
 		)
-		(property "Footprint" "Package_SON:Texas_DPY0002A_0.6x1mm_P0.65mm"
+		(property "Footprint" "IphoneFM:Texas_DPY0002A_0.6x1mm_P0.65mm"
 			(at 142.24 67.31 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -7899,7 +7899,7 @@
 			(at 92.71 78.74 0)
 			(effects (font (size 1.27 1.27)) (justify right))
 		)
-		(property "Footprint" "Package_SON:Texas_DPY0002A_0.6x1mm_P0.65mm"
+		(property "Footprint" "IphoneFM:Texas_DPY0002A_0.6x1mm_P0.65mm"
 			(at 93.98 69.85 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -7950,7 +7950,7 @@
 			(at 548.64 143.51 90)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" ""
+		(property "Footprint" "IphoneFM:D_SOD-882"
 			(at 552.45 130.81 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -8001,7 +8001,7 @@
 			(at 40.64 254.00 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
+		(property "Footprint" "IphoneFM:TestPoint_Pad_D1.5mm"
 			(at 40.64 254.00 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -8049,7 +8049,7 @@
 			(at 58.42 254.00 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
+		(property "Footprint" "IphoneFM:TestPoint_Pad_D1.5mm"
 			(at 58.42 254.00 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -8097,7 +8097,7 @@
 			(at 76.20 257.81 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
+		(property "Footprint" "IphoneFM:TestPoint_Pad_D1.5mm"
 			(at 76.20 257.81 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -8145,7 +8145,7 @@
 			(at 127.00 363.22 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
+		(property "Footprint" "IphoneFM:TestPoint_Pad_D1.5mm"
 			(at 127.00 363.22 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -8193,7 +8193,7 @@
 			(at 304.80 101.60 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
+		(property "Footprint" "IphoneFM:TestPoint_Pad_D1.5mm"
 			(at 304.80 101.60 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -8241,7 +8241,7 @@
 			(at 182.88 218.44 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
+		(property "Footprint" "IphoneFM:TestPoint_Pad_D1.5mm"
 			(at 182.88 218.44 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -8289,7 +8289,7 @@
 			(at 248.92 254.00 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
+		(property "Footprint" "IphoneFM:TestPoint_Pad_D1.5mm"
 			(at 248.92 254.00 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -8337,7 +8337,7 @@
 			(at 243.84 251.46 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
-		(property "Footprint" "TestPoint:TestPoint_Pad_D1.5mm"
+		(property "Footprint" "IphoneFM:TestPoint_Pad_D1.5mm"
 			(at 243.84 251.46 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -8385,7 +8385,7 @@
 			(at 116.84 66.04 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "IphoneFM:R_0402_1005Metric"
 			(at 114.30 64.77 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -8436,7 +8436,7 @@
 			(at 102.87 48.26 0)
 			(effects (font (size 1.27 1.27)) (justify right))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "IphoneFM:C_0603_1608Metric"
 			(at 105.41 46.99 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -8487,7 +8487,7 @@
 			(at 480.06 294.64 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Inductor_SMD:L_0603_1608Metric"
+		(property "Footprint" "IphoneFM:L_0603_1608Metric"
 			(at 477.52 293.37 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -8538,7 +8538,7 @@
 			(at 463.55 285.75 90)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Inductor_SMD:L_0402_1005Metric"
+		(property "Footprint" "IphoneFM:L_0402_1005Metric"
 			(at 467.36 289.56 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -8589,7 +8589,7 @@
 			(at 66.04 68.58 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "IphoneFM:R_0402_1005Metric"
 			(at 63.50 67.31 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -8640,7 +8640,7 @@
 			(at 138.43 48.26 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "IphoneFM:C_0603_1608Metric"
 			(at 135.89 46.99 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -8691,7 +8691,7 @@
 			(at 246.38 203.20 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Inductor_SMD:L_0402_1005Metric"
+		(property "Footprint" "IphoneFM:L_0402_1005Metric"
 			(at 243.84 201.93 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -8742,7 +8742,7 @@
 			(at 452.12 123.19 90)
 			(effects (font (size 1.27 1.27)) (justify right))
 		)
-		(property "Footprint" "Inductor_SMD:L_0603_1608Metric"
+		(property "Footprint" "IphoneFM:L_0603_1608Metric"
 			(at 455.93 127.00 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -8793,7 +8793,7 @@
 			(at 177.80 185.42 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+		(property "Footprint" "IphoneFM:C_0805_2012Metric"
 			(at 175.26 184.15 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -8844,7 +8844,7 @@
 			(at 190.50 238.76 0)
 			(effects (font (size 1.27 1.27)) (justify right))
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "IphoneFM:R_0402_1005Metric"
 			(at 193.04 237.49 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -8895,7 +8895,7 @@
 			(at 472.44 123.19 90)
 			(effects (font (size 1.27 1.27)) (justify right))
 		)
-		(property "Footprint" "Inductor_SMD:L_0603_1608Metric"
+		(property "Footprint" "IphoneFM:L_0603_1608Metric"
 			(at 476.25 127.00 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -8946,7 +8946,7 @@
 			(at 378.46 264.16 0)
 			(effects (font (size 1.27 1.27)) (justify right))
 		)
-		(property "Footprint" "Inductor_SMD:L_0402_1005Metric"
+		(property "Footprint" "IphoneFM:L_0402_1005Metric"
 			(at 381.00 262.89 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -8997,7 +8997,7 @@
 			(at 200.66 203.20 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "IphoneFM:C_0402_1005Metric"
 			(at 198.12 201.93 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -9048,7 +9048,7 @@
 			(at 250.19 46.99 90)
 			(effects (font (size 1.27 1.27)) (justify right))
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "IphoneFM:R_0402_1005Metric"
 			(at 254.00 50.80 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -9099,7 +9099,7 @@
 			(at 200.66 185.42 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "IphoneFM:C_0402_1005Metric"
 			(at 198.12 184.15 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -9150,7 +9150,7 @@
 			(at 367.03 77.47 90)
 			(effects (font (size 1.27 1.27)) (justify right))
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "IphoneFM:R_0402_1005Metric"
 			(at 370.84 81.28 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -9201,7 +9201,7 @@
 			(at 177.80 203.20 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "IphoneFM:C_0402_1005Metric"
 			(at 175.26 201.93 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -9252,7 +9252,7 @@
 			(at 278.13 234.95 90)
 			(effects (font (size 1.27 1.27)) (justify right))
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "IphoneFM:R_0402_1005Metric"
 			(at 281.94 238.76 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -9303,7 +9303,7 @@
 			(at 254.00 210.82 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "IphoneFM:C_0402_1005Metric"
 			(at 251.46 209.55 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -9354,7 +9354,7 @@
 			(at 265.43 245.11 90)
 			(effects (font (size 1.27 1.27)) (justify right))
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "IphoneFM:R_0402_1005Metric"
 			(at 269.24 248.92 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -9405,7 +9405,7 @@
 			(at 276.86 210.82 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "IphoneFM:C_0603_1608Metric"
 			(at 274.32 209.55 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -9456,7 +9456,7 @@
 			(at 265.43 255.27 90)
 			(effects (font (size 1.27 1.27)) (justify right))
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "IphoneFM:R_0402_1005Metric"
 			(at 269.24 259.08 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -9507,7 +9507,7 @@
 			(at 198.12 289.56 0)
 			(effects (font (size 1.27 1.27)) (justify right))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+		(property "Footprint" "IphoneFM:C_0805_2012Metric"
 			(at 200.66 288.29 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -9558,7 +9558,7 @@
 			(at 307.34 109.22 0)
 			(effects (font (size 1.27 1.27)) (justify right))
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "IphoneFM:R_0402_1005Metric"
 			(at 309.88 107.95 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -9609,7 +9609,7 @@
 			(at 185.42 223.52 0)
 			(effects (font (size 1.27 1.27)) (justify right))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "IphoneFM:C_0402_1005Metric"
 			(at 187.96 222.25 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -9660,7 +9660,7 @@
 			(at 327.66 148.59 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "IphoneFM:R_0402_1005Metric"
 			(at 327.66 135.89 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -9711,7 +9711,7 @@
 			(at 233.68 33.02 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "IphoneFM:C_0402_1005Metric"
 			(at 231.14 31.75 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -9762,7 +9762,7 @@
 			(at 340.36 151.13 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "IphoneFM:R_0402_1005Metric"
 			(at 340.36 138.43 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -9813,7 +9813,7 @@
 			(at 213.36 33.02 0)
 			(effects (font (size 1.27 1.27)) (justify right))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0805_2012Metric"
+		(property "Footprint" "IphoneFM:C_0805_2012Metric"
 			(at 215.90 31.75 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -9864,7 +9864,7 @@
 			(at 353.06 153.67 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "IphoneFM:R_0402_1005Metric"
 			(at 353.06 140.97 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -9915,7 +9915,7 @@
 			(at 350.52 50.80 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "IphoneFM:C_0402_1005Metric"
 			(at 347.98 49.53 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -9966,7 +9966,7 @@
 			(at 365.76 156.21 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "IphoneFM:R_0402_1005Metric"
 			(at 365.76 143.51 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -10017,7 +10017,7 @@
 			(at 302.26 33.02 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "IphoneFM:C_0402_1005Metric"
 			(at 299.72 31.75 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -10068,7 +10068,7 @@
 			(at 378.46 158.75 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "IphoneFM:R_0402_1005Metric"
 			(at 378.46 146.05 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -10119,7 +10119,7 @@
 			(at 325.12 33.02 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "IphoneFM:C_0402_1005Metric"
 			(at 322.58 31.75 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -10170,7 +10170,7 @@
 			(at 391.16 161.29 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "IphoneFM:R_0402_1005Metric"
 			(at 391.16 148.59 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -10221,7 +10221,7 @@
 			(at 373.38 50.80 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "IphoneFM:C_0402_1005Metric"
 			(at 370.84 49.53 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -10272,7 +10272,7 @@
 			(at 543.56 109.22 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "IphoneFM:R_0402_1005Metric"
 			(at 541.02 107.95 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -10323,7 +10323,7 @@
 			(at 350.52 33.02 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "IphoneFM:C_0402_1005Metric"
 			(at 347.98 31.75 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -10374,7 +10374,7 @@
 			(at 491.49 143.51 90)
 			(effects (font (size 1.27 1.27)) (justify right))
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "IphoneFM:R_0402_1005Metric"
 			(at 495.30 147.32 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -10425,7 +10425,7 @@
 			(at 302.26 50.80 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "IphoneFM:C_0402_1005Metric"
 			(at 299.72 49.53 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -10476,7 +10476,7 @@
 			(at 121.92 368.30 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "IphoneFM:R_0402_1005Metric"
 			(at 119.38 367.03 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -10527,7 +10527,7 @@
 			(at 373.38 33.02 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "IphoneFM:C_0402_1005Metric"
 			(at 370.84 31.75 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -10578,7 +10578,7 @@
 			(at 300.99 346.71 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "IphoneFM:R_0402_1005Metric"
 			(at 298.45 345.44 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -10629,7 +10629,7 @@
 			(at 388.62 96.52 90)
 			(effects (font (size 1.27 1.27)) (justify right))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "IphoneFM:C_0402_1005Metric"
 			(at 370.84 96.52 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -10680,7 +10680,7 @@
 			(at 360.68 279.40 0)
 			(effects (font (size 1.27 1.27)) (justify right))
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "IphoneFM:R_0402_1005Metric"
 			(at 358.14 278.13 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -10731,7 +10731,7 @@
 			(at 388.62 99.06 90)
 			(effects (font (size 1.27 1.27)) (justify right))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "IphoneFM:C_0402_1005Metric"
 			(at 378.46 99.06 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -10782,7 +10782,7 @@
 			(at 342.90 281.94 0)
 			(effects (font (size 1.27 1.27)) (justify right))
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "IphoneFM:R_0402_1005Metric"
 			(at 340.36 280.67 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -10833,7 +10833,7 @@
 			(at 388.62 101.60 90)
 			(effects (font (size 1.27 1.27)) (justify right))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "IphoneFM:C_0402_1005Metric"
 			(at 370.84 101.60 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -10884,7 +10884,7 @@
 			(at 342.90 346.71 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "IphoneFM:R_0402_1005Metric"
 			(at 340.36 345.44 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -10935,7 +10935,7 @@
 			(at 388.62 104.14 90)
 			(effects (font (size 1.27 1.27)) (justify right))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "IphoneFM:C_0603_1608Metric"
 			(at 378.46 104.14 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -10986,7 +10986,7 @@
 			(at 328.93 346.71 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "IphoneFM:R_0402_1005Metric"
 			(at 326.39 345.44 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11037,7 +11037,7 @@
 			(at 359.41 86.36 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "IphoneFM:C_0402_1005Metric"
 			(at 356.87 85.09 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11088,7 +11088,7 @@
 			(at 314.96 346.71 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "IphoneFM:R_0402_1005Metric"
 			(at 312.42 345.44 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11139,7 +11139,7 @@
 			(at 377.19 86.36 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "IphoneFM:C_0402_1005Metric"
 			(at 374.65 85.09 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11190,7 +11190,7 @@
 			(at 118.11 293.37 90)
 			(effects (font (size 1.27 1.27)) (justify right))
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "IphoneFM:R_0402_1005Metric"
 			(at 121.92 297.18 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11241,7 +11241,7 @@
 			(at 372.11 69.85 90)
 			(effects (font (size 1.27 1.27)) (justify right))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "IphoneFM:C_0402_1005Metric"
 			(at 375.92 73.66 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11292,7 +11292,7 @@
 			(at 118.11 306.07 90)
 			(effects (font (size 1.27 1.27)) (justify right))
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "IphoneFM:R_0402_1005Metric"
 			(at 121.92 309.88 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11343,7 +11343,7 @@
 			(at 434.34 114.30 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "IphoneFM:C_0603_1608Metric"
 			(at 431.80 113.03 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11394,7 +11394,7 @@
 			(at 118.11 318.77 90)
 			(effects (font (size 1.27 1.27)) (justify right))
 		)
-		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+		(property "Footprint" "IphoneFM:R_0402_1005Metric"
 			(at 121.92 322.58 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11445,7 +11445,7 @@
 			(at 447.04 132.08 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "IphoneFM:C_0402_1005Metric"
 			(at 444.50 130.81 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11496,7 +11496,7 @@
 			(at 467.36 132.08 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "IphoneFM:C_0402_1005Metric"
 			(at 464.82 130.81 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11547,7 +11547,7 @@
 			(at 487.68 132.08 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "IphoneFM:C_0402_1005Metric"
 			(at 485.14 130.81 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11598,7 +11598,7 @@
 			(at 508.00 152.40 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "IphoneFM:C_0402_1005Metric"
 			(at 505.46 151.13 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11649,7 +11649,7 @@
 			(at 391.16 271.78 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "IphoneFM:C_0402_1005Metric"
 			(at 388.62 270.51 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11700,7 +11700,7 @@
 			(at 414.02 271.78 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "IphoneFM:C_0402_1005Metric"
 			(at 411.48 270.51 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11751,7 +11751,7 @@
 			(at 483.87 285.75 90)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "IphoneFM:C_0402_1005Metric"
 			(at 487.68 289.56 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11802,7 +11802,7 @@
 			(at 459.74 294.64 0)
 			(effects (font (size 1.27 1.27)) (justify left))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "IphoneFM:C_0402_1005Metric"
 			(at 457.20 293.37 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11853,7 +11853,7 @@
 			(at 274.32 228.60 90)
 			(effects (font (size 1.27 1.27)) (justify right))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "IphoneFM:C_0402_1005Metric"
 			(at 256.54 228.60 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11904,7 +11904,7 @@
 			(at 360.68 339.09 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "IphoneFM:C_0402_1005Metric"
 			(at 360.68 326.39 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -11955,7 +11955,7 @@
 			(at 350.52 336.55 0)
 			(effects (font (size 1.27 1.27)))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "IphoneFM:C_0402_1005Metric"
 			(at 350.52 323.85 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -12006,7 +12006,7 @@
 			(at 274.32 223.52 90)
 			(effects (font (size 1.27 1.27)) (justify right))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "IphoneFM:C_0402_1005Metric"
 			(at 256.54 223.52 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -12057,7 +12057,7 @@
 			(at 274.32 226.06 90)
 			(effects (font (size 1.27 1.27)) (justify right))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "IphoneFM:C_0402_1005Metric"
 			(at 264.16 226.06 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
@@ -12108,7 +12108,7 @@
 			(at 274.32 231.14 90)
 			(effects (font (size 1.27 1.27)) (justify right))
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "IphoneFM:C_0402_1005Metric"
 			(at 264.16 231.14 0)
 			(effects (font (size 1.27 1.27)) (hide yes))
 		)
