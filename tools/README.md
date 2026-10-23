@@ -38,6 +38,7 @@
 | `fp_d1_xl1615.py` | Build D1's project footprint to Xinglight's XL-1615RGBC-RF soldering pattern (KiCad has none) |
 | `fp_sw3_tdp06.py` | Build SW3's project footprint: KiCad's KingTek 6-way DIP pads with C&K TDP06's real body and lever side |
 | `fp_rv_rk10j.py` | Build RV1–RV3's project footprint to Alps' RK10J reflow-type PC board drawing (KiCad has none) |
+| `pcb_setup.py` | Phase 3: write the board setup (stack-up and title block so far) into `IphoneFM.kicad_pcb` from `fab-rules.md`; re-runnable |
 | `setup-kicad.sh` | Install KiCad 10 and pre-cache the KiCad MCP server (Ubuntu 24.04, as root) |
 
 API keys come from environment variables (`DIGIKEY_CLIENT_ID`, `DIGIKEY_CLIENT_SECRET`, `MOUSER_API_KEY`). Never commit keys.
