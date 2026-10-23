@@ -3,7 +3,8 @@ every run, so it can be re-run after any change to the rules.
 - Step 3.1: the layer stack-up, JLC's JLC0216A from their impedance calculator (fab-rules.md, 50 ohm section): 0.030 mm
   copper, 1.43 mm FR-4 core, 0.030 mm copper; core Dk 4.6 and solder mask Dk 3.8, 0.6 mil (0.015 mm) over copper, from
   JLC's impedance stack-up page (jlcpcb.com/impedance, read 2026-10-23). The sum, about 1.52 mm, is inside JLC's
-  +-10% on the 1.6 mm board we order. No surface finish: that is chosen with the order. And the title block, the same
+  +-10% on the 1.6 mm board we order. The mask is named "Liquid Ink" (JLC's liquid photoimageable mask): KiCad drops a
+  mask's Dk on save unless a material is named, and writes a 0 loss tangent beside it. No surface finish: that is chosen with the order. And the title block, the same
   as the schematic's.
 - Step 3.2: the design rules from fab-rules.md's "Our design rules": Board Setup's constraints and defaults in
   IphoneFM.kicad_pro, the 0.10 mm solder-mask web in the board's setup, and the two rules Board Setup has no field
@@ -31,7 +32,9 @@ STACKUP = """\t\t(stackup
 \t\t\t(layer "F.Mask"
 \t\t\t\t(type "Top Solder Mask")
 \t\t\t\t(thickness 0.015)
+\t\t\t\t(material "Liquid Ink")
 \t\t\t\t(epsilon_r 3.8)
+\t\t\t\t(loss_tangent 0)
 \t\t\t)
 \t\t\t(layer "F.Cu"
 \t\t\t\t(type "copper")
@@ -51,7 +54,9 @@ STACKUP = """\t\t(stackup
 \t\t\t(layer "B.Mask"
 \t\t\t\t(type "Bottom Solder Mask")
 \t\t\t\t(thickness 0.015)
+\t\t\t\t(material "Liquid Ink")
 \t\t\t\t(epsilon_r 3.8)
+\t\t\t\t(loss_tangent 0)
 \t\t\t)
 \t\t\t(layer "B.Paste"
 \t\t\t\t(type "Bottom Solder Paste")
