@@ -103,6 +103,7 @@ Checks:
 - [ ] 3.3 Set the net classes' widths and clearances: default, power, 50 Ω RF lines and wider-spaced clocks [HHG p64].
 - [ ] 3.4 Draw the 46.45 × 71.40 mm outline on Edge.Cuts, with the grid origin at the envelope's top-left corner so board and sketch coordinates line up [KHA p252; HHG p36].
 - [ ] 3.5 Ask the user whether the enclosure needs mounting holes, and if so add them as symbols and footprints [KLAP p105].
+  - Asked 2026-10-23 while scoping Phase 3: yes, four M2 holes near the corners, marked by the user on the sketch. Standard corner spots are taken (top two on the MagSafe ring and D1, bottom two on SW1 and J2), so they sit near the corners at whole-millimetre offsets from the board's top-left corner for the enclosure model: H1 (13, 7), H2 (33, 7), H3 (41, 57), H4 (8, 66) mm. 2.2 mm unplated holes (KiCad MountingHole_2.2mm_M2) with a 4.4 mm copper-free circle; H1 and H2 sit inside the ring's open centre, H3 and H4 below it. H3 may move a millimetre or two in Phase 4 if the transmit filter needs room, staying on whole-millimetre offsets. Approved by the user.
 - [ ] 3.6 Add keep-outs: copper at least 0.5 mm from the edge, and no through-hole parts over the magnet ring [HHG p105, p113; ADG R31 p278–279].
 - [ ] 3.7 Add fiducials if JLC's assembly rules call for them [conflict C4].
 - [ ] 3.8 **Review checkpoint:** the user reviews the empty board.

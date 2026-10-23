@@ -72,4 +72,4 @@ Board orientation: looking at the back of the phone, camera at top left. The **t
 | # | Rule | Source | Check |
 |---|---|---|---|
 | T1 | TP1–TP5 on the top side, reachable with a probe | HHG p39, p48; bom.md chain 10 | Clear of tall parts |
-| T2 | Fiducials and mounting holes as JLC and the enclosure need | Workflow C4 | Asked of the assembler |
+| T2 | Fiducials and mounting holes as JLC and the enclosure need. Mounting holes (user, 2026-10-23): four M2, 2.2 mm unplated, at H1 (13, 7), H2 (33, 7), H3 (41, 57), H4 (8, 66) mm from the board's top-left corner, whole-millimetre offsets for the enclosure model | Workflow C4; kicad-build-procedure 3.5 | Asked of the assembler; holes as placed |
