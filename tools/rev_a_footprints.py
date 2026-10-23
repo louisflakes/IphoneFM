@@ -8,7 +8,7 @@ K = r"C:/Users/jakep/AppData/Local/Programs/KiCad/10.0/share/kicad/footprints/"
 P = "kicad/rev-a/IphoneFM.pretty/"
 FIXED = {"J1": P + "USB_C_Receptacle_HRO_TYPE-C-31-M-12_2020", "U1": K + "Package_DFN_QFN.pretty/QFN-48-1EP_7x7mm_P0.5mm_EP5.6x5.6mm",
          "U2": P + "TI_NJK0036A_WQFN-36-1EP_6x6mm_P0.5mm_EP4.6x4.6mm", "U3": K + "Package_TO_SOT_SMD.pretty/SOT-23-5",
-         "U4": K + "Package_DFN_QFN.pretty/SiliconLabs_QFN-20-1EP_3x3mm_P0.5mm_EP1.8x1.8mm", "U5": K + "Package_TO_SOT_SMD.pretty/SOT-363_SC-70-6",
+         "U4": P + "SiliconLabs_QFN-20-1EP_3x3mm_P0.5mm_EP1.8x1.8mm", "U5": K + "Package_TO_SOT_SMD.pretty/SOT-363_SC-70-6",
          "U6": K + "Package_TO_SOT_SMD.pretty/SOT-23-6", "U7": K + "Package_DFN_QFN.pretty/QFN-24-1EP_4x4mm_P0.5mm_EP2.75x2.75mm",
          "Y2": K + "Oscillator.pretty/Oscillator_SMD_SiT_PQFN-4Pin_3.2x2.5mm", "D1": P + "LED_RGB_XINGLIGHT_XL-1615RGBC_1.6x1.5mm",
          "D3": K + "Package_SON.pretty/Texas_DPY0002A_0.6x1mm_P0.65mm", "D4": K + "Package_SON.pretty/Texas_DPY0002A_0.6x1mm_P0.65mm",

@@ -32,6 +32,7 @@
 | `silk_check.py [--render DIR]` | Step 2.4: each footprint's silkscreen line widths and closest ink to a pad, against `fab-rules.md`; `--render` draws sheets of them |
 | `fp_silk_trim.py` | Step 2.4: copy every Rev A footprint into `IphoneFM.pretty` with silkscreen widened to 0.25 mm and trimmed 0.20 mm clear of pads; run after any `fp_*.py` builder |
 | `paste_check.py` | Step 2.5: each footprint's solder paste against its pads (1:1, or centre-pad windows with their coverage) |
+| `fp_u4_si4705.py` | Build U4's project footprint: KiCad's SiliconLabs QFN-20 with Skyworks' 0.28 mm side pads and 0.06 mm mask clearance |
 | `fp_d5_sod882.py` | Build D5's project footprint: KiCad's D_SOD-882 with the paste made 1:1 with the pads |
 | `pinpad_check.py` | Step 2.3: check every Rev A symbol pin has a pad of the same number on its chosen footprint (and no pad lacks a pin) |
 | `fp_d1_xl1615.py` | Build D1's project footprint to Xinglight's XL-1615RGBC-RF soldering pattern (KiCad has none) |
