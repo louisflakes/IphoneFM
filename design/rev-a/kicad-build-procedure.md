@@ -134,6 +134,7 @@ Checks:
 - [x] 4.6 Place and lock SW1, SW2 and SW3 at their Rev A positions, SW3's levers facing out.
   - Done 2026-10-23, live, all at the sketch's positions and locked: SW1 (14.65, 125.5) −90°, handle out of the left edge; SW2 (25.5, 129.21) 0°, knob out of the bottom edge; SW3 (35.925, 64.51) −90°, levers facing out of the top edge (the footprint draws them on its −x side; switch 1 at the right). Copper 0.5 mm from each edge. DRC: no errors, no courtyard overlaps; 3 warnings where outlines run past the edge. The sketch drew SW1's middle terminal mirrored (−0.75 instead of +0.75, the approved footprint); corrected.
 - [ ] 4.7 Place and lock D1 at the top right.
+  - Done 2026-10-23, live: D1 at the sketch's (56.0, 63.0), 0°, locked; pin 1 (red) top left, as the sketch and XINGLIGHT p8 draw it; pads 2.3 mm from the right edge. DRC: no errors; one warning where its reference text touches its own outline (reference text is tidied later).
 - [ ] 4.8 Place U2 with its loop filter and supply capacitors, and Y2 beside it [KHA p127, p253; LMX2571 p55].
 - [ ] 4.9 Place U7, then FL1's five parts with its two inductors at 90° to each other, then U5 next to J2 [AN4169 p9, p11–12].
 - [ ] 4.10 Place U4 with its front end (C34, L1, FB1, C35) close to U5 [AN383 p15, p17].
