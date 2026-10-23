@@ -91,6 +91,7 @@ Checks:
 - [x] 2.6 Assign the footprints in the footprint assignment tool, using its filters [EES p85–92].
   - Done 2026-10-23 for all 102 symbols in one pass, at the user's suggestion, with `tools/sch_footprints.py` (writes each part's IphoneFM footprint from footprints.md into its Footprint field) rather than the assignment tool. 87 symbols already carried KiCad library names, none conflicting with the choices; 15 were empty. Checked with KiCad's own exports: the netlist lists 102 footprints, all IphoneFM, each with a file in IphoneFM.pretty; ERC unchanged (0 errors, the two U4 items excluded); `kicadcheck.py --net --bom` 17 of 17 pass.
 - [ ] 2.7 Re-run ERC, re-export the netlist and run `kicadcheck.py --net` again.
+  - Run 2026-10-23 on the schematic with all footprints assigned: ERC 0 errors and 0 open warnings, with the two U4 LOUT/ROUT items still excluded (step 1.35); KiCad's netlist re-exported; `kicadcheck.py --net` 11 of 11 pass (every part present, every connected pin has a pad, no opens, no shorts, NC pins open, LCSC codes and part numbers match, passive footprint sizes right).
 - [ ] 2.8 **Review checkpoint:** the user reviews the footprint list and its sources.
 
 ## Phase 3: Board setup
