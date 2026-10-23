@@ -93,7 +93,7 @@ Saved 2026-10-20. LCSC copies come from LCSC's datasheet server (`datasheet.lcsc
 
 | File | Document | Source | Used for |
 |---|---|---|---|
-| ESD_Semtech_RClamp0521P.pdf | Semtech RClamp0521PA | LCSC copy (C117554) | Antenna ESD (D5) |
+| ESD_Semtech_RClamp0521PA_Rev4.pdf | Semtech RClamp0521PA, Rev 4.0 (8/29/2017); replaces a 2010 LCSC copy | [semtech.com (via DigiKey)](https://semtech.my.salesforce.com/sfc/p/E0000000JelG/a/2R0000001NeE/JltB0vQmxlmZTzTdLOCVmxY0zlpZPYrev10YtGSA7JM) | Antenna ESD (D5) |
 | L_Murata_LQW18AN_JELF243A-0024.pdf | Murata LQW18AN reference spec JELF243A-0024AC-01 | [murata.com](https://pim.murata.com/asset/pim4/inductor/JELF243A-0024_PDF_INDUCTOR) | L1, FL1 inductors |
 | Q_onsemi_MMBTH10LT1.pdf | onsemi MMBTH10L | LCSC copy (C16204) | Oscillator and buffer transistors |
 | VAR_Toshiba_1SV322.pdf | Toshiba 1SV322 (2014-03-01, watermarked Not Recommended for New Design) | toshiba.semicon-storage.com (saved via the user's Chrome) | VCO varicap (D2) |
