@@ -16,6 +16,7 @@ from rev_a_footprints import K, P, footprint_map
 from silk_check import arc_points, dist_to_pad, sample
 
 WIDTH, GAP, MIN_PIECE = 0.25, 0.20, 0.2
+SPARE = 0.003  # mm a cut end keeps beyond the limit, so a rerun changes nothing
 GRAPHIC = re.compile(r'\t\((fp_line|fp_rect|fp_circle|fp_arc|fp_poly)\n.*?\n\t\)\n', re.S)
 
 
@@ -53,6 +54,7 @@ def graphic_points(g):
 
 
 def line(x1, y1, x2, y2):
+    x1, y1, x2, y2 = (round(v, 4) + 0.0 for v in (x1, y1, x2, y2))  # + 0.0 turns -0.0 into 0.0
     return (f'\t(fp_line\n\t\t(start {x1:.4f} {y1:.4f})\n\t\t(end {x2:.4f} {y2:.4f})\n'
             f'\t\t(stroke\n\t\t\t(width {WIDTH:g})\n\t\t\t(type solid)\n\t\t)\n\t\t(layer "F.SilkS")\n\t)\n')
 
@@ -65,15 +67,20 @@ def trim(pts, pads):
         n = max(1, int(math.hypot(x2 - x1, y2 - y1) / 0.005))
         run = None
         for i in range(n + 1):
-            t = i / n
-            x, y = x1 + (x2 - x1) * t, y1 + (y2 - y1) * t
-            ok = clearance(x, y, pads) >= need
+            pt = lambda j: (x1 + (x2 - x1) * j / n, y1 + (y2 - y1) * j / n)
+            ok = clearance(*pt(i), pads) >= need
             if ok and run is None:
-                run = (x, y)
+                run = i
             if run is not None and (not ok or i == n):
-                end = (x, y) if ok else (x1 + (x2 - x1) * (i - 1) / n, y1 + (y2 - y1) * (i - 1) / n)
-                if math.hypot(end[0] - run[0], end[1] - run[1]) >= MIN_PIECE:
-                    out.append(line(*run, *end))
+                s, e = run, (i if ok else i - 1)
+                # a cut end sits a little inside the limit, so a rerun finds the whole piece clear and leaves it alone
+                while s > 0 and s < e and clearance(*pt(s), pads) < need + SPARE:
+                    s += 1
+                while e < n and e > s and clearance(*pt(e), pads) < need + SPARE:
+                    e -= 1
+                (sx, sy), (ex, ey) = pt(s), pt(e)
+                if math.hypot(ex - sx, ey - sy) >= MIN_PIECE:
+                    out.append(line(sx, sy, ex, ey))
                 run = None
     return out
 
@@ -128,7 +135,7 @@ def process(src, dst, name):
         return "".join(trim(graphic_points(g), pads))
 
     text = GRAPHIC.sub(repl, text)
-    if name in PIN1_DOT:
+    if name in PIN1_DOT and not kept_marks:  # a footprint updated in place already carries its dot from the last run
         text = add_pin1_dot(text, pads)
     open(dst + ".kicad_mod", "w", encoding="utf-8", newline="\n").write(text)
     return kept_marks, lost_marks

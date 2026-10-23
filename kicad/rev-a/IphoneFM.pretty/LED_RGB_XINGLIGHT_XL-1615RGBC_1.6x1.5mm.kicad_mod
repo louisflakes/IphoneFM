@@ -144,66 +144,6 @@
 		(fill yes)
 		(layer "F.SilkS")
 	)
-	(fp_circle
-		(center -1.2938 -0.9833)
-		(end -1.1438 -0.9833)
-		(stroke
-			(width 0.25)
-			(type solid)
-		)
-		(fill yes)
-		(layer "F.SilkS")
-	)
-	(fp_circle
-		(center -1.2938 -0.9833)
-		(end -1.1438 -0.9833)
-		(stroke
-			(width 0.25)
-			(type solid)
-		)
-		(fill yes)
-		(layer "F.SilkS")
-	)
-	(fp_circle
-		(center -1.2938 -0.9833)
-		(end -1.1438 -0.9833)
-		(stroke
-			(width 0.25)
-			(type solid)
-		)
-		(fill yes)
-		(layer "F.SilkS")
-	)
-	(fp_circle
-		(center -1.2938 -0.9833)
-		(end -1.1438 -0.9833)
-		(stroke
-			(width 0.25)
-			(type solid)
-		)
-		(fill yes)
-		(layer "F.SilkS")
-	)
-	(fp_circle
-		(center -1.2938 -0.9833)
-		(end -1.1438 -0.9833)
-		(stroke
-			(width 0.25)
-			(type solid)
-		)
-		(fill yes)
-		(layer "F.SilkS")
-	)
-	(fp_circle
-		(center -1.2938 -0.9833)
-		(end -1.1438 -0.9833)
-		(stroke
-			(width 0.25)
-			(type solid)
-		)
-		(fill yes)
-		(layer "F.SilkS")
-	)
 	(pad "1" smd rect
 		(at -0.625 -0.475)
 		(size 0.45 0.65)

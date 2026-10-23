@@ -39,7 +39,7 @@
 	(duplicate_pad_numbers_are_jumpers no)
 	(fp_line
 		(start -2.1100 2.1100)
-		(end -2.1100 1.7007)
+		(end -2.1100 1.7057)
 		(stroke
 			(width 0.25)
 			(type solid)
@@ -47,7 +47,7 @@
 		(layer "F.SilkS")
 	)
 	(fp_line
-		(start -1.7007 2.1100)
+		(start -1.7057 2.1100)
 		(end -2.1100 2.1100)
 		(stroke
 			(width 0.25)
@@ -56,7 +56,7 @@
 		(layer "F.SilkS")
 	)
 	(fp_line
-		(start 1.7007 -2.1100)
+		(start 1.7057 -2.1100)
 		(end 2.1100 -2.1100)
 		(stroke
 			(width 0.25)
@@ -66,7 +66,7 @@
 	)
 	(fp_line
 		(start 2.1100 -2.1100)
-		(end 2.1100 -1.7007)
+		(end 2.1100 -1.7057)
 		(stroke
 			(width 0.25)
 			(type solid)
@@ -74,7 +74,7 @@
 		(layer "F.SilkS")
 	)
 	(fp_line
-		(start 2.1100 1.7007)
+		(start 2.1100 1.7057)
 		(end 2.1100 2.1100)
 		(stroke
 			(width 0.25)
@@ -84,7 +84,7 @@
 	)
 	(fp_line
 		(start 2.1100 2.1100)
-		(end 1.7007 2.1100)
+		(end 1.7057 2.1100)
 		(stroke
 			(width 0.25)
 			(type solid)

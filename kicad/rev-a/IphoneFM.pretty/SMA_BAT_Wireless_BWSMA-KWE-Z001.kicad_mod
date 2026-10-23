@@ -75,7 +75,7 @@
 	)
 	(fp_line
 		(start -3.9100 -3.9100)
-		(end -2.9800 -3.9100)
+		(end -2.9900 -3.9100)
 		(stroke
 			(width 0.25)
 			(type solid)
@@ -83,8 +83,8 @@
 		(layer "F.SilkS")
 	)
 	(fp_line
-		(start -2.1200 -3.9100)
-		(end 2.1200 -3.9100)
+		(start -2.1100 -3.9100)
+		(end 2.1100 -3.9100)
 		(stroke
 			(width 0.25)
 			(type solid)
@@ -92,7 +92,7 @@
 		(layer "F.SilkS")
 	)
 	(fp_line
-		(start 2.9800 -3.9100)
+		(start 2.9900 -3.9100)
 		(end 3.9100 -3.9100)
 		(stroke
 			(width 0.25)
@@ -102,7 +102,7 @@
 	)
 	(fp_line
 		(start 3.9100 -3.9100)
-		(end 3.9100 -2.9800)
+		(end 3.9100 -2.9900)
 		(stroke
 			(width 0.25)
 			(type solid)
@@ -110,8 +110,8 @@
 		(layer "F.SilkS")
 	)
 	(fp_line
-		(start 3.9100 -2.1200)
-		(end 3.9100 2.1200)
+		(start 3.9100 -2.1100)
+		(end 3.9100 2.1100)
 		(stroke
 			(width 0.25)
 			(type solid)
@@ -119,7 +119,7 @@
 		(layer "F.SilkS")
 	)
 	(fp_line
-		(start 3.9100 2.9800)
+		(start 3.9100 2.9900)
 		(end 3.9100 3.9100)
 		(stroke
 			(width 0.25)
@@ -129,7 +129,7 @@
 	)
 	(fp_line
 		(start 3.9100 3.9100)
-		(end 2.9800 3.9100)
+		(end 2.9900 3.9100)
 		(stroke
 			(width 0.25)
 			(type solid)
@@ -137,8 +137,8 @@
 		(layer "F.SilkS")
 	)
 	(fp_line
-		(start 2.1200 3.9100)
-		(end -2.1200 3.9100)
+		(start 2.1100 3.9100)
+		(end -2.1100 3.9100)
 		(stroke
 			(width 0.25)
 			(type solid)
@@ -146,7 +146,7 @@
 		(layer "F.SilkS")
 	)
 	(fp_line
-		(start -2.9800 3.9100)
+		(start -2.9900 3.9100)
 		(end -3.9100 3.9100)
 		(stroke
 			(width 0.25)
@@ -156,7 +156,7 @@
 	)
 	(fp_line
 		(start -3.9100 3.9100)
-		(end -3.9100 2.9800)
+		(end -3.9100 2.9900)
 		(stroke
 			(width 0.25)
 			(type solid)
@@ -164,8 +164,8 @@
 		(layer "F.SilkS")
 	)
 	(fp_line
-		(start -3.9100 2.1200)
-		(end -3.9100 -2.1200)
+		(start -3.9100 2.1100)
+		(end -3.9100 -2.1100)
 		(stroke
 			(width 0.25)
 			(type solid)
@@ -173,7 +173,7 @@
 		(layer "F.SilkS")
 	)
 	(fp_line
-		(start -3.9100 -2.9800)
+		(start -3.9100 -2.9900)
 		(end -3.9100 -3.9100)
 		(stroke
 			(width 0.25)
