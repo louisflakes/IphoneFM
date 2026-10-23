@@ -1,7 +1,7 @@
 """Step 2.4: brings every Rev A footprint's silkscreen to kicad/rev-a/fab-rules.md: lines 0.25 mm wide, and no ink
 within 0.20 mm of copper or a hole. Each silkscreen line, rectangle, circle and arc is widened to 0.25 mm and cut back
-wherever its edge would come closer than 0.20 mm; leftover pieces shorter than 0.2 mm are dropped. A filled mark (a pin-1
-triangle or dot) is kept whole if it clears, otherwise dropped and reported. Reference text is left as it is (its rule is
+wherever its edge would come closer than 0.20 mm; leftover pieces shorter than 0.2 mm are dropped. Every filled mark (a
+pin-1 triangle or dot) is redrawn as a round dot 0.55 mm across, slid straight outward until it clears. Reference text is left as it is (its rule is
 a 0.15 mm stroke). KiCad library footprints are copied into kicad/rev-a/IphoneFM.pretty under their own names; the
 project's own footprints are updated in place, so run this after any fp_*.py builder.
 Usage (from the repository root): python tools/fp_silk_trim.py"""
@@ -93,9 +93,12 @@ def add_pin1_dot(text, pads):
         x, y = px + ux * i * 0.01, py + uy * i * 0.01
         if clearance(x, y, pads) >= GAP + ink:
             break
-    dot = (f'\t(fp_circle\n\t\t(center {x:.4f} {y:.4f})\n\t\t(end {x + DOT_R:.4f} {y:.4f})\n'
-           f'\t\t(stroke\n\t\t\t(width {WIDTH:g})\n\t\t\t(type solid)\n\t\t)\n\t\t(fill yes)\n\t\t(layer "F.SilkS")\n\t)\n')
-    return text.replace("\t(pad ", dot + "\t(pad ", 1)
+    return text.replace("\t(pad ", dot(x, y) + "\t(pad ", 1)
+
+
+def dot(x, y):
+    return (f'\t(fp_circle\n\t\t(center {x:.4f} {y:.4f})\n\t\t(end {x + DOT_R:.4f} {y:.4f})\n'
+            f'\t\t(stroke\n\t\t\t(width {WIDTH:g})\n\t\t\t(type solid)\n\t\t)\n\t\t(fill yes)\n\t\t(layer "F.SilkS")\n\t)\n')
 
 
 def process(src, dst, name):
@@ -111,19 +114,15 @@ def process(src, dst, name):
         if kid(g, "layer")[1] != "F.SilkS":
             return blk
         fill = kid(g, "fill")
-        if fill and fill[1] in ("yes", "solid"):
+        if fill and fill[1] in ("yes", "solid"):  # a pin-1 mark: drawn as a round dot where the mark was
             pts = graphic_points(g)
             cx, cy = sum(p[0] for p in pts[:-1]) / (len(pts) - 1), sum(p[1] for p in pts[:-1]) / (len(pts) - 1)
             ux, uy = (cx / math.hypot(cx, cy), cy / math.hypot(cx, cy)) if math.hypot(cx, cy) > 1e-6 else (-1.0, 0.0)
-            for step in range(0, 41):  # slide the mark straight out from the footprint's centre, up to 2 mm
-                dx, dy = ux * step * 0.05, uy * step * 0.05
-                if all(clearance(x + dx, y + dy, pads) >= GAP + WIDTH / 2 for x, y in sample(pts, 0.005)):
+            for step in range(0, 41):  # slide it straight out from the footprint's centre, up to 2 mm, until it clears
+                x, y = cx + ux * step * 0.05, cy + uy * step * 0.05
+                if clearance(x, y, pads) >= GAP + DOT_R + WIDTH / 2:
                     kept_marks += 1
-                    blk = re.sub(r"\(width [\d.]+\)", f"(width {WIDTH:g})", blk)
-                    if step:
-                        moved = lambda m2: f"({m2.group(1)} {float(m2.group(2)) + dx:.4f} {float(m2.group(3)) + dy:.4f})"
-                        blk = re.sub(r"\((xy|center|end|start|mid) ([-\d.]+) ([-\d.]+)\)", moved, blk)
-                    return blk
+                    return dot(x, y)
             lost_marks += 1
             return ""
         return "".join(trim(graphic_points(g), pads))

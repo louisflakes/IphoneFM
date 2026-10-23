@@ -20,10 +20,10 @@ LEVER_OUT, LEVER_W = 0.75, 0.6
 ROWS = [-3.175 + 1.27 * i for i in range(6)]  # switch 1 to 6
 PAD_X0 = 3.81 - 1.27 / 2  # pads start 3.175 mm out and end 4.445 mm out
 PAD_Y = ROWS[-1] + 0.76 / 2  # last pad edge, 3.555 mm
-SILK, GAP = 0.12, 0.2  # line width; clearance from pads
+SILK, GAP = 0.25, 0.2  # line width (fab-rules.md); clearance from pads
 SX, SY = BX + 0.1, BY + 0.1  # silkscreen just outside the body
-FRONT = -(PAD_X0 + 1.27 + GAP + SILK / 2)  # front-face line, outside the pads
-CRT_L, CRT_R, CRT_Y = -5.1, 4.7, BY + 0.25  # around the pads, body, levers and the pin-1 triangle
+FRONT = -(PAD_X0 + 1.27 + GAP + SILK / 2 + 0.02)  # front-face line, outside the pads (0.02 mm spare)
+CRT_L, CRT_R, CRT_Y = -5.75, 4.7, BY + 0.25  # around the pads, body, levers and the pin-1 mark
 
 
 def line(x1, y1, x2, y2, layer, w):
@@ -66,7 +66,7 @@ def main():
     out += [line(FRONT, -SY, SX - CHAMFER, -SY, "F.SilkS", SILK), line(FRONT, SY, SX - CHAMFER, SY, "F.SilkS", SILK),
             line(SX - CHAMFER, -SY, cx, -stop, "F.SilkS", SILK), line(SX - CHAMFER, SY, cx, stop, "F.SilkS", SILK),
             line(FRONT, -SY, FRONT, SY, "F.SilkS", SILK)]
-    out.append(poly([(FRONT - 0.25, ROWS[0] - 0.3), (FRONT - 0.25, ROWS[0] + 0.3), (FRONT - 0.05, ROWS[0])], "F.SilkS", True))
+    out.append(poly([(FRONT - 0.75, ROWS[0] - 0.3), (FRONT - 0.75, ROWS[0] + 0.3), (FRONT - 0.45, ROWS[0])], "F.SilkS", True))  # clear of the front line once drawn as a dot
     out += [line(CRT_L, -CRT_Y, CRT_R, -CRT_Y, "F.CrtYd", 0.05), line(CRT_R, -CRT_Y, CRT_R, CRT_Y, "F.CrtYd", 0.05),
             line(CRT_R, CRT_Y, CRT_L, CRT_Y, "F.CrtYd", 0.05), line(CRT_L, CRT_Y, CRT_L, -CRT_Y, "F.CrtYd", 0.05)]
     out.append(pads)

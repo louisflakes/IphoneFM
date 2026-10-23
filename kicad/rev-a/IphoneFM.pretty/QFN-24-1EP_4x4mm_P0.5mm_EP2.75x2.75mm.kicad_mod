@@ -91,12 +91,9 @@
 		)
 		(layer "F.SilkS")
 	)
-	(fp_poly
-		(pts
-			(xy -2.11 -2.11)
-			(xy -2.35 -2.44)
-			(xy -1.87 -2.44)
-		)
+	(fp_circle
+		(center -2.1100 -2.3300)
+		(end -1.9600 -2.3300)
 		(stroke
 			(width 0.25)
 			(type solid)
