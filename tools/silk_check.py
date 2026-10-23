@@ -8,7 +8,7 @@ import sys
 
 sys.path.insert(0, "tools")
 from kicadcheck import sexpr, kids, kid
-from rev_a_footprints import footprint_map
+from rev_a_footprints import project_map
 
 LINE_MIN, GAP_MIN = 0.25, 0.20
 
@@ -149,7 +149,7 @@ def render(results, outdir):
                 if filled:
                     d.polygon([P(*p) for p in pts], fill=(220, 180, 0))
                 d.line([P(*p) for p in pts], fill=(220, 180, 0), width=max(1, int(w * k)), joint="curve")
-            ok_w = widths and min(widths) >= LINE_MIN
+            ok_w = not widths or min(widths) >= LINE_MIN
             ok_g = gap >= GAP_MIN - 0.005
             d.text((ox + 20, oy + 10), name[:52], fill="black", font=font)
             d.text((ox + 20, oy + 560), f"lines {', '.join(f'{w:g}' for w in widths) or 'none'} mm", fill=(0, 130, 60) if ok_w else (200, 0, 0), font=small)
@@ -158,7 +158,7 @@ def render(results, outdir):
 
 
 def main():
-    fps = footprint_map()
+    fps = project_map()
     users = {}
     for ref, path in fps.items():
         users.setdefault(path, []).append(ref)
@@ -168,11 +168,11 @@ def main():
         results[name] = check(path)
         fp, pads, items, widths, gap, ref_layer = results[name]
         flag = []
-        if not widths or min(widths) < LINE_MIN:
+        if widths and min(widths) < LINE_MIN:
             flag.append("thin lines")
         if gap < GAP_MIN - 0.005:
             flag.append("ink near pads")
-        print(f"{name:52} {len(refs):3} parts | lines {', '.join(f'{w:g}' for w in widths) or '-':14} | closest ink {gap:5.2f} | {'; '.join(flag) or 'OK'}")
+        print(f"{name:52} {len(refs):3} parts | lines {', '.join(f'{w:g}' for w in widths) or 'none':14} | closest ink {'-' if gap == math.inf else f'{gap:.2f}':>5} | {'; '.join(flag) or 'OK'}")
     if "--render" in sys.argv:
         render(results, sys.argv[sys.argv.index("--render") + 1])
 

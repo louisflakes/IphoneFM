@@ -2,6 +2,8 @@
 
 Each part's footprint source, chosen in the order step 2.1 sets: KiCad's own library, then the maker's own land pattern, then LCSC/EasyEDA. A KiCad footprint named for the exact part is preferred over a generic one. Nothing here is final until step 2.2 has compared its pads with the datasheet's land pattern; that column records the result.
 
+**Silkscreen (step 2.4, 2026-10-23):** every footprint the board uses is a copy in `IphoneFM.pretty` whose silkscreen `tools/fp_silk_trim.py` has widened to 0.25 mm and cut back to stay 0.20 mm from copper and holes (fab-rules.md); the Footprint column below names each one's source. The trimming leaves no outline on the 0402 and 0603 parts, the test pads and D5 (all work either way round); pin-1 marks are kept on every part that has an orientation, moved outward where needed, and D1 and Y2 get a dot beside pad 1 in place of their trimmed corner marks. Run fp_silk_trim.py after any of the fp_*.py builders.
+
 **Followed up with the user at their 2.2 steps (asked 2026-10-22):** U4 and SW2; see their rows.
 
 **Rule for checking (agreed 2026-10-22):** a KiCad *package* footprint (generic, computed to IPC-7351B nominal, our Phase 0 convention) is kept when what must match does: pin count, pitch, pin 1 and numbering, body size and any exposed pad's size; pad-shape differences from a maker's "footprint example" don't count against it. A footprint copied from one maker's drawing (like J1), or one we build, must match that maker's drawing exactly.

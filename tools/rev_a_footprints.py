@@ -1,5 +1,7 @@
 """The footprint chosen for each Rev A part in kicad/rev-a/footprints.md, as file paths without the .kicad_mod
-extension. Shared by pinpad_check.py and silk_check.py; run from the repository root."""
+extension. footprint_map() gives each one's source (KiCad's library, or a project footprint built by a tools/fp_*.py
+script); project_map() gives the copy the board uses, in kicad/rev-a/IphoneFM.pretty (made by fp_silk_trim.py).
+Shared by pinpad_check.py, silk_check.py and fp_silk_trim.py; run from the repository root."""
 import json
 
 K = r"C:/Users/jakep/AppData/Local/Programs/KiCad/10.0/share/kicad/footprints/"
@@ -35,3 +37,7 @@ def footprint_map():
         elif r.startswith("TP"):
             fp[r] = K + "TestPoint.pretty/TestPoint_Pad_D1.5mm"
     return fp
+
+
+def project_map():
+    return {r: P + path.split("/")[-1] for r, path in footprint_map().items()}

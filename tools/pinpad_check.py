@@ -4,8 +4,8 @@ Run from the repository root: python tools/pinpad_check.py"""
 import sys, collections
 sys.path.insert(0, "tools")
 from kicadcheck import sexpr, kids, kid
-from rev_a_footprints import footprint_map
-FP = footprint_map()
+from rev_a_footprints import project_map
+FP = project_map()
 sch = sexpr(open("kicad/rev-a/IphoneFM.kicad_sch", encoding="utf-8").read())
 libs = {s[1]: s for s in kids(kid(sch, "lib_symbols"), "symbol")}
 def pins(sym):
