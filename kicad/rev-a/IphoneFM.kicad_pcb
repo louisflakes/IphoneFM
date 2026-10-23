@@ -15960,9 +15960,10 @@
 		)
 	)
 	(footprint "IphoneFM:USB_C_Receptacle_HRO_TYPE-C-31-M-12_2020"
+		(locked yes)
 		(layer "F.Cu")
 		(uuid "970ba78f-b70d-4407-8759-9c02b0bcd987")
-		(at 74.47 127.45)
+		(at 35.925 127.77)
 		(descr "USB Type-C receptacle for USB 2.0 and PD, HRO TYPE-C-31-M-12; pads and holes per HRO's recommended PCB layout, drawing dated 2020-12-08 (KiCad's footprint follows the 2015 drawing)")
 		(tags "usb usb-c 2.0 pd")
 		(property "Reference" "J1"
@@ -16422,17 +16423,6 @@
 			(uuid "24066196-a78e-46b0-98cb-49daaf80ccdf")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Connector_USB.3dshapes/USB_C_Receptacle_HRO_TYPE-C-31-M-12.step"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
 	)
 	(footprint "IphoneFM:Texas_DPY0002A_0.6x1mm_P0.65mm"
 		(layer "F.Cu")
