@@ -31,11 +31,13 @@ def pad(m):
         x = WIDE_X.get(num, x)
         blk = re.sub(r"\(at [-\d.]+ [-\d.]+\)", f"(at {x:g} {SIGNAL_Y:g})", blk)
         return re.sub(r"\(size ([\d.]+) [\d.]+\)", lambda q: f"(size {q.group(1)} {SIGNAL_LEN:g})", blk)
-    # shell legs: front slots 0.6 x 1.7 mm hole in a 0.9 x 2.0 mm pad, rear 0.6 x 1.4 in 0.9 x 1.7
+    # shell legs: front slots 0.6 x 1.7 mm hole, rear 0.6 x 1.4, as HRO draws them. HRO's pads (0.9 x 2.0 and 0.9 x 1.7)
+    # leave a 0.15 mm copper ring, under JLC's 0.18 mm minimum, so each pad is 0.2 mm bigger both ways: a 0.25 mm ring,
+    # our rule (fab-rules.md; step 3.2, the user's choice)
     front = y < 0
-    sy, (h, d) = (FRONT_SLOT_Y, (2.0, 1.7)) if front else (REAR_SLOT_Y, (1.7, 1.4))
+    sy, (h, d) = (FRONT_SLOT_Y, (2.2, 1.7)) if front else (REAR_SLOT_Y, (1.9, 1.4))
     blk = re.sub(r"\(at [-\d.]+ [-\d.]+\)", f"(at {SLOT_X if x > 0 else -SLOT_X:g} {sy:g})", blk)
-    blk = re.sub(r"\(size [\d.]+ [\d.]+\)", f"(size 0.9 {h:g})", blk)
+    blk = re.sub(r"\(size [\d.]+ [\d.]+\)", f"(size 1.1 {h:g})", blk)
     return re.sub(r"\(drill oval [\d.]+ [\d.]+\)", f"(drill oval 0.6 {d:g})", blk)
 
 
