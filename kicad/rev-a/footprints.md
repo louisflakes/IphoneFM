@@ -4,12 +4,14 @@ Each part's footprint source, chosen in the order step 2.1 sets: KiCad's own lib
 
 **Follow up with the user at their 2.2 steps (asked 2026-10-22):** U4, whose KiCad footprint was drawn for a different Silicon Labs chip, and SW2, where KiCad has two Panasonic EVQ-P7 footprints and the right one must be confirmed.
 
+**Rule for checking (agreed 2026-10-22):** a KiCad *package* footprint (generic, computed to IPC-7351B nominal, our Phase 0 convention) is kept when what must match does: pin count, pitch, pin 1 and numbering, body size and any exposed pad's size; pad-shape differences from a maker's "footprint example" don't count against it. A footprint copied from one maker's drawing (like J1), or one we build, must match that maker's drawing exactly.
+
 Sources: **KiCad (part)** is a KiCad library footprint named for this part; **KiCad (generic)** is a KiCad footprint for the package, used only if its pads match the maker's land pattern; **Maker** is drawn from the land pattern in the maker's datasheet. No part needs LCSC/EasyEDA.
 
 | Parts | Part number | Package | Source | Footprint | Datasheet land pattern | 2.2 check |
 |---|---|---|---|---|---|---|
 | J1 | HRO TYPE-C-31-M-12 | USB-C receptacle | KiCad (part), pads updated to the maker's 2020 layout | IphoneFM:USB_C_Receptacle_HRO_TYPE-C-31-M-12_2020 | J1_HRO_TYPE-C-31-M-12 p1 (2020-12-08) | Done 2026-10-22. KiCad's footprint follows HRO's 2015 drawing (archived copy in J1_HRO_TYPE-C-31-M-12_2015_superseded.pdf); HRO's 2020 drawing shortens the signal pads to 1.14 mm (0.50–1.64 mm behind the peg holes), moves the wide pads to ±2.40/±3.20 mm, makes the peg holes Ø0.60, the rear shell slots 0.6 × 1.4 mm in 0.9 × 1.7 pads and the front slot pads 0.9 × 2.0. The project copy (tools/fp_j1_hro2020.py) takes those values; outline, courtyard and 3D model are KiCad's. Board edge: 5.79 mm in front of the peg holes. Approved by the user |
-| U1 | ST STM32U535CEU6 | UFQFPN-48 7 × 7, EP | KiCad (generic) | Package_DFN_QFN:QFN-48-1EP_7x7mm_P0.5mm_EP5.6x5.6mm | DS14217 (UFQFPN48 package section) | |
+| U1 | ST STM32U535CEU6 | UFQFPN-48 7 × 7, EP | KiCad (generic) | Package_DFN_QFN:QFN-48-1EP_7x7mm_P0.5mm_EP5.6x5.6mm | DS14217 p268–269 (Table 140, Figure 74) | Pass 2026-10-22: 48 pads at 0.50 mm, pin 1 top-left, counter-clockwise, 7 × 7 mm body, 5.60 × 5.60 mm exposed pad numbered 49. ST's example uses 0.30 × 0.55 mm pads (KiCad's IPC pads are 0.25 × 0.875); kept KiCad's per the rule above |
 | U2 | TI LMX2571NJKR | WQFN-36 6 × 6, DAP (NJK) | Maker (no KiCad 6 × 6 QFN-36 matches TI's NJK yet) | to build from TI's NJK land pattern | SNAS654A (NJK0036A package section) | |
 | U3 | Diodes AP2112K-3.3TRG1 | SOT-25 | KiCad (generic) | Package_TO_SOT_SMD:SOT-23-5 | DS39724 (SOT25 land pattern) | |
 | U4 | Skyworks SI4705-D60-GM | QFN-20 3 × 3, 0.5 mm, EP | KiCad (generic) | Package_DFN_QFN:SiliconLabs_QFN-20-1EP_3x3mm_P0.5mm_EP1.8x1.8mm (drawn for an EFM8 part: confirm pads and EP) | Si4704/05-D60 (PCB land pattern section) | |
