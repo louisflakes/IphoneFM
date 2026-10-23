@@ -24,6 +24,8 @@
 | `sch_noconnect.py [--dry-run]` | Put a no-connect flag (X) on every pin `netlist.json` marks NC |
 | `sch_notes.py [--dry-run]` | Write the layout notes block onto the Rev A schematic |
 | `sch_pinids.py [--dry-run]` | Give every symbol pin a fixed ID, as KiCad saves them, so ERC exclusions survive a reload; run last |
+| `fp_j1_hro2020.py` | Build J1's project footprint: KiCad's HRO USB-C footprint with pads and holes moved to HRO's 2020 drawing |
+| `fp_u2_ti_njk.py` | Build U2's project footprint to TI's NJK0036A land pattern (4.6 mm centre pad), on KiCad's QFN-36 outline and 3D model |
 | `setup-kicad.sh` | Install KiCad 10 and pre-cache the KiCad MCP server (Ubuntu 24.04, as root) |
 
 API keys come from environment variables (`DIGIKEY_CLIENT_ID`, `DIGIKEY_CLIENT_SECRET`, `MOUSER_API_KEY`). Never commit keys.
