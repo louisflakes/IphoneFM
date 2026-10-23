@@ -78,7 +78,10 @@ Checks:
 ## Phase 2: Footprints
 
 - [x] 2.1 Choose each part's footprint source in this order and record it: KiCad's library, then the maker's own, then LCSC/EasyEDA.
-- [ ] 2.2 Compare each footprint's pads with its datasheet land pattern and the true-size drawing in layout.html, one part per step [HHG p35].
+- [x] 2.2 Compare each footprint's pads with its datasheet land pattern and the true-size drawing in layout.html, one part per step [HHG p35].
+  - Done 2026-10-22, each part approved by the user on a to-scale overlay of the footprint's pads and the maker's lands; results per part in [footprints.md](../../kicad/rev-a/footprints.md). The body sizes in layout.html agree with every footprint.
+  - Built as project footprints (kicad/rev-a/IphoneFM.pretty, scripts in tools/): J1 (HRO's 2020 layout), U2 (TI's 4.6 mm centre pad), D1 (Xinglight), SW3 (KingTek pads, C&K body), RV1–RV3 (Alps). Kept KiCad's for the rest, including U4 by the user's decision.
+  - Datasheets replaced with the makers' current ones on the way: U6 (ST DS4260 Rev 7), D5 (Semtech Rev 4.0).
 - [ ] 2.3 Confirm every symbol pin number has a pad of the same number [EES p133].
 - [ ] 2.4 Check each footprint's silkscreen: real-size body outline, pin 1 and polarity marks, no ink on pads, lines at least 0.25 mm wide [BAC p13; KHA p149].
 - [ ] 2.5 Check each paste layer is 1:1 with its pads [HHG p96, p113].
