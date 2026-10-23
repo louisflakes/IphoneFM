@@ -98,7 +98,7 @@ Checks:
 
 ## Phase 3: Board setup
 
-- [ ] 3.1 Open the PCB editor and set the stackup to JLC's 2-layer 1.6 mm FR4 with 1 oz copper [KLAP contents p7–8; HHG p63–65].
+- [x] 3.1 Open the PCB editor and set the stackup to JLC's 2-layer 1.6 mm FR4 with 1 oz copper [KLAP contents p7–8; HHG p63–65].
   - Done 2026-10-23 with `tools/pcb_setup.py` (file edit, KiCad closed): JLC0216A as recorded in fab-rules.md (0.030 mm copper, 1.43 mm FR-4 core) with JLC's published Dk (core 4.6, mask 3.8, mask 0.015 mm over copper; jlcpcb.com/impedance, read 2026-10-23). The stack sums to 1.52 mm, inside JLC's ±10% on the 1.6 mm order. Surface finish left for the order. Title block copied from the schematic. KiCad loads the board; DRC's only finding is the missing outline, which 3.4 adds.
 - [ ] 3.2 Enter the design rules from fab-rules.md.
 - [ ] 3.3 Set the net classes' widths and clearances: default, power, 50 Ω RF lines and wider-spaced clocks [HHG p64].
