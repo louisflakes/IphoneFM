@@ -103,15 +103,15 @@ Rev A fits Economic on every line. Whether Economic takes our two global-sourcin
 ### What this means for Rev A
 
 Rev A puts parts at all four edges on purpose:
-- **Left:** RV1–RV3 rims 2.9 mm past the edge; SW1's handle 0.9 mm past.
+- **Left:** RV1–RV3 rims 1.9 mm past the edge (2.9 until step 4.5); SW1's handle 0.9 mm past.
 - **Right:** J2's barrel 7.45 mm past the edge.
 - **Bottom:** J1 flush with the edge; SW2's knob 0.35 mm past.
 - **Top:** SW3's levers 1.35 mm inside the edge.
 
 So the 2.5 mm body-to-edge rule can't be met on the board itself; it has to come from rails.
 
-**Decided 2026-10-23 (the user): rails on all four edges, in a panel we draw ourselves in Phase 8.** This replaces the earlier plan of rails on the top and bottom only, which assumed only the edges the machine grips need the 2.5 mm. JLC's pages state no such limit: the rule names no edge, and rails exist "to increase the distance between components and the board edge" (Terms; rails article, re-read 2026-10-23). Every edge has a part inside 2.5 mm: the wheels (2.9 mm past the left edge, the worst case), D1 (about 2.35 mm from the right), J2's barrel (7.45 mm past the right), SW3 (1.35 mm from the top), J1 and SW2 at the bottom.
-- **The gap between board and rail is wider than any overhang,** so no part hangs over a rail: about 3.5 mm on the left for the wheels, about 8 mm near J2. The break-off tabs go where nothing overhangs, such as the 3 mm spaces between the wheels.
+**Decided 2026-10-23 (the user): rails on all four edges, in a panel we draw ourselves in Phase 8.** This replaces the earlier plan of rails on the top and bottom only, which assumed only the edges the machine grips need the 2.5 mm. JLC's pages state no such limit: the rule names no edge, and rails exist "to increase the distance between components and the board edge" (Terms; rails article, re-read 2026-10-23). Every edge has a part inside 2.5 mm: the wheels (1.9 mm past the left edge since step 4.5), D1 (about 2.35 mm from the right), J2's barrel (7.45 mm past the right), SW3 (1.35 mm from the top), J1 and SW2 at the bottom.
+- **The gap between board and rail is wider than any overhang,** so no part hangs over a rail: about 2.5 mm on the left for the wheels (1.9 mm past the edge since step 4.5), about 8 mm near J2. The break-off tabs go where nothing overhangs, such as the 3 mm spaces between the wheels.
 - **Fiducials on the rails,** to JLC's size and spacing.
 - **Why we draw it:** if the order has no rails, JLC adds its own by its own method and "will not take the final responsibility" for special needs (Terms). A standard 1.6–2 mm gap would put the wheels on top of the rail.
 - **Details wait for Phase 8** (steps 8.3, 8.5). Nothing changes on the board file or in placement.

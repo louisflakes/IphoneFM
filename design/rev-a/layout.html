@@ -177,7 +177,7 @@ const PARTS = [
   { ref: "RV1, RV2, RV3", n: 3, fn: "Tuning Wheel", mpn: "Alps / RK10J11R0A0H", pkg: "Thumbwheel potentiometer, reflow SMD, Ø14 mm knurled wheel lying flat, 2.5 mm tall",
     body: [{ t: "rect", y: -2.45, w: 10.4, h: 12.1, r: 0.3 }, { t: "circle", x: 0, y: 0, r: 7.0 }],
     pads: [...[-4, -2, 0, 2, 4].map(x => ({ x, y: -9.0, w: 1.2, h: 1.4 })), ...[-6.1, 6.1].map(x => ({ x, y: 2.9, w: 2.2, h: 1.4 }))],
-    edge: 4.1, src: "POT_Alps_RK10J p2 (RK10J1□R, reflow type): Ø14 wheel, frame 10.4 wide and 14 over the ears, terminals 9.5 below the knob centre, 2.5 tall; PCB lands 5 × 1.2 wide at 2 mm pitch and 2 × 2.2 × 1.4 mounting lands 10 mm apart (inner edges). The land rows' distance from the knob centre (about 9.0 and 2.9) is read off the drawing, not dimensioned. The rim faces local +y. Board edge drawn 4.1 from the centre, the closest the rim-side mounting lands allow with 0.5 mm copper clearance, so 2.9 mm of wheel stands past it" },
+    edge: 5.1, src: "POT_Alps_RK10J p2 (RK10J1□R, reflow type): Ø14 wheel, frame 10.4 wide and 14 over the ears, terminals 9.5 below the knob centre, 2.5 tall; PCB lands 5 × 1.2 wide at 2 mm pitch and 2 × 2.2 × 1.4 mounting lands 10 mm apart (inner edges). The land rows' distance from the knob centre (about 9.0 and 2.9) is read off the drawing, not dimensioned. The rim faces local +y. Board edge 5.1 from the centre (step 4.5, the user's choice): the frame's rim-side locating peg sits in a 2.2 × 1.1 slot 4.2 from the centre, which an edge at 4.1 cut through; at 5.1 the slot is on the board with 0.35 to spare, so 1.9 mm of wheel stands past the edge" },
   { ref: "D1", fn: "RGB Status LED", mpn: "XINGLIGHT / XL-1615RGBC-RF", pkg: "1.6 × 1.5 × 0.6 mm, top-emitting, 4 pads",
     body: [{ t: "rect", w: 1.6, h: 1.5, r: 0.05 }],
     pads: [-0.625, 0.625].flatMap(x => [-0.475, 0.475].map(y => ({ x, y, w: 0.45, h: 0.65 }))),
@@ -187,12 +187,12 @@ const PARTS = [
 // Rotation is clockwise as drawn. Actuators, barrels and wheel rims point along local +y: 0° = down, -90° = right, 90° = left, 180° = up.
 const LAYOUTS = {
   A: { name: "Rev A · wheels down the side", idea: [
-      "Revised with the user's notes (2026-10-21). The three wheels sit as far out as their mounting lands allow, 2.9 mm of rim past the left edge, and lower on the board, 17 mm apart, so each has room to spin. The TX/RX slider moved to the bottom of the left edge to make room.",
+      "Revised with the user's notes (2026-10-21). The three wheels sit as far out as their mounting lands allow, 1.9 mm of rim past the left edge (2.9 until step 4.5, when the rim-side peg slot moved them 1 mm in), and lower on the board, 17 mm apart, so each has room to spin. The TX/RX slider moved to the bottom of the left edge to make room.",
       "The DIP switch is on the top edge on the midline, parallel to J1, with its levers facing out through the top edge. Its six lines to U7 only carry static DC levels, so their length doesn't matter.",
       "The status LED (D1) is at the top right, away from the controls.",
       "The transmit chain still runs down the right side in signal order: U2 (synthesizer) at the upper right, U7 (attenuator) below it, FL1 down the right side, then U5 and J2 at the bottom right. U1 sits in the middle near Y2, which feeds both U1 and U2. U4 (receiver) sits low and left of U5, away from U2.",
       "J1 on the midline with U6 above it; U3 above U6 and to its left; the BOOT button on the bottom edge beside J1."],
-    place: [["RV1", 16.80, 78.0, 90], ["RV2", 16.80, 95.0, 90], ["RV3", 16.80, 112.0, 90], ["SW1", 14.65, 125.5, 90], ["D1", 56.0, 63.0, 0],
+    place: [["RV1", 17.80, 78.0, 90], ["RV2", 17.80, 95.0, 90], ["RV3", 17.80, 112.0, 90], ["SW1", 14.65, 125.5, 90], ["D1", 56.0, 63.0, 0],
       ["SW3", 35.925, 64.51, 180], ["J1", 35.925, 127.77, 0], ["SW2", 25.5, 129.21, 0], ["U6", 35.925, 119.0, 0], ["U3", 30.5, 114.5, 0],
       ["J2", 54.99, 126.8, -90], ["U5", 47.0, 125.0, 0], ["U7", 46.0, 94.0, 0], ["U2", 46.0, 76.0, 0],
       ["Y2", 39.5, 84.0, 0], ["U1", 35.5, 93.0, 0], ["U4", 38.5, 113.0, 0]] }
