@@ -100,6 +100,8 @@
 		)
 		(capping no)
 		(filling no)
+		(aux_axis_origin 12.7 59.56)
+		(grid_origin 12.7 59.56)
 		(pcbplotparams
 			(layerselection 0x00000000_00000000_55555555_5755f5ff)
 			(plot_on_all_layers_selection 0x00000000_00000000_00000000_00000000)
@@ -136,6 +138,16 @@
 			(scaleselection 1)
 			(outputdirectory "")
 		)
+	)
+	(gr_rect
+		(start 12.7 59.56)
+		(end 59.15 130.96)
+		(stroke
+			(width 0.05)
+			(type solid)
+		)
+		(fill no)
+		(layer "Edge.Cuts")
 	)
 	(embedded_fonts no)
 )

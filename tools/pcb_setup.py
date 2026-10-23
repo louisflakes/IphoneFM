@@ -8,6 +8,8 @@ every run, so it can be re-run after any change to the rules.
 - Step 3.2: the design rules from fab-rules.md's "Our design rules": Board Setup's constraints and defaults in
   IphoneFM.kicad_pro, the 0.10 mm solder-mask web in the board's setup, and the two rules Board Setup has no field
   for (0.25 mm ring on plated holes, 0.3 mm courtyard gap) in IphoneFM.kicad_dru.
+- Step 3.4: the 46.45 x 71.40 mm outline on Edge.Cuts at layout.html's envelope coordinates, with the grid and drill
+  origins on its top-left corner.
 Close KiCad (or don't save from it) while this runs; reopen the project to see the result.
 Usage (from the repository root): python tools/pcb_setup.py"""
 import re
@@ -100,6 +102,26 @@ def design_rules():
     open(DRU, "w", encoding="utf-8", newline="\n").write(CUSTOM)
 
 
+# Step 3.4: the board outline is layout.html's envelope, placed at the same coordinates (phone-back mm, x from the camera-side
+# long edge, y down from the top edge), so a position on the board reads the same as on the sketch. The grid and drill
+# origins sit on the board's top-left corner, so positions relative to them are the board-corner offsets used for the
+# mounting holes (step 3.5).
+ENVELOPE = (12.70, 59.56, 59.15, 130.96)  # layout.html ENVELOPE: 46.45 x 71.40 mm, square corners
+OUTLINE_TAG = "IphoneFM board outline (layout.html ENVELOPE)"
+
+
+def outline(text):
+    x0, y0, x1, y1 = ENVELOPE
+    text = re.sub(r'\t\(gr_rect\n(?:(?!\n\t\)\n).)*?\(layer "Edge\.Cuts"\).*?\n\t\)\n', "", text, flags=re.S)
+    rect = (f'\t(gr_rect\n\t\t(start {x0:g} {y0:g})\n\t\t(end {x1:g} {y1:g})\n\t\t(stroke\n\t\t\t(width 0.05)\n\t\t\t(type solid)\n'
+            f'\t\t)\n\t\t(fill no)\n\t\t(layer "Edge.Cuts")\n\t)\n')
+    text = text.replace("\t(embedded_fonts no)\n)", rect + "\t(embedded_fonts no)\n)", 1)
+    for key in ("aux_axis_origin", "grid_origin"):
+        text = re.sub(rf"\t\t\({key} [-\d.]+ [-\d.]+\)\n", "", text)
+        text = text.replace("\t\t(pcbplotparams\n", f"\t\t({key} {x0:g} {y0:g})\n\t\t(pcbplotparams\n", 1)
+    return text
+
+
 def main():
     design_rules()
     text = open(PCB, encoding="utf-8").read()
@@ -116,6 +138,7 @@ def main():
     tb = re.search(r"\t\(title_block\n.*?\n\t\)\n", open(SCH, encoding="utf-8").read(), re.S).group(0)
     text = re.sub(r"\t\(title_block\n.*?\n\t\)\n", "", text, flags=re.S)
     text = re.sub(r'(\t\(paper "[^"]*"\)\n)', lambda m: m.group(1) + tb, text, count=1)
+    text = outline(text)
     open(PCB, "w", encoding="utf-8", newline="\n").write(text)
     print(PCB)
 
