@@ -22,6 +22,7 @@
 | `sch_flags.py [--dry-run]` | Put a PWR_FLAG on each power net fed from the connector or through a passive part (VBUS, GND, VDDA, RX_VDD, U5_VDD), on a short stub; run before `sch_labels` |
 | `sch_labels.py [--dry-run]` | Name every signal net with a local label carrying its `netlist.json` name, one per connected group (lone chip pins on a short stub), placed clear of parts, wires and text; the matching names join the groups. Reruns replace them |
 | `sch_noconnect.py [--dry-run]` | Put a no-connect flag (X) on every pin `netlist.json` marks NC |
+| `sch_mountholes.py [--dry-run]` | Place the mounting holes H1–H4 on the Rev A schematic beside the layout notes; holds their agreed board positions |
 | `sch_notes.py [--dry-run]` | Write the layout notes block onto the Rev A schematic |
 | `sch_footprints.py [--dry-run]` | Step 2.6: write each part's IphoneFM footprint (from `footprints.md`, via `rev_a_footprints.py`) into its symbol's Footprint field |
 | `sch_pinids.py [--dry-run]` | Give every symbol pin a fixed ID, as KiCad saves them, so ERC exclusions survive a reload; run last |

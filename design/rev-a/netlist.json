@@ -2838,6 +2838,58 @@
      "net": "SWDIO"
     }
    }
+  },
+  {
+   "ref": "H1",
+   "value": "M2",
+   "mpn": "",
+   "maker": "",
+   "lcsc": "",
+   "package": "M2 mounting hole, 2.2 mm unplated",
+   "pins": 0,
+   "chain": 10,
+   "function": "Mounting hole, 13, 7 mm from the board's top-left corner",
+   "assembly": "unplated hole, not a part",
+   "pinmap": {}
+  },
+  {
+   "ref": "H2",
+   "value": "M2",
+   "mpn": "",
+   "maker": "",
+   "lcsc": "",
+   "package": "M2 mounting hole, 2.2 mm unplated",
+   "pins": 0,
+   "chain": 10,
+   "function": "Mounting hole, 33, 7 mm from the board's top-left corner",
+   "assembly": "unplated hole, not a part",
+   "pinmap": {}
+  },
+  {
+   "ref": "H3",
+   "value": "M2",
+   "mpn": "",
+   "maker": "",
+   "lcsc": "",
+   "package": "M2 mounting hole, 2.2 mm unplated",
+   "pins": 0,
+   "chain": 10,
+   "function": "Mounting hole, 41, 57 mm from the board's top-left corner",
+   "assembly": "unplated hole, not a part",
+   "pinmap": {}
+  },
+  {
+   "ref": "H4",
+   "value": "M2",
+   "mpn": "",
+   "maker": "",
+   "lcsc": "",
+   "package": "M2 mounting hole, 2.2 mm unplated",
+   "pins": 0,
+   "chain": 10,
+   "function": "Mounting hole, 8, 66 mm from the board's top-left corner",
+   "assembly": "unplated hole, not a part",
+   "pinmap": {}
   }
  ],
  "nets": {

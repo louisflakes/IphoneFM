@@ -38,7 +38,7 @@ check(not dupes, f"Designators unique ({len(refs)} parts)" + (f": duplicates {',
 missing = [f"{p.get('ref', '?')}.{f}" for p in parts for f in REQUIRED if f not in p]
 check(not missing, "Every part has " + ", ".join(REQUIRED) + (f": missing {', '.join(missing)}" if missing else ""))
 
-bad_ref = [r for r in refs if not re.fullmatch(r"(U|J|SW|D|Y|RV|FB|L|C|R|TP)\d+", r)]
+bad_ref = [r for r in refs if not re.fullmatch(r"(U|J|SW|D|Y|RV|FB|L|C|R|TP|H)\d+", r)]
 check(not bad_ref, "Designators use the standard prefixes" + (f": {', '.join(bad_ref)}" if bad_ref else ""))
 
 bad_lcsc = [p["ref"] for p in placed if not re.fullmatch(r"C\d+", p["lcsc"])]

@@ -36,6 +36,8 @@ def footprint_map():
             fp[r] = K + f"Inductor_SMD.pretty/L_{sz}_{SIZE[sz]}Metric"
         elif r.startswith("TP"):
             fp[r] = K + "TestPoint.pretty/TestPoint_Pad_D1.5mm"
+        elif r.startswith("H"):
+            fp[r] = K + "MountingHole.pretty/MountingHole_2.2mm_M2"
     return fp
 
 

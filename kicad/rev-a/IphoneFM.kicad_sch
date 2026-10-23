@@ -6419,6 +6419,105 @@
 			)
 			(embedded_fonts no)
 		)
+	(symbol "Mechanical:MountingHole"
+			(pin_names
+				(offset 1.016)
+			)
+			(exclude_from_sim no)
+			(in_bom no)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "H"
+				(at 0 5.08 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "MountingHole"
+				(at 0 3.175 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Mounting Hole without connection"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "mounting hole"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "MountingHole*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "MountingHole_0_1"
+				(circle
+					(center 0 0)
+					(radius 1.27)
+					(stroke
+						(width 1.27)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 )
 	(symbol
 		(lib_id "MCU_ST_STM32U5:STM32U535CEUx")
@@ -18540,6 +18639,144 @@
 		(at 444.50 322.58 0)
 		(effects (font (size 1.27 1.27)) (justify left top))
 		(uuid "a07e5000-0000-4000-8000-000000000001")
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 452.12 358.14 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "414f723e-55aa-59bf-bca5-2aeb9b406407")
+		(property "Reference" "H1"
+			(at 452.12 353.06 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "M2"
+			(at 452.12 354.96 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "IphoneFM:MountingHole_2.2mm_M2"
+			(at 452.12 358.14 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 452.12 358.14 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(instances
+			(project "IphoneFM"
+				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
+					(reference "H1") (unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 467.36 358.14 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "213ecc66-a654-523a-ace2-378c3d68944b")
+		(property "Reference" "H2"
+			(at 467.36 353.06 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "M2"
+			(at 467.36 354.96 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "IphoneFM:MountingHole_2.2mm_M2"
+			(at 467.36 358.14 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 467.36 358.14 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(instances
+			(project "IphoneFM"
+				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
+					(reference "H2") (unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 482.60 358.14 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "2b06bace-65f7-52bd-9ae5-966098de2583")
+		(property "Reference" "H3"
+			(at 482.60 353.06 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "M2"
+			(at 482.60 354.96 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "IphoneFM:MountingHole_2.2mm_M2"
+			(at 482.60 358.14 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 482.60 358.14 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(instances
+			(project "IphoneFM"
+				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
+					(reference "H3") (unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Mechanical:MountingHole")
+		(at 497.84 358.14 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom no)
+		(on_board yes)
+		(dnp no)
+		(uuid "68a38f4a-2c00-5d28-aa53-6ffe09a105ec")
+		(property "Reference" "H4"
+			(at 497.84 353.06 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Value" "M2"
+			(at 497.84 354.96 0)
+			(effects (font (size 1.27 1.27)))
+		)
+		(property "Footprint" "IphoneFM:MountingHole_2.2mm_M2"
+			(at 497.84 358.14 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(property "Datasheet" "~"
+			(at 497.84 358.14 0)
+			(effects (font (size 1.27 1.27)) (hide yes))
+		)
+		(instances
+			(project "IphoneFM"
+				(path "/efee88c9-028d-4fdb-86e0-0a4145b330e1"
+					(reference "H4") (unit 1)
+				)
+			)
+		)
+	)
+	(text "MOUNTING HOLES: M2, 2.2 mm unplated. Board positions from the top-left corner: H1 (13, 7), H2 (33, 7), H3 (41, 57), H4 (8, 66) mm"
+		(exclude_from_sim no)
+		(at 444.50 347.98 0)
+		(effects (font (size 1.27 1.27)) (justify left bottom))
+		(uuid "2ff5c863-d394-5bc3-94c9-f8e06c1b687d")
 	)
 	(sheet_instances
 		(path "/"
