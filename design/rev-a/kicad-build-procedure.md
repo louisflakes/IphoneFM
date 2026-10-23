@@ -82,7 +82,7 @@ Checks:
   - Done 2026-10-22, each part approved by the user on a to-scale overlay of the footprint's pads and the maker's lands; results per part in [footprints.md](../../kicad/rev-a/footprints.md). The body sizes in layout.html agree with every footprint.
   - Built as project footprints (kicad/rev-a/IphoneFM.pretty, scripts in tools/): J1 (HRO's 2020 layout), U2 (TI's 4.6 mm centre pad), D1 (Xinglight), SW3 (KingTek pads, C&K body), RV1–RV3 (Alps). Kept KiCad's for the rest, including U4 by the user's decision.
   - Datasheets replaced with the makers' current ones on the way: U6 (ST DS4260 Rev 7), D5 (Semtech Rev 4.0).
-- [ ] 2.3 Confirm every symbol pin number has a pad of the same number [EES p133].
+- [x] 2.3 Confirm every symbol pin number has a pad of the same number [EES p133].
   - Checked 2026-10-22 with `tools/pinpad_check.py` on all 102 symbols. First run: one mismatch, SW1, whose symbol calls the four tabs pin 4 while KiCad's footprint names them "SH" (they would have been left unconnected). At the user's choice, SW1 now uses a project copy with the tabs numbered 4, as Shou Han's drawing does. Second run: 0 mismatches. Pads sharing a number, all intended: J1's four shell pads (SH), J2's four ground legs (2), SW1's four tabs (4), SW2's 1/1′ and 2/2′ (joined inside the switch).
 - [ ] 2.4 Check each footprint's silkscreen: real-size body outline, pin 1 and polarity marks, no ink on pads, lines at least 0.25 mm wide [BAC p13; KHA p149].
 - [ ] 2.5 Check each paste layer is 1:1 with its pads [HHG p96, p113].
