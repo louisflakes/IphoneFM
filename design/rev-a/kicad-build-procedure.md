@@ -120,7 +120,7 @@ Checks:
 
 ## Phase 4: Placement (the most important step [BAC p8; HHG p36])
 
-- [ ] 4.1 Bring the parts across with Update PCB from Schematic (F8) [EES p96–97].
+- [x] 4.1 Bring the parts across with Update PCB from Schematic (F8) [EES p96–97].
   - Done 2026-10-23 in KiCad (F8): 106 footprints (102 parts and H1–H4), 0 errors and 0 warnings in the dialog, all from the IphoneFM library; parked left of the board. KiCad had been open since before Phase 3, so its first save put back old design rules and J1's old shell pads from memory; KiCad was closed, the rules restored, and every footprint refreshed with Update Footprints from Library. Checked: every footprint's pads match the library file, schematic parity clean. KiCad also drops the mask Dk unless the mask material is named, so `tools/pcb_setup.py` now names it "Liquid Ink". DRC finds only the expected: parts piled on each other, nets not routed, and J1's locating holes (3.6 notes).
 - [ ] 4.2 Group the parts by chain off the board, with short pin-to-pin distances [HHG p37, p46].
 - [ ] 4.3 Place and lock J1 at its Rev A position [HHG p46; KHA p127, p147].
