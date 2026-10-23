@@ -158,8 +158,8 @@ const PARTS = [
     edge: 3.19, src: "HRO TYPE-C-31-M-12 drawing p1: body 8.94 × 7.35, 3.26 tall; recommended layout 4 × 0.60 + 8 × 0.30 pads at 0.50 pitch, shell slots 8.65 apart (0.6 × 1.7 and 0.6 × 1.4 drills, rows 4.18 apart), 2 × Ø0.60 holes 5.78 apart, PCB edge 5.79 in front of the holes, so the shell front stands about 0.4 past it (corrected at step 4.3; it was drawn flush). Pad for pad the same pattern as Plan C's GCT USB4105" },
   { ref: "J2", fn: "Antenna Connector", mpn: "BAT Wireless / BWSMA-KWE-Z001", pkg: "SMA jack, right angle, through hole; 6 mm square base, barrel 8.5 mm past it",
     body: [{ t: "rect", w: 6.0, h: 6.0, r: 0.1 }, { t: "rect", y: 7.25, w: 6.2, h: 8.5, r: 0.2 }],
-    pads: [{ x: 0, y: 0, w: 2.0, h: 2.0, hole: 1.4 }, ...[[-2.55, -2.55], [2.55, -2.55], [-2.55, 2.55], [2.55, 2.55]].map(([x, y]) => ({ x, y, w: 2.0, h: 2.0, hole: 1.4 }))],
-    edge: 4.05, tht: 1.9, src: "BWSMA-KWE-Z001 p6: base 6 × 6, 14.5 long overall (barrel 8.5 past the base, Ø6.2 thread), axis 6.4 above the board, 9.5 tall, 3.5 mm legs; PCB layout 5 × Ø1.4 holes, legs on a 5.1 mm square. Lands drawn at hole + 0.6 (KHA p135). The leg lands reach 0.55 past the base front, so the board edge sits 0.5 beyond them: base front 1.05 inside the edge" },
+    pads: [{ x: 0, y: 0, w: 2.3, h: 2.3, hole: 1.4 }, ...[[-2.55, -2.55], [2.55, -2.55], [-2.55, 2.55], [2.55, 2.55]].map(([x, y]) => ({ x, y, w: 2.2, h: 2.2, hole: 1.4 }))],
+    edge: 4.16, tht: 1.9, src: "BWSMA-KWE-Z001 p6: base 6 × 6, 14.5 long overall (barrel 8.5 past the base, Ø6.2 thread), axis 6.4 above the board, 9.5 tall, 3.5 mm legs; PCB layout 5 × Ø1.4 holes, legs on a 5.1 mm square. Lands as the KiCad footprint (step 2.2): Ø2.2 legs, 2.3 signal. The leg lands reach 0.65 past the base front, so the board edge sits 0.51 beyond them: base front 1.16 inside the edge (corrected at step 4.4 from the 2.0 lands first drawn)" },
   { ref: "SW1", fn: "TX/RX Slide Switch", mpn: "Shou Han / MSK12C02", pkg: "SPDT side-operated slide, SMD; 8.0 × 2.8 mm with tabs, handle 1.3 × 1.45 mm, 1.6 mm travel",
     body: [{ t: "rect", w: 8.0, h: 2.8, r: 0.1 }, { t: "rect", x: -0.8, y: 2.125, w: 1.3, h: 1.45, r: 0.1 }, { t: "rect", x: 0.8, y: 2.125, w: 1.3, h: 1.45, r: 0.1, dash: "0.4 0.25" }],
     pads: [...[-2.25, -0.75, 2.25].map(x => ({ x, y: -1.94, w: 0.6, h: 1.3 })),
@@ -194,7 +194,7 @@ const LAYOUTS = {
       "J1 on the midline with U6 above it; U3 above U6 and to its left; the BOOT button on the bottom edge beside J1."],
     place: [["RV1", 16.80, 78.0, 90], ["RV2", 16.80, 95.0, 90], ["RV3", 16.80, 112.0, 90], ["SW1", 14.65, 125.5, 90], ["D1", 56.0, 63.0, 0],
       ["SW3", 35.925, 64.51, 180], ["J1", 35.925, 127.77, 0], ["SW2", 25.5, 129.21, 0], ["U6", 35.925, 119.0, 0], ["U3", 30.5, 114.5, 0],
-      ["J2", 55.10, 126.9, -90], ["U5", 47.0, 125.0, 0], ["U7", 46.0, 94.0, 0], ["U2", 46.0, 76.0, 0],
+      ["J2", 54.99, 126.8, -90], ["U5", 47.0, 125.0, 0], ["U7", 46.0, 94.0, 0], ["U2", 46.0, 76.0, 0],
       ["Y2", 39.5, 84.0, 0], ["U1", 35.5, 93.0, 0], ["U4", 38.5, 113.0, 0]] }
 };
 // ---- Data: the antenna on J2 (GSG ANT500). Only the total lengths are published (Adafruit 3584; GSG): 20 cm to 88 cm (7–34 in).
