@@ -41,6 +41,7 @@
 | `fp_rv_rk10j.py` | Build RV1–RV3's project footprint to Alps' RK10J reflow-type PC board drawing (KiCad has none) |
 | `pcb_setup.py` | Phase 3: write the board setup into `IphoneFM.kicad_pcb` from `fab-rules.md`: stack-up, title block, design rules, outline and origins, and the MagSafe ring rule areas; re-runnable |
 | `pcb_group.py` | Step 4.2: group the parts beside the board, each IC with the parts at its pins, live in the open KiCad board through its API |
+| `pcb_local.py` | Steps 4.8–4.13: place an IC (optionally) and every part netlist.json puts at its pins, just outside it, pointing at each pin, live in the open KiCad board |
 | `setup-kicad.sh` | Install KiCad 10 and pre-cache the KiCad MCP server (Ubuntu 24.04, as root) |
 
 API keys come from environment variables (`DIGIKEY_CLIENT_ID`, `DIGIKEY_CLIENT_SECRET`, `MOUSER_API_KEY`). Never commit keys.
