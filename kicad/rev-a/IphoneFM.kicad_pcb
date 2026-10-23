@@ -5602,9 +5602,10 @@
 		)
 	)
 	(footprint "IphoneFM:LED_RGB_XINGLIGHT_XL-1615RGBC_1.6x1.5mm"
+		(locked yes)
 		(layer "F.Cu")
 		(uuid "22d9ebb5-564b-4b75-be32-b26e13953764")
-		(at -3.56 60.71)
+		(at 56 63)
 		(descr "XINGLIGHT XL-1615RGBC-RF RGB LED, common anode, 1.6 x 1.5 mm; pads per Xinglight's recommended soldering pattern (datasheet p8)")
 		(tags "LED RGB 1615")
 		(property "Reference" "D1"
