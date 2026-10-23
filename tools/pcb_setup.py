@@ -10,6 +10,10 @@ every run, so it can be re-run after any change to the rules.
   for (0.25 mm ring on plated holes, 0.3 mm courtyard gap) in IphoneFM.kicad_dru.
 - Step 3.4: the 46.45 x 71.40 mm outline on Edge.Cuts at layout.html's envelope coordinates, with the grid and drill
   origins on its top-left corner.
+- Step 3.6: keep-outs. Copper 0.5 mm from the edge is the step 3.2 rule (min_copper_edge_clearance). For the magnet ring
+  (placement-rules.md M8), two named rule areas, the ring's outer circle and its open centre, and a rule in
+  IphoneFM.kicad_dru that flags any plated through-hole pad (a lead that comes out of the bottom) touching the band
+  between them. Unplated holes and SMD parts over the ring are allowed.
 Close KiCad (or don't save from it) while this runs; reopen the project to see the result.
 Usage (from the repository root): python tools/pcb_setup.py"""
 import re
@@ -87,6 +91,10 @@ CUSTOM = """(version 1)
 \t(constraint annular_width (min 0.25mm)))
 (rule "Courtyard gap 0.3 mm"
 \t(constraint courtyard_clearance (min 0.3mm)))
+# Step 3.6: no through-hole leads over the MagSafe magnet ring (placement-rules.md M8)
+(rule "No through-hole leads over the MagSafe ring"
+\t(condition "A.Type == 'Pad' && A.Pad_Type == 'Through-hole' && A.intersectsArea('MagSafe ring') && !A.enclosedByArea('MagSafe ring opening')")
+\t(constraint disallow pad))
 """
 
 
@@ -122,6 +130,29 @@ def outline(text):
     return text
 
 
+# Step 3.6: the MagSafe magnet ring under the board (local/apple/phone-outline.js): centre and diameters in phone-back mm
+RING_C, RING_OD, RING_ID = (35.92, 77.74), 54.10, 46.00
+
+
+def ring_areas(text):
+    """Two rule areas on both copper layers that restrict nothing themselves; IphoneFM.kicad_dru's ring rule uses them."""
+    import math
+    import uuid
+    text = re.sub(r'\t\(zone\n(?:(?!\n\t\)\n).)*?\(name "MagSafe ring[^"]*"\).*?\n\t\)\n', "", text, flags=re.S)
+    out = ""
+    for name, d in (("MagSafe ring", RING_OD), ("MagSafe ring opening", RING_ID)):
+        pts = " ".join(f"(xy {RING_C[0] + d / 2 * math.cos(math.radians(a)):.4f} {RING_C[1] + d / 2 * math.sin(math.radians(a)):.4f})"
+                       for a in range(0, 360, 5))
+        out += (f'\t(zone\n\t\t(net 0)\n\t\t(net_name "")\n\t\t(locked yes)\n\t\t(layers "F.Cu" "B.Cu")\n'
+                f'\t\t(uuid "{uuid.uuid5(uuid.NAMESPACE_URL, "IphoneFM/" + name)}")\n\t\t(name "{name}")\n\t\t(hatch edge 0.5)\n'
+                f'\t\t(connect_pads\n\t\t\t(clearance 0)\n\t\t)\n\t\t(min_thickness 0.25)\n'
+                f'\t\t(keepout\n\t\t\t(tracks allowed)\n\t\t\t(vias allowed)\n\t\t\t(pads allowed)\n\t\t\t(copperpour allowed)\n'
+                f'\t\t\t(footprints allowed)\n\t\t)\n\t\t(placement\n\t\t\t(enabled no)\n\t\t\t(sheetname "")\n\t\t)\n'
+                f'\t\t(fill\n\t\t\t(thermal_gap 0.5)\n\t\t\t(thermal_bridge_width 0.5)\n\t\t)\n'
+                f'\t\t(polygon\n\t\t\t(pts\n\t\t\t\t{pts}\n\t\t\t)\n\t\t)\n\t)\n')
+    return text.replace("\t(embedded_fonts no)\n)", out + "\t(embedded_fonts no)\n)", 1)
+
+
 def main():
     design_rules()
     text = open(PCB, encoding="utf-8").read()
@@ -139,6 +170,7 @@ def main():
     text = re.sub(r"\t\(title_block\n.*?\n\t\)\n", "", text, flags=re.S)
     text = re.sub(r'(\t\(paper "[^"]*"\)\n)', lambda m: m.group(1) + tb, text, count=1)
     text = outline(text)
+    text = ring_areas(text)
     open(PCB, "w", encoding="utf-8", newline="\n").write(text)
     print(PCB)
 

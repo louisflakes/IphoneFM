@@ -5,3 +5,7 @@
 	(constraint annular_width (min 0.25mm)))
 (rule "Courtyard gap 0.3 mm"
 	(constraint courtyard_clearance (min 0.3mm)))
+# Step 3.6: no through-hole leads over the MagSafe magnet ring (placement-rules.md M8)
+(rule "No through-hole leads over the MagSafe ring"
+	(condition "A.Type == 'Pad' && A.Pad_Type == 'Through-hole' && A.intersectsArea('MagSafe ring') && !A.enclosedByArea('MagSafe ring opening')")
+	(constraint disallow pad))
