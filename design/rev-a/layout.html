@@ -146,7 +146,7 @@ const PARTS = [
     body: [{ t: "rect", w: 3.2, h: 2.5, r: 0.1 }],
     pads: [-1.05, 1.05].flatMap(x => [-0.95, 0.95].map(y => ({ x, y, w: 1.3, h: 1.2 }))),
     pin1: [-2.1, 1.65], src: "YSO110TR p3 (3.2 × 2.5: body 3.2 × 2.5 ± 0.10, 1.2 max tall; recommended pattern 1.3 × 1.2 pads, 0.8 and 0.7 gaps) and p2 (#1 tri-state bottom left, #2 GND, #3 OUT, #4 VDD top left)" },
-  { ref: "J1", fn: "USB-C Receptacle", mpn: "HRO / TYPE-C-31-M-12", pkg: "USB 2.0 Type-C, top mount, 8.94 × 7.35 × 3.26 mm, front at the board edge",
+  { ref: "J1", fn: "USB-C Receptacle", mpn: "HRO / TYPE-C-31-M-12", pkg: "USB 2.0 Type-C, top mount, 8.94 × 7.35 × 3.26 mm, shell front 0.4 mm past the board edge",
     body: [{ t: "rect", w: 8.94, h: 7.35, r: 0.3 }],
     pads: [
       ...[[-3.20, 0.60], [-2.40, 0.60], [-1.75, 0.30], [-1.25, 0.30], [-0.75, 0.30], [-0.25, 0.30], [0.25, 0.30], [0.75, 0.30], [1.25, 0.30], [1.75, 0.30], [2.40, 0.60], [3.20, 0.60]]
@@ -155,7 +155,7 @@ const PARTS = [
       ...[-4.325, 4.325].map(x => ({ x, y: 1.075, w: 1.00, h: 1.70, round: true, slot: [0.60, 1.40] })),
       ...[-2.89, 2.89].map(x => ({ x, y: -2.605, w: 0.60, h: 0.60, npth: true })),
     ],
-    edge: 3.675, src: "HRO TYPE-C-31-M-12 drawing p1: body 8.94 × 7.35, 3.26 tall; recommended layout 4 × 0.60 + 8 × 0.30 pads at 0.50 pitch, shell slots 8.65 apart (0.6 × 1.7 and 0.6 × 1.4 drills, rows 4.18 apart), 2 × Ø0.60 holes 5.78 apart, PCB edge at the body front. Pad for pad the same pattern as Plan C's GCT USB4105" },
+    edge: 3.19, src: "HRO TYPE-C-31-M-12 drawing p1: body 8.94 × 7.35, 3.26 tall; recommended layout 4 × 0.60 + 8 × 0.30 pads at 0.50 pitch, shell slots 8.65 apart (0.6 × 1.7 and 0.6 × 1.4 drills, rows 4.18 apart), 2 × Ø0.60 holes 5.78 apart, PCB edge 5.79 in front of the holes, so the shell front stands about 0.4 past it (corrected at step 4.3; it was drawn flush). Pad for pad the same pattern as Plan C's GCT USB4105" },
   { ref: "J2", fn: "Antenna Connector", mpn: "BAT Wireless / BWSMA-KWE-Z001", pkg: "SMA jack, right angle, through hole; 6 mm square base, barrel 8.5 mm past it",
     body: [{ t: "rect", w: 6.0, h: 6.0, r: 0.1 }, { t: "rect", y: 7.25, w: 6.2, h: 8.5, r: 0.2 }],
     pads: [{ x: 0, y: 0, w: 2.0, h: 2.0, hole: 1.4 }, ...[[-2.55, -2.55], [2.55, -2.55], [-2.55, 2.55], [2.55, 2.55]].map(([x, y]) => ({ x, y, w: 2.0, h: 2.0, hole: 1.4 }))],
@@ -193,7 +193,7 @@ const LAYOUTS = {
       "The transmit chain still runs down the right side in signal order: U2 (synthesizer) at the upper right, U7 (attenuator) below it, FL1 down the right side, then U5 and J2 at the bottom right. U1 sits in the middle near Y2, which feeds both U1 and U2. U4 (receiver) sits low and left of U5, away from U2.",
       "J1 on the midline with U6 above it; U3 above U6 and to its left; the BOOT button on the bottom edge beside J1."],
     place: [["RV1", 16.80, 78.0, 90], ["RV2", 16.80, 95.0, 90], ["RV3", 16.80, 112.0, 90], ["SW1", 14.65, 125.5, 90], ["D1", 56.0, 63.0, 0],
-      ["SW3", 35.925, 64.51, 180], ["J1", 35.925, 127.285, 0], ["SW2", 25.5, 129.21, 0], ["U6", 35.925, 119.0, 0], ["U3", 30.5, 114.5, 0],
+      ["SW3", 35.925, 64.51, 180], ["J1", 35.925, 127.77, 0], ["SW2", 25.5, 129.21, 0], ["U6", 35.925, 119.0, 0], ["U3", 30.5, 114.5, 0],
       ["J2", 55.10, 126.9, -90], ["U5", 47.0, 125.0, 0], ["U7", 46.0, 94.0, 0], ["U2", 46.0, 76.0, 0],
       ["Y2", 39.5, 84.0, 0], ["U1", 35.5, 93.0, 0], ["U4", 38.5, 113.0, 0]] }
 };
