@@ -5,6 +5,14 @@
 	(constraint annular_width (min 0.25mm)))
 (rule "Courtyard gap 0.3 mm"
 	(constraint courtyard_clearance (min 0.3mm)))
+# Step 4.3 (the user's choice): the Clock class's wider gap is for its tracks. Pins inside a part keep the normal 0.2 mm
+# (U1, U2 and U4's clock pins are 0.25 mm apart); a clock track keeps 0.4 mm from other nets' tracks and vias.
+(rule "Clock nets: 0.2 mm, as Default"
+	(condition "A.NetClass == 'Clock'")
+	(constraint clearance (min 0.2mm)))
+(rule "Clock tracks 0.4 mm from other tracks and vias"
+	(condition "A.NetClass == 'Clock' && A.Type == 'Track' && (B.Type == 'Track' || B.Type == 'Via') && A.Net != B.Net")
+	(constraint clearance (min 0.4mm)))
 # Step 3.6: no through-hole leads over the MagSafe magnet ring (placement-rules.md M8)
 (rule "No through-hole leads over the MagSafe ring"
 	(condition "A.Type == 'Pad' && A.Pad_Type == 'Through-hole' && A.intersectsArea('MagSafe ring') && !A.enclosedByArea('MagSafe ring opening')")

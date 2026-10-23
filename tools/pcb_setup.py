@@ -96,6 +96,14 @@ CUSTOM = """(version 1)
 \t(constraint annular_width (min 0.25mm)))
 (rule "Courtyard gap 0.3 mm"
 \t(constraint courtyard_clearance (min 0.3mm)))
+# Step 4.3 (the user's choice): the Clock class's wider gap is for its tracks. Pins inside a part keep the normal 0.2 mm
+# (U1, U2 and U4's clock pins are 0.25 mm apart); a clock track keeps 0.4 mm from other nets' tracks and vias.
+(rule "Clock nets: 0.2 mm, as Default"
+\t(condition "A.NetClass == 'Clock'")
+\t(constraint clearance (min 0.2mm)))
+(rule "Clock tracks 0.4 mm from other tracks and vias"
+\t(condition "A.NetClass == 'Clock' && A.Type == 'Track' && (B.Type == 'Track' || B.Type == 'Via') && A.Net != B.Net")
+\t(constraint clearance (min 0.4mm)))
 # Step 3.6: no through-hole leads over the MagSafe magnet ring (placement-rules.md M8)
 (rule "No through-hole leads over the MagSafe ring"
 \t(condition "A.Type == 'Pad' && A.Pad_Type == 'Through-hole' && A.intersectsArea('MagSafe ring') && !A.enclosedByArea('MagSafe ring opening')")
@@ -111,6 +119,9 @@ def design_rules():
     ds["defaults"].update(DEFAULTS)
     ds["track_widths"] = [0.0, 0.20, 0.40, 0.92]  # first entry is KiCad's "use net class" slot
     ds["via_dimensions"] = [{"diameter": 0.0, "drill": 0.0}, {"diameter": 0.60, "drill": 0.30}]
+    for c in pro["net_settings"]["classes"]:  # step 4.3: Clock's 0.4 mm lives in IphoneFM.kicad_dru, for its tracks only
+        if c["name"] == "Clock":
+            c["clearance"] = 0.2
     open(PRO, "w", encoding="utf-8", newline="\n").write(json.dumps(pro, indent=2) + "\n")
     open(DRU, "w", encoding="utf-8", newline="\n").write(CUSTOM)
 

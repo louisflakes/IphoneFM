@@ -148,7 +148,7 @@ A step above JLC's minimums, never at them [HHG p15, p63–64]. These are what g
 | Default | everything else | 0.20 mm | 0.20 mm | |
 | Power | VBUS, 3V3, VDDA, RX_VDD | 0.40 mm | 0.20 mm | |
 | RF | ANT, LMX_RF, ATT_IN, TX_RF_ATT, TX_LPF_MID, TX_RF, RX_RF, FMI_MATCH, FMI | 0.92 mm | 0.20 mm | 50 Ω grounded coplanar (step 0.6) |
-| Clock | FSK_CLK(_MCU), REF20(_MCU), RX_RCLK, RX_SCK(_MCU), LMX_CLK | 0.20 mm | **0.40 mm** | Switching lines kept further from their neighbours [HHG p64; LMX2571 p55] |
+| Clock | FSK_CLK(_MCU), REF20(_MCU), RX_RCLK, RX_SCK(_MCU), LMX_CLK | 0.20 mm | **0.40 mm between tracks** (0.20 at pins) | Switching lines kept further from their neighbours [HHG p64; LMX2571 p55]. The 0.40 mm applies from a clock track to other nets' tracks and vias, in IphoneFM.kicad_dru; pins inside a part keep 0.20 mm, since the ICs' clock pins are 0.25 mm apart (step 4.3, the user's choice) |
 
 GND gets no class of its own; it's poured on both layers in phase 6.
 
