@@ -44,6 +44,10 @@
 | `pcb_local.py` | Steps 4.8–4.13: place an IC (optionally) and every part netlist.json puts at its pins, just outside it, pointing at each pin, live in the open KiCad board |
 | `pcb_rf_switch.py` | Step 4.9: place U5, the transmit filter FL1 (inductors at 90°) and U5's parts, live in the open KiCad board |
 | `pcb_place.py` | Phase 4: place named parts at given positions and turns, live in the open KiCad board, for the few `pcb_local.py` can't |
+| `pcb_fanout.py` | Step 5.1: ground fan-out vias (exposed pads in the paste gaps, one beside every other ground pad), live and locked |
+| `pcb_route_rf.py` | Steps 5.4–5.6: the RF lines laid by hand on the top layer, live and locked |
+| `pcb_astar.py` | Phase 5: route one connection on one layer around everything on the board (A*, 45° bends), live and locked |
+| `pcb_freeroute.py` | Step 5.11: export to Freerouting (ring areas dropped, GND not routed, RF bottom keep-out), route, import the new tracks live |
 | `setup-kicad.sh` | Install KiCad 10 and pre-cache the KiCad MCP server (Ubuntu 24.04, as root) |
 
 API keys come from environment variables (`DIGIKEY_CLIENT_ID`, `DIGIKEY_CLIENT_SECRET`, `MOUSER_API_KEY`). Never commit keys.
