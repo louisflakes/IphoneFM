@@ -9,7 +9,8 @@
   digital corridor (KEEP_OUT, from step 4.9-4.13's plan).
 Vias are 0.6 / 0.3 mm, KiCad's netclass default. Run it once; a rerun would add a second set. A pad with no room
 beside it (U5's middle ground pin, between its RF pins) joins through the top ground pour in Phase 6.
-Usage (from the repository root, board open in KiCad): python tools/pcb_fanout.py [--dry-run]"""
+Usage (from the repository root, board open in KiCad): python tools/pcb_fanout.py [--only C13,C20,...] [--dry-run]
+--only redoes just those parts' pads (after they moved; remove their old vias and stubs first)."""
 import math
 import sys
 
@@ -35,7 +36,8 @@ KEEP_OUT = [
     (47.8, 124.3, 52.0, 125.7),   # antenna line to J2
     (52.4, 70.0, 58.7, 108.0),    # digital corridor down the right edge
     (36.0, 69.2, 52.4, 72.4),     # digital corridor over U2 (C18/C19's ground vias sit at its lower edge)
-    (35.6, 75.0, 37.2, 89.6),     # digital corridor up from U1
+    (33.6, 75.0, 37.2, 89.6),     # digital corridor up from U1 (widened when Y2 moved left)
+    (36.0, 78.3, 39.8, 80.6),     # the FSK lines' way in to U2 pins 4, 6 and 7, between C21 and C14
 ]
 
 
@@ -121,8 +123,11 @@ def main():
         return True
 
     # exposed pads, and side ground pins stubbed to them
+    only = set(sys.argv[sys.argv.index("--only") + 1].split(",")) if "--only" in sys.argv else None
     ep_refs = set(EP_VIAS)
     for ref, pts in EP_VIAS.items():
+        if only is not None and ref not in only:
+            continue
         fx, fy, fr = places[ref]
         for lx, ly in pts:
             dx, dy = rot(lx, ly, fr)
@@ -144,7 +149,7 @@ def main():
     missed = []
     for p in copper:
         ref, num, net, x, y, hw, hh, kind, drill, layers = p
-        if net != "GND" or ref in ep_refs or kind != "smd" or ref.startswith(("J", "TP")) or "F.Cu" not in layers:
+        if (only is not None and ref not in only) or net != "GND" or ref in ep_refs or kind != "smd" or ref.startswith(("J", "TP")) or "F.Cu" not in layers:
             continue
         fx, fy, _ = places[ref]
         ox, oy = x - fx, y - fy

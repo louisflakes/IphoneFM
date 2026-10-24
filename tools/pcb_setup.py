@@ -101,8 +101,10 @@ CUSTOM = """(version 1)
 (rule "Clock nets: 0.2 mm, as Default"
 \t(condition "A.NetClass == 'Clock'")
 \t(constraint clearance (min 0.2mm)))
+# Phase 5: not within the courtyards of the parts the clock lines start and end at, where escapes from 0.5 mm-pitch pins
+# run 0.3 mm apart for their first millimetre
 (rule "Clock tracks 0.4 mm from other tracks and vias"
-\t(condition "A.NetClass == 'Clock' && A.Type == 'Track' && (B.Type == 'Track' || B.Type == 'Via') && A.Net != B.Net")
+\t(condition "A.NetClass == 'Clock' && A.Type == 'Track' && (B.Type == 'Track' || B.Type == 'Via') && A.Net != B.Net && !A.intersectsCourtyard('U1') && !A.intersectsCourtyard('U2') && !A.intersectsCourtyard('U4') && !A.intersectsCourtyard('Y2') && !A.intersectsCourtyard('R4') && !A.intersectsCourtyard('R6') && !A.intersectsCourtyard('R24')")
 \t(constraint clearance (min 0.4mm)))
 # Step 3.6: no through-hole leads over the MagSafe magnet ring (placement-rules.md M8)
 (rule "No through-hole leads over the MagSafe ring"

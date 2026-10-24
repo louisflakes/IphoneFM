@@ -2,7 +2,8 @@
 for the nets laid by hand before the autorouter (U1's escape and its runs, steps 5.7-5.10). A* search on a 0.05 mm grid
 around everything already on the board:
 - other nets' pads, tracks and vias kept at the clearance rule (0.2 mm); clock tracks keep 0.4 mm from other nets'
-  tracks and vias, and other tracks keep 0.4 mm from clock tracks (IphoneFM.kicad_dru);
+  tracks and vias, and other tracks keep 0.4 mm from clock tracks, except inside the courtyards of the parts the clock
+  lines start and end at (CLOCK_ENDS), as IphoneFM.kicad_dru;
 - the board edge at 0.5 mm; no bottom-layer copper under the RF section (RF_BOTTOM, as pcb_freeroute.py) [AN4169 p12];
 - a via (0.6 / 0.3 mm) only where it keeps 0.2 mm from other copper on both layers, 0.5 mm hole to hole, stays off
   every pad and out of the RF section, and costs the length of VIA_COST so the path changes layer only when it pays;
@@ -119,7 +120,10 @@ def inside(X, Y, poly):
     return res
 
 
-def maps(grid, copper, net, width, avoid):
+CLOCK_ENDS = ("U1", "U2", "U4", "Y2", "R4", "R6", "R24")  # inside these courtyards clock escapes keep 0.2 mm (IphoneFM.kicad_dru)
+
+
+def maps(grid, copper, net, width, avoid, courtyards=None):
     """Blocked maps for the track centre line on F and B, and for a via centre."""
     hw = width / 2
     clock = net in CLOCK
@@ -127,19 +131,32 @@ def maps(grid, copper, net, width, avoid):
     mV = grid.edge_mask(EDGE + VIA_D / 2)
     mB |= grid.rf
     mV |= grid.rf
+    xF = np.zeros_like(mF)  # the extra 0.2 mm a clock pair needs, lifted inside CLOCK_ENDS courtyards
+    xB, xV = np.zeros_like(mF), np.zeros_like(mF)
     for kind, n, layers, g, _ in copper:
-        tc = CLOCK_CLR if (kind != "pad" and (clock or n in CLOCK)) else CLR
+        pair = kind != "pad" and (clock or n in CLOCK)
         if n != net:
-            for layer, m in (("F.Cu", mF), ("B.Cu", mB)):
+            for layer, m, x in (("F.Cu", mF, xF), ("B.Cu", mB, xB)):
                 if layer in layers:
-                    grid.mark(m, kind, g, hw + tc)
-            grid.mark(mV, kind, g, VIA_D / 2 + tc)
+                    grid.mark(m, kind, g, hw + CLR)
+                    if pair:
+                        grid.mark(x, kind, g, hw + CLOCK_CLR)
+            grid.mark(mV, kind, g, VIA_D / 2 + CLR)
+            if pair:
+                grid.mark(xV, kind, g, VIA_D / 2 + CLOCK_CLR)
         elif kind == "pad":
             grid.mark(mV, kind, g, VIA_D / 2)  # no via in a pad, even its own net's
         if kind == "via" or (kind == "pad" and g[5] > 0):  # every hole, any net: 0.5 mm hole to hole
             cx, cy = g[0], g[1]
             r = g[3] if kind == "via" else g[5]
             grid.mark(mV, "via", (cx, cy, r), HOLE_GAP + VIA_DRILL / 2)
+    lift = np.zeros_like(mF)
+    for x0, y0, x1, y1 in (courtyards or []):
+        j0, j1, i0, i1 = grid.window(x0, y0, x1, y1)
+        lift[j0:j1, i0:i1] = True
+    mF |= xF & ~lift
+    mB |= xB & ~lift
+    mV |= xV & ~lift
     for ax0, ay0, ax1, ay1 in avoid:
         j0, j1, i0, i1 = grid.window(ax0, ay0, ax1, ay1)
         for m in (mF, mB, mV):
@@ -197,7 +214,15 @@ def route(board, net, a, b, width=0.2, layers="FB", avoid=(), margin=12.0, dry=F
     copper = board_copper(board.get_as_string())
     pads = {name: (g, l) for kind, n, l, g, name in copper if kind == "pad"}
     grid = Grid()
-    mF, mB, mV = maps(grid, copper, net, width, list(avoid))
+    from pcb_group import courtyard
+    from pcb_local import turned_box
+    cys = []
+    for fp in board.get_footprints():
+        if fp.reference_field.text.value in CLOCK_ENDS:
+            bx = turned_box(courtyard(fp.definition.id.name), fp.orientation.degrees)
+            px, py = fp.position.x / 1e6, fp.position.y / 1e6
+            cys.append((px + bx[0], py + bx[1], px + bx[2], py + bx[3]))
+    mF, mB, mV = maps(grid, copper, net, width, list(avoid), cys)
     if "F" not in layers:
         mF[:] = True
     if "B" not in layers:

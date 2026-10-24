@@ -5,7 +5,7 @@ runs are far below a tenth of a wavelength (about 1.5 m in FR-4), so the necks a
 (docs/pcb-design-workflow.md conflict C9; KHA p190). The receiver's FMI side stays narrow (0.25 mm): AN383 counts
 3-4 pF per inch of FMI trace against its input (p15, p17, p52). Bends are 45 degrees [ADI "Transmission Line Bends"].
 Coordinates are the pads' own (read from the board), with the bends chosen clear of neighbours by at least 0.2 mm.
-Usage (from the repository root, board open in KiCad): python tools/pcb_route_rf.py [--dry-run]"""
+Usage (from the repository root, board open in KiCad): python tools/pcb_route_rf.py [--only NET,NET] [--dry-run]"""
 import sys
 
 W, NECK = 0.92, 0.25
@@ -13,11 +13,11 @@ W, NECK = 0.92, 0.25
 RUNS = {
     # 5.5 transmit: U2 RF out -> C26 (DC block) -> U7 RF in
     "/LMX_RF": [([(44.500, 81.900), (44.500, 82.700), (44.635, 83.410)], 0.30)],
-    "/ATT_IN": [([(44.635, 84.370), (44.635, 90.400)], W),
-                ([(44.635, 90.400), (45.250, 91.100), (45.250, 92.025)], NECK)],
+    "/ATT_IN": [([(44.635, 84.370), (44.635, 87.900), (47.250, 90.515)], W),          # U7 at (48, 94) since phase 5
+                ([(47.250, 90.515), (47.250, 92.025)], NECK)],
     # U7 RF out -> straight down, step left clear of U4, down to the filter's input (L2 pad 1, C28 pad 1)
-    "/TX_RF_ATT": [([(45.250, 95.975), (45.250, 97.300)], NECK),
-                   ([(45.250, 97.300), (45.250, 106.500), (42.932, 108.818), (42.932, 122.302)], W),
+    "/TX_RF_ATT": [([(47.250, 95.975), (47.250, 97.300)], NECK),
+                   ([(47.250, 97.300), (47.250, 104.500), (42.932, 108.818), (42.932, 122.302)], W),
                    ([(42.932, 122.302), (44.443, 122.302)], W)],
     "/TX_LPF_MID": [([(42.932, 123.877), (42.932, 127.160)], W)],              # L2 pad 2, L3 pad 1, C29 pad 1 in line
     "/TX_RF": [([(44.508, 125.650), (44.508, 127.160)], W),                    # L3 pad 2 down to C30
@@ -35,7 +35,8 @@ RUNS = {
 
 
 def main():
-    segs = [(net, a, b, w) for net, runs in RUNS.items() for pts, w in runs for a, b in zip(pts, pts[1:])]
+    only = sys.argv[sys.argv.index("--only") + 1].split(",") if "--only" in sys.argv else None
+    segs = [(net, a, b, w) for net, runs in RUNS.items() if not only or net in only for pts, w in runs for a, b in zip(pts, pts[1:])]
     print(f"{len(segs)} segments on {len(RUNS)} nets")
     if "--dry-run" in sys.argv:
         return
