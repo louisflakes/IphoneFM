@@ -53,7 +53,7 @@ def main():
         t0 = time.time()
         res = route(board, net, a, b, w, layers, margin=margin, dry="--dry-run" in sys.argv)
         if res:
-            runs, vias, length = res
+            runs, vias, length = res[:3]
             print(f"{k:2} ok   {net:14} {a:>7} -> {b:<7} {length:5.1f} mm  vias {len(vias)}  {''.join('FB'[l] for l, _ in runs)}  ({time.time() - t0:.0f} s)", flush=True)
         else:
             failed.append(f"{net} {a}->{b}")

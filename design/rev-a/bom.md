@@ -96,7 +96,7 @@ Power pins as Plan C chain 4 (DS14217 Figure 23 power scheme p127, Figure 37 NRS
 | PH1-OSC_OUT | — | Free GPIO | | Not needed in bypass mode |
 | U1 timer output | — | 32,787 Hz (160 MHz ÷ 4880) to U4 RCLK | | Chain 8. Replaces the earlier plan of 20 MHz from MCO, to keep 20 MHz and its 100.0 MHz harmonic away from the receiver |
 | SAI1 sub-block A | — | I²S out to U2 (CLK, DATA, FS) at about 912 kSa/s | | Chain 5. Sub-block B receives U4's digital audio at 48 kHz; each sub-block has its own clock generator (DS14217 p80) |
-| SPI2 + GPIOs | — | U2 programming (CLK, DATA, LE), CE, MUXout | | Chain 5 |
+| GPIOs | — | U2 programming (CLK, DATA, LE, driven by firmware), CE, MUXout | | Chain 5 |
 
 Removed from Plan C: Y1 (ABS07 32.768 kHz) and its two 5.6 pF capacitors; LSCO on PA2; TIM16 on PB8 (the LV2285 76 kHz drive).
 
@@ -107,10 +107,10 @@ Removed from Plan C: Y1 (ABS07 32.768 kHz) and its two 5.6 pF capacitors; LSCO o
 | 29 | PA8 | SAI1_SCK_A (AF13) | U2 FSK_DV (I²S CLK), 33 Ω | |
 | 30 | PA9 | SAI1_FS_A (AF13) | U2 FSK_D0 (I²S FS), 33 Ω | Bootloader USART1_TX: input until USART1 is detected |
 | 31 | PA10 | SAI1_SD_A (AF13) | U2 FSK_D1 (I²S DATA), 33 Ω | Bootloader USART1_RX: U2 is off (CE low), nothing drives it |
-| 26 | PB13 | SPI2_SCK (AF5) | U2 CLK | PB12–PB15 are the bootloader's SPI2 pins; U2 is off then |
-| 28 | PB15 | SPI2_MOSI (AF5) | U2 DATA | |
+| 28 | PB15 | GPIO in | U2 MUXout, TP5 | Lock detect or register readback. PB12–PB15 are the bootloader's SPI2 pins; U2 is off then |
+| 27 | PB14 | GPIO out | U2 CLK | MICROWIRE driven by firmware (bit-banged), so the four lines reach U2's pins in its own order with no crossing (Phase 5, 2026-10-24) |
+| 26 | PB13 | GPIO out | U2 DATA | |
 | 25 | PB12 | GPIO out | U2 LE | |
-| 27 | PB14 | SPI2_MISO (AF5) / GPIO in | U2 MUXout, TP5 | Lock detect or register readback |
 | 20 | PB2 | GPIO out | U2 CE, 10 kΩ pull-down | No reset-state pull |
 | 39 | PB3 | SAI1_SCK_B (AF13) | U4 DCLK via 2 kΩ | |
 | 14 | PA4 | SAI1_FS_B (AF13) | U4 DFS via 2 kΩ, 3.3 pF | Bootloader SPI1_NSS; U4 in reset then |
@@ -179,7 +179,7 @@ Chosen 2026-10-21 (see [modulation-strategies.md](modulation-strategies.md)). It
 | OSCin* 36 | — | Not connected | | Table 37 |
 | FSK_DV 4 / FSK_D1 6 / FSK_D0 7 | Yageo RC0402FR-0733RL ×3 | 33 Ω series, at U1 | C138002 | I²S CLK / DATA / FS from U1 SAI1 sub-block A (FSK I²S mode, p3, p13). The stream runs continuously next to the synthesizer, so series resistors soften the edges (HELIOS puts ferrites on its ADF4002 lines for the same reason) |
 | FSK_D2 5 | — | GND | | Used only in FSK PIN mode (p3) |
-| CLK 11, DATA 12, LE 13 | — | U1 SPI2 SCK, MOSI, and a GPIO | | MICROWIRE, 24-bit words (p15) |
+| CLK 11, DATA 12, LE 13 | — | U1 GPIOs PB14, PB13, PB12 | | MICROWIRE, 24-bit words (p15), driven by firmware |
 | MUXout 10 | — | To a U1 input | | Lock detect or register readback (p14) |
 | CE 19 | Yageo RC0402FR-0710KL | 10 kΩ pull-down; U1 GPIO | C60490 | Off until firmware enables it, and off in receive mode so its carrier can't reach U4 |
 | TrCtl 18 | — | GND | | Output port and F1/F2 under register control (p37) |

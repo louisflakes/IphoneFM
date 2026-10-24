@@ -291,9 +291,9 @@ def route(board, net, a, b, width=0.2, layers="FB", avoid=(), margin=12.0, dry=F
         v.net, v.locked = netobj, True
         items.append(v)
     c = board.begin_commit()
-    board.create_items(items)
+    made = board.create_items(items)
     board.push_commit(c, f"Route {net} {a} -> {b}")
-    return runs, [xy(v) for v in vias], length
+    return runs, [xy(v) for v in vias], length, made
 
 
 def main():
@@ -305,7 +305,7 @@ def main():
     res = route(KiCad().get_board(), net, a, b, float(opt("--width", "0.2")), opt("--layers", "FB"), avoid, dry="--dry-run" in args)
     if not res:
         sys.exit(f"no path for {net} {a} -> {b}")
-    runs, vias, length = res
+    runs, vias, length = res[:3]
     print(f"{net} {a} -> {b}: {length:.1f} mm, {len(vias)} via(s), layers {''.join('FB'[l] for l, _ in runs)}")
 
 

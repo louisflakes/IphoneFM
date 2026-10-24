@@ -18020,7 +18020,7 @@
 		(stroke (width 0) (type default))
 		(uuid "1abe1000-0000-4000-8000-000000000029")
 	)
-	(label "LMX_CLK"
+	(label "LMX_DATA"
 		(at 205.74 274.32 180)
 		(effects (font (size 1.27 1.27)) (justify right bottom))
 		(uuid "1abe1000-0000-4000-8000-00000000002a")
@@ -18040,7 +18040,7 @@
 		(stroke (width 0) (type default))
 		(uuid "1abe1000-0000-4000-8000-00000000002f")
 	)
-	(label "LMX_DATA"
+	(label "LMX_MUX"
 		(at 205.74 279.40 180)
 		(effects (font (size 1.27 1.27)) (justify right bottom))
 		(uuid "1abe1000-0000-4000-8000-000000000030")
@@ -18080,7 +18080,7 @@
 		(stroke (width 0) (type default))
 		(uuid "1abe1000-0000-4000-8000-00000000003b")
 	)
-	(label "LMX_MUX"
+	(label "LMX_CLK"
 		(at 205.74 276.86 180)
 		(effects (font (size 1.27 1.27)) (justify right bottom))
 		(uuid "1abe1000-0000-4000-8000-00000000003c")

@@ -422,15 +422,15 @@
     },
     "26": {
      "name": "PB13",
-     "net": "LMX_CLK"
+     "net": "LMX_DATA"
     },
     "27": {
      "name": "PB14",
-     "net": "LMX_MUX"
+     "net": "LMX_CLK"
     },
     "28": {
      "name": "PB15",
-     "net": "LMX_DATA"
+     "net": "LMX_MUX"
     },
     "29": {
      "name": "PA8",

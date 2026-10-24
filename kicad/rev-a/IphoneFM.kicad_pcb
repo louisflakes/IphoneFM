@@ -815,6 +815,17 @@
 			(uuid "90556212-f802-42a9-bbb5-061f9193104a")
 		)
 		(embedded_fonts no)
+		(model "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0402_1005Metric.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "IphoneFM:L_0402_1005Metric"
 		(layer "F.Cu")
@@ -4219,6 +4230,17 @@
 			(uuid "332d3900-19b4-4ddf-be39-fdee3593d6d4")
 		)
 		(embedded_fonts no)
+		(model "${KICAD10_3DMODEL_DIR}/Package_DFN_QFN.3dshapes/QFN-24-1EP_4x4mm_P0.5mm_EP2.75x2.75mm.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "IphoneFM:QFN-48-1EP_7x7mm_P0.5mm_EP5.6x5.6mm"
 		(layer "F.Cu")
@@ -4988,7 +5010,7 @@
 			(size 0.875 0.25)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
-			(net "/LMX_CLK")
+			(net "/LMX_DATA")
 			(pinfunction "PB13_26")
 			(pintype "bidirectional")
 			(uuid "dee7b60d-4022-47ab-9433-318fc3054d38")
@@ -4998,7 +5020,7 @@
 			(size 0.875 0.25)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
-			(net "/LMX_MUX")
+			(net "/LMX_CLK")
 			(pinfunction "PB14_27")
 			(pintype "bidirectional")
 			(uuid "2a0af8e8-ef7e-4ef5-8be2-ef17bdc6ee86")
@@ -5008,7 +5030,7 @@
 			(size 0.875 0.25)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
-			(net "/LMX_DATA")
+			(net "/LMX_MUX")
 			(pinfunction "PB15_28")
 			(pintype "bidirectional")
 			(uuid "94997897-e48e-4c18-bec7-a2eab152f743")
@@ -5567,6 +5589,17 @@
 			(uuid "1a20db08-eccf-42d6-953c-f5032d5919f0")
 		)
 		(embedded_fonts no)
+		(model "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0603_1608Metric.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "IphoneFM:LED_RGB_XINGLIGHT_XL-1615RGBC_1.6x1.5mm"
 		(locked yes)
@@ -9614,6 +9647,17 @@
 			(uuid "1e7b8b1e-a8b3-47a8-9d2d-de5ffa3b0869")
 		)
 		(embedded_fonts no)
+		(model "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0402_1005Metric.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "IphoneFM:C_0402_1005Metric"
 		(layer "F.Cu")
@@ -10116,6 +10160,17 @@
 			(uuid "fa34a663-86b1-42c6-92a1-bdcefe7abb16")
 		)
 		(embedded_fonts no)
+		(model "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0402_1005Metric.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "IphoneFM:C_0402_1005Metric"
 		(layer "F.Cu")
@@ -10633,11 +10688,11 @@
 	(footprint "IphoneFM:C_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "59654b6f-79b5-498f-a5ca-292167b9f7d5")
-		(at 41.39 91.25)
+		(at 40.95 90.5 90)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C5"
-			(at 0 -1.16 0)
+			(at 0 -1.16 90)
 			(layer "F.SilkS")
 			(uuid "3d4b1980-e384-4561-b563-2f407c2a8949")
 			(effects
@@ -10648,7 +10703,7 @@
 			)
 		)
 		(property "Value" "100 nF X7R 16 V"
-			(at 0 1.16 0)
+			(at 0 1.16 90)
 			(layer "F.Fab")
 			(uuid "9f0dc034-5931-42d2-ab0d-bef3a070e58b")
 			(effects
@@ -10659,7 +10714,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "bc93bcd7-5f6e-4064-9f37-804746281646")
@@ -10670,7 +10725,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "028d9465-97ae-4b9a-9996-40d8869320e2")
@@ -10681,7 +10736,7 @@
 			)
 		)
 		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "4b1188f5-2edd-449c-9aeb-f99177f29f88")
@@ -10693,7 +10748,7 @@
 			)
 		)
 		(property "MPN" "CL05B104KO5NNNC"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -10706,7 +10761,7 @@
 			)
 		)
 		(property "LCSC" "C1525"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -10719,7 +10774,7 @@
 			)
 		)
 		(property "Manufacturer" "Samsung"
-			(at 0 0 0)
+			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -10760,7 +10815,7 @@
 			(uuid "36a37cc6-dc93-4196-bb07-8ae1c9ecad8f")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 90)
 			(layer "F.Fab")
 			(uuid "c6aea7d4-0348-413c-b312-3d15d5e3967e")
 			(effects
@@ -10771,7 +10826,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.48 0)
+			(at -0.48 0 90)
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -10780,7 +10835,7 @@
 			(uuid "65066591-fbeb-4da2-99c5-39d725ff0439")
 		)
 		(pad "2" smd roundrect
-			(at 0.48 0)
+			(at 0.48 0 90)
 			(size 0.56 0.62)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -12864,6 +12919,17 @@
 			(uuid "77bf3ec8-504b-4b11-adca-33a9f9b0bf80")
 		)
 		(embedded_fonts no)
+		(model "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0402_1005Metric.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "IphoneFM:L_0603_1608Metric"
 		(layer "F.Cu")
@@ -13041,11 +13107,11 @@
 	(footprint "IphoneFM:R_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "770b9a64-4bf0-424c-8740-1baf91a94505")
-		(at 41.41 94.25)
+		(at 39.4 85.6 180)
 		(descr "Resistor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R7"
-			(at 0 -1.17 0)
+			(at 0 -1.17 180)
 			(layer "F.SilkS")
 			(uuid "0e206432-96ad-497c-8496-73f34207beca")
 			(effects
@@ -13056,7 +13122,7 @@
 			)
 		)
 		(property "Value" "33 Ω 1%"
-			(at 0 1.17 0)
+			(at 0 1.17 180)
 			(layer "F.Fab")
 			(uuid "3d9c73c0-341e-4ffd-bdb6-a514787c7493")
 			(effects
@@ -13067,7 +13133,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 0 0 0)
+			(at 0 0 180)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "491d851d-5e6c-4f43-95a0-1fe7429203b9")
@@ -13078,7 +13144,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 180)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "b1e14cf7-a12c-4baf-ba44-da016536d4ed")
@@ -13089,7 +13155,7 @@
 			)
 		)
 		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
-			(at 0 0 0)
+			(at 0 0 180)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "c35afe7f-8238-4cc9-a1ee-1cdb18748987")
@@ -13101,7 +13167,7 @@
 			)
 		)
 		(property "MPN" "RC0402FR-0733RL"
-			(at 0 0 0)
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -13114,7 +13180,7 @@
 			)
 		)
 		(property "LCSC" "C138002"
-			(at 0 0 0)
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -13127,7 +13193,7 @@
 			)
 		)
 		(property "Manufacturer" "Yageo"
-			(at 0 0 0)
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -13168,7 +13234,7 @@
 			(uuid "d659fff0-a180-442b-8f13-44ecc7fedd42")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 540)
 			(layer "F.Fab")
 			(uuid "d158cf56-b529-40fb-b37d-1d1dfaebefd2")
 			(effects
@@ -13179,7 +13245,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.51 0)
+			(at -0.51 0 180)
 			(size 0.54 0.64)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -13188,7 +13254,7 @@
 			(uuid "2121dd0b-93e4-4525-93a2-6687e3cf71d4")
 		)
 		(pad "2" smd roundrect
-			(at 0.51 0)
+			(at 0.51 0 180)
 			(size 0.54 0.64)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -13841,6 +13907,17 @@
 			(uuid "86f6a12d-68e7-44bd-bc55-87516e44362e")
 		)
 		(embedded_fonts no)
+		(model "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0805_2012Metric.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "IphoneFM:R_0402_1005Metric"
 		(layer "F.Cu")
@@ -14127,11 +14204,11 @@
 	(footprint "IphoneFM:R_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "86f2e0a6-3f75-4574-87f0-a10d9af5199e")
-		(at 41.41 92.96)
+		(at 39.4 86.9 180)
 		(descr "Resistor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R8"
-			(at 0 -1.17 0)
+			(at 0 -1.17 180)
 			(layer "F.SilkS")
 			(uuid "c3d67ca2-03b5-4f7d-a073-b5157bcdde5e")
 			(effects
@@ -14142,7 +14219,7 @@
 			)
 		)
 		(property "Value" "33 Ω 1%"
-			(at 0 1.17 0)
+			(at 0 1.17 180)
 			(layer "F.Fab")
 			(uuid "e99e5f8b-70aa-4910-b068-274816a127f6")
 			(effects
@@ -14153,7 +14230,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 0 0 0)
+			(at 0 0 180)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "23d9e1a2-9922-49e8-afdf-eeab56a37642")
@@ -14164,7 +14241,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 180)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "33c95926-1373-4d42-9b3a-bf6f3d5b1493")
@@ -14175,7 +14252,7 @@
 			)
 		)
 		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
-			(at 0 0 0)
+			(at 0 0 180)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "c22a88af-7745-41f2-901d-f9dbd9930bd5")
@@ -14187,7 +14264,7 @@
 			)
 		)
 		(property "MPN" "RC0402FR-0733RL"
-			(at 0 0 0)
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -14200,7 +14277,7 @@
 			)
 		)
 		(property "LCSC" "C138002"
-			(at 0 0 0)
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -14213,7 +14290,7 @@
 			)
 		)
 		(property "Manufacturer" "Yageo"
-			(at 0 0 0)
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -14254,7 +14331,7 @@
 			(uuid "0ffae217-ddb6-4549-b925-b75e7009a8e7")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 540)
 			(layer "F.Fab")
 			(uuid "4f4e8647-589a-42ac-b86d-1d586947e4d0")
 			(effects
@@ -14265,7 +14342,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.51 0)
+			(at -0.51 0 180)
 			(size 0.54 0.64)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -14274,7 +14351,7 @@
 			(uuid "077d8d00-06d6-485b-b09c-2c94a2d03eae")
 		)
 		(pad "2" smd roundrect
-			(at 0.51 0)
+			(at 0.51 0 180)
 			(size 0.54 0.64)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -14796,6 +14873,17 @@
 			(uuid "6c538f12-dfe5-48d3-b271-b9955ff88d62")
 		)
 		(embedded_fonts no)
+		(model "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0402_1005Metric.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "IphoneFM:C_0603_1608Metric"
 		(layer "F.Cu")
@@ -15584,6 +15672,17 @@
 			(uuid "6a1b5f54-ff39-43bc-9c0f-d2e6118f30ab")
 		)
 		(embedded_fonts no)
+		(model "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0402_1005Metric.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "IphoneFM:D_SOD-882"
 		(layer "F.Cu")
@@ -17559,6 +17658,17 @@
 			(uuid "ffb69b87-4703-40b6-8c2f-4bdd9713ec8c")
 		)
 		(embedded_fonts no)
+		(model "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0402_1005Metric.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "IphoneFM:C_0402_1005Metric"
 		(layer "F.Cu")
@@ -19218,6 +19328,17 @@
 			(uuid "fdb415ad-47a3-477b-afea-ae67e8f8a851")
 		)
 		(embedded_fonts no)
+		(model "${KICAD10_3DMODEL_DIR}/Capacitor_SMD.3dshapes/C_0402_1005Metric.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "IphoneFM:C_0402_1005Metric"
 		(layer "F.Cu")
@@ -19720,6 +19841,17 @@
 			(uuid "895b7d5b-6e04-4805-a2fb-7ae23d4fcaf0")
 		)
 		(embedded_fonts no)
+		(model "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0402_1005Metric.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "IphoneFM:TestPoint_Pad_D1.5mm"
 		(layer "F.Cu")
@@ -21541,11 +21673,11 @@
 	(footprint "IphoneFM:R_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "eaaad24f-d3cf-41f8-8814-b98e4295e2de")
-		(at 41.41 95.54)
+		(at 39.4 88.2 180)
 		(descr "Resistor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R6"
-			(at 0 -1.17 0)
+			(at 0 -1.17 180)
 			(layer "F.SilkS")
 			(uuid "6223b71c-c9ad-489e-872c-f8005ed2de0c")
 			(effects
@@ -21556,7 +21688,7 @@
 			)
 		)
 		(property "Value" "33 Ω 1%"
-			(at 0 1.17 0)
+			(at 0 1.17 180)
 			(layer "F.Fab")
 			(uuid "1947619b-cd8c-4bd1-8c50-ee06b4f95bc0")
 			(effects
@@ -21567,7 +21699,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 0 0 0)
+			(at 0 0 180)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "4f4b2ca6-d928-447a-a8f5-07162bbadf37")
@@ -21578,7 +21710,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 180)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "9d88259c-c0ef-4edd-84c4-3ef808e6354a")
@@ -21589,7 +21721,7 @@
 			)
 		)
 		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
-			(at 0 0 0)
+			(at 0 0 180)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "e80168e8-0290-4f6d-9bb6-f238897a0d16")
@@ -21601,7 +21733,7 @@
 			)
 		)
 		(property "MPN" "RC0402FR-0733RL"
-			(at 0 0 0)
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -21614,7 +21746,7 @@
 			)
 		)
 		(property "LCSC" "C138002"
-			(at 0 0 0)
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -21627,7 +21759,7 @@
 			)
 		)
 		(property "Manufacturer" "Yageo"
-			(at 0 0 0)
+			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -21668,7 +21800,7 @@
 			(uuid "df327892-3ad5-4937-b38d-7c2ff0f7c431")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 540)
 			(layer "F.Fab")
 			(uuid "b85992f0-55b9-415c-83f6-a090d7a5a55f")
 			(effects
@@ -21679,7 +21811,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.51 0)
+			(at -0.51 0 180)
 			(size 0.54 0.64)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -21688,7 +21820,7 @@
 			(uuid "a4dc2a80-68d4-4edc-b894-d77fb481796b")
 		)
 		(pad "2" smd roundrect
-			(at 0.51 0)
+			(at 0.51 0 180)
 			(size 0.54 0.64)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -22076,6 +22208,17 @@
 			(uuid "43f70aa9-2635-4d88-b354-dec9d77e4818")
 		)
 		(embedded_fonts no)
+		(model "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0402_1005Metric.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "IphoneFM:SOT-23-6"
 		(layer "F.Cu")
@@ -22653,6 +22796,17 @@
 			(uuid "589563e9-cc97-4cfa-ac87-29835635b293")
 		)
 		(embedded_fonts no)
+		(model "${KICAD10_3DMODEL_DIR}/Oscillator.3dshapes/Oscillator_SMD_SiT_PQFN-4Pin_3.2x2.5mm.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "IphoneFM:R_0402_1005Metric"
 		(layer "F.Cu")
@@ -24071,6 +24225,17 @@
 			(uuid "78f38bf8-bd97-4d2c-8c30-0449b126c6b0")
 		)
 		(embedded_fonts no)
+		(model "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0402_1005Metric.step"
+			(offset
+				(xyz 0 0 0)
+			)
+			(scale
+				(xyz 1 1 1)
+			)
+			(rotate
+				(xyz 0 0 0)
+			)
+		)
 	)
 	(footprint "IphoneFM:R_0402_1005Metric"
 		(layer "F.Cu")
@@ -25362,15 +25527,6 @@
 		(uuid "eebdb49f-fa1d-40dc-85d6-09ae462e8db5")
 	)
 	(segment
-		(start 41.87 91.25)
-		(end 42.55 91.25)
-		(width 0.3)
-		(locked yes)
-		(layer "F.Cu")
-		(net "GND")
-		(uuid "f151520f-7c3c-4fea-bbfb-fe7e3a8c6a86")
-	)
-	(segment
 		(start 45.9 79)
 		(end 45.25 79)
 		(width 0.25)
@@ -25567,15 +25723,6 @@
 		(locked yes)
 		(net "GND")
 		(uuid "1bba4729-d291-4b22-8841-e79bb8d77146")
-	)
-	(via
-		(at 42.55 91.25)
-		(size 0.6)
-		(drill 0.3)
-		(layers "F.Cu" "B.Cu")
-		(locked yes)
-		(net "GND")
-		(uuid "1c54ec5f-e9d0-4928-8fa9-373a3c93aaef")
 	)
 	(via
 		(at 37.63 77.16)
@@ -26125,15 +26272,6 @@
 		(locked yes)
 		(net "GND")
 		(uuid "bd39086a-04ec-4e1f-ab38-043249411077")
-	)
-	(via
-		(at 45.05 94)
-		(size 0.6)
-		(drill 0.3)
-		(layers "F.Cu" "B.Cu")
-		(locked yes)
-		(net "GND")
-		(uuid "bed103db-64c2-4863-9ac9-71d6cf068191")
 	)
 	(via
 		(at 41.85 77.85)
@@ -26820,78 +26958,6 @@
 		(uuid "b64b7413-ea08-4a2c-8154-f2346fc66745")
 	)
 	(segment
-		(start 40.1 94.76)
-		(end 40.9 95.54)
-		(width 0.2)
-		(locked yes)
-		(layer "F.Cu")
-		(net "/FSK_CLK_MCU")
-		(uuid "e387be7e-a029-443a-b0ba-2a9be13af662")
-	)
-	(segment
-		(start 39.4375 94.75)
-		(end 40.1 94.76)
-		(width 0.2)
-		(locked yes)
-		(layer "F.Cu")
-		(net "/FSK_CLK_MCU")
-		(uuid "f71a8168-6d90-4f2d-886e-9bc6a16db964")
-	)
-	(segment
-		(start 39.4375 94.25)
-		(end 40.1 94.26)
-		(width 0.2)
-		(locked yes)
-		(layer "F.Cu")
-		(net "/FSK_FS_MCU")
-		(uuid "5777ec38-45bd-48fa-92e9-7711eab2f698")
-	)
-	(segment
-		(start 40.8 94.16)
-		(end 40.9 94.25)
-		(width 0.2)
-		(locked yes)
-		(layer "F.Cu")
-		(net "/FSK_FS_MCU")
-		(uuid "c0d30a0e-2bfa-4fe4-9126-5178810ee487")
-	)
-	(segment
-		(start 40.1 94.26)
-		(end 40.2 94.16)
-		(width 0.2)
-		(locked yes)
-		(layer "F.Cu")
-		(net "/FSK_FS_MCU")
-		(uuid "d1eb9816-43cb-4b51-a8c1-2b0ca3489c28")
-	)
-	(segment
-		(start 40.2 94.16)
-		(end 40.8 94.16)
-		(width 0.2)
-		(locked yes)
-		(layer "F.Cu")
-		(net "/FSK_FS_MCU")
-		(uuid "e995d065-2e4e-4a33-9403-4a40447a7932")
-	)
-	(segment
-		(start 40.1 93.76)
-		(end 40.9 92.96)
-		(width 0.2)
-		(locked yes)
-		(layer "F.Cu")
-		(net "/FSK_DATA_MCU")
-		(uuid "0ef8d3f9-635f-407c-9c74-d30ed67b56c0")
-	)
-	(segment
-		(start 39.4375 93.75)
-		(end 40.1 93.76)
-		(width 0.2)
-		(locked yes)
-		(layer "F.Cu")
-		(net "/FSK_DATA_MCU")
-		(uuid "cf3d72f6-649e-421b-83bc-9161629f8174")
-	)
-	(segment
 		(start 46.163 124.35)
 		(end 46.642 123.7)
 		(width 0.35)
@@ -27089,15 +27155,6 @@
 		(net "/FSK_FS")
 		(uuid "b1f7b9dc-876d-47f1-ac1a-85b7913be506")
 	)
-	(segment
-		(start 42.45 93.71)
-		(end 41.92 94.25)
-		(width 0.2)
-		(locked yes)
-		(layer "F.Cu")
-		(net "/FSK_FS")
-		(uuid "b59e114c-e423-4dd6-9864-106a3140ba7d")
-	)
 	(via
 		(at 39.25 80.3)
 		(size 0.6)
@@ -27106,42 +27163,6 @@
 		(locked yes)
 		(net "/FSK_FS")
 		(uuid "4684f606-2711-4437-8c2a-ac267e9005ac")
-	)
-	(via
-		(at 595 683)
-		(size 0.6)
-		(drill 0.3)
-		(layers "F.Cu" "B.Cu")
-		(locked yes)
-		(net "/FSK_FS")
-		(uuid "84eb0342-5104-4db4-8616-797d5b26d4fc")
-	)
-	(segment
-		(start 39.25 90.51)
-		(end 42.45 93.71)
-		(width 0.2)
-		(locked yes)
-		(layer "B.Cu")
-		(net "/FSK_FS")
-		(uuid "48b97102-7ff4-42e1-9be6-130ad0003af6")
-	)
-	(segment
-		(start 39.25 80.3)
-		(end 39.25 90.51)
-		(width 0.2)
-		(locked yes)
-		(layer "B.Cu")
-		(net "/FSK_FS")
-		(uuid "881b0085-cf8a-482c-be81-30c3df013dda")
-	)
-	(segment
-		(start 41.9 92.31)
-		(end 41.92 92.96)
-		(width 0.2)
-		(locked yes)
-		(layer "F.Cu")
-		(net "/FSK_DATA")
-		(uuid "dbd3d10d-c760-4e1d-9c9d-b70d1be326fc")
 	)
 	(segment
 		(start 39.25 79.45)
@@ -27153,15 +27174,6 @@
 		(uuid "ef7e611d-d244-48fa-abde-d29faded3746")
 	)
 	(via
-		(at 584 655)
-		(size 0.6)
-		(drill 0.3)
-		(layers "F.Cu" "B.Cu")
-		(locked yes)
-		(net "/FSK_DATA")
-		(uuid "525fa5c6-5dfb-4b20-a1ee-9e14f35b3d4b")
-	)
-	(via
 		(at 39.25 79.45)
 		(size 0.6)
 		(drill 0.3)
@@ -27169,42 +27181,6 @@
 		(locked yes)
 		(net "/FSK_DATA")
 		(uuid "dca677f7-8206-41e8-8f96-060096ee7030")
-	)
-	(segment
-		(start 39.25 79.45)
-		(end 39.3 79.46)
-		(width 0.2)
-		(locked yes)
-		(layer "B.Cu")
-		(net "/FSK_DATA")
-		(uuid "019da82e-20fe-4ca4-91fd-08f4ede56273")
-	)
-	(segment
-		(start 39.3 79.46)
-		(end 39.85 80.01)
-		(width 0.2)
-		(locked yes)
-		(layer "B.Cu")
-		(net "/FSK_DATA")
-		(uuid "3e6ec42e-216c-472a-9c1e-8bff4aaa79f2")
-	)
-	(segment
-		(start 39.85 80.01)
-		(end 39.85 90.26)
-		(width 0.2)
-		(locked yes)
-		(layer "B.Cu")
-		(net "/FSK_DATA")
-		(uuid "4e6f25b5-37d3-4447-8336-5e18628cc8de")
-	)
-	(segment
-		(start 39.85 90.26)
-		(end 41.9 92.31)
-		(width 0.2)
-		(locked yes)
-		(layer "B.Cu")
-		(net "/FSK_DATA")
-		(uuid "dab99b31-ef32-4a96-94dd-7a0cbc7b6530")
 	)
 	(segment
 		(start 38.75 78.01)
@@ -27234,15 +27210,6 @@
 		(uuid "4670904e-7a62-4db1-9161-128304a4bf50")
 	)
 	(segment
-		(start 42.45 95.01)
-		(end 41.92 95.54)
-		(width 0.2)
-		(locked yes)
-		(layer "F.Cu")
-		(net "/FSK_CLK")
-		(uuid "99154aec-545d-4fe5-bade-7ce03c279da2")
-	)
-	(segment
 		(start 39.25 78.65)
 		(end 39.4 78.5)
 		(width 0.2)
@@ -27259,51 +27226,6 @@
 		(locked yes)
 		(net "/FSK_CLK")
 		(uuid "3ac1e91f-7a5e-4ec8-bbea-0c7e885eedcb")
-	)
-	(via
-		(at 595 709)
-		(size 0.6)
-		(drill 0.3)
-		(layers "F.Cu" "B.Cu")
-		(locked yes)
-		(net "/FSK_CLK")
-		(uuid "f7d41751-7831-4d1d-a085-d23d5203287d")
-	)
-	(segment
-		(start 38.45 79.11)
-		(end 38.45 91.01)
-		(width 0.2)
-		(locked yes)
-		(layer "B.Cu")
-		(net "/FSK_CLK")
-		(uuid "80085f24-ff72-4b70-bc34-08b0b9745f56")
-	)
-	(segment
-		(start 38.9 78.66)
-		(end 38.45 79.11)
-		(width 0.2)
-		(locked yes)
-		(layer "B.Cu")
-		(net "/FSK_CLK")
-		(uuid "85311de9-2a09-480e-935f-06466e816a80")
-	)
-	(segment
-		(start 38.45 91.01)
-		(end 42.45 95.01)
-		(width 0.2)
-		(locked yes)
-		(layer "B.Cu")
-		(net "/FSK_CLK")
-		(uuid "ab80626a-69da-4399-902a-d873fd127e9f")
-	)
-	(segment
-		(start 39.25 78.65)
-		(end 38.9 78.66)
-		(width 0.2)
-		(locked yes)
-		(layer "B.Cu")
-		(net "/FSK_CLK")
-		(uuid "fcd616da-e608-4823-b6d3-c9f64645d3e1")
 	)
 	(zone
 		(locked yes)
