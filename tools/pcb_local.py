@@ -122,7 +122,7 @@ def main():
         ux, uy = out
         depth = (box[2] - box[0]) if ux else (box[3] - box[1])
         for ring in range(8):
-            for k in range(0, 41):
+            for k in range(0, 61):  # slide up to 6 mm along the side, round a corner if need be
                 for sgn in ((1,) if k == 0 else (1, -1)):
                     a = along + sgn * k * 0.1
                     if ux:
@@ -134,7 +134,8 @@ def main():
                         y -= (box[1] + box[3]) / 2
                         x = a - (box[0] + box[2]) / 2
                     ab = (x + box[0], y + box[1], x + box[2], y + box[3])
-                    if not any(overlaps(ab, t) for t in taken):
+                    inside = x0 + 0.5 <= ab[0] and ab[2] <= x1 - 0.5 and y0 + 0.5 <= ab[1] and ab[3] <= y1 - 0.5
+                    if inside and not any(overlaps(ab, t) for t in taken):
                         taken.append(ab)
                         placed[ref] = (x, y, deg, ab, out)
                         return ab

@@ -43,6 +43,7 @@
 | `pcb_group.py` | Step 4.2: group the parts beside the board, each IC with the parts at its pins, live in the open KiCad board through its API |
 | `pcb_local.py` | Steps 4.8–4.13: place an IC (optionally) and every part netlist.json puts at its pins, just outside it, pointing at each pin, live in the open KiCad board |
 | `pcb_rf_switch.py` | Step 4.9: place U5, the transmit filter FL1 (inductors at 90°) and U5's parts, live in the open KiCad board |
+| `pcb_place.py` | Phase 4: place named parts at given positions and turns, live in the open KiCad board, for the few `pcb_local.py` can't |
 | `setup-kicad.sh` | Install KiCad 10 and pre-cache the KiCad MCP server (Ubuntu 24.04, as root) |
 
 API keys come from environment variables (`DIGIKEY_CLIENT_ID`, `DIGIKEY_CLIENT_SECRET`, `MOUSER_API_KEY`). Never commit keys.
