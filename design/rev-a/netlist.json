@@ -1664,7 +1664,7 @@
    "pins": 2,
    "chain": 7,
    "function": "FL1 shunt 1",
-   "local_to": "U7.14",
+   "local_to": "L2.1",
    "ds_name": "FL1 C1",
    "pinmap": {
     "1": {

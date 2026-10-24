@@ -786,7 +786,7 @@
 	(footprint "IphoneFM:L_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "0ad85dc5-d449-40d6-bf0f-b7fbb45b5f64")
-		(at 30.59 96.894)
+		(at 30.59 95.6)
 		(descr "Inductor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: http://www.tortai-tech.com/upload/download/2011102023233369053.pdf)")
 		(tags "inductor")
 		(property "Reference" "FB2"
@@ -1106,7 +1106,7 @@
 	(footprint "IphoneFM:TestPoint_Pad_D1.5mm"
 		(layer "F.Cu")
 		(uuid "0ff64936-5b67-40bf-9cee-672dd0f7306a")
-		(at 20.15 142.21)
+		(at 33.25 104.5)
 		(descr "SMD pad as test Point, diameter 1.5mm")
 		(tags "test point SMD pad")
 		(property "Reference" "TP3"
@@ -2956,7 +2956,7 @@
 	(footprint "IphoneFM:TestPoint_Pad_D1.5mm"
 		(layer "F.Cu")
 		(uuid "19bf169a-8a81-4843-bd92-72ce1cad337b")
-		(at 17.05 142.21)
+		(at 36.1 104.5)
 		(descr "SMD pad as test Point, diameter 1.5mm")
 		(tags "test point SMD pad")
 		(property "Reference" "TP2"
@@ -5097,7 +5097,7 @@
 	(footprint "IphoneFM:C_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "2132712a-3351-4a6d-9679-5cd478a38716")
-		(at 30.61 101.174 180)
+		(at 30.61 96.88 180)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C39"
@@ -8676,7 +8676,7 @@
 	(footprint "IphoneFM:TestPoint_Pad_D1.5mm"
 		(layer "F.Cu")
 		(uuid "464ca6af-6d0a-488d-8ddb-9aa6859c0de3")
-		(at 32.55 142.21)
+		(at 38.95 104.5)
 		(descr "SMD pad as test Point, diameter 1.5mm")
 		(tags "test point SMD pad")
 		(property "Reference" "TP7"
@@ -8808,11 +8808,11 @@
 	(footprint "IphoneFM:R_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "4dc016d4-78e1-460b-909c-2e7370717f87")
-		(at 51.22 81)
+		(at 46.2 84.2 -90)
 		(descr "Resistor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R9"
-			(at 0 -1.17 0)
+			(at 0 -1.17 -90)
 			(layer "F.SilkS")
 			(uuid "e92ba948-a00c-4cdb-87de-df18f5958d7a")
 			(effects
@@ -8823,7 +8823,7 @@
 			)
 		)
 		(property "Value" "10 kΩ 1%"
-			(at 0 1.17 0)
+			(at 0 1.17 -90)
 			(layer "F.Fab")
 			(uuid "b4e9af3f-4fdd-4fbd-88b5-31d373886e65")
 			(effects
@@ -8834,7 +8834,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 0 0 0)
+			(at 0 0 -90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "bea346e9-1bd5-428e-b240-7994311de4f2")
@@ -8845,7 +8845,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 0)
+			(at 0 0 -90)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "be1b90fd-07e7-4ff2-90d3-ed0136fd3254")
@@ -8856,7 +8856,7 @@
 			)
 		)
 		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
-			(at 0 0 0)
+			(at 0 0 -90)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "1ab3862a-0bac-49db-80ae-d0a73b4a6a4d")
@@ -8868,7 +8868,7 @@
 			)
 		)
 		(property "MPN" "RC0402FR-0710KL"
-			(at 0 0 0)
+			(at 0 0 -90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -8881,7 +8881,7 @@
 			)
 		)
 		(property "LCSC" "C60490"
-			(at 0 0 0)
+			(at 0 0 -90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -8894,7 +8894,7 @@
 			)
 		)
 		(property "Manufacturer" "Yageo"
-			(at 0 0 0)
+			(at 0 0 -90)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -8913,8 +8913,8 @@
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_rect
-			(start -0.93 -0.47)
-			(end 0.93 0.47)
+			(start -0.929999 -0.47)
+			(end 0.929999 0.47)
 			(stroke
 				(width 0.05)
 				(type solid)
@@ -8935,7 +8935,7 @@
 			(uuid "dfaa3587-a21c-46a7-a451-c1a8547e2098")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 270)
 			(layer "F.Fab")
 			(uuid "9e55de2d-ef7d-4564-9cd0-fff3e2765a75")
 			(effects
@@ -8946,7 +8946,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.51 0)
+			(at -0.51 0 270)
 			(size 0.54 0.64)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -8955,7 +8955,7 @@
 			(uuid "7149b48f-d0a2-427d-b543-f33742693e27")
 		)
 		(pad "2" smd roundrect
-			(at 0.51 0)
+			(at 0.51 0 270)
 			(size 0.54 0.64)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -10588,7 +10588,7 @@
 	(footprint "IphoneFM:TestPoint_Pad_D1.5mm"
 		(layer "F.Cu")
 		(uuid "6559e252-c387-410b-9941-b8dce8fbd4a8")
-		(at 29.45 142.21)
+		(at 30.4 104.5)
 		(descr "SMD pad as test Point, diameter 1.5mm")
 		(tags "test point SMD pad")
 		(property "Reference" "TP6"
@@ -12108,7 +12108,7 @@
 	(footprint "IphoneFM:C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "6c14c70f-fb1b-4adb-9886-82a2df7cb7fb")
-		(at 30.04 95.344 180)
+		(at 30.04 94.05 180)
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C8"
@@ -13181,7 +13181,7 @@
 	(footprint "IphoneFM:C_0805_2012Metric"
 		(layer "F.Cu")
 		(uuid "859cb462-af6d-4b03-aeb0-0bed6bfe0a4a")
-		(at 29.345 86.15 -90)
+		(at 29.4 84.3 -90)
 		(descr "Capacitor SMD 0805 (2012 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf, https://docs.google.com/spreadsheets/d/1BsfQQcO9C6DZCsRaXUlFlo91Tg2WpOkGARC1WS5S8t0/edit?usp=sharing)")
 		(tags "capacitor")
 		(property "Reference" "C12"
@@ -15972,7 +15972,7 @@
 	(footprint "IphoneFM:TestPoint_Pad_D1.5mm"
 		(layer "F.Cu")
 		(uuid "a196a71f-45a8-4150-a8be-9e49d559a0d9")
-		(at 26.35 142.21)
+		(at 40.5 86.8)
 		(descr "SMD pad as test Point, diameter 1.5mm")
 		(tags "test point SMD pad")
 		(property "Reference" "TP5"
@@ -16104,7 +16104,7 @@
 	(footprint "IphoneFM:TestPoint_Pad_D1.5mm"
 		(layer "F.Cu")
 		(uuid "a19ed825-559d-4a90-b0bc-a5ca47d82fd7")
-		(at 35.65 142.21)
+		(at 41.8 104.5)
 		(descr "SMD pad as test Point, diameter 1.5mm")
 		(tags "test point SMD pad")
 		(property "Reference" "TP8"
@@ -16649,7 +16649,7 @@
 	(footprint "IphoneFM:C_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "acd44be9-1dad-4006-b808-8c2adae8bbb0")
-		(at 30.61 92.534 180)
+		(at 30.61 91.24 180)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C10"
@@ -16969,7 +16969,7 @@
 	(footprint "IphoneFM:C_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "b34a87d5-529c-413b-89e4-100f06c99005")
-		(at 30.61 93.804 180)
+		(at 30.61 92.51 180)
 		(descr "Capacitor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C7"
@@ -19020,7 +19020,7 @@
 	(footprint "IphoneFM:TestPoint_Pad_D1.5mm"
 		(layer "F.Cu")
 		(uuid "dece2550-e749-40f9-b933-a9551e522a4a")
-		(at 23.25 142.21)
+		(at 19 121)
 		(descr "SMD pad as test Point, diameter 1.5mm")
 		(tags "test point SMD pad")
 		(property "Reference" "TP4"
@@ -20512,7 +20512,7 @@
 	(footprint "IphoneFM:TestPoint_Pad_D1.5mm"
 		(layer "F.Cu")
 		(uuid "e9619429-cd5c-4c1f-82b1-e43660832c46")
-		(at 13.95 142.21)
+		(at 29 121.75)
 		(descr "SMD pad as test Point, diameter 1.5mm")
 		(tags "test point SMD pad")
 		(property "Reference" "TP1"

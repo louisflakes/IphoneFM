@@ -148,9 +148,13 @@ Checks:
 - [x] 4.13 Place every remaining passive at its pin, decoupling caps first [BAC p21–22; HHG p40].
   - Done 2026-10-23, live: R25 left of D1 and R26, R27 below it (D1 is in the corner, so its edge sides have no room); R18 at SW1's RF_MODE pin. H1–H4 placed and locked at their step 3.5 positions (fixed parts, missed at 4.3–4.7). Every part except TP1–TP8 (4.15) is on the board. DRC: no errors and no courtyard overlaps; only J1's eight known hole findings. One squeeze to watch in routing: RF_MODE to R17 passes between J1 and the filter (about 1.7 mm).
 - [ ] 4.14 Give like parts the same rotation and align polarized parts [KHA p127, p148; HHG p46].
+  - Done 2026-10-23: HHG p46 asks for similar rotation of like parts for assembly and inspection. Each row of like parts at a pin already shares one rotation (U7's six pull-downs, U1's bottom row, each side of U2); the one polarized pair, D3 and D4 (CC ESD), match at 90°. Turning the radial parts to one angle would turn their pads away from their pins, so pin-first placement [BAC p21–22; HHG p40] keeps priority. No change.
 - [ ] 4.15 Place TP1–TP8 where a probe can reach them [HHG p39, p48].
+  - Done 2026-10-23, live: the SWD set in one row under U1 at y 104.5 (TP6 NRST, TP3 GND, TP2 3V3, TP7 SWCLK, TP8 SWDIO, 2.85 mm apart); TP1 VBUS beside J1; TP4 RF_MODE above SW1; TP5 LMX_MUX between U1 and U2 on its line. All on the top side, clear of the tall parts (placement-rules T1).
 - [ ] 4.16 Check courtyards and mechanical fit [HHG p39].
+  - Done 2026-10-23: DRC finds no courtyard overlaps and no copper-to-edge or ring-rule errors; every part on the top side (M7); no through-hole lead over the magnet ring (only J2 has them); the tall parts (J2, SW3, J1, wheels) are where M9 has them. Found while checking: turning or locking a part through KiCad's API drops its 3D model link, so the board had none left (positions and copper unaffected); restored with Update Footprints from Library.
 - [ ] 4.17 Run `kicadcheck.py --pcb` until placement and every local part pass.
+  - Done 2026-10-23: every check passes. The first run had four local parts over 4 mm; C39/FB2 swapped and U1's left column moved up, C12 moved in beside Y2, R9 moved to U2's bottom corner. C28 (FL1's input shunt) was tied to U7 pin 14 in netlist.json from when the filter sat at U7; it now sits with the filter, so its local_to is L2.1 (placement anchor only, no connection changes; netcheck 19/19). DRC with schematic parity: 0 footprint errors; only J1's eight known hole findings.
 - [ ] 4.18 **Review checkpoint:** the user compares the placement and the 3D view with the layout page.
 
 ## Phase 5: Routing
