@@ -7,6 +7,8 @@ around everything already on the board:
 - the board edge at 0.5 mm; no bottom-layer copper under the RF section (RF_BOTTOM, as pcb_freeroute.py) [AN4169 p12];
 - a via (0.6 / 0.3 mm) only where it keeps 0.2 mm from other copper on both layers, 0.5 mm hole to hole, stays off
   every pad and out of the RF section, and costs the length of VIA_COST so the path changes layer only when it pays;
+- each step on the bottom layer costs B_COST times a top-layer step, so crossings under other lines stay short and
+  the ground plane stays whole;
 - moves straight or at 45 degrees, never a 90-degree corner, with a cost on each bend [BAC p11; KHA p130-131].
 The path is cut into straight segments and locked. As a module, route() lays several connections in one session, each
 seeing the ones before it.
@@ -30,6 +32,7 @@ EDGE, CLR, CLOCK_CLR = 0.5, 0.2, 0.4
 VIA_D, VIA_DRILL, HOLE_GAP = 0.6, 0.3, 0.5
 VIA_COST = 30.0  # grid steps (1.5 mm of track)
 TURN = 4.0
+B_COST = 3.0  # each step on the bottom layer counts this many times: it is the ground plane, so crossings there stay short
 CLOCK = {"/FSK_CLK", "/FSK_CLK_MCU", "/REF20", "/REF20_MCU", "/RX_RCLK", "/RX_SCK", "/RX_SCK_MCU", "/LMX_CLK"}
 
 
@@ -167,7 +170,7 @@ def maps(grid, copper, net, width, avoid, courtyards=None):
 MOVES = [(1, 0, 1.0), (-1, 0, 1.0), (0, 1, 1.0), (0, -1, 1.0), (1, 1, 1.414), (1, -1, 1.414), (-1, 1, 1.414), (-1, -1, 1.414)]
 
 
-def astar(blocked, mV, starts, goals, window):
+def astar(blocked, mV, starts, goals, window, b_cost=1.0):
     """starts/goals: sets of (i, j, layer). blocked: [mF, mB]. Returns [(i, j, layer)]."""
     i0, i1, j0, j1 = window
     gl = list(goals)
@@ -195,7 +198,7 @@ def astar(blocked, mV, starts, goals, window):
                 dot = pi * di + pj * dj
                 if dot < 0 or (dot == 0 and abs(pi) + abs(pj) == 1 and abs(di) + abs(dj) == 1):
                     continue  # no U-turns and no 90-degree corners
-            ng = g + c + (TURN if d >= 0 and d != k else 0.0)
+            ng = g + c * (b_cost if l == 1 else 1.0) + (TURN if d >= 0 and d != k else 0.0)
             key = (a, b, l, k)
             if ng < best.get(key, 1e18):
                 best[key], came[key] = ng, (i, j, l, d)
@@ -209,7 +212,7 @@ def astar(blocked, mV, starts, goals, window):
     return None
 
 
-def route(board, net, a, b, width=0.2, layers="FB", avoid=(), margin=12.0, dry=False):
+def route(board, net, a, b, width=0.2, layers="FB", avoid=(), margin=12.0, dry=False, b_cost=B_COST):
     """Lay one connection on the live board; returns (segments, vias, length) or None."""
     copper = board_copper(board.get_as_string())
     pads = {name: (g, l) for kind, n, l, g, name in copper if kind == "pad"}
@@ -245,7 +248,7 @@ def route(board, net, a, b, width=0.2, layers="FB", avoid=(), margin=12.0, dry=F
     (si, sj), (ti, tj) = idx(ax, ay), idx(bx, by)
     win = (max(0, min(si, ti) - int(margin / G)), min(grid.nx, max(si, ti) + int(margin / G)),
            max(0, min(sj, tj) - int(margin / G)), min(grid.ny, max(sj, tj) + int(margin / G)))
-    path = astar([mF, mB], mV, S, T, win)
+    path = astar([mF, mB], mV, S, T, win, b_cost)
     if not path:
         return None
     # cut into runs per layer, keep only the bends
@@ -284,7 +287,7 @@ def route(board, net, a, b, width=0.2, layers="FB", avoid=(), margin=12.0, dry=F
             t.layer = BoardLayer.BL_F_Cu if layer == 0 else BoardLayer.BL_B_Cu
             t.net, t.locked = netobj, True
             items.append(t)
-    for vx, vy in vias:
+    for vx, vy in (xy(v) for v in vias):
         v = Via()
         v.position = Vector2.from_xy(round(vx * 1e6), round(vy * 1e6))
         v.diameter, v.drill_diameter = round(VIA_D * 1e6), round(VIA_DRILL * 1e6)

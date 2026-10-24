@@ -13,7 +13,8 @@ W, NECK = 0.92, 0.25
 RUNS = {
     # 5.5 transmit: U2 RF out -> C26 (DC block) -> U7 RF in
     "/LMX_RF": [([(44.500, 81.900), (44.500, 82.700), (44.635, 83.410)], 0.30)],
-    "/ATT_IN": [([(44.635, 84.370), (44.635, 87.900), (47.250, 90.515)], W),          # U7 at (48, 94) since phase 5
+    # U7 at (48, 94) since phase 5; the bend starts 1.7 mm higher so U1's MICROWIRE lines can turn beside it
+    "/ATT_IN": [([(44.635, 84.370), (44.635, 86.200), (47.250, 88.815), (47.250, 90.515)], W),
                 ([(47.250, 90.515), (47.250, 92.025)], NECK)],
     # U7 RF out -> straight down, step left clear of U4, down to the filter's input (L2 pad 1, C28 pad 1)
     "/TX_RF_ATT": [([(47.250, 95.975), (47.250, 97.300)], NECK),
