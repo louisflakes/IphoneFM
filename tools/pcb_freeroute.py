@@ -21,8 +21,8 @@ FREEROUTING = os.path.expanduser(r"~\.freerouting\2.5.0-full\freerouting\freerou
 # U2's RF half (its exposed pad, RF out, loop filter side), the transmit line with about 1.5 mm each side, U7, U4 and its
 # front end, and the switch, filter and antenna corner. U2's digital (left) side and the strip beside U1 stay open.
 RF_BOTTOM = [(41.0, 70.0), (52.0, 70.0), (52.0, 86.6), (51.3, 86.6), (51.3, 106.0), (53.6, 106.0), (53.6, 119.0),
-             (58.7, 119.0), (58.7, 131.0), (41.0, 131.0), (41.0, 106.5), (43.3, 106.5), (43.3, 86.6), (41.0, 86.6),
-             (41.0, 70.0)]
+             (58.7, 119.0), (58.7, 131.0), (41.6, 131.0), (41.6, 106.5), (43.3, 106.5), (43.3, 86.6), (41.0, 86.6),
+             (41.0, 70.0)]  # x 41.6 below U7: about 0.9 mm clear of the transmit line, leaving RF_MODE a way past J1
 
 
 def export(d):
