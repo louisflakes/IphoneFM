@@ -1400,7 +1400,7 @@
 	(footprint "IphoneFM:C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "12a5f284-c895-40f1-b6b8-f4ed443e5974")
-		(at 22.75 121.6 -90)
+		(at 22.75 121.575 -90)
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C2"
@@ -1560,7 +1560,7 @@
 	(footprint "IphoneFM:R_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "1491588e-4537-4f44-ba8c-5b311899abe5")
-		(at 29.15 129.3 90)
+		(at 29.15 129.42 90)
 		(descr "Resistor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R3"
@@ -7868,7 +7868,7 @@
 	(footprint "IphoneFM:R_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "3cd68ebc-972f-4127-8bdb-88ca45e9a75d")
-		(at 18.78 128.85)
+		(at 19.51 129.6)
 		(descr "Resistor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R18"
@@ -7970,17 +7970,11 @@
 		(path "/5a56be28-0611-496d-a64f-661476185d1c")
 		(sheetname "/")
 		(sheetfile "IphoneFM.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_rect
-			(start -0.93 -0.47)
-			(end 0.93 0.47)
+			(start -0.929999 -0.47)
+			(end 0.929999 0.47)
 			(stroke
 				(width 0.05)
 				(type solid)
@@ -8001,7 +7995,7 @@
 			(uuid "bf31549d-89df-41cb-bfcd-7e4b742730b5")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 0)
+			(at 0 0 360)
 			(layer "F.Fab")
 			(uuid "5864396c-af17-47ce-9007-d58076848c2d")
 			(effects
@@ -8030,17 +8024,6 @@
 			(uuid "24d0a707-d529-4572-bc4e-46b2ce761599")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0402_1005Metric.step"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
 	)
 	(footprint "IphoneFM:SW_SPDT_Shouhan_MSK12C02_Tabs4"
 		(locked yes)
@@ -13246,7 +13229,7 @@
 	(footprint "IphoneFM:R_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "8660a70f-0505-4f95-95c3-342e45e20f2a")
-		(at 33.9 121.22 90)
+		(at 33 121.09 90)
 		(descr "Resistor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R1"
@@ -13348,12 +13331,6 @@
 		(path "/3ac27253-64c2-4caa-8a1b-c02429f0ff9b")
 		(sheetname "/")
 		(sheetfile "IphoneFM.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_rect
@@ -13408,17 +13385,6 @@
 			(uuid "e29faa2a-1c3a-4f14-bd4c-19850f349628")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Resistor_SMD.3dshapes/R_0402_1005Metric.step"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
 	)
 	(footprint "IphoneFM:MountingHole_2.2mm_M2"
 		(locked yes)
@@ -13700,11 +13666,11 @@
 	(footprint "IphoneFM:R_0402_1005Metric"
 		(layer "F.Cu")
 		(uuid "89f2cd5c-9b15-4e49-9b56-e6c39f43ef7f")
-		(at 37.45 121.22 90)
+		(at 38.185 121.3)
 		(descr "Resistor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "resistor")
 		(property "Reference" "R2"
-			(at 0 -1.17 90)
+			(at 0 -1.17 0)
 			(layer "F.SilkS")
 			(uuid "daf3505e-7b31-404e-a271-d6c4c92b814b")
 			(effects
@@ -13715,7 +13681,7 @@
 			)
 		)
 		(property "Value" "5.1 kΩ 1%"
-			(at 0 1.17 90)
+			(at 0 1.17 0)
 			(layer "F.Fab")
 			(uuid "815082ae-0757-4c86-953d-ba7b3142f0d1")
 			(effects
@@ -13726,7 +13692,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 0 0 90)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "d4b43f96-d77c-42a1-ba7c-4f049af4de19")
@@ -13737,7 +13703,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 90)
+			(at 0 0 0)
 			(layer "F.Fab")
 			(hide yes)
 			(uuid "66692695-3525-4aea-9426-6ff51ac50333")
@@ -13748,7 +13714,7 @@
 			)
 		)
 		(property "KiLib_Generator" "SMD_2terminal_chip_molded"
-			(at 0 0 90)
+			(at 0 0 0)
 			(layer "F.SilkS")
 			(hide yes)
 			(uuid "f6b830a5-0b6b-4f01-8ca4-6ac6bf488fd5")
@@ -13760,7 +13726,7 @@
 			)
 		)
 		(property "MPN" "RC0402FR-075K1L"
-			(at 0 0 90)
+			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -13773,7 +13739,7 @@
 			)
 		)
 		(property "LCSC" "C105872"
-			(at 0 0 90)
+			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -13786,7 +13752,7 @@
 			)
 		)
 		(property "Manufacturer" "Yageo"
-			(at 0 0 90)
+			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -13805,8 +13771,8 @@
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_rect
-			(start -0.93 -0.47)
-			(end 0.93 0.47)
+			(start -0.929999 -0.47)
+			(end 0.929999 0.47)
 			(stroke
 				(width 0.05)
 				(type solid)
@@ -13827,7 +13793,7 @@
 			(uuid "df975eb7-3b2e-41ef-88d8-9276c91e4354")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 90)
+			(at 0 0 360)
 			(layer "F.Fab")
 			(uuid "47c8076c-689c-49a8-9900-bc3fb62bb160")
 			(effects
@@ -13838,7 +13804,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.51 0 90)
+			(at -0.51 0)
 			(size 0.54 0.64)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -13847,7 +13813,7 @@
 			(uuid "609b75a3-b5c4-4125-a950-1bb55c7c98fa")
 		)
 		(pad "2" smd roundrect
-			(at 0.51 0 90)
+			(at 0.51 0)
 			(size 0.54 0.64)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -14180,7 +14146,7 @@
 	(footprint "IphoneFM:C_0603_1608Metric"
 		(layer "F.Cu")
 		(uuid "8f868967-b203-44b2-8796-b04f566fd94b")
-		(at 28.45 124.4 -90)
+		(at 28.45 124.425 -90)
 		(descr "Capacitor SMD 0603 (1608 Metric), square (rectangular) end terminal, IPC-7351 nominal, (Body size source: IPC-SM-782 page 76, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf)")
 		(tags "capacitor")
 		(property "Reference" "C1"
@@ -15702,11 +15668,11 @@
 	(footprint "IphoneFM:Texas_DPY0002A_0.6x1mm_P0.65mm"
 		(layer "F.Cu")
 		(uuid "9c3db674-59fe-4097-b61a-fa81c83fa913")
-		(at 38.9 121.35 90)
+		(at 38.6 119.9)
 		(descr "X1SON 2 pin 0.6x1mm 0.375mm height package, https://www.ti.com/lit/ml/mpss034c/mpss034c.pdf, https://www.ti.com/lit/ds/symlink/tpd6e05u06.pdf")
 		(tags "X1SON")
 		(property "Reference" "D4"
-			(at 0 -1.25 90)
+			(at 0 -1.25 0)
 			(unlocked yes)
 			(layer "F.SilkS")
 			(uuid "88cbb4c1-4ab3-400b-8944-892b5c3afbb1")
@@ -15718,7 +15684,7 @@
 			)
 		)
 		(property "Value" "ESD 5.5 V"
-			(at 0 1.25 90)
+			(at 0 1.25 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(uuid "072649ac-1820-4b03-841c-2d6030c209a4")
@@ -15730,7 +15696,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 0 0 90)
+			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -15743,7 +15709,7 @@
 			)
 		)
 		(property "Description" ""
-			(at 0 0 90)
+			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -15756,7 +15722,7 @@
 			)
 		)
 		(property "MPN" "TPD1E05U06DPYR"
-			(at 0 0 90)
+			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -15769,7 +15735,7 @@
 			)
 		)
 		(property "LCSC" "C436349"
-			(at 0 0 90)
+			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -15782,7 +15748,7 @@
 			)
 		)
 		(property "Manufacturer" "TI"
-			(at 0 0 90)
+			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
 			(hide yes)
@@ -15812,8 +15778,8 @@
 			(uuid "29284204-2f94-4b68-9e4a-3755faacf647")
 		)
 		(fp_rect
-			(start -0.65 -0.45)
-			(end 0.65 0.45)
+			(start -0.649999 -0.45)
+			(end 0.649999 0.45)
 			(stroke
 				(width 0.05)
 				(type solid)
@@ -15823,18 +15789,18 @@
 			(uuid "db584f70-5262-4287-865f-28608d3fbe31")
 		)
 		(fp_line
-			(start -0.2 0.3)
-			(end -0.2 -0.3)
+			(start -0.4 0.299999)
+			(end -0.399999 -0.3)
 			(stroke
 				(width 0.1)
 				(type solid)
 			)
 			(layer "F.Fab")
-			(uuid "f1220a26-43fa-4b51-b038-8d70e620d740")
+			(uuid "38a18974-d37d-4caf-baa8-6e834bc9b1ac")
 		)
 		(fp_line
-			(start -0.3 0.3)
-			(end -0.3 -0.3)
+			(start -0.3 0.299999)
+			(end -0.299999 -0.3)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -15843,18 +15809,18 @@
 			(uuid "3f81c6fd-f5c5-42a2-88ef-3abf05b9a847")
 		)
 		(fp_line
-			(start -0.4 0.3)
-			(end -0.4 -0.3)
+			(start -0.2 0.299999)
+			(end -0.199999 -0.3)
 			(stroke
 				(width 0.1)
 				(type solid)
 			)
 			(layer "F.Fab")
-			(uuid "38a18974-d37d-4caf-baa8-6e834bc9b1ac")
+			(uuid "f1220a26-43fa-4b51-b038-8d70e620d740")
 		)
 		(fp_rect
-			(start -0.5 -0.3)
-			(end 0.5 0.3)
+			(start -0.499999 -0.3)
+			(end 0.499999 0.3)
 			(stroke
 				(width 0.1)
 				(type solid)
@@ -15864,7 +15830,7 @@
 			(uuid "fd20582d-0576-45de-a54c-bcefff6fecbf")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 90)
+			(at 0 0 360)
 			(layer "F.Fab")
 			(uuid "6f3b851c-fd1d-469b-8f40-96c1c2be92dd")
 			(effects
@@ -15875,7 +15841,7 @@
 			)
 		)
 		(pad "1" smd roundrect
-			(at -0.35 0 90)
+			(at -0.35 0)
 			(size 0.3 0.5)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -15885,7 +15851,7 @@
 			(uuid "9dbcb67b-c0bb-4de9-b0c2-df0f7f39243d")
 		)
 		(pad "2" smd roundrect
-			(at 0.35 0 90)
+			(at 0.35 0)
 			(size 0.3 0.5)
 			(layers "F.Cu" "F.Mask" "F.Paste")
 			(roundrect_rratio 0.25)
@@ -20563,7 +20529,7 @@
 	(footprint "IphoneFM:Texas_DPY0002A_0.6x1mm_P0.65mm"
 		(layer "F.Cu")
 		(uuid "ed0825fd-fa94-4e60-a456-dd02e4fb3054")
-		(at 32.45 121.35 90)
+		(at 31.75 121.25 90)
 		(descr "X1SON 2 pin 0.6x1mm 0.375mm height package, https://www.ti.com/lit/ml/mpss034c/mpss034c.pdf, https://www.ti.com/lit/ds/symlink/tpd6e05u06.pdf")
 		(tags "X1SON")
 		(property "Reference" "D3"
@@ -20659,12 +20625,6 @@
 		(path "/44ba88b8-c9f9-4efc-871d-9cfb070757e4")
 		(sheetname "/")
 		(sheetfile "IphoneFM.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1" "2")
-			)
-		)
 		(attr smd)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_circle
@@ -20762,17 +20722,6 @@
 			(uuid "7337686d-8434-4f68-bf2c-8347e5f2838f")
 		)
 		(embedded_fonts no)
-		(model "${KICAD10_3DMODEL_DIR}/Package_SON.3dshapes/Texas_DPY0002A_0.6x1mm_P0.65mm.step"
-			(offset
-				(xyz 0 0 0)
-			)
-			(scale
-				(xyz 1 1 1)
-			)
-			(rotate
-				(xyz 0 0 0)
-			)
-		)
 	)
 	(footprint "IphoneFM:R_0402_1005Metric"
 		(layer "F.Cu")
@@ -23802,7 +23751,7 @@
 	(footprint "IphoneFM:TestPoint_Pad_D1.5mm"
 		(layer "B.Cu")
 		(uuid "e9619429-cd5c-4c1f-82b1-e43660832c46")
-		(at 27.6 122.2 180)
+		(at 29.95 121.35 180)
 		(descr "SMD pad as test Point, diameter 1.5mm")
 		(tags "test point SMD pad")
 		(property "Reference" "TP1"

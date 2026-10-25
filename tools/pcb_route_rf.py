@@ -32,8 +32,6 @@ PLACE = {
     "C17": (40.03, 113.69, -90),  # left 0.135 mm, so C26 sits straight under U2's RF pin
     "C26": (41.3, 113.69, -90),
     "C28": (40.85, 121.42, 180),  # filter input shunt beside the attenuator's output line
-    "D4": (38.9, 121.35, 90),     # D4 and R2 left 0.5 mm to make room for C28
-    "R2": (37.45, 121.22, 90),
     "C30": (44.5075, 127.64, -90),  # filter output shunt below L3 (back where it was)
     "C31": (47.7, 128.6, 0),      # control shunt beside the control line, under the antenna line
     "R17": (45.84, 129.95, 0),    # control series resistor at the foot of the control line; RF_MODE comes from the west

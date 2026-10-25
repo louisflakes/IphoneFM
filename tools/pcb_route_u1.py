@@ -70,7 +70,7 @@ group = [(19, "/CC2"), (18, "/CC1"), (17, "/RF_MODE"), (15, "/WHEEL3"), (14, "/W
 fan = dict(zip([n for _, n in group],
                turn([(XW, wy(p)) for p, _ in group], (-1, 0), (0, 1), [-LANE[n] for _, n in group], 0.45, tips=TIP)))
 P.run("/WHEEL2", fan["/WHEEL2"] + [(27.8, 96.7), (27.5, 97.0), (26.8, 97.0)])
-P.run("/WHEEL2", [(30.2, wy(14)), (30.2, 87.88)])                      # to C40
+P.run("/WHEEL2", [(30.2, 119.4686 - 30.2), (30.2, 87.88)])             # to C40, off WHEEL2's diagonal
 Y_HAND = 103.0  # the west lane plan carries RF_MODE, CC1 and CC2 on from here
 P.run("/WHEEL3", fan["/WHEEL3"] + [(28.25, 103.5)])
 P.run("/WHEEL3", [(28.25, 103.5), (28.08, 103.5)])                     # to C41
@@ -118,6 +118,7 @@ P.run("/USB_DP", [(sx(33), YS), (sx(33), y_dp)])
 P.via("/USB_DP", sx(33), y_dp)
 P.run("/SWDIO", [(sx(34), YS), (sx(34), YS + TIP + 1.0), (sx(34) + 0.515, YS + TIP + 1.515)])
 P.via("/SWDIO", sx(34) + 0.515, YS + TIP + 1.515)
+P.run("/SWDIO", [(38.4, 95.985), (38.4, 99.3), (40.3, 101.2)], W, B)             # to TP8 on the bottom
 P.run("3V3", [(sx(36), YS), (sx(36), 95.1), (39.3, 95.515), (39.3, 95.62)], 0.25)
 
 # --- north -----------------------------------------------------------------------------------------------------
@@ -136,6 +137,7 @@ P.run("/LMX_CE", runs[1] + [(42.3, 84.7), (42.6, 84.4)])
 P.run("/NRST", runs[2] + [(40.0, 84.1)])
 P.run("/NRST", [(38.8, 84.1), (38.8, 83.63)])                         # to C10
 P.via("/NRST", 40.0, 84.1)                                            # TP6 on the bottom
+P.run("/NRST", [(40.0, 84.1), (40.0, 83.0)], W, B)
 P.place["TP6"] = (40.0, 83.0, 0)
 # CE and REF20 under the receiver bundle on the bottom, up again south of it
 Y_DS = 95.8
