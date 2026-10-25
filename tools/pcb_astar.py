@@ -4,7 +4,7 @@ around everything already on the board:
 - other nets' pads, tracks and vias kept at the clearance rule (0.2 mm); clock tracks keep 0.4 mm from other nets'
   tracks and vias, and other tracks keep 0.4 mm from clock tracks, except inside the courtyards of the parts the clock
   lines start and end at (CLOCK_ENDS), as IphoneFM.kicad_dru;
-- the board edge at 0.5 mm; no bottom-layer copper under the RF section (RF_BOTTOM, as pcb_freeroute.py) [AN4169 p12];
+- the board edge at 0.5 mm; no bottom-layer copper under the RF parts and lines (RF_BOTTOM_POLYS, as pcb_freeroute.py) [AN4169 p12];
 - a via (0.6 / 0.3 mm) only where it keeps 0.2 mm from other copper on both layers, 0.5 mm hole to hole, stays off
   every pad and out of the RF section, and costs the length of VIA_COST so the path changes layer only when it pays;
 - each step on the bottom layer costs B_COST times a top-layer step, so crossings under other lines stay short and
@@ -24,7 +24,7 @@ import numpy as np
 sys.path.insert(0, "tools")
 from kicadcheck import sexpr, kids, kid
 from pcb_fanout import rot
-from pcb_freeroute import RF_BOTTOM
+from pcb_freeroute import RF_BOTTOM_POLYS
 
 G = 0.05  # grid, mm
 BOARD = (12.70, 59.56, 59.15, 130.96)
@@ -77,7 +77,7 @@ class Grid:
         self.xs = x0 + np.arange(self.nx) * G
         self.ys = y0 + np.arange(self.ny) * G
         X, Y = np.meshgrid(self.xs, self.ys)
-        self.rf = inside(X, Y, RF_BOTTOM)
+        self.rf = np.logical_or.reduce([inside(X, Y, poly + poly[:1]) for poly in RF_BOTTOM_POLYS])
 
     def window(self, ax0, ay0, ax1, ay1):
         x0, y0 = BOARD[:2]

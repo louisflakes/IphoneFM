@@ -6,7 +6,7 @@ tracks and vias into the board open in KiCad (one undo step, left unlocked for r
            - GND keeps no pins: not routed (the Phase 6 pours join it), its vias still obstacles;
            - Clock nets get 0.2 mm to pins so they can reach 0.5 mm-pitch pins; the 0.4 mm between tracks is
              checked afterwards by IphoneFM.kicad_dru;
-           - no tracks or vias on the bottom under the RF section [AN4169 p12] (RF_BOTTOM).
+           - no tracks or vias on the bottom under the RF parts and lines [AN4169 p12] (RF_BOTTOM_POLYS).
   route    Freerouting v2.5.0 (the official Windows release, unpacked in ~/.freerouting/2.5.0-full), up to N passes.
   import   pcbnew.ImportSpecctraSES on a copy, then every track and via there that the live board lacks is added.
 Usage (from the repository root, board saved and open in KiCad):
@@ -18,11 +18,17 @@ import sys
 
 KICAD_PY = r"C:\Users\jakep\AppData\Local\Programs\KiCad\10.0\bin\python.exe"
 FREEROUTING = os.path.expanduser(r"~\.freerouting\2.5.0-full\freerouting\freerouting.exe")
-# U2's RF half (its exposed pad, RF out, loop filter side), the transmit line with about 1.5 mm each side, U7, U4 and its
-# front end, and the switch, filter and antenna corner. U2's digital (left) side and the strip beside U1 stay open.
-RF_BOTTOM = [(41.0, 70.0), (52.0, 70.0), (52.0, 86.6), (51.3, 86.6), (51.3, 106.0), (53.6, 106.0), (53.6, 119.0),
-             (58.7, 119.0), (58.7, 131.0), (41.6, 131.0), (41.6, 106.5), (43.3, 106.5), (43.3, 86.6), (41.0, 86.6),
-             (41.0, 70.0)]  # x 41.6 below U7: about 0.9 mm clear of the transmit line, leaving RF_MODE a way past J1
+# No bottom-layer copper under the RF parts and lines, so their ground return stays whole [AN4169 p12]. Floorplan B3:
+# A, the transmit chain below U1: U2's RF half (exposed pad, RF out, loop filter side), C26, U7, the filter, U5, the
+#    antenna line and J2; U2's digital (left) side stays open for the FSK and MICROWIRE hops;
+# B, the 50-ohm receive line from U5 past H3's west side and up to C34, about 1.5 mm each side;
+# C, U4 with its input parts (C34, L1, FB1, C35); its west edge leaves room for crossings beside U4.
+RF_BOTTOM_POLYS = [
+    [(39.5, 104.5), (49.3, 104.5), (49.3, 121.3), (59.0, 121.3), (59.0, 131.0), (41.6, 131.0), (41.6, 121.0),
+     (39.5, 121.0)],
+    [(48.7, 121.3), (48.7, 113.4), (52.9, 109.2), (52.9, 93.0), (55.9, 93.0), (55.9, 110.4), (51.7, 114.6), (51.7, 121.3)],
+    [(51.4, 80.6), (56.9, 80.6), (56.9, 95.6), (51.4, 95.6)],
+]
 
 
 def export(d):
@@ -36,9 +42,10 @@ def export(d):
     t = re.sub(r'\n    \(net GND\n(?:      [^\n]*\n)*?    \)', "\n    (net GND\n      (pins)\n    )", t)
     t = t.replace(' GND "unconnected-(J1-SBU1-PadA8)"', ' "unconnected-(J1-SBU1-PadA8)"')
     t = t.replace("      (rule\n        (width 200)\n        (clearance 400)\n      )", "      (rule\n        (width 200)\n        (clearance 200)\n      )")
-    coords = "  ".join(f"{x * 1000:.0f} {-y * 1000:.0f}" for x, y in RF_BOTTOM)
     i = t.index('    (via "Via[0-1]_600:300_um")')
-    t = t[:i].rstrip() + f'\n    (keepout "rf_bottom" (polygon B.Cu 0  {coords}))\n' + t[i:]
+    keep = "".join(f'\n    (keepout "rf_bottom_{k}" (polygon B.Cu 0  ' + "  ".join(f"{x * 1000:.0f} {-y * 1000:.0f}" for x, y in poly + poly[:1]) + "))"
+                   for k, poly in enumerate(RF_BOTTOM_POLYS))
+    t = t[:i].rstrip() + keep + "\n" + t[i:]
     open(os.path.join(d, "IphoneFM_fr.dsn"), "w", encoding="utf-8").write(t)
     print("wrote", os.path.join(d, "IphoneFM_fr.dsn"))
 

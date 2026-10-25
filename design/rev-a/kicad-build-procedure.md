@@ -182,6 +182,16 @@ Checks:
       - Router fixes: vias were being placed at grid indices (off the board), so earlier "routed" results with vias were not real. Bottom-layer steps now cost 3× so crossings stay short. DRC: only J1's 8 known hole-clearance findings.
     - Floorplan study (2026-10-24/25, `tools/pcb_floorplan.py`, pictures `floorplan-round1.png`, `floorplan-round2.png`): every attempt stalled at U1, so the placement was scored before more routing. Each layout is routed roughly on one layer with negotiated congestion. Today's layout came out at 2281 mm and 525 cells over capacity. The cause: U4 and D1 sat across the transmit line from U1, so 11 lines wrapped over U2 through a 3.9 mm gap. **The user chose B3:** the transmit chain (U2, Y2, U7) below U1, feeding U5 from the west; U4 with its input parts (C34, L1, FB1, C35) at the top right, fed by the 50 Ω receive line up the right edge; U1 turned 90° so its I²S/MICROWIRE/USB side faces U2 and J1 and its receiver/LED side faces U4 and D1.
     - B3 placed (tag `rollback/phase5-b3-placed`, `placement-b3.png`): routing cleared for a fresh start; R6–R8 in a row between U1 and U2; Y2 turned to face both; SWD pads TP7/TP8 beside U1; TP6 by NRST; TP5 by the MICROWIRE lines. Scored as placed: 1299 mm, 125 cells over, 199 crossings (versus 2281 / 525 / 318 before).
+    - Routing prep for B3 (2026-10-25):
+      - **RF keep-out:** redrawn as three zones (`RF_BOTTOM_POLYS`: the transmit chain with U5/J2, the receive corridor, and U4's front end).
+      - **RF lines planned in `tools/pcb_route_rf.py`** (`place`, then `lay`; pictures `phase5-rf-plan-tx.png`, `phase5-rf-plan-rx.png`):
+        - U5 is up 1.1 mm, so the antenna line leaves straight and runs east between J2's legs.
+        - The filter output climbs past L2 and drops into U5's north-facing pin 3.
+        - The receive line runs about 40 mm at 50 Ω, with GND stitching vias on both sides.
+        - Twelve small parts were nudged (C17, C26, C28, C30, C31, D4, R2, R16, R17, D5, L1, FB1, C35).
+        - DRC is clean apart from J1's known hole findings.
+      - **New `tools/pcb_quality.py`:** the routing-quality check, run alongside `pcb_drc.py`. It checks 45° segments, 45° bends, straight pin exits of at least 1 mm (local connections of up to 2.5 mm excepted), one pitch per bus, clearance and the RF bottom zones. It also scores plans before any copper goes down. The RF plan passes it.
+      - **Lane plan** (`phase5-lanes.json`, `phase5-lane-plan.png`), for the user's review before routing.
 - [ ] 5.12 Review net lengths and remove detours [HHG p77].
 - [ ] 5.13 **Review checkpoint:** the user reviews the routing.
 
