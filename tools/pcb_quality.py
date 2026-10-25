@@ -2,9 +2,10 @@
 this proves it is tidy (routing-quality standard, 2026-10-25):
   angle   every segment runs at a multiple of 45 degrees;
   bend    every bend between two segments of a line turns 45 degrees (no 90 or 135 degree corners);
-  exit    a line leaves an IC or connector pad straight along the pad's long axis, outwards, for at least MIN_EXIT
-          (measured from the pad's edge to the first bend), unless it reaches its other pad first;
-  pitch   parallel neighbours of different nets that run side by side form a bus, and each bus keeps one pitch;
+  exit    a line leaves a fine-pitch pad (an IC or connector) straight along the pad's long axis, outwards, for at
+          least MIN_EXIT (pad edge to first bend), unless it reaches its other pad or an escape via within LOCAL;
+          power nets need only leave straight;
+  pitch   parallel neighbours of one net class that run side by side form a bus, and each bus keeps one pitch;
   clear   copper of other nets on the same layer is at least CLEAR away (catches problems in plans, before DRC runs);
   rf      no bottom-layer copper inside RF_BOTTOM_POLYS [AN4169 p12].
 Tracks come from the board open in KiCad; --plan adds the hand-laid runs of a routing script (its RUNS table, top layer)
@@ -28,6 +29,25 @@ CLEAR = 0.2        # mm, the board's copper clearance
 BUS_GAP = 1.0      # mm, centre-to-centre: closer parallel neighbours count as one bus
 BUS_RUN = 1.0      # mm of side-by-side overlap before two lines count as neighbours
 TOL = 0.01
+
+
+def net_classes():
+    """Net name -> net class, from the project's netclass patterns (plain names and /names)."""
+    import json
+    import re
+    pro = json.load(open("kicad/rev-a/IphoneFM.kicad_pro", encoding="utf-8"))
+    pats = [(re.compile("^" + p["pattern"].replace("*", ".*") + "$"), p["netclass"])
+            for p in pro["net_settings"].get("netclass_patterns") or []]
+
+    def cls(net):
+        for rx, c in pats:
+            if rx.match(net):
+                return c
+        return "Default"
+    return cls
+
+
+POWER = ("Power",)
 
 
 def load_plan(path, copper):
@@ -68,6 +88,7 @@ def main():
         for path in a[a.index("--plan") + 1].split(","):
             plan += load_plan(path, copper + plan)
         copper = copper + plan
+    cls = net_classes()
     pads = [c for c in copper if c[0] == "pad"]
     tracks = [c for c in copper if c[0] == "track"]
     vias = [c for c in copper if c[0] == "via"]
@@ -75,6 +96,11 @@ def main():
     for p in pads:
         fp_pads[p[4].split(".")[0]].append(p)
     fp_centre = {r: (sum(p[3][0] for p in ps) / len(ps), sum(p[3][1] for p in ps) / len(ps)) for r, ps in fp_pads.items()}
+    # the exit rule covers fine-pitch parts (ICs, connectors): some two pads 0.8 mm apart or closer
+    fine = {}
+    for r, ps in fp_pads.items():
+        cs = [(q[3][0], q[3][1]) for q in ps if q[1] or True]
+        fine[r] = len(ps) >= 5 and any(0 < math.hypot(a[0] - b[0], a[1] - b[1]) <= 0.81 for i, a in enumerate(cs) for b in cs[i + 1:])
     shown = [t for t in tracks if only is None or t[1] in only]
     found = collections.defaultdict(list)
 
@@ -118,7 +144,7 @@ def main():
         l = next(iter(lay))
         for (sx, sy), (ox, oy) in (((x0, y0), (x1, y1)), ((x1, y1), (x0, y0))):
             p = pad_at(net, l, sx, sy)
-            if not p or len(fp_pads[p[4].split(".")[0]]) < 5 or pad_at(net, l, ox, oy) is p:
+            if not p or not fine.get(p[4].split(".")[0]) or pad_at(net, l, ox, oy) is p:
                 continue
             q = pad_at(net, l, ox, oy)
             if q and q[4].split(".")[0] == p[4].split(".")[0]:
@@ -164,7 +190,7 @@ def main():
             local = (far is not None and far is not p and length <= LOCAL) or (at_via and length <= LOCAL)
             edge = phw if axis[0] else phh
             straight = abs((run_end[0] - px) * axis[0] + (run_end[1] - py) * axis[1]) - edge
-            if straight < min_exit - TOL and not reached_pad and not local:
+            if straight < min_exit - TOL and not reached_pad and not local and cls(net) not in POWER and net != "GND":
                 found["exit"].append(f"{net} leaves {p[4]} straight for {straight:.2f} mm")
 
     # pitch: neighbours run parallel, overlap, on one layer, nets differ
@@ -172,7 +198,7 @@ def main():
     for i, t in enumerate(tracks):
         for j in range(i + 1, len(tracks)):
             u = tracks[j]
-            if t[1] == u[1] or t[2] != u[2]:
+            if t[1] == u[1] or t[2] != u[2] or cls(t[1]) != cls(u[1]):
                 continue
             (ax0, ay0, ax1, ay1, _), (bx0, by0, bx1, by1, _) = t[3], u[3]
             la, lb = math.hypot(ax1 - ax0, ay1 - ay0), math.hypot(bx1 - bx0, by1 - by0)
