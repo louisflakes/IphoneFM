@@ -33,6 +33,7 @@ U1_BLOCK = ["U1", "C10", "FB2", "C7", "C8", "C39", "C40", "C36", "C41", "C9", "C
 U2_BLOCK = ["U2", "C13", "C20", "C21", "C14", "C17", "C26", "R9", "C15", "C23", "C22", "C24", "R5", "C16", "C19", "C18", "C25"]
 Y2_BLOCK = ["Y2", "R4", "C11", "C12"]
 U7_BLOCK = ["U7", "C27", "R10", "R11", "R12", "R13", "R14", "R15"]
+TP_ROW = ["TP2", "TP3", "TP6", "TP7", "TP8"]
 U4_BLOCK = ["U4", "L1", "FB1", "C35", "R19", "R20", "R21", "C33", "FB3", "C32", "R22", "R23", "R24", "C37", "C38"]
 CANDIDATES = {
     "now": [],  # today's blocks and today's U1 pins (the only candidate scored with U1's pins as they are)
@@ -43,7 +44,27 @@ CANDIDATES = {
     # C: U1 moves above U2 (top centre, under SW3); U2 and Y2 sit between U1 and the transmit chain, which is as today
     "C": [(U1_BLOCK, 0.0, -14.0, 0), (Y2_BLOCK, 0.0, 13.3, 0), (U2_BLOCK, -2.0, 17.0, 0), (U7_BLOCK, 0.0, 9.4, 0),
           (["TP5"], 0.0, 18.0, 0)],
+    # Round 2, branches of B: U4 with its input parts (C34 too) at the top right, 10+ mm from U2, fed by a 50-ohm receive
+    # line from U5 up the right edge; B1 keeps B's U1, B2 leaves U1 where it is and packs U2, Y2 and U7 below it,
+    # B3 is B2 with U1 turned so its I2S/USB side faces U2 and J1 and its receiver/LED side faces U4 and D1
+    "B1": dict(moves=[(U1_BLOCK, 0, -10, 0), (Y2_BLOCK, 0, 17.3, 0), (U2_BLOCK, -2, 22, 0), (U7_BLOCK, -3.5, 19.5, 0),
+                      (U4_BLOCK + ["C34"], 6, -28.5, 0), (TP_ROW, 8, -36, 0), (["TP5"], 6, 22, 0)], rf={"/RX_RF": None}),
+    "B2": dict(moves=[(Y2_BLOCK, 16.3, 19.1, 90), (U2_BLOCK, -3.2, 29.8, 0), (U7_BLOCK, 3.1, 15.4, 0),
+                      (U4_BLOCK + ["C34"], 6, -28.5, 0), (TP_ROW, 8, -36, 0)], rf={"/RX_RF": None}),
+    "B3": dict(moves=[(U1_BLOCK, 1.7, 0, 90), (Y2_BLOCK, 16.3, 19.8, 90), (U2_BLOCK, -3.2, 29.8, 0), (U7_BLOCK, 3.1, 15.4, 0),
+                      (U4_BLOCK + ["C34"], 6, -28.5, 0), (TP_ROW, 8, -36, 0)], rf={"/RX_RF": None}),
 }
+
+
+def rx_up_right_edge(P):
+    """Round 2's receive line: U5 RF1 to C34 up the right edge, clear of H3."""
+    a, b = P[("U5", "1")], P[("C34", "1")]
+    return [a, (49.5, 121.0), (57.4, 113.1), (57.4, b[1] + 1.5), b]
+
+
+for _c in CANDIDATES.values():
+    if isinstance(_c, dict):
+        _c["rf"] = {k: rx_up_right_edge for k in _c["rf"]}
 
 
 def load(board):
@@ -123,7 +144,7 @@ def cross(p1, p2, p3, p4):
     return (d(p1, p2, p3) * d(p1, p2, p4) < 0) and (d(p3, p4, p1) * d(p3, p4, p2) < 0)
 
 
-def score(parts, pads, draw=None, title="", repin=True):
+def score(parts, pads, draw=None, title="", repin=True, rf_paths=None):
     g = Grid()
     wall = np.zeros((g.ny, g.nx), dtype=np.int32)  # 0 free, else part index + 1 (or -1 for RF/edge)
     cost = np.ones((g.ny, g.nx))
@@ -142,9 +163,14 @@ def score(parts, pads, draw=None, title="", repin=True):
     rf_walls = []
     for net in RF_NETS:
         pts = [(x, y) for r, n, nn, x, y in pads if nn == net]
-        for a, b in mst(pts):
-            rf_walls.append((pts[a], pts[b]))
-            for i, j in seg_cells(g, pts[a], pts[b], 0.8):
+        if rf_paths and net in rf_paths:  # a hand-drawn run (pads at its ends)
+            path = rf_paths[net](dict(((r, n), (x, y)) for r, n, nn, x, y in pads))
+            segs = list(zip(path, path[1:]))
+        else:
+            segs = [(pts[a], pts[b]) for a, b in mst(pts)]
+        for p, q in segs:
+            rf_walls.append((p, q))
+            for i, j in seg_cells(g, p, q, 0.8):
                 wall[j, i] = -1
     for r, n, net, x, y in pads:  # every pad reachable from its own part, even inside a wall or a neighbour's courtyard
         if net not in RF_NETS:
@@ -205,7 +231,7 @@ def score(parts, pads, draw=None, title="", repin=True):
         pf *= 1.8
     over = np.maximum(use - 1, 0)
     length = sum(len(p) for p in paths.values()) * G
-    failed = [conns[k][0] for k, p in paths.items() if not p]
+    failed = [f"{conns[k][0]} {conns[k][1][0]}.{conns[k][1][1]}-{conns[k][2][0]}.{conns[k][2][1]}" for k, p in paths.items() if not p]
     res = dict(length=length, overflow=float(over.sum()), hot=int(over.max()), over_cells=int((over > 0).sum()),
                crossings=crossings, rf_cross=rf_cross, conns=len(conns), failed=failed)
     if draw:
@@ -276,7 +302,9 @@ def main():
     names = [a for a in args if a in CANDIDATES] or list(CANDIDATES)
     parts0, pads0 = load(KiCad().get_board())
     for name in names:
-        parts, pads = apply(parts0, pads0, CANDIDATES[name])
+        cand = CANDIDATES[name]
+        moves, rf = (cand["moves"], cand["rf"]) if isinstance(cand, dict) else (cand, None)
+        parts, pads = apply(parts0, pads0, moves)
         overlaps = []
         rs = sorted(parts)
         for k, r in enumerate(rs):
@@ -285,7 +313,7 @@ def main():
                 X, Y, B = parts[s]
                 if x + b[0] < X + B[2] and X + B[0] < x + b[2] and y + b[1] < Y + B[3] and Y + B[1] < y + b[3]:
                     overlaps.append(f"{r}/{s}")
-        res = score(parts, pads, f"{draw}/floorplan-{name}.png" if draw else None, name, repin=name != "now")
+        res = score(parts, pads, f"{draw}/floorplan-{name}.png" if draw else None, name, repin=name != "now", rf_paths=rf)
         print(f"{name:4} length {res['length']:6.0f} mm  overflow {res['overflow']:5.0f} in {res['over_cells']:4} cells (worst {res['hot']})"
               f"  crossings {res['crossings']:4}  across RF {res['rf_cross']:3}  failed {len(res['failed'])}"
               f"  overlaps {len(overlaps)} {overlaps[:12]}", flush=True)
