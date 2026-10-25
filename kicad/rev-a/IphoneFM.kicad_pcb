@@ -1200,7 +1200,7 @@
 		(path "/13d9ed4b-48f7-47f5-9f20-cbcdd2f42325")
 		(sheetname "/")
 		(sheetfile "IphoneFM.kicad_sch")
-		(attr exclude_from_bom)
+		(attr exclude_from_pos_files exclude_from_bom)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_circle
 			(center 0 0)
@@ -3073,7 +3073,7 @@
 		(path "/843193b9-7030-473a-a747-a74d5b4e6e47")
 		(sheetname "/")
 		(sheetfile "IphoneFM.kicad_sch")
-		(attr exclude_from_bom)
+		(attr exclude_from_pos_files exclude_from_bom)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_circle
 			(center 0 0)
@@ -8873,7 +8873,7 @@
 		(path "/85f356ef-045d-4506-b1d6-a33300f45e5f")
 		(sheetname "/")
 		(sheetfile "IphoneFM.kicad_sch")
-		(attr exclude_from_bom)
+		(attr exclude_from_pos_files exclude_from_bom)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_circle
 			(center 0 0)
@@ -10807,7 +10807,7 @@
 		(path "/487a91f9-d776-4b62-aa0a-3b0ab3cf4345")
 		(sheetname "/")
 		(sheetfile "IphoneFM.kicad_sch")
-		(attr exclude_from_bom)
+		(attr exclude_from_pos_files exclude_from_bom)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_circle
 			(center 0 0)
@@ -16182,270 +16182,6 @@
 		)
 		(embedded_fonts no)
 	)
-	(footprint "IphoneFM:TestPoint_Pad_D1.5mm"
-		(layer "F.Cu")
-		(uuid "a196a71f-45a8-4150-a8be-9e49d559a0d9")
-		(at 32.2 103.1)
-		(descr "SMD pad as test Point, diameter 1.5mm")
-		(tags "test point SMD pad")
-		(property "Reference" "TP5"
-			(at 0 -1.648 0)
-			(layer "F.SilkS")
-			(uuid "0d9e17b7-0eb9-4be8-8df0-af134349af5d")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Value" "LMX_MUX"
-			(at 0 1.75 0)
-			(layer "F.Fab")
-			(uuid "0b633286-07c7-4bc8-ac0a-ea15a083b898")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "c724042d-8a2f-4ee6-a5fc-a9375c0eb2cb")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "25e3e3d9-5f07-4a8b-9b39-af9aa3ca49d2")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "MPN" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "ec3007e0-cbe6-4219-85cb-8233835541f5")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "LCSC" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "c917e25b-168f-4f39-bd37-97ab7205a655")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Manufacturer" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "17ebb3eb-c977-4649-aae5-279d72c52f5e")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property ki_fp_filters "Pin* Test*")
-		(path "/ceee226d-ffa3-4e78-9636-d517877049fe")
-		(sheetname "/")
-		(sheetfile "IphoneFM.kicad_sch")
-		(attr exclude_from_bom)
-		(duplicate_pad_numbers_are_jumpers no)
-		(fp_circle
-			(center 0 0)
-			(end 1.25 0)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(fill no)
-			(layer "F.CrtYd")
-			(uuid "1c66174c-1757-4b82-ae5e-61c21d559890")
-		)
-		(fp_text user "${REFERENCE}"
-			(at 0 -1.65 0)
-			(layer "F.Fab")
-			(uuid "e5dc4c9f-83b3-4a8d-9882-29c2f1916cb7")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(pad "1" smd circle
-			(at 0 0)
-			(size 1.5 1.5)
-			(layers "F.Cu" "F.Mask")
-			(net "/LMX_MUX")
-			(pinfunction "1_1")
-			(pintype "passive")
-			(uuid "a211e8bc-9349-490c-a9a3-842c8c4d9ddb")
-		)
-		(embedded_fonts no)
-	)
-	(footprint "IphoneFM:TestPoint_Pad_D1.5mm"
-		(layer "F.Cu")
-		(uuid "a19ed825-559d-4a90-b0bc-a5ca47d82fd7")
-		(at 39.9 101.75)
-		(descr "SMD pad as test Point, diameter 1.5mm")
-		(tags "test point SMD pad")
-		(property "Reference" "TP8"
-			(at 0 -1.648 0)
-			(layer "F.SilkS")
-			(uuid "3e2b0b42-befc-4326-994b-fc70cb8c9df7")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Value" "SWDIO"
-			(at 0 1.75 0)
-			(layer "F.Fab")
-			(uuid "fd5f3b64-c28d-4a64-a542-66e6a6099d1b")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "8795e83f-690f-49ea-a428-79a77e09efff")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "c98d3847-da01-4679-bde1-1c2873963627")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "MPN" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "9b47ba6e-4bc7-4622-aba7-2a8b3db6c256")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "LCSC" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "9289cf90-20d1-44de-90df-27eb540adeae")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Manufacturer" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "42a97f86-2c89-4cc2-858a-a3d1ea3bb7aa")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property ki_fp_filters "Pin* Test*")
-		(path "/567598ec-2ada-41f7-80b3-1f0a88ae2218")
-		(sheetname "/")
-		(sheetfile "IphoneFM.kicad_sch")
-		(attr exclude_from_bom)
-		(duplicate_pad_numbers_are_jumpers no)
-		(fp_circle
-			(center 0 0)
-			(end 1.25 0)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(fill no)
-			(layer "F.CrtYd")
-			(uuid "50098993-e7a0-47b9-9d8d-306b2e3c485b")
-		)
-		(fp_text user "${REFERENCE}"
-			(at 0 -1.65 0)
-			(layer "F.Fab")
-			(uuid "5e97dfb1-5942-402d-8750-a2606e5fb111")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(pad "1" smd circle
-			(at 0 0)
-			(size 1.5 1.5)
-			(layers "F.Cu" "F.Mask")
-			(net "/SWDIO")
-			(pinfunction "1_1")
-			(pintype "passive")
-			(uuid "b4cac8bf-8ac7-49db-ac67-3c6426092774")
-		)
-		(embedded_fonts no)
-	)
 	(footprint "IphoneFM:SW_DIP_SPSTx06_Side_CK_TDP06H1SBD1_W7.62mm_P1.27mm"
 		(locked yes)
 		(layer "F.Cu")
@@ -19367,13 +19103,7 @@
 		(path "/8f46a5c8-b49b-4753-98db-e436b7a71d19")
 		(sheetname "/")
 		(sheetfile "IphoneFM.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1")
-			)
-		)
-		(attr exclude_from_bom)
+		(attr exclude_from_pos_files exclude_from_bom)
 		(duplicate_pad_numbers_are_jumpers no)
 		(fp_circle
 			(center 0 0)
@@ -20795,144 +20525,6 @@
 				(xyz 0 0 0)
 			)
 		)
-	)
-	(footprint "IphoneFM:TestPoint_Pad_D1.5mm"
-		(layer "F.Cu")
-		(uuid "e9619429-cd5c-4c1f-82b1-e43660832c46")
-		(at 29 121.75)
-		(descr "SMD pad as test Point, diameter 1.5mm")
-		(tags "test point SMD pad")
-		(property "Reference" "TP1"
-			(at 0 -1.648 0)
-			(layer "F.SilkS")
-			(uuid "72e02c0e-be67-4c7d-a231-a0eb0e874735")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Value" "VBUS"
-			(at 0 1.75 0)
-			(layer "F.Fab")
-			(uuid "e944ae17-d03e-4405-a8a3-f8aeb0ec86bd")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "5c17b30a-7c81-4d01-b645-c054217c3167")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "af1c3c3f-a06b-4d5d-87bb-a7a95f57c7ea")
-			(effects
-				(font
-					(size 1.27 1.27)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "MPN" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "5c8b23b7-8ef6-43da-918f-a95e3659e593")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "LCSC" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "cd1f556e-b05f-45b7-9961-32a2cbe168df")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property "Manufacturer" ""
-			(at 0 0 0)
-			(unlocked yes)
-			(layer "F.Fab")
-			(hide yes)
-			(uuid "21306286-83a4-44fe-8e3d-270d43f4b211")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(property ki_fp_filters "Pin* Test*")
-		(path "/83a950d4-bc6f-4580-b93b-c43cb862c3bc")
-		(sheetname "/")
-		(sheetfile "IphoneFM.kicad_sch")
-		(units
-			(unit
-				(name "A")
-				(pins "1")
-			)
-		)
-		(attr exclude_from_bom)
-		(duplicate_pad_numbers_are_jumpers no)
-		(fp_circle
-			(center 0 0)
-			(end 1.25 0)
-			(stroke
-				(width 0.05)
-				(type solid)
-			)
-			(fill no)
-			(layer "F.CrtYd")
-			(uuid "7fc15406-6070-4253-a9e3-b708dc22d854")
-		)
-		(fp_text user "${REFERENCE}"
-			(at 0 -1.65 0)
-			(layer "F.Fab")
-			(uuid "0dd18a62-97bc-41a7-8fc3-d639ce982898")
-			(effects
-				(font
-					(size 1 1)
-					(thickness 0.15)
-				)
-			)
-		)
-		(pad "1" smd circle
-			(at 0 0)
-			(size 1.5 1.5)
-			(layers "F.Cu" "F.Mask")
-			(net "VBUS")
-			(pinfunction "1_1")
-			(pintype "passive")
-			(uuid "ef5dde26-7776-4d4d-9dfc-7f37599c8f0b")
-		)
-		(embedded_fonts no)
 	)
 	(footprint "IphoneFM:C_0402_1005Metric"
 		(layer "F.Cu")
@@ -23958,6 +23550,426 @@
 			(net "/RF_CTRL")
 			(pintype "passive")
 			(uuid "badcbab8-6a25-4076-8a56-53d13f20b0e2")
+		)
+		(embedded_fonts no)
+	)
+	(footprint "IphoneFM:TestPoint_Pad_D1.5mm"
+		(layer "B.Cu")
+		(uuid "a196a71f-45a8-4150-a8be-9e49d559a0d9")
+		(at 34.4 103.4 180)
+		(descr "SMD pad as test Point, diameter 1.5mm")
+		(tags "test point SMD pad")
+		(property "Reference" "TP5"
+			(at 0 1.648 0)
+			(layer "B.SilkS")
+			(uuid "0d9e17b7-0eb9-4be8-8df0-af134349af5d")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Value" "LMX_MUX"
+			(at 0 -1.75 0)
+			(layer "B.Fab")
+			(uuid "0b633286-07c7-4bc8-ac0a-ea15a083b898")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "c724042d-8a2f-4ee6-a5fc-a9375c0eb2cb")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "25e3e3d9-5f07-4a8b-9b39-af9aa3ca49d2")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "MPN" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "ec3007e0-cbe6-4219-85cb-8233835541f5")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "c917e25b-168f-4f39-bd37-97ab7205a655")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Manufacturer" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "17ebb3eb-c977-4649-aae5-279d72c52f5e")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property ki_fp_filters "Pin* Test*")
+		(path "/ceee226d-ffa3-4e78-9636-d517877049fe")
+		(sheetname "/")
+		(sheetfile "IphoneFM.kicad_sch")
+		(attr exclude_from_pos_files exclude_from_bom)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_circle
+			(center 0 0)
+			(end 1.25 0)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(fill no)
+			(layer "B.CrtYd")
+			(uuid "1c66174c-1757-4b82-ae5e-61c21d559890")
+		)
+		(fp_text user "${REFERENCE}"
+			(at 0 1.65 0)
+			(layer "B.Fab")
+			(uuid "e5dc4c9f-83b3-4a8d-9882-29c2f1916cb7")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(pad "1" smd circle
+			(at 0 0 180)
+			(size 1.5 1.5)
+			(layers "B.Cu" "B.Mask")
+			(net "/LMX_MUX")
+			(pinfunction "1_1")
+			(pintype "passive")
+			(uuid "a211e8bc-9349-490c-a9a3-842c8c4d9ddb")
+		)
+		(embedded_fonts no)
+	)
+	(footprint "IphoneFM:TestPoint_Pad_D1.5mm"
+		(layer "B.Cu")
+		(uuid "a19ed825-559d-4a90-b0bc-a5ca47d82fd7")
+		(at 40.3 101.2 180)
+		(descr "SMD pad as test Point, diameter 1.5mm")
+		(tags "test point SMD pad")
+		(property "Reference" "TP8"
+			(at 0 1.648 0)
+			(layer "B.SilkS")
+			(uuid "3e2b0b42-befc-4326-994b-fc70cb8c9df7")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Value" "SWDIO"
+			(at 0 -1.75 0)
+			(layer "B.Fab")
+			(uuid "fd5f3b64-c28d-4a64-a542-66e6a6099d1b")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "8795e83f-690f-49ea-a428-79a77e09efff")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "c98d3847-da01-4679-bde1-1c2873963627")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "MPN" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "9b47ba6e-4bc7-4622-aba7-2a8b3db6c256")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "9289cf90-20d1-44de-90df-27eb540adeae")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Manufacturer" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "42a97f86-2c89-4cc2-858a-a3d1ea3bb7aa")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property ki_fp_filters "Pin* Test*")
+		(path "/567598ec-2ada-41f7-80b3-1f0a88ae2218")
+		(sheetname "/")
+		(sheetfile "IphoneFM.kicad_sch")
+		(attr exclude_from_pos_files exclude_from_bom)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_circle
+			(center 0 0)
+			(end 1.25 0)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(fill no)
+			(layer "B.CrtYd")
+			(uuid "50098993-e7a0-47b9-9d8d-306b2e3c485b")
+		)
+		(fp_text user "${REFERENCE}"
+			(at 0 1.65 0)
+			(layer "B.Fab")
+			(uuid "5e97dfb1-5942-402d-8750-a2606e5fb111")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(pad "1" smd circle
+			(at 0 0 180)
+			(size 1.5 1.5)
+			(layers "B.Cu" "B.Mask")
+			(net "/SWDIO")
+			(pinfunction "1_1")
+			(pintype "passive")
+			(uuid "b4cac8bf-8ac7-49db-ac67-3c6426092774")
+		)
+		(embedded_fonts no)
+	)
+	(footprint "IphoneFM:TestPoint_Pad_D1.5mm"
+		(layer "B.Cu")
+		(uuid "e9619429-cd5c-4c1f-82b1-e43660832c46")
+		(at 27.6 122.2 180)
+		(descr "SMD pad as test Point, diameter 1.5mm")
+		(tags "test point SMD pad")
+		(property "Reference" "TP1"
+			(at 0 1.648 0)
+			(layer "B.SilkS")
+			(uuid "72e02c0e-be67-4c7d-a231-a0eb0e874735")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Value" "VBUS"
+			(at 0 -1.75 0)
+			(layer "B.Fab")
+			(uuid "e944ae17-d03e-4405-a8a3-f8aeb0ec86bd")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "5c17b30a-7c81-4d01-b645-c054217c3167")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Description" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "af1c3c3f-a06b-4d5d-87bb-a7a95f57c7ea")
+			(effects
+				(font
+					(size 1.27 1.27)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "MPN" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "5c8b23b7-8ef6-43da-918f-a95e3659e593")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "LCSC" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "cd1f556e-b05f-45b7-9961-32a2cbe168df")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property "Manufacturer" ""
+			(at 0 0 0)
+			(unlocked yes)
+			(layer "B.Fab")
+			(hide yes)
+			(uuid "21306286-83a4-44fe-8e3d-270d43f4b211")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(property ki_fp_filters "Pin* Test*")
+		(path "/83a950d4-bc6f-4580-b93b-c43cb862c3bc")
+		(sheetname "/")
+		(sheetfile "IphoneFM.kicad_sch")
+		(attr exclude_from_pos_files exclude_from_bom)
+		(duplicate_pad_numbers_are_jumpers no)
+		(fp_circle
+			(center 0 0)
+			(end 1.25 0)
+			(stroke
+				(width 0.05)
+				(type solid)
+			)
+			(fill no)
+			(layer "B.CrtYd")
+			(uuid "7fc15406-6070-4253-a9e3-b708dc22d854")
+		)
+		(fp_text user "${REFERENCE}"
+			(at 0 1.65 0)
+			(layer "B.Fab")
+			(uuid "0dd18a62-97bc-41a7-8fc3-d639ce982898")
+			(effects
+				(font
+					(size 1 1)
+					(thickness 0.15)
+				)
+				(justify mirror)
+			)
+		)
+		(pad "1" smd circle
+			(at 0 0 180)
+			(size 1.5 1.5)
+			(layers "B.Cu" "B.Mask")
+			(net "VBUS")
+			(pinfunction "1_1")
+			(pintype "passive")
+			(uuid "ef5dde26-7776-4d4d-9dfc-7f37599c8f0b")
 		)
 		(embedded_fonts no)
 	)

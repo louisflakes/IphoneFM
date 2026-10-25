@@ -203,7 +203,7 @@ Checks:
       - **U2's east capacitor column** re-stacked (and Y2 raised 0.9 mm), so U2's CE pin (19) has a straight way in below C15. R5/C25 and R9 moved east. C11 and C12 sit above Y2. R4 sits on the REF20 line. C18/C19 shifted, so REF20 reaches pin 34 straight from the north.
       - **U3, C1 and C2** moved 1.6 mm lower, so the MICROWIRE lines pass above them.
       - **RF plan:** follows the lower U4 group. Receive-line stitching vias skip the stretch where the U7 control lanes run on the line's west side.
-      - **Still open:** TP1, TP5 and TP8 have no room on top.
+      - **TP1, TP5 and TP8** moved to the bottom side as bare pads (the user's choice), flipped with KiCad's own flip action. All test pads are now out of the position files, so the bottom side adds no assembly.
 - [ ] 5.12 Review net lengths and remove detours [HHG p77].
 - [ ] 5.13 **Review checkpoint:** the user reviews the routing.
 
