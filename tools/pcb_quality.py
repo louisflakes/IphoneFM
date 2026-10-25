@@ -9,7 +9,7 @@ this proves it is tidy (routing-quality standard, 2026-10-25):
   rf      no bottom-layer copper inside RF_BOTTOM_POLYS [AN4169 p12].
 Tracks come from the board open in KiCad; --plan adds the hand-laid runs of a routing script (its RUNS table, top layer)
 so a plan can be scored before any copper goes down.
-Usage (from the repository root): python tools/pcb_quality.py [--plan tools/pcb_route_rf.py] [--nets A,B] [--min-exit 1.0]"""
+Usage (from the repository root): python tools/pcb_quality.py [--plan SCRIPT.py[,SCRIPT.py]] [--nets A,B] [--min-exit 1.0]"""
 import collections
 import importlib.util
 import math
@@ -64,9 +64,10 @@ def main():
     from kipy import KiCad
     copper = board_copper(KiCad().get_board().get_as_string())
     if "--plan" in a:
-        plan = load_plan(a[a.index("--plan") + 1], copper)
-        planned = {c[1] for c in plan}
-        copper = [c for c in copper if not (c[0] in ("track", "via") and c[1] in planned)] + plan
+        plan = []
+        for path in a[a.index("--plan") + 1].split(","):
+            plan += load_plan(path, copper + plan)
+        copper = copper + plan
     pads = [c for c in copper if c[0] == "pad"]
     tracks = [c for c in copper if c[0] == "track"]
     vias = [c for c in copper if c[0] == "via"]
@@ -119,6 +120,9 @@ def main():
             p = pad_at(net, l, sx, sy)
             if not p or len(fp_pads[p[4].split(".")[0]]) < 5 or pad_at(net, l, ox, oy) is p:
                 continue
+            q = pad_at(net, l, ox, oy)
+            if q and q[4].split(".")[0] == p[4].split(".")[0]:
+                continue  # a bridge between two pins of one part (tied supply pins)
             px, py, phw, phh, shape, _ = p[3]
             if shape == "circle" or abs(phw - phh) < 0.02:
                 continue
@@ -155,7 +159,9 @@ def main():
                 length += math.hypot(o[0] - cur2[0], o[1] - cur2[1])
                 prev2, cur2 = cur2, o
             far = pad_at(net, l, *cur2)
-            local = far is not None and far is not p and length <= LOCAL
+            at_via = any(v[1] == net and abs(v[3][0] - cur2[0]) < 1e-3 and abs(v[3][1] - cur2[1]) < 1e-3 for v in vias)
+            # a local connection, or an escape via straight off the pin
+            local = (far is not None and far is not p and length <= LOCAL) or (at_via and length <= LOCAL)
             edge = phw if axis[0] else phh
             straight = abs((run_end[0] - px) * axis[0] + (run_end[1] - py) * axis[1]) - edge
             if straight < min_exit - TOL and not reached_pad and not local:
@@ -183,8 +189,22 @@ def main():
             tb = sorted([(bx0 - ax0) * ua[0] + (by0 - ay0) * ua[1], (bx1 - ax0) * ua[0] + (by1 - ay0) * ua[1]])
             if min(s[1], tb[1]) - max(s[0], tb[0]) < BUS_RUN:
                 continue
-            pairs[i].append((j, d))
-            pairs[j].append((i, d))
+            side = (bx0 - ax0) * -ua[1] + (by0 - ay0) * ua[0] > 0
+            pairs[i].append((j, d, side))
+            pairs[j].append((i, d, not side))
+    def fp_of(k):
+        g = tracks[k][3]
+        l = next(iter(tracks[k][2]))
+        ps = [pad_at(tracks[k][1], l, g[0], g[1]), pad_at(tracks[k][1], l, g[2], g[3])]
+        return {q[4].split(".")[0] for q in ps if q}
+    for i in list(pairs):  # keep the nearest neighbour on each side
+        best = {}
+        for j, d, s in pairs[i]:
+            if s not in best or d < best[s][1]:
+                best[s] = (j, d)
+        pairs[i] = [(j, d, s) for s, (j, d) in best.items() if not (fp_of(i) & fp_of(j))]
+    for i in list(pairs):
+        pairs[i] = [(j, d, s) for j, d, s in pairs[i] if any(k == i for k, _, _ in pairs[j])]
     seen = set()
     for i in list(pairs):
         if i in seen:
@@ -195,12 +215,12 @@ def main():
             if k in group:
                 continue
             group.add(k)
-            stack += [j for j, _ in pairs[k]]
+            stack += [j for j, _, _ in pairs[k]]
         seen |= group
         if only and not any(tracks[k][1] in only for k in group):
             continue
-        ds = sorted({round(d, 2) for k in group for _, d in pairs[k]})
-        if ds[-1] - ds[0] > TOL:
+        ds = sorted({round(d, 2) for k in group for _, d, _ in pairs[k]})
+        if ds and ds[-1] - ds[0] > TOL:
             nets = sorted({tracks[k][1].lstrip("/") for k in group})
             found["pitch"].append(f"bus of {', '.join(nets)}: pitches {', '.join(f'{d:.2f}' for d in ds)} mm")
 

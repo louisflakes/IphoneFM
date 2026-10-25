@@ -115,8 +115,8 @@ Removed from Plan C: Y1 (ABS07 32.768 kHz) and its two 5.6 pF capacitors; LSCO o
 | 39 | PB3 | SAI1_SCK_B (AF13) | U4 DCLK via 2 kΩ | |
 | 42 | PB6 | SAI1_FS_B (AF13) | U4 DFS via 2 kΩ, 3.3 pF | Bootloader I2C1_SCL (open-drain, pull-up); U4 in reset then |
 | 41 | PB5 | SAI1_SD_B (AF13) | U4 DOUT via 604 Ω | Bootloader SPI3_MOSI input; U4's DOUT is idle in reset |
-| 46 | PB9 | TIM17_CH1 (AF14) | U4 RCLK, 32,787 Hz | Bootloader FDCAN1_TX output (recessive high) into U4's RCLK input; U4 in reset then |
-| 40 | PB4 | GPIO out | U4 RSTB, 10 kΩ pull-down | Reset-state pull-up 30–50 kΩ (p132) against 10 kΩ: RSTB ≤ 0.83 V, under the Si4705's 0.3 × VD low threshold, so U4 stays in reset until firmware runs |
+| 46 | PB9 | GPIO out | U4 RSTB, 10 kΩ pull-down | Analog with no pull at reset, so R19 holds RSTB low until firmware runs. The bootloader's FDCAN1_TX drives it high (recessive) once FDCAN starts: U4 leaves reset but stays powered down with no command, which is harmless. Moved from PB4 (Phase 5, 2026-10-25) so the U4 lines leave U1 in U4's order |
+| 40 | PB4 | TIM3_CH1 (AF2) | U4 RCLK, 32,787 Hz | 160 MHz / 4880. Reset state is NJTRST with its pull-up (p132), so RCLK sits high until firmware sets the AF. Not a bootloader pin (AN2606 Table 165). Moved from PB9 |
 | 45 | PB8 | I2C1_SCL (AF4) | U4 SCLK, 6.8 kΩ pull-up | Bootloader FDCAN1_RX input: SCL idles high, the bus's recessive level |
 | 43 | PB7 | I2C1_SDA (AF4) | U4 SDIO, 6.8 kΩ pull-up | Bootloader I2C1_SDA; idles high, U4 in reset |
 | 17 | PA7 | GPIO in | RF_MODE | Bootloader SPI1_MOSI input (pull-down); the slider and R18 set its level |
@@ -263,7 +263,7 @@ Circuits as Plan C chains 7, 11 and 12. U5 is compared against four published de
 
 ## Chain 8: U4 Si4705-D60-GM receiver (QFN-20)
 
-**Designators:** C32 U4 VA bypass (22 nF X7R 50 V); C33 U4 VD bypass (100 nF X7R 16 V); C34 FMI coupling (1 nF C0G); C35 FMI emissions filter shunt (6 pF C0G); C36 DFS filter at U1 (3.3 pF C0G); C37 GPO2/INT filter (33 pF C0G); C38 GPO1 filter (33 pF C0G); FB1 FMI emissions filter (75 Ω at 100 MHz); FB3 3V3 to U4 VA/VD filter (600 Ω at 100 MHz); L1 FMI matching inductor (150 nH 2%); R19 U4 RSTB pull-down (10 kΩ 1%); R20 I²C SCL pull-up (6.8 kΩ 1%); R21 I²C SDA pull-up (6.8 kΩ 1%); R22 DOUT series (604 Ω 1%); R23 DFS series (2 kΩ 1%); R24 DCLK series (2 kΩ 1%); U4 FM receiver.
+**Designators:** C32 U4 VA bypass (22 nF X7R 50 V); C33 U4 VD bypass (100 nF X7R 16 V); C34 FMI coupling (1 nF C0G); C35 FMI emissions filter shunt (6 pF C0G); C36 DFS filter on R23's U1 side (3.3 pF C0G); C37 GPO2/INT filter (33 pF C0G); C38 GPO1 filter (33 pF C0G); FB1 FMI emissions filter (75 Ω at 100 MHz); FB3 3V3 to U4 VA/VD filter (600 Ω at 100 MHz); L1 FMI matching inductor (150 nH 2%); R19 U4 RSTB pull-down (10 kΩ 1%); R20 I²C SCL pull-up (6.8 kΩ 1%); R21 I²C SDA pull-up (6.8 kΩ 1%); R22 DOUT series (604 Ω 1%); R23 DFS series (2 kΩ 1%); R24 DCLK series (2 kΩ 1%); U4 FM receiver.
 
 **References:**
 - **Datasheet Si4704/05-D60 Rev 1.2:** QFN typical schematic (p16), BOM (Table 12, p18), DC characteristics (p5), RCLK (p14).
@@ -292,7 +292,7 @@ Circuits as Plan C chains 7, 11 and 12. U5 is compared against four published de
 | RCLK 9 | — | U1 timer output, 32,787 Hz | | See above |
 | ROUT 13, LOUT 14 | — | GND | | Closes reference-check U4 gap 3 (AN383 p17; USB FM Radio). Firmware keeps analog outputs off |
 | DOUT 15 | Yageo RC0402FR-07604RL | R22 (datasheet R1) 604 Ω series → U1 SAI1-B SD | C273693 | Table 12 (600 Ω) |
-| DFS 16 | Panasonic ERJ-2RKF2001X + Murata GRM1555C1H3R3CA01D | R23 (datasheet R2) 2 kΩ series → SAI1-B FS; C36 (datasheet C9) 3.3 pF C0G to GND at U1 | C413086, 12,348 / C76968, 14,752 | Table 12 (2 kΩ; C9 2–5 pF) |
+| DFS 16 | Panasonic ERJ-2RKF2001X + Murata GRM1555C1H3R3CA01D | R23 (datasheet R2) 2 kΩ series → SAI1-B FS; C36 (datasheet C9) 3.3 pF C0G to GND on R23's U1 side, as the datasheet draws it | C413086, 12,348 / C76968, 14,752 | Table 12 (2 kΩ; C9 2–5 pF) |
 | GPO3/DCLK 17 | Panasonic ERJ-2RKF2001X | R24 (datasheet R3) 2 kΩ series → SAI1-B SCK | C413086 | Table 12 |
 | GPO2/INT 18, GPO1 19 | Samsung CL05C330JB5NNNC ×2 | 33 pF to GND; otherwise floating | C70465 | AN383 p8 option 1. Firmware polls (reference-check gap 2 left as optional) |
 | NC 1, 20 | — | Floating | | p16 note 3 |

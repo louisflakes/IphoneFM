@@ -18022,7 +18022,7 @@
 		(stroke (width 0) (type default))
 		(uuid "1abe1000-0000-4000-8000-00000000001f")
 	)
-	(label "RX_RCLK"
+	(label "RX_RST"
 		(at 205.74 266.70 180)
 		(effects (font (size 1.27 1.27)) (justify right bottom))
 		(uuid "1abe1000-0000-4000-8000-000000000020")
@@ -18037,7 +18037,7 @@
 		(stroke (width 0) (type default))
 		(uuid "1abe1000-0000-4000-8000-000000000023")
 	)
-	(label "RX_RST"
+	(label "RX_RCLK"
 		(at 205.74 254.00 180)
 		(effects (font (size 1.27 1.27)) (justify right bottom))
 		(uuid "1abe1000-0000-4000-8000-000000000024")

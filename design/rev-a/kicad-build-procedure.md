@@ -192,6 +192,18 @@ Checks:
         - DRC is clean apart from J1's known hole findings.
       - **New `tools/pcb_quality.py`:** the routing-quality check, run alongside `pcb_drc.py`. It checks 45° segments, 45° bends, straight pin exits of at least 1 mm (local connections of up to 2.5 mm excepted), one pitch per bus, clearance and the RF bottom zones. It also scores plans before any copper goes down. The RF plan passes it.
       - **Lane plan** (`phase5-lanes.json`, `phase5-lane-plan.png`), for the user's review before routing.
+    - Complications cleared before routing (2026-10-25, the user's go-ahead):
+      - **U1 re-pin:** RX_RST moved to PB9 (46) and RX_RCLK to PB4 (40, TIM3_CH1 AF2). The receiver lines now leave U1 in nearly U4's order; the U1-to-U4 crossings drop from 8 to 3. Checked against DS14217 Tables 27/28 and AN2606 Table 165. FS/SD stays one crossing, because SAI1 block B fixes FS on PB6 above SD on PB5.
+      - **U4 corner, fully planned** in `tools/pcb_route_u4.py`:
+        - U4's group is 2.5 mm lower.
+        - RCLK and RST reach U4 on the bottom layer; FS dives under SD within the bundle.
+        - SDA and SCL run down the strip on U4's east side; the pull-ups sit where those lines are outermost.
+        - The FS/SD series parts and U4's supply parts sit in a pocket above U4.
+        - C36 (the datasheet's C9) moved to R23's U1 side, where Si4704/05 p16 draws it. R3 moved to SW2.
+      - **U2's east capacitor column** re-stacked (and Y2 raised 0.9 mm), so U2's CE pin (19) has a straight way in below C15. R5/C25 and R9 moved east. C11 and C12 sit above Y2. R4 sits on the REF20 line. C18/C19 shifted, so REF20 reaches pin 34 straight from the north.
+      - **U3, C1 and C2** moved 1.6 mm lower, so the MICROWIRE lines pass above them.
+      - **RF plan:** follows the lower U4 group. Receive-line stitching vias skip the stretch where the U7 control lanes run on the line's west side.
+      - **Still open:** TP1, TP5 and TP8 have no room on top.
 - [ ] 5.12 Review net lengths and remove detours [HHG p77].
 - [ ] 5.13 **Review checkpoint:** the user reviews the routing.
 

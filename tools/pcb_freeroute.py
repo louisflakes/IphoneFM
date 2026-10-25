@@ -22,12 +22,13 @@ FREEROUTING = os.path.expanduser(r"~\.freerouting\2.5.0-full\freerouting\freerou
 # A, the transmit chain below U1: U2's RF half (exposed pad, RF out, loop filter side), C26, U7, the filter, U5, the
 #    antenna line and J2; U2's digital (left) side stays open for the FSK and MICROWIRE hops;
 # B, the 50-ohm receive line from U5 past H3's west side and up to C34, about 1.5 mm each side;
-# C, U4 with its input parts (C34, L1, FB1, C35); its west edge leaves room for crossings beside U4.
+# C, U4 with its input parts (C34, L1, FB1, C35); its west edge leaves room for crossings beside U4, and its east edge
+#    beside U4's digital pins room for the RCLK and RST lines that reach them on the bottom (tools/pcb_route_u4.py).
 RF_BOTTOM_POLYS = [
     [(39.5, 104.5), (49.3, 104.5), (49.3, 121.3), (59.0, 121.3), (59.0, 131.0), (41.6, 131.0), (41.6, 121.0),
      (39.5, 121.0)],
-    [(48.7, 121.3), (48.7, 113.4), (52.9, 109.2), (52.9, 93.0), (55.9, 93.0), (55.9, 110.4), (51.7, 114.6), (51.7, 121.3)],
-    [(51.4, 80.6), (56.9, 80.6), (56.9, 95.6), (51.4, 95.6)],
+    [(48.7, 121.3), (48.7, 113.4), (52.9, 109.2), (52.9, 96.0), (55.9, 96.0), (55.9, 110.4), (51.7, 114.6), (51.7, 121.3)],
+    [(51.4, 83.1), (56.3, 83.1), (56.3, 90.6), (56.9, 90.6), (56.9, 98.6), (51.4, 98.6)],
 ]
 
 

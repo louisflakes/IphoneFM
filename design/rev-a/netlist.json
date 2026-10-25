@@ -478,7 +478,7 @@
     },
     "40": {
      "name": "PB4",
-     "net": "RX_RST"
+     "net": "RX_RCLK"
     },
     "41": {
      "name": "PB5",
@@ -502,7 +502,7 @@
     },
     "46": {
      "name": "PB9",
-     "net": "RX_RCLK"
+     "net": "RX_RST"
     },
     "47": {
      "name": "VSS",
@@ -689,7 +689,7 @@
    "pins": 2,
    "chain": 3,
    "function": "BOOT0 pull-down",
-   "local_to": "U1.44",
+   "local_to": "SW2.2",
    "pinmap": {
     "1": {
      "net": "BOOT0"
@@ -2318,8 +2318,8 @@
    "package": "0402",
    "pins": 2,
    "chain": 8,
-   "function": "DFS filter at U1",
-   "local_to": "U1.42",
+   "function": "DFS filter on R23's U1 side",
+   "local_to": "R23.2",
    "ds_name": "C9 (Si4705)",
    "pinmap": {
     "1": {
@@ -2947,21 +2947,21 @@
   "RX_SCK": "DCLK at U4",
   "RX_SCK_MCU": "DCLK at U1, after R24",
   "RX_FS": "DFS at U4",
-  "RX_FS_MCU": "DFS at U1, after R23, with C36",
+  "RX_FS_MCU": "DFS from U1 to R23, with C36 at R23",
   "RX_SD": "DOUT at U4",
   "RX_SD_MCU": "DOUT at U1, after R22",
-  "RX_RCLK": "32,787 Hz from U1 TIM16 to U4 RCLK",
+  "RX_RCLK": "32,787 Hz from U1 TIM3_CH1 (PB4) to U4 RCLK",
   "RX_RST": "U4 reset, R19 pull-down",
   "RX_GPO1": "U4 GPO1 filter cap",
   "RX_GPO2": "U4 GPO2/INT filter cap",
   "I2C_SCL": "I2C clock U1-U4, R20 pull-up",
   "I2C_SDA": "I2C data U1-U4, R21 pull-up",
-  "WHEEL1": "RV1 wiper to U1 PA2",
-  "WHEEL2": "RV2 wiper to U1 PA3",
+  "WHEEL1": "RV1 wiper to U1 PA3",
+  "WHEEL2": "RV2 wiper to U1 PA4",
   "WHEEL3": "RV3 wiper to U1 PA5",
-  "LED_R": "U1 PB4 to R25",
-  "LED_G": "U1 PB10 to R26",
-  "LED_B": "U1 PB1 to R27",
+  "LED_R": "U1 PA0 to R25",
+  "LED_G": "U1 PA1 to R26",
+  "LED_B": "U1 PA2 to R27",
   "LED_R_K": "R25 to D1 red cathode",
   "LED_G_K": "R26 to D1 green cathode",
   "LED_B_K": "R27 to D1 blue cathode"

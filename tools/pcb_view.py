@@ -3,7 +3,7 @@ blue, through-hole grey), tracks and vias, coloured by layer, with each part's r
 on the pads. Optional plan lines (dashed) are drawn over it; --runs adds a routing script's planned tracks and vias
 (its plan() function) as copper, and --zones shades the no-bottom-copper RF areas.
 Usage (from the repository root, board open in KiCad):
-  python tools/pcb_view.py X0 Y0 X1 Y1 OUT.png [--nets] [--plan FILE.json] [--runs SCRIPT.py] [--zones] [--title T]"""
+  python tools/pcb_view.py X0 Y0 X1 Y1 OUT.png [--nets] [--plan FILE.json] [--runs SCRIPT.py[,SCRIPT.py]] [--zones] [--title T]"""
 import json
 import sys
 
@@ -23,13 +23,11 @@ def draw(board, box, out, nets=False, plan=None, runs=None, zones=False, title=N
     x0, y0, x1, y1 = box
     copper = board_copper(board.get_as_string())
     if runs:
-        import importlib.util
-        spec = importlib.util.spec_from_file_location("runs", runs)
-        mod = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(mod)
-        planned = mod.plan(copper)
-        names = {c[1] for c in planned}
-        copper = [c for c in copper if not (c[0] in ("track", "via") and c[1] in names)] + planned
+        from pcb_quality import load_plan
+        planned = []
+        for path in runs.split(","):
+            planned += load_plan(path, copper + planned)
+        copper = copper + planned
     inbox = lambda x, y, m=1.0: x0 - m < x < x1 + m and y0 - m < y < y1 + m
     fig, ax = plt.subplots(figsize=(10, 10 * (y1 - y0) / (x1 - x0)), dpi=150)
     refs = {}
@@ -82,7 +80,7 @@ def draw(board, box, out, nets=False, plan=None, runs=None, zones=False, title=N
         for hx, hy in p.get("hops", []):  # a bottom-layer hop: one marker per via pair
             ax.add_patch(Circle((hx, hy), 0.55, fc="#f28e2b", ec="black", lw=0.5, zorder=10))
         if p.get("label"):
-            lx, ly = p.get("at", p["pts"][-1] if p.get("pts") else p["hops"][0])
+            lx, ly = p["at"] if "at" in p else p["pts"][-1] if p.get("pts") else p["hops"][0]
             ax.text(lx, ly, p["label"], fontsize=p.get("size", 6.5), color=col, weight="bold", zorder=11,
                     bbox=dict(fc="white", ec="none", alpha=0.75, pad=0.6))
     ax.set_xlim(x0, x1)

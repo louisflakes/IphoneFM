@@ -21,6 +21,10 @@ W, NECK = 0.92, 0.25
 VIA, DRILL = 0.6, 0.3
 STITCH_OFF, STITCH_PITCH = 1.1, 2.0   # stitching via centres: from the line's centre, and along it
 STITCHED = ("/RX_RF", "/ANT")
+# no stitching vias where the U7 control lanes (SW3 to U7) run beside the receive line's west side; that side keeps its
+# ground pour, the east side keeps its vias (lane plan, 2026-10-25)
+RESERVED = [[(46.0, 119.6), (49.4, 119.6), (49.4, 114.4), (53.1, 110.7), (53.1, 95.8), (49.8, 95.8), (49.8, 109.6),
+             (46.0, 113.4)]]
 
 # ref: (x, y, rotation) nudges for this plan
 PLACE = {
@@ -35,9 +39,10 @@ PLACE = {
     "R17": (45.84, 129.95, 0),    # control series resistor at the foot of the control line; RF_MODE comes from the west
     "R16": (49.5, 126.55, 180),   # supply feed level with U5's supply line, above the antenna line
     "D5": (49.6, 128.65, -90),    # ESD diode just below the antenna line
-    "L1": (55.187, 90.5, 0),      # match shunt with its pad 1 on the FMI_MATCH line
-    "FB1": (53.15, 87.03, 90),    # under U4's FMI pin
-    "C35": (51.87, 87.025, -90),  # FMI shunt beside FB1
+    "L1": (55.187, 93.0, 0),      # match shunt with its pad 1 on the FMI_MATCH line
+    "FB1": (53.15, 89.53, 90),    # under U4's FMI pin (U4's group sits 2.5 mm lower since the corner plan)
+    "C35": (51.87, 89.525, -90),  # FMI shunt beside FB1
+    "C34": (54.4, 96.64, 90),     # DC block at the top of the receive line
 }
 
 # net: [(points, width), ...] -- each run is a polyline; a line ends at a pad's centre, never just across it
@@ -58,10 +63,10 @@ RUNS = {
     "/RF_CTRL": [([(46.35, 124.738), (46.35, 128.6), (46.35, 129.95)], NECK),
                  ([(46.35, 128.6), (47.22, 128.6)], NECK)],                      # to C31
     "/RX_RF": [([(47.65, 123.062), (47.65, 121.55)], 0.35),
-               ([(47.65, 121.55), (50.2, 119.0), (50.2, 114.0), (54.4, 109.8), (54.4, 94.62)], W)],
-    "/FMI_MATCH": [([(54.4, 93.66), (54.4, 90.5), (54.4, 89.0), (53.15, 87.75), (53.15, 87.515)], NECK)],
-    "/FMI": [([(53.15, 86.545), (53.15, 85.05)], NECK),
-             ([(53.15, 86.545), (51.87, 86.545)], NECK)],                       # to C35
+               ([(47.65, 121.55), (50.2, 119.0), (50.2, 114.0), (54.4, 109.8), (54.4, 97.12)], W)],
+    "/FMI_MATCH": [([(54.4, 96.16), (54.4, 93.0), (54.4, 91.5), (53.15, 90.25), (53.15, 90.015)], NECK)],
+    "/FMI": [([(53.15, 89.045), (53.15, 87.55)], NECK),
+             ([(53.15, 89.045), (51.87, 89.045)], NECK)],                       # to C35
 }
 
 
@@ -72,7 +77,7 @@ def segments(only=None):
 
 def stitching(copper):
     """GND via sites along both sides of the 50 ohm runs, kept where they clear all other copper by 0.2 mm."""
-    from shapely.geometry import LineString, Point, box
+    from shapely.geometry import LineString, Point, Polygon, box
     obst = []
     for kind, net, lay, g, name in copper:
         if net == "GND" and kind != "pad":
@@ -86,6 +91,7 @@ def stitching(copper):
         else:
             obst.append(Point(g[0], g[1]).buffer(g[2]))
     obst += [LineString([a, b]).buffer(w / 2) for _, a, b, w in segments()]
+    obst += [Polygon(p) for p in RESERVED]
     sites = []
     for net in STITCHED:
         for pts, w in RUNS[net]:
