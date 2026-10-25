@@ -111,28 +111,30 @@ Removed from Plan C: Y1 (ABS07 32.768 kHz) and its two 5.6 pF capacitors; LSCO o
 | 27 | PB14 | GPIO out | U2 CLK | MICROWIRE driven by firmware (bit-banged), so the four lines reach U2's pins in its own order with no crossing (Phase 5, 2026-10-24) |
 | 26 | PB13 | GPIO out | U2 DATA | |
 | 25 | PB12 | GPIO out | U2 LE | |
-| 20 | PB2 | GPIO out | U2 CE, 10 kΩ pull-down | No reset-state pull |
+| 6 | PH1 | GPIO out | U2 CE, 10 kΩ pull-down | No reset-state pull, so CE stays under the LMX2571's 0.4 V low threshold (p8). Not a bootloader pin |
 | 39 | PB3 | SAI1_SCK_B (AF13) | U4 DCLK via 2 kΩ | |
-| 14 | PA4 | SAI1_FS_B (AF13) | U4 DFS via 2 kΩ, 3.3 pF | Bootloader SPI1_NSS; U4 in reset then |
-| 41 | PB5 | SAI1_SD_B (AF13) | U4 DOUT via 604 Ω | |
-| 45 | PB8 | TIM16_CH1 (AF14) | U4 RCLK, 32,787 Hz | |
-| 16 | PA6 | GPIO out | U4 RSTB, 10 kΩ pull-down | Not PB4 or PA15: their reset-state pull-ups would fight the pull-down |
-| 42 | PB6 | I2C1_SCL (AF4) | U4 SCLK, 6.8 kΩ pull-up | Bootloader I2C1 pins, idle high |
-| 43 | PB7 | I2C1_SDA (AF4) | U4 SDIO, 6.8 kΩ pull-up | |
-| 18 | PB0 | GPIO in | RF_MODE | |
-| 10 | PA0 | ADC1_IN5 | CC1 | |
-| 11 | PA1 | ADC1_IN6 | CC2 | |
-| 12 | PA2 | ADC1_IN7 | RV1 wiper | |
-| 13 | PA3 | ADC1_IN8 | RV2 wiper | |
+| 42 | PB6 | SAI1_FS_B (AF13) | U4 DFS via 2 kΩ, 3.3 pF | Bootloader I2C1_SCL (open-drain, pull-up); U4 in reset then |
+| 41 | PB5 | SAI1_SD_B (AF13) | U4 DOUT via 604 Ω | Bootloader SPI3_MOSI input; U4's DOUT is idle in reset |
+| 46 | PB9 | TIM17_CH1 (AF14) | U4 RCLK, 32,787 Hz | Bootloader FDCAN1_TX output (recessive high) into U4's RCLK input; U4 in reset then |
+| 40 | PB4 | GPIO out | U4 RSTB, 10 kΩ pull-down | Reset-state pull-up 30–50 kΩ (p132) against 10 kΩ: RSTB ≤ 0.83 V, under the Si4705's 0.3 × VD low threshold, so U4 stays in reset until firmware runs |
+| 45 | PB8 | I2C1_SCL (AF4) | U4 SCLK, 6.8 kΩ pull-up | Bootloader FDCAN1_RX input: SCL idles high, the bus's recessive level |
+| 43 | PB7 | I2C1_SDA (AF4) | U4 SDIO, 6.8 kΩ pull-up | Bootloader I2C1_SDA; idles high, U4 in reset |
+| 17 | PA7 | GPIO in | RF_MODE | Bootloader SPI1_MOSI input (pull-down); the slider and R18 set its level |
+| 18 | PB0 | ADC1_IN15 | CC1 | TT_ha (3.6 V tolerant); CC stays under about 2.6 V with Rd |
+| 19 | PB1 | ADC1_IN16 | CC2 | FT_ha |
+| 13 | PA3 | ADC1_IN8 | RV1 wiper | |
+| 14 | PA4 | ADC1_IN9 | RV2 wiper | Bootloader SPI1_NSS input; SPI1 may select, and its MISO (PA6) is left unconnected |
 | 15 | PA5 | ADC1_IN10 | RV3 wiper | Bootloader SPI1_SCK; a static voltage never clocks it |
-| 40 | PB4 | TIM3_CH1 (AF2), open-drain | LED red via 510 Ω | 5 V tolerant (FT_fa) |
-| 21 | PB10 | TIM2_CH3 (AF1), open-drain | LED green via 390 Ω | FT_fhv; bootloader I2C2_SCL pull-up keeps the LED dark |
-| 19 | PB1 | TIM3_CH4 (AF2), open-drain | LED blue via 390 Ω | FT_ha |
+| 10 | PA0 | TIM2_CH1 (AF1), open-drain | LED red via 510 Ω | FT_hat: 5 V tolerant with pulls off (p132 note 5); analog with no pull at reset, so the LED stays dark |
+| 11 | PA1 | TIM2_CH2 (AF1), open-drain | LED green via 390 Ω | FT_hat |
+| 12 | PA2 | TIM2_CH3 (AF1), open-drain | LED blue via 390 Ω | FT_ha |
 | 44 | PH3 | BOOT0 | SW2, 10 kΩ pull-down | |
 | 5 | PH0 | OSC_IN (HSE bypass) | Y2 via 33 Ω | |
 | 32, 33 | PA11, PA12 | USB_DM, USB_DP | J1 | |
 | 34, 37 | PA13, PA14 | SWDIO, SWCLK | SWD pads | |
-| 2, 6, 17, 38, 46 | PC13, PH1, PA7, PA15, PB9 | — | Spare, unconnected | PA7 (SPI1_MOSI) and PB9 (FDCAN1_TX) are bootloader pins, so they stay free |
+| 2, 16, 20, 21, 38 | PC13, PA6, PB2, PB10, PA15 | — | Spare, unconnected | PA6 is the bootloader's SPI1_MISO output (AN2606 p387), so it stays free |
+
+Pins 6, 10–19, 40, 42, 45 and 46 were reassigned on 2026-10-25 for the turned U1 of floorplan B3: receiver lines and LEDs face U4 and D1, wheels and CC face the left and J1. Each pin checked against DS14217 Tables 26–28 and p132 and AN2606 Table 165.
 
 ## Chain 4: Y2 20 MHz reference oscillator (YXC OT322520MJBA4SL)
 

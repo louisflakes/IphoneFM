@@ -342,7 +342,7 @@
     },
     "6": {
      "name": "PH1-OSC_OUT",
-     "net": "NC"
+     "net": "LMX_CE"
     },
     "7": {
      "name": "NRST",
@@ -358,23 +358,23 @@
     },
     "10": {
      "name": "PA0",
-     "net": "CC1"
+     "net": "LED_R"
     },
     "11": {
      "name": "PA1",
-     "net": "CC2"
+     "net": "LED_G"
     },
     "12": {
      "name": "PA2",
-     "net": "WHEEL1"
+     "net": "LED_B"
     },
     "13": {
      "name": "PA3",
-     "net": "WHEEL2"
+     "net": "WHEEL1"
     },
     "14": {
      "name": "PA4",
-     "net": "RX_FS_MCU"
+     "net": "WHEEL2"
     },
     "15": {
      "name": "PA5",
@@ -382,27 +382,27 @@
     },
     "16": {
      "name": "PA6",
-     "net": "RX_RST"
+     "net": "NC"
     },
     "17": {
      "name": "PA7",
-     "net": "NC"
+     "net": "RF_MODE"
     },
     "18": {
      "name": "PB0",
-     "net": "RF_MODE"
+     "net": "CC1"
     },
     "19": {
      "name": "PB1",
-     "net": "LED_B"
+     "net": "CC2"
     },
     "20": {
      "name": "PB2",
-     "net": "LMX_CE"
+     "net": "NC"
     },
     "21": {
      "name": "PB10",
-     "net": "LED_G"
+     "net": "NC"
     },
     "22": {
      "name": "VCAP",
@@ -478,7 +478,7 @@
     },
     "40": {
      "name": "PB4",
-     "net": "LED_R"
+     "net": "RX_RST"
     },
     "41": {
      "name": "PB5",
@@ -486,7 +486,7 @@
     },
     "42": {
      "name": "PB6",
-     "net": "I2C_SCL"
+     "net": "RX_FS_MCU"
     },
     "43": {
      "name": "PB7",
@@ -498,11 +498,11 @@
     },
     "45": {
      "name": "PB8",
-     "net": "RX_RCLK"
+     "net": "I2C_SCL"
     },
     "46": {
      "name": "PB9",
-     "net": "NC"
+     "net": "RX_RCLK"
     },
     "47": {
      "name": "VSS",
@@ -2319,7 +2319,7 @@
    "pins": 2,
    "chain": 8,
    "function": "DFS filter at U1",
-   "local_to": "U1.14",
+   "local_to": "U1.42",
    "ds_name": "C9 (Si4705)",
    "pinmap": {
     "1": {
@@ -2446,7 +2446,7 @@
    "pins": 2,
    "chain": 9,
    "function": "Wheel 1 ADC reservoir",
-   "local_to": "U1.12",
+   "local_to": "U1.13",
    "pinmap": {
     "1": {
      "net": "WHEEL1"
@@ -2509,7 +2509,7 @@
    "pins": 2,
    "chain": 9,
    "function": "Wheel 2 ADC reservoir",
-   "local_to": "U1.13",
+   "local_to": "U1.14",
    "pinmap": {
     "1": {
      "net": "WHEEL2"
