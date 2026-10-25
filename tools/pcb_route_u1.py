@@ -20,17 +20,14 @@ PLAN = [
     ("/VCAP", "U1.22", "C9.1", S, "F", 4), ("/NRST", "U1.7", "C10.1", S, "F", 4),
     ("/WHEEL1", "U1.12", "C39.1", S, "F", 4), ("/WHEEL2", "U1.13", "C40.1", S, "F", 4), ("/WHEEL3", "U1.15", "C41.1", S, "F", 4),
     ("/RX_FS_MCU", "U1.14", "C36.1", S, "F", 4), ("/BOOT0", "U1.44", "R3.1", S, "F", 4),
-    ("/FSK_CLK_MCU", "U1.29", "R6.1", S, "F", 4), ("/FSK_FS_MCU", "U1.30", "R7.1", S, "F", 4), ("/FSK_DATA_MCU", "U1.31", "R8.1", S, "F", 4),
     # 2. short critical links to U2 and the reference
-    ("/FSK_CLK", "R6.2", "U2.4", S, "FB", 10), ("/FSK_FS", "R7.2", "U2.7", S, "FB", 10), ("/FSK_DATA", "R8.2", "U2.6", S, "FB", 10),
-    ("/LMX_DATA", "U1.28", "U2.12", S, "FB", 10), ("/LMX_CLK", "U1.26", "U2.11", S, "FB", 10),
-    ("/LMX_LE", "U1.25", "U2.13", S, "FB", 10), ("/LMX_MUX", "U1.27", "U2.10", S, "FB", 10), ("/LMX_MUX", "U1.27", "TP5.1", S, "FB", 10),
+    # (U1's right side, pins 25-37, is laid by pcb_lay_u1right.py; TP5 joins LMX_MUX on its way to U2)
+    ("/LMX_MUX", "TP5.1", "40.9,84.0", S, "FB", 14),
     ("/REF20", "Y2.3", "R4.1", S, "F", 4), ("/REF20", "Y2.3", "U2.34", S, "FB", 10), ("/REF20_MCU", "R4.2", "U1.5", S, "FB", 10),
     # 3. connectors, controls and test pads
-    ("/USB_DP", "U1.33", "U6.1", S, "FB", 10), ("/USB_DM", "U1.32", "U6.3", S, "FB", 10),
     ("/CC1", "U1.10", "R1.1", S, "FB", 10), ("/CC2", "U1.11", "R2.1", S, "FB", 10),
     ("/WHEEL1", "C39.1", "RV1.2", S, "FB", 10), ("/WHEEL2", "C40.1", "RV2.2", S, "FB", 10), ("/WHEEL3", "C41.1", "RV3.2", S, "FB", 10),
-    ("/NRST", "C10.1", "TP6.1", S, "FB", 10), ("/SWCLK", "U1.37", "TP7.1", S, "FB", 10), ("/SWDIO", "U1.34", "TP8.1", S, "FB", 10),
+    ("/NRST", "C10.1", "TP6.1", S, "FB", 10),
     ("/BOOT0", "R3.1", "SW2.2", S, "FB", 15), ("/RF_MODE", "U1.18", "SW1.2", S, "FB", 15),
     # 4. long runs over U2, to the right of the transmit line
     ("/I2C_SCL", "U1.42", "U4.7", S, "FB", 40), ("/I2C_SDA", "U1.43", "U4.8", S, "FB", 40),
