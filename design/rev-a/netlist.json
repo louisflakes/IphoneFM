@@ -188,7 +188,7 @@
    "pinmap": {
     "1": {
      "name": "I/O1",
-     "net": "USB_DM"
+     "net": "USB_DP"
     },
     "2": {
      "name": "GND",
@@ -196,11 +196,11 @@
     },
     "3": {
      "name": "I/O2",
-     "net": "USB_DP"
+     "net": "USB_DM"
     },
     "4": {
      "name": "I/O2",
-     "net": "USB_DP"
+     "net": "USB_DM"
     },
     "5": {
      "name": "VBUS",
@@ -208,7 +208,7 @@
     },
     "6": {
      "name": "I/O1",
-     "net": "USB_DM"
+     "net": "USB_DP"
     }
    },
    "pin_source": "USBLC6-2 Rev 2 p1-2 (flow-through: 1/6 and 3/4 carry the same line)"

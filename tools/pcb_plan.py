@@ -31,10 +31,11 @@ def _offsets(pitch, k):
     return off
 
 
-def turn(starts, u, v, lanes, pitch, tips=0.0, min_exit=1.0, min_tail=0.0):
+def turn(starts, u, v, lanes, pitch, tips=0.0, min_exit=1.0, min_tail=0.0, late=False):
     """Lines start at `starts` (pad centres, ordered from the inside of the bend outwards), leave along unit vector u,
     bend through 45 degrees and run along unit vector v at u-coordinates `lanes` (u . point = lane).
-    `tips`: distance from each start to its pad's tip along u (a number or a list). Returns, per line, the points
+    `tips`: distance from each start to its pad's tip along u (a number or a list). `late` bends each line as late as
+    the lanes allow (long straight runs, short diagonals) instead of as early. Returns, per line, the points
     [start, first bend, second bend]; the caller carries each line on along v."""
     n = ((u[0] - v[0]) / R2, (u[1] - v[1]) / R2)
     k = len(starts)
@@ -47,9 +48,10 @@ def turn(starts, u, v, lanes, pitch, tips=0.0, min_exit=1.0, min_tail=0.0):
     hi = min((lanes[i] - us[i] - min_tail + us[i] - vs[i]) / R2 - off[i] for i in range(k))
     if lo > hi + 1e-9:
         raise ValueError(f"turn: no room (needs {lo:.3f}, room up to {hi:.3f})")
+    d0 = hi if late else lo  # late: run straight as far as the lanes allow, bend at the last moment
     out = []
     for i, s in enumerate(starts):
-        a = R2 * (lo + off[i]) - us[i] + vs[i]
+        a = R2 * (d0 + off[i]) - us[i] + vs[i]
         t = lanes[i] - us[i] - a
         b = add(s, u, a)
         c = add(add(b, u, t), v, t)

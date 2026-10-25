@@ -31,6 +31,17 @@ RF_BOTTOM_POLYS = [
     [(51.4, 83.1), (56.3, 83.1), (56.3, 90.6), (56.9, 90.6), (56.9, 98.6), (51.4, 98.6)],
 ]
 
+# 3V3 may run on the bottom inside zone A in these two corridors only (the user's choice, 2026-10-25), because U7's
+# supply and LE pins and C27 are boxed in on top by the RF lines, CE and the attenuator's control lines:
+#   1  from a via inside the PLL capacitor column (on U2 pin 20's line to C15) south under CE to a via at C27;
+#   2  from a via below U7's LE pin (16) east past U7's lower-right corner and north to a via beside C27.
+# Neither passes under an RF line or RF pin (tools/pcb_route_u2.py lays both).
+RF_BOTTOM_ALLOW = {"3V3": [
+    [(43.95, 111.86), (42.91, 112.9), (43.55, 113.54), (44.85, 112.24), (44.85, 109.68), (43.95, 109.68)],
+    [(43.54, 120.75), (44.85, 120.75), (44.85, 114.5), (43.95, 114.5), (43.95, 119.85), (43.16, 119.85),
+     (42.41, 120.6), (43.05, 121.24)],
+]}
+
 
 def export(d):
     for f in ("IphoneFM.kicad_pcb", "IphoneFM.kicad_pro", "IphoneFM.kicad_dru"):

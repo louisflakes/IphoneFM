@@ -81,10 +81,10 @@ const LAYERS = [
 const ATT = [["C16", 19, 290, 1, "16"], ["C8", 20, 325, 2, "8"], ["C4", 21, 360, 3, "4"], ["C2", 22, 395, 4, "2"], ["C1", 23, 430, 5, "1"], ["C0_5", 24, 465, 6, "0.5"]];
 const NETS = [
   { name: "USB_DP", layer: "usb", from: "J1 A6 + B6 (D+)", to: "U1 PA12 / USB_DP (33)",
-    between: "A6–B6 joined at the socket, stub ≤ 3.5 mm. D+ pull-up is inside U1, no resistor. ESD: U6 ST USBLC6-2SC6 at J1, D+ through I/O2 (pins 3/4)", src: "HRO TYPE-C-31-M-12 p1 · Type-C R2.5 p76 · DS14217 p107 · AN2606 p388 · bom chain 1",
+    between: "A6–B6 joined at the socket, stub ≤ 3.5 mm. D+ pull-up is inside U1, no resistor. ESD: U6 ST USBLC6-2SC6 at J1, D+ through I/O1 (pins 1/6)", src: "HRO TYPE-C-31-M-12 p1 · Type-C R2.5 p76 · DS14217 p107 · AN2606 p388 · bom chain 1",
     paths: [[[-186, 100], [190, 100]]], parts: [[40, "U6"]] },
   { name: "USB_DM", layer: "usb", from: "J1 A7 + B7 (D−)", to: "U1 PA11 / USB_DM (32)",
-    between: "A7–B7 joined at the socket. ESD: U6 USBLC6-2SC6, D− through I/O1 (pins 1/6)", src: "HRO p1 · Type-C R2.5 p76 · DS14217 p107 · bom chain 1",
+    between: "A7–B7 joined at the socket. ESD: U6 USBLC6-2SC6, D− through I/O2 (pins 3/4)", src: "HRO p1 · Type-C R2.5 p76 · DS14217 p107 · bom chain 1",
     paths: [[[-186, 140], [190, 140]]], parts: [[40, "U6"]] },
   { name: "CC1", layer: "usb", from: "J1 A5 (CC1)", to: "U1 PB0 / ADC1_IN15 (18)",
     between: "R1 5.1 kΩ 1 % to GND (Yageo RC0402FR-075K1L). ESD: D3 TI TPD1E05U06 at J1. U1 reads the source’s current advertisement on the ADC", src: "Type-C R2.5 Table 4-28 p246 · DS14217 Table 26 p99 · bom chain 1",

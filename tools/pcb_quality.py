@@ -20,10 +20,10 @@ from shapely.geometry import LineString, Point, Polygon, box
 
 sys.path.insert(0, "tools")
 from pcb_astar import board_copper
-from pcb_freeroute import RF_BOTTOM_POLYS
+from pcb_freeroute import RF_BOTTOM_ALLOW, RF_BOTTOM_POLYS
 
 MIN_EXIT = 1.0     # mm of straight line beyond the pad's edge before the first bend
-LOCAL = 2.5        # mm: a line that reaches its other pad within this length is a local connection (a decoupling
+LOCAL = 4.5        # mm: a line that reaches its other pad within this length is a local connection (a decoupling
                    # capacitor or series part at the pin) and only has to leave straight, not for MIN_EXIT
 CLEAR = 0.2        # mm, the board's copper clearance
 BUS_GAP = 1.0      # mm, centre-to-centre: closer parallel neighbours count as one bus
@@ -174,20 +174,22 @@ def main():
                 seen.add(j)
                 cur = o
                 run_end = o
-            # local: follow the line on through its bends to where it ends
-            length, cur2, seen2, prev2 = 0.0, (sx, sy), set(), None
-            while True:
-                nxt = [(j, o) for j, o in ends[(net, l, key(*cur2))] if j not in seen2]
-                if len(nxt) != 1 or (prev2 is not None and pad_at(net, l, *cur2)):
-                    break
-                j, o = nxt[0]
-                seen2.add(j)
-                length += math.hypot(o[0] - cur2[0], o[1] - cur2[1])
-                prev2, cur2 = cur2, o
-            far = pad_at(net, l, *cur2)
-            at_via = any(v[1] == net and abs(v[3][0] - cur2[0]) < 1e-3 and abs(v[3][1] - cur2[1]) < 1e-3 for v in vias)
-            # a local connection, or an escape via straight off the pin
-            local = (far is not None and far is not p and length <= LOCAL) or (at_via and length <= LOCAL)
+            # local: within LOCAL of the pin along the line (through its bends and branches) there is another pad,
+            # or an escape via (a decoupling capacitor, series part or escape at the pin)
+            local, best, todo = False, {key(sx, sy): 0.0}, [((sx, sy), 0.0)]
+            while todo and not local:
+                cur2, length = todo.pop()
+                for j, o in ends[(net, l, key(*cur2))]:
+                    d2 = length + math.hypot(o[0] - cur2[0], o[1] - cur2[1])
+                    if d2 > LOCAL or best.get(key(*o), 1e9) <= d2:
+                        continue
+                    best[key(*o)] = d2
+                    far = pad_at(net, l, *o)
+                    if (far is not None and far is not p) or any(
+                            v[1] == net and abs(v[3][0] - o[0]) < 1e-3 and abs(v[3][1] - o[1]) < 1e-3 for v in vias):
+                        local = True
+                        break
+                    todo.append((o, d2))
             edge = phw if axis[0] else phh
             straight = abs((run_end[0] - px) * axis[0] + (run_end[1] - py) * axis[1]) - edge
             if straight < min_exit - TOL and not reached_pad and not local and cls(net) not in POWER and net != "GND":
@@ -198,7 +200,7 @@ def main():
     for i, t in enumerate(tracks):
         for j in range(i + 1, len(tracks)):
             u = tracks[j]
-            if t[1] == u[1] or t[2] != u[2] or cls(t[1]) != cls(u[1]):
+            if t[1] == u[1] or t[2] != u[2]:
                 continue
             (ax0, ay0, ax1, ay1, _), (bx0, by0, bx1, by1, _) = t[3], u[3]
             la, lb = math.hypot(ax1 - ax0, ay1 - ay0), math.hypot(bx1 - bx0, by1 - by0)
@@ -228,7 +230,9 @@ def main():
         for j, d, s in pairs[i]:
             if s not in best or d < best[s][1]:
                 best[s] = (j, d)
-        pairs[i] = [(j, d, s) for s, (j, d) in best.items() if not (fp_of(i) & fp_of(j))]
+        # nearest neighbours of any class, then only same-class pairs count towards a bus's pitch
+        pairs[i] = [(j, d, s) for s, (j, d) in best.items()
+                    if not (fp_of(i) & fp_of(j)) and cls(tracks[i][1]) == cls(tracks[j][1])]
     for i in list(pairs):
         pairs[i] = [(j, d, s) for j, d, s in pairs[i] if any(k == i for k, _, _ in pairs[j])]
     seen = set()
@@ -276,6 +280,9 @@ def main():
     for t in shown + [v for v in vias if only is None or v[1] in only]:
         g = t[3]
         shp = LineString([g[:2], g[2:4]]).buffer(g[4]) if t[0] == "track" else Point(g[0], g[1]).buffer(g[2])
+        allow = [Polygon(p) for p in RF_BOTTOM_ALLOW.get(t[1], [])]
+        if any(a.contains(shp) for a in allow):
+            continue
         if "B.Cu" in t[2] and t[1] != "GND" and any(z.intersects(shp) for z in zones):
             found["rf"].append(f"{t[1]} {t[0]} at ({g[0]:.2f},{g[1]:.2f}) on the bottom under the RF area")
 

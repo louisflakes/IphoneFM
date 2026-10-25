@@ -4,7 +4,7 @@ RST to PB9 and RCLK to PB4). U4 takes them clockwise as SCK (west side), FS, SD 
 RCLK, SDA, SCL (east side) and RST (bottom, with R19), so:
   SCK      leaves the bundle first, east into R24 on U4's west side;
   RCLK     drops to the bottom layer, runs under the pocket above U4 and comes up at an escape via beside pin 9;
-  RST      drops to the bottom layer too, runs outside RCLK and comes up beside R19 below U4;
+  RST      drops to the bottom layer beside U1 (tools/pcb_route_u1.py), runs outside RCLK and comes up beside R19;
   FS / SD  swap within the bundle (FS dives under SD into RCLK's vacated lane), because SAI1 block B fixes FS on PB6
            above SD on PB5 while U4 has FS before SD;
   SDA/SCL  run east over the pocket and down the strip on U4's east side into pins 8 and 7; R21 hangs off SDA in the
@@ -22,7 +22,7 @@ VIA, DRILL = 0.6, 0.3
 S2 = P * (2 - math.sqrt(2))  # how much longer each next line out runs before its 45-degree bend, so bends stay concentric
 
 # band lanes northbound along U4's west side (x), runs eastbound over the pocket (y)
-LANE = dict(RST=45.5, SCL=46.1, SDA=46.7, FS=47.3, SD=47.9, RCLK=48.5, SCK=49.1)
+LANE = dict(SCL=46.2, SDA=46.8, FS=47.4, SD=48.0, RCLK=48.6, SCK=49.2)  # RST comes on the bottom from U1
 RUN = dict(SCL=77.4, SDA=78.0, SD=78.6, FS=79.2)
 Y0 = 88.0  # where this plan picks the band up
 
@@ -36,7 +36,7 @@ def turn_ne(x, y_run, k):
 def runs():
     r = []
     # SCK: north, then into R24 on U4's west; R24 to pin 17
-    r += [("/RX_SCK_MCU", T, [(LANE["SCK"], Y0), (LANE["SCK"], 84.0), (49.71, 83.39), (50.75, 83.39)], W),
+    r += [("/RX_SCK_MCU", T, [(LANE["SCK"], Y0), (LANE["SCK"], 83.9), (49.71, 83.39), (50.75, 83.39)], W),
           ("/RX_SCK", T, [(50.75, 84.41), (51.59, 85.25), (52.35, 85.25)], W)]
     # GPO caps on U4's west side
     # GPO caps beside U4's west side, one above the other
@@ -47,8 +47,7 @@ def runs():
           ("/RX_RCLK", B, [(LANE["RCLK"], 82.6), (56.2, 82.6), (56.6, 83.0), (56.6, 85.45)], W),
           ("/RX_RCLK", T, [(56.6, 85.45), (56.3, 85.75), (55.45, 85.75)], W)]
     # RST: dive, bottom outside RCLK, up beside R19; R19 to pin 5
-    r += [("/RX_RST", T, [(LANE["RST"], Y0), (LANE["RST"], 82.0)], W),
-          ("/RX_RST", B, [(LANE["RST"], 82.0), (56.95, 82.0), (57.35, 82.4), (57.35, 89.02)], W),
+    r += [("/RX_RST", B, [(41.8, 82.4), (42.2, 82.0), (56.95, 82.0), (57.35, 82.4), (57.35, 89.02)], W),
           ("/RX_RST", T, [(57.35, 89.02), (54.65, 89.02)], W),
           ("/RX_RST", T, [(54.65, 89.02), (54.65, 87.55)], W)]
     # FS under SD: FS dives in its lane, SD steps west into it, FS comes up in SD's old lane (RCLK has left by then)
@@ -83,8 +82,8 @@ def runs():
     return r
 
 
-VIAS = [("/RX_RCLK", 48.5, 82.6), ("/RX_RCLK", 56.6, 85.45), ("/RX_RST", 45.5, 82.0), ("/RX_RST", 57.35, 89.02),
-        ("/RX_FS_MCU", 47.3, 81.2), ("/RX_FS_MCU", 47.9, 79.9), ("3V3", 55.42, 79.2), ("3V3", 58.02, 75.6)]
+VIAS = [("/RX_RCLK", 48.6, 82.6), ("/RX_RCLK", 56.6, 85.45), ("/RX_RST", 57.35, 89.02),
+        ("/RX_FS_MCU", 47.4, 81.2), ("/RX_FS_MCU", 48.0, 79.9), ("3V3", 55.42, 79.2), ("3V3", 58.02, 75.6)]
 EXTRA = [("3V3", T, [(58.02, 75.6), (58.02, 76.4)], 0.3)]                              # R20's 3V3 via
 
 
