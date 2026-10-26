@@ -10,8 +10,8 @@ room for the FSK series resistors. Each side hands its lines on in the lanes of 
   north  the LED lines straight north; VDDA north to its parts (C7, C8, FB2) and C3 above the NRST/CE/REF20 runs;
          NRST, CE and REF20 north then east (C10 on NRST); CE and REF20 drop to the bottom to pass under the
          receiver bundle; pin 1 (VBAT) round to C6 with pin 48, 3V3 fed from below.
-  east   the receiver bundle east, then north into the U4 corner's lanes; RST and BOOT0 drop to the bottom on the way
-         (the bundle's lines step 0.1 mm apart round BOOT0's via); SWCLK drops to TP7 on the bottom.
+  east   the receiver bundle east, then north into the U4 corner's lanes, RST one lane west of it; BOOT0 drops to the
+         bottom on the way (the bundle's lines step 0.1 mm apart round its via); SWCLK drops to TP7 on the bottom.
   GND    every VSS pin straight into the exposed pad.
 Usage (from the repository root, board open in KiCad): python tools/pcb_route_u1.py place | lay [--dry-run]"""
 import sys
@@ -166,11 +166,10 @@ stepped = [(X1 + 0.1, ey(p) + d) for p, _, d in rows]
 T_ = turn(stepped, (1, 0), (0, -1), [U4_LANES[n] for _, n, _ in rows], 0.6, min_exit=0.0, min_tail=0.3, late=True)
 for (p, n, d), pts in zip(rows, T_):
     P.run(n, [(XE, ey(p)), (X1, ey(p))] + pts + [(U4_LANES[n], Y0)])
-# RST dives first and runs north on the bottom to the U4 corner's bottom path; BOOT0 dives and heads west
+# RST runs on top beside the bundle (one lane west of SCL), handed on to the U4 corner plan at Y0; it stays off the
+# bottom here so the attenuator bus can cross under the bundle (tools/pcb_route_att.py). BOOT0 dives and heads west
 y_rst = ey(46) - 0.2
-P.run("/RX_RST", [(XE, ey(46)), (X1, ey(46)), (X1 + 0.2, y_rst), (42.0, y_rst)])
-P.via("/RX_RST", 42.0, y_rst)
-P.run("/RX_RST", [(42.0, y_rst), (42.0, 82.8), (41.8, 82.6), (41.8, 82.4)], W, B)  # on into the U4 corner's path
+P.run("/RX_RST", [(XE, ey(46)), (X1, ey(46)), (X1 + 0.2, y_rst), (45.2, y_rst), (45.6, y_rst - 0.4), (45.6, Y0)])
 P.run("/BOOT0", [(XE, ey(44)), (41.5, ey(44))])
 P.via("/BOOT0", 41.5, ey(44))
 P.run("/BOOT0", [(41.5, ey(44)), (39.4, ey(44)), (39.0, ey(44) - 0.4), (39.0, 87.4), (38.6, 87.0), (31.0, 87.0)], W, B)
