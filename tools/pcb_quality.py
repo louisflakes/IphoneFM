@@ -7,6 +7,8 @@ this proves it is tidy (routing-quality standard, 2026-10-25):
           power nets need only leave straight;
   pitch   parallel neighbours of one net class that run side by side form a bus, and each bus keeps one pitch;
   clear   copper of other nets on the same layer is at least CLEAR away (catches problems in plans, before DRC runs);
+  via     vias clear other nets' copper by CLEAR, their holes clear other copper by 0.3 mm and other holes by 0.5 mm;
+  clock   Clock class tracks keep 0.4 mm from other tracks and vias outside the escape areas (CLOCK_ESCAPE);
   rf      no bottom-layer copper inside RF_BOTTOM_POLYS [AN4169 p12].
 Tracks come from the board open in KiCad; --plan adds the hand-laid runs of a routing script (its RUNS table, top layer)
 so a plan can be scored before any copper goes down.
@@ -17,10 +19,11 @@ import math
 import sys
 
 from shapely.geometry import LineString, Point, Polygon, box
+from shapely.ops import unary_union
 
 sys.path.insert(0, "tools")
 from pcb_astar import board_copper
-from pcb_freeroute import RF_BOTTOM_ALLOW, RF_BOTTOM_POLYS
+from pcb_freeroute import CLOCK_ESCAPE, CLOCK_SMALL, RF_BOTTOM_ALLOW, RF_BOTTOM_POLYS
 
 MIN_EXIT = 1.0     # mm of straight line beyond the pad's edge before the first bend
 LOCAL = 4.5        # mm: a line that reaches its other pad within this length is a local connection (a decoupling
@@ -62,6 +65,27 @@ def load_plan(path, copper):
             for (x0, y0), (x1, y1) in zip(pts, pts[1:]):
                 out.append(("track", net, {"F.Cu"}, (x0, y0, x1, y1, w / 2), "plan"))
     return out
+
+
+def courtyard_box(text, ref):
+    """Courtyard of a footprint on the board as a shapely polygon (its F.CrtYd lines and rectangles, turned)."""
+    from kicadcheck import kid, kids, sexpr
+    for fp in kids(sexpr(text), "footprint"):
+        if not any(p[1] == "Reference" and p[2] == ref for p in kids(fp, "property")):
+            continue
+        at = kid(fp, "at")
+        fx, fy, fr = float(at[1]), float(at[2]), float(at[3]) if len(at) > 3 else 0.0
+        pts = []
+        for g in fp[1:]:
+            if isinstance(g, list) and g[0] in ("fp_line", "fp_rect", "fp_poly") and kid(g, "layer") and                     kid(g, "layer")[1] == "F.CrtYd":
+                for q in [kid(g, k) for k in ("start", "end") if kid(g, k)] or kid(g, "pts")[1:]:
+                    x, y = float(q[1]), float(q[2])
+                    c, s = math.cos(math.radians(-fr)), math.sin(math.radians(-fr))
+                    pts.append((fx + x * c - y * s, fy + x * s + y * c))
+        if pts:
+            xs, ys = [p[0] for p in pts], [p[1] for p in pts]
+            return box(min(xs), min(ys), max(xs), max(ys))
+    return None
 
 
 def pad_shape(g):
@@ -275,6 +299,51 @@ def main():
             if d < CLEAR - 1e-3:
                 found["clear"].append(f"{net} ({g[0]:.2f},{g[1]:.2f})-({g[2]:.2f},{g[3]:.2f}) {d:.2f} mm from {name} ({onet or 'no net'})")
 
+    # via
+    holes = [(c[3][0], c[3][1], c[3][3] if c[0] == "via" else c[3][5], c[1]) for c in copper
+             if c[0] == "via" or (c[0] == "pad" and c[3][5] > 0)]
+    for v in vias:
+        if only and v[1] not in only:
+            continue
+        x, y, r, hr = v[3]
+        disc = Point(x, y).buffer(r)
+        for onet, ol, shp, name in shapes:
+            if onet == v[1] or (not onet and name == "track"):
+                continue
+            d = disc.distance(shp)
+            if d < CLEAR - 1e-3 and not (name == "via" and abs(shp.centroid.x - x) < 1e-6 and abs(shp.centroid.y - y) < 1e-6):
+                found["via"].append(f"{v[1]} via at ({x:.2f},{y:.2f}) {d:.2f} mm from {name} ({onet or 'no net'})")
+            elif name != "via" and name != "track" and Point(x, y).buffer(hr).distance(shp) < 0.3 - 1e-3:
+                found["via"].append(f"{v[1]} via hole at ({x:.2f},{y:.2f}) under 0.3 mm from {name} ({onet or 'no net'})")
+        for hx, hy, ohr, onet in holes:
+            dd = math.hypot(hx - x, hy - y)
+            if 1e-6 < dd < hr + ohr + 0.5 - 1e-3:
+                found["via"].append(f"{v[1]} via hole at ({x:.2f},{y:.2f}) {dd - hr - ohr:.2f} mm from a hole ({onet or 'no net'})")
+
+    # clock
+    text = KiCad().get_board().get_as_string()
+    small = [courtyard_box(text, r) for r in CLOCK_SMALL]
+    escape = unary_union([box(*b) for b in CLOCK_ESCAPE.values()])
+    others = [(c[1], c[2], c[0], (LineString([c[3][:2], c[3][2:4]]).buffer(c[3][4]) if c[0] == "track"
+                                 else Point(c[3][0], c[3][1]).buffer(c[3][2]))) for c in tracks + vias]
+    for t in shown:
+        if cls(t[1]) != "Clock":
+            continue
+        g = t[3]
+        seg = LineString([g[:2], g[2:4]])
+        if any(s is not None and seg.intersects(s) for s in small):
+            continue
+        part = seg.difference(escape)
+        if part.is_empty:
+            continue
+        l = next(iter(t[2]))
+        for onet, olay, kind, shp in others:
+            if onet == t[1] or l not in olay:
+                continue
+            d = part.distance(shp) - g[4]
+            if d < 0.4 - 1e-3:
+                found["clock"].append(f"{t[1]} ({g[0]:.2f},{g[1]:.2f})-({g[2]:.2f},{g[3]:.2f}) {d:.2f} mm from {kind} ({onet})")
+
     # rf
     zones = [Polygon(p) for p in RF_BOTTOM_POLYS]
     for t in shown + [v for v in vias if only is None or v[1] in only]:
@@ -286,8 +355,9 @@ def main():
         if "B.Cu" in t[2] and t[1] != "GND" and any(z.intersects(shp) for z in zones):
             found["rf"].append(f"{t[1]} {t[0]} at ({g[0]:.2f},{g[1]:.2f}) on the bottom under the RF area")
 
-    print(f"{len(shown)} segments checked: " + ", ".join(f"{k} {len(found[k])}" for k in ("angle", "bend", "exit", "pitch", "clear", "rf")))
-    for k in ("angle", "bend", "exit", "pitch", "clear", "rf"):
+    kinds = ("angle", "bend", "exit", "pitch", "clear", "via", "clock", "rf")
+    print(f"{len(shown)} segments checked: " + ", ".join(f"{k} {len(found[k])}" for k in kinds))
+    for k in kinds:
         for line in dict.fromkeys(found[k]):
             print(f"  {k:5} {line}")
     sys.exit(1 if any(found.values()) else 0)

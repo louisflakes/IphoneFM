@@ -160,17 +160,17 @@ Checks:
 
 ## Phase 5: Routing
 
-- [ ] 5.1 Fan out every ground pad and exposed pad with vias, as many as the rules allow under each IC, then lock them [HHG p74–78; AN4169 p12; ADI "IC Ground Plane"].
-- [ ] 5.2 Route 3V3 from U3 out to each load, not part to part [BAC p11; KHA p148, p170].
-- [ ] 5.3 Route VBUS from J1 to U3 and D1 at power width [KHA p184].
-- [ ] 5.4 Route the antenna line from J2 to U5 as a 50 Ω grounded coplanar line, with D5 at J2 [AN4169 p6, p11; ADI "Coplanar Waveguide"].
-- [ ] 5.5 Route the transmit path from U2 through C26, U7 and FL1 to U5 the same way.
-- [ ] 5.6 Route the receive path from U5 through C34, L1, FB1 and C35 to U4's FMI over unbroken ground [AN383 p15, p17].
-- [ ] 5.7 Route U2's loop filter and OSCin compactly, with no switching line near them [LMX2571 p55].
-- [ ] 5.8 Route the three I²S lines from U1's series resistors to U2, short and away from the loop filter.
-- [ ] 5.9 Route USB D+ and D− as a short side-by-side pair through U6 [BAC p11].
-- [ ] 5.10 Route U4's digital lines and RCLK away from its RF input [AN383 p15–16].
-- [ ] 5.11 Route everything else with 45° corners, the bottom layer running mostly at 90° to the top [BAC p11, p13; KHA p130–131].
+- [x] 5.1 Fan out every ground pad and exposed pad with vias, as many as the rules allow under each IC, then lock them [HHG p74–78; AN4169 p12; ADI "IC Ground Plane"].
+- [x] 5.2 Route 3V3 from U3 out to each load, not part to part [BAC p11; KHA p148, p170].
+- [x] 5.3 Route VBUS from J1 to U3 and D1 at power width [KHA p184].
+- [x] 5.4 Route the antenna line from J2 to U5 as a 50 Ω grounded coplanar line, with D5 at J2 [AN4169 p6, p11; ADI "Coplanar Waveguide"].
+- [x] 5.5 Route the transmit path from U2 through C26, U7 and FL1 to U5 the same way.
+- [x] 5.6 Route the receive path from U5 through C34, L1, FB1 and C35 to U4's FMI over unbroken ground [AN383 p15, p17].
+- [x] 5.7 Route U2's loop filter and OSCin compactly, with no switching line near them [LMX2571 p55].
+- [x] 5.8 Route the three I²S lines from U1's series resistors to U2, short and away from the loop filter.
+- [x] 5.9 Route USB D+ and D− as a short side-by-side pair through U6 [BAC p11].
+- [x] 5.10 Route U4's digital lines and RCLK away from its RF input [AN383 p15–16].
+- [x] 5.11 Route everything else with 45° corners, the bottom layer running mostly at 90° to the top [BAC p11, p13; KHA p130–131].
   - Attempts so far (2026-10-23/24), for what they taught:
     - Freerouting v2.5.0 (official release; `tools/pcb_freeroute.py`), three runs around the locked ground fan-out, RF lines and loop filter, GND left to the pours and no bottom copper under the RF section: 45, 43, then 37 signal connections left unrouted (after nudging Y2 up, TP5 beside U1 and the SWD pads down). Nearly all were U1's: U1 is the hub, boxed in by the wheels, the transmit line, U2's parts and the test pads, and its lines to U4, D1 and U2's CE must go over U2 and down the right-edge corridor.
     - Hand-routing U1, attempt 1 (`tools/pcb_route_u1.py` on the two-layer `tools/pcb_astar.py`, from tag `rollback/phase5-before-u1-handroute`): 35 of 52 routed. U1's 18 short links to its own parts (decoupling, VDDA, VCAP, NRST, wheel filters, FSK resistors, BOOT0) came out clean. The long runs over U2 and down the corridor also worked (I²C SCL, RX SD and FS, LED R, RF_MODE, BOOT0). But routing one connection at a time, greedily, with no lanes planned and no rip-up, made medium runs wander (USB D+ 35 mm with 4 vias), added vias U1-to-U2 links don't need, three new hole-clearance findings, and boxed later pins in (17 failed).
@@ -204,7 +204,42 @@ Checks:
       - **U3, C1 and C2** moved 1.6 mm lower, so the MICROWIRE lines pass above them.
       - **RF plan:** follows the lower U4 group. Receive-line stitching vias skip the stretch where the U7 control lanes run on the line's west side.
       - **TP1, TP5 and TP8** moved to the bottom side as bare pads (the user's choice), flipped with KiCad's own flip action. All test pads are now out of the position files, so the bottom side adds no assembly.
-- [ ] 5.12 Review net lengths and remove detours [HHG p77].
+    - **Routed, 2026-10-25/26** (tag `rollback/phase5-before-lay`, then laid and locked): eight region plans, each built
+      as copper with `tools/pcb_plan.py`, checked, then laid through KiCad's API. In laying order: `pcb_route_gnd.py`
+      (step 5.1), `pcb_route_u1.py`, `pcb_route_u2.py`, `pcb_route_j1.py`, `pcb_route_att.py`, `pcb_route_north.py`,
+      `pcb_route_u4.py`, `pcb_route_rf.py`. 825 tracks and 180 vias in total.
+      - **U2:** C13 at U2's top-left corner; BYP1/BYP2 fan into C20/C21; FSK_CLK hops under FS/DATA. The PLL
+        capacitor column is re-stacked so each line rises at 45° into its capacitor. U6 is 0.7 mm lower, so the USB
+        pair comes up north of it.
+      - **The user's two bottom 3V3 links in the RF zone (2026-10-25):** link 1 runs from pin 27's line under the
+        PLL column to pin 20/C15 and on to C27 and U7's supply (about 7 mm, longer than the 4–6 mm asked, because the
+        enclosed pin-20 node needs a source). Link 2 is U7's LE pin. Both are recorded as `RF_BOTTOM_ALLOW`.
+      - **J1 corner:** D+/D− flow straight through U6, with the A/B crossover at J1. CC2 hops under U6. VBUS runs to
+        C1/U3 on top and joins U6.5 and the east VBUS pad on the bottom. RF_MODE runs west to TP4/SW1/R18 and east
+        under J1 to R17.
+      - **West strip (bottom), west to east:** VBUS (to the LED lane), BOOT0 (to SW2/R3), and the pots' 3V3 by vias.
+        U1's north 3V3 group joins the rest along RV1.1–RV2.1 under the pot bodies.
+      - **Attenuator bus:** RST moved to the top layer (over the U4 corner, down outside RCLK), which opens the
+        bottom north of the receiver bundle. The six ATT lines then cross under the bundle in one via staircase and
+        come up west of the U4 corner. R10–R15 moved 1.7 mm east to clear H2. The lines reach SW3 under its body.
+      - **North band:** LEDs and VBUS hop under the ATT lanes. D1's resistors were re-placed so VBUS, B, G and R
+        arrive in lane order (R25 now in the edge lane). 3V3 runs on the bottom from FB2/C3 to SW3's row (TP2),
+        U4's supply via, R20's via, and down the east edge outside the RF zones to R16. TP3 is beside TP2.
+      - **Ground (5.1):** via arrays in the U1, U2, U4 and U7 pads, with their ground pins bridged in. Every other
+        ground pad has a via at the nearest clear spot. U5.2 (between U5's RF pins) is left to the pour.
+      - **Checks added on the way:** vias against pads and holes, and the Clock class's 0.4 mm rule. DRC caught
+        the clock rule after the first lay. That copper was removed and re-planned: U1's RCLK/SCK and
+        LMX_CLK/FSK_CLK step out to 0.6 mm right after their 1 mm exits, and two vias moved off ground pads. The
+        rule's escape exemption is now "Clock escape" rule areas (courtyard + 1.5 mm) round U1, U2 and U4,
+        because the step-out ends about 1.5 mm past the pad tips rather than 1.0.
+      - **Result:** `pcb_quality.py` 0 findings on the board; `pcb_open.py` 0 open nets (GND from the pours); DRC
+        only J1's 8 known hole clearances, 104 ground vias waiting for the pours, and silkscreen (Phase 7).
+- [x] 5.12 Review net lengths and remove detours [HHG p77].
+  - Routed length against the minimum span of each net's pads (2,145 mm over 71 nets, GND aside). The high ratios
+    are all deliberate: RX_RST 2.8× (over the U4 corner, so the ATT bus can pass under the receiver bundle); TX_RF
+    2.0× (the filter output past L2, as the RF plan places it); I²C, MICROWIRE and LED_R_K 1.6–1.8× (their lanes
+    over the U4 pocket, under U2 and round D1). No accidental detours; nothing removed. Pictures:
+    `review/phase5-routed-board.png`, `-north.png`, `-south.png`.
 - [ ] 5.13 **Review checkpoint:** the user reviews the routing.
 
 ## Phase 6: Ground pours

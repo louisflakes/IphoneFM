@@ -94,14 +94,25 @@ R_ROW = {"/FSK_CLK_MCU": 32.775, "/FSK_FS_MCU": 34.105, "/FSK_DATA_MCU": 35.435}
 # MICROWIRE's CLK is a Clock-class line: 0.6 mm to its neighbours, 0.45 mm between the others
 lanes = [30.05, 30.475, 30.925, 31.525, 32.125, 32.775, 34.105, 35.435, 36.3]
 gaps = [0.425, 0.45, 0.6, 0.6, 0.65, 0.65, 0.7, 0.7]
-starts = [(x, 96.52 if y is None else y + TIP + 1.0) for _, x, y in south]
+# the two clock lines get 0.6 mm to their neighbours right after the 1 mm exit, inside the escape area
+# (pcb_freeroute.CLOCK_ESCAPE): every line west of FSK's FS steps west, the westmost first, 0.07 mm apart;
+# (shift west, delay)
+STEP = {"/LMX_LE": (0.4, 0.0), "/LMX_DATA": (0.4, 0.07), "/LMX_CLK": (0.3, 0.14), "/LMX_MUX": (0.2, 0.21),
+        "/FSK_CLK_MCU": (0.1, 0.28)}
+heads = {}
+for net, x, y in south:
+    if net in STEP:
+        s, d = STEP[net]
+        y1 = y + TIP + 1.0 + d
+        heads[net] = [(x, y), (x, y1), (x - s, y1 + abs(s))]
+starts = [(x, 96.52) if y is None else (heads[net][-1] if net in heads else (x, y + TIP + 1.0)) for net, x, y in south]
 J = jog(starts, (0, 1), (-1, 0), [s[0] - l for s, l in zip(starts, lanes)], gaps, lead=1.6)  # 3V3 bends below C4
 y_jog = max(p[-1][1] for p in J)
 Y_R = 101.9                       # R6-R8 centres (pads 0.51 above and below), high enough that FSK clears C13
 Y_SOUTH = 106.0                   # the U2-west plan picks MICROWIRE and 3V3 up here
 for (net, x, y), pts, lane in zip(south, J, lanes):
     w = 0.25 if net == "3V3" else W
-    head = [] if y is None else [(x, y)]
+    head = [] if y is None else heads.get(net, [(x, y)])
     if net == "/USB_DM":
         via = (lane, pts[-1][1] + 0.15)
         P.run(net, head + pts + [via])
@@ -131,8 +142,8 @@ P.run("VDDA", [(nx(9), 81.6), (35.665, 81.6)], 0.3)                   # to C8
 P.run("3V3", [(35.2, 79.11), (35.2, 78.9), (35.5, 78.6), (36.6, 78.6), (37.05, 79.05), (37.05, 79.4)], 0.3)  # FB2 to C3
 P.via("3V3", 36.1, 78.6)                                              # fed from below
 runs = turn([(nx(5), YN), (nx(6), YN), (nx(7), YN)], (0, -1), (1, 0), [-85.3, -84.7, -84.1], 0.6, tips=TIP)
-X_D = {"/REF20_MCU": 43.2, "/LMX_CE": 42.6}
-P.run("/REF20_MCU", runs[0] + [(43.2, 85.3)])
+X_D = {"/REF20_MCU": 43.4, "/LMX_CE": 42.6}   # REF20 0.8 mm from CE's vias (Clock class)
+P.run("/REF20_MCU", runs[0] + [(43.4, 85.3)])
 P.run("/LMX_CE", runs[1] + [(42.3, 84.7), (42.6, 84.4)])
 P.run("/NRST", runs[2] + [(40.0, 84.1)])
 P.run("/NRST", [(38.8, 84.1), (38.8, 83.63)])                         # to C10
@@ -144,10 +155,10 @@ Y_DS = 95.8
 for n, x in X_D.items():
     y0 = 85.3 if n == "/REF20_MCU" else 84.4
     P.via(n, x, y0)
-    y1 = Y_DS if n == "/LMX_CE" else 99.9   # REF20 stays below until past the 3V3 line to Y2
+    y1 = Y_DS if n == "/LMX_CE" else 99.6   # REF20 stays below until past the 3V3 line to Y2
     P.run(n, [(x, y0), (x, y1)], W, B)
     P.via(n, x, y1)
-P.run("/REF20_MCU", [(43.2, 99.9), (42.3, 100.8), (42.3, 101.58)])
+P.run("/REF20_MCU", [(43.4, 99.6), (42.3, 100.7), (42.3, 101.58)])
 P.run("/LMX_CE", [(42.6, Y_DS), (48.4, Y_DS), (49.0, Y_DS + 0.6), (49.0, 104.0)])   # the U2 plan carries CE on
 # pin 1 (VBAT) round the corner to C6 with pin 48; 3V3 from below
 P.run("3V3", [(nx(1), YN), (nx(1), 86.45), (39.135, 86.2), (40.7, 86.2), (41.145, 86.645), (41.145, ey(48) - 0.2)], 0.25)
@@ -157,15 +168,17 @@ P.via("3V3", 39.9, 86.2)
 # --- east ------------------------------------------------------------------------------------------------------
 X1 = XE + TIP + 1.0  # one millimetre out from the tips
 # step the rows 0.1 mm apart round BOOT0, then turn north into the U4 corner's lanes (tools/pcb_route_u4.py)
-rows = [(45, "/I2C_SCL", -0.1), (43, "/I2C_SDA", 0.1), (42, "/RX_FS_MCU", 0.1), (41, "/RX_SD_MCU", 0.1),
-        (40, "/RX_RCLK", 0.1), (39, "/RX_SCK_MCU", 0.1)]
+rows = [(45, "/I2C_SCL", -0.1, 0.0), (43, "/I2C_SDA", 0.1, 0.0), (42, "/RX_FS_MCU", 0.1, 0.0),
+        (41, "/RX_SD_MCU", 0.1, 0.0), (40, "/RX_RCLK", 0.2, 0.1), (39, "/RX_SCK_MCU", 0.3, 0.0)]
+# (pin, net, step, delay): RCLK and SCK step 0.2 / 0.3 mm south so the clocks run 0.6 mm from their neighbours;
+# RCLK steps 0.1 mm after SCK so the two steps stay 0.4 mm apart; all end inside the escape area
 U4_LANES = {"/I2C_SCL": 46.2, "/I2C_SDA": 46.8, "/RX_FS_MCU": 47.4, "/RX_SD_MCU": 48.0, "/RX_RCLK": 48.6,
             "/RX_SCK_MCU": 49.2}
 Y0 = 88.0  # where the U4 corner plan picks the lanes up
-stepped = [(X1 + 0.1, ey(p) + d) for p, _, d in rows]
-T_ = turn(stepped, (1, 0), (0, -1), [U4_LANES[n] for _, n, _ in rows], 0.6, min_exit=0.0, min_tail=0.3, late=True)
-for (p, n, d), pts in zip(rows, T_):
-    P.run(n, [(XE, ey(p)), (X1, ey(p))] + pts + [(U4_LANES[n], Y0)])
+stepped = [(X1 + dl + abs(d), ey(p) + d) for p, _, d, dl in rows]
+T_ = turn(stepped, (1, 0), (0, -1), [U4_LANES[n] for _, n, _, _ in rows], 0.6, min_exit=0.0, min_tail=0.3, late=True)
+for (p, n, d, dl), pts in zip(rows, T_):
+    P.run(n, [(XE, ey(p)), (X1 + dl, ey(p))] + pts + [(U4_LANES[n], Y0)])
 # RST runs on top beside the bundle (one lane west of SCL), handed on to the U4 corner plan at Y0; it stays off the
 # bottom here so the attenuator bus can cross under the bundle (tools/pcb_route_att.py). BOOT0 dives and heads west
 y_rst = ey(46) - 0.2

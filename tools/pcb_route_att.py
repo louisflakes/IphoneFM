@@ -31,10 +31,10 @@ L2 = [51.57 + 0.4 * k for k in range(6)]
 C = [160.2 + 0.566 * k for k in range(6)]                  # x + y of each diagonal beside the receive line
 U7 = turn([(44.775, 116.55 + 0.5 * k) for k in range(6)], (1, 0), (0, -1), L1, 0.4, tips=0.4, min_exit=1.0)
 # ---- the down staircase: rows west at 95.2 .. 92.2, each into its via
-ROW_D = [95.2 - 0.6 * k for k in range(6)]
+ROW_D = [95.5 - 0.6 * k for k in range(6)]   # 0.8 mm off SCK's diagonal (Clock class)
 VD = [(51.05 - 0.6 * k, ROW_D[k]) for k in range(6)]
 # ---- bottom: rows west, north up the gap at 43.8..45.8, jog west into the up staircase
-L3 = [43.8 + 0.4 * k for k in range(6)]
+L3 = [44.0 + 0.4 * k for k in range(6)]
 VU = [(42.0 + 0.6 * k, 78.6 + 0.6 * k) for k in range(6)]
 # ---- top north of the bundle: rows east at 73.0 .. 75.5, north between the resistors, west into SW3
 ROW_E = [73.1 + 0.5 * k for k in range(6)]

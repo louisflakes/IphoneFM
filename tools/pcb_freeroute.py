@@ -43,6 +43,16 @@ RF_BOTTOM_ALLOW = {"3V3": [
      (42.41, 120.6), (43.05, 121.24)],
 ]}
 
+# Clock class (the user's rule, step 4.3): clock tracks keep 0.4 mm from other tracks and vias except where escapes
+# from 0.5 mm-pitch pins run 0.3 mm apart for their first millimetre. The escape areas are the courtyards of the
+# fine-pitch ICs grown by 1.5 mm: the pad tips sit 0.25-0.3 mm inside the courtyard, then the first millimetre and
+# the 45-degree step out of the pin pitch (up to 0.4 mm, staggered 0.07 mm line to line), so clock escapes run
+# 0.3 mm from their neighbours for about 1.5 mm past the pad tips rather than 1.0; they are drawn on the board as rule areas named "Clock escape" for DRC
+# (kicad/rev-a/IphoneFM.kicad_dru).
+CLOCK_ESCAPE = {"U1": (30.505, 84.965, 41.765, 96.225), "U2": (34.67, 103.67, 44.93, 113.93),
+                "U4": (50.15, 82.25, 57.65, 89.75)}
+CLOCK_SMALL = ("Y2", "R4", "R6", "R24")   # DRC exempts clock segments touching these parts' courtyards
+
 
 def export(d):
     for f in ("IphoneFM.kicad_pcb", "IphoneFM.kicad_pro", "IphoneFM.kicad_dru"):
