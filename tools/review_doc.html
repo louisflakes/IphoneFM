@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>IphoneFM Rev A design review</title>
+<style>
+  @page { size: Letter; margin: 0.45in 0.5in; }
+  :root { --ink: #1b1b1b; --muted: #5b5b5b; --rule: #d6d6d6; --head: #f2f2f2;
+          --pw: #1f6fd1; --ck: #8a3ffc; --tx: #d12f1f; --rx: #0a8a4a; --mc: #b06a00; --ui: #5a5a5a; }
+  body { font-family: "Segoe UI", Arial, sans-serif; font-size: 8.9pt; line-height: 1.32; color: var(--ink);
+         background: #fff; margin: 0; }
+  h1 { font-size: 16pt; margin: 0 0 1pt; }
+  .sub { color: var(--muted); margin-bottom: 7pt; }
+  h2 { font-size: 11.5pt; margin: 9pt 0 4pt; border-bottom: 1.2pt solid var(--ink); padding-bottom: 1pt; }
+  h3 { font-size: 9.6pt; margin: 7pt 0 2pt; }
+  p { margin: 2pt 0 4pt; }
+  ul, ol { margin: 2pt 0 4pt 14pt; padding: 0; }
+  li { margin: 0.5pt 0; }
+  table { border-collapse: collapse; width: 100%; font-size: 7.8pt; margin: 3pt 0 4pt; }
+  th, td { border-bottom: 0.6pt solid var(--rule); padding: 1.2pt 4pt; text-align: left; vertical-align: top; }
+  th { background: var(--head); font-weight: 600; }
+  td.n { text-align: right; white-space: nowrap; }
+  .k { width: 17%; font-weight: 600; }
+  img { display: block; max-width: 100%; margin: 3pt auto 4pt; }
+  .chain { font-weight: 600; margin: 2pt 0 3pt; }
+  .chain span { display: inline-block; border-radius: 3pt; padding: 0 4pt; margin: 1pt 0; color: #fff; }
+  .chain i { font-style: normal; color: var(--muted); margin: 0 2pt; }
+  .pw span { background: var(--pw); } .ck span { background: var(--ck); } .tx span { background: var(--tx); }
+  .rx span { background: var(--rx); } .mc span { background: var(--mc); } .ui span { background: var(--ui); }
+  .ref { color: var(--muted); }
+  .two { display: flex; gap: 12pt; align-items: flex-start; }
+  .two > div { flex: 1; }
+  .page { page-break-before: always; }
+  .blk { break-inside: avoid; }
+  h3 { break-after: avoid; }
+  .note { color: var(--muted); font-size: 7.8pt; }
+</style>
+</head>
+<body>
+
+<h1>IphoneFM Rev A — design review</h1>
+<div class="sub">MagSafe FM transmitter / receiver for iPhone (USB-C audio). Prepared for an independent sanity check before
+the JLCPCB order. 26 Oct 2026. Every claim cites its datasheet page; the datasheets are in the package.</div>
+
+<h2>1. Overview</h2>
+<p><b>What it is.</b> A small board that clips to the back of an iPhone and plugs into its USB-C port. The phone sees a USB
+audio device. In <b>transmit</b> it broadcasts the phone's audio on a chosen FM channel (88.1–107.9 MHz, low-power,
+FCC Part 15 target). In <b>receive</b> it tunes an FM station and streams it back to the phone.</p>
+<p><b>How.</b> The MCU does all the audio work. The radio is two single-chip parts: a TI LMX2571 synthesizer generates the
+FM carrier directly (the MCU streams the modulation to it as frequency steps), and a Skyworks Si4705 receives. They share one
+SMA antenna through an RF switch set by a slider.</p>
+
+<img src="{{block}}" alt="Block diagram" style="width:100%">
+
+<table>
+  <tr><td class="k">Board</td><td>46.45 × 71.40 mm, 2 layers, 1.6 mm FR-4, 1 oz (JLC0216A stack-up). Ground poured on both layers, 303 vias (123 stitching).</td></tr>
+  <tr><td class="k">Parts</td><td>94 placed (45 types), all on the top side; 5 bare test pads underneath. Fully assembled by JLCPCB.</td></tr>
+  <tr><td class="k">Power</td><td>USB-C 5 V from the phone → AP2112K 3.3 V LDO (600 mA). ~96 mA transmitting, ~62 mA receiving, plus ≤ 15 mA LED. Inside Apple's 100 mA (before USB set-up) / 500 mA limits.</td></tr>
+  <tr><td class="k">Transmit</td><td>88.1–107.9 MHz, direct digital FM ±75 kHz, stereo multiplex built in the MCU. Level: LMX2571 −18…+3 dBm, then a 0–31.5 dB DIP-switch attenuator, then a 5-pole low-pass (harmonics est. ≤ −53 dBc).</td></tr>
+  <tr><td class="k">Receive</td><td>Si4705, I²S digital audio to the MCU, then to the phone as USB audio.</td></tr>
+  <tr><td class="k">Reference</td><td>One 20 MHz XO (±20 ppm) clocks the MCU, the synthesizer and, through an MCU timer, the receiver.</td></tr>
+  <tr><td class="k">RF line</td><td>50 Ω grounded coplanar, 0.92 mm track, 0.20 mm gap. Bottom layer under the RF section is solid ground except two short 3V3 links.</td></tr>
+  <tr><td class="k">Controls</td><td>3 thumbwheels (channel digits), TX/RX slider, 6-bit power DIP switch, BOOT button, RGB LED.</td></tr>
+  <tr><td class="k">Cost</td><td>2 assembled boards (of 5 made) ≈ $190 before shipping (JLC quote, 26 Oct 2026).</td></tr>
+</table>
+
+<h3>Main parts</h3>
+<table>
+  <tr><th>Ref</th><th>Function</th><th>Part (maker)</th><th>LCSC</th><th class="n">$ / board</th><th class="n">JLC stock</th></tr>
+  <tr><td>U1</td><td>MCU: USB audio, DSP</td><td>STM32U535CEU6 (ST)</td><td>C22454224</td><td class="n">10.08</td><td class="n">0 → global sourcing</td></tr>
+  <tr><td>U2</td><td>TX synthesizer, direct FM</td><td>LMX2571NJKR (TI)</td><td>C440388</td><td class="n">11.32</td><td class="n">142</td></tr>
+  <tr><td>U4</td><td>FM receiver, digital audio</td><td>Si4705-D60-GM (Skyworks)</td><td>C1526114</td><td class="n">3.11</td><td class="n">48</td></tr>
+  <tr><td>U7</td><td>TX attenuator</td><td>PE43711B-Z (pSemi)</td><td>C470929</td><td class="n">3.91</td><td class="n">1,673</td></tr>
+  <tr><td>U5</td><td>T/R antenna switch</td><td>PE42421SCAA-Z (pSemi)</td><td>C470893</td><td class="n">2.92</td><td class="n">669</td></tr>
+  <tr><td>Y2</td><td>20 MHz CMOS reference</td><td>OT322520MJBA4SL (YXC)</td><td>C725987</td><td class="n">0.54</td><td class="n">4,030</td></tr>
+  <tr><td>U3</td><td>3.3 V LDO</td><td>AP2112K-3.3TRG1 (Diodes)</td><td>C51118</td><td class="n">0.18</td><td class="n">10,885</td></tr>
+  <tr><td>U6, D3–D5</td><td>ESD: USB, CC, antenna</td><td>USBLC6-2SC6 (ST), TPD1E05U06 (TI), RClamp0521P (Semtech)</td><td>C7519, …</td><td class="n">0.36</td><td class="n">deep</td></tr>
+  <tr><td>J1 / J2</td><td>USB-C socket / SMA jack</td><td>TYPE-C-31-M-12 (HRO) / BWSMA-KWE-Z001</td><td>C165948 / C496551</td><td class="n">0.72</td><td class="n">deep</td></tr>
+  <tr><td>RV1–RV3</td><td>Tuning wheels</td><td>RK10J11R0A0H (Alps)</td><td>C470766</td><td class="n">2.17</td><td class="n">908</td></tr>
+  <tr><td>SW1 / SW2 / SW3</td><td>Slider / BOOT / DIP</td><td>MSK12C02 / EVQ-P7J01P / TDP06H1SBD1 (C&amp;K)</td><td>C431540, …</td><td class="n">3.63</td><td class="n">SW3: global sourcing</td></tr>
+</table>
+<p class="note">Passives: 0402–0805; 16 of the 45 part types are JLC Basic parts. Full BOM, placement file and assembly drawing are in the package.</p>
+
+<div class="two">
+<div>
+<h3>Fabrication and assembly</h3>
+<ul>
+  <li>Our own 1-up panel (KiKit): 6.5 mm rails all round, because parts overhang every edge (wheels, SMA barrel, USB-C, switches); 5 mouse-bite tabs; 3 fiducials.</li>
+  <li>DRC: 0 errors. One rule exception: J1's two unplated locating holes sit 0.22 mm from its pads (maker's land pattern; JLC minimum 0.20 mm).</li>
+  <li>Placement file corrected per part against JLC's own footprints (rotation and origin), and checked in JLC's preview. JLC engineer placement confirmation is on.</li>
+  <li>Gerbers read back with an independent viewer and match the board.</li>
+</ul>
+</div>
+<div>
+<h3>Firmware plan (not written yet)</h3>
+<ol>
+  <li><b>Load:</b> STM32 ROM USB bootloader (hold BOOT while plugging in); SWD pads as backup.</li>
+  <li><b>USB:</b> Audio Class 2, 48 kHz stereo, asynchronous with feedback (Apple's recommendation).</li>
+  <li><b>TX:</b> MCU builds the FM stereo multiplex (75 µs pre-emphasis, 19 kHz pilot, 38 kHz L−R), corrects the PLL response, interpolates to ~912 kSa/s and streams it to the LMX2571 over SAI in FSK I²S mode (TI SNAA309). LMX2571 set up over bit-banged MICROWIRE; lock watched on MUXout.</li>
+  <li><b>RX:</b> Si4705 over I²C; its I²S audio into the second SAI block, back to the phone.</li>
+  <li><b>UI:</b> wheels on the ADC → channel; slider read for mode (it also switches the RF path directly); LED shows state.</li>
+</ol>
+</div>
+</div>
+
+<h2>2. Signal chains</h2>
+<p class="note">Each chain is drawn on the actual schematic; the numbered badges follow the signal. Page references are to the datasheet in the package.</p>
+
+<div class="blk"><h3>Power and USB</h3>
+<div class="chain pw"><span>1 J1 USB-C</span><i>→</i><span>2 R1/R2 Rd + D3/D4 ESD</span><i>→</i><span>3 U6 ESD (D+, D−, VBUS)</span><i>→</i><span>4 U3 LDO → 3V3</span></div>
+<img src="{{power}}" style="max-height:2.3in">
+<ul>
+  <li>5.1 kΩ Rd on each CC line makes the phone switch on 5 V; no USB-PD needed. <span class="ref">USB Type-C R2.5 Table 4-28 p246</span></li>
+  <li>USBLC6 at the connector on D+, D− and VBUS; TPD1E05U06 on each CC. <span class="ref">USBLC6-2 p1–2</span></li>
+  <li>AP2112K: 600 mA, stable with ≥ 1 µF; load ≤ ~110 mA. <span class="ref">AP2112 p1–2</span></li>
+  <li>Ferrites split the ADC supply (VDDA, FB2) and the receiver supply (FB3) from digital 3V3. <span class="ref">DS14217 Fig. 23 p127; Si4705 p16</span></li>
+</ul></div>
+
+<div class="two blk">
+<div>
+<h3>Reference clock</h3>
+<div class="chain ck"><span>1 Y2 20 MHz XO</span><i>→</i><span>U2 OSCin</span> <i>and</i> <span>2 R4 33 Ω → U1 PH0</span></div>
+<img src="{{clock}}" style="max-height:1.55in">
+<ul>
+  <li>CMOS straight into OSCin, the input TI recommends for best spurs. <span class="ref">LMX2571 Table 37 p38, p11</span></li>
+  <li>U1 runs in HSE bypass from the same clock. <span class="ref">DS14217 p184–185</span></li>
+  <li>U1 timer makes 32,787 Hz for the Si4705's RCLK (31.1–34.4 kHz allowed). <span class="ref">AN332 p37</span></li>
+</ul>
+</div>
+<div>
+<h3>MCU</h3>
+<div class="chain mc"><span>1 U1 STM32U535</span><i>→</i><span>2 R6–R8 33 Ω FSK I²S</span><i>·</i><span>3 FB2 VDDA</span></div>
+<img src="{{mcu}}" style="max-height:2.0in">
+<ul>
+  <li>Bypassing per ST's power scheme; 4.7 µF on VCAP. <span class="ref">DS14217 p127</span></li>
+  <li>Pins checked against the alternate-function and bootloader tables. <span class="ref">DS14217 Tables 26–28; AN2606 Table 165</span></li>
+</ul>
+</div>
+</div>
+
+<div class="blk"><h3>Transmit</h3>
+<div class="chain tx"><span>1 U2 LMX2571</span><i>→</i><span>2 loop filter</span><i>·</i><span>3 C26 DC block</span><i>→</i><span>4 U7 attenuator</span><i>←</i><span>5 SW3</span><i>→</i><span>6 FL1 low-pass</span><i>→</i><span>7 U5 switch</span><i>→</i><span>8 D5 ESD</span><i>→</i><span>9 J2</span></div>
+<img src="{{tx}}" style="max-height:3.3in">
+<ul>
+  <li>LMX2571 per TI's typical schematic: 100 nF on every supply pin, 2.2 µF on VregVCO, VcpExt powered. <span class="ref">LMX2571 Fig. 62 p44; p53–54</span></li>
+  <li>Loop filter 100 pF / 1.1 kΩ / 1.5 nF → 300–405 kHz loop, ~61° margin; flat to 15 kHz, +0.6 dB at 53 kHz (MCU pre-corrects). Charge-pump current is a firmware setting. <span class="ref">LMX2571 p5–6, p35</span></li>
+  <li>Divider ÷56 / ÷48 and two reference settings give ±100 kHz deviation headroom on all 100 US channels. <span class="ref">LMX2571 Eq. 4 p35; SNAA309 §6.2</span></li>
+  <li>PE43711 in direct parallel mode from the DIP switch; pull-downs make an open switch read 0. <span class="ref">PE43711 p8, Table 4 p6</span></li>
+  <li>FL1: 5-pole 50 Ω low-pass, 23–34 dB at the 2nd harmonic, ≥ 43 dB from 264 MHz. <span class="ref">47 CFR §15.239 / §15.209</span></li>
+  <li>PE42421: ~85 dB isolation keeps the TX carrier off the receiver; the slider drives its CTRL pin directly. <span class="ref">PE42421 p3–4</span></li>
+</ul></div>
+
+<div class="blk"><h3>Receive</h3>
+<div class="chain rx"><span>J2 → U5 RF1</span><i>→</i><span>1 C34 1 nF</span><i>→</i><span>2 L1 150 nH match</span><i>→</i><span>3 FB1 + C35 filter</span><i>→</i><span>4 U4 Si4705</span><i>→</i><span>5 R22–R24 → U1 SAI</span></div>
+<img src="{{rx}}" style="max-height:2.1in">
+<ul>
+  <li>Front end, emissions filter and I²S series parts as Skyworks specifies. <span class="ref">Si4705 p16, Table 12 p18; AN383 p7–9, p37</span></li>
+  <li>U2 is powered down (CE) while receiving, so its carrier can't desensitise U4. <span class="ref">LMX2571 p8</span></li>
+</ul></div>
+
+<div class="blk">
+<h3>Controls</h3>
+<div class="chain ui"><span>1 RV1–RV3 → ADC</span><i>·</i><span>2 SW1 → RF_MODE</span><i>·</i><span>3 SW2 BOOT0</span><i>·</i><span>4 D1 LED</span></div>
+<img src="{{ui}}" style="width:100%;max-height:2.4in;object-fit:contain">
+<ul>
+  <li>Wheels are 10 kΩ dividers 3V3–GND, read by the ADC; firmware splits each into 10 digits.</li>
+  <li>Slider: 3V3 = TX, GND = RX, 100 kΩ holds RX between contacts; it drives U5 and is read by U1. <span class="ref">PE42421 p4</span></li>
+  <li>BOOT0 pulled low; pressed at plug-in → ROM USB bootloader. <span class="ref">AN2606 p30</span></li>
+  <li>LED anode on VBUS (blue/green need up to 3.4 V), sunk by U1's 5 V-tolerant open-drain pins. <span class="ref">XL-1615 p3–4; DS14217 p132</span></li>
+</ul>
+</div>
+
+<h2>3. What I'd most like checked</h2>
+<ol>
+  <li><b>Direct FM with the LMX2571.</b> No published schematic uses it this way; is the loop filter (C24, R5, C25) and the FSK I²S approach sound?</li>
+  <li><b>RF layout on 2 layers:</b> the 50 Ω line, ground stitching and return paths under U2, U5 and U4, and TX-to-RX isolation.</li>
+  <li><b>FL1 values</b> (33 pF, 100 nH, 56 pF, 100 nH, 33 pF) against a square-wave source, and whether its harmonic margin is enough for Part 15.</li>
+  <li><b>USB-C sink:</b> Rd only, no PD controller; current budget against Apple's limits.</li>
+  <li><b>Clocking:</b> one 20 MHz XO for MCU and synthesizer; 32,787 Hz from a timer for the Si4705.</li>
+  <li><b>Manufacturing:</b> the panel and rails, the J1 hole-clearance exception, the JLC placement corrections.</li>
+  <li>Anything that would stop it working on first power-up.</li>
+</ol>
+
+<h3>In the package</h3>
+<p><b>Schematic</b> IphoneFM-RevA-schematic.pdf · <b>For JLC</b> IphoneFM-RevA-gerbers.zip (panel), -BOM.csv, -CPL.csv ·
+<b>Bench</b> IphoneFM-RevA-assembly.pdf · <b>Board</b> IphoneFM-RevA-board-top.png, -bottom.png, kicad/ project ·
+<b>Datasheets</b> datasheets/ (every part datasheet and app note cited; the USB Type-C spec and Apple's accessory guidelines are public)</p>
+
+</body>
+</html>

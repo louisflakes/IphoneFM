@@ -12,3 +12,6 @@ fp-info-cache
 kicad/rev-a/output/
 kicad/rev-a/.history/
 kicad/rev-a/.kicad-mcp/
+
+# review PDF build intermediates (tools/review_doc.py)
+design/rev-a/review/design-review/
