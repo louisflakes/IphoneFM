@@ -255,7 +255,8 @@ Checks:
   - Done: island removal leaves no dead copper. DRC finds no unconnected items, dangling vias or isolated fill.
 - [x] 6.5 Check the copper is roughly balanced between the two sides [HHG p61–62; KHA p135].
   - Done: copper covers 71% of the top and 87% of the bottom (pours, tracks and pads). Roughly balanced for a two-layer 1.6 mm board with every part on top. Pictures: `review/phase6-pour-top.png`, `-bottom.png`, `-top-rf.png`.
-- [ ] 6.6 **Review checkpoint:** the user reviews the pours.
+- [x] 6.6 **Review checkpoint:** the user reviews the pours.
+  - Approved 2026-10-26.
 
 ## Phase 7: DRC and the netlist comparison
 

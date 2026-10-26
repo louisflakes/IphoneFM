@@ -11,7 +11,7 @@ import tempfile
 
 CLI = r"C:\Users\jakep\AppData\Local\Programs\KiCad\10.0\bin\kicad-cli.exe"
 BOARD = "kicad/rev-a/IphoneFM.kicad_pcb"
-LATER = {"unconnected_items", "via_dangling", "track_dangling", "silk_overlap", "silk_over_copper", "silk_edge_clearance",
+LATER = {"silk_overlap", "silk_over_copper", "silk_edge_clearance",
          "lib_footprint_mismatch"}  # the last: 3D model links dropped by API turns; not needed for fabrication
 
 

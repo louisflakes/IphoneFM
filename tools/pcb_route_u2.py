@@ -58,7 +58,7 @@ P.run("3V3", [(35.3, 104.4), (35.3, 111.75)], 0.3, B)
 # the U1 trunk on down past MICROWIRE's turn to its via, then east under U6 on the bottom (to pin 15) and up to y 108.3
 P.run("3V3", [(30.05, 106.0), (30.05, 115.6), (30.65, 116.2)], 0.25)
 P.via("3V3", 30.65, 116.2)
-P.run("3V3", [(30.65, 116.2), (31.05, 116.6), (38.75, 116.6), (39.15, 116.2), (39.15, 115.7)], 0.3, B)
+P.run("3V3", [(30.65, 116.2), (31.45, 117.0), (38.35, 117.0), (39.15, 116.2), (39.15, 115.7)], 0.3, B)   # 0.8 mm under the USB vias, so the pour joins U6's ground
 P.run("3V3", [(30.65, 116.2), (30.05, 115.6), (30.05, 108.7), (30.45, 108.3), (35.3, 108.3)], 0.3, B)
 
 # ---- west: FSK. FS and DATA drop from R7 and R8 into two lanes west of the capacitors and turn into pins 7 and 6;
