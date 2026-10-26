@@ -1,9 +1,10 @@
 """Phase 5: draws a window of the board open in KiCad to a PNG, for routing plans and reports: pads (top red, bottom
 blue, through-hole grey), tracks and vias, coloured by layer, with each part's reference and, optionally, net names
 on the pads. Optional plan lines (dashed) are drawn over it; --runs adds a routing script's planned tracks and vias
-(its plan() function) as copper, and --zones shades the no-bottom-copper RF areas.
+(its plan() function) as copper, --zones shades the no-bottom-copper RF areas, and --pours draws the filled ground
+pours of one layer (--pours F or --pours B) under the copper.
 Usage (from the repository root, board open in KiCad):
-  python tools/pcb_view.py X0 Y0 X1 Y1 OUT.png [--nets] [--plan FILE.json] [--runs SCRIPT.py[,SCRIPT.py]] [--zones] [--title T]"""
+  python tools/pcb_view.py X0 Y0 X1 Y1 OUT.png [--nets] [--plan FILE.json] [--runs SCRIPT.py[,SCRIPT.py]] [--zones] [--pours F|B] [--title T]"""
 import json
 import sys
 
@@ -19,7 +20,7 @@ from pcb_astar import board_copper
 TOP, BOT, TH = "#c8302c", "#2c62c8", "#888888"
 
 
-def draw(board, box, out, nets=False, plan=None, runs=None, zones=False, title=None):
+def draw(board, box, out, nets=False, plan=None, runs=None, zones=False, title=None, pours=None):
     x0, y0, x1, y1 = box
     copper = board_copper(board.get_as_string())
     if runs:
@@ -62,6 +63,13 @@ def draw(board, box, out, nets=False, plan=None, runs=None, zones=False, title=N
         if inbox(cx, cy, 0):
             ax.text(cx, cy, ref, fontsize=7 if ref[0] == "U" else 5, ha="center", va="center", weight="bold",
                     color="black", zorder=7, alpha=0.85)
+    if pours:
+        from pcb_stitch import fills
+        geom = fills(board)[3 if pours == "F" else 34]
+        for g in getattr(geom, "geoms", [geom]):
+            ax.add_patch(Polygon(list(g.exterior.coords), closed=True, fc="#9aa5b1", ec="none", alpha=0.45, zorder=0.5))
+            for h in g.interiors:
+                ax.add_patch(Polygon(list(h.coords), closed=True, fc="white", ec="none", zorder=0.6))
     if zones:
         from pcb_freeroute import RF_BOTTOM_POLYS
         for poly in RF_BOTTOM_POLYS:
@@ -100,7 +108,7 @@ def main():
     box = tuple(float(v) for v in a[:4])
     plan = json.load(open(a[a.index("--plan") + 1])) if "--plan" in a else None
     opt = lambda k: a[a.index(k) + 1] if k in a else None
-    draw(KiCad().get_board(), box, a[4], "--nets" in a, plan, opt("--runs"), "--zones" in a, opt("--title"))
+    draw(KiCad().get_board(), box, a[4], "--nets" in a, plan, opt("--runs"), "--zones" in a, opt("--title"), opt("--pours"))
 
 
 if __name__ == "__main__":

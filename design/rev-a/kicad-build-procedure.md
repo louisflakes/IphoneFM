@@ -240,15 +240,21 @@ Checks:
     2.0× (the filter output past L2, as the RF plan places it); I²C, MICROWIRE and LED_R_K 1.6–1.8× (their lanes
     over the U4 pocket, under U2 and round D1). No accidental detours; nothing removed. Pictures:
     `review/phase5-routed-board.png`, `-north.png`, `-south.png`.
-- [ ] 5.13 **Review checkpoint:** the user reviews the routing.
+- [x] 5.13 **Review checkpoint:** the user reviews the routing.
+  - Approved 2026-10-26, including the 1.5 mm clock escape areas and the 7 mm bottom 3V3 link 1.
 
 ## Phase 6: Ground pours
 
-- [ ] 6.1 Pour ground on both layers, pulled back at least 0.5 mm from the edge [BAC p20; conflict C3].
-- [ ] 6.2 Stitch the two pours with vias across the board, liberally through the RF area and along the RF lines [AN383 p15–16; ADI "Ground Planes"; BAC p22].
-- [ ] 6.3 Connect the FMI shunt parts (C35, L1) and the GPO caps (C37, C38) to the top ground fill without thermal reliefs [AN383 p17].
-- [ ] 6.4 Remove dead copper [BAC p6, p11].
-- [ ] 6.5 Check the copper is roughly balanced between the two sides [HHG p61–62; KHA p135].
+- [x] 6.1 Pour ground on both layers, pulled back at least 0.5 mm from the edge [BAC p20; conflict C3].
+  - Done 2026-10-26: zones "GND top" and "GND bottom" on the board outline (the 0.5 mm edge rule pulls them back), 0.2 mm clearance (the RF lines' coplanar gap), 0.2 mm minimum width, thermal reliefs 0.3/0.3 mm on pads, islands always removed. The bottom pour is unbroken under the RF zones apart from the two approved 3V3 links.
+- [x] 6.2 Stitch the two pours with vias across the board, liberally through the RF area and along the RF lines [AN383 p15–16; ADI "Ground Planes"; BAC p22].
+  - Done: `tools/pcb_stitch.py` placed 123 ground vias on a grid, 3 mm across the board and 1.5 mm inside the RF zones, each where both fills cover the whole via and it clears other copper, holes and vias. These are on top of the receive and antenna lines' own stitching (RF plan) and the 5.1 fan-out: 303 vias in all.
+- [x] 6.3 Connect the FMI shunt parts (C35, L1) and the GPO caps (C37, C38) to the top ground fill without thermal reliefs [AN383 p17].
+  - Done: solid (no thermal relief) on the ground pads of C35, L1, C37 and C38, and on the five pads DRC found starved of spokes (U5.2 between U5's RF pins, U4 pins 3/4, J1 A1/B12/A12/B1). U5.2 reaches the pour this way.
+- [x] 6.4 Remove dead copper [BAC p6, p11].
+  - Done: island removal leaves no dead copper. DRC finds no unconnected items, dangling vias or isolated fill.
+- [x] 6.5 Check the copper is roughly balanced between the two sides [HHG p61–62; KHA p135].
+  - Done: copper covers 71% of the top and 87% of the bottom (pours, tracks and pads). Roughly balanced for a two-layer 1.6 mm board with every part on top. Pictures: `review/phase6-pour-top.png`, `-bottom.png`, `-top-rf.png`.
 - [ ] 6.6 **Review checkpoint:** the user reviews the pours.
 
 ## Phase 7: DRC and the netlist comparison
