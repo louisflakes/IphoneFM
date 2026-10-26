@@ -1,11 +1,13 @@
 """Step 7.1: the parts that overhang the board edge (the three dials, SW3, J1 and J2) carry silkscreen outlines past
 it, which the board house clips. Each silkscreen line of a placed footprint is cut back to 0.2 mm inside the edge
-(Board Setup's silk clearance, plus half the line width); lines wholly outside are removed. The library footprints
-are left as they are; only the parts on this board change.
+(Board Setup's silk clearance, plus half the line width); lines wholly outside are removed, and so are marks (dots)
+that don't sit wholly inside (SW3's pin-1 dot had been slid out past the top edge by fp_silk_trim.py). The library
+footprints are left as they are; only the parts on this board change.
 Usage (from the repository root, board open in KiCad): python tools/pcb_silk_edge.py [list] | lay"""
+import math
 import sys
 
-from shapely.geometry import LineString, box
+from shapely.geometry import LineString, Point, box
 
 BOARD = (12.7, 59.56, 59.15, 130.96)
 GAP = 0.2 + 0.02
@@ -34,6 +36,14 @@ def plan(board):
                     s.start.x_nm, s.start.y_nm = round(x0 * 1e6), round(y0 * 1e6)
                     s.end.x_nm, s.end.y_nm = round(x1 * 1e6), round(y1 * 1e6)
                     cut += 1
+            elif isinstance(it, BoardShape) and it.layer in silk and it.proto.shape.WhichOneof("geometry") == "circle":
+                c = it.proto.shape.circle
+                cx, cy = c.center.x_nm / 1e6, c.center.y_nm / 1e6
+                r = math.hypot(c.radius_point.x_nm / 1e6 - cx, c.radius_point.y_nm / 1e6 - cy)
+                if not box(BOARD[0] + GAP, BOARD[1] + GAP, BOARD[2] - GAP, BOARD[3] - GAP).contains(
+                        Point(cx, cy).buffer(r)):
+                    dropped += 1
+                    continue
             keep.append(it)
         if cut or dropped:
             f.definition.items = keep
