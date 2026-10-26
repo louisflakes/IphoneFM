@@ -37,7 +37,7 @@ VD = [(51.05 - 0.6 * k, ROW_D[k]) for k in range(6)]
 L3 = [43.8 + 0.4 * k for k in range(6)]
 VU = [(42.0 + 0.6 * k, 78.6 + 0.6 * k) for k in range(6)]
 # ---- top north of the bundle: rows east at 73.0 .. 75.5, north between the resistors, west into SW3
-ROW_E = [73.0 + 0.5 * k for k in range(6)]
+ROW_E = [73.1 + 0.5 * k for k in range(6)]
 L4 = [R_X[n] - 0.65 for n in NETS]
 ROW_W = [64.6 - 0.5 * k for k in range(6)]
 

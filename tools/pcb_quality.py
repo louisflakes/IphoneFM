@@ -200,7 +200,7 @@ def main():
     for i, t in enumerate(tracks):
         for j in range(i + 1, len(tracks)):
             u = tracks[j]
-            if t[1] == u[1] or t[2] != u[2]:
+            if t[1] == u[1] or t[2] != u[2] or "GND" in (t[1], u[1]):   # ground links are not bus lines
                 continue
             (ax0, ay0, ax1, ay1, _), (bx0, by0, bx1, by1, _) = t[3], u[3]
             la, lb = math.hypot(ax1 - ax0, ay1 - ay0), math.hypot(bx1 - bx0, by1 - by0)

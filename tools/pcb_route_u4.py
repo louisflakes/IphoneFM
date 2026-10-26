@@ -49,8 +49,8 @@ def runs():
           ("/RX_RCLK", B, [(LANE["RCLK"], 82.6), (56.2, 82.6), (56.6, 83.0), (56.6, 85.45)], W),
           ("/RX_RCLK", T, [(56.6, 85.45), (56.3, 85.75), (55.45, 85.75)], W)]
     # RST: on top north of the bundle, dive at the corner's north-east, bottom outside RCLK, up beside R19; R19 to pin 5
-    r += [("/RX_RST", T, [(45.6, Y0), (45.6, 76.4), (46.0, 76.0), (56.0, 76.0)], W),
-          ("/RX_RST", B, [(56.0, 76.0), (56.0, 79.0), (57.35, 80.35), (57.35, 89.02)], W),
+    r += [("/RX_RST", T, [(45.6, Y0), (45.6, 76.5), (46.0, 76.1), (56.0, 76.1)], W),
+          ("/RX_RST", B, [(56.0, 76.1), (56.0, 79.0), (57.35, 80.35), (57.35, 89.02)], W),
           ("/RX_RST", T, [(57.35, 89.02), (54.65, 89.02)], W),
           ("/RX_RST", T, [(54.65, 89.02), (54.65, 87.55)], W)]
     # FS under SD: FS dives in its lane, SD steps west into it, FS comes up in SD's old lane (RCLK has left by then)
@@ -85,7 +85,7 @@ def runs():
     return r
 
 
-VIAS = [("/RX_RCLK", 48.6, 82.6), ("/RX_RCLK", 56.6, 85.45), ("/RX_RST", 56.0, 76.0), ("/RX_RST", 57.35, 89.02),
+VIAS = [("/RX_RCLK", 48.6, 82.6), ("/RX_RCLK", 56.6, 85.45), ("/RX_RST", 56.0, 76.1), ("/RX_RST", 57.35, 89.02),
         ("/RX_FS_MCU", 47.4, 81.2), ("/RX_FS_MCU", 48.0, 79.9), ("3V3", 55.42, 79.2), ("3V3", 58.02, 75.6)]
 EXTRA = [("3V3", T, [(58.02, 75.6), (58.02, 76.4)], 0.3)]                              # R20's 3V3 via
 
