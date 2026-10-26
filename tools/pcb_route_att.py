@@ -27,8 +27,8 @@ for n in NETS:
 
 # ---- south: U7 east pins -> lanes 46.6..48.6, north-east beside RX, north at 51.64..53.64
 L1 = [46.6 + 0.4 * k for k in range(6)]
-L2 = [51.64 + 0.4 * k for k in range(6)]
-C = [160.3 + 0.566 * k for k in range(6)]                  # x + y of each diagonal beside the receive line
+L2 = [51.57 + 0.4 * k for k in range(6)]
+C = [160.2 + 0.566 * k for k in range(6)]                  # x + y of each diagonal beside the receive line
 U7 = turn([(44.775, 116.55 + 0.5 * k) for k in range(6)], (1, 0), (0, -1), L1, 0.4, tips=0.4, min_exit=1.0)
 # ---- the down staircase: rows west at 95.2 .. 92.2, each into its via
 ROW_D = [95.2 - 0.6 * k for k in range(6)]

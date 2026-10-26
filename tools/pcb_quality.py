@@ -249,7 +249,7 @@ def main():
         seen |= group
         if only and not any(tracks[k][1] in only for k in group):
             continue
-        ds = sorted({round(d, 2) for k in group for _, d, _ in pairs[k]})
+        ds = sorted({round(d, 3) for k in group for _, d, _ in pairs[k]})
         if ds and ds[-1] - ds[0] > TOL:
             nets = sorted({tracks[k][1].lstrip("/") for k in group})
             found["pitch"].append(f"bus of {', '.join(nets)}: pitches {', '.join(f'{d:.2f}' for d in ds)} mm")
