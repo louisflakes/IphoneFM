@@ -280,10 +280,15 @@ Checks:
 
 ## Phase 8: Outputs
 
-- [ ] 8.1 Export Gerbers and the Excellon drill file with JLC's recommended settings [HHG p79–93].
-- [ ] 8.1a Plot the assembly drawing (fab layers with every reference) as a PDF for bench work.
-- [ ] 8.2 Export the BOM in JLC's format (comment, designator, footprint, LCSC code).
+- [x] 8.1 Export Gerbers and the Excellon drill file with JLC's recommended settings [HHG p79–93].
+  - 2026-10-26, from the panel (8.3), with JLC's KiCad guide (read 2026-10-26, written for KiCad 8.0.4): copper, paste, silkscreen and mask on both sides plus Edge.Cuts; Protel extensions; references and footprint text plotted; soldermask subtracted from silkscreen; zones checked; vias tented (board setting). Drill: Excellon, absolute origin, millimetres, decimal zeros, alternate drill mode for slots, plated and unplated in separate files, drill maps as PDF. Zipped as `output/jlc/IphoneFM-RevA-gerbers.zip`.
+- [x] 8.1a Plot the assembly drawing (fab layers with every reference) as a PDF for bench work.
+  - 2026-10-26, `tools/pcb_assembly.py` → `output/assembly/IphoneFM-RevA-assembly.pdf`: two A3 pages (top; bottom seen from below), every reference inside its part's body as large as it fits, the test pads with their nets. KiCad's own fab plot printed the passives' references inside their pads at 0.5 mm.
+- [x] 8.2 Export the BOM in JLC's format (comment, designator, footprint, LCSC code).
+  - 2026-10-26: `output/jlc/IphoneFM-RevA-BOM.csv`, 45 lines, 94 parts (test pads and mounting holes are not ordered). Stock at JLC the same day: every line has stock for six boards; U1 and SW3 are 0 at JLC and go through global sourcing (sourcing.md); U4 has 48 at JLC, with DigiKey as the second route.
 - [ ] 8.3 Export the pick-and-place file and check every part's rotation in JLC's preview [HHG p94–113].
+  - Panel 2026-10-26 (`tools/pcb_panel.sh`, KiKit 1.8.1 installed into KiCad's Python with the user's OK; tabs and fiducials in `tools/kikit_tabs.py`): one board in a frame of 6.5 mm rails; gaps 9.5 mm left and right (J2's barrel 7.45 mm, the wheels' rims 1.9 mm) and 3 mm top and bottom; five 3 mm tabs where no part's courtyard comes within 2 mm of the edge (two top, one left above the wheels, two right); mouse bites 0.5 mm holes 1.0 mm apart on the board edge; three 1 mm fiducials with 2 mm openings, 3.35 mm from the panel edge to the opening; "IphoneFM Rev A" on the top rail. The bottom edge has no clear stretch, so no tab. Panel DRC: 0 errors, 0 unconnected; the six known edge-part warnings. Picture `phase8-panel.png`.
+  - `output/jlc/IphoneFM-RevA-CPL.csv`: 94 parts in panel coordinates (designator, mid X/Y, layer, rotation), matching the BOM one for one. Rotations still to check in JLC's preview (8.5).
 - [ ] 8.4 Inspect the Gerbers in KiCad's Gerber viewer [KLAP p68–69].
 - [ ] 8.5 Upload to JLC for a quote and DFM check only; the user places the order.
 - [ ] 8.6 **Final review:** commit the project and tag it `rev-a`.
