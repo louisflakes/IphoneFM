@@ -1,0 +1,17 @@
+# Copyrighted reference books, kept local only (cited in docs/pcb-design-workflow.md)
+Books/
+local/
+
+# KiCad working files
+*-backups/
+*.lck
+\#auto_saved_files\#
+_autosave-*
+fp-info-cache
+*.kicad_prl
+kicad/rev-a/output/
+kicad/rev-a/.history/
+kicad/rev-a/.kicad-mcp/
+
+# review PDF build intermediates (tools/review_doc.py)
+design/rev-a/review/design-review/
