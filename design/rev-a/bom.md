@@ -319,7 +319,7 @@ The LED allows 5 V reverse voltage (p3), so the unplug case that worried Plan C'
 
 **Designators:** H1 Mounting hole, 13, 7 mm from the board's top-left corner; H2 Mounting hole, 33, 7 mm from the board's top-left corner; H3 Mounting hole, 41, 57 mm from the board's top-left corner; H4 Mounting hole, 8, 66 mm from the board's top-left corner; TP1 Test pad VBUS; TP2 Test pad 3V3; TP3 Test pad GND; TP4 Test pad RF_MODE; TP5 Test pad LMX_MUX; TP6 SWD pad NRST; TP7 SWD pad SWCLK; TP8 SWD pad SWDIO.
 
-**Test pads:** none on RF nets (Plan C chain 13 rule). Bare pads, no parts, so they stay out of the BOM and the position files. TP1, TP5 and TP8 sit on the bottom side, where Phase 5's lanes leave room (the user's choice, 2026-10-25).
+**Test pads:** none on RF nets (Plan C chain 13 rule). Bare pads, no parts, so they stay out of the BOM and the position files. TP1 and TP5–TP8 sit on the bottom side, where Phase 5's lanes leave room (the user's choice, 2026-10-25; TP6 and TP7 joined them in the approved routing).
 - TP1 VBUS (bottom)
 - TP2 3V3
 - TP3 GND

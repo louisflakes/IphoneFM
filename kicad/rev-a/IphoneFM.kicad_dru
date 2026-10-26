@@ -20,3 +20,8 @@
 (rule "No through-hole leads over the MagSafe ring"
 	(condition "A.Type == 'Pad' && A.Pad_Type == 'Through-hole' && A.intersectsArea('MagSafe ring') && !A.enclosedByArea('MagSafe ring opening')")
 	(constraint disallow pad))
+# Phase 7: J1's two locating holes are unplated and sit 0.28 mm from the maker's pads (HRO TYPE-C-31-M-12 land
+# pattern). JLC's NPTH-to-copper minimum is 0.20 mm (fab-rules.md); 0.25 mm keeps a step above it.
+(rule "J1 locating holes 0.25 mm to copper"
+	(condition "(A.Pad_Type == 'NPTH, mechanical' && A.memberOfFootprint('J1')) || (B.Pad_Type == 'NPTH, mechanical' && B.memberOfFootprint('J1'))")
+	(constraint hole_clearance (min 0.25mm)))

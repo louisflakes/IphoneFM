@@ -261,10 +261,19 @@ Checks:
 ## Phase 7: DRC and the netlist comparison
 
 - [ ] 7.1 Run DRC against the JLC rules until it reports zero errors [BAC p17].
-- [ ] 7.2 Run DRC's schematic parity check until the board matches the schematic [KHA p236–238].
-- [ ] 7.3 Run `netcheck.py` and `kicadcheck.py --net --bom --pcb` until every check passes.
-- [ ] 7.4 Check hole sizes, annular rings and part clearances [BAC p12; KHA p151].
-- [ ] 7.5 Check part heights in the 3D view against the enclosure notes (placement rule M9).
+  - Run 2026-10-26 (kicad-cli, all severities, with schematic parity): 0 unconnected items, 0 parity issues.
+    - Remaining errors: only J1's locating holes. A rule in IphoneFM.kicad_dru allows 0.25 mm hole to copper for them (JLC's NPTH figure is 0.20 mm); four of the maker's wide ground pads (A1, A12, B1, B12) sit 0.22 mm away, so four errors stay for the user's decision.
+    - Silkscreen: `tools/pcb_silk_refs.py` puts every reference beside its part, outside all courtyards, 0.2 mm from pads, via holes and other ink, 0.6 mm between labels, 0.3 mm in from the edge. 98 of 106 fit; C17, C29, C30, L3, R17, R18, R3 and SW1 have no clear spot and are hidden on the silkscreen (still on the fab layer). `tools/pcb_silk_edge.py` cuts the outlines of RV1–RV3, SW3, J1 and J2 back 0.2 mm inside the edge (board only; the library footprints keep theirs). Silk findings: 143 to 0.
+    - `tools/pcb_fp_snap.py` put six footprints (U1, U5, U7, C3, C12, D5) back on the library's 100 nm grid (1 nm left from API rotations). The six "differs from library" warnings left are the edge parts just trimmed, as intended.
+    - `pcb_quality.py`: 825 segments, 0 findings. Picture `phase7-top-copper-silk.png`, `phase7-silk-top.png`.
+- [x] 7.2 Run DRC's schematic parity check until the board matches the schematic [KHA p236–238].
+  - 2026-10-26: 0 parity issues.
+- [x] 7.3 Run `netcheck.py` and `kicadcheck.py --net --bom --pcb` until every check passes.
+  - 2026-10-26: netcheck passes; kicadcheck 30 of 30 with `--layout none`. The comparisons with layout A and the Phase 4 local-part distances predate the B3 floorplan the user chose (5.11), so `--layout none` skips them; the M7 check now leaves out the bare test pads, five of which sit on the bottom (bom.md).
+- [x] 7.4 Check hole sizes, annular rings and part clearances [BAC p12; KHA p151].
+  - 2026-10-26 (board statistics and DRC): 303 vias 0.30/0.60 mm; plated holes 1.4 mm and plated slots 0.6 × 1.4 / 1.7 mm (over 2× width); unplated holes 0.6, 0.85, 2.2 mm and slots 1.1 × 2.2 mm, all at or above JLC's 0.5 mm hole and 1.0 mm slot; plated rings ≥ 0.25 mm (DRC rule passes); tracks ≥ 0.20 mm wide and 0.20 mm apart; no courtyard overlaps.
+- [x] 7.5 Check part heights in the 3D view against the enclosure notes (placement rule M9).
+  - 2026-10-26 from the drawings: J2 9.5 mm, SW3 4.1, J1 3.26, RV1–RV3 2.5, as M9 lists, all at the edges M9 gives them; every other part is 1.45 mm or lower (SOT-23 parts, SW1 about 1.4, SW2 1.35, 0805 capacitors, QFNs). The bottom has only bare test pads.
 - [ ] 7.6 **Review checkpoint:** the user reviews every check result.
 
 ## Phase 8: Outputs

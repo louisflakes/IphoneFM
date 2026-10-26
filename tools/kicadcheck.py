@@ -3,7 +3,9 @@ Usage (from the repo root; exit code 1 if any check fails):
   python tools/kicadcheck.py --net board.net                 schematic netlist: kicad-cli sch export netlist --format kicadsexpr
   python tools/kicadcheck.py --bom board.csv                 schematic BOM:     kicad-cli sch export bom --fields "Reference,Value,Footprint,LCSC,MPN"
   python tools/kicadcheck.py --pcb board.kicad_pcb           the board itself: pads and their nets, positions, sides, outline
-  Options: --layout A (placement in layout.html to compare with), --tol 1.5 (mm, major-part position), --local 4 (mm, part to its pin)"""
+  Options: --layout A (placement in layout.html to compare with), --tol 1.5 (mm, major-part position), --local 4 (mm, part to its pin)
+           --layout none skips both placement comparisons: from Phase 5 the placement is the B3 floorplan the user chose
+           (kicad-build-procedure.md 5.11), which layout.html and the local_to anchors predate"""
 import argparse
 import json
 import math
@@ -228,13 +230,15 @@ def check_pcb(by_ref, fps, outline, layout_n, tol, local, out):
     k_pins = {(r, num): net for r, f in fps.items() for num, (net, _, _) in f["pads"].items()}
     compare(by_ref, json_pins(by_ref), k_pins, "Board", out)
     check_fields(by_ref, {r: {"value": "", "footprint": f["footprint"], "fields": f["fields"]} for r, f in fps.items()}, "Board", out)
-    back = sorted(r for r, f in fps.items() if f["layer"] != "F.Cu")
+    back = sorted(r for r, f in fps.items() if f["layer"] != "F.Cu" and not r.startswith("TP"))  # bare test pads may sit underneath (bom.md)
     add((not back, "Board: every part on the top side (M7)" + (f": on the bottom {', '.join(back)}" if back else "")))
     if outline:
         w, h = outline[2] - outline[0], outline[3] - outline[1]
         add((abs(w - ENVELOPE[0]) < 0.1 and abs(h - ENVELOPE[1]) < 0.1, f"Board: outline {w:.2f} × {h:.2f} mm (envelope {ENVELOPE[0]} × {ENVELOPE[1]})"))
     else:
         add((False, "Board: no Edge.Cuts outline found"))
+    if layout_n == "none":
+        return
     # placement against the sketch: anchor on J1 (on the midline of the bottom edge), then compare every sketched part
     plan = read_layout(layout_n)
     if "J1" in fps and "J1" in plan:
