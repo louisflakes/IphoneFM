@@ -2,7 +2,7 @@
 firmware plan, each signal chain drawn on the schematic with its datasheet references, and what to check).
 Pictures are made here: the block diagram, and schematic crops with each chain's parts outlined and numbered in the
 order the signal passes them. The PDF is printed from HTML by Chrome.
-Usage (from the repository root): python tools/review_doc.py [--package]  (--package also builds the folder and zip)"""
+Usage (from the repository root): python tools/review_doc.py [--package]  (--package also fills review/rev-a/)"""
 import html
 import io
 import os
@@ -201,57 +201,64 @@ if __name__ == "__main__":
     main()
 
 
-# ---- the folder that goes with the PDF ----
-DATASHEETS = ["U6_USBLC6-2_ST_DS4260_Rev7.pdf", "D3-D4_TPD1E05U06_TI.pdf",
-              "U3_AP2112_DS39724_Rev2-2.pdf", "U1_STM32U535_DS14217_Rev5.pdf", "U1_ST_AN2606_bootloader_Rev61.pdf",
-              "XO_YXC_OT322520MJBA4SL.pdf", "PLL_TI_LMX2571_SNAS654A.pdf", "AN_TI_SNAA309_LMX2571_FSK.pdf",
-              "ATT_pSemi_PE43711.pdf", "U5_PE42421_DOC-33214-1.03.pdf", "ESD_Semtech_RClamp0521PA_Rev4.pdf",
-              "U4_Si4704-05-D60_Rev1.2.pdf", "U4_Skyworks_AN332_programming_guide.pdf",
-              "U4_Skyworks_AN383_antenna_layout.pdf", "D1_XINGLIGHT_XL-1615RGBC-RF.pdf", "J1_HRO_TYPE-C-31-M-12.pdf",
-              "J2_BAT_BWSMA-KWE-Z001.pdf", "POT_Alps_RK10J.pdf", "SW1_ShouHan_MSK12C02.pdf",
-              "SW2-SW3_Panasonic_EVQP7_ANCTB21E.pdf", "SW_CK_TDP_series.pdf", "L_Murata_LQW18AN_JELF243A-0024.pdf",
-              "FB_Murata_BLM15AG_ENFA0018.pdf"]   # the USB Type-C spec and Apple's guidelines are public, and large
+# ---- the review folder in the repository ----
+DATASHEETS = ["U6_USBLC6-2_ST_DS4260_Rev7.pdf", "D3-D4_TPD1E05U06_TI.pdf", "U3_AP2112_DS39724_Rev2-2.pdf",
+              "U1_STM32U535_DS14217_Rev5.pdf", "U1_ST_AN2606_bootloader_Rev61.pdf", "XO_YXC_OT322520MJBA4SL.pdf",
+              "PLL_TI_LMX2571_SNAS654A.pdf", "AN_TI_SNAA309_LMX2571_FSK.pdf", "ATT_pSemi_PE43711.pdf",
+              "U5_PE42421_DOC-33214-1.03.pdf", "ESD_Semtech_RClamp0521PA_Rev4.pdf", "U4_Si4704-05-D60_Rev1.2.pdf",
+              "U4_Skyworks_AN332_programming_guide.pdf", "U4_Skyworks_AN383_antenna_layout.pdf",
+              "D1_XINGLIGHT_XL-1615RGBC-RF.pdf", "J1_HRO_TYPE-C-31-M-12.pdf", "J2_BAT_BWSMA-KWE-Z001.pdf",
+              "POT_Alps_RK10J.pdf", "SW1_ShouHan_MSK12C02.pdf", "SW2-SW3_Panasonic_EVQP7_ANCTB21E.pdf",
+              "SW_CK_TDP_series.pdf", "L_Murata_LQW18AN_JELF243A-0024.pdf", "FB_Murata_BLM15AG_ENFA0018.pdf",
+              "USB_Type-C_R2.5_Mar2026.pdf", "Apple_Accessory_Design_Guidelines.pdf"]
+REVIEW = "review/rev-a"
 
 
 def package():
-    """kicad/rev-a/output/review-package/ and its zip: the PDF, schematic, JLC files, assembly drawing, board pictures,
-    the KiCad project and every datasheet the PDF cites. Run tools/pcb_export.sh first."""
+    """review/rev-a/: the PDF, schematic, JLC files, assembly drawing and board pictures, with a README linking the
+    KiCad project and every datasheet the PDF cites (already in docs/datasheets/). Run tools/pcb_export.sh first."""
     import glob
     import shutil
-    import zipfile
-    pkg = "kicad/rev-a/output/review-package"
-    shutil.rmtree(pkg, ignore_errors=True)
-    os.makedirs(pkg + "/datasheets")
-    shutil.copy(PDF, pkg)
-    subprocess.run([K, "sch", "export", "pdf", "-o", pkg + "/IphoneFM-RevA-schematic.pdf",
+    os.makedirs(REVIEW, exist_ok=True)
+    shutil.copy(PDF, REVIEW)
+    subprocess.run([K, "sch", "export", "pdf", "-o", REVIEW + "/IphoneFM-RevA-schematic.pdf",
                     "kicad/rev-a/IphoneFM.kicad_sch"], check=True, capture_output=True)
     for f in ("IphoneFM-RevA-gerbers.zip", "IphoneFM-RevA-BOM.csv", "IphoneFM-RevA-CPL.csv"):
-        shutil.copy("kicad/rev-a/output/jlc/" + f, pkg)
-    shutil.copy("kicad/rev-a/output/assembly/IphoneFM-RevA-assembly.pdf", pkg)
-    shutil.copy("design/rev-a/review/phase8-gerber-top.png", pkg + "/IphoneFM-RevA-board-top.png")
-    shutil.copy("design/rev-a/review/phase8-gerber-bottom.png", pkg + "/IphoneFM-RevA-board-bottom.png")
+        shutil.copy("kicad/rev-a/output/jlc/" + f, REVIEW)
+    shutil.copy("kicad/rev-a/output/assembly/IphoneFM-RevA-assembly.pdf", REVIEW)
+    shutil.copy("design/rev-a/review/phase8-gerber-top.png", REVIEW + "/IphoneFM-RevA-board-top.png")
+    shutil.copy("design/rev-a/review/phase8-gerber-bottom.png", REVIEW + "/IphoneFM-RevA-board-bottom.png")
+    links = []
     for name in DATASHEETS:
         src = glob.glob("docs/datasheets/**/" + name, recursive=True)
         if not src:
             sys.exit("datasheet not found: " + name)
-        shutil.copy(src[0], pkg + "/datasheets")
-    for src in glob.glob("docs/datasheets/analog-fm/basic/*.pdf"):
-        shutil.copy(src, pkg + "/datasheets")
-    proj = pkg + "/kicad"
-    for f in ("IphoneFM.kicad_pro", "IphoneFM.kicad_sch", "IphoneFM.kicad_pcb", "IphoneFM.kicad_dru", "fp-lib-table",
-              "sym-lib-table"):
-        shutil.copy("kicad/rev-a/" + f, os.path.join(proj, f) if os.path.isdir(proj) else (os.makedirs(proj) or
-                                                                                          os.path.join(proj, f)))
-    shutil.copytree("kicad/rev-a/IphoneFM.pretty", proj + "/IphoneFM.pretty")
-    if os.path.isdir("kicad/rev-a/symbols"):
-        shutil.copytree("kicad/rev-a/symbols", proj + "/symbols")
-    z = "kicad/rev-a/output/IphoneFM-RevA-review-package.zip"
-    with zipfile.ZipFile(z, "w", zipfile.ZIP_DEFLATED) as out:
-        for root, _, files in os.walk(pkg):
-            for f in files:
-                full = os.path.join(root, f)
-                out.write(full, os.path.join("IphoneFM-RevA-review", os.path.relpath(full, pkg)))
-    print("written", z, os.path.getsize(z) // 1024, "KB")
+        links.append(f"- [{name}](../../{src[0].replace(os.sep, '/')})")
+    for src in sorted(glob.glob("docs/datasheets/analog-fm/basic/*.pdf")):
+        links.append(f"- [{os.path.basename(src)}](../../{src.replace(os.sep, '/')})")
+    readme = f"""# IphoneFM Rev A — design review
+
+Start with **[IphoneFM-RevA-design-review.pdf](IphoneFM-RevA-design-review.pdf)** (4 pages). It cites datasheet pages;
+the documents are linked below.
+
+| File | What it is |
+|---|---|
+| [IphoneFM-RevA-design-review.pdf](IphoneFM-RevA-design-review.pdf) | Overview, key numbers, main parts, each signal chain on the schematic, what to check |
+| [IphoneFM-RevA-schematic.pdf](IphoneFM-RevA-schematic.pdf) | The schematic, one A2 sheet |
+| [IphoneFM-RevA-gerbers.zip](IphoneFM-RevA-gerbers.zip) | Gerbers and drill files of the JLC panel (one board in rails) |
+| [IphoneFM-RevA-BOM.csv](IphoneFM-RevA-BOM.csv), [IphoneFM-RevA-CPL.csv](IphoneFM-RevA-CPL.csv) | Parts list and placement file in JLC's format |
+| [IphoneFM-RevA-assembly.pdf](IphoneFM-RevA-assembly.pdf) | Assembly drawing, every reference, both sides |
+| [IphoneFM-RevA-board-top.png](IphoneFM-RevA-board-top.png), [IphoneFM-RevA-board-bottom.png](IphoneFM-RevA-board-bottom.png) | The board as built, drawn from the Gerbers |
+| [kicad/rev-a/](../../kicad/rev-a/) | KiCad 10 project (schematic, board, rules, footprints) |
+
+## Datasheets cited
+
+{chr(10).join(links)}
+
+Generated by `tools/review_doc.py --package`.
+"""
+    open(REVIEW + "/README.md", "w", encoding="utf-8").write(readme)
+    print("written", REVIEW, len(os.listdir(REVIEW)), "files")
 
 
 if __name__ == "__main__" and "--package" in sys.argv:

@@ -447,79 +447,7 @@
     "netclass_patterns": [
       {
         "netclass": "Default",
-        "pattern": "/FSK_FS"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/SWDIO"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "unconnected-(J1-SBU2-PadB8)"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/I2C_SDA"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/LMX_VREGVCO"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/LMX_DATA"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "unconnected-(U2-RFoutRx-Pad16)"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/VCAP"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/ATT_C4"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/LMX_MUX"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/ATT_C1"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/CP_LOOP"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/LED_G"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "unconnected-(U1-PC15-Pad4)"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "unconnected-(U2-FLout1-Pad29)"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "unconnected-(U2-Fin-Pad24)"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "unconnected-(U4-NC-Pad1)"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/ATT_C2"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/LOOP_RC"
+        "pattern": "/WHEEL1"
       },
       {
         "netclass": "Default",
@@ -527,67 +455,23 @@
       },
       {
         "netclass": "Default",
-        "pattern": "unconnected-(U2-CPoutExt-Pad30)"
+        "pattern": "unconnected-(U2-NC-Pad26)"
       },
       {
         "netclass": "Default",
-        "pattern": "unconnected-(U2-NC-Pad14)"
+        "pattern": "/LMX_DATA"
       },
       {
         "netclass": "Default",
-        "pattern": "/LED_R"
+        "pattern": "unconnected-(U2-FLout1-Pad29)"
       },
       {
         "netclass": "Default",
-        "pattern": "/ATT_C16"
+        "pattern": "/CP_LOOP"
       },
       {
         "netclass": "Default",
-        "pattern": "/CC2"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/LED_B"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/FSK_DATA"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/USB_DM"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "unconnected-(U1-PA15-Pad38)"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "unconnected-(U2-FLout2-Pad28)"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/ATT_C0_5"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/LMX_VREFVCO"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/FSK_DATA_MCU"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "unconnected-(U1-PB10-Pad21)"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "unconnected-(U2-OSCin*-Pad36)"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/FSK_FS_MCU"
+        "pattern": "/FSK_FS"
       },
       {
         "netclass": "Default",
@@ -595,7 +479,15 @@
       },
       {
         "netclass": "Default",
-        "pattern": "unconnected-(U1-PB2-Pad20)"
+        "pattern": "/USB_DP"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "unconnected-(U1-PB10-Pad21)"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/FSK_FS_MCU"
       },
       {
         "netclass": "Default",
@@ -603,95 +495,7 @@
       },
       {
         "netclass": "Default",
-        "pattern": "/NRST"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "unconnected-(U2-NC-Pad8)"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/LMX_CE"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "unconnected-(J1-SBU1-PadA8)"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/WHEEL1"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/RX_FS_MCU"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/RF_CTRL"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "GND"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "unconnected-(U2-NC-Pad26)"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/CC1"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/USB_DP"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/RX_GPO1"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/ATT_C8"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/RX_RST"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "unconnected-(U1-PC13-Pad2)"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/LMX_BYP1"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/I2C_SCL"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/RX_SD_MCU"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/LED_R_K"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/WHEEL3"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/RX_FS"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/RX_SD"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/BOOT0"
+        "pattern": "/ATT_C0_5"
       },
       {
         "netclass": "Default",
@@ -699,11 +503,43 @@
       },
       {
         "netclass": "Default",
-        "pattern": "/LMX_LE"
+        "pattern": "/RF_MODE"
       },
       {
         "netclass": "Default",
-        "pattern": "/LMX_BYP2"
+        "pattern": "unconnected-(U4-NC-Pad1)"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/U5_VDD"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/RX_RST"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "unconnected-(U2-Fin-Pad24)"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "unconnected-(U1-PA15-Pad38)"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/LOOP_RC"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/LED_B"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/LED_R_K"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/CC1"
       },
       {
         "netclass": "Default",
@@ -711,19 +547,7 @@
       },
       {
         "netclass": "Default",
-        "pattern": "/RF_MODE"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "unconnected-(U1-PC14-Pad3)"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "unconnected-(U3-NC-Pad4)"
-      },
-      {
-        "netclass": "Default",
-        "pattern": "/WHEEL2"
+        "pattern": "/CC2"
       },
       {
         "netclass": "Default",
@@ -731,7 +555,183 @@
       },
       {
         "netclass": "Default",
-        "pattern": "/U5_VDD"
+        "pattern": "/RX_SD_MCU"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "unconnected-(U2-CPoutExt-Pad30)"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "unconnected-(U2-FLout2-Pad28)"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/ATT_C2"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/ATT_C16"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/LMX_MUX"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "unconnected-(J1-SBU2-PadB8)"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/LED_R"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/RX_SD"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/I2C_SDA"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/FSK_DATA"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "unconnected-(U1-PB2-Pad20)"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "unconnected-(U2-NC-Pad14)"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/FSK_DATA_MCU"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/SWDIO"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "unconnected-(U2-OSCin*-Pad36)"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "unconnected-(U3-NC-Pad4)"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "unconnected-(U1-PC13-Pad2)"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "unconnected-(U2-NC-Pad8)"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "unconnected-(U2-RFoutRx-Pad16)"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/LMX_VREFVCO"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/LMX_BYP2"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/WHEEL2"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "GND"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/BOOT0"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/NRST"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/RX_FS"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/RX_FS_MCU"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/ATT_C4"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/I2C_SCL"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/WHEEL3"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "unconnected-(J1-SBU1-PadA8)"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "unconnected-(U1-PC14-Pad3)"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/LMX_VREGVCO"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/VCAP"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/LMX_LE"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/LED_G"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/USB_DM"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "unconnected-(U1-PC15-Pad4)"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/RX_GPO1"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/LMX_BYP1"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/ATT_C1"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/ATT_C8"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/RF_CTRL"
+      },
+      {
+        "netclass": "Default",
+        "pattern": "/LMX_CE"
       },
       {
         "netclass": "Power",
