@@ -72,9 +72,24 @@ RF power is set after the synthesizer and is independent of deviation. The chain
 |---|---|---|---|---|
 | Step attenuator | **pSemi PE43711B-Z** | C470929, 1,737 | 9 kHz–6 GHz, 50 Ω, 7 bits, 0–31.75 dB in 0.25 dB steps, about 1.5 dB loss at the 0 dB setting (DOC-84940-8 p1, p4). VDD 2.3–5.5 V, so it runs from 3.3 V. +28 dBm max input (p3). **Direct parallel mode:** P/S tied low and LE tied high; the control pins then set the state live, "ideal for manual control… using hardwire, switches, or jumpers" (p8). Bits D6–D0 = 16, 8, 4, 2, 1, 0.5, 0.25 dB (Table 4, p6). Floating pins at power-up give minimum attenuation (p8), so every line has a defined level. QFN-24, 4 × 4 mm | Checked. Same maker as U5 |
 | Power setting | **C&K TDP06H1SBD1**, 6-position half-pitch side-actuated SMD DIP switch, extended actuators (chosen 2026-10-21 so the levers face out the board edge) | JLC C221994, 0 → **global sourcing**: DigiKey 1,180, tube, MOQ 1 | SPST ×6, 1.27 mm pitch, body 8.74 × 6.0 mm, 4.1 mm tall, gull wing; pads 8.89 mm apart. 24 V DC / 25 mA switching, ≤ 100 mΩ, 1,000-cycle life (fine for a bench setting), −40 to +85 °C, 4.9 N max operating force. Process-sealed for SMT soldering (`SW_CK_TDP_series.pdf` p1–3). Switches 1–6 drive D6–D1 (16, 8, 4, 2, 1, 0.5 dB, labelled on the silkscreen), giving 0–31.5 dB in 0.5 dB steps. D0 (0.25 dB) is tied low on the board. Each switch connects its line to 3V3 | Checked. Replaces the top-actuated Kangshen DSHP06TSGER (C3293146, 14,596), kept as the in-stock fallback. Rejected: Shou Han 2.54-6P TPCB piano DIP (7 mm tall) |
-| DIP pull-downs ×6 | Yageo RC0402FR-0710KL, 10 kΩ | C60490, 5,416,054 | One per attenuator control line, so an off switch reads low. 0.33 mA when on, well inside the switch rating | Plan C part |
+| DIP pull-downs ×6 | UNI-ROYAL 0402WGF1002TCE, 10 kΩ | C25744, 17,624,691 | One per attenuator control line, so an off switch reads low. 0.33 mA when on, well inside the switch rating | Plan C part |
 | ~~Buffer lock-gate~~ | ~~onsemi MMBT3904LT1G~~ | | Replaced by the LMX2571's output auto-mute (p23) plus firmware lock monitoring | Dropped |
 
 **Height check:** the DIP switch (4.1 mm) is lower than the SMA jack (9.5 mm tall with its axis 6.4 mm up, J2 drawing p6), the tallest part, so it doesn't set the enclosure height. It is taller than the USB-C socket (3.26 mm, J1 drawing) and the thumbwheels (2.5 mm, `POT_Alps_RK10J.pdf` p2). It sits at the board edge with its levers facing out, like the slider; the enclosure needs a slot there.
 
+## JLC Basic-library swaps (2026-10-26)
 
+JLC charges a fee per Extended part type in every assembly order (about $3 each, $124 across Rev A's 41 types at the first quote). Fourteen passive types have exact equivalents in JLC's Basic library: the same value and size, with an equal or higher voltage rating. They were swapped in netlist.json, the schematic and the board. Datasheets are saved in `docs/datasheets/analog-fm/basic/`.
+
+| Was | Now (JLC Basic) | Parts | Note |
+|---|---|---|---|
+| Yageo RC0402FR 1% (5.1 kΩ, 10 kΩ, 33 Ω, 1 kΩ, 100 kΩ, 510 Ω), Panasonic ERJ-2RKF2001X (2 kΩ) | UNI-ROYAL 0402WGF…TCE, 1%, 1/16 W, ±100 ppm/°C | R1–R4, R6–R19 (not R5), R23–R25 | Same rating (UniOhm data sheet p4) |
+| Samsung CL10B105KO8NNNC 1 µF X7R 16 V 0603 | Samsung CL10A105KB8NNNC 1 µF X5R 50 V (C15849) | C1, C2, C8, C27 | Decoupling and LDO in/out; X5R is fine at these temperatures |
+| Samsung CL21A106KOQNNNE 10 µF X5R 16 V 0805 | Samsung CL21A106KAYNNNE 10 µF X5R 25 V (C15850) | C3, C12 | |
+| Murata GRM21BR71C475KE51L 4.7 µF X7R 16 V 0805 | Samsung CL21A475KAQNNNE 4.7 µF X5R 25 V (C1779) | C9 (U1 VCAP) | Still ≥ 10 V, ±10% (DS14217 p127 asks ±20%) |
+| Samsung CL05C101JB5NNNC 100 pF C0G | FH 0402CG101J500NT 100 pF C0G 50 V (C1546) | C24, C26 | Same dielectric and tolerance |
+| Samsung CL05C330JB5NNNC 33 pF C0G | FH 0402CG330J500NT 33 pF C0G 50 V (C1562) | C28, C30, C37, C38 | Same dielectric and tolerance |
+| Murata GRM1555C1H102JA01D 1 nF C0G | FH 0402B102K500NT 1 nF X7R 50 V (C1523) | C31, C34 | CTRL filter and FMI coupling: 1.6 Ω at 100 MHz either way |
+| Murata GRM155R71H223KA12D 22 nF X7R 50 V | FH 0402B223K500NT 22 nF X7R 50 V (C1532) | C32 | Same spec |
+
+Left as they are, with no Basic equivalent of the same value: R5 1.1 kΩ (loop filter), R20/R21 6.8 kΩ, R22 604 Ω, R26/R27 390 Ω, C25 1.5 nF, C29 56 pF, C35 6 pF, C36 3.3 pF, the ferrites, inductors and every specialist part.

@@ -528,7 +528,7 @@
 				)
 			)
 		)
-		(property "MPN" "RC0402FR-071KL"
+		(property "MPN" "0402WGF1001TCE"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -541,7 +541,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C106235"
+		(property "LCSC" "C11702"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -554,7 +554,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Yageo"
+		(property "Manufacturer" "UNI-ROYAL"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -689,7 +689,7 @@
 				)
 			)
 		)
-		(property "MPN" "RC0402FR-0710KL"
+		(property "MPN" "0402WGF1002TCE"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -702,7 +702,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C60490"
+		(property "LCSC" "C25744"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -715,7 +715,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Yageo"
+		(property "Manufacturer" "UNI-ROYAL"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -1423,7 +1423,7 @@
 				)
 			)
 		)
-		(property "Value" "1 µF X7R 16 V"
+		(property "Value" "1 µF X5R 50 V"
 			(at 0 1.43 270)
 			(layer "F.Fab")
 			(uuid "f0576a82-d975-4cad-9b35-09d6d3723985")
@@ -1468,7 +1468,7 @@
 				)
 			)
 		)
-		(property "MPN" "CL10B105KO8NNNC"
+		(property "MPN" "CL10A105KB8NNNC"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -1481,7 +1481,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C59782"
+		(property "LCSC" "C15849"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -1629,7 +1629,7 @@
 				)
 			)
 		)
-		(property "MPN" "RC0402FR-0710KL"
+		(property "MPN" "0402WGF1002TCE"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -1642,7 +1642,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C60490"
+		(property "LCSC" "C25744"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -1655,7 +1655,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Yageo"
+		(property "Manufacturer" "UNI-ROYAL"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -1790,7 +1790,7 @@
 				)
 			)
 		)
-		(property "MPN" "ERJ-2RKF2001X"
+		(property "MPN" "0402WGF2001TCE"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -1803,7 +1803,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C413086"
+		(property "LCSC" "C4109"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -1816,7 +1816,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Panasonic"
+		(property "Manufacturer" "UNI-ROYAL"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -5118,7 +5118,7 @@
 				)
 			)
 		)
-		(property "Value" "1 µF X7R 16 V"
+		(property "Value" "1 µF X5R 50 V"
 			(at 0 1.43 0)
 			(layer "F.Fab")
 			(uuid "cd7088bf-bb63-4ba3-abaf-7e634d3cbca6")
@@ -5163,7 +5163,7 @@
 				)
 			)
 		)
-		(property "MPN" "CL10B105KO8NNNC"
+		(property "MPN" "CL10A105KB8NNNC"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -5176,7 +5176,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C59782"
+		(property "LCSC" "C15849"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -6416,7 +6416,7 @@
 				)
 			)
 		)
-		(property "MPN" "CL05C101JB5NNNC"
+		(property "MPN" "0402CG101J500NT"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -6429,7 +6429,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C26409"
+		(property "LCSC" "C1546"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -6442,7 +6442,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Samsung"
+		(property "Manufacturer" "FH"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -7716,7 +7716,7 @@
 				)
 			)
 		)
-		(property "MPN" "RC0402FR-07100KL"
+		(property "MPN" "0402WGF1003TCE"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -7729,7 +7729,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C60491"
+		(property "LCSC" "C25741"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -7742,7 +7742,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Yageo"
+		(property "Manufacturer" "UNI-ROYAL"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -8285,7 +8285,7 @@
 				)
 			)
 		)
-		(property "MPN" "CL05C330JB5NNNC"
+		(property "MPN" "0402CG330J500NT"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -8298,7 +8298,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C70465"
+		(property "LCSC" "C1562"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -8311,7 +8311,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Samsung"
+		(property "Manufacturer" "FH"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -8447,7 +8447,7 @@
 				)
 			)
 		)
-		(property "MPN" "CL05C330JB5NNNC"
+		(property "MPN" "0402CG330J500NT"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -8460,7 +8460,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C70465"
+		(property "LCSC" "C1562"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -8473,7 +8473,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Samsung"
+		(property "Manufacturer" "FH"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -8608,7 +8608,7 @@
 				)
 			)
 		)
-		(property "MPN" "RC0402FR-0710KL"
+		(property "MPN" "0402WGF1002TCE"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -8621,7 +8621,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C60490"
+		(property "LCSC" "C25744"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -8634,7 +8634,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Yageo"
+		(property "Manufacturer" "UNI-ROYAL"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -9574,7 +9574,7 @@
 				)
 			)
 		)
-		(property "MPN" "CL05C330JB5NNNC"
+		(property "MPN" "0402CG330J500NT"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -9587,7 +9587,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C70465"
+		(property "LCSC" "C1562"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -9600,7 +9600,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Samsung"
+		(property "Manufacturer" "FH"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -9735,7 +9735,7 @@
 				)
 			)
 		)
-		(property "MPN" "CL05C330JB5NNNC"
+		(property "MPN" "0402CG330J500NT"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -9748,7 +9748,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C70465"
+		(property "LCSC" "C1562"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -9761,7 +9761,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Samsung"
+		(property "Manufacturer" "FH"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -9897,7 +9897,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM155R71H223KA12D"
+		(property "MPN" "0402B223K500NT"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -9910,7 +9910,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C77023"
+		(property "LCSC" "C1532"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -9923,7 +9923,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Murata"
+		(property "Manufacturer" "FH"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -10174,7 +10174,7 @@
 				)
 			)
 		)
-		(property "Value" "4.7 µF X7R 16 V"
+		(property "Value" "4.7 µF X5R 25 V"
 			(at 0 1.68 270)
 			(layer "F.Fab")
 			(uuid "acca40b0-37f0-46c1-8eae-b02cf51ff67d")
@@ -10219,7 +10219,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM21BR71C475KE51L"
+		(property "MPN" "CL21A475KAQNNNE"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -10232,7 +10232,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C408144"
+		(property "LCSC" "C1779"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -10245,7 +10245,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Murata"
+		(property "Manufacturer" "Samsung"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -11575,7 +11575,7 @@
 				)
 			)
 		)
-		(property "Value" "1 µF X7R 16 V"
+		(property "Value" "1 µF X5R 50 V"
 			(at 0 1.43 0)
 			(layer "F.Fab")
 			(uuid "1c168ba6-f2ff-465d-aa79-9a294f3e584d")
@@ -11620,7 +11620,7 @@
 				)
 			)
 		)
-		(property "MPN" "CL10B105KO8NNNC"
+		(property "MPN" "CL10A105KB8NNNC"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -11633,7 +11633,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C59782"
+		(property "LCSC" "C15849"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -11781,7 +11781,7 @@
 				)
 			)
 		)
-		(property "MPN" "RC0402FR-0710KL"
+		(property "MPN" "0402WGF1002TCE"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -11794,7 +11794,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C60490"
+		(property "LCSC" "C25744"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -11807,7 +11807,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Yageo"
+		(property "Manufacturer" "UNI-ROYAL"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -12116,7 +12116,7 @@
 				)
 			)
 		)
-		(property "MPN" "RC0402FR-0733RL"
+		(property "MPN" "0402WGF330JTCE"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -12129,7 +12129,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C138002"
+		(property "LCSC" "C25105"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -12142,7 +12142,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Yageo"
+		(property "Manufacturer" "UNI-ROYAL"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -12389,7 +12389,7 @@
 				)
 			)
 		)
-		(property "MPN" "CL05C101JB5NNNC"
+		(property "MPN" "0402CG101J500NT"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -12402,7 +12402,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C26409"
+		(property "LCSC" "C1546"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -12415,7 +12415,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Samsung"
+		(property "Manufacturer" "FH"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -12666,7 +12666,7 @@
 				)
 			)
 		)
-		(property "Value" "10 µF X5R 16 V"
+		(property "Value" "10 µF X5R 25 V"
 			(at 0 1.68 180)
 			(layer "F.Fab")
 			(uuid "ee81b078-e647-464e-94b3-3d5552b53062")
@@ -12711,7 +12711,7 @@
 				)
 			)
 		)
-		(property "MPN" "CL21A106KOQNNNE"
+		(property "MPN" "CL21A106KAYNNNE"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -12724,7 +12724,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C1713"
+		(property "LCSC" "C15850"
 			(at 0 0 180)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -12892,7 +12892,7 @@
 				)
 			)
 		)
-		(property "MPN" "RC0402FR-075K1L"
+		(property "MPN" "0402WGF5101TCE"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -12905,7 +12905,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C105872"
+		(property "LCSC" "C25905"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -12918,7 +12918,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Yageo"
+		(property "Manufacturer" "UNI-ROYAL"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -13165,7 +13165,7 @@
 				)
 			)
 		)
-		(property "MPN" "RC0402FR-0733RL"
+		(property "MPN" "0402WGF330JTCE"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -13178,7 +13178,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C138002"
+		(property "LCSC" "C25105"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -13191,7 +13191,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Yageo"
+		(property "Manufacturer" "UNI-ROYAL"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -13326,7 +13326,7 @@
 				)
 			)
 		)
-		(property "MPN" "RC0402FR-075K1L"
+		(property "MPN" "0402WGF5101TCE"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -13339,7 +13339,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C105872"
+		(property "LCSC" "C25905"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -13352,7 +13352,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Yageo"
+		(property "Manufacturer" "UNI-ROYAL"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -13648,7 +13648,7 @@
 				)
 			)
 		)
-		(property "MPN" "RC0402FR-0710KL"
+		(property "MPN" "0402WGF1002TCE"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -13661,7 +13661,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C60490"
+		(property "LCSC" "C25744"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -13674,7 +13674,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Yageo"
+		(property "Manufacturer" "UNI-ROYAL"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -13764,7 +13764,7 @@
 				)
 			)
 		)
-		(property "Value" "1 µF X7R 16 V"
+		(property "Value" "1 µF X5R 50 V"
 			(at 0 1.43 270)
 			(layer "F.Fab")
 			(uuid "0f11add7-ec53-4f72-b7e6-d1ee074778fc")
@@ -13809,7 +13809,7 @@
 				)
 			)
 		)
-		(property "MPN" "CL10B105KO8NNNC"
+		(property "MPN" "CL10A105KB8NNNC"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -13822,7 +13822,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C59782"
+		(property "LCSC" "C15849"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -14418,7 +14418,7 @@
 				)
 			)
 		)
-		(property "MPN" "RC0402FR-0710KL"
+		(property "MPN" "0402WGF1002TCE"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -14431,7 +14431,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C60490"
+		(property "LCSC" "C25744"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -14444,7 +14444,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Yageo"
+		(property "Manufacturer" "UNI-ROYAL"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -16395,7 +16395,7 @@
 				)
 			)
 		)
-		(property "MPN" "RC0402FR-0710KL"
+		(property "MPN" "0402WGF1002TCE"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -16408,7 +16408,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C60490"
+		(property "LCSC" "C25744"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -16421,7 +16421,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Yageo"
+		(property "Manufacturer" "UNI-ROYAL"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -16623,7 +16623,7 @@
 				)
 			)
 		)
-		(property "Value" "1 nF C0G"
+		(property "Value" "1 nF X7R 50 V"
 			(at 0 1.16 90)
 			(layer "F.Fab")
 			(uuid "34830942-76c3-435d-b3e3-f0e81755a5cc")
@@ -16668,7 +16668,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM1555C1H102JA01D"
+		(property "MPN" "0402B102K500NT"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -16681,7 +16681,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C76947"
+		(property "LCSC" "C1523"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -16694,7 +16694,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Murata"
+		(property "Manufacturer" "FH"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -16829,7 +16829,7 @@
 				)
 			)
 		)
-		(property "MPN" "ERJ-2RKF2001X"
+		(property "MPN" "0402WGF2001TCE"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -16842,7 +16842,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C413086"
+		(property "LCSC" "C4109"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -16855,7 +16855,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Panasonic"
+		(property "Manufacturer" "UNI-ROYAL"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -17117,7 +17117,7 @@
 				)
 			)
 		)
-		(property "Value" "10 µF X5R 16 V"
+		(property "Value" "10 µF X5R 25 V"
 			(at 0 1.68 0)
 			(layer "F.Fab")
 			(uuid "011c2459-9359-4cd0-847f-0087e4657839")
@@ -17162,7 +17162,7 @@
 				)
 			)
 		)
-		(property "MPN" "CL21A106KOQNNNE"
+		(property "MPN" "CL21A106KAYNNNE"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -17175,7 +17175,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C1713"
+		(property "LCSC" "C15850"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -17782,7 +17782,7 @@
 				)
 			)
 		)
-		(property "Value" "1 nF C0G"
+		(property "Value" "1 nF X7R 50 V"
 			(at 0 1.16 0)
 			(layer "F.Fab")
 			(uuid "900b7774-7250-49c9-b0ec-2239ab433b9d")
@@ -17827,7 +17827,7 @@
 				)
 			)
 		)
-		(property "MPN" "GRM1555C1H102JA01D"
+		(property "MPN" "0402B102K500NT"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -17840,7 +17840,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C76947"
+		(property "LCSC" "C1523"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -17853,7 +17853,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Murata"
+		(property "Manufacturer" "FH"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -18149,7 +18149,7 @@
 				)
 			)
 		)
-		(property "MPN" "RC0402FR-0733RL"
+		(property "MPN" "0402WGF330JTCE"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -18162,7 +18162,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C138002"
+		(property "LCSC" "C25105"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -18175,7 +18175,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Yageo"
+		(property "Manufacturer" "UNI-ROYAL"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -19936,7 +19936,7 @@
 				)
 			)
 		)
-		(property "MPN" "RC0402FR-0733RL"
+		(property "MPN" "0402WGF330JTCE"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -19949,7 +19949,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C138002"
+		(property "LCSC" "C25105"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -19962,7 +19962,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Yageo"
+		(property "Manufacturer" "UNI-ROYAL"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -20295,7 +20295,7 @@
 				)
 			)
 		)
-		(property "MPN" "RC0402FR-0710KL"
+		(property "MPN" "0402WGF1002TCE"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -20308,7 +20308,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C60490"
+		(property "LCSC" "C25744"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -20321,7 +20321,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Yageo"
+		(property "Manufacturer" "UNI-ROYAL"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -22080,7 +22080,7 @@
 				)
 			)
 		)
-		(property "MPN" "RC0402FR-0710KL"
+		(property "MPN" "0402WGF1002TCE"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -22093,7 +22093,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C60490"
+		(property "LCSC" "C25744"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -22106,7 +22106,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Yageo"
+		(property "Manufacturer" "UNI-ROYAL"
 			(at 0 0 270)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -22241,7 +22241,7 @@
 				)
 			)
 		)
-		(property "MPN" "RC0402FR-07510RL"
+		(property "MPN" "0402WGF5100TCE"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -22254,7 +22254,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C276273"
+		(property "LCSC" "C25123"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -22267,7 +22267,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Yageo"
+		(property "Manufacturer" "UNI-ROYAL"
 			(at 0 0 90)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -22402,7 +22402,7 @@
 				)
 			)
 		)
-		(property "MPN" "RC0402FR-071KL"
+		(property "MPN" "0402WGF1001TCE"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -22415,7 +22415,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C106235"
+		(property "LCSC" "C11702"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")
@@ -22428,7 +22428,7 @@
 				)
 			)
 		)
-		(property "Manufacturer" "Yageo"
+		(property "Manufacturer" "UNI-ROYAL"
 			(at 0 0 0)
 			(unlocked yes)
 			(layer "F.Fab")

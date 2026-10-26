@@ -33,8 +33,8 @@ Pinout from the HRO drawing (`J1_HRO_TYPE-C-31-M-12.pdf` p1): A1/A12/B1/B12 GND,
 
 | Ref / pin | Part | Value | JLC | Note |
 |---|---|---|---|---|
-| R1 (A5 CC1) | Yageo RC0402FR-075K1L | 5.1 kΩ 1% to GND | C105872, 2,164,069 | Type-C R2.5 Table 4-28 p246 |
-| R2 (B5 CC2) | Yageo RC0402FR-075K1L | 5.1 kΩ 1% to GND | C105872 | Fitted on both CC pins (Plan C decision) |
+| R1 (A5 CC1) | UNI-ROYAL 0402WGF5101TCE | 5.1 kΩ 1% to GND | C25905, 4,087,725 | Type-C R2.5 Table 4-28 p246 |
+| R2 (B5 CC2) | UNI-ROYAL 0402WGF5101TCE | 5.1 kΩ 1% to GND | C25905 | Fitted on both CC pins (Plan C decision) |
 | D3, D4 (CC1, CC2) | TI TPD1E05U06DPYR | ESD | C436349, 75,576 | Plan C chain 11 |
 | U6 (D+, D−, VBUS) | ST USBLC6-2SC6 | ESD array | C7519, 42,385 | Plan C chain 11; D+ on I/O1, D− on I/O2 (the two channels are identical; this order lets U1's lines reach U6 with no crossing at floorplan B3, Phase 5), VBUS pin 5 |
 | A6–B6, A7–B7 | — | Joined at the connector, stub ≤ 3.5 mm | | Type-C R2.5 p76 |
@@ -55,17 +55,17 @@ No gaps. Note: echoplayer puts 100 nF on VBUS at the connector. Ours has U3's 1 
 
 ## Chain 2: U3 AP2112K-3.3 regulator
 
-**Designators:** C1 U3 input (1 µF X7R 16 V); C2 U3 output (1 µF X7R 16 V); C3 3V3 bulk at U1 (10 µF X5R 16 V); U3 3.3 V regulator.
+**Designators:** C1 U3 input (1 µF X5R 50 V); C2 U3 output (1 µF X5R 50 V); C3 3V3 bulk at U1 (10 µF X5R 25 V); U3 3.3 V regulator.
 
 Circuit as Plan C chain 5 (AP2112 DS39724 p1–2), already compared against three published designs in reference-check.md (U3: RP2040 Stamp, Beepy, PicoROM; no gaps). What changes here: two capacitor part numbers that JLC can't supply.
 
 | Ref / pin | Part | Value | JLC | Note |
 |---|---|---|---|---|
 | U3 | Diodes AP2112K-3.3TRG1 | 3.3 V 600 mA LDO, SOT-25 | C51118, 17,723 | VIN 1, GND 2, EN 3, NC 4, VOUT 5 |
-| C (VIN 1) | **Samsung CL10B105KO8NNNC** | 1 µF X7R 16 V ±10% 0603 | C59782, 234,150 | Replaces TDK C1608X7R1C105K080AC (JLC: 157, minimum buy 206). Same spec: Samsung code 10 = 0603, B = X7R, 105 = 1 µF, K = ±10%, O = 16 V, 8 = 0.8 mm (catalog p4–5) |
-| C (VOUT 5) | Samsung CL10B105KO8NNNC | 1 µF X7R 16 V 0603 | C59782 | AP2112 is stable with ≥ 1 µF (p1) |
+| C (VIN 1) | **Samsung CL10A105KB8NNNC** | 1 µF X5R 50 V ±10% 0603 | C15849, 13,374,924 | JLC Basic part (2026-10-26, no extended-part fee). Samsung code 10 = 0603, A = X5R, 105 = 1 µF, K = ±10%, B = 50 V, 8 = 0.8 mm (catalog p4–5, p19); X5R covers −55 to +85 °C, and the 50 V rating keeps more of its 1 µF at 5 V |
+| C (VOUT 5) | Samsung CL10A105KB8NNNC | 1 µF X5R 50 V 0603 | C15849 | AP2112 is stable with ≥ 1 µF (p1) |
 | EN 3 | — | Tied to VIN | | Internal pull-down (p2) |
-| U1 VDD bulk | **Samsung CL21A106KOQNNNE** | 10 µF X5R 16 V ±10% 0805 | C1713, 836,963 | Replaces Yageo CC0805KRX5R7BB106 (JLC: 0). Samsung code 21 = 0805, A = X5R, 106 = 10 µF, Q = 1.25 mm (catalog p4–5) |
+| U1 VDD bulk | **Samsung CL21A106KAYNNNE** | 10 µF X5R 25 V ±10% 0805 | C15850, 8,956,329 | JLC Basic part (2026-10-26, no extended-part fee). Samsung code 21 = 0805, A = X5R, 106 = 10 µF, K = ±10%, A = 25 V (catalog p4–5, p21) |
 
 - Load on 3V3: about 96 mA transmitting and 62 mA receiving (chain 10). Well under the AP2112's 600 mA. The LED runs from VBUS.
 - Start-up (foldback, 50 mA into the rail capacitance) is checked in chain 10.
@@ -73,7 +73,7 @@ Circuit as Plan C chain 5 (AP2112 DS39724 p1–2), already compared against thre
 
 ## Chain 3: U1 STM32U535 support
 
-**Designators:** C4 U1 VDD bypass (100 nF X7R 16 V); C5 U1 VDD bypass (100 nF X7R 16 V); C6 U1 VDD bypass (100 nF X7R 16 V); C7 U1 VDDA bypass (100 nF X7R 16 V); C8 U1 VDDA bulk (1 µF X7R 16 V); C9 U1 VCAP (4.7 µF X7R 16 V); C10 U1 NRST filter (100 nF X7R 16 V); FB2 3V3 to VDDA filter (600 Ω at 100 MHz); R3 BOOT0 pull-down (10 kΩ 1%); U1 MCU.
+**Designators:** C4 U1 VDD bypass (100 nF X7R 16 V); C5 U1 VDD bypass (100 nF X7R 16 V); C6 U1 VDD bypass (100 nF X7R 16 V); C7 U1 VDDA bypass (100 nF X7R 16 V); C8 U1 VDDA bulk (1 µF X5R 50 V); C9 U1 VCAP (4.7 µF X5R 25 V); C10 U1 NRST filter (100 nF X7R 16 V); FB2 3V3 to VDDA filter (600 Ω at 100 MHz); R3 BOOT0 pull-down (10 kΩ 1%); U1 MCU.
 
 Power pins as Plan C chain 4 (DS14217 Figure 23 power scheme p127, Figure 37 NRST p212), already compared against four published designs in reference-check.md (U1). Changes for this rendition:
 
@@ -85,12 +85,12 @@ Power pins as Plan C chain 4 (DS14217 Figure 23 power scheme p127, Figure 37 NRS
 |---|---|---|---|---|
 | U1 | ST STM32U535CEU6 | MCU, UFQFPN48 | Global sourcing (DigiKey 1,394) | |
 | VDD 24, 36, 48 (×3) | **Samsung CL05B104KO5NNNC** | 100 nF X7R 16 V 0402 | C1525, 38,027,442 | One per pin. Replaces Murata GRM155R71C104KA88J (39,537) with JLC's basic 100 nF: code 05 = 0402, B = X7R, 104 = 100 nF, O = 16 V (Samsung catalog p4–5). This part is used for every 100 nF on the board |
-| VDD bulk | Samsung CL21A106KOQNNNE | 10 µF X5R 16 V 0805 | C1713 | Chain 2 |
+| VDD bulk | Samsung CL21A106KAYNNNE | 10 µF X5R 25 V 0805 | C15850 | Chain 2 |
 | FB2 (3V3 → VDDA) | **Murata BLM15AG601SN1D** | 600 Ω ±25% at 100 MHz, ≤ 0.11 Ω DC, 0402 | C76884, 1,227,301 | `FB_Murata_BLM15AG_ENFA0018.pdf` p1. VDDA draws far less than its current rating, so the DC drop is negligible |
-| VDDA 9 | Samsung CL05B104KO5NNNC + CL10B105KO8NNNC | 100 nF + 1 µF, after FB2 | C1525 / C59782 | DS14217 Figure 23 (p127) |
-| VCAP 22 | Murata GRM21BR71C475KE51L | 4.7 µF X7R 16 V 0805 | C408144, 10,473 | Plan C chain 4; meets ≥ 10 V and ±20% (p127) |
+| VDDA 9 | Samsung CL05B104KO5NNNC + CL10A105KB8NNNC | 100 nF + 1 µF, after FB2 | C1525 / C15849 | DS14217 Figure 23 (p127) |
+| VCAP 22 | Samsung CL21A475KAQNNNE | 4.7 µF X5R 25 V 0805 | C1779, 2,004,357 | Plan C chain 4; meets ≥ 10 V and ±20% (p127) |
 | NRST 7 | Samsung CL05B104KO5NNNC | 100 nF | C1525 | Internal 40 kΩ pull-up (p211) |
-| BOOT0 (PH3) 44 | Yageo RC0402FR-0710KL | 10 kΩ pull-down; SW2 to 3V3 | C60490, 5,222,786 | Plan C chain 4 |
+| BOOT0 (PH3) 44 | UNI-ROYAL 0402WGF1002TCE | 10 kΩ pull-down; SW2 to 3V3 | C25744, 17,624,691 | Plan C chain 4 |
 | VBAT 1 | — | Tied to 3V3 | | Plan C chain 4 |
 | PH0-OSC_IN | — | From Y2 through R4 (chain 4) | | HSE digital bypass |
 | PH1-OSC_OUT | — | Free GPIO | | Not needed in bypass mode |
@@ -138,7 +138,7 @@ Pins 6, 10–19, 40, 42, 45 and 46 were reassigned on 2026-10-25 for the turned 
 
 ## Chain 4: Y2 20 MHz reference oscillator (YXC OT322520MJBA4SL)
 
-**Designators:** C11 Y2 VDD bypass (100 nF X7R 16 V); C12 Y2 VDD bulk (10 µF X5R 16 V); R4 REF20 source termination to U1 PH0 (33 Ω 1%); Y2 Reference oscillator.
+**Designators:** C11 Y2 VDD bypass (100 nF X7R 16 V); C12 Y2 VDD bulk (10 µF X5R 25 V); R4 REF20 source termination to U1 PH0 (33 Ω 1%); Y2 Reference oscillator.
 
 One CMOS oscillator is the frequency reference for the whole board. It drives U1 (system clock and audio timing) and U2 (LMX2571 OSCin), and through a U1 timer, U4 (receiver reference, chain 8).
 
@@ -146,8 +146,8 @@ One CMOS oscillator is the frequency reference for the whole board. It drives U1
 |---|---|---|---|---|
 | Y2 | YXC OT322520MJBA4SL | 20 MHz CMOS, 1.8–3.3 V, 3.2 × 2.5 mm | C725987, 4,055 | Pins: 1 tri-state, 2 GND, 3 OUT, 4 VDD (YSO110TR p2) |
 | Pin 1 (tri-state) | — | Tied to VDD | | High or floating enables the output (p1); tied, not left floating |
-| Pin 4 VDD | Samsung CL05B104KO5NNNC + CL21A106KOQNNNE | 100 nF + 10 µF to GND | C1525 / C1713 | The maker's test circuit (p4) |
-| R4 (pin 3 → U1 PH0) | Yageo RC0402FR-0733RL | 33 Ω series | C138002, 6,823,372 | Source termination at Y2 to damp ringing on the line to U1 (best guess; the Nucleo uses a series R and C on its external clock path, UM3062 p26) |
+| Pin 4 VDD | Samsung CL05B104KO5NNNC + CL21A106KAYNNNE | 100 nF + 10 µF to GND | C1525 / C15850 | The maker's test circuit (p4) |
+| R4 (pin 3 → U1 PH0) | UNI-ROYAL 0402WGF330JTCE | 33 Ω series | C25105, 2,193,586 | Source termination at Y2 to damp ringing on the line to U1 (best guess; the Nucleo uses a series R and C on its external clock path, UM3062 p26) |
 | — (pin 3 → U2 OSCin) | — | Direct | | Single-ended CMOS straight into OSCin, OSCin* unconnected (LMX2571 Table 37, p38; Figure 62, p44). The ADF4002's 10 nF coupling capacitor is gone |
 
 - Level at OSCin: Y2 swings 0 to 3.3 V, a CMOS square wave, which TI recommends for the best spurs and phase noise (LMX2571 p11).
@@ -174,16 +174,16 @@ Chosen 2026-10-21 (see [modulation-strategies.md](modulation-strategies.md)). It
 | Bypass1 2, Bypass2 3 | Samsung CL05B104KO5NNNC | 100 nF each | C1525 | Pin table (p3) |
 | VrefVCO 22 | Samsung CL05B104KO5NNNC | 100 nF | C1525 | Figure 62 |
 | VregVCO 21 | **Samsung CL10A225KO8NNNC** | 2.2 µF X5R 16 V 0603 | C23630, 3,207,467 | Figure 62; 100 nF here is marked "incorrect" (p53) |
-| CPout 25: C24 to GND (datasheet C1) | Samsung CL05C101JB5NNNC | 100 pF C0G | C26409, 492,000 | Loop filter (see below) |
+| CPout 25: C24 to GND (datasheet C1) | FH 0402CG101J500NT | 100 pF C0G | C1546, 3,297,196 | Loop filter (see below) |
 | CPout 25: R5 + C25 to GND (datasheet R2, C2) | Panasonic ERJ-2RKF1101X + Murata GRM1555C1H152JA01D | 1.1 kΩ + 1.5 nF C0G | C409028, 51,663 / C668348, 97,247 | Loop filter |
-| RFoutTx 17 → U7 RF1 | Samsung CL05C101JB5NNNC | 100 pF C0G, series | C26409 | Push-pull output needs only a DC block (Table 38, p42); the PE43711 RF pins must be at 0 V DC |
+| RFoutTx 17 → U7 RF1 | FH 0402CG101J500NT | 100 pF C0G, series | C1546 | Push-pull output needs only a DC block (Table 38, p42); the PE43711 RF pins must be at 0 V DC |
 | OSCin 34 | — | Y2 output, direct | | Single-ended CMOS: IPBUF_SE_DIFF_SEL = 0, OSCin* unconnected (Table 37, p38) |
 | OSCin* 36 | — | Not connected | | Table 37 |
-| FSK_DV 4 / FSK_D1 6 / FSK_D0 7 | Yageo RC0402FR-0733RL ×3 | 33 Ω series, at U1 | C138002 | I²S CLK / DATA / FS from U1 SAI1 sub-block A (FSK I²S mode, p3, p13). The stream runs continuously next to the synthesizer, so series resistors soften the edges (HELIOS puts ferrites on its ADF4002 lines for the same reason) |
+| FSK_DV 4 / FSK_D1 6 / FSK_D0 7 | UNI-ROYAL 0402WGF330JTCE ×3 | 33 Ω series, at U1 | C25105 | I²S CLK / DATA / FS from U1 SAI1 sub-block A (FSK I²S mode, p3, p13). The stream runs continuously next to the synthesizer, so series resistors soften the edges (HELIOS puts ferrites on its ADF4002 lines for the same reason) |
 | FSK_D2 5 | — | GND | | Used only in FSK PIN mode (p3) |
 | CLK 11, DATA 12, LE 13 | — | U1 GPIOs PB14, PB13, PB12 | | MICROWIRE, 24-bit words (p15), driven by firmware |
 | MUXout 10 | — | To a U1 input | | Lock detect or register readback (p14) |
-| CE 19 | Yageo RC0402FR-0710KL | 10 kΩ pull-down; U1 GPIO | C60490 | Off until firmware enables it, and off in receive mode so its carrier can't reach U4 |
+| CE 19 | UNI-ROYAL 0402WGF1002TCE | 10 kΩ pull-down; U1 GPIO | C25744 | Off until firmware enables it, and off in receive mode so its carrier can't reach U4 |
 | TrCtl 18 | — | GND | | Output port and F1/F2 under register control (p37) |
 | Fin 24 | — | Not connected | | "Leave it open… if not being used" (p3) |
 | CPoutExt 30, FLout1 29, FLout2 28 | — | Not connected | | PLL-mode outputs, unused in synthesizer mode |
@@ -206,7 +206,7 @@ Chosen 2026-10-21 (see [modulation-strategies.md](modulation-strategies.md)). It
 
 ## Chain 6: U7 PE43711 attenuator and SW3 DIP switch
 
-**Designators:** C27 U7 VDD bypass (1 µF X7R 16 V); R10 U7 C16 pull-down (10 kΩ 1%); R11 U7 C8 pull-down (10 kΩ 1%); R12 U7 C4 pull-down (10 kΩ 1%); R13 U7 C2 pull-down (10 kΩ 1%); R14 U7 C1 pull-down (10 kΩ 1%); R15 U7 C0.5 pull-down (10 kΩ 1%); SW3 TX power DIP switch; U7 TX power attenuator.
+**Designators:** C27 U7 VDD bypass (1 µF X5R 50 V); R10 U7 C16 pull-down (10 kΩ 1%); R11 U7 C8 pull-down (10 kΩ 1%); R12 U7 C4 pull-down (10 kΩ 1%); R13 U7 C2 pull-down (10 kΩ 1%); R14 U7 C1 pull-down (10 kΩ 1%); R15 U7 C0.5 pull-down (10 kΩ 1%); SW3 TX power DIP switch; U7 TX power attenuator.
 
 **References:**
 - **PE43711 datasheet DOC-84940-8:** pin table (Table 9, p28), parallel truth table (Table 4, p6), programming modes and power-up behaviour (p8).
@@ -216,12 +216,12 @@ Chosen 2026-10-21 (see [modulation-strategies.md](modulation-strategies.md)). It
 | Ref / pin | Part | Value | JLC | Note |
 |---|---|---|---|---|
 | U7 | pSemi PE43711B-Z | DSA, QFN-24 4 × 4 mm | C470929, 1,737 | |
-| VDD 2 | Samsung CL10B105KO8NNNC | 3V3, 1 µF to GND | C59782 | As gpsrx. 2.3–5.5 V (p3) |
+| VDD 2 | Samsung CL10A105KB8NNNC | 3V3, 1 µF to GND | C15849 | As gpsrx. 2.3–5.5 V (p3) |
 | P/S 3 | — | GND | | Parallel interface (p8) |
 | LE 16 | — | 3V3 | | Direct parallel mode: the control pins act immediately (p8) |
 | CLK 17, SI 18 | — | GND | | Serial interface unused |
 | C0.25 (D0) 1 | — | GND | | "Ground… if not in use" (Table 9 note 1) |
-| C16, C8, C4, C2, C1, C0.5 (pins 19–24) | Yageo RC0402FR-0710KL ×6 | 10 kΩ pull-down each | C60490 | So an open switch reads low (p8: floating pins at power-up give minimum attenuation) |
+| C16, C8, C4, C2, C1, C0.5 (pins 19–24) | UNI-ROYAL 0402WGF1002TCE ×6 | 10 kΩ pull-down each | C25744 | So an open switch reads low (p8: floating pins at power-up give minimum attenuation) |
 | SW3 | C&K TDP06H1SBD1 | 6-position side-actuated DIP | Global sourcing (DigiKey 1,180) | One side of every switch on 3V3. Switch 1 → C16 … switch 6 → C0.5. Silkscreen 16 / 8 / 4 / 2 / 1 / 0.5 dB. 0.33 mA per closed switch, within its 25 mA rating |
 | RF1 5 | — | From U2 RFoutTx through the 100 pF in chain 5 | | RF pins must be at 0 V DC (Table 9 note 2) |
 | RF2 14 | — | To FL1 (chain 7) | | 0 V DC |
@@ -233,7 +233,7 @@ Chosen 2026-10-21 (see [modulation-strategies.md](modulation-strategies.md)). It
 
 ## Chain 7: TX low-pass FL1, U5 RF switch, J2 SMA, D5 antenna ESD
 
-**Designators:** C28 FL1 shunt 1 (33 pF C0G); C29 FL1 shunt 2 (56 pF C0G); C30 FL1 shunt 3 (33 pF C0G); C31 U5 CTRL filter (1 nF C0G); D5 Antenna ESD; J2 Antenna connector; L2 FL1 series 1 (100 nH 2%); L3 FL1 series 2 (100 nH 2%); R16 U5 VDD series (1 kΩ 1%); R17 U5 CTRL series (1 kΩ 1%); R18 RF_MODE pull-down (100 kΩ 1%); SW1 TX/RX slider; U5 TX/RX antenna switch.
+**Designators:** C28 FL1 shunt 1 (33 pF C0G); C29 FL1 shunt 2 (56 pF C0G); C30 FL1 shunt 3 (33 pF C0G); C31 U5 CTRL filter (1 nF X7R 50 V); D5 Antenna ESD; J2 Antenna connector; L2 FL1 series 1 (100 nH 2%); L3 FL1 series 2 (100 nH 2%); R16 U5 VDD series (1 kΩ 1%); R17 U5 CTRL series (1 kΩ 1%); R18 RF_MODE pull-down (100 kΩ 1%); SW1 TX/RX slider; U5 TX/RX antenna switch.
 
 Circuits as Plan C chains 7, 11 and 12. U5 is compared against four published designs, and the antenna ESD position against three, in reference-check.md. What changes:
 - **FL1 now sees a true 50 Ω source** (the attenuator), as it was designed for.
@@ -242,13 +242,13 @@ Circuits as Plan C chains 7, 11 and 12. U5 is compared against four published de
 
 | Ref / pin | Part | Value | JLC | Note |
 |---|---|---|---|---|
-| FL1 C (shunt, ×2) | Samsung CL05C330JB5NNNC | 33 pF C0G 0402 | C70465, 312,114 | Replaces Murata GRM1555C1H330JA01D (JLC: 0) |
+| FL1 C (shunt, ×2) | FH 0402CG330J500NT | 33 pF C0G 0402 | C1562, 1,545,324 | JLC Basic part (2026-10-26). FH code CG = C0G, 330 = 33 pF, J = ±5%, 500 = 50 V (FH catalog p2) |
 | FL1 C (shunt, middle) | **Yageo CC0402JRNPO9BN560** | 56 pF C0G (NP0) ±5% 50 V 0402 | C107007, 630,922 | Replaces Murata GRM1555C1H560JA01D (JLC: 0) |
 | FL1 L (series, ×2) | Murata LQW18ANR10G00D | 100 nH ±2%, Q ≥ 34 at 150 MHz | C98088, 43,869 | Sourcing replacement for the Coilcraft part |
 | U5 | pSemi PE42421SCAA-Z | SPDT RF switch | C470893, 677 | |
-| U5 VDD 6 | Yageo RC0402FR-071KL | 1 kΩ from 3V3 | C106235 | Eval board (PE42421 p7) |
-| U5 CTRL 4 | Yageo RC0402FR-071KL + Murata GRM1555C1H102JA01D | 1 kΩ series, then 1 nF C0G to GND at the pin | C106235 / C76947 | 1 nF added (reference-check U5 gap 1; LoRaPP and Electronic Cats both fit it) |
-| RF_MODE | Yageo RC0402FR-07100KL | 100 kΩ pull-down | C60491 | Holds receive while the slider is between contacts |
+| U5 VDD 6 | UNI-ROYAL 0402WGF1001TCE | 1 kΩ from 3V3 | C11702 | Eval board (PE42421 p7) |
+| U5 CTRL 4 | UNI-ROYAL 0402WGF1001TCE + FH 0402B102K500NT | 1 kΩ series, then 1 nF X7R to GND at the pin | C11702 / C1523 | 1 nF added (reference-check U5 gap 1; LoRaPP and Electronic Cats both fit it) |
+| RF_MODE | UNI-ROYAL 0402WGF1003TCE | 100 kΩ pull-down | C25741 | Holds receive while the slider is between contacts |
 | SW1 | Shou Han MSK12C02 | SPDT slide switch | C431540, 195,730 | Common to RF_MODE; throws to 3V3 (TX) and GND (RX). U1 reads RF_MODE (Plan C PB0) and powers U2 down in receive |
 | U5 RF2 3 | — | From FL1 | | TX |
 | U5 RF1 1 | — | To U4 through C34 1 nF (chain 8) | | RX |
@@ -263,7 +263,7 @@ Circuits as Plan C chains 7, 11 and 12. U5 is compared against four published de
 
 ## Chain 8: U4 Si4705-D60-GM receiver (QFN-20)
 
-**Designators:** C32 U4 VA bypass (22 nF X7R 50 V); C33 U4 VD bypass (100 nF X7R 16 V); C34 FMI coupling (1 nF C0G); C35 FMI emissions filter shunt (6 pF C0G); C36 DFS filter on R23's U1 side (3.3 pF C0G); C37 GPO2/INT filter (33 pF C0G); C38 GPO1 filter (33 pF C0G); FB1 FMI emissions filter (75 Ω at 100 MHz); FB3 3V3 to U4 VA/VD filter (600 Ω at 100 MHz); L1 FMI matching inductor (150 nH 2%); R19 U4 RSTB pull-down (10 kΩ 1%); R20 I²C SCL pull-up (6.8 kΩ 1%); R21 I²C SDA pull-up (6.8 kΩ 1%); R22 DOUT series (604 Ω 1%); R23 DFS series (2 kΩ 1%); R24 DCLK series (2 kΩ 1%); U4 FM receiver.
+**Designators:** C32 U4 VA bypass (22 nF X7R 50 V); C33 U4 VD bypass (100 nF X7R 16 V); C34 FMI coupling (1 nF X7R 50 V); C35 FMI emissions filter shunt (6 pF C0G); C36 DFS filter on R23's U1 side (3.3 pF C0G); C37 GPO2/INT filter (33 pF C0G); C38 GPO1 filter (33 pF C0G); FB1 FMI emissions filter (75 Ω at 100 MHz); FB3 3V3 to U4 VA/VD filter (600 Ω at 100 MHz); L1 FMI matching inductor (150 nH 2%); R19 U4 RSTB pull-down (10 kΩ 1%); R20 I²C SCL pull-up (6.8 kΩ 1%); R21 I²C SDA pull-up (6.8 kΩ 1%); R22 DOUT series (604 Ω 1%); R23 DFS series (2 kΩ 1%); R24 DCLK series (2 kΩ 1%); U4 FM receiver.
 
 **References:**
 - **Datasheet Si4704/05-D60 Rev 1.2:** QFN typical schematic (p16), BOM (Table 12, p18), DC characteristics (p5), RCLK (p14).
@@ -279,22 +279,22 @@ Circuits as Plan C chains 7, 11 and 12. U5 is compared against four published de
 |---|---|---|---|---|
 | U4 | Skyworks SI4705-D60-GM | FM receiver, QFN-20 3 × 3 mm | C1526114, 48 | DigiKey 470 as second route |
 | FB3 (3V3 → VA/VD) | Murata BLM15AG601SN1D | 600 Ω at 100 MHz | C76884 | Closes reference-check U4 gap 1 (USB FM Radio FB2) |
-| C32, datasheet C1 (VA 11 to GND) | Murata GRM155R71H223KA12D | 22 nF X7R, at the pin | C77023, 415,822 | QFN puts C1 from VA to GND (p16; Table 12, p18) |
+| C32, datasheet C1 (VA 11 to GND) | FH 0402B223K500NT | 22 nF X7R, at the pin | C1532, 630,288 | QFN puts C1 from VA to GND (p16; Table 12, p18) |
 | C33, datasheet C4 (VD 10 to GND) | Samsung CL05B104KO5NNNC | 100 nF, at the pin | C1525 | p16, Table 12 |
-| C34, datasheet C2 (U5 RF1 → FMI chain) | Murata GRM1555C1H102JA01D | 1 nF C0G | C76947 | Coupling (Table 12); keeps U5's RF1 at 0 V DC |
+| C34, datasheet C2 (U5 RF1 → FMI chain) | FH 0402B102K500NT | 1 nF X7R | C1523 | Coupling (Table 12); keeps U5's RF1 at 0 V DC |
 | L1 (C2–FB1 node to GND) | Murata LQW18ANR15G00D | 150 nH ±2%, Q ≥ 32 | C113131, 25,316 | Whip-antenna match (AN383 p37 Figure 23), sized in Plan C chain 3 |
 | FB1 (→ FMI 2) | Murata BLM15GA750SN1D | 75 Ω at 100 MHz | C113009, 18,276 | Emissions filter (AN383 p7, p9) |
 | C35, AN383 C14 (FMI 2 to GND) | Murata GJM1555C1H6R0CB01D | 6 pF C0G, at the pin | C161330, 3,416 | Emissions filter (AN383 p7) |
 | RFGND 3, LPI 4 | — | GND | | AN383 p8, p17 |
-| RSTB 5 | Yageo RC0402FR-0710KL | 10 kΩ pull-down; U1 GPIO | C60490 | Held in reset until firmware runs |
+| RSTB 5 | UNI-ROYAL 0402WGF1002TCE | 10 kΩ pull-down; U1 GPIO | C25744 | Held in reset until firmware runs |
 | SENB 6 | — | GND | | 2-wire bus |
 | SCLK 7, SDIO 8 | Yageo RC0402FR-076K8L ×2 | 6.8 kΩ pull-ups to 3V3; U1 I²C | C93940 | SDIO sinks ≤ 500 µA (p5) |
 | RCLK 9 | — | U1 timer output, 32,787 Hz | | See above |
 | ROUT 13, LOUT 14 | — | GND | | Closes reference-check U4 gap 3 (AN383 p17; USB FM Radio). Firmware keeps analog outputs off |
 | DOUT 15 | Yageo RC0402FR-07604RL | R22 (datasheet R1) 604 Ω series → U1 SAI1-B SD | C273693 | Table 12 (600 Ω) |
-| DFS 16 | Panasonic ERJ-2RKF2001X + Murata GRM1555C1H3R3CA01D | R23 (datasheet R2) 2 kΩ series → SAI1-B FS; C36 (datasheet C9) 3.3 pF C0G to GND on R23's U1 side, as the datasheet draws it | C413086, 12,348 / C76968, 14,752 | Table 12 (2 kΩ; C9 2–5 pF) |
-| GPO3/DCLK 17 | Panasonic ERJ-2RKF2001X | R24 (datasheet R3) 2 kΩ series → SAI1-B SCK | C413086 | Table 12 |
-| GPO2/INT 18, GPO1 19 | Samsung CL05C330JB5NNNC ×2 | 33 pF to GND; otherwise floating | C70465 | AN383 p8 option 1. Firmware polls (reference-check gap 2 left as optional) |
+| DFS 16 | UNI-ROYAL 0402WGF2001TCE + Murata GRM1555C1H3R3CA01D | R23 (datasheet R2) 2 kΩ series → SAI1-B FS; C36 (datasheet C9) 3.3 pF C0G to GND on R23's U1 side, as the datasheet draws it | C4109, 7,171,650 / C76968, 14,752 | Table 12 (2 kΩ; C9 2–5 pF) |
+| GPO3/DCLK 17 | UNI-ROYAL 0402WGF2001TCE | R24 (datasheet R3) 2 kΩ series → SAI1-B SCK | C4109 | Table 12 |
+| GPO2/INT 18, GPO1 19 | FH 0402CG330J500NT ×2 | 33 pF to GND; otherwise floating | C1562 | AN383 p8 option 1. Firmware polls (reference-check gap 2 left as optional) |
 | NC 1, 20 | — | Floating | | p16 note 3 |
 | GND 12, pad | — | GND | | |
 
@@ -310,7 +310,7 @@ Circuits as Plan C chains 7, 11 and 12. U5 is compared against four published de
 | SW1 | Shou Han MSK12C02 | Chain 7 | | |
 | SW2 | Panasonic EVQ-P7J01P | 3V3 to U1 BOOT0 (10 kΩ pull-down, chain 3) | C2828254, 9,729 | BOOT button only (Plan C chain 9) |
 | D1 | XINGLIGHT XL-1615RGBC-RF | Pin 2 (common anode) → VBUS; R pin 1 / G pin 3 / B pin 4 through resistors to U1 open-drain pins | C965840 | p8 pinout |
-| R (red) | Yageo RC0402FR-07510RL | 510 Ω | C276273 | (5 − 1.9 − 0.4) / 510 ≈ 5.3 mA typical, 4.3 mA at VF max 2.4 V (p4). IF max 20 mA (p3) |
+| R (red) | UNI-ROYAL 0402WGF5100TCE | 510 Ω | C25123 | (5 − 1.9 − 0.4) / 510 ≈ 5.3 mA typical, 4.3 mA at VF max 2.4 V (p4). IF max 20 mA (p3) |
 | R (green, blue) | Yageo RC0402FR-07390RL ×2 | 390 Ω | C137997, 1,797,586 | Replaces Panasonic ERJ-2RKF3900X (JLC: 21, minimum buy 828). (5 − 2.8 − 0.4) / 390 ≈ 4.6 mA typical, 3.1 mA at VF max 3.4 V |
 
 The LED allows 5 V reverse voltage (p3), so the unplug case that worried Plan C's Broadcom part is covered.
