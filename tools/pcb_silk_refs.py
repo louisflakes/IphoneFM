@@ -1,8 +1,10 @@
-"""Step 7.1: places every reference designator on the silkscreen of its own side, 1.0 mm high with a 0.15 mm stroke
+"""Step 7.1: places the reference designators of the major parts (LABELLED: ICs, connectors, switches, dials, the
+crystal oscillator, the LED and the test pads) on the silkscreen of its own side, 1.0 mm high with a 0.15 mm stroke
 (kicad/rev-a/fab-rules.md), at the nearest clear spot beside its part: outside every courtyard, 0.2 mm from exposed
 copper (pads, via holes), 0.2 mm from other silkscreen (Board Setup) and 0.3 mm inside the board edge. Candidates run along the four sides
 of the part's courtyard, level first, then upright (reading bottom to top); the parts with the fewest clear spots are
-placed first. A reference with no clear spot is hidden on the silkscreen; it stays on the fab layer for the assembly
+placed first. The passives' references (and any with no clear spot) are hidden on the silkscreen, where on this dense
+board they would crowd and stand away from their parts; every reference stays on the fab layer for the assembly
 drawing.
 Usage (from the repository root, board open in KiCad): python tools/pcb_silk_refs.py [list] | lay"""
 import math
@@ -16,6 +18,7 @@ EDGE_GAP, PAD_GAP, SILK_GAP, CRT_GAP = 0.3, 0.2, 0.2, 0.1
 REF_GAP = 0.6       # between two references, so neighbouring labels read apart
 GAPS = (0.1, 0.35, 0.7, 1.1, 1.6, 2.2)
 SLIDE = [s * 0.25 for s in range(-12, 13)]
+LABELLED = ("U", "J", "SW", "RV", "Y", "D1", "TP")
 
 
 def mm(v):
@@ -119,7 +122,7 @@ def plan():
         ref = f.reference_field.text.value
         side = F if f.layer == F else Bk
         own = crt.get(ref, {}).get(side)
-        if own is None:
+        if own is None or not ref.startswith(LABELLED) or (ref.startswith("D") and ref != "D1"):
             continue
         x0, y0, x1, y1 = own.bounds
         dx0, dy0, dx1, dy1 = ink(kicad, f.reference_field)
@@ -153,7 +156,7 @@ def plan():
         return [r for r, j in chosen.items() if r != ref and r not in skip and cands[r][1] == side
                 and bx.intersects(cands[r][2][j][4])]
 
-    hidden = []
+    hidden = [f.reference_field.text.value for f in fps if f.reference_field.text.value not in cands]
     for ref in sorted(cands, key=lambda r: (len(cands[r][2]), r)):
         i = next((i for i in range(len(cands[ref][2])) if not clash(ref, i)), None)
         if i is None:
@@ -161,7 +164,7 @@ def plan():
         else:
             chosen[ref] = i
     # repair: a hidden reference takes a spot held by one neighbour, if that neighbour has another clear spot
-    for ref in list(hidden):
+    for ref in [r for r in hidden if r in cands]:
         for i in range(len(cands[ref][2])):
             c = clash(ref, i)
             if len(c) != 1:
@@ -203,7 +206,7 @@ def lay(board, placed, hidden):
 
 if __name__ == "__main__":
     B, P, H = plan()
-    print(f"{len(P)} references placed; hidden on the silkscreen: {', '.join(sorted(H)) or 'none'}")
+    print(f"{len(P)} references placed; {len(H)} hidden on the silkscreen: {', '.join(sorted(H)) or 'none'}")
     if len(sys.argv) > 1 and sys.argv[1] == "lay":
         lay(B, P, H)
         print("laid and saved")

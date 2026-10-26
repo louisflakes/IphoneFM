@@ -276,10 +276,12 @@ Checks:
   - 2026-10-26 from the drawings: J2 9.5 mm, SW3 4.1, J1 3.26, RV1–RV3 2.5, as M9 lists, all at the edges M9 gives them; every other part is 1.45 mm or lower (SOT-23 parts, SW1 about 1.4, SW2 1.35, 0805 capacitors, QFNs). The bottom has only bare test pads.
 - [x] 7.6 **Review checkpoint:** the user reviews every check result.
   - 2026-10-26: results reported with `phase7-top-copper-silk.png` and `phase7-silk-top.png`; the user's one decision was J1's holes (allow 0.20 mm).
+  - After the review (2026-10-26, the user left both to me): the silkscreen labels only the major parts (ICs, connectors, switches, dials, Y2, D1, test pads; 25 labels), since on this board the passives' labels crowded and stood away from their parts; every reference stays on the fab layer, so Phase 8 adds an assembly drawing for bench work. The board's tag (`tools/pcb_tag.py`): "CLAUDE / WAS HERE" over a frequency-modulated wave, top left, between the stitching rows. DRC: 0 errors, 0 unconnected, 0 parity; the only warnings are the six trimmed edge parts. Picture `phase7-tag.png`.
 
 ## Phase 8: Outputs
 
 - [ ] 8.1 Export Gerbers and the Excellon drill file with JLC's recommended settings [HHG p79–93].
+- [ ] 8.1a Plot the assembly drawing (fab layers with every reference) as a PDF for bench work.
 - [ ] 8.2 Export the BOM in JLC's format (comment, designator, footprint, LCSC code).
 - [ ] 8.3 Export the pick-and-place file and check every part's rotation in JLC's preview [HHG p94–113].
 - [ ] 8.4 Inspect the Gerbers in KiCad's Gerber viewer [KLAP p68–69].
