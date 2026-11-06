@@ -41,7 +41,7 @@ def main(photos):
     W, CARD, PH = 1500, 470, 240
     img = Image.new("RGB", (W, 90 + len(SECTIONS) * (70 + PH + 190)), "white")
     d = ImageDraw.Draw(img)
-    d.text((30, 24), "Rev B front panel — candidates (all JLC-stocked, not yet datasheet-checked)", font=font(34, True),
+    d.text((30, 24), "Rev B front panel — candidates (all JLC-stocked; the A picks datasheet-checked)", font=font(34, True),
            fill="#111")
     y = 90
     for title, cards in SECTIONS:
