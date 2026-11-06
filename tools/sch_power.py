@@ -28,6 +28,9 @@ WIRED_RAILS = {
     3: {"3V3": ("C3.1", ["C5.1", "C6.1", "C4.1", "FB2.1", "U1.1", "U1.24", "U1.36", "U1.48"]),
         "VDDA": ("C8.1", ["C7.1", "FB2.2", "U1.9"]),
         "GND": ("@266.7,231.14", ["C39.2", "C40.2", "C36.2", "C41.2"])},  # an anchor "@x,y" is a free point: the bar's foot
+    # Rev B chain 9: the encoder pull-ups R30-R32 lie on their rows and join one 3V3 bar; U8 VCC runs up onto a VBUS line
+    # that C43 (100 nF, nearest) and C42 (1 uF) hang from. Pins of parts a revision doesn't have are skipped
+    9: {"3V3": ("@104.14,195.58", ["R30.2", "R31.2", "R32.2"]), "VBUS": ("C42.1", ["C43.1", "U8.38"])},
 }
 WIRED = {tuple(p.split(".")) for rails in WIRED_RAILS.values() for _, pins in rails.values() for p in pins}
 STUB = 2.54
@@ -162,8 +165,10 @@ def main():
         n += 1; k += 1
         new.append(power(net, at, o, n, k, sheet_uuid))
     for rails in WIRED_RAILS.values():  # a free-point anchor: the one symbol at the foot (or head) of a wired rail
-        for net, (anchor, _) in rails.items():
-            if anchor.startswith("@"):
+        for net, (anchor, others) in rails.items():
+            # only for a bar this sheet still has: two or more of its parts on the sheet (Rev B keeps C36 of chain 3's
+            # list, but not the wheel caps C39-C41 that made up that bar)
+            if anchor.startswith("@") and sum(p.split(".")[0] in placed for p in others) >= 2:
                 at = tuple(float(v) for v in anchor[1:].split(","))
                 n += 1; k += 1
                 new.append(power(net, at, (0, 1) if SYMBOL[net][1] == "down" else (0, -1), n, k, sheet_uuid))

@@ -18,6 +18,12 @@ NOTES = [
     "   (C37, C38) go straight into the top ground fill, with no thermal reliefs and an",
     "   unbroken top-ground path to system ground [AN383 p17].",
 ]
+# Rev B's front panel (only on a sheet that has U8)
+REV_B = [
+    "4. U8 (IS31FL3236A): thermal pad to the ground fill; C43 100 nF then C42 1 uF right",
+    "   at VCC, pin 38; R28 (R_EXT) short, at pin 40 [IS31FL3236A p1, p11]. C44 at the",
+    "   digits' anodes. Segment lines may be swapped among OUT1-OUT32 in layout.",
+]
 
 
 def main():
@@ -30,7 +36,8 @@ def main():
             out.append(text[i:m.start()])
             i = e
     text = "".join(out) + text[i:]
-    body = "\\n".join(NOTES)
+    notes = NOTES + (REV_B if '(property "Reference" "U8"\n' in text else [])
+    body = "\\n".join(notes)
     block = (f'\t(text "{body}"\n\t\t(exclude_from_sim no)\n\t\t(at {AT[0]:.2f} {AT[1]:.2f} 0)\n'
              f'\t\t(effects (font (size 1.27 1.27)) (justify left top))\n\t\t(uuid "{UID}-0000-4000-8000-000000000001")\n\t)\n')
     k = text.rindex("\t(sheet_instances")

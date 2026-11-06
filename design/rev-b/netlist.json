@@ -2704,7 +2704,7 @@
   },
   {
    "ref": "SW4",
-   "value": "Encoder, 15 detents + push",
+   "value": "Encoder + push",
    "mpn": "SIQ-02FVS3",
    "maker": "Mitsumi",
    "lcsc": "C2925423",
@@ -2712,7 +2712,7 @@
    "pins": 10,
    "chain": 9,
    "function": "Tuning wheel: turn to tune, push in to select",
-   "pads_note": "4 terminals (A, S, C, B) + 6 frame tabs; 2 unplated locating holes",
+   "pads_note": "4 terminals (1 A, 2 S, 3 C, 4 B) + 6 frame tabs (5-10); 2 unplated locating holes",
    "pinmap": {
     "1": {
      "name": "A",
@@ -2730,27 +2730,27 @@
      "name": "B",
      "net": "ENC_B"
     },
-    "M1": {
+    "5": {
      "name": "Frame",
      "net": "GND"
     },
-    "M2": {
+    "6": {
      "name": "Frame",
      "net": "GND"
     },
-    "M3": {
+    "7": {
      "name": "Frame",
      "net": "GND"
     },
-    "M4": {
+    "8": {
      "name": "Frame",
      "net": "GND"
     },
-    "M5": {
+    "9": {
      "name": "Frame",
      "net": "GND"
     },
-    "M6": {
+    "10": {
      "name": "Frame",
      "net": "GND"
     }
@@ -2759,7 +2759,7 @@
   },
   {
    "ref": "DS1",
-   "value": "0.3\" 7-segment, white, common anode",
+   "value": "0.3in 7-seg, white",
    "mpn": "GS3011AW-B",
    "maker": "Guangcai",
    "lcsc": "C22462661",
@@ -2809,11 +2809,11 @@
      "net": "SEG1_G"
     }
    },
-   "pin_source": "Guangcai GS3011A/CX-X p3 (common anode: anodes 3 and 8; A 7, B 6, C 4, D 2, E 1, F 9, G 10, DP 5)"
+   "pin_source": "Guangcai GS3011A/CX-X Rev A (2020.09.20) p3 (common anode: anodes 3 and 8; A 7, B 6, C 4, D 2, E 1, F 9, G 10, DP 5)"
   },
   {
    "ref": "DS2",
-   "value": "0.3\" 7-segment, white, common anode",
+   "value": "0.3in 7-seg, white",
    "mpn": "GS3011AW-B",
    "maker": "Guangcai",
    "lcsc": "C22462661",
@@ -2863,11 +2863,11 @@
      "net": "SEG2_G"
     }
    },
-   "pin_source": "Guangcai GS3011A/CX-X p3 (common anode: anodes 3 and 8; A 7, B 6, C 4, D 2, E 1, F 9, G 10, DP 5)"
+   "pin_source": "Guangcai GS3011A/CX-X Rev A (2020.09.20) p3 (common anode: anodes 3 and 8; A 7, B 6, C 4, D 2, E 1, F 9, G 10, DP 5)"
   },
   {
    "ref": "DS3",
-   "value": "0.3\" 7-segment, white, common anode",
+   "value": "0.3in 7-seg, white",
    "mpn": "GS3011AW-B",
    "maker": "Guangcai",
    "lcsc": "C22462661",
@@ -2917,11 +2917,11 @@
      "net": "SEG3_G"
     }
    },
-   "pin_source": "Guangcai GS3011A/CX-X p3 (common anode: anodes 3 and 8; A 7, B 6, C 4, D 2, E 1, F 9, G 10, DP 5)"
+   "pin_source": "Guangcai GS3011A/CX-X Rev A (2020.09.20) p3 (common anode: anodes 3 and 8; A 7, B 6, C 4, D 2, E 1, F 9, G 10, DP 5)"
   },
   {
    "ref": "DS4",
-   "value": "0.3\" 7-segment, white, common anode",
+   "value": "0.3in 7-seg, white",
    "mpn": "GS3011AW-B",
    "maker": "Guangcai",
    "lcsc": "C22462661",
@@ -2971,7 +2971,7 @@
      "net": "SEG4_G"
     }
    },
-   "pin_source": "Guangcai GS3011A/CX-X p3 (common anode: anodes 3 and 8; A 7, B 6, C 4, D 2, E 1, F 9, G 10, DP 5)"
+   "pin_source": "Guangcai GS3011A/CX-X Rev A (2020.09.20) p3 (common anode: anodes 3 and 8; A 7, B 6, C 4, D 2, E 1, F 9, G 10, DP 5)"
   },
   {
    "ref": "U8",
@@ -3166,7 +3166,7 @@
      "net": "GND"
     }
    },
-   "pin_source": "ISSI IS31FL3236A Rev. A p2 (pin configuration and description); AD to GND gives address 0111100 (p6 Table 1)"
+   "pin_source": "Lumissil IS31FL3236A Rev. I (10/14/2024) p3 pin description (QFN-44); confirmed on the IS31FL3236A evaluation board schematic (EB guide Rev. G, Figure 3); AD to GND gives address 0111100 (p7 Table 1)"
   },
   {
    "ref": "R28",

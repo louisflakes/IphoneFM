@@ -11,6 +11,11 @@ from sch_power import balanced
 # ref: (x, y, rotation, (dx, dy) of the first visible field from the symbol; the next ones stack 2.54 mm below);
 # a rotation written "270y" also mirrors the symbol left to right
 LAYOUT = {
+    # Rev B chain 9: SW4 where the wheels were; U8 in the display zone under U1, DS1/DS2 on its right (OUT1-16 straight
+    # across), DS3/DS4 mirrored on its left (OUT17-32); text clear of the segment lines
+    "SW4": (60.96, 205.74, 0, (-12.7, 17.78)), "U8": (222.25, 353.06, 0, (17.78, 30.48)),
+    "DS1": (260.35, 337.82, 0, (10.16, -10.16)), "DS2": (260.35, 365.76, 0, (10.16, -10.16)),
+    "DS3": (184.15, 337.82, "0y", (-24.13, -10.16)), "DS4": (184.15, 365.76, "0y", (-24.13, -10.16)),
     # chain 9: the three wheels side by side across the controls zone, as on the board edge; text off the wheels, LED
     # and BOOT button; SW2 down a little, clear of the LED_B line
     "RV1": (40.64, 205.74, 0, (15.24, 2.54)), "RV2": (91.44, 205.74, 0, (15.24, 2.54)), "RV3": (142.24, 205.74, 0, (15.24, 2.54)),
@@ -44,6 +49,8 @@ def main():
         mirror = "y" if str(rot).endswith("y") else None
         rot = int(str(rot).rstrip("y"))
         m = re.search(r'\n\t\(symbol\n\t\t\(lib_id "[^"]+"\)(?:(?!\n\t\(symbol\n).)*?\(property "Reference" "%s"\n' % re.escape(ref), text, re.S)
+        if not m:  # a part this revision doesn't have
+            continue
         s = m.start() + 2
         e = balanced(text, s)
         blk = text[s:e]

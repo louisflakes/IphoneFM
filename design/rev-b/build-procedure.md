@@ -45,11 +45,17 @@ each batch; a choice that is the user's stops the batch at once.
 ## Phase B2: Schematic (Rev A Phase 1, for the changed parts)
 
 - [ ] B2.1 Delete RV1–RV3 and C39–C41 from the sheet.
+  - Done 2026-11-06 (`tools/sch_rev_b.py`): RV1–RV3, C39–C41 and their library symbol removed, with chain 3's wires from U1 PA3–PA5 to those caps and their ground bar (by uuid; chain 3 itself isn't rerouted, since every later chain's wires now cross its area).
 - [ ] B2.2 Place the encoder, the four digits, the driver and the new SW3, each checked pin by pin against its datasheet
   (Rev A steps 1.4–1.16), with their passives at the pins they serve (1.17) and their fields from netlist.json (1.18).
+  - Done 2026-11-06. Makers' documents first: U8 from Lumissil's own Rev. I datasheet (10/14/2024, lumissil.com) and its evaluation-board guide (Rev. G, 02/14/2025), both saved in docs/datasheets/rev-b; the board's schematic confirms OUT1→43, OUT2→44, OUT3–18→1–16, OUT19–36→18–35, AD to GND, 100 kΩ on SDB, 1 µF on VCC. Guangcai's site only offers its PDF as a download; the saved copy is Guangcai's own spec (Rev A, 2020). Mitsumi's and Diptronics' saved copies are their own catalogue pages.
+  - Symbols, pin by pin: U8 `IphoneFM:IS31FL3236A` built from the QFN-44 table (45 pins with the pad; OUTx open collector, VCC/GND/EP power in); DS1–DS4 `IphoneFM:GS3011AW-B`, KiCad's KCSA02-105 drawing, whose ten pins match GS3011A/CX-X p3 one for one, with the LED pins made passive; SW4 `IphoneFM:SIQ-02FVS3`, terminals 1 A, 2 S, 3 C, 4 B and frame tabs 5–10 (not M1–M6: the tools read Mn as pad 4–7); SW3 keeps `Switch:SW_DIP_x06`.
+  - Placed per kicad/rev-b/sheet-plan.md (new Display zone under U1); passives at their pins; fields from netlist.json (`sch_fields`).
 - [ ] B2.3 Wire the new chain, label the nets, flags and no-connects (1.19–1.32), net classes and layout notes
   (1.33–1.34).
+  - Done 2026-11-06 with the Rev A tools in their order (`sch_layout`, `sch_fields`, `sch_power`, `sch_wire 9`, `sch_flags`, `sch_labels`, `sch_noconnect`, `sch_notes`, `sch_pinids`): 48 chain-9 nets wired, every signal net labelled (the two labels Rev A placed by hand are now in `sch_labels.HAND`), NC flags on U8 OUT33–36 and none left on U1 PC13. New nets stay in the Default class (7.6 mA segments, far from the RF and the loop filter). Layout note 4 added for U8.
 - [ ] B2.4 ERC to zero errors; `kicadcheck.py --net` and `--bom` pass (1.35–1.37).
+  - Done 2026-11-06: ERC 0 errors, 0 open warnings (Rev A's two reviewed U4 LOUT/ROUT exclusions remain); `kicadcheck.py --net --bom` 17 of 17; Rev A's sheet unchanged and still 11 of 11.
 - [ ] B2.5 **Review checkpoint:** the user reviews the sheet and the check results.
 
 ## Phase B3 onward: footprints, placement, routing, outputs

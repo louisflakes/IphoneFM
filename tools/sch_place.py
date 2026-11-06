@@ -30,6 +30,12 @@ FOOT = {("R", "0402"): "Resistor_SMD:R_0402_1005Metric", ("C", "0402"): "Capacit
 # Chains drawn where the sheet plan puts them (sheet-plan.md): FL1 between U7 and U5, the RX front end in its own zone,
 # and U2's loop filter as a compact group at CPout. (x, y, rotation); rotation 90 = horizontal.
 MANUAL = {
+    # Rev B chain 9 (design/rev-b/build-procedure.md B2.2): the encoder pull-ups on their pin rows (5.08 mm apart), R31
+    # stepped out so ENC_B has a run long enough for its name, 3V3 ends to one bar; U8's VCC caps hang from a VBUS line left of U8, text on the left; R29 (SDB) and R28
+    # (R_EXT) hang to ground right of U8's top, R28 higher and further out; C44 below DS2's anodes, text on the left
+    "R30": (83.82, 198.12, 90), "R31": (96.52, 203.2, 90), "R32": (83.82, 208.28, 90),
+    "C42": (181.61, 313.69, 0, True), "C43": (204.47, 313.69, 0, True),
+    "R29": (243.84, 313.69, 0), "R28": (261.62, 308.61, 0), "C44": (283.21, 389.89, 0, True),
     # chain 9: the LED resistors, R25 straight off the red cathode, R26 and R27 stepped down off green and blue
     "R25": (121.92, 297.18, 90), "R26": (121.92, 309.88, 90), "R27": (121.92, 322.58, 90),
     # chain 8: U4's I2C pull-ups at the tops of two short columns; RSTB and the I2S lines turn down in a ribbon to R19
@@ -191,14 +197,15 @@ def upside_down(p):
 
 
 # parts stacked one grid step apart: the compact capacitor symbol, name and value on the part's own row past its ground bar
-INLINE = {"C39": 12.7, "C40": 5.08, "C36": 12.7, "C41": 5.08, "C20": 12.7, "C21": 5.08, "C22": 12.7, "C23": 5.08}  # ref: x of the name from the part's centre
+INLINE = {"R30": 22.86, "R31": 10.16, "R32": 22.86, "C39": 12.7, "C40": 5.08, "C36": 12.7, "C41": 5.08, "C20": 12.7, "C21": 5.08, "C22": 12.7, "C23": 5.08}  # ref: x of the name from the part's centre
 SMALL = "Device:C_Small"
+SMALL_R = "Device:R_Small"
 # pull-downs hanging side by side in a ribbon of lines (chain 6): name and value centred under the ground symbol
 BELOW = {"R10", "R11", "R12", "R13", "R14", "R15", "C37", "C38"}
 
 
 def block(ref, p, x, y, rot, left, sheet_uuid):
-    lib = SMALL if ref in INLINE else LIB[prefix(ref)]
+    lib = (SMALL_R if prefix(ref) == "R" else SMALL) if ref in INLINE else LIB[prefix(ref)]
     foot = FOOT.get((prefix(ref), p["package"]), "")
     # text reads left to right in both orientations: above a horizontal part, beside a vertical one
     s = -1 if left else 1

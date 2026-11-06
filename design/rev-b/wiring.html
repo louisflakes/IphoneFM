@@ -348,7 +348,7 @@ const SW4 = { ref: "SW4", title: "SIQ-02FVS3", sub: "SW4 · tuning wheel", x0: -
   { side: "R", y: 1070, num: "4", name: "B", net: "ENC_B", src: "Mitsumi SIQ p3" },
   { side: "R", y: 1110, num: "2", name: "S", net: "ENC_SW", src: "Mitsumi SIQ p3: slide switch, worked by pushing the wheel in" },
   { side: "L", y: 1050, num: "3", name: "C", layer: "gnd", ext: ["GND", "common"], src: "Mitsumi SIQ p3 (circuit: A, B and S switch to C)" },
-  { side: "L", y: 1100, num: "M", name: "", layer: "gnd", ext: ["GND pads", "6 frame tabs"], src: "Mitsumi SIQ p3 (land dimensions: 4 side tabs, 2 angled tabs; 2 unplated locating holes)" },
+  { side: "L", y: 1100, num: "5–10", name: "", layer: "gnd", ext: ["GND pads", "6 frame tabs"], src: "Mitsumi SIQ p3 (land dimensions: 4 side tabs, 2 angled tabs; 2 unplated locating holes)" },
 ] };
 const U8 = { ref: "U8", title: "IS31FL3236A", sub: "U8 · display driver", x0: -150, x1: 10, ty: 1537, y0: 1220, y1: 1565, pw: 30, pins: [
   ...[1, 2, 3, 4].map(d => ({ side: "L", y: 1200 + 40 * d, num: `${8 * d - 7}–${8 * d}`, name: `OUT${8 * d - 7}–${8 * d}`, layer: "led",

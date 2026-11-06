@@ -20,6 +20,9 @@ from sch_wire import G, cell, bodies, obstacles, existing_wires, line_cells
 KICAD_CLI = r"C:\Users\jakep\AppData\Local\Programs\KiCad\10.0\bin\kicad-cli.exe"
 RAILS = {"VBUS", "3V3", "VDDA", "RX_VDD", "GND", "NC"}
 UID = "1abe1000"
+# (net, its first pin) -> (x, y, direction the text runs): the two labels Rev A's sheet has where this search finds no
+# room, at the end of the stub off U1's pin
+HAND = {("LED_B", "U1.12"): (241.3, 223.52, (1, 0)), ("RX_FS_MCU", "U1.42"): (205.74, 259.08, (-1, 0))}
 
 
 def strip_labels(text):
@@ -124,7 +127,12 @@ def main():
                 placed_text |= box
                 break
         else:
-            failed.append(f"{name} ({', '.join(f'{r}.{p}' for r, p in pins[:3])})")
+            hand = HAND.get((name, f"{pins[0][0]}.{pins[0][1]}"))
+            if hand:  # placed by hand on Rev A, where the search finds no room; kept so a rerun gives the same sheet
+                n += 1
+                drawn.append(label(name, cell(hand[0], hand[1]), hand[2], n))
+            else:
+                failed.append(f"{name} ({', '.join(f'{r}.{p}' for r, p in pins[:3])})")
     i = text.rindex("\t(sheet_instances")
     text = text[:i] + "".join(drawn) + text[i:]
     print(f"{sum(1 for x in drawn if x.startswith(chr(9) + '(label'))} labels on {len({k[0] for k in islands})} nets" + (f"; NO ROOM for {len(failed)}: {'; '.join(failed)}" if failed else ""))

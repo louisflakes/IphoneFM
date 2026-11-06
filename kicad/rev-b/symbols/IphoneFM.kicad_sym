@@ -217,4 +217,537 @@
 			(pin no_connect line (at 5.08 -27.94 90) (length 2.54) (name "NC" (effects (font (size 1.27 1.27)))) (number "20" (effects (font (size 1.27 1.27)))))
 		)
 	)
+	(symbol "IS31FL3236A"
+		(pin_names (offset 1.016))
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "U" (at -12.70 36.83 0) (effects (font (size 1.27 1.27)) (justify left bottom)))
+		(property "Value" "IS31FL3236A" (at -12.70 -36.83 0) (effects (font (size 1.27 1.27)) (justify left top)))
+		(property "Footprint" "" (at 0.00 0.00 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(property "Datasheet" "https://www.lumissil.com/assets/pdf/core/IS31FL3236A_DS.pdf" (at 0.00 0.00 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(property "Description" "36-channel constant-current LED driver, I2C, 2.7-5.5 V, QFN-44 5x5 mm (Lumissil IS31FL3236A Rev. I)" (at 0.00 0.00 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(symbol "IS31FL3236A_0_1"
+			(rectangle (start -12.70 33.02) (end 12.70 -33.02) (stroke (width 0.254) (type default)) (fill (type background)))
+		)
+		(symbol "IS31FL3236A_1_1"
+			(pin open_collector line (at -15.24 22.86 0) (length 2.54) (name "OUT17" (effects (font (size 1.27 1.27)))) (number "15" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at -15.24 20.32 0) (length 2.54) (name "OUT18" (effects (font (size 1.27 1.27)))) (number "16" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at -15.24 17.78 0) (length 2.54) (name "OUT19" (effects (font (size 1.27 1.27)))) (number "18" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at -15.24 15.24 0) (length 2.54) (name "OUT20" (effects (font (size 1.27 1.27)))) (number "19" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at -15.24 12.70 0) (length 2.54) (name "OUT21" (effects (font (size 1.27 1.27)))) (number "20" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at -15.24 10.16 0) (length 2.54) (name "OUT22" (effects (font (size 1.27 1.27)))) (number "21" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at -15.24 7.62 0) (length 2.54) (name "OUT23" (effects (font (size 1.27 1.27)))) (number "22" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at -15.24 5.08 0) (length 2.54) (name "OUT24" (effects (font (size 1.27 1.27)))) (number "23" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at -15.24 -5.08 0) (length 2.54) (name "OUT25" (effects (font (size 1.27 1.27)))) (number "24" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at -15.24 -7.62 0) (length 2.54) (name "OUT26" (effects (font (size 1.27 1.27)))) (number "25" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at -15.24 -10.16 0) (length 2.54) (name "OUT27" (effects (font (size 1.27 1.27)))) (number "26" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at -15.24 -12.70 0) (length 2.54) (name "OUT28" (effects (font (size 1.27 1.27)))) (number "27" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at -15.24 -15.24 0) (length 2.54) (name "OUT29" (effects (font (size 1.27 1.27)))) (number "28" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at -15.24 -17.78 0) (length 2.54) (name "OUT30" (effects (font (size 1.27 1.27)))) (number "29" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at -15.24 -20.32 0) (length 2.54) (name "OUT31" (effects (font (size 1.27 1.27)))) (number "30" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at -15.24 -22.86 0) (length 2.54) (name "OUT32" (effects (font (size 1.27 1.27)))) (number "31" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at 15.24 22.86 180) (length 2.54) (name "OUT1" (effects (font (size 1.27 1.27)))) (number "43" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at 15.24 20.32 180) (length 2.54) (name "OUT2" (effects (font (size 1.27 1.27)))) (number "44" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at 15.24 17.78 180) (length 2.54) (name "OUT3" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at 15.24 15.24 180) (length 2.54) (name "OUT4" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at 15.24 12.70 180) (length 2.54) (name "OUT5" (effects (font (size 1.27 1.27)))) (number "3" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at 15.24 10.16 180) (length 2.54) (name "OUT6" (effects (font (size 1.27 1.27)))) (number "4" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at 15.24 7.62 180) (length 2.54) (name "OUT7" (effects (font (size 1.27 1.27)))) (number "5" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at 15.24 5.08 180) (length 2.54) (name "OUT8" (effects (font (size 1.27 1.27)))) (number "6" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at 15.24 -5.08 180) (length 2.54) (name "OUT9" (effects (font (size 1.27 1.27)))) (number "7" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at 15.24 -7.62 180) (length 2.54) (name "OUT10" (effects (font (size 1.27 1.27)))) (number "8" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at 15.24 -10.16 180) (length 2.54) (name "OUT11" (effects (font (size 1.27 1.27)))) (number "9" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at 15.24 -12.70 180) (length 2.54) (name "OUT12" (effects (font (size 1.27 1.27)))) (number "10" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at 15.24 -15.24 180) (length 2.54) (name "OUT13" (effects (font (size 1.27 1.27)))) (number "11" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at 15.24 -17.78 180) (length 2.54) (name "OUT14" (effects (font (size 1.27 1.27)))) (number "12" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at 15.24 -20.32 180) (length 2.54) (name "OUT15" (effects (font (size 1.27 1.27)))) (number "13" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at 15.24 -22.86 180) (length 2.54) (name "OUT16" (effects (font (size 1.27 1.27)))) (number "14" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at -10.16 35.56 270) (length 2.54) (name "VCC" (effects (font (size 1.27 1.27)))) (number "38" (effects (font (size 1.27 1.27)))))
+			(pin bidirectional line (at -5.08 35.56 270) (length 2.54) (name "SDA" (effects (font (size 1.27 1.27)))) (number "41" (effects (font (size 1.27 1.27)))))
+			(pin input line (at 0.00 35.56 270) (length 2.54) (name "SCL" (effects (font (size 1.27 1.27)))) (number "42" (effects (font (size 1.27 1.27)))))
+			(pin passive line (at 5.08 35.56 270) (length 2.54) (name "R_EXT" (effects (font (size 1.27 1.27)))) (number "40" (effects (font (size 1.27 1.27)))))
+			(pin input line (at 10.16 35.56 270) (length 2.54) (name "SDB" (effects (font (size 1.27 1.27)))) (number "36" (effects (font (size 1.27 1.27)))))
+			(pin input line (at -10.16 -35.56 90) (length 2.54) (name "AD" (effects (font (size 1.27 1.27)))) (number "37" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at -7.62 -35.56 90) (length 2.54) (name "GND" (effects (font (size 1.27 1.27)))) (number "17" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at -5.08 -35.56 90) (length 2.54) (name "GND" (effects (font (size 1.27 1.27)))) (number "39" (effects (font (size 1.27 1.27)))))
+			(pin power_in line (at -2.54 -35.56 90) (length 2.54) (name "EP" (effects (font (size 1.27 1.27)))) (number "45" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at 2.54 -35.56 90) (length 2.54) (name "OUT33" (effects (font (size 1.27 1.27)))) (number "32" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at 5.08 -35.56 90) (length 2.54) (name "OUT34" (effects (font (size 1.27 1.27)))) (number "33" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at 7.62 -35.56 90) (length 2.54) (name "OUT35" (effects (font (size 1.27 1.27)))) (number "34" (effects (font (size 1.27 1.27)))))
+			(pin open_collector line (at 10.16 -35.56 90) (length 2.54) (name "OUT36" (effects (font (size 1.27 1.27)))) (number "35" (effects (font (size 1.27 1.27)))))
+		)
+	)
+	(symbol "SIQ-02FVS3"
+		(pin_names (offset 1.016))
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(property "Reference" "SW" (at -12.70 11.43 0) (effects (font (size 1.27 1.27)) (justify left bottom)))
+		(property "Value" "SIQ-02FVS3" (at -12.70 -13.97 0) (effects (font (size 1.27 1.27)) (justify left top)))
+		(property "Footprint" "" (at 0.00 0.00 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(property "Datasheet" "https://www.lcsc.com/datasheet/lcsc_datasheet_2207281230_Mitsumi-Electric-SIQ-02FVS3_C2925423.pdf" (at 0.00 0.00 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(property "Description" "Edge thumbwheel encoder, 15 detents, A/B to common C, push-in slide switch S to C (Mitsumi SIQ-02FVS3)" (at 0.00 0.00 0) (effects (font (size 1.27 1.27)) (hide yes)))
+		(symbol "SIQ-02FVS3_0_1"
+			(rectangle (start -12.70 10.16) (end 12.70 -10.16) (stroke (width 0.254) (type default)) (fill (type background)))
+		)
+		(symbol "SIQ-02FVS3_1_1"
+			(pin passive line (at -15.24 7.62 0) (length 2.54) (name "C" (effects (font (size 1.27 1.27)))) (number "3" (effects (font (size 1.27 1.27)))))
+			(pin passive line (at 15.24 7.62 180) (length 2.54) (name "A" (effects (font (size 1.27 1.27)))) (number "1" (effects (font (size 1.27 1.27)))))
+			(pin passive line (at 15.24 2.54 180) (length 2.54) (name "B" (effects (font (size 1.27 1.27)))) (number "4" (effects (font (size 1.27 1.27)))))
+			(pin passive line (at 15.24 -2.54 180) (length 2.54) (name "S" (effects (font (size 1.27 1.27)))) (number "2" (effects (font (size 1.27 1.27)))))
+			(pin passive line (at -5.08 -12.70 90) (length 2.54) (name "Frame" (effects (font (size 1.27 1.27)))) (number "5" (effects (font (size 1.27 1.27)))))
+			(pin passive line (at -2.54 -12.70 90) (length 2.54) (name "Frame" (effects (font (size 1.27 1.27)))) (number "6" (effects (font (size 1.27 1.27)))))
+			(pin passive line (at 0.00 -12.70 90) (length 2.54) (name "Frame" (effects (font (size 1.27 1.27)))) (number "7" (effects (font (size 1.27 1.27)))))
+			(pin passive line (at 2.54 -12.70 90) (length 2.54) (name "Frame" (effects (font (size 1.27 1.27)))) (number "8" (effects (font (size 1.27 1.27)))))
+			(pin passive line (at 5.08 -12.70 90) (length 2.54) (name "Frame" (effects (font (size 1.27 1.27)))) (number "9" (effects (font (size 1.27 1.27)))))
+			(pin passive line (at 7.62 -12.70 90) (length 2.54) (name "Frame" (effects (font (size 1.27 1.27)))) (number "10" (effects (font (size 1.27 1.27)))))
+		)
+	)
+	(symbol "GS3011AW-B"
+		(pin_names
+			(offset 0.635)
+		)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(duplicate_pin_numbers_are_jumpers no)
+		(property "Reference" "DS"
+			(at -2.54 13.97 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "GS3011AW-B"
+			(at 1.27 13.97 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" ""
+			(at 0 -15.24 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" "https://www.smddisplay.com/products_detail/18.html"
+			(at -12.7 12.065 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Description" "0.3 in single-digit 7-segment display, white, black face, common anode (Guangcai GS3011A/CX-X)"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_keywords" "display LED 7-segment"
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ki_fp_filters" ""
+			(at 0 0 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(hide yes)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(symbol "GS3011AW-B_0_0"
+			(text "E"
+				(at -2.54 1.778 0)
+				(effects
+					(font
+						(size 0.508 0.508)
+					)
+				)
+			)
+			(text "F"
+				(at -2.286 4.826 0)
+				(effects
+					(font
+						(size 0.508 0.508)
+					)
+				)
+			)
+			(text "D"
+				(at -0.254 1.016 0)
+				(effects
+					(font
+						(size 0.508 0.508)
+					)
+				)
+			)
+			(text "G"
+				(at 0 4.064 0)
+				(effects
+					(font
+						(size 0.508 0.508)
+					)
+				)
+			)
+			(text "A"
+				(at 0.254 5.588 0)
+				(effects
+					(font
+						(size 0.508 0.508)
+					)
+				)
+			)
+			(text "C"
+				(at 2.286 1.778 0)
+				(effects
+					(font
+						(size 0.508 0.508)
+					)
+				)
+			)
+			(text "B"
+				(at 2.54 4.826 0)
+				(effects
+					(font
+						(size 0.508 0.508)
+					)
+				)
+			)
+			(text "DP"
+				(at 3.556 0.254 0)
+				(effects
+					(font
+						(size 0.508 0.508)
+					)
+				)
+			)
+		)
+		(symbol "GS3011AW-B_0_1"
+			(rectangle
+				(start -5.08 12.7)
+				(end 5.08 -12.7)
+				(stroke
+					(width 0.254)
+					(type default)
+				)
+				(fill
+					(type background)
+				)
+			)
+			(polyline
+				(pts
+					(xy -1.524 2.794) (xy -1.778 0.762)
+				)
+				(stroke
+					(width 0.508)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -1.27 5.842) (xy -1.524 3.81)
+				)
+				(stroke
+					(width 0.508)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -1.27 0.254) (xy 0.762 0.254)
+				)
+				(stroke
+					(width 0.508)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -1.016 3.302) (xy 1.016 3.302)
+				)
+				(stroke
+					(width 0.508)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy -0.762 6.35) (xy 1.27 6.35)
+				)
+				(stroke
+					(width 0.508)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 1.524 2.794) (xy 1.27 0.762)
+				)
+				(stroke
+					(width 0.508)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 1.778 5.842) (xy 1.524 3.81)
+				)
+				(stroke
+					(width 0.508)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+			(polyline
+				(pts
+					(xy 2.54 0.254) (xy 2.54 0.254)
+				)
+				(stroke
+					(width 0.508)
+					(type default)
+				)
+				(fill
+					(type none)
+				)
+			)
+		)
+		(symbol "GS3011AW-B_1_1"
+			(pin passive line
+				(at -7.62 -2.54 0)
+				(length 2.54)
+				(name "E"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "1"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -7.62 0 0)
+				(length 2.54)
+				(name "D"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "2"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 -7.62 180)
+				(length 2.54)
+				(name "CA"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "3"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -7.62 2.54 0)
+				(length 2.54)
+				(name "C"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "4"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -7.62 -10.16 0)
+				(length 2.54)
+				(name "DP"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "5"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -7.62 5.08 0)
+				(length 2.54)
+				(name "B"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "6"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -7.62 7.62 0)
+				(length 2.54)
+				(name "A"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "7"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at 7.62 -10.16 180)
+				(length 2.54)
+				(name "CA"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "8"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -7.62 -5.08 0)
+				(length 2.54)
+				(name "F"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "9"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+			(pin passive line
+				(at -7.62 -7.62 0)
+				(length 2.54)
+				(name "G"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+				(number "10"
+					(effects
+						(font
+							(size 1.27 1.27)
+						)
+					)
+				)
+			)
+		)
+		(embedded_fonts no)
+	)
 )

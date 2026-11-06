@@ -110,6 +110,8 @@ def bodies(root, placed):
                 x0, x1, y0, y1 = x0 + 1.27, x1 - 1.27, y0 - 1.27, y1 + 1.27
         else:
             pts = [to_sheet(s, x, y) for x, y in rects.get(s["lib_id"], [])] + pins
+            if not pts:  # no rectangle and no pins: the mounting holes (step 3.5), which sit apart from every net
+                continue
             xs, ys = [p[0] for p in pts], [p[1] for p in pts]
             x0, y0, x1, y1 = min(xs), min(ys), max(xs), max(ys)
         out[ref] = (x0, y0, x1, y1)
@@ -201,8 +203,8 @@ def route(src, dst, dst_in, hard, foreign, foreign_ends, soft, bound):
     return None
 
 
-# zones of the sheet (kicad/rev-a/sheet-plan.md), x0, y0, x1, y1 in mm; the first that holds a part's origin is its zone
-ZONES = [("clock", 158, 19, 288, 90), ("mcu", 158, 99, 288, 401), ("transmit", 297, 19, 431, 214),
+# zones of the sheet (kicad/<rev>/sheet-plan.md; "display" is Rev B's U8 and digits, empty on Rev A), x0, y0, x1, y1 in mm; the first that holds a part's origin is its zone
+ZONES = [("clock", 158, 19, 288, 90), ("display", 158, 300, 290, 401), ("mcu", 158, 99, 288, 401), ("transmit", 297, 19, 431, 214),
          ("receive", 297, 223, 431, 401), ("rf_out", 441, 19, 575, 214), ("rx_front", 441, 223, 575, 312),
          ("usb", 19, 19, 167, 161), ("controls", 19, 170, 167, 401)]
 
@@ -300,7 +302,8 @@ def main():
                 nets.setdefault(net, set()).add((cell(x, y), (0, -1) if net == "GND" else (0, 1)))
                 continue
             ref, num = p.split(".")
-            nets.setdefault(net, set()).add(pin_cell[(ref, num)])
+            if (ref, num) in pin_cell:  # a part this revision doesn't have (Rev A's C39-C41 on Rev B) is skipped
+                nets.setdefault(net, set()).add(pin_cell[(ref, num)])
     bound = (cell(15, 15)[0], cell(15, 15)[1], cell(580, 405)[0], cell(580, 405)[1])
     drawn, n, failed = [], 0, []
     for net in sorted(nets, key=lambda k: (k in RAILS, -len(nets[k]))):  # signals first, wired rails last
