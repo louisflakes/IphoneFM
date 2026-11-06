@@ -1,13 +1,14 @@
 """Step 2.6: writes each Rev A part's footprint, as chosen in kicad/rev-a/footprints.md (the IphoneFM.pretty copies), into
 the Footprint field of its symbol on the schematic. Prints what changed.
 Usage (from the repository root): python tools/sch_footprints.py [--dry-run]"""
+import os
 import re
 import sys
 
 sys.path.insert(0, "tools")
 from rev_a_footprints import project_map
 
-SCH = "kicad/rev-a/IphoneFM.kicad_sch"
+SCH = f"kicad/{os.environ.get("IPHONEFM_REV", "rev-a")}/IphoneFM.kicad_sch"
 BLOCK = re.compile(r"\n\t\(symbol\n.*?\n\t\)(?=\n)", re.S)  # placed symbols (library symbols sit one level deeper)
 
 

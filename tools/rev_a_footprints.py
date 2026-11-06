@@ -2,10 +2,11 @@
 extension. footprint_map() gives each one's source (KiCad's library, or a project footprint built by a tools/fp_*.py
 script); project_map() gives the copy the board uses, in kicad/rev-a/IphoneFM.pretty (made by fp_silk_trim.py).
 Shared by pinpad_check.py, silk_check.py and fp_silk_trim.py; run from the repository root."""
+import os
 import json
 
 K = r"C:/Users/jakep/AppData/Local/Programs/KiCad/10.0/share/kicad/footprints/"
-P = "kicad/rev-a/IphoneFM.pretty/"
+P = f"kicad/{os.environ.get("IPHONEFM_REV", "rev-a")}/IphoneFM.pretty/"
 FIXED = {"J1": P + "USB_C_Receptacle_HRO_TYPE-C-31-M-12_2020", "U1": K + "Package_DFN_QFN.pretty/QFN-48-1EP_7x7mm_P0.5mm_EP5.6x5.6mm",
          "U2": P + "TI_NJK0036A_WQFN-36-1EP_6x6mm_P0.5mm_EP4.6x4.6mm", "U3": K + "Package_TO_SOT_SMD.pretty/SOT-23-5",
          "U4": P + "SiliconLabs_QFN-20-1EP_3x3mm_P0.5mm_EP1.8x1.8mm", "U5": K + "Package_TO_SOT_SMD.pretty/SOT-363_SC-70-6",
@@ -22,7 +23,7 @@ SIZE = {"0402": "1005", "0603": "1608", "0805": "2012"}
 
 def footprint_map():
     fp = dict(FIXED)
-    net = json.load(open("design/rev-a/netlist.json", encoding="utf-8"))
+    net = json.load(open(f"design/{os.environ.get("IPHONEFM_REV", "rev-a")}/netlist.json", encoding="utf-8"))
     for p in net["parts"] if "parts" in net else net:
         r = p["ref"]
         if r in fp:

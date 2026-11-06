@@ -14,8 +14,9 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from kicadcheck import sexpr, kids, kid, atom  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-SCH = os.path.join(ROOT, "kicad", "rev-a", "IphoneFM.kicad_sch")
-NETLIST = os.path.join(ROOT, "design", "rev-a", "netlist.json")
+REV = os.environ.get("IPHONEFM_REV", "rev-a")   # IPHONEFM_REV=rev-b for Rev B
+SCH = os.path.join(ROOT, "kicad", REV, "IphoneFM.kicad_sch")
+NETLIST = os.path.join(ROOT, "design", REV, "netlist.json")
 G = 1.27
 CW = 1.1  # width of one 1.27 mm character, with a margin
 PWR_ROOM = 8.9  # half height of an upright passive with power symbols on its ends

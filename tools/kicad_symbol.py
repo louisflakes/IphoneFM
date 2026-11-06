@@ -4,7 +4,7 @@ Usage (from Python):  from kicad_symbol import add_symbol;  add_symbol("LMX2571"
 import os
 import re
 
-LIB = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "kicad", "rev-a", "symbols", "IphoneFM.kicad_sym")
+LIB = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "kicad", os.environ.get("IPHONEFM_REV", "rev-a"), "symbols", "IphoneFM.kicad_sym")
 G = 2.54        # pin pitch, 100 mil (pin ends stay on the 50 mil grid)
 CH = 1.27 * 0.8  # rough width of one 1.27 mm character
 

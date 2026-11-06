@@ -1,12 +1,13 @@
 """Step 2.3 check: every symbol pin number on the Rev A schematic has a pad of the same number on the footprint chosen
 for that part in kicad/rev-a/footprints.md, and no pad is left without a pin; also lists pad numbers used more than once.
 Run from the repository root: python tools/pinpad_check.py"""
+import os
 import sys, collections
 sys.path.insert(0, "tools")
 from kicadcheck import sexpr, kids, kid
 from rev_a_footprints import project_map
 FP = project_map()
-sch = sexpr(open("kicad/rev-a/IphoneFM.kicad_sch", encoding="utf-8").read())
+sch = sexpr(open(f"kicad/{os.environ.get("IPHONEFM_REV", "rev-a")}/IphoneFM.kicad_sch", encoding="utf-8").read())
 libs = {s[1]: s for s in kids(kid(sch, "lib_symbols"), "symbol")}
 def pins(sym):
     out = []

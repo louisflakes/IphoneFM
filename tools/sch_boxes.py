@@ -1,13 +1,14 @@
 """Bounding boxes of every placed symbol on the Rev A schematic, in sheet millimetres (y down), from the symbols' own
 graphics and pins in lib_symbols, turned and mirrored as placed. Used to mark parts on schematic pictures.
 Usage: python tools/sch_boxes.py [REF ...]"""
+import os
 import math
 import sys
 
 sys.path.insert(0, "tools")
 from kicadcheck import kid, kids, sexpr
 
-SCH = "kicad/rev-a/IphoneFM.kicad_sch"
+SCH = f"kicad/{os.environ.get("IPHONEFM_REV", "rev-a")}/IphoneFM.kicad_sch"
 
 
 def _points(sym):
