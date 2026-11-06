@@ -88,14 +88,22 @@ KiCad's own Python (`tools/pcb_rev_b.py`), since the Rev B board is not open in 
 taken up here and listed for Phase B5 (routing).
 
 - [ ] B4.1 Board setup for the new parts: U8's own clearance rule (its pins are 0.15 mm apart; JLC's minimum is 0.10).
+  - Done 2026-11-06 (`pcb_rev_b.py rules`): inside U8's courtyard, copper keeps 0.15 mm (pads and the tracks leaving them); 0.20 mm everywhere else. Checked once U8 is on the board (B4.9).
 - [ ] B4.2 Bring the schematic across (Rev A 4.1): remove RV1–RV3 and C39–C41 and the copper only they used; swap SW3's
   footprint; add SW4, DS1–DS4, U8, R28–R32 and C42–C44 beside the board; every pad's net from KiCad's netlist.
+  - Done 2026-11-06 (`pcb_rev_b.py update`), from KiCad's own netlist of the sheet: RV1–RV3 and C39–C41 removed with the 19 tracks on WHEEL1–3; SW3 swapped in place; 14 parts added beside the board; 127 pad nets set (the new parts', U1 PA3–PA5 and PC13); H1–H4 given the sheet's empty MPN/LCSC/Manufacturer fields. KiCad's DRC with schematic parity: 0 differences, so the board matches the sheet as Update PCB from Schematic would leave it.
 - [ ] B4.3 Place and lock SW3 at Rev A's SW3 position, levers up (Rev A 4.6), and join its tracks to the new pads.
+  - Done 2026-11-06 (`pcb_rev_b.py fixed`): SW3 at Rev A's (35.925, 64.51), −90°, locked: pins 1–6 (ATT_C16 … C0_5) along the top row with pin 1 at the right, 7–12 (3V3) along the bottom, so "ON" (the 7–12 side) faces into the board. The pitch is Rev A's 1.27 mm, so the 12 Rev A track ends were moved straight onto the new rows (4.90/7.40 mm apart, Rev A 7.62).
 - [ ] B4.4 Place and lock SW4 where RV3 was, wheel out of the left edge, copper 0.5 mm from the edge (Rev A 4.5).
+  - Done 2026-11-06: knob centre (17.19, 112.0), 90° (terminals into the board), locked. The sketch had the frame's end on the edge (centre 16.55), but the two 45° frame tabs then reach 0.13 mm past the edge; the knob moved 0.64 mm in so their copper is 0.51 mm from it (our 0.50 rule). The wheel stands 2.76 mm past the edge (sketch 3.4, Rev A's wheels 1.9), so the panel's left rail gap must clear 2.76 mm (Phase 8). TP4 moved 0.1 mm down, clear of SW4's courtyard.
 - [ ] B4.5 Place and lock DS1–DS4 where RV1 and RV2 were, turned to read with the phone's left edge down, DS1 at the top.
+  - Done 2026-11-06: DS1–DS4 at x 20.96, y 73.61 / 81.91 / 90.21 / 98.51, −90° (each digit's top toward the board's right edge, so they read 1-0-7-9 left to right with the phone's left edge down), locked; outer pads 0.51 mm from the left edge. Pitch 8.3 mm, not the sketch's 8.0: at 8.0 the B3 courtyards (body + 0.35 mm) touch, against our 0.3 mm courtyard gap; the display keeps the sketch's centre. Digits 1.0 mm apart instead of 0.7.
 - [ ] B4.6 Place U8 by the display with R28, R29, C42 and C43 at its pins (Rev A 4.11, 4.13).
+  - Stopped for the user's choice (2026-11-06): the sketch's spot right of DS1 ("roughly here") is not free: U8's 6.5 mm courtyard there overlaps DS1's courtyard, TP2, TP3, the 3V3 feed from TP2 and three of U1's LED lines to D1, all Rev A routing. The space above the display (left of H1, x 13–23, y 60–69) holds only ground stitching vias. Picture: placement-b4.png (A, B).
 - [ ] B4.7 Place R30–R32 at SW4's terminals and C44 at the anodes (Rev A 4.13).
+  - R30–R32 done 2026-11-06 (`pcb_rev_b.py pullups`): each straight out from its terminal (A, B, S), its signal pad toward it, 0.3 mm courtyard gap to SW4. C44 waits for B4.6: DS2 pin 3 (its local_to) is in the outer pad row by the edge, with no room beside it, so it goes on the display's VBUS feed by U8.
 - [ ] B4.8 Move TP2 and TP3 and clear the left column: Rev A copper under the new parts is taken up and listed for B5.
+  - Copper taken up 2026-11-06 (`pcb_rev_b.py clear`): every Rev A track and via a new part's pad, hole or courtyard lands on, then what that left dangling, then Rev A copper that had taken a new pad's net (a ground stub under R31). Against the B4 start: 149 items: 19 wheel tracks, 69 ground stitching vias and 14 ground stubs in the left column, 27 on 3V3 (the top-layer feed up the column) and 20 on RF_MODE (U1 to SW1, TP4, R18 and R17). Bottom-layer tracks under the digits stay (VBUS at x 25.6). For B5: 3V3 and RF_MODE to re-route, plus the new nets. TP2 and TP3 wait for B4.6.
 - [ ] B4.9 Check courtyards, mechanical fit and DRC; `kicadcheck.py --pcb`; schematic parity (Rev A 4.16–4.17).
 - [ ] B4.10 **Review checkpoint:** the user reviews the placement.
 

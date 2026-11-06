@@ -25,3 +25,9 @@
 (rule "J1 locating holes 0.20 mm to copper"
 	(condition "(A.Pad_Type == 'NPTH, mechanical' && A.memberOfFootprint('J1')) || (B.Pad_Type == 'NPTH, mechanical' && B.memberOfFootprint('J1'))")
 	(constraint hole_clearance (min 0.2mm)))
+# Rev B step B4.1: U8 (IS31FL3236A, QFN-44 0.4 mm pitch, Lumissil's land pattern) has 0.15 mm of copper between
+# neighbouring pins, under our 0.20 mm rule; JLC's minimum is 0.10 mm (fab-rules.md). Inside U8's courtyard, pads and
+# the tracks leaving them keep 0.15 mm; everywhere else the 0.20 mm rule holds.
+(rule "U8 0.4 mm-pitch pins"
+	(condition "A.intersectsCourtyard('U8') && B.intersectsCourtyard('U8')")
+	(constraint clearance (min 0.15mm)))

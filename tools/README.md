@@ -44,6 +44,7 @@
 | `pcb_local.py` | Steps 4.8–4.13: place an IC (optionally) and every part netlist.json puts at its pins, just outside it, pointing at each pin, live in the open KiCad board |
 | `pcb_rf_switch.py` | Step 4.9: place U5, the transmit filter FL1 (inductors at 90°) and U5's parts, live in the open KiCad board |
 | `pcb_place.py` | Phase 4: place named parts at given positions and turns, live in the open KiCad board, for the few `pcb_local.py` can't |
+| `pcb_rev_b.py STEP…` | Rev B Phase B4, file edits with KiCad's own Python while the Rev B board is closed: `rules` (U8's clearance rule), `update` (Update PCB from Schematic from KiCad's netlist), `fixed` (SW3, SW4, DS1–DS4), `pullups` (R30–R32), `clear` (take up Rev A copper under the new parts, then what dangles) |
 | `pcb_fanout.py` | Step 5.1: ground fan-out vias (exposed pads in the paste gaps, one beside every other ground pad), live and locked |
 | `pcb_route_rf.py` | Steps 5.4–5.6: the RF lines laid by hand on the top layer, live and locked |
 | `pcb_astar.py` | Phase 5: route one connection on one layer around everything on the board (A*, 45° bends), live and locked |
