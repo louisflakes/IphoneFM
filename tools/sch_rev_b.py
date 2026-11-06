@@ -105,10 +105,10 @@ def lib_symbols_span(text):
 
 def drop_lib_symbol(text, lib_id):
     s, e = lib_symbols_span(text)
-    m = re.search(r'\n\t\t\(symbol "%s"\n' % re.escape(lib_id), text[s:e])
+    m = re.search(r'\n(\t{1,2})\(symbol "%s"\n' % re.escape(lib_id), text[s:e])  # the sheet's entries sit one tab in
     if m:
         a = s + m.start()
-        text = text[:a] + text[balanced(text, a + 3):]
+        text = text[:a] + text[balanced(text, a + 1 + len(m.group(1))):]
     return text
 
 

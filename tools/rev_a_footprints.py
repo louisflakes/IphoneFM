@@ -18,6 +18,13 @@ FIXED = {"J1": P + "USB_C_Receptacle_HRO_TYPE-C-31-M-12_2020", "U1": K + "Packag
          "SW3": P + "SW_DIP_SPSTx06_Side_CK_TDP06H1SBD1_W7.62mm_P1.27mm",
          "RV1": P + "Potentiometer_Alps_RK10J_Reflow_Thumbwheel_14mm", "RV2": P + "Potentiometer_Alps_RK10J_Reflow_Thumbwheel_14mm",
          "RV3": P + "Potentiometer_Alps_RK10J_Reflow_Thumbwheel_14mm"}
+if os.environ.get("IPHONEFM_REV", "rev-a") == "rev-b":  # Rev B front panel (kicad/rev-b/footprints.md, tools/fp_rev_b.py)
+    for _r in ("RV1", "RV2", "RV3"):
+        del FIXED[_r]
+    FIXED.update({"SW3": P + "SW_DIP_SPSTx06_Slide_Diptronics_DHN-06_W6.15mm_P1.27mm",
+                  "SW4": P + "RotaryEncoder_Switch_Mitsumi_SIQ-02FVS3",
+                  "U8": P + "Lumissil_QFN-44-1EP_5x5mm_P0.4mm_EP2.45x2.45mm",
+                  **{f"DS{i}": P + "LED_7Segment_Guangcai_GS3011_7.3x12mm_P1.5mm" for i in range(1, 5)}})
 SIZE = {"0402": "1005", "0603": "1608", "0805": "2012"}
 
 

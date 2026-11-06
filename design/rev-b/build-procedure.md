@@ -44,22 +44,43 @@ each batch; a choice that is the user's stops the batch at once.
 
 ## Phase B2: Schematic (Rev A Phase 1, for the changed parts)
 
-- [ ] B2.1 Delete RV1–RV3 and C39–C41 from the sheet.
+- [x] B2.1 Delete RV1–RV3 and C39–C41 from the sheet.
   - Done 2026-11-06 (`tools/sch_rev_b.py`): RV1–RV3, C39–C41 and their library symbol removed, with chain 3's wires from U1 PA3–PA5 to those caps and their ground bar (by uuid; chain 3 itself isn't rerouted, since every later chain's wires now cross its area).
-- [ ] B2.2 Place the encoder, the four digits, the driver and the new SW3, each checked pin by pin against its datasheet
+- [x] B2.2 Place the encoder, the four digits, the driver and the new SW3, each checked pin by pin against its datasheet
   (Rev A steps 1.4–1.16), with their passives at the pins they serve (1.17) and their fields from netlist.json (1.18).
   - Done 2026-11-06. Makers' documents first: U8 from Lumissil's own Rev. I datasheet (10/14/2024, lumissil.com) and its evaluation-board guide (Rev. G, 02/14/2025), both saved in docs/datasheets/rev-b; the board's schematic confirms OUT1→43, OUT2→44, OUT3–18→1–16, OUT19–36→18–35, AD to GND, 100 kΩ on SDB, 1 µF on VCC. Guangcai's site only offers its PDF as a download; the saved copy is Guangcai's own spec (Rev A, 2020). Mitsumi's and Diptronics' saved copies are their own catalogue pages.
   - Symbols, pin by pin: U8 `IphoneFM:IS31FL3236A` built from the QFN-44 table (45 pins with the pad; OUTx open collector, VCC/GND/EP power in); DS1–DS4 `IphoneFM:GS3011AW-B`, KiCad's KCSA02-105 drawing, whose ten pins match GS3011A/CX-X p3 one for one, with the LED pins made passive; SW4 `IphoneFM:SIQ-02FVS3`, terminals 1 A, 2 S, 3 C, 4 B and frame tabs 5–10 (not M1–M6: the tools read Mn as pad 4–7); SW3 keeps `Switch:SW_DIP_x06`.
   - Placed per kicad/rev-b/sheet-plan.md (new Display zone under U1); passives at their pins; fields from netlist.json (`sch_fields`).
-- [ ] B2.3 Wire the new chain, label the nets, flags and no-connects (1.19–1.32), net classes and layout notes
+- [x] B2.3 Wire the new chain, label the nets, flags and no-connects (1.19–1.32), net classes and layout notes
   (1.33–1.34).
   - Done 2026-11-06 with the Rev A tools in their order (`sch_layout`, `sch_fields`, `sch_power`, `sch_wire 9`, `sch_flags`, `sch_labels`, `sch_noconnect`, `sch_notes`, `sch_pinids`): 48 chain-9 nets wired, every signal net labelled (the two labels Rev A placed by hand are now in `sch_labels.HAND`), NC flags on U8 OUT33–36 and none left on U1 PC13. New nets stay in the Default class (7.6 mA segments, far from the RF and the loop filter). Layout note 4 added for U8.
-- [ ] B2.4 ERC to zero errors; `kicadcheck.py --net` and `--bom` pass (1.35–1.37).
+- [x] B2.4 ERC to zero errors; `kicadcheck.py --net` and `--bom` pass (1.35–1.37).
   - Done 2026-11-06: ERC 0 errors, 0 open warnings (Rev A's two reviewed U4 LOUT/ROUT exclusions remain); `kicadcheck.py --net --bom` 17 of 17; Rev A's sheet unchanged and still 11 of 11.
-- [ ] B2.5 **Review checkpoint:** the user reviews the sheet and the check results.
+- [x] B2.5 **Review checkpoint:** the user reviews the sheet and the check results.
+  - Approved by the user 2026-11-06 ("lets continue to footprints"). Found at B3.4: B2.1 had left the wheels' unused library symbol in the sheet (the removal looked for entries two tabs in; the sheet keeps them one tab in). Fixed in `sch_rev_b.drop_lib_symbol` and removed; nothing placed used it.
 
-## Phase B3 onward: footprints, placement, routing, outputs
+## Phase B3: Footprints (Rev A Phase 2, for the new parts)
 
-As Rev A Phases 2–8, for the new parts only: footprints checked on a to-scale overlay against the makers' land patterns,
-placement in Rev A's left column per the sketch, local re-routing, pours, DRC and the netlist comparison, then the JLC
-files. The steps are written out when Phase B2 is done.
+- [ ] B3.1 Choose each new part's footprint source in Rev A's order (KiCad's library, then the maker's, then LCSC) and record it in kicad/rev-b/footprints.md.
+  - Done 2026-11-06. KiCad has no 5 × 5 mm 0.4 mm-pitch QFN-44, no GS3011 and no SIQ encoder, so U8, DS1–DS4 and SW4 are built from the makers' drawings. SW3 keeps KiCad's Omron A6H-6101 pads, which are Diptronics' layout exactly. The RV1–RV3 and C&K TDP06 footprints leave the Rev B library.
+- [ ] B3.2 Compare each footprint's pads with its maker's land pattern on a to-scale overlay, one table per part (Rev A 2.2).
+  - Done 2026-11-06 (`tools/fp_rev_b.py`, overlay [footprint-overlays.png](footprint-overlays.png) by `tools/fp_overlay_rev_b.py`). Every pad matches the maker's drawing. The departures:
+    - U8: KiCad can't round a single pad corner, so the corner pads' R0.125 corners are chamfered 0.125 instead (0.21 mm apart against Lumissil's 0.20), and the joins from pins 17 and 39 to the centre pad are square, not R0.1.
+    - SW4: the angled frame tabs follow Mitsumi, which LCSC's footprint does not. Mitsumi's "2–4" is to the tabs' inner ends; the PDF's vectors put their centres 4.60 mm from the knob centre, where LCSC has 4.0.
+  - LCSC's footprints were read as a second opinion only (footprints.md).
+- [ ] B3.3 Pin-to-pad, silkscreen and paste checks (Rev A 2.3–2.5).
+  - Done 2026-11-06: `pinpad_check` 114 of 114, 0 mismatches. `fp_silk_trim` then `silk_check` pass (0.25 mm lines, ink at least 0.20 mm from copper); a second trim changes nothing. The encoder's wheel is drawn as chords, because the trim drops a circle whole. `paste_check`: 0 problems; pads 1:1, U8's centre pad four windows (65%).
+- [ ] B3.4 Assign the footprints, re-run ERC, re-export the netlist and run `kicadcheck.py --net --bom` (Rev A 2.6–2.7).
+  - Done 2026-11-06 (`sch_footprints`). 15 symbols changed. KiCad's netlist has 114 parts, all on IphoneFM footprints that exist. ERC: 0 errors, 0 warnings (the two U4 items still excluded). kicadcheck 17 of 17. Rev A untouched (pin-to-pad still 106 of 106).
+  - Carried to the board (Phase B4):
+    - U8's pins are 0.15 mm apart in copper, under our 0.20 mm rule, so U8 needs its own clearance rule (JLC's minimum is 0.10).
+    - Each digit's pads span 15.5 mm, not the body's 12.
+    - SW4's knob (Ø14.5) overhangs everything inside its circle.
+    - SW4's origin is the knob centre (placement-file offsets at Rev A step 8.3).
+- [ ] B3.5 **Review checkpoint:** the user reviews the footprints and their sources.
+
+## Phase B4 onward: placement, routing, outputs
+
+As Rev A Phases 3–8, for the new parts only: placement in Rev A's left column per the sketch (and the open question of
+which way the digits read), local re-routing, pours, DRC and the netlist comparison, then the JLC files. The steps are
+written out when Phase B3 is done.
