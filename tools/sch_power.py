@@ -150,6 +150,9 @@ def main():
     nets = pin_nets(doc, placed)
     sheet_uuid = atom(root, "uuid")
     new, n, k, ends = [], 0, 0, {}
+    # #PWR numbers already held by power symbols this tool didn't draw (placed by hand in KiCad), so none is reused
+    held = {int(v) for v in re.findall(r'\(reference "#PWR(\d+)"\)', text)}
+    nextk = lambda k: next(j for j in range(k + 1, k + 1000) if j not in held)
     for net, o, pins in groups(placed, nets):
         if len(pins) == 1:
             at = pins[0]
@@ -162,7 +165,7 @@ def main():
                 n += 1; new.append(wire(a, b, n))
                 ends[a] = ends.get(a, 0) + 1; ends[b] = ends.get(b, 0) + 1
             at = stubs[len(stubs) // 2]
-        n += 1; k += 1
+        n += 1; k = nextk(k)
         new.append(power(net, at, o, n, k, sheet_uuid))
     for rails in WIRED_RAILS.values():  # a free-point anchor: the one symbol at the foot (or head) of a wired rail
         for net, (anchor, others) in rails.items():
@@ -170,7 +173,7 @@ def main():
             # list, but not the wheel caps C39-C41 that made up that bar)
             if anchor.startswith("@") and sum(p.split(".")[0] in placed for p in others) >= 2:
                 at = tuple(float(v) for v in anchor[1:].split(","))
-                n += 1; k += 1
+                n += 1; k = nextk(k)
                 new.append(power(net, at, (0, 1) if SYMBOL[net][1] == "down" else (0, -1), n, k, sheet_uuid))
     for pt, c in sorted(ends.items()):
         if c >= 3:  # a stub meeting the bar from both sides is a T: mark it

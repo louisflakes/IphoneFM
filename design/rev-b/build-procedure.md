@@ -61,26 +61,46 @@ each batch; a choice that is the user's stops the batch at once.
 
 ## Phase B3: Footprints (Rev A Phase 2, for the new parts)
 
-- [ ] B3.1 Choose each new part's footprint source in Rev A's order (KiCad's library, then the maker's, then LCSC) and record it in kicad/rev-b/footprints.md.
+- [x] B3.1 Choose each new part's footprint source in Rev A's order (KiCad's library, then the maker's, then LCSC) and record it in kicad/rev-b/footprints.md.
   - Done 2026-11-06. KiCad has no 5 × 5 mm 0.4 mm-pitch QFN-44, no GS3011 and no SIQ encoder, so U8, DS1–DS4 and SW4 are built from the makers' drawings. SW3 keeps KiCad's Omron A6H-6101 pads, which are Diptronics' layout exactly. The RV1–RV3 and C&K TDP06 footprints leave the Rev B library.
-- [ ] B3.2 Compare each footprint's pads with its maker's land pattern on a to-scale overlay, one table per part (Rev A 2.2).
+- [x] B3.2 Compare each footprint's pads with its maker's land pattern on a to-scale overlay, one table per part (Rev A 2.2).
   - Done 2026-11-06 (`tools/fp_rev_b.py`, overlay [footprint-overlays.png](footprint-overlays.png) by `tools/fp_overlay_rev_b.py`). Every pad matches the maker's drawing. The departures:
     - U8: KiCad can't round a single pad corner, so the corner pads' R0.125 corners are chamfered 0.125 instead (0.21 mm apart against Lumissil's 0.20), and the joins from pins 17 and 39 to the centre pad are square, not R0.1.
     - SW4: the angled frame tabs follow Mitsumi, which LCSC's footprint does not. Mitsumi's "2–4" is to the tabs' inner ends; the PDF's vectors put their centres 4.60 mm from the knob centre, where LCSC has 4.0.
   - LCSC's footprints were read as a second opinion only (footprints.md).
-- [ ] B3.3 Pin-to-pad, silkscreen and paste checks (Rev A 2.3–2.5).
+- [x] B3.3 Pin-to-pad, silkscreen and paste checks (Rev A 2.3–2.5).
   - Done 2026-11-06: `pinpad_check` 114 of 114, 0 mismatches. `fp_silk_trim` then `silk_check` pass (0.25 mm lines, ink at least 0.20 mm from copper); a second trim changes nothing. The encoder's wheel is drawn as chords, because the trim drops a circle whole. `paste_check`: 0 problems; pads 1:1, U8's centre pad four windows (65%).
-- [ ] B3.4 Assign the footprints, re-run ERC, re-export the netlist and run `kicadcheck.py --net --bom` (Rev A 2.6–2.7).
+- [x] B3.4 Assign the footprints, re-run ERC, re-export the netlist and run `kicadcheck.py --net --bom` (Rev A 2.6–2.7).
   - Done 2026-11-06 (`sch_footprints`). 15 symbols changed. KiCad's netlist has 114 parts, all on IphoneFM footprints that exist. ERC: 0 errors, 0 warnings (the two U4 items still excluded). kicadcheck 17 of 17. Rev A untouched (pin-to-pad still 106 of 106).
   - Carried to the board (Phase B4):
     - U8's pins are 0.15 mm apart in copper, under our 0.20 mm rule, so U8 needs its own clearance rule (JLC's minimum is 0.10).
     - Each digit's pads span 15.5 mm, not the body's 12.
     - SW4's knob (Ø14.5) overhangs everything inside its circle.
     - SW4's origin is the knob centre (placement-file offsets at Rev A step 8.3).
-- [ ] B3.5 **Review checkpoint:** the user reviews the footprints and their sources.
+- [x] B3.5 **Review checkpoint:** the user reviews the footprints and their sources.
+  - Approved by the user 2026-11-06 ("so we're good to continue?", after the overlay and the B3 report). Found at B4.2: `sch_power` had numbered one of its ground symbols #PWR103, which a ground symbol placed by hand in Rev A already uses (Rev B has more power symbols, so its count reached it); KiCad reported an annotation error on netlist export, ERC did not. `sch_power` now skips numbers held by symbols it didn't draw; rerun with `sch_pinids`, nothing else changed (every wire, symbol and position identical); ERC 0.
 
-## Phase B4 onward: placement, routing, outputs
+## Phase B4: Placement (Rev A Phase 4, for the new parts)
 
-As Rev A Phases 3–8, for the new parts only: placement in Rev A's left column per the sketch (and the open question of
-which way the digits read), local re-routing, pours, DRC and the netlist comparison, then the JLC files. The steps are
-written out when Phase B3 is done.
+The board starts as Rev A's, placed and routed. The new parts go into the left column per the sketch
+(`front-face-sketch.png`); the middle and right keep their Rev A placement and routing. Board edits are file edits with
+KiCad's own Python (`tools/pcb_rev_b.py`), since the Rev B board is not open in KiCad. Copper the new parts land on is
+taken up here and listed for Phase B5 (routing).
+
+- [ ] B4.1 Board setup for the new parts: U8's own clearance rule (its pins are 0.15 mm apart; JLC's minimum is 0.10).
+- [ ] B4.2 Bring the schematic across (Rev A 4.1): remove RV1–RV3 and C39–C41 and the copper only they used; swap SW3's
+  footprint; add SW4, DS1–DS4, U8, R28–R32 and C42–C44 beside the board; every pad's net from KiCad's netlist.
+- [ ] B4.3 Place and lock SW3 at Rev A's SW3 position, levers up (Rev A 4.6), and join its tracks to the new pads.
+- [ ] B4.4 Place and lock SW4 where RV3 was, wheel out of the left edge, copper 0.5 mm from the edge (Rev A 4.5).
+- [ ] B4.5 Place and lock DS1–DS4 where RV1 and RV2 were, turned to read with the phone's left edge down, DS1 at the top.
+- [ ] B4.6 Place U8 by the display with R28, R29, C42 and C43 at its pins (Rev A 4.11, 4.13).
+- [ ] B4.7 Place R30–R32 at SW4's terminals and C44 at the anodes (Rev A 4.13).
+- [ ] B4.8 Move TP2 and TP3 and clear the left column: Rev A copper under the new parts is taken up and listed for B5.
+- [ ] B4.9 Check courtyards, mechanical fit and DRC; `kicadcheck.py --pcb`; schematic parity (Rev A 4.16–4.17).
+- [ ] B4.10 **Review checkpoint:** the user reviews the placement.
+
+## Phase B5 onward: routing, pours, outputs
+
+As Rev A Phases 5–8, for the new parts and the copper B4 takes up: local re-routing, pours, DRC and the netlist
+comparison, then the JLC files (the left rail's gap widened for the wheel). The steps are written out when Phase B4 is
+done.
