@@ -17,9 +17,9 @@ SECTIONS = [
         ("C143790", "C  Knob encoder, panel nut", "Bourns PEC11R-4215F-S0024",
          "24 detents + push switch, threaded bushing to bolt through an enclosure lid.", "4,321", "$2.37", False)]),
     ("Station display", [
-        ("C22462637", "A  4 × 0.2\" white digits (SMD)", "Guangcai GS2016CW-G",
-         "Four single digits in a row, ~42 mm wide, only 2.4 mm thin. Fully machine-placed. Crisp white.",
-         "2,725", "$0.55 each", True),
+        ("C22462661", "A  4 × 0.3\" white digits (SMD)", "Guangcai GS3011AW-B",
+         "Four single digits, black face, ~31 mm wide, 3.75 mm thin. Machine-placed; static drive (no flicker).",
+         "818", "$0.49 each", True),
         ("C2913068", "B  0.36\" white, 4-digit module", "Sunlight SLR0364DWC1BD",
          "One 30 × 14 mm block, bigger digits. Through-hole, 7.2 mm tall.", "931", "$1.15", False),
         ("C109199", "C  0.28\" red, 4-digit module", "ARKLED SR440281N",
