@@ -27,3 +27,10 @@ Replaces Rev A's three thumbwheel pots (RV1–RV3) and the out-of-stock side-lev
 
 At 3 mA a segment, "107.9" lights 21 segments: about 65 mA from VBUS, plus about 9 mA for the driver. Firmware sets the
 brightness, and the display stays well inside the 500 mA available after USB set-up.
+
+## Placement (sketch: `front-face-sketch.png`, user 2026-11-06)
+
+The new parts take Rev A's left column, so the middle and right of the board keep their Rev A placement and routing:
+the four digits where RV1 and RV2 were, turned a quarter so they read with the phone sideways (its left edge down);
+the wheel where RV3 was; the DIP where SW3 was; the driver beside the display's top, where TP2 and TP3 were. To move:
+the 3V3/VBUS feed at x 13–16 mm from the left edge (under the display's inner pad row).
