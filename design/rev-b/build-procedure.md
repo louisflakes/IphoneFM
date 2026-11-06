@@ -108,7 +108,8 @@ taken up here and listed for Phase B5 (routing).
   - TP2 done 2026-11-06 (`pcb_rev_b.py tp2`, then `clear` again): TP2 (3V3) from under DS1 to (30.65, 74.84), right of DS1 and below TP3, 0.3 mm courtyard gaps; the Rev A 3V3 run to SW3 started at TP2's pad and crossed the via down to the feed, so its end was pulled back to that via (29.6, 69.3) and the run stays whole. B5 joins TP2 to 3V3. TP3 stays: with U8 at B it is in nobody's way. The second clear took up 8 ground stitching vias under U8's group. Ground stitching vias left beside U8 (x 14.2 and 23.2) are B5's to move if the outputs need the room.
 - [x] B4.9 Check courtyards, mechanical fit and DRC; `kicadcheck.py --pcb`; schematic parity (Rev A 4.16–4.17).
   - Done 2026-11-06: DRC with schematic parity: 0 differences; no clearance, courtyard, edge or mask errors; one error, U8 pin 37's starved thermal (B4.6, for B5); silkscreen warnings left for the silkscreen step, as Rev A. `IPHONEFM_REV=rev-b kicadcheck.py --pcb --layout none`: all pass. Local parts to their pins: R28, R29, C43 1.6–1.7 mm, C42 3.9 mm, R30–R32 1.8 mm; C44 by U8 (B4.7). U8's own clearance rule (B4.1) applies only inside its courtyard. Unconnected, for B5: the new nets, 3V3 (TP2 and the islands B4.8 left), RF_MODE and VBUS.
-- [ ] B4.10 **Review checkpoint:** the user reviews the placement.
+- [x] B4.10 **Review checkpoint:** the user reviews the placement.
+  - Approved 2026-11-06.
 
 ## Phase B5 onward: routing, pours, outputs
 
