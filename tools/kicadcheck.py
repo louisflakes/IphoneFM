@@ -1,4 +1,4 @@
-"""Checks KiCad's own files against design/rev-a/netlist.json (connections, parts, JLC codes) and the Rev A placement in layout.html.
+"""Checks KiCad's own files against design/<rev>/netlist.json (rev-a, or IPHONEFM_REV) (connections, parts, JLC codes) and the Rev A placement in layout.html.
 Usage (from the repo root; exit code 1 if any check fails):
   python tools/kicadcheck.py --net board.net                 schematic netlist: kicad-cli sch export netlist --format kicadsexpr
   python tools/kicadcheck.py --bom board.csv                 schematic BOM:     kicad-cli sch export bom --fields "Reference,Value,Footprint,LCSC,MPN"
@@ -14,7 +14,7 @@ import re
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-DESIGN = os.path.join(ROOT, "design", "rev-a")
+DESIGN = os.path.join(ROOT, "design", os.environ.get("IPHONEFM_REV", "rev-a"))   # IPHONEFM_REV=rev-b for Rev B
 ENVELOPE = (46.45, 71.40)  # board outline, mm (layout.html, unchanged since 2026-10-20)
 
 

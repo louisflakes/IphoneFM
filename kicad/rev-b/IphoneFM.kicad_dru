@@ -1,0 +1,27 @@
+(version 1)
+# Step 3.2 rules KiCad's Board Setup has no field for (kicad/rev-a/fab-rules.md)
+(rule "Plated hole annular ring 0.25 mm"
+	(condition "A.Type == 'Pad' && A.Pad_Type == 'Through-hole'")
+	(constraint annular_width (min 0.25mm)))
+(rule "Courtyard gap 0.3 mm"
+	(constraint courtyard_clearance (min 0.3mm)))
+# Step 4.3 (the user's choice): the Clock class's wider gap is for its tracks. Pins inside a part keep the normal 0.2 mm
+# (U1, U2 and U4's clock pins are 0.25 mm apart); a clock track keeps 0.4 mm from other nets' tracks and vias.
+(rule "Clock nets: 0.2 mm, as Default"
+	(condition "A.NetClass == 'Clock'")
+	(constraint clearance (min 0.2mm)))
+# Phase 5: not within the courtyards of the parts the clock lines start and end at, nor the "Clock escape" rule areas
+# round U1, U2 and U4 (courtyard + 1.5 mm), where escapes from 0.5 mm-pitch pins run 0.3 mm apart for their first
+# millimetre and the 45-degree step out of the pin pitch (tools/pcb_freeroute.py CLOCK_ESCAPE)
+(rule "Clock tracks 0.4 mm from other tracks and vias"
+	(condition "A.NetClass == 'Clock' && A.Type == 'Track' && (B.Type == 'Track' || B.Type == 'Via') && A.Net != B.Net && !A.intersectsCourtyard('U1') && !A.intersectsCourtyard('U2') && !A.intersectsCourtyard('U4') && !A.intersectsCourtyard('Y2') && !A.intersectsCourtyard('R4') && !A.intersectsCourtyard('R6') && !A.intersectsCourtyard('R24') && !A.intersectsArea('Clock escape')")
+	(constraint clearance (min 0.4mm)))
+# Step 3.6: no through-hole leads over the MagSafe magnet ring (placement-rules.md M8)
+(rule "No through-hole leads over the MagSafe ring"
+	(condition "A.Type == 'Pad' && A.Pad_Type == 'Through-hole' && A.intersectsArea('MagSafe ring') && !A.enclosedByArea('MagSafe ring opening')")
+	(constraint disallow pad))
+# Phase 7 (the user's choice, 2026-10-26): J1's two locating holes are unplated and sit 0.22 mm from the maker's wide
+# ground pads (HRO TYPE-C-31-M-12 land pattern). JLC's NPTH-to-copper minimum is 0.20 mm (fab-rules.md).
+(rule "J1 locating holes 0.20 mm to copper"
+	(condition "(A.Pad_Type == 'NPTH, mechanical' && A.memberOfFootprint('J1')) || (B.Pad_Type == 'NPTH, mechanical' && B.memberOfFootprint('J1'))")
+	(constraint hole_clearance (min 0.2mm)))

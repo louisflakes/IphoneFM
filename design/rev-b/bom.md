@@ -1,0 +1,348 @@
+# Analog FM rendition: bill of materials
+
+Built one chain at a time. Each chain is checked against its datasheet and against published designs that use the exact part. Key parts and their stock are in [sourcing.md](sourcing.md); datasheets are in [docs/datasheets/analog-fm/](../../docs/datasheets/analog-fm/) and `plan-c/`.
+
+Rules carried over from Plan C: every passive is populated with a best-guess value (no empty pads), and every part needs deep stock at JLC or a second route.
+
+**Designators** come from [netlist.json](netlist.json), the single list every other file is checked against. Each chain below opens with its designators; `python tools/netcheck.py` fails if a line here and the JSON disagree. Where a datasheet uses its own names (the LMX2571's loop-filter C1/R2/C2, the Si4705's C1/C2/C4/C9/R1–R3, AN383's C14), the board designator is given next to it.
+
+Reference designs are read with a small connectivity script on their KiCad files. It traces wires, labels and power symbols to list what sits on each pin of the part.
+
+## Chain order
+
+| # | Chain | Status |
+|---|---|---|
+| 1 | J1 USB-C receptacle and USB ESD | **Done** |
+| 2 | U3 3.3 V regulator and bulk capacitors | **Done** |
+| 3 | U1 STM32U535 support (VDDA filter, clock source) | **Done** |
+| 4 | Y2 20 MHz reference oscillator | **Done** (updated for D2) |
+| 5 | U2 LMX2571 synthesizer | **Done** |
+| 6 | U7 PE43711 attenuator and SW3 DIP switch | **Done** |
+| 7 | FL1 low-pass, U5 RF switch, J2, D5 | **Done** |
+| 8 | U4 Si4705 receiver (QFN) | **Done** |
+| 9 | Controls: thumbwheels, slider, BOOT button, LED | **Done** |
+| 10 | Test pads and power budget | **Done** |
+
+Dropped with the move to the LMX2571 (option D2): the discrete oscillator, buffer and lock gate, the ADF4002 loop, and the DAC audio filter. The MCU's DAC no longer carries transmit audio.
+
+## Chain 1: J1 USB-C receptacle (Korean Hroparts TYPE-C-31-M-12)
+
+**Designators:** D3 CC1 ESD; D4 CC2 ESD; J1 USB-C socket; R1 CC1 Rd to GND (5.1 kΩ 1%); R2 CC2 Rd to GND (5.1 kΩ 1%); U6 D+, D−, VBUS ESD.
+
+Pinout from the HRO drawing (`J1_HRO_TYPE-C-31-M-12.pdf` p1): A1/A12/B1/B12 GND, A4/A9/B4/B9 VBUS, A5 CC1, B5 CC2, A6/B6 D+, A7/B7 D−, A8/B8 SBU, four shell legs. The wiring is the same as Plan C chain 6 (USB Type-C R2.5) and chain 11 (ESD).
+
+| Ref / pin | Part | Value | JLC | Note |
+|---|---|---|---|---|
+| R1 (A5 CC1) | UNI-ROYAL 0402WGF5101TCE | 5.1 kΩ 1% to GND | C25905, 4,087,725 | Type-C R2.5 Table 4-28 p246 |
+| R2 (B5 CC2) | UNI-ROYAL 0402WGF5101TCE | 5.1 kΩ 1% to GND | C25905 | Fitted on both CC pins (Plan C decision) |
+| D3, D4 (CC1, CC2) | TI TPD1E05U06DPYR | ESD | C436349, 75,576 | Plan C chain 11 |
+| U6 (D+, D−, VBUS) | ST USBLC6-2SC6 | ESD array | C7519, 42,385 | Plan C chain 11; D+ on I/O1, D− on I/O2 (the two channels are identical; this order lets U1's lines reach U6 with no crossing at floorplan B3, Phase 5), VBUS pin 5 |
+| A6–B6, A7–B7 | — | Joined at the connector, stub ≤ 3.5 mm | | Type-C R2.5 p76 |
+| A8, B8 (SBU) | — | Not connected | | |
+| Shell legs | — | GND | | |
+
+Reference designs with this exact connector:
+
+| Pin | IphoneFM | LinHT handheld radio ([M17-Project/LinHT-hw](https://github.com/M17-Project/LinHT-hw), connectors sheet, J12) | echoplayer ([amachronic/echoplayer](https://github.com/amachronic/echoplayer), r1-rev1.1 USB sheet, J2) | Beepy ([sqfmi/beepy-hardware](https://github.com/sqfmi/beepy-hardware), schematic PDF) | Verdict |
+|---|---|---|---|---|---|
+| CC1, CC2 | 5.1 kΩ each to GND | 5k1 each (R46, R47) | 5.1 kΩ each (R14, R15) | 5.1K each (R2, R3) | Match |
+| D+, D− | Pairs joined, through USBLC6 to U1 | Pairs joined, through USBLC6-2SC6 (U8) | Pairs joined, to the USB PHY | Pairs joined, to the RP2040 via its 27 Ω resistors | Match (27 Ω is an RP2040 requirement, not ours) |
+| VBUS | USBLC6 pin 5, then U3 input | USBLC6 pin 5 and a 220 Ω ferrite | 100 nF to GND | To the charger | Match; see note |
+| SBU | Open | Open | Open | — | Match |
+| Shell | GND | GND | GND | — | Match |
+
+No gaps. Note: echoplayer puts 100 nF on VBUS at the connector. Ours has U3's 1 µF input capacitor (chain 2) close by, and the phone on a short cable is the only source. No change.
+
+## Chain 2: U3 AP2112K-3.3 regulator
+
+**Designators:** C1 U3 input (1 µF X5R 50 V); C2 U3 output (1 µF X5R 50 V); C3 3V3 bulk at U1 (10 µF X5R 25 V); U3 3.3 V regulator.
+
+Circuit as Plan C chain 5 (AP2112 DS39724 p1–2), already compared against three published designs in reference-check.md (U3: RP2040 Stamp, Beepy, PicoROM; no gaps). What changes here: two capacitor part numbers that JLC can't supply.
+
+| Ref / pin | Part | Value | JLC | Note |
+|---|---|---|---|---|
+| U3 | Diodes AP2112K-3.3TRG1 | 3.3 V 600 mA LDO, SOT-25 | C51118, 17,723 | VIN 1, GND 2, EN 3, NC 4, VOUT 5 |
+| C (VIN 1) | **Samsung CL10A105KB8NNNC** | 1 µF X5R 50 V ±10% 0603 | C15849, 13,374,924 | JLC Basic part (2026-10-26, no extended-part fee). Samsung code 10 = 0603, A = X5R, 105 = 1 µF, K = ±10%, B = 50 V, 8 = 0.8 mm (catalog p4–5, p19); X5R covers −55 to +85 °C, and the 50 V rating keeps more of its 1 µF at 5 V |
+| C (VOUT 5) | Samsung CL10A105KB8NNNC | 1 µF X5R 50 V 0603 | C15849 | AP2112 is stable with ≥ 1 µF (p1) |
+| EN 3 | — | Tied to VIN | | Internal pull-down (p2) |
+| U1 VDD bulk | **Samsung CL21A106KAYNNNE** | 10 µF X5R 25 V ±10% 0805 | C15850, 8,956,329 | JLC Basic part (2026-10-26, no extended-part fee). Samsung code 21 = 0805, A = X5R, 106 = 10 µF, K = ±10%, A = 25 V (catalog p4–5, p21) |
+
+- Load on 3V3: about 96 mA transmitting and 62 mA receiving (chain 10). Well under the AP2112's 600 mA. The LED runs from VBUS.
+- Start-up (foldback, 50 mA into the rail capacitance) is checked in chain 10.
+- DC bias: the Samsung catalog gives no DC-bias curve. The output's ≥ 1 µF stability minimum (p1) is met with margin, because U1's 10 µF and every bypass capacitor sit on the same 3V3 rail. The 1 µF input capacitor follows the datasheet's typical circuit (p2), which sets no minimum for it.
+
+## Chain 3: U1 STM32U535 support
+
+**Designators:** C4 U1 VDD bypass (100 nF X7R 16 V); C5 U1 VDD bypass (100 nF X7R 16 V); C6 U1 VDD bypass (100 nF X7R 16 V); C7 U1 VDDA bypass (100 nF X7R 16 V); C8 U1 VDDA bulk (1 µF X5R 50 V); C9 U1 VCAP (4.7 µF X5R 25 V); C10 U1 NRST filter (100 nF X7R 16 V); FB2 3V3 to VDDA filter (600 Ω at 100 MHz); R3 BOOT0 pull-down (10 kΩ 1%); U1 MCU.
+
+Power pins as Plan C chain 4 (DS14217 Figure 23 power scheme p127, Figure 37 NRST p212), already compared against four published designs in reference-check.md (U1). Changes for this rendition:
+
+1. **VDDA ferrite added** (reference-check U1 gap 1). VREF+ is bonded to VDDA on this package, so VDDA noise reaches the ADC readings (thumbwheels, CC sensing). The DAC no longer carries transmit audio after the move to the LMX2571. The CAN-node reference design feeds VDDA through a 600 Ω ferrite, and that is adopted here.
+2. **Clock from the 20 MHz reference oscillator.** Y2 drives PH0-OSC_IN in HSE digital bypass mode, and the PLL runs the system clock from it. DS14217 allows a 4–50 MHz external clock with OSC_IN high ≥ 0.7 × VDD and low ≤ 0.3 × VDD (p184–185); Y2 gives ≥ 90% and ≤ 10% of VDD (YSO110TR p1). ST's own Nucleo-U545 offers the same external-oscillator-into-PH0 option (UM3062 p27). The audio sample clock and the 19 kHz pilot become crystal-accurate. USB stays on HSI48 locked to USB start-of-frame by the CRS, as in Plan C, so the ROM bootloader still works with no crystal.
+3. **32.768 kHz crystal removed.** Plan C needed Y1 only to give the receiver its reference clock through LSCO. Now a U1 timer makes 32,787 Hz (160 MHz ÷ 4880) from the crystal-referenced system clock (chain 8). It is inside the Si4705's 31,130–34,406 Hz REFCLK range (AN332 p37), and accuracy improves from Plan C's −92 ppm worst case to ±20 ppm. Y1 and its two 5.6 pF capacitors are gone.
+
+| Ref / pin | Part | Value | JLC | Note |
+|---|---|---|---|---|
+| U1 | ST STM32U535CEU6 | MCU, UFQFPN48 | Global sourcing (DigiKey 1,394) | |
+| VDD 24, 36, 48 (×3) | **Samsung CL05B104KO5NNNC** | 100 nF X7R 16 V 0402 | C1525, 38,027,442 | One per pin. Replaces Murata GRM155R71C104KA88J (39,537) with JLC's basic 100 nF: code 05 = 0402, B = X7R, 104 = 100 nF, O = 16 V (Samsung catalog p4–5). This part is used for every 100 nF on the board |
+| VDD bulk | Samsung CL21A106KAYNNNE | 10 µF X5R 25 V 0805 | C15850 | Chain 2 |
+| FB2 (3V3 → VDDA) | **Murata BLM15AG601SN1D** | 600 Ω ±25% at 100 MHz, ≤ 0.11 Ω DC, 0402 | C76884, 1,227,301 | `FB_Murata_BLM15AG_ENFA0018.pdf` p1. VDDA draws far less than its current rating, so the DC drop is negligible |
+| VDDA 9 | Samsung CL05B104KO5NNNC + CL10A105KB8NNNC | 100 nF + 1 µF, after FB2 | C1525 / C15849 | DS14217 Figure 23 (p127) |
+| VCAP 22 | Samsung CL21A475KAQNNNE | 4.7 µF X5R 25 V 0805 | C1779, 2,004,357 | Plan C chain 4; meets ≥ 10 V and ±20% (p127) |
+| NRST 7 | Samsung CL05B104KO5NNNC | 100 nF | C1525 | Internal 40 kΩ pull-up (p211) |
+| BOOT0 (PH3) 44 | UNI-ROYAL 0402WGF1002TCE | 10 kΩ pull-down; SW2 to 3V3 | C25744, 17,624,691 | Plan C chain 4 |
+| VBAT 1 | — | Tied to 3V3 | | Plan C chain 4 |
+| PH0-OSC_IN | — | From Y2 through R4 (chain 4) | | HSE digital bypass |
+| PH1-OSC_OUT | — | Free GPIO | | Not needed in bypass mode |
+| U1 timer output | — | 32,787 Hz (160 MHz ÷ 4880) to U4 RCLK | | Chain 8. Replaces the earlier plan of 20 MHz from MCO, to keep 20 MHz and its 100.0 MHz harmonic away from the receiver |
+| SAI1 sub-block A | — | I²S out to U2 (CLK, DATA, FS) at about 912 kSa/s | | Chain 5. Sub-block B receives U4's digital audio at 48 kHz; each sub-block has its own clock generator (DS14217 p80) |
+| GPIOs | — | U2 programming (CLK, DATA, LE, driven by firmware), CE, MUXout | | Chain 5 |
+
+Removed from Plan C: Y1 (ABS07 32.768 kHz) and its two 5.6 pF capacitors; LSCO on PA2; TIM16 on PB8 (the LV2285 76 kHz drive).
+
+**U1 pin map** (UFQFPN48). Checked against DS14217 Table 26 (p97–113, pin types and ADC channels), Tables 27–28 (p114–121, alternate functions) and the ROM bootloader's pins (AN2606 Table 165, p386–388). Drawn in [wiring.html](wiring.html).
+
+| Pin | Port | Function | Net / part | Note |
+|---|---|---|---|---|
+| 29 | PA8 | SAI1_SCK_A (AF13) | U2 FSK_DV (I²S CLK), 33 Ω | |
+| 30 | PA9 | SAI1_FS_A (AF13) | U2 FSK_D0 (I²S FS), 33 Ω | Bootloader USART1_TX: input until USART1 is detected |
+| 31 | PA10 | SAI1_SD_A (AF13) | U2 FSK_D1 (I²S DATA), 33 Ω | Bootloader USART1_RX: U2 is off (CE low), nothing drives it |
+| 28 | PB15 | GPIO in | U2 MUXout, TP5 | Lock detect or register readback. PB12–PB15 are the bootloader's SPI2 pins; U2 is off then |
+| 27 | PB14 | GPIO out | U2 CLK | MICROWIRE driven by firmware (bit-banged), so the four lines reach U2's pins in its own order with no crossing (Phase 5, 2026-10-24) |
+| 26 | PB13 | GPIO out | U2 DATA | |
+| 25 | PB12 | GPIO out | U2 LE | |
+| 6 | PH1 | GPIO out | U2 CE, 10 kΩ pull-down | No reset-state pull, so CE stays under the LMX2571's 0.4 V low threshold (p8). Not a bootloader pin |
+| 39 | PB3 | SAI1_SCK_B (AF13) | U4 DCLK via 2 kΩ | |
+| 42 | PB6 | SAI1_FS_B (AF13) | U4 DFS via 2 kΩ, 3.3 pF | Bootloader I2C1_SCL (open-drain, pull-up); U4 in reset then |
+| 41 | PB5 | SAI1_SD_B (AF13) | U4 DOUT via 604 Ω | Bootloader SPI3_MOSI input; U4's DOUT is idle in reset |
+| 46 | PB9 | GPIO out | U4 RSTB, 10 kΩ pull-down | Analog with no pull at reset, so R19 holds RSTB low until firmware runs. The bootloader's FDCAN1_TX drives it high (recessive) once FDCAN starts: U4 leaves reset but stays powered down with no command, which is harmless. Moved from PB4 (Phase 5, 2026-10-25) so the U4 lines leave U1 in U4's order |
+| 40 | PB4 | TIM3_CH1 (AF2) | U4 RCLK, 32,787 Hz | 160 MHz / 4880. Reset state is NJTRST with its pull-up (p132), so RCLK sits high until firmware sets the AF. Not a bootloader pin (AN2606 Table 165). Moved from PB9 |
+| 45 | PB8 | I2C1_SCL (AF4) | U4 SCLK, 6.8 kΩ pull-up | Bootloader FDCAN1_RX input: SCL idles high, the bus's recessive level |
+| 43 | PB7 | I2C1_SDA (AF4) | U4 SDIO, 6.8 kΩ pull-up | Bootloader I2C1_SDA; idles high, U4 in reset |
+| 17 | PA7 | GPIO in | RF_MODE | Bootloader SPI1_MOSI input (pull-down); the slider and R18 set its level |
+| 18 | PB0 | ADC1_IN15 | CC1 | TT_ha (3.6 V tolerant); CC stays under about 2.6 V with Rd |
+| 19 | PB1 | ADC1_IN16 | CC2 | FT_ha |
+| 13 | PA3 | ADC1_IN8 | RV1 wiper | |
+| 14 | PA4 | ADC1_IN9 | RV2 wiper | Bootloader SPI1_NSS input; SPI1 may select, and its MISO (PA6) is left unconnected |
+| 15 | PA5 | ADC1_IN10 | RV3 wiper | Bootloader SPI1_SCK; a static voltage never clocks it |
+| 10 | PA0 | TIM2_CH1 (AF1), open-drain | LED red via 510 Ω | FT_hat: 5 V tolerant with pulls off (p132 note 5); analog with no pull at reset, so the LED stays dark |
+| 11 | PA1 | TIM2_CH2 (AF1), open-drain | LED green via 390 Ω | FT_hat |
+| 12 | PA2 | TIM2_CH3 (AF1), open-drain | LED blue via 390 Ω | FT_ha |
+| 44 | PH3 | BOOT0 | SW2, 10 kΩ pull-down | |
+| 5 | PH0 | OSC_IN (HSE bypass) | Y2 via 33 Ω | |
+| 32, 33 | PA11, PA12 | USB_DM, USB_DP | J1 | |
+| 34, 37 | PA13, PA14 | SWDIO, SWCLK | SWD pads | |
+| 2, 16, 20, 21, 38 | PC13, PA6, PB2, PB10, PA15 | — | Spare, unconnected | PA6 is the bootloader's SPI1_MISO output (AN2606 p387), so it stays free |
+
+Pins 6, 10–19, 40, 42, 45 and 46 were reassigned on 2026-10-25 for the turned U1 of floorplan B3: receiver lines and LEDs face U4 and D1, wheels and CC face the left and J1. Each pin checked against DS14217 Tables 26–28 and p132 and AN2606 Table 165.
+
+## Chain 4: Y2 20 MHz reference oscillator (YXC OT322520MJBA4SL)
+
+**Designators:** C11 Y2 VDD bypass (100 nF X7R 16 V); C12 Y2 VDD bulk (10 µF X5R 25 V); R4 REF20 source termination to U1 PH0 (33 Ω 1%); Y2 Reference oscillator.
+
+One CMOS oscillator is the frequency reference for the whole board. It drives U1 (system clock and audio timing) and U2 (LMX2571 OSCin), and through a U1 timer, U4 (receiver reference, chain 8).
+
+| Ref / pin | Part | Value | JLC | Note |
+|---|---|---|---|---|
+| Y2 | YXC OT322520MJBA4SL | 20 MHz CMOS, 1.8–3.3 V, 3.2 × 2.5 mm | C725987, 4,055 | Pins: 1 tri-state, 2 GND, 3 OUT, 4 VDD (YSO110TR p2) |
+| Pin 1 (tri-state) | — | Tied to VDD | | High or floating enables the output (p1); tied, not left floating |
+| Pin 4 VDD | Samsung CL05B104KO5NNNC + CL21A106KAYNNNE | 100 nF + 10 µF to GND | C1525 / C15850 | The maker's test circuit (p4) |
+| R4 (pin 3 → U1 PH0) | UNI-ROYAL 0402WGF330JTCE | 33 Ω series | C25105, 2,193,586 | Source termination at Y2 to damp ringing on the line to U1 (best guess; the Nucleo uses a series R and C on its external clock path, UM3062 p26) |
+| — (pin 3 → U2 OSCin) | — | Direct | | Single-ended CMOS straight into OSCin, OSCin* unconnected (LMX2571 Table 37, p38; Figure 62, p44). The ADF4002's 10 nF coupling capacitor is gone |
+
+- Level at OSCin: Y2 swings 0 to 3.3 V, a CMOS square wave, which TI recommends for the best spurs and phase noise (LMX2571 p11).
+- Load: U1's OSC_IN plus U2's OSCin (about 1 pF typical, LMX2571 p38), well within the 15 pF Y2 is specified into (YSO110TR p1). U4's clock comes from a U1 timer, not from Y2.
+- Reference: LMX2571 Figure 62 (p44) drives OSCin straight from an XO.
+
+## Chain 5: U2 LMX2571 synthesizer (D2: internal VCO, direct digital FM)
+
+**Designators:** C13 U2 Vcc3p3 bypass (100 nF X7R 16 V); C14 U2 Vcc3p3 bypass (100 nF X7R 16 V); C15 U2 Vcc3p3 bypass (100 nF X7R 16 V); C16 U2 Vcc3p3 bypass (100 nF X7R 16 V); C17 U2 VccIO bypass (100 nF X7R 16 V); C18 U2 VccIO bypass (100 nF X7R 16 V); C19 U2 VcpExt bypass (100 nF X7R 16 V); C20 U2 Bypass1 (100 nF X7R 16 V); C21 U2 Bypass2 (100 nF X7R 16 V); C22 U2 VrefVCO (100 nF X7R 16 V); C23 U2 VregVCO (2.2 µF X5R 16 V); C24 Loop filter shunt C1 (100 pF C0G); C25 Loop filter C2 (1.5 nF C0G); C26 RFoutTx DC block to U7 RF1 (100 pF C0G); R5 Loop filter R2 (1.1 kΩ 1%); R6 FSK_CLK series (33 Ω 1%); R7 FSK_FS series (33 Ω 1%); R8 FSK_DATA series (33 Ω 1%); R9 U2 CE pull-down (10 kΩ 1%); U2 FM synthesizer (transmitter).
+
+Chosen 2026-10-21 (see [modulation-strategies.md](modulation-strategies.md)). It replaces the discrete oscillator, buffer and lock gate (old chain 5) and the ADF4002 loop (old chain 6). Both are in git history (commits 9f95801, 0414cd3).
+
+**References:**
+- **Datasheet SNAS654A:** pin functions (p3), typical synthesizer schematic (Figure 62, p44), Do's and Don'ts (Figure 86, p53), power-supply recommendations (p54), and OSCin configuration (Table 37, p38).
+- **TI SNAA309:** analog FM in FSK I²S mode.
+- **Published hardware:** no open schematic using the LMX2571 turned up. Open STM32 firmware does use it for FM: [yxy1003/Gaopin_lib_2025](https://github.com/yxy1003/Gaopin_lib_2025) streams frequency offsets to R33 (FSK SPI FAST, `LMX2571_FASTFSK`); [xjc666-666/Electronic-Design-Contest](https://github.com/xjc666-666/Electronic-Design-Contest) configures the FSK I²S fields. Both are Chinese electronic-design-contest libraries.
+
+| Ref / pin | Part | Value | JLC | Note |
+|---|---|---|---|---|
+| U2 | TI LMX2571NJKR | Synthesizer, WQFN-36 6 × 6 mm | C440388, 139 | DigiKey 1,244 as second route |
+| Vcc3p3 1, 9, 20, 27 (×4) | Samsung CL05B104KO5NNNC | 100 nF each, at the pin | C1525 | "100 nF close to each of the power supply pins" (p54) |
+| VccIO 15, 33 (×2) | Samsung CL05B104KO5NNNC | 3V3, 100 nF each | C1525 | Both pins are VccIO and connect to 3.3 V (pin table, p4). Pin 15 was missing here until the wiring page was drawn |
+| VcpExt 32 | — + Samsung CL05B104KO5NNNC | 3V3, 100 nF | C1525 | Must be powered in synthesizer mode too, 3.3 V or 5 V (p53, p54) |
+| Bypass1 2, Bypass2 3 | Samsung CL05B104KO5NNNC | 100 nF each | C1525 | Pin table (p3) |
+| VrefVCO 22 | Samsung CL05B104KO5NNNC | 100 nF | C1525 | Figure 62 |
+| VregVCO 21 | **Samsung CL10A225KO8NNNC** | 2.2 µF X5R 16 V 0603 | C23630, 3,207,467 | Figure 62; 100 nF here is marked "incorrect" (p53) |
+| CPout 25: C24 to GND (datasheet C1) | FH 0402CG101J500NT | 100 pF C0G | C1546, 3,297,196 | Loop filter (see below) |
+| CPout 25: R5 + C25 to GND (datasheet R2, C2) | Panasonic ERJ-2RKF1101X + Murata GRM1555C1H152JA01D | 1.1 kΩ + 1.5 nF C0G | C409028, 51,663 / C668348, 97,247 | Loop filter |
+| RFoutTx 17 → U7 RF1 | FH 0402CG101J500NT | 100 pF C0G, series | C1546 | Push-pull output needs only a DC block (Table 38, p42); the PE43711 RF pins must be at 0 V DC |
+| OSCin 34 | — | Y2 output, direct | | Single-ended CMOS: IPBUF_SE_DIFF_SEL = 0, OSCin* unconnected (Table 37, p38) |
+| OSCin* 36 | — | Not connected | | Table 37 |
+| FSK_DV 4 / FSK_D1 6 / FSK_D0 7 | UNI-ROYAL 0402WGF330JTCE ×3 | 33 Ω series, at U1 | C25105 | I²S CLK / DATA / FS from U1 SAI1 sub-block A (FSK I²S mode, p3, p13). The stream runs continuously next to the synthesizer, so series resistors soften the edges (HELIOS puts ferrites on its ADF4002 lines for the same reason) |
+| FSK_D2 5 | — | GND | | Used only in FSK PIN mode (p3) |
+| CLK 11, DATA 12, LE 13 | — | U1 GPIOs PB14, PB13, PB12 | | MICROWIRE, 24-bit words (p15), driven by firmware |
+| MUXout 10 | — | To a U1 input | | Lock detect or register readback (p14) |
+| CE 19 | UNI-ROYAL 0402WGF1002TCE | 10 kΩ pull-down; U1 GPIO | C25744 | Off until firmware enables it, and off in receive mode so its carrier can't reach U4 |
+| TrCtl 18 | — | GND | | Output port and F1/F2 under register control (p37) |
+| Fin 24 | — | Not connected | | "Leave it open… if not being used" (p3) |
+| CPoutExt 30, FLout1 29, FLout2 28 | — | Not connected | | PLL-mode outputs, unused in synthesizer mode |
+| RFoutRx 16 | — | Not connected | | RX buffer disabled in registers |
+| NC 8, 14, 26 | — | Not connected | | "Do not connect" (p3) |
+| GND 23, 31, 35, DAP | — | GND | | DAP must be grounded (p53) |
+
+**Loop filter check** (second-order passive, the internal third and fourth poles bypassed: LF_R3 = LF_R4 = 0):
+- **Model:** C1 = 100 pF (C24), R2 = 1.1 kΩ (R5), C2 = 1.5 nF (C25), checked against the internal VCO's gain (56 MHz/V typical at 4.8 GHz, p6, swept 40–75 MHz/V) and both reference settings (f_PD 40 MHz, N ≈ 123–130; f_PD 100 MHz, N ≈ 49–52).
+- **Result:** firmware picks the charge-pump current per setting (2.2–5.3 mA, in 312.5 µA steps, p5), which gives a 300–405 kHz loop at 61–62° phase margin.
+- **Audio response:** +0.05–0.07 dB at 15 kHz. At 53 kHz, +0.5–0.7 dB and −1.7° to −2.5°; the MCU removes this with a fixed pre-equaliser.
+- **Tuning:** set on the bench. The charge-pump current is a firmware setting, and any spur on a channel is fixed by giving that channel the other reference setting. Neither needs a hardware change.
+
+**Firmware set-up** (from the datasheet, recorded here so the hardware choices make sense):
+- **Synthesizer mode.** Output divider 56 for 88.1–95.9 MHz, 48 for 96.1–107.9 MHz.
+- **Per-channel reference:** f_PD = 40 MHz (MULT 2, DEN 400,000) or 100 MHz (MULT 5, DEN 1,000,000).
+- **Modulation:** FSK I²S mode at about 912 kSa/s.
+- **Output:** push-pull buffer, OUTBUF_AUTOMUTE on (default).
+- **Power-on sequence:** R60 down to R0 (p15).
+
+## Chain 6: U7 PE43711 attenuator and SW3 DIP switch
+
+**Designators:** C27 U7 VDD bypass (1 µF X5R 50 V); R10 U7 C16 pull-down (10 kΩ 1%); R11 U7 C8 pull-down (10 kΩ 1%); R12 U7 C4 pull-down (10 kΩ 1%); R13 U7 C2 pull-down (10 kΩ 1%); R14 U7 C1 pull-down (10 kΩ 1%); R15 U7 C0.5 pull-down (10 kΩ 1%); SW3 TX power DIP switch; U7 TX power attenuator.
+
+**References:**
+- **PE43711 datasheet DOC-84940-8:** pin table (Table 9, p28), parallel truth table (Table 4, p6), programming modes and power-up behaviour (p8).
+- **[bgelb/gpsrx](https://github.com/bgelb/gpsrx):** a GPS receiver that runs the PE43711 in serial mode. It bypasses VDD with 1 µF, ties its unused parallel inputs low through 1 kΩ, and feeds RF1 through a 1 nF DC block.
+- No published design uses direct parallel mode with switches. The datasheet describes that mode as "ideal for manual control… using hardwire, switches, or jumpers" (p8).
+
+| Ref / pin | Part | Value | JLC | Note |
+|---|---|---|---|---|
+| U7 | pSemi PE43711B-Z | DSA, QFN-24 4 × 4 mm | C470929, 1,737 | |
+| VDD 2 | Samsung CL10A105KB8NNNC | 3V3, 1 µF to GND | C15849 | As gpsrx. 2.3–5.5 V (p3) |
+| P/S 3 | — | GND | | Parallel interface (p8) |
+| LE 16 | — | 3V3 | | Direct parallel mode: the control pins act immediately (p8) |
+| CLK 17, SI 18 | — | GND | | Serial interface unused |
+| C0.25 (D0) 1 | — | GND | | "Ground… if not in use" (Table 9 note 1) |
+| C16, C8, C4, C2, C1, C0.5 (pins 19–24) | UNI-ROYAL 0402WGF1002TCE ×6 | 10 kΩ pull-down each | C25744 | So an open switch reads low (p8: floating pins at power-up give minimum attenuation) |
+| SW3 | C&K TDP06H1SBD1 | 6-position side-actuated DIP | Global sourcing (DigiKey 1,180) | One side of every switch on 3V3. Switch 1 → C16 … switch 6 → C0.5. Silkscreen 16 / 8 / 4 / 2 / 1 / 0.5 dB. 0.33 mA per closed switch, within its 25 mA rating |
+| RF1 5 | — | From U2 RFoutTx through the 100 pF in chain 5 | | RF pins must be at 0 V DC (Table 9 note 2) |
+| RF2 14 | — | To FL1 (chain 7) | | 0 V DC |
+| GND 4, 6–13, 15, pad | — | GND | | |
+
+- **Power-up:** in direct mode the part sits at maximum attenuation for about 400 µs, then takes the switches' setting (p8).
+- **Levels:** U2 delivers at most about +3 dBm (LMX2571 p42), far below the +28 dBm input limit (PE43711 p3). The insertion loss is about 1.5 dB at 0 dB (p4).
+- **Range:** with U2's programmable output (about −18 to +3 dBm), the board can deliver about +1.5 dBm down to −51 dBm into FL1, before filter and switch loss.
+
+## Chain 7: TX low-pass FL1, U5 RF switch, J2 SMA, D5 antenna ESD
+
+**Designators:** C28 FL1 shunt 1 (33 pF C0G); C29 FL1 shunt 2 (56 pF C0G); C30 FL1 shunt 3 (33 pF C0G); C31 U5 CTRL filter (1 nF X7R 50 V); D5 Antenna ESD; J2 Antenna connector; L2 FL1 series 1 (100 nH 2%); L3 FL1 series 2 (100 nH 2%); R16 U5 VDD series (1 kΩ 1%); R17 U5 CTRL series (1 kΩ 1%); R18 RF_MODE pull-down (100 kΩ 1%); SW1 TX/RX slider; U5 TX/RX antenna switch.
+
+Circuits as Plan C chains 7, 11 and 12. U5 is compared against four published designs, and the antenna ESD position against three, in reference-check.md. What changes:
+- **FL1 now sees a true 50 Ω source** (the attenuator), as it was designed for.
+- **The DC block after FL1 is dropped.** Both ends are now at 0 V DC: U7's RF pins (Table 9 note 2) and U5's RF pins (PE42421 p8). Plan C needed it only because the LV2285 output sat at a DC voltage.
+- **The 1 nF filter capacitor on U5's control pin is added,** closing reference-check U5 gap 1.
+
+| Ref / pin | Part | Value | JLC | Note |
+|---|---|---|---|---|
+| FL1 C (shunt, ×2) | FH 0402CG330J500NT | 33 pF C0G 0402 | C1562, 1,545,324 | JLC Basic part (2026-10-26). FH code CG = C0G, 330 = 33 pF, J = ±5%, 500 = 50 V (FH catalog p2) |
+| FL1 C (shunt, middle) | **Yageo CC0402JRNPO9BN560** | 56 pF C0G (NP0) ±5% 50 V 0402 | C107007, 630,922 | Replaces Murata GRM1555C1H560JA01D (JLC: 0) |
+| FL1 L (series, ×2) | Murata LQW18ANR10G00D | 100 nH ±2%, Q ≥ 34 at 150 MHz | C98088, 43,869 | Sourcing replacement for the Coilcraft part |
+| U5 | pSemi PE42421SCAA-Z | SPDT RF switch | C470893, 677 | |
+| U5 VDD 6 | UNI-ROYAL 0402WGF1001TCE | 1 kΩ from 3V3 | C11702 | Eval board (PE42421 p7) |
+| U5 CTRL 4 | UNI-ROYAL 0402WGF1001TCE + FH 0402B102K500NT | 1 kΩ series, then 1 nF X7R to GND at the pin | C11702 / C1523 | 1 nF added (reference-check U5 gap 1; LoRaPP and Electronic Cats both fit it) |
+| RF_MODE | UNI-ROYAL 0402WGF1003TCE | 100 kΩ pull-down | C25741 | Holds receive while the slider is between contacts |
+| SW1 | Shou Han MSK12C02 | SPDT slide switch | C431540, 195,730 | Common to RF_MODE; throws to 3V3 (TX) and GND (RX). U1 reads RF_MODE (Plan C PB0) and powers U2 down in receive |
+| U5 RF2 3 | — | From FL1 | | TX |
+| U5 RF1 1 | — | To U4 through C34 1 nF (chain 8) | | RX |
+| U5 RFC 5 | — | To J2 centre | | 0 V DC (p8) |
+| J2 | BAT Wireless BWSMA-KWE-Z001 | SMA jack, right angle | C496551, 129,042 | Footprint 5.1 mm square, Ø1.4 holes (drawing p6) |
+| D5 | Semtech RClamp0521PATCT | Antenna line to GND, at J2 | C117554, 91,372 | Bidirectional, 0.3–0.5 pF, 5 V stand-off (p1–2) |
+
+**Harmonics** (estimate):
+- **At U2:** the push-pull output's harmonics are about −30 dBc (2nd), −12 dBc (3rd) and −16 dBc (5th) (LMX2571 Table 38, p42, measured at 480 MHz).
+- **After FL1** (23–34 dB at the 2nd, ≥ 43 dB from 264 MHz; Plan C chain 12): about ≤ −53 dBc (2nd), ≤ −55 dBc (3rd), ≤ −59 dBc (5th).
+- **Margin:** U2's open-drain output with an LC pull-up (Table 38) is the step to take if the bench wants more.
+
+## Chain 8: U4 Si4705-D60-GM receiver (QFN-20)
+
+**Designators:** C32 U4 VA bypass (22 nF X7R 50 V); C33 U4 VD bypass (100 nF X7R 16 V); C34 FMI coupling (1 nF X7R 50 V); C35 FMI emissions filter shunt (6 pF C0G); C36 DFS filter on R23's U1 side (3.3 pF C0G); C37 GPO2/INT filter (33 pF C0G); C38 GPO1 filter (33 pF C0G); FB1 FMI emissions filter (75 Ω at 100 MHz); FB3 3V3 to U4 VA/VD filter (600 Ω at 100 MHz); L1 FMI matching inductor (150 nH 2%); R19 U4 RSTB pull-down (10 kΩ 1%); R20 I²C SCL pull-up (6.8 kΩ 1%); R21 I²C SDA pull-up (6.8 kΩ 1%); R22 DOUT series (604 Ω 1%); R23 DFS series (2 kΩ 1%); R24 DCLK series (2 kΩ 1%); U4 FM receiver.
+
+**References:**
+- **Datasheet Si4704/05-D60 Rev 1.2:** QFN typical schematic (p16), BOM (Table 12, p18), DC characteristics (p5), RCLK (p14).
+- **AN332:** REFCLK (p37–38).
+- **AN383:** FMI front end and emissions filter (p7–9, p17, p37).
+- **[USB FM Radio](https://github.com/anttikes/usb-fm-radio):** uses this exact QFN part. It was compared pin by pin in reference-check.md (U4); its three gaps are closed here.
+
+**RCLK change:** the reference clock now comes from a **U1 timer output at 32,787 Hz** (160 MHz ÷ 4880), with REFCLK_PRESCALE = 1 and REFCLK_FREQ = 32787. That is inside 31,130–34,406 Hz (AN332 p37). Because U1 now runs from Y2, the clock is accurate to ±20 ppm.
+- **Why not MCO:** chain 3 had planned 20 MHz from MCO divided by 610 inside the Si4705. That is replaced because a 20 MHz trace near the receiver puts its 5th harmonic at 100.0 MHz, inside the band.
+- **RCLK input:** high is ≥ 0.7 × VD (p5), which U1's 3.3 V output meets.
+
+| Ref / pin (QFN) | Part | Value | JLC | Note |
+|---|---|---|---|---|
+| U4 | Skyworks SI4705-D60-GM | FM receiver, QFN-20 3 × 3 mm | C1526114, 48 | DigiKey 470 as second route |
+| FB3 (3V3 → VA/VD) | Murata BLM15AG601SN1D | 600 Ω at 100 MHz | C76884 | Closes reference-check U4 gap 1 (USB FM Radio FB2) |
+| C32, datasheet C1 (VA 11 to GND) | FH 0402B223K500NT | 22 nF X7R, at the pin | C1532, 630,288 | QFN puts C1 from VA to GND (p16; Table 12, p18) |
+| C33, datasheet C4 (VD 10 to GND) | Samsung CL05B104KO5NNNC | 100 nF, at the pin | C1525 | p16, Table 12 |
+| C34, datasheet C2 (U5 RF1 → FMI chain) | FH 0402B102K500NT | 1 nF X7R | C1523 | Coupling (Table 12); keeps U5's RF1 at 0 V DC |
+| L1 (C2–FB1 node to GND) | Murata LQW18ANR15G00D | 150 nH ±2%, Q ≥ 32 | C113131, 25,316 | Whip-antenna match (AN383 p37 Figure 23), sized in Plan C chain 3 |
+| FB1 (→ FMI 2) | Murata BLM15GA750SN1D | 75 Ω at 100 MHz | C113009, 18,276 | Emissions filter (AN383 p7, p9) |
+| C35, AN383 C14 (FMI 2 to GND) | Murata GJM1555C1H6R0CB01D | 6 pF C0G, at the pin | C161330, 3,416 | Emissions filter (AN383 p7) |
+| RFGND 3, LPI 4 | — | GND | | AN383 p8, p17 |
+| RSTB 5 | UNI-ROYAL 0402WGF1002TCE | 10 kΩ pull-down; U1 GPIO | C25744 | Held in reset until firmware runs |
+| SENB 6 | — | GND | | 2-wire bus |
+| SCLK 7, SDIO 8 | Yageo RC0402FR-076K8L ×2 | 6.8 kΩ pull-ups to 3V3; U1 I²C | C93940 | SDIO sinks ≤ 500 µA (p5) |
+| RCLK 9 | — | U1 timer output, 32,787 Hz | | See above |
+| ROUT 13, LOUT 14 | — | GND | | Closes reference-check U4 gap 3 (AN383 p17; USB FM Radio). Firmware keeps analog outputs off |
+| DOUT 15 | Yageo RC0402FR-07604RL | R22 (datasheet R1) 604 Ω series → U1 SAI1-B SD | C273693 | Table 12 (600 Ω) |
+| DFS 16 | UNI-ROYAL 0402WGF2001TCE + Murata GRM1555C1H3R3CA01D | R23 (datasheet R2) 2 kΩ series → SAI1-B FS; C36 (datasheet C9) 3.3 pF C0G to GND on R23's U1 side, as the datasheet draws it | C4109, 7,171,650 / C76968, 14,752 | Table 12 (2 kΩ; C9 2–5 pF) |
+| GPO3/DCLK 17 | UNI-ROYAL 0402WGF2001TCE | R24 (datasheet R3) 2 kΩ series → SAI1-B SCK | C4109 | Table 12 |
+| GPO2/INT 18, GPO1 19 | FH 0402CG330J500NT ×2 | 33 pF to GND; otherwise floating | C1562 | AN383 p8 option 1. Firmware polls (reference-check gap 2 left as optional) |
+| NC 1, 20 | — | Floating | | p16 note 3 |
+| GND 12, pad | — | GND | | |
+
+
+## Chain 9: Controls
+
+**Designators:** C39 Wheel 1 ADC reservoir (100 nF X7R 16 V); C40 Wheel 2 ADC reservoir (100 nF X7R 16 V); C41 Wheel 3 ADC reservoir (100 nF X7R 16 V); D1 Status LED; R25 LED red series (510 Ω 1%); R26 LED green series (390 Ω 1%); R27 LED blue series (390 Ω 1%); RV1 Tuning wheel 1 (10 kΩ 3B); RV2 Tuning wheel 2 (10 kΩ 3B); RV3 Tuning wheel 3 (10 kΩ 3B); SW2 BOOT button.
+
+| Ref | Part | Wiring | JLC | Note |
+|---|---|---|---|---|
+| RV1–RV3 | Alps RK10J11R0A0H | Pin 1 → 3V3, pin 3 → GND, wiper pin 2 → U1 ADC; the two dummy pins → GND pads | C470766, 913 | `POT_Alps_RK10J.pdf` p3 terminal layout |
+| C (each wiper) | Samsung CL05B104KO5NNNC | 100 nF to GND at the ADC pin | C1525 | Charge reservoir for the ADC's sampling capacitor; ≤ 0.25 ms time constant with the pot, fine for a hand-turned wheel |
+| SW1 | Shou Han MSK12C02 | Chain 7 | | |
+| SW2 | Panasonic EVQ-P7J01P | 3V3 to U1 BOOT0 (10 kΩ pull-down, chain 3) | C2828254, 9,729 | BOOT button only (Plan C chain 9) |
+| D1 | XINGLIGHT XL-1615RGBC-RF | Pin 2 (common anode) → VBUS; R pin 1 / G pin 3 / B pin 4 through resistors to U1 open-drain pins | C965840 | p8 pinout |
+| R (red) | UNI-ROYAL 0402WGF5100TCE | 510 Ω | C25123 | (5 − 1.9 − 0.4) / 510 ≈ 5.3 mA typical, 4.3 mA at VF max 2.4 V (p4). IF max 20 mA (p3) |
+| R (green, blue) | Yageo RC0402FR-07390RL ×2 | 390 Ω | C137997, 1,797,586 | Replaces Panasonic ERJ-2RKF3900X (JLC: 21, minimum buy 828). (5 − 2.8 − 0.4) / 390 ≈ 4.6 mA typical, 3.1 mA at VF max 3.4 V |
+
+The LED allows 5 V reverse voltage (p3), so the unplug case that worried Plan C's Broadcom part is covered.
+
+## Chain 10: Test pads and power budget
+
+**Designators:** H1 Mounting hole, 13, 7 mm from the board's top-left corner; H2 Mounting hole, 33, 7 mm from the board's top-left corner; H3 Mounting hole, 41, 57 mm from the board's top-left corner; H4 Mounting hole, 8, 66 mm from the board's top-left corner; TP1 Test pad VBUS; TP2 Test pad 3V3; TP3 Test pad GND; TP4 Test pad RF_MODE; TP5 Test pad LMX_MUX; TP6 SWD pad NRST; TP7 SWD pad SWCLK; TP8 SWD pad SWDIO.
+
+**Test pads:** none on RF nets (Plan C chain 13 rule). Bare pads, no parts, so they stay out of the BOM and the position files. TP1 and TP5–TP8 sit on the bottom side, where Phase 5's lanes leave room (the user's choice, 2026-10-25; TP6 and TP7 joined them in the approved routing).
+- TP1 VBUS (bottom)
+- TP2 3V3
+- TP3 GND
+- TP4 RF_MODE: which slide direction is TX
+- TP5 U2 MUXout: PLL lock (bottom)
+- TP6 NRST, TP7 SWCLK, TP8 SWDIO (bottom): backup programming with a debugger, alongside TP2 (3V3) and TP3 (GND). These were on the wiring page but missing from this list until the netlist check
+
+**3V3 current** (maximum or high-setting figures):
+
+| Load | Transmit | Receive | Source |
+|---|---|---|---|
+| U1 at 160 MHz plus USB, SAI, ADC | ~30 mA | ~30 mA | DS14217 p139: 13–17 mA typical, 20 mA max at 85 °C, plus peripherals (estimate) |
+| U2 LMX2571 | ~57 mA at the highest output setting (39 mA typical) | ~0 (CE low) | LMX2571 p1, Figure 61 (p42) |
+| U4 Si4705 | µA (powered down) | ≤ 23 mA (VA 9.5 + VD 13.5, digital mode) | Si4704/05 p5 |
+| Y2 | ≤ 5 mA | ≤ 5 mA | YSO110TR p1 |
+| U7, U5, pull-ups, DIP, wheels | ~4 mA | ~4 mA | |
+| **3V3 total** | **~96 mA** | **~62 mA** | |
+| D1 from VBUS | ≤ 15 mA | ≤ 15 mA | Chain 9 |
+
+- **Apple limits:**
+  - **Before USB setup (≤ 100 mA):** at power-up U2 is off (CE pull-down), U4 is in reset (RST pull-down) and the LED pins are high-impedance. That leaves about 35 mA.
+  - **After setup (≤ 500 mA):** at most about 111 mA from VBUS.
+- **Regulator:** 600 mA rating; dissipation about (5 − 3.3) × 0.1 A ≈ 0.17 W.
+- **Start-up:**
+  - **3V3 capacitance:** about 24 µF. That is U3's 1 µF, U1's 10 µF + 3 × 100 nF + VDDA's 1.1 µF, Y2's 10 µF + 100 nF, U2's seven 100 nF supply caps, U7's 1 µF and U4's 122 nF. U2's VregVCO/Bypass caps sit behind its internal regulators.
+  - **Ramp time:** the AP2112's 50 mA fold-back current (Plan C chain 5) charges it to 3.3 V in about 1.6 ms, or about 1.8 ms with Y2 already running. Every other load is off or in reset at that point.
