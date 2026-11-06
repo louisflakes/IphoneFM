@@ -10,6 +10,10 @@ Steps:
                  longer has and the tracks and vias left on nets it no longer has; swap changed footprints in place;
                  add new parts beside the board; every pad's net, value and fields from KiCad's exported netlist
   fixed    B4.3-B4.5  place and lock SW3, SW4 and DS1-DS4
+  pullups  B4.7  R30-R32 at SW4's terminals
+  u8       B4.6-B4.7  U8 above the display (spot B) with R28, R29, C42, C43 and C44
+  tp2      B4.8  TP2 out from under DS1
+  clear    B4.8  take up Rev A copper under the new parts, and what that leaves dangling; refill
 """
 import os
 import re
@@ -238,6 +242,99 @@ def step_pullups():
     done = [(r, *at_pin(board, r, "SW4", p, gap=0.95)) for r, p in (("R30", "1"), ("R31", "4"), ("R32", "2"))]
     save(board)
     print("pullups:", [(r, round(x, 2), round(y, 2), a) for r, x, y, a in done])
+
+
+def crt(fp):
+    """courtyard box in mm: (left, top, right, bottom)"""
+    b = fp.GetCourtyard(pcbnew.F_CrtYd).BBox()
+    return tuple(pcbnew.ToMM(v) for v in (b.GetLeft(), b.GetTop(), b.GetRight(), b.GetBottom()))
+
+
+# B4.6: spot B (the user's choice, 2026-11-06), above the display left of H1. Turned 0 deg: the control pins (34-44:
+# SDB, VCC, R_EXT, SDA, SCL) face the board's top edge and OUT1-OUT32 face left, down and right, toward the digits
+U8_X, U8_ROT = 18.0, 0
+GAP = 0.35   # between courtyards: the 0.3 mm rule plus a little (pcb_local.py)
+
+
+def step_u8():
+    """B4.6-B4.7: U8 with R28 (R_EXT), C43 (VCC) and R29 (SDB) in a row straight out from their pins, spread as Rev A
+    step 4.13 (pcb_local.py), toward the top edge; U8 as high as that row's copper allows (EDGE_GAP), leaving the most
+    room between U8 and DS1 for the outputs. C42 (VCC bulk) and C44 (display reservoir, B4.7) are too deep for the
+    row and lie along the top edge to its right, above H1, on the way to the VBUS feed."""
+    from pcb_local import spread
+    board = load()
+    u8 = place(board, "U8", U8_X, 65.0, U8_ROT)
+    row = [("R28", "40"), ("C43", "38"), ("R29", "36")]
+    pin_x = {r: pcbnew.ToMM(next(p for p in u8.Pads() if p.GetNumber() == n).GetPosition().x) for r, n in row}
+    for r, n in row:
+        at_pin(board, r, "U8", n)            # turn only: long axis at the pin, its pin-net pad toward U8
+    width = [crt(board.FindFootprintByReference(r))[2] - crt(board.FindFootprintByReference(r))[0] for r, _ in row]
+    xs = spread([pin_x[r] for r, _ in row], width)
+    top = crt(u8)[1]
+    for (r, _), x in zip(row, xs):
+        fp = board.FindFootprintByReference(r)
+        c = crt(fp)
+        fp.SetPosition(fp.GetPosition() + pcbnew.VECTOR2I(mm(x - (c[0] + c[2]) / 2), mm(top - GAP - c[3])))
+    # the whole group up (or down) until the row's highest copper is EDGE_GAP from the top edge
+    group = [u8] + [board.FindFootprintByReference(r) for r, _ in row]
+    high = min(pcbnew.ToMM(p.GetBoundingBox().GetTop()) for f in group[1:] for p in f.Pads())
+    dy = (EDGE_Y + EDGE_GAP) - high
+    for f in group:
+        f.SetPosition(f.GetPosition() + pcbnew.VECTOR2I(0, mm(dy)))
+    # C42 then C44 along the top edge right of the row, VBUS pad (1) toward U8, copper EDGE_GAP from the edge
+    x = crt(board.FindFootprintByReference("R29"))[2] + GAP
+    for r in ("C42", "C44"):
+        fp = place(board, r, 0, 0, 0, lock=False)
+        c = crt(fp)
+        high = min(pcbnew.ToMM(p.GetBoundingBox().GetTop()) for p in fp.Pads())
+        fp.SetPosition(pcbnew.VECTOR2I(mm(x - c[0]), mm(EDGE_Y + EDGE_GAP - high)))
+        x += c[2] - c[0] + GAP
+    for f in group:
+        f.SetLocked(f.GetReference() == "U8")
+    ds1, h1 = crt(board.FindFootprintByReference("DS1")), crt(board.FindFootprintByReference("H1"))
+    u = crt(u8)
+    c44 = crt(board.FindFootprintByReference("C44"))
+    save(board)
+    print(f"u8: U8 at ({U8_X}, {pcbnew.ToMM(u8.GetPosition().y):.3f}) {U8_ROT} deg; courtyard {ds1[1] - u[3]:.2f} mm above "
+          f"DS1's, {h1[0] - u[2]:.2f} mm left of H1's; row " +
+          ", ".join(f"{r} ({pcbnew.ToMM(board.FindFootprintByReference(r).GetPosition().x):.2f}, "
+                    f"{pcbnew.ToMM(board.FindFootprintByReference(r).GetPosition().y):.2f})" for r in
+                    ("R28", "C43", "R29", "C42", "C44")) +
+          f"; C44 courtyard {h1[1] - c44[3]:.2f} mm above H1's")
+    os._exit(0)
+
+
+def step_tp2():
+    """B4.8: TP2 (3V3) out from under DS1, into the space right of DS1 that spot A left free: below TP3 by the 3V3
+    feed at x 32.2, courtyards GAP from DS1's and TP3's. Rev A's 3V3 run to SW3 starts at TP2's pad and passes over
+    the via down to the feed (29.6, 69.3): that end is pulled back to the via, so the run to SW3 stays whole (were it
+    left dangling, step_clear would take up the run and the via with it); B5 joins TP2 to the feed."""
+    board = load()
+    ds1, tp3 = crt(board.FindFootprintByReference("DS1")), crt(board.FindFootprintByReference("TP3"))
+    tp2 = board.FindFootprintByReference("TP2")
+    c, p = crt(tp2), tp2.GetPosition()
+    net = tp2.Pads()[0].GetNetname()
+    tracks = list(board.GetTracks())
+    vias = [t.GetPosition() for t in tracks if t.GetClass() == "PCB_VIA" and t.GetNetname() == net]
+    for t in tracks:
+        if t.GetClass() != "PCB_TRACK":
+            continue
+        for get, put, far in ((t.GetStart, t.SetStart, t.GetEnd), (t.GetEnd, t.SetEnd, t.GetStart)):
+            if get() == p:
+                a, b = get(), far()
+                on = [v for v in vias if (v.x - a.x) * (b.y - a.y) == (v.y - a.y) * (b.x - a.x)
+                      and min(a.x, b.x) <= v.x <= max(a.x, b.x) and min(a.y, b.y) <= v.y <= max(a.y, b.y) and v != a]
+                if not on:
+                    sys.exit(f"tp2: no via on the track from TP2 toward {pcbnew.ToMM(b.x)}, {pcbnew.ToMM(b.y)}")
+                v = min(on, key=lambda v: abs(v.x - a.x) + abs(v.y - a.y))
+                put(v)
+                print(f"tp2: track end pulled back from TP2's pad to the via at ({pcbnew.ToMM(v.x)}, {pcbnew.ToMM(v.y)})")
+    x = ds1[2] + GAP + (pcbnew.ToMM(p.x) - c[0])
+    y = tp3[3] + GAP + (pcbnew.ToMM(p.y) - c[1])
+    tp2.SetPosition(pcbnew.VECTOR2I(mm(x), mm(y)))
+    save(board, fill=False)
+    print(f"tp2: TP2 to ({x:.2f}, {y:.2f})", flush=True)
+    os._exit(0)
 
 
 NEW = {"SW3", "SW4", "U8", "R28", "R29", "R30", "R31", "R32", "C42", "C43", "C44", "DS1", "DS2", "DS3", "DS4"}
