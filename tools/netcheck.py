@@ -38,7 +38,7 @@ check(not dupes, f"Designators unique ({len(refs)} parts)" + (f": duplicates {',
 missing = [f"{p.get('ref', '?')}.{f}" for p in parts for f in REQUIRED if f not in p]
 check(not missing, "Every part has " + ", ".join(REQUIRED) + (f": missing {', '.join(missing)}" if missing else ""))
 
-bad_ref = [r for r in refs if not re.fullmatch(r"(U|J|SW|D|Y|RV|FB|L|C|R|TP|H)\d+", r)]
+bad_ref = [r for r in refs if not re.fullmatch(r"(U|J|SW|DS|D|Y|RV|FB|L|C|R|TP|H)\d+", r)]
 check(not bad_ref, "Designators use the standard prefixes" + (f": {', '.join(bad_ref)}" if bad_ref else ""))
 
 bad_lcsc = [p["ref"] for p in placed if not re.fullmatch(r"C\d+", p["lcsc"])]
@@ -107,7 +107,7 @@ check(not single, "Every net joins at least two parts (test pads don't count; SW
 shorted = [p["ref"] for p in parts if p["pins"] == 2 and "pinmap" in p and len({d["net"] for d in p["pinmap"].values()}) < 2 and p["ref"][0] in "CRLF"]
 check(not shorted, "No two-pin passive has both ends on one net" + (f": {', '.join(shorted)}" if shorted else ""))
 
-SUPPLY = re.compile(r"^(VDD|VDDA|VBAT|VA|VD|VIN|Vcc3p3|VccIO|VcpExt)$")
+SUPPLY = re.compile(r"^(VDD|VDDA|VBAT|VA|VD|VIN|VCC|Vcc3p3|VccIO|VcpExt)$")
 GROUND = re.compile(r"^(GND|VSS|VSSA|RFGND|Exposed pad|DAP)$")
 bad_pwr = [f"{p['ref']}.{k} {d['name']}→{d['net']}" for p in parts for k, d in p.get("pinmap", {}).items()
            if "name" in d and ((SUPPLY.match(d["name"]) and d["net"] in ("NC", "GND")) or (GROUND.match(d["name"]) and d["net"] != "GND")
@@ -128,7 +128,7 @@ check(not far, "Every part placed 'local_to' a pin shares a net with it" + (f": 
 # ---- The wiring page must agree pin by pin ----
 WIRING = os.path.join(DESIGN, "wiring.html")
 w = open(WIRING, encoding="utf-8").read()
-w_nets = set(re.findall(r'\{ name: "([A-Z0-9_]+)", layer:', w)) | {"ATT_" + c for c in re.findall(r'\["(C[0-9_]+)", \d+, \d+, \d+, "', w)} | {f"WHEEL{n}" for n in (1, 2, 3)}
+w_nets = set(re.findall(r'\{ name: "([A-Z0-9_]+)", layer:', w)) | {"ATT_" + c for c in re.findall(r'\["(C[0-9_]+)", \d+, \d+, \d+, "', w)} | {f"WHEEL{n}" for n in (1, 2, 3) if f"WHEEL{n}" in nets}
 missing_w = sorted(n for n in w_nets if n not in nets)
 check(not missing_w, f"Every net on the wiring page exists in netlist.json ({len(w_nets)} nets)" + (f": {', '.join(missing_w)}" if missing_w else ""))
 

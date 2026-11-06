@@ -25,8 +25,7 @@ Replaces Rev A's three thumbwheel pots (RV1–RV3) and the out-of-stock side-lev
 
 ## Current
 
-At 3 mA a segment, "107.9" lights 21 segments: about 65 mA from VBUS, plus about 9 mA for the driver. Firmware sets the
-brightness, and the display stays well inside the 500 mA available after USB set-up.
+R28 (10 kΩ on U8's R_EXT) caps each segment at 7.6 mA. At that cap, "107.9" lights 21 segments: about 169 mA from VBUS with U8's 9 mA; all 32 segments about 252 mA. Firmware dims below the cap (PWM). The board stays inside the 500 mA available after USB set-up, and the display draws nothing before it. Details in bom.md chain 9 and chain 10.
 
 ## Placement (sketch: `front-face-sketch.png`, user 2026-11-06)
 

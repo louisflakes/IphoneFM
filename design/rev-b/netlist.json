@@ -1,12 +1,13 @@
 {
- "about": "IphoneFM analog FM (D2). Every placed part with its designator, and every pin with its net. Source of truth: edit this file, then run python tools/netcheck.py.",
+ "about": "IphoneFM analog FM (D2), Rev B. Every placed part with its designator, and every pin with its net. Source of truth: edit this file, then run python tools/netcheck.py.",
  "notes": [
-  "Designators U1-U7, J1, J2, SW1-SW3, D1, D3-D5, Y2, RV1-RV3, FB1-FB3, L1 and TP1-TP5 keep the names already used in bom.md, wiring.html and layout.html; gaps (D2, Y1) are parts dropped in earlier revisions.",
+  "Designators U1-U8, J1, J2, SW1-SW4, D1, D3-D5, DS1-DS4, Y2, FB1-FB3, L1 and TP1-TP8 keep the names already used in bom.md, wiring.html and layout.html; gaps (D2, Y1, and Rev A's RV1-RV3 and C39-C41) are parts dropped in earlier revisions.",
   "Passives are numbered by chain order. ds_name gives the datasheet's own name where bom.md used it, so C24 is the LMX2571's loop-filter C1 and C32 is the Si4705's C1.",
   "local_to names the pin a part must sit next to, for the placement check.",
   "pinmap gives every pin of every part and the net it joins; \"NC\" marks a pin left open on purpose. A series part splits a net: the U1 side carries the suffix _MCU, a cathode side _K.",
   "pad_nets join one part and a test pad only, on purpose (the SWD debug pads).",
-  "page_segments: the wiring page draws a net through its series parts (a resistor, capacitor, filter or ferrite) as one line; this maps each JSON net segment to the page net it belongs to."
+  "page_segments: the wiring page draws a net through its series parts (a resistor, capacitor, filter or ferrite) as one line; this maps each JSON net segment to the page net it belongs to.",
+  "Rev B (2026-11-06): the front panel. SW4 push-wheel encoder, DS1-DS4 station digits driven by U8, SW3 now a top-lever DIP. U8's OUT1-OUT32 drive the digits in reading order, A to DP; the order may be permuted in layout (firmware maps it)."
  ],
  "parts": [
   {
@@ -326,7 +327,7 @@
     },
     "2": {
      "name": "PC13",
-     "net": "NC"
+     "net": "LED_SDB"
     },
     "3": {
      "name": "PC14-OSC32_IN",
@@ -370,15 +371,15 @@
     },
     "13": {
      "name": "PA3",
-     "net": "WHEEL1"
+     "net": "ENC_A"
     },
     "14": {
      "name": "PA4",
-     "net": "WHEEL2"
+     "net": "ENC_B"
     },
     "15": {
      "name": "PA5",
-     "net": "WHEEL3"
+     "net": "ENC_SW"
     },
     "16": {
      "name": "PA6",
@@ -1594,14 +1595,13 @@
   {
    "ref": "SW3",
    "value": "6 × SPST",
-   "mpn": "TDP06H1SBD1",
-   "maker": "C&K",
-   "lcsc": "C221994",
-   "package": "SMD DIP, 6-position, 1.27 mm pitch",
+   "mpn": "DHN-06-V-T/R",
+   "maker": "Diptronics",
+   "lcsc": "C224997",
+   "package": "SMD DIP, 6-position, 1.27 mm pitch, top lever",
    "pins": 12,
    "chain": 6,
    "function": "TX power DIP switch",
-   "sourcing": "global (DigiKey)",
    "pinmap": {
     "1": {
      "name": "Switch 1",
@@ -1652,7 +1652,7 @@
      "net": "3V3"
     }
    },
-   "pin_source": "C&K TDP p3 (SPST x6). Pin numbering assumed standard DIP (switch n between pins n and 13-n); confirm against the KiCad footprint"
+   "pin_source": "Diptronics DHN(F) series p1 (DHN-06: positions 1-6 marked on the body, ON side opposite). Pin numbering standard DIP (switch n between pins n and 13-n), confirmed on the footprint in Phase B3"
   },
   {
    "ref": "C28",
@@ -2394,195 +2394,6 @@
    }
   },
   {
-   "ref": "RV1",
-   "value": "10 kΩ 3B",
-   "mpn": "RK10J11R0A0H",
-   "maker": "Alps",
-   "lcsc": "C470766",
-   "package": "Thumbwheel pot, reflow SMD",
-   "pins": 7,
-   "chain": 9,
-   "function": "Tuning wheel 1",
-   "pads_note": "3 terminals + 2 dummy + 2 mounting lands",
-   "pinmap": {
-    "1": {
-     "name": "CW end",
-     "net": "3V3"
-    },
-    "2": {
-     "name": "Wiper",
-     "net": "WHEEL1"
-    },
-    "3": {
-     "name": "CCW end",
-     "net": "GND"
-    },
-    "D1": {
-     "name": "Dummy",
-     "net": "GND"
-    },
-    "D2": {
-     "name": "Dummy",
-     "net": "GND"
-    },
-    "M1": {
-     "name": "Mounting",
-     "net": "GND"
-    },
-    "M2": {
-     "name": "Mounting",
-     "net": "GND"
-    }
-   },
-   "pin_source": "Alps RK10J p2-3 (reflow type terminal layout; dummy and mounting lands to GND)"
-  },
-  {
-   "ref": "C39",
-   "value": "100 nF X7R 16 V",
-   "mpn": "CL05B104KO5NNNC",
-   "maker": "Samsung",
-   "lcsc": "C1525",
-   "package": "0402",
-   "pins": 2,
-   "chain": 9,
-   "function": "Wheel 1 ADC reservoir",
-   "local_to": "U1.13",
-   "pinmap": {
-    "1": {
-     "net": "WHEEL1"
-    },
-    "2": {
-     "net": "GND"
-    }
-   }
-  },
-  {
-   "ref": "RV2",
-   "value": "10 kΩ 3B",
-   "mpn": "RK10J11R0A0H",
-   "maker": "Alps",
-   "lcsc": "C470766",
-   "package": "Thumbwheel pot, reflow SMD",
-   "pins": 7,
-   "chain": 9,
-   "function": "Tuning wheel 2",
-   "pads_note": "3 terminals + 2 dummy + 2 mounting lands",
-   "pinmap": {
-    "1": {
-     "name": "CW end",
-     "net": "3V3"
-    },
-    "2": {
-     "name": "Wiper",
-     "net": "WHEEL2"
-    },
-    "3": {
-     "name": "CCW end",
-     "net": "GND"
-    },
-    "D1": {
-     "name": "Dummy",
-     "net": "GND"
-    },
-    "D2": {
-     "name": "Dummy",
-     "net": "GND"
-    },
-    "M1": {
-     "name": "Mounting",
-     "net": "GND"
-    },
-    "M2": {
-     "name": "Mounting",
-     "net": "GND"
-    }
-   },
-   "pin_source": "Alps RK10J p2-3 (reflow type terminal layout; dummy and mounting lands to GND)"
-  },
-  {
-   "ref": "C40",
-   "value": "100 nF X7R 16 V",
-   "mpn": "CL05B104KO5NNNC",
-   "maker": "Samsung",
-   "lcsc": "C1525",
-   "package": "0402",
-   "pins": 2,
-   "chain": 9,
-   "function": "Wheel 2 ADC reservoir",
-   "local_to": "U1.14",
-   "pinmap": {
-    "1": {
-     "net": "WHEEL2"
-    },
-    "2": {
-     "net": "GND"
-    }
-   }
-  },
-  {
-   "ref": "RV3",
-   "value": "10 kΩ 3B",
-   "mpn": "RK10J11R0A0H",
-   "maker": "Alps",
-   "lcsc": "C470766",
-   "package": "Thumbwheel pot, reflow SMD",
-   "pins": 7,
-   "chain": 9,
-   "function": "Tuning wheel 3",
-   "pads_note": "3 terminals + 2 dummy + 2 mounting lands",
-   "pinmap": {
-    "1": {
-     "name": "CW end",
-     "net": "3V3"
-    },
-    "2": {
-     "name": "Wiper",
-     "net": "WHEEL3"
-    },
-    "3": {
-     "name": "CCW end",
-     "net": "GND"
-    },
-    "D1": {
-     "name": "Dummy",
-     "net": "GND"
-    },
-    "D2": {
-     "name": "Dummy",
-     "net": "GND"
-    },
-    "M1": {
-     "name": "Mounting",
-     "net": "GND"
-    },
-    "M2": {
-     "name": "Mounting",
-     "net": "GND"
-    }
-   },
-   "pin_source": "Alps RK10J p2-3 (reflow type terminal layout; dummy and mounting lands to GND)"
-  },
-  {
-   "ref": "C41",
-   "value": "100 nF X7R 16 V",
-   "mpn": "CL05B104KO5NNNC",
-   "maker": "Samsung",
-   "lcsc": "C1525",
-   "package": "0402",
-   "pins": 2,
-   "chain": 9,
-   "function": "Wheel 3 ADC reservoir",
-   "local_to": "U1.15",
-   "pinmap": {
-    "1": {
-     "net": "WHEEL3"
-    },
-    "2": {
-     "net": "GND"
-    }
-   }
-  },
-  {
    "ref": "SW2",
    "value": "SPST",
    "mpn": "EVQ-P7J01P",
@@ -2890,6 +2701,632 @@
    "function": "Mounting hole, 8, 66 mm from the board's top-left corner",
    "assembly": "unplated hole, not a part",
    "pinmap": {}
+  },
+  {
+   "ref": "SW4",
+   "value": "Encoder, 15 detents + push",
+   "mpn": "SIQ-02FVS3",
+   "maker": "Mitsumi",
+   "lcsc": "C2925423",
+   "package": "Edge thumbwheel encoder, reflow SMD",
+   "pins": 10,
+   "chain": 9,
+   "function": "Tuning wheel: turn to tune, push in to select",
+   "pads_note": "4 terminals (A, S, C, B) + 6 frame tabs; 2 unplated locating holes",
+   "pinmap": {
+    "1": {
+     "name": "A",
+     "net": "ENC_A"
+    },
+    "2": {
+     "name": "S",
+     "net": "ENC_SW"
+    },
+    "3": {
+     "name": "C",
+     "net": "GND"
+    },
+    "4": {
+     "name": "B",
+     "net": "ENC_B"
+    },
+    "M1": {
+     "name": "Frame",
+     "net": "GND"
+    },
+    "M2": {
+     "name": "Frame",
+     "net": "GND"
+    },
+    "M3": {
+     "name": "Frame",
+     "net": "GND"
+    },
+    "M4": {
+     "name": "Frame",
+     "net": "GND"
+    },
+    "M5": {
+     "name": "Frame",
+     "net": "GND"
+    },
+    "M6": {
+     "name": "Frame",
+     "net": "GND"
+    }
+   },
+   "pin_source": "Mitsumi SIQ series p3 (SIQ-02FVS3: terminals A, S, C, B at 2.95 mm pitch; circuit A/B encoder and S slide switch to common C; land dimensions: 4 side tabs, 2 angled tabs, 2 locating holes)"
+  },
+  {
+   "ref": "DS1",
+   "value": "0.3\" 7-segment, white, common anode",
+   "mpn": "GS3011AW-B",
+   "maker": "Guangcai",
+   "lcsc": "C22462661",
+   "package": "SMD single digit, 12 × 7.3 mm",
+   "pins": 10,
+   "chain": 9,
+   "function": "Station display digit 1 (reading order)",
+   "pinmap": {
+    "1": {
+     "name": "E",
+     "net": "SEG1_E"
+    },
+    "2": {
+     "name": "D",
+     "net": "SEG1_D"
+    },
+    "3": {
+     "name": "Common anode",
+     "net": "VBUS"
+    },
+    "4": {
+     "name": "C",
+     "net": "SEG1_C"
+    },
+    "5": {
+     "name": "DP",
+     "net": "SEG1_DP"
+    },
+    "6": {
+     "name": "B",
+     "net": "SEG1_B"
+    },
+    "7": {
+     "name": "A",
+     "net": "SEG1_A"
+    },
+    "8": {
+     "name": "Common anode",
+     "net": "VBUS"
+    },
+    "9": {
+     "name": "F",
+     "net": "SEG1_F"
+    },
+    "10": {
+     "name": "G",
+     "net": "SEG1_G"
+    }
+   },
+   "pin_source": "Guangcai GS3011A/CX-X p3 (common anode: anodes 3 and 8; A 7, B 6, C 4, D 2, E 1, F 9, G 10, DP 5)"
+  },
+  {
+   "ref": "DS2",
+   "value": "0.3\" 7-segment, white, common anode",
+   "mpn": "GS3011AW-B",
+   "maker": "Guangcai",
+   "lcsc": "C22462661",
+   "package": "SMD single digit, 12 × 7.3 mm",
+   "pins": 10,
+   "chain": 9,
+   "function": "Station display digit 2 (reading order)",
+   "pinmap": {
+    "1": {
+     "name": "E",
+     "net": "SEG2_E"
+    },
+    "2": {
+     "name": "D",
+     "net": "SEG2_D"
+    },
+    "3": {
+     "name": "Common anode",
+     "net": "VBUS"
+    },
+    "4": {
+     "name": "C",
+     "net": "SEG2_C"
+    },
+    "5": {
+     "name": "DP",
+     "net": "SEG2_DP"
+    },
+    "6": {
+     "name": "B",
+     "net": "SEG2_B"
+    },
+    "7": {
+     "name": "A",
+     "net": "SEG2_A"
+    },
+    "8": {
+     "name": "Common anode",
+     "net": "VBUS"
+    },
+    "9": {
+     "name": "F",
+     "net": "SEG2_F"
+    },
+    "10": {
+     "name": "G",
+     "net": "SEG2_G"
+    }
+   },
+   "pin_source": "Guangcai GS3011A/CX-X p3 (common anode: anodes 3 and 8; A 7, B 6, C 4, D 2, E 1, F 9, G 10, DP 5)"
+  },
+  {
+   "ref": "DS3",
+   "value": "0.3\" 7-segment, white, common anode",
+   "mpn": "GS3011AW-B",
+   "maker": "Guangcai",
+   "lcsc": "C22462661",
+   "package": "SMD single digit, 12 × 7.3 mm",
+   "pins": 10,
+   "chain": 9,
+   "function": "Station display digit 3 (reading order)",
+   "pinmap": {
+    "1": {
+     "name": "E",
+     "net": "SEG3_E"
+    },
+    "2": {
+     "name": "D",
+     "net": "SEG3_D"
+    },
+    "3": {
+     "name": "Common anode",
+     "net": "VBUS"
+    },
+    "4": {
+     "name": "C",
+     "net": "SEG3_C"
+    },
+    "5": {
+     "name": "DP",
+     "net": "SEG3_DP"
+    },
+    "6": {
+     "name": "B",
+     "net": "SEG3_B"
+    },
+    "7": {
+     "name": "A",
+     "net": "SEG3_A"
+    },
+    "8": {
+     "name": "Common anode",
+     "net": "VBUS"
+    },
+    "9": {
+     "name": "F",
+     "net": "SEG3_F"
+    },
+    "10": {
+     "name": "G",
+     "net": "SEG3_G"
+    }
+   },
+   "pin_source": "Guangcai GS3011A/CX-X p3 (common anode: anodes 3 and 8; A 7, B 6, C 4, D 2, E 1, F 9, G 10, DP 5)"
+  },
+  {
+   "ref": "DS4",
+   "value": "0.3\" 7-segment, white, common anode",
+   "mpn": "GS3011AW-B",
+   "maker": "Guangcai",
+   "lcsc": "C22462661",
+   "package": "SMD single digit, 12 × 7.3 mm",
+   "pins": 10,
+   "chain": 9,
+   "function": "Station display digit 4 (reading order)",
+   "pinmap": {
+    "1": {
+     "name": "E",
+     "net": "SEG4_E"
+    },
+    "2": {
+     "name": "D",
+     "net": "SEG4_D"
+    },
+    "3": {
+     "name": "Common anode",
+     "net": "VBUS"
+    },
+    "4": {
+     "name": "C",
+     "net": "SEG4_C"
+    },
+    "5": {
+     "name": "DP",
+     "net": "SEG4_DP"
+    },
+    "6": {
+     "name": "B",
+     "net": "SEG4_B"
+    },
+    "7": {
+     "name": "A",
+     "net": "SEG4_A"
+    },
+    "8": {
+     "name": "Common anode",
+     "net": "VBUS"
+    },
+    "9": {
+     "name": "F",
+     "net": "SEG4_F"
+    },
+    "10": {
+     "name": "G",
+     "net": "SEG4_G"
+    }
+   },
+   "pin_source": "Guangcai GS3011A/CX-X p3 (common anode: anodes 3 and 8; A 7, B 6, C 4, D 2, E 1, F 9, G 10, DP 5)"
+  },
+  {
+   "ref": "U8",
+   "value": "36-channel LED driver",
+   "mpn": "IS31FL3236A-QFLS2-TR",
+   "maker": "ISSI",
+   "lcsc": "C246443",
+   "package": "QFN-44 5 × 5 mm + EP",
+   "pins": 45,
+   "chain": 9,
+   "function": "Station display driver",
+   "pads_note": "44 pins + thermal pad",
+   "pinmap": {
+    "1": {
+     "name": "OUT3",
+     "net": "SEG1_C"
+    },
+    "2": {
+     "name": "OUT4",
+     "net": "SEG1_D"
+    },
+    "3": {
+     "name": "OUT5",
+     "net": "SEG1_E"
+    },
+    "4": {
+     "name": "OUT6",
+     "net": "SEG1_F"
+    },
+    "5": {
+     "name": "OUT7",
+     "net": "SEG1_G"
+    },
+    "6": {
+     "name": "OUT8",
+     "net": "SEG1_DP"
+    },
+    "7": {
+     "name": "OUT9",
+     "net": "SEG2_A"
+    },
+    "8": {
+     "name": "OUT10",
+     "net": "SEG2_B"
+    },
+    "9": {
+     "name": "OUT11",
+     "net": "SEG2_C"
+    },
+    "10": {
+     "name": "OUT12",
+     "net": "SEG2_D"
+    },
+    "11": {
+     "name": "OUT13",
+     "net": "SEG2_E"
+    },
+    "12": {
+     "name": "OUT14",
+     "net": "SEG2_F"
+    },
+    "13": {
+     "name": "OUT15",
+     "net": "SEG2_G"
+    },
+    "14": {
+     "name": "OUT16",
+     "net": "SEG2_DP"
+    },
+    "15": {
+     "name": "OUT17",
+     "net": "SEG3_A"
+    },
+    "16": {
+     "name": "OUT18",
+     "net": "SEG3_B"
+    },
+    "17": {
+     "name": "GND",
+     "net": "GND"
+    },
+    "18": {
+     "name": "OUT19",
+     "net": "SEG3_C"
+    },
+    "19": {
+     "name": "OUT20",
+     "net": "SEG3_D"
+    },
+    "20": {
+     "name": "OUT21",
+     "net": "SEG3_E"
+    },
+    "21": {
+     "name": "OUT22",
+     "net": "SEG3_F"
+    },
+    "22": {
+     "name": "OUT23",
+     "net": "SEG3_G"
+    },
+    "23": {
+     "name": "OUT24",
+     "net": "SEG3_DP"
+    },
+    "24": {
+     "name": "OUT25",
+     "net": "SEG4_A"
+    },
+    "25": {
+     "name": "OUT26",
+     "net": "SEG4_B"
+    },
+    "26": {
+     "name": "OUT27",
+     "net": "SEG4_C"
+    },
+    "27": {
+     "name": "OUT28",
+     "net": "SEG4_D"
+    },
+    "28": {
+     "name": "OUT29",
+     "net": "SEG4_E"
+    },
+    "29": {
+     "name": "OUT30",
+     "net": "SEG4_F"
+    },
+    "30": {
+     "name": "OUT31",
+     "net": "SEG4_G"
+    },
+    "31": {
+     "name": "OUT32",
+     "net": "SEG4_DP"
+    },
+    "32": {
+     "name": "OUT33",
+     "net": "NC"
+    },
+    "33": {
+     "name": "OUT34",
+     "net": "NC"
+    },
+    "34": {
+     "name": "OUT35",
+     "net": "NC"
+    },
+    "35": {
+     "name": "OUT36",
+     "net": "NC"
+    },
+    "36": {
+     "name": "SDB",
+     "net": "LED_SDB"
+    },
+    "37": {
+     "name": "AD",
+     "net": "GND"
+    },
+    "38": {
+     "name": "VCC",
+     "net": "VBUS"
+    },
+    "39": {
+     "name": "GND",
+     "net": "GND"
+    },
+    "40": {
+     "name": "R_EXT",
+     "net": "DRV_REXT"
+    },
+    "41": {
+     "name": "SDA",
+     "net": "I2C_SDA"
+    },
+    "42": {
+     "name": "SCL",
+     "net": "I2C_SCL"
+    },
+    "43": {
+     "name": "OUT1",
+     "net": "SEG1_A"
+    },
+    "44": {
+     "name": "OUT2",
+     "net": "SEG1_B"
+    },
+    "EP": {
+     "name": "Exposed pad",
+     "net": "GND"
+    }
+   },
+   "pin_source": "ISSI IS31FL3236A Rev. A p2 (pin configuration and description); AD to GND gives address 0111100 (p6 Table 1)"
+  },
+  {
+   "ref": "R28",
+   "value": "10 kΩ 1%",
+   "mpn": "0402WGF1002TCE",
+   "maker": "UNI-ROYAL",
+   "lcsc": "C25744",
+   "package": "0402",
+   "pins": 2,
+   "chain": 9,
+   "function": "U8 REXT: 7.6 mA segment maximum",
+   "local_to": "U8.40",
+   "pinmap": {
+    "1": {
+     "net": "DRV_REXT"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
+  },
+  {
+   "ref": "R29",
+   "value": "100 kΩ 1%",
+   "mpn": "0402WGF1003TCE",
+   "maker": "UNI-ROYAL",
+   "lcsc": "C25741",
+   "package": "0402",
+   "pins": 2,
+   "chain": 9,
+   "function": "U8 SDB pull-down",
+   "local_to": "U8.36",
+   "pinmap": {
+    "1": {
+     "net": "LED_SDB"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
+  },
+  {
+   "ref": "R30",
+   "value": "10 kΩ 1%",
+   "mpn": "0402WGF1002TCE",
+   "maker": "UNI-ROYAL",
+   "lcsc": "C25744",
+   "package": "0402",
+   "pins": 2,
+   "chain": 9,
+   "function": "Encoder A pull-up",
+   "local_to": "SW4.1",
+   "pinmap": {
+    "1": {
+     "net": "ENC_A"
+    },
+    "2": {
+     "net": "3V3"
+    }
+   }
+  },
+  {
+   "ref": "R31",
+   "value": "10 kΩ 1%",
+   "mpn": "0402WGF1002TCE",
+   "maker": "UNI-ROYAL",
+   "lcsc": "C25744",
+   "package": "0402",
+   "pins": 2,
+   "chain": 9,
+   "function": "Encoder B pull-up",
+   "local_to": "SW4.4",
+   "pinmap": {
+    "1": {
+     "net": "ENC_B"
+    },
+    "2": {
+     "net": "3V3"
+    }
+   }
+  },
+  {
+   "ref": "R32",
+   "value": "10 kΩ 1%",
+   "mpn": "0402WGF1002TCE",
+   "maker": "UNI-ROYAL",
+   "lcsc": "C25744",
+   "package": "0402",
+   "pins": 2,
+   "chain": 9,
+   "function": "Encoder push-switch pull-up",
+   "local_to": "SW4.2",
+   "pinmap": {
+    "1": {
+     "net": "ENC_SW"
+    },
+    "2": {
+     "net": "3V3"
+    }
+   }
+  },
+  {
+   "ref": "C42",
+   "value": "1 µF X5R 50 V",
+   "mpn": "CL10A105KB8NNNC",
+   "maker": "Samsung",
+   "lcsc": "C15849",
+   "package": "0603",
+   "pins": 2,
+   "chain": 9,
+   "function": "U8 VCC bulk",
+   "local_to": "U8.38",
+   "pinmap": {
+    "1": {
+     "net": "VBUS"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
+  },
+  {
+   "ref": "C43",
+   "value": "100 nF X7R 16 V",
+   "mpn": "CL05B104KO5NNNC",
+   "maker": "Samsung",
+   "lcsc": "C1525",
+   "package": "0402",
+   "pins": 2,
+   "chain": 9,
+   "function": "U8 VCC bypass",
+   "local_to": "U8.38",
+   "pinmap": {
+    "1": {
+     "net": "VBUS"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
+  },
+  {
+   "ref": "C44",
+   "value": "10 µF X5R 25 V",
+   "mpn": "CL21A106KAYNNNE",
+   "maker": "Samsung",
+   "lcsc": "C15850",
+   "package": "0805",
+   "pins": 2,
+   "chain": 9,
+   "function": "Display anode reservoir",
+   "local_to": "DS2.3",
+   "pinmap": {
+    "1": {
+     "net": "VBUS"
+    },
+    "2": {
+     "net": "GND"
+    }
+   }
   }
  ],
  "nets": {
@@ -2954,17 +3391,51 @@
   "RX_RST": "U4 reset, R19 pull-down",
   "RX_GPO1": "U4 GPO1 filter cap",
   "RX_GPO2": "U4 GPO2/INT filter cap",
-  "I2C_SCL": "I2C clock U1-U4, R20 pull-up",
-  "I2C_SDA": "I2C data U1-U4, R21 pull-up",
-  "WHEEL1": "RV1 wiper to U1 PA3",
-  "WHEEL2": "RV2 wiper to U1 PA4",
-  "WHEEL3": "RV3 wiper to U1 PA5",
+  "I2C_SCL": "I2C clock U1-U4-U8, R20 pull-up",
+  "I2C_SDA": "I2C data U1-U4-U8, R21 pull-up",
   "LED_R": "U1 PA0 to R25",
   "LED_G": "U1 PA1 to R26",
   "LED_B": "U1 PA2 to R27",
   "LED_R_K": "R25 to D1 red cathode",
   "LED_G_K": "R26 to D1 green cathode",
-  "LED_B_K": "R27 to D1 blue cathode"
+  "LED_B_K": "R27 to D1 blue cathode",
+  "ENC_A": "SW4 encoder A to U1 PA3, R30 pull-up",
+  "ENC_B": "SW4 encoder B to U1 PA4, R31 pull-up",
+  "ENC_SW": "SW4 push switch to U1 PA5, R32 pull-up",
+  "LED_SDB": "U1 PC13 to U8 SDB, R29 pull-down: display off until firmware runs",
+  "DRV_REXT": "U8 R_EXT to R28, sets the segment current",
+  "SEG1_A": "U8 OUT1 to DS1 segment A",
+  "SEG1_B": "U8 OUT2 to DS1 segment B",
+  "SEG1_C": "U8 OUT3 to DS1 segment C",
+  "SEG1_D": "U8 OUT4 to DS1 segment D",
+  "SEG1_E": "U8 OUT5 to DS1 segment E",
+  "SEG1_F": "U8 OUT6 to DS1 segment F",
+  "SEG1_G": "U8 OUT7 to DS1 segment G",
+  "SEG1_DP": "U8 OUT8 to DS1 segment DP",
+  "SEG2_A": "U8 OUT9 to DS2 segment A",
+  "SEG2_B": "U8 OUT10 to DS2 segment B",
+  "SEG2_C": "U8 OUT11 to DS2 segment C",
+  "SEG2_D": "U8 OUT12 to DS2 segment D",
+  "SEG2_E": "U8 OUT13 to DS2 segment E",
+  "SEG2_F": "U8 OUT14 to DS2 segment F",
+  "SEG2_G": "U8 OUT15 to DS2 segment G",
+  "SEG2_DP": "U8 OUT16 to DS2 segment DP",
+  "SEG3_A": "U8 OUT17 to DS3 segment A",
+  "SEG3_B": "U8 OUT18 to DS3 segment B",
+  "SEG3_C": "U8 OUT19 to DS3 segment C",
+  "SEG3_D": "U8 OUT20 to DS3 segment D",
+  "SEG3_E": "U8 OUT21 to DS3 segment E",
+  "SEG3_F": "U8 OUT22 to DS3 segment F",
+  "SEG3_G": "U8 OUT23 to DS3 segment G",
+  "SEG3_DP": "U8 OUT24 to DS3 segment DP",
+  "SEG4_A": "U8 OUT25 to DS4 segment A",
+  "SEG4_B": "U8 OUT26 to DS4 segment B",
+  "SEG4_C": "U8 OUT27 to DS4 segment C",
+  "SEG4_D": "U8 OUT28 to DS4 segment D",
+  "SEG4_E": "U8 OUT29 to DS4 segment E",
+  "SEG4_F": "U8 OUT30 to DS4 segment F",
+  "SEG4_G": "U8 OUT31 to DS4 segment G",
+  "SEG4_DP": "U8 OUT32 to DS4 segment DP"
  },
  "pad_nets": [
   "SWCLK",

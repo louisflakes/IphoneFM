@@ -1,4 +1,6 @@
-# Analog FM rendition: sourcing check
+# Analog FM rendition: sourcing check (Rev B)
+
+Rev B changes the front panel only; see [Rev B front panel](#rev-b-front-panel-2026-11-06) at the end. The Rev A tables below are kept as the record of how each part was chosen; RV1–RV3 and the C&K DIP no longer fit the board.
 
 For about 6 boards, **fully assembled by JLCPCB, with no hand soldering**. Stock checked 2026-10-20 with the JLCPCB and DigiKey APIs. Datasheets are in [docs/datasheets/analog-fm/](../../docs/datasheets/analog-fm/) unless noted.
 
@@ -93,3 +95,18 @@ JLC charges a fee per Extended part type in every assembly order (about $3 each,
 | Murata GRM155R71H223KA12D 22 nF X7R 50 V | FH 0402B223K500NT 22 nF X7R 50 V (C1532) | C32 | Same spec |
 
 Left as they are, with no Basic equivalent of the same value: R5 1.1 kΩ (loop filter), R20/R21 6.8 kΩ, R22 604 Ω, R26/R27 390 Ω, C25 1.5 nF, C29 56 pF, C35 6 pF, C36 3.3 pF, the ferrites, inductors and every specialist part.
+
+## Rev B front panel (2026-11-06)
+
+Chosen by the user from [front-panel-candidates.png](front-panel-candidates.png); details in [front-panel.md](front-panel.md). Each datasheet is saved in [docs/datasheets/rev-b/](../../docs/datasheets/rev-b/) and was checked before the part went into netlist.json. Stock from the JLC API on 2026-11-06.
+
+| Block | Part | JLC stock | Datasheet check | Status |
+|---|---|---|---|---|
+| Tuning | **Mitsumi SIQ-02FVS3** edge thumbwheel encoder | C2925423, 1,349; equivalents SAMZO C29780879, XUNPU C42416825, Shou Han C56192303 | 15 detents (24°), A/B quadrature, both contacts open at each detent; slide switch worked by pushing the wheel in; 0.5 mA / 5 V; Ø14.5 mm dial, 4 mm tall; reflow (`ENC_Mitsumi_SIQ-02FVS3_C2925423.pdf` p1–3) | Checked. Replaces RV1–RV3 (Alps RK10J) |
+| Station display | **Guangcai GS3011AW-B** ×4, 0.3" single digit, white, black face, common anode | C22462661, 818 | 12 × 7.3 × 3.75 mm; VF 3.0 typ / 3.8 V max at 10 mA; 60–180 mcd; IF ≤ 30 mA; anodes pins 3 and 8 (`DISP_Guangcai_GS3011AW-B_C22462661.pdf` p2–5) | Checked. The 0.2" white GS2016CW-G was the first pick; its common-anode version is out of stock |
+| Display driver | **ISSI IS31FL3236A-QFLS2-TR** | C246443, 6,185 | 36 constant-current sinks, 2.7–5.5 V, I²C (logic high ≥ 1.4 V at 5.5 V), outputs ≤ VCC + 0.3 V, 2 kΩ minimum R_EXT, SDB shutdown 3–5 µA; QFN-44 5 × 5 mm (`DRV_ISSI_IS31FL3236A_C246443.pdf` p1–12) | Checked. Rejected: WCH CH455G (C89818): multiplexed, and its SDA has an internal pull-up to its 5 V supply |
+| Power setting | **Diptronics DHN-06-V-T/R**, 6-position top-lever DIP, 1.27 mm | C224997, 14,336 | 1.6 mm tall; 25 mA / 24 V; gold contacts; 1,000 operations; PCB layout pad rows 4.90 / 7.40 mm, 0.76 mm pads (`DIP_Diptronics_DHN-06-V_C224997.pdf` p1) | Checked. Replaces the C&K TDP06H1SBD1 (JLC stock 0, global sourcing only) |
+
+New passives are all JLC Basic parts already on the board: 10 kΩ C25744 (R28, R30–R32), 100 kΩ C25741 (R29), 1 µF C15849 (C42), 100 nF C1525 (C43), 10 µF C15850 (C44). Rev B adds four Extended part types and drops two (RK10J and the C&K DIP's global-sourcing line).
+
+**Height check (Rev B):** the wheel (4.0 mm), digits (3.75 mm) and DIP (1.6 mm) all stay below the SMA jack (9.5 mm), which still sets the enclosure height.

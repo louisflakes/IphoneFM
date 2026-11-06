@@ -1,4 +1,6 @@
-# Analog FM rendition: bill of materials
+# Analog FM rendition: bill of materials (Rev B)
+
+Rev B is Rev A with a new front panel (chain 9, and SW3 in chain 6): a push-wheel encoder, a four-digit station display and its driver, and a top-lever DIP switch. Their datasheets are in [docs/datasheets/rev-b/](../../docs/datasheets/rev-b/); the choice is in [front-panel.md](front-panel.md).
 
 Built one chain at a time. Each chain is checked against its datasheet and against published designs that use the exact part. Key parts and their stock are in [sourcing.md](sourcing.md); datasheets are in [docs/datasheets/analog-fm/](../../docs/datasheets/analog-fm/) and `plan-c/`.
 
@@ -20,7 +22,7 @@ Reference designs are read with a small connectivity script on their KiCad files
 | 6 | U7 PE43711 attenuator and SW3 DIP switch | **Done** |
 | 7 | FL1 low-pass, U5 RF switch, J2, D5 | **Done** |
 | 8 | U4 Si4705 receiver (QFN) | **Done** |
-| 9 | Controls: thumbwheels, slider, BOOT button, LED | **Done** |
+| 9 | Controls: tuning wheel, station display, slider, BOOT button, LED | **Done** (Rev B) |
 | 10 | Test pads and power budget | **Done** |
 
 Dropped with the move to the LMX2571 (option D2): the discrete oscillator, buffer and lock gate, the ADF4002 loop, and the DAC audio filter. The MCU's DAC no longer carries transmit audio.
@@ -122,9 +124,10 @@ Removed from Plan C: Y1 (ABS07 32.768 kHz) and its two 5.6 pF capacitors; LSCO o
 | 17 | PA7 | GPIO in | RF_MODE | Bootloader SPI1_MOSI input (pull-down); the slider and R18 set its level |
 | 18 | PB0 | ADC1_IN15 | CC1 | TT_ha (3.6 V tolerant); CC stays under about 2.6 V with Rd |
 | 19 | PB1 | ADC1_IN16 | CC2 | FT_ha |
-| 13 | PA3 | ADC1_IN8 | RV1 wiper | |
-| 14 | PA4 | ADC1_IN9 | RV2 wiper | Bootloader SPI1_NSS input; SPI1 may select, and its MISO (PA6) is left unconnected |
-| 15 | PA5 | ADC1_IN10 | RV3 wiper | Bootloader SPI1_SCK; a static voltage never clocks it |
+| 13 | PA3 | GPIO in, EXTI3 | SW4 encoder A, 10 kΩ pull-up | Rev B. Not a bootloader pin |
+| 14 | PA4 | GPIO in, EXTI4 | SW4 encoder B, 10 kΩ pull-up | Rev B. Bootloader SPI1_NSS input: high at every detent (both contacts open at rest, SIQ p3), so SPI1 stays deselected |
+| 15 | PA5 | GPIO in, EXTI5 | SW4 push switch, 10 kΩ pull-up | Rev B. Bootloader SPI1_SCK input: high unless the wheel is pushed while the bootloader runs |
+| 2 | PC13 | GPIO out | U8 SDB, 100 kΩ pull-down | Rev B. Analog with no pull at reset, so the display stays off until firmware runs. Light loads only (≤ 2 MHz, not a current source, DS14217 Table 26 note 2); SDB draws nA. Not a bootloader pin |
 | 10 | PA0 | TIM2_CH1 (AF1), open-drain | LED red via 510 Ω | FT_hat: 5 V tolerant with pulls off (p132 note 5); analog with no pull at reset, so the LED stays dark |
 | 11 | PA1 | TIM2_CH2 (AF1), open-drain | LED green via 390 Ω | FT_hat |
 | 12 | PA2 | TIM2_CH3 (AF1), open-drain | LED blue via 390 Ω | FT_ha |
@@ -132,9 +135,9 @@ Removed from Plan C: Y1 (ABS07 32.768 kHz) and its two 5.6 pF capacitors; LSCO o
 | 5 | PH0 | OSC_IN (HSE bypass) | Y2 via 33 Ω | |
 | 32, 33 | PA11, PA12 | USB_DM, USB_DP | J1 | |
 | 34, 37 | PA13, PA14 | SWDIO, SWCLK | SWD pads | |
-| 2, 16, 20, 21, 38 | PC13, PA6, PB2, PB10, PA15 | — | Spare, unconnected | PA6 is the bootloader's SPI1_MISO output (AN2606 p387), so it stays free |
+| 16, 20, 21, 38 | PA6, PB2, PB10, PA15 | — | Spare, unconnected | PA6 is the bootloader's SPI1_MISO output (AN2606 p387), so it stays free |
 
-Pins 6, 10–19, 40, 42, 45 and 46 were reassigned on 2026-10-25 for the turned U1 of floorplan B3: receiver lines and LEDs face U4 and D1, wheels and CC face the left and J1. Each pin checked against DS14217 Tables 26–28 and p132 and AN2606 Table 165.
+Rev B (2026-11-06) reuses the wheel pins 13–15 for the encoder and spare PC13 for the display's shutdown line, each checked against DS14217 Tables 26–28 and AN2606 Table 165 (p386–387). The encoder is decoded in firmware (no timer has both its encoder inputs on these pins). Pins 6, 10–19, 40, 42, 45 and 46 were reassigned on 2026-10-25 for the turned U1 of floorplan B3: receiver lines and LEDs face U4 and D1, wheels and CC face the left and J1. Each pin checked against DS14217 Tables 26–28 and p132 and AN2606 Table 165.
 
 ## Chain 4: Y2 20 MHz reference oscillator (YXC OT322520MJBA4SL)
 
@@ -222,7 +225,7 @@ Chosen 2026-10-21 (see [modulation-strategies.md](modulation-strategies.md)). It
 | CLK 17, SI 18 | — | GND | | Serial interface unused |
 | C0.25 (D0) 1 | — | GND | | "Ground… if not in use" (Table 9 note 1) |
 | C16, C8, C4, C2, C1, C0.5 (pins 19–24) | UNI-ROYAL 0402WGF1002TCE ×6 | 10 kΩ pull-down each | C25744 | So an open switch reads low (p8: floating pins at power-up give minimum attenuation) |
-| SW3 | C&K TDP06H1SBD1 | 6-position side-actuated DIP | Global sourcing (DigiKey 1,180) | One side of every switch on 3V3. Switch 1 → C16 … switch 6 → C0.5. Silkscreen 16 / 8 / 4 / 2 / 1 / 0.5 dB. 0.33 mA per closed switch, within its 25 mA rating |
+| SW3 | Diptronics DHN-06-V-T/R | 6-position top-lever DIP, 1.27 mm, 1.6 mm tall | C224997, 14,336 | Rev B: replaces Rev A's side-lever C&K TDP06H1SBD1 (JLC stock 0). One side of every switch on 3V3. Switch 1 → C16 … switch 6 → C0.5. Silkscreen 16 / 8 / 4 / 2 / 1 / 0.5 dB. 0.33 mA per closed switch, within its 25 mA rating (DHN p1) |
 | RF1 5 | — | From U2 RFoutTx through the 100 pF in chain 5 | | RF pins must be at 0 V DC (Table 9 note 2) |
 | RF2 14 | — | To FL1 (chain 7) | | 0 V DC |
 | GND 4, 6–13, 15, pad | — | GND | | |
@@ -301,17 +304,31 @@ Circuits as Plan C chains 7, 11 and 12. U5 is compared against four published de
 
 ## Chain 9: Controls
 
-**Designators:** C39 Wheel 1 ADC reservoir (100 nF X7R 16 V); C40 Wheel 2 ADC reservoir (100 nF X7R 16 V); C41 Wheel 3 ADC reservoir (100 nF X7R 16 V); D1 Status LED; R25 LED red series (510 Ω 1%); R26 LED green series (390 Ω 1%); R27 LED blue series (390 Ω 1%); RV1 Tuning wheel 1 (10 kΩ 3B); RV2 Tuning wheel 2 (10 kΩ 3B); RV3 Tuning wheel 3 (10 kΩ 3B); SW2 BOOT button.
+**Designators:** C42 U8 VCC bulk (1 µF X5R 50 V); C43 U8 VCC bypass (100 nF X7R 16 V); C44 Display anode reservoir (10 µF X5R 25 V); D1 Status LED; DS1 Station display digit 1 (reading order); DS2 Station display digit 2 (reading order); DS3 Station display digit 3 (reading order); DS4 Station display digit 4 (reading order); R25 LED red series (510 Ω 1%); R26 LED green series (390 Ω 1%); R27 LED blue series (390 Ω 1%); R28 U8 REXT: 7.6 mA segment maximum (10 kΩ 1%); R29 U8 SDB pull-down (100 kΩ 1%); R30 Encoder A pull-up (10 kΩ 1%); R31 Encoder B pull-up (10 kΩ 1%); R32 Encoder push-switch pull-up (10 kΩ 1%); SW2 BOOT button; SW4 Tuning wheel: turn to tune, push in to select; U8 Station display driver.
+
+Rev B front panel. The three Rev A thumbwheel pots (RV1–RV3) and their ADC caps (C39–C41) are gone; one push-wheel encoder tunes, and a four-digit display shows the station.
 
 | Ref | Part | Wiring | JLC | Note |
 |---|---|---|---|---|
-| RV1–RV3 | Alps RK10J11R0A0H | Pin 1 → 3V3, pin 3 → GND, wiper pin 2 → U1 ADC; the two dummy pins → GND pads | C470766, 913 | `POT_Alps_RK10J.pdf` p3 terminal layout |
-| C (each wiper) | Samsung CL05B104KO5NNNC | 100 nF to GND at the ADC pin | C1525 | Charge reservoir for the ADC's sampling capacitor; ≤ 0.25 ms time constant with the pot, fine for a hand-turned wheel |
+| SW4 | Mitsumi SIQ-02FVS3 | A → U1 PA3, B → PA4, S (push) → PA5; C (common) and the frame tabs → GND | C2925423, 1,349 | 15 detents, both contacts open at each detent; quadrature; 0.5 mA / 5 V contacts (SIQ p2–3). Turn to tune, push the wheel in to select. Equivalents: SAMZO C29780879, XUNPU C42416825, Shou Han C56192303 |
+| R30–R32 | UNI-ROYAL 0402WGF1002TCE ×3 | 10 kΩ pull-ups to 3V3 on A, B, S | C25744 | 0.33 mA through a closed contact, under its 0.5 mA rating. Debounced in firmware: a filter capacitor across the contact would discharge through it |
+| DS1–DS4 | Guangcai GS3011AW-B ×4 | Anodes 3, 8 → VBUS; segments A 7, B 6, C 4, D 2, E 1, F 9, G 10, DP 5 → U8 | C22462661, 818 | 0.3" (7.62 mm) white digits, black face, common anode (GS3011A/CX-X p2–3). VF 3.0 typ / 3.8 max at 10 mA, 60–180 mcd, IF ≤ 30 mA (p4) |
+| U8 | ISSI IS31FL3236A-QFLS2-TR | OUT1–OUT32 → the 32 segments in reading order (DS1 A … DS4 DP); OUT33–36 open | C246443, 6,185 | 36 constant-current sinks, static drive (no multiplexing, no scan noise), 256-step PWM at 3 or 22 kHz (p1, p11). Firmware sets 22 kHz, above hearing, against capacitor hum (p12) |
+| U8 VCC 38 (C42, C43) | Samsung CL10A105KB8NNNC + CL05B104KO5NNNC | VBUS; 1 µF + 100 nF to GND | C15849 / C1525 | Typical application circuit (p1). VCC is on VBUS because every output must stay under VCC + 0.3 V (p4), and an off segment's output sits near the anodes' 5 V |
+| C44 | Samsung CL21A106KAYNNNE | 10 µF, VBUS to GND at the digits' anodes | C15850 | Local reservoir for the segment current pulses, so they stay off the VBUS line from J1 to U3 |
+| U8 R_EXT 40 (R28) | UNI-ROYAL 0402WGF1002TCE | 10 kΩ to GND | C25744 | IMAX = 58.5 × 1.3 V / R_EXT (p10) = 7.6 mA per segment at most; firmware dims below that (PWM, and the ×1, ½, ⅓, ¼ scale, p9). 2 kΩ minimum (p10) |
+| U8 SDB 36 (R29) | UNI-ROYAL 0402WGF1003TCE | 100 kΩ to GND; U1 PC13 drives it | C25741 | As the typical circuit (p1). Off until firmware runs: 3–5 µA shut down (p5), so the display adds nothing before USB set-up |
+| U8 AD 37 | — | GND | | I²C address 0111100 (0x3C, p6 Table 1); U4 is 0x11 |
+| U8 SDA 41, SCL 42 | — | U1's I²C1 with U4; R20/R21 6.8 kΩ pull-ups to 3V3 | | Logic high ≥ 1.4 V at VCC 5.5 V (p5), so 3.3 V logic works with a 5 V supply. A second device adds a few pF; the 6.8 kΩ pull-ups still suit 100–400 kHz |
+| U8 GND 17, 39, pad | — | GND | | |
 | SW1 | Shou Han MSK12C02 | Chain 7 | | |
 | SW2 | Panasonic EVQ-P7J01P | 3V3 to U1 BOOT0 (10 kΩ pull-down, chain 3) | C2828254, 9,729 | BOOT button only (Plan C chain 9) |
 | D1 | XINGLIGHT XL-1615RGBC-RF | Pin 2 (common anode) → VBUS; R pin 1 / G pin 3 / B pin 4 through resistors to U1 open-drain pins | C965840 | p8 pinout |
 | R (red) | UNI-ROYAL 0402WGF5100TCE | 510 Ω | C25123 | (5 − 1.9 − 0.4) / 510 ≈ 5.3 mA typical, 4.3 mA at VF max 2.4 V (p4). IF max 20 mA (p3) |
 | R (green, blue) | Yageo RC0402FR-07390RL ×2 | 390 Ω | C137997, 1,797,586 | Replaces Panasonic ERJ-2RKF3900X (JLC: 21, minimum buy 828). (5 − 2.8 − 0.4) / 390 ≈ 4.6 mA typical, 3.1 mA at VF max 3.4 V |
+
+- **Headroom:** a lit segment needs its VF (≤ 3.8 V) plus the driver's 0.4–0.6 V at 20 mA (p5), less at 7.6 mA: at most 4.4 V, inside VBUS's 4.75 V minimum.
+- **Driver heat:** all 32 segments at the full 7.6 mA with VF 3.0 V put about 32 × 7.6 mA × 2 V ≈ 0.49 W into U8; a station reading ("107.9", 21 segments) about 0.32 W, and less once dimmed. The thermal pad goes to the ground plane.
 
 The LED allows 5 V reverse voltage (p3), so the unplug case that worried Plan C's Broadcom part is covered.
 
@@ -335,13 +352,14 @@ The LED allows 5 V reverse voltage (p3), so the unplug case that worried Plan C'
 | U2 LMX2571 | ~57 mA at the highest output setting (39 mA typical) | ~0 (CE low) | LMX2571 p1, Figure 61 (p42) |
 | U4 Si4705 | µA (powered down) | ≤ 23 mA (VA 9.5 + VD 13.5, digital mode) | Si4704/05 p5 |
 | Y2 | ≤ 5 mA | ≤ 5 mA | YSO110TR p1 |
-| U7, U5, pull-ups, DIP, wheels | ~4 mA | ~4 mA | |
+| U7, U5, pull-ups, DIP, encoder | ~4 mA | ~4 mA | |
 | **3V3 total** | **~96 mA** | **~62 mA** | |
 | D1 from VBUS | ≤ 15 mA | ≤ 15 mA | Chain 9 |
+| Display from VBUS (U8 and DS1–DS4) | ≤ 252 mA | ≤ 252 mA | Chain 9: 32 segments × 7.6 mA plus U8's 9 mA (p5); "107.9" at full brightness ≈ 169 mA |
 
 - **Apple limits:**
-  - **Before USB setup (≤ 100 mA):** at power-up U2 is off (CE pull-down), U4 is in reset (RST pull-down) and the LED pins are high-impedance. That leaves about 35 mA.
-  - **After setup (≤ 500 mA):** at most about 111 mA from VBUS.
+  - **Before USB setup (≤ 100 mA):** at power-up U2 is off (CE pull-down), U4 is in reset (RST pull-down) and the LED pins are high-impedance, and U8 is shut down (SDB pull-down, 5 µA). That leaves about 35 mA.
+  - **After setup (≤ 500 mA):** at most about 363 mA from VBUS with every segment at full current, about 280 mA showing a station at full brightness.
 - **Regulator:** 600 mA rating; dissipation about (5 − 3.3) × 0.1 A ≈ 0.17 W.
 - **Start-up:**
   - **3V3 capacitance:** about 24 µF. That is U3's 1 µF, U1's 10 µF + 3 × 100 nF + VDDA's 1.1 µF, Y2's 10 µF + 100 nF, U2's seven 100 nF supply caps, U7's 1 µF and U4's 122 nF. U2's VregVCO/Bypass caps sit behind its internal regulators.

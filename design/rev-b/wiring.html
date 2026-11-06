@@ -1,5 +1,5 @@
 <meta charset="utf-8">
-<title>IphoneFM Rev A Wiring</title>
+<title>IphoneFM Rev B Wiring</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap">
@@ -53,15 +53,15 @@ footer a { color: inherit; }
 
 <div class="wrap">
   <header>
-    <h1>IphoneFM Rev A wiring</h1>
-    <p><b>Rev A, the active design</b> (analog FM, option D2). Plan C is archived (design/archive/plan-c/ in the repo). The LMX2571’s internal VCO makes the carrier and U1 streams the FM deviation to it over I²S, so there is no analog modulator. The power level comes from a DIP switch on a step attenuator, and receive is the Si4705 as before. U1’s pins were checked against DS14217 Tables 26–28 and the ROM bootloader’s pins (AN2606 Table 165). Lines are nets; short stubs are parts local to one chip; “▲ 3V3” means wired to U3’s 3.3 V output. Tap a pin for its datasheet source.</p>
+    <h1>IphoneFM Rev B wiring</h1>
+    <p><b>Rev B</b>: Rev A (analog FM, option D2) with a new front panel. A push-wheel encoder (SW4) tunes, four white digits (DS1–DS4) on an IS31FL3236A driver (U8) show the station, and SW3 is a top-lever DIP. Plan C is archived (design/archive/plan-c/ in the repo). The LMX2571’s internal VCO makes the carrier and U1 streams the FM deviation to it over I²S, so there is no analog modulator. The power level comes from a DIP switch on a step attenuator, and receive is the Si4705 as before. U1’s pins were checked against DS14217 Tables 26–28 and the ROM bootloader’s pins (AN2606 Table 165). Lines are nets; short stubs are parts local to one chip; “▲ 3V3” means wired to U3’s 3.3 V output. Tap a pin for its datasheet source.</p>
   </header>
   <div class="layers" id="layers" role="group" aria-label="Layers"></div>
-  <div class="sheet"><svg id="sheet" viewBox="0 0 2360 1570" role="img" aria-label="Analog FM D2: USB-C socket, regulator, STM32U535, 20 MHz oscillator, LMX2571 synthesizer, PE43711 attenuator with DIP switch, low-pass filter, RF switch, SMA, Si4705 receiver, slider, wheels and LED wiring"></svg></div>
+  <div class="sheet"><svg id="sheet" viewBox="0 0 2360 1570" role="img" aria-label="Analog FM D2: USB-C socket, regulator, STM32U535, 20 MHz oscillator, LMX2571 synthesizer, PE43711 attenuator with DIP switch, low-pass filter, RF switch, SMA, Si4705 receiver, slider, tuning wheel, station display and LED wiring"></svg></div>
   <div class="detail" id="detail">Tap a pin.</div>
   <h2>Netlist</h2>
   <div class="tablewrap"><table><thead><tr><th>Net</th><th>From</th><th>To</th><th>In between</th><th>Source</th></tr></thead><tbody id="netlist"></tbody></table></div>
-  <footer>Sources: <a href="https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/8915/STM32U535CEU6QTR.pdf">STM32U535 DS14217 Rev 5</a> · ST AN2606 Rev 61 (bootloader) · <a href="https://www.ti.com/lit/ds/symlink/lmx2571.pdf">TI LMX2571 SNAS654A</a> · TI SNAA309 (FSK I²S) · <a href="https://www.psemi.com/pdf/datasheets/pe43711ds.pdf">pSemi PE43711</a> · <a href="https://www.psemi.com/pdf/datasheets/pe42421ds.pdf">pSemi PE42421</a> · <a href="https://www.skyworksinc.com/-/media/Skyworks/SL/documents/public/data-sheets/Si4704-05-D60.pdf">Si4704/05-D60 Rev 1.2</a> · AN332 · AN383 · YXC OT322520MJBA4SL (YSO110TR) · <a href="https://www.diodes.com/assets/Datasheets/AP2112.pdf">AP2112</a> · HRO TYPE-C-31-M-12 · C&amp;K TDP series · Shou Han MSK12C02 · XINGLIGHT XL-1615RGBC-RF · Alps RK10J · Panasonic EVQ-P7 · Semtech RClamp0521P · BAT Wireless BWSMA-KWE-Z001 · USB Type-C R2.5. Every part and value is in design/rev-a/bom.md (chains 1–10); designators come from design/rev-a/netlist.json, checked by tools/netcheck.py; local copies of the datasheets in docs/datasheets/. Net routes are drawn by hand; the netlist table is the source of truth.</footer>
+  <footer>Sources: <a href="https://mm.digikey.com/Volume0/opasdata/d220001/medias/docus/8915/STM32U535CEU6QTR.pdf">STM32U535 DS14217 Rev 5</a> · ST AN2606 Rev 61 (bootloader) · <a href="https://www.ti.com/lit/ds/symlink/lmx2571.pdf">TI LMX2571 SNAS654A</a> · TI SNAA309 (FSK I²S) · <a href="https://www.psemi.com/pdf/datasheets/pe43711ds.pdf">pSemi PE43711</a> · <a href="https://www.psemi.com/pdf/datasheets/pe42421ds.pdf">pSemi PE42421</a> · <a href="https://www.skyworksinc.com/-/media/Skyworks/SL/documents/public/data-sheets/Si4704-05-D60.pdf">Si4704/05-D60 Rev 1.2</a> · AN332 · AN383 · YXC OT322520MJBA4SL (YSO110TR) · <a href="https://www.diodes.com/assets/Datasheets/AP2112.pdf">AP2112</a> · HRO TYPE-C-31-M-12 · Diptronics DHN series · Mitsumi SIQ series · Guangcai GS3011A/CX-X · ISSI IS31FL3236A · Shou Han MSK12C02 · XINGLIGHT XL-1615RGBC-RF · Panasonic EVQ-P7 · Semtech RClamp0521P · BAT Wireless BWSMA-KWE-Z001 · USB Type-C R2.5. Every part and value is in design/rev-b/bom.md (chains 1–10); designators come from design/rev-b/netlist.json, checked by tools/netcheck.py; local copies of the datasheets in docs/datasheets/. Net routes are drawn by hand; the netlist table is the source of truth.</footer>
 </div>
 
 <script>
@@ -92,15 +92,15 @@ const NETS = [
   { name: "CC2", layer: "usb", from: "J1 B5 (CC2)", to: "U1 PB1 / ADC1_IN16 (19)",
     between: "R2 5.1 kΩ 1 % to GND, own resistor. ESD: D4 TPD1E05U06 at J1. Not PA7: its bootloader pull-down would load Rd", src: "Type-C R2.5 Table 4-28 p246 · DS14217 p99 · AN2606 p387 · bom chain 1",
     paths: [[[-186, 220], [190, 220]]], parts: [[-40, "R2 5.1k↓"], [40, "D4"]] },
-  { name: "VBUS", layer: "power", from: "J1 A4, A9, B4, B9 (bussed)", to: "U3 VIN (1), EN (3) · D1 common anode (2) · U6 VBUS (5) · TP1",
-    between: "C1 1 µF X5R 50 V (Samsung CL10A105KB8NNNC) to GND at U3 VIN; EN tied to VIN (internal pull-down). D1 runs from VBUS so LED current skips U3. TP1 test pad", src: "AP2112 p2 · XL-1615RGBC-RF p8 · bom chains 1, 2, 9, 10",
+  { name: "VBUS", layer: "power", from: "J1 A4, A9, B4, B9 (bussed)", to: "U3 VIN (1), EN (3) · D1 common anode (2) · U6 VBUS (5) · U8 VCC (38) · DS1–DS4 anodes (3, 8) · TP1",
+    between: "C1 1 µF X5R 50 V (Samsung CL10A105KB8NNNC) to GND at U3 VIN; EN tied to VIN (internal pull-down). D1, U8 and the digits run from VBUS so LED current skips U3: C42 1 µF + C43 100 nF at U8 VCC, C44 10 µF at the digits' anodes. TP1 test pad", src: "AP2112 p2 · XL-1615RGBC-RF p8 · IS31FL3236A p1, p4 · bom chains 1, 2, 9, 10",
     paths: [[[-186, 300], [-120, 300], [-120, 560], [-90, 560]], [[-120, 560], [-120, 600], [-90, 600]],
       [[-120, 600], [-120, 740], [-170, 740], [-170, 826], [-140, 826]]], parts: [[-160, "C1 1µ↓"]] },
-  { name: "3V3", layer: "power", from: "U3 VOUT (5)", to: "U1 VDD (24, 36, 48), VBAT (1), FB2 → VDDA · U2 Vcc3p3/VccIO/VcpExt (1, 9, 15, 20, 27, 32, 33) · U7 VDD (2), LE (16) · Y2 VDD (4), OE (1) · FB3 → U4 · U5 VDD via R16 1 kΩ · SW1 pin 1 · SW2 1·1′ · SW3 commons · RV1–RV3 pin 1 · I²C pull-ups · TP2",
+  { name: "3V3", layer: "power", from: "U3 VOUT (5)", to: "U1 VDD (24, 36, 48), VBAT (1), FB2 → VDDA · U2 Vcc3p3/VccIO/VcpExt (1, 9, 15, 20, 27, 32, 33) · U7 VDD (2), LE (16) · Y2 VDD (4), OE (1) · FB3 → U4 · U5 VDD via R16 1 kΩ · SW1 pin 1 · SW2 1·1′ · SW3 commons · R30–R32 encoder pull-ups · I²C pull-ups · TP2",
     between: "C2 1 µF X7R at U3 VOUT; C3 10 µF X5R (CL21A106KAYNNNE) bulk at U1; 100 nF (CL05B104KO5NNNC) at every supply pin. Rail ≈ 24 µF: the AP2112’s 50 mA fold-back charges it in ≈ 1.6–1.8 ms while every load is off or in reset. Load ≈ 96 mA transmitting, 62 mA receiving, ≈ 35 mA before USB enumeration", src: "AP2112 p1–2, p8 · DS14217 p127 (Figure 23) · LMX2571 p3–4, p54 · bom chains 2, 3, 10",
     paths: [[[90, 560], [140, 560], [140, 280], [190, 280]], [[140, 360], [190, 360]]], parts: [[115, "C2 1µ↓"]] },
   { name: "VDDA", layer: "power", from: "FB2 (from 3V3)", to: "U1 VDDA (9)", dot: true,
-    between: "FB2 Murata BLM15AG601SN1D, 600 Ω at 100 MHz, then C7 100 nF + C8 1 µF to GND at the pin. VREF+ is bonded to VDDA on this package, so this filters the ADC reference for the wheels and CC sensing", src: "BLM15AG ENFA0018 p1 · DS14217 p99, p127 · bom chain 3",
+    between: "FB2 Murata BLM15AG601SN1D, 600 Ω at 100 MHz, then C7 100 nF + C8 1 µF to GND at the pin. VREF+ is bonded to VDDA on this package, so this filters the ADC reference for CC sensing", src: "BLM15AG ENFA0018 p1 · DS14217 p99, p127 · bom chain 3",
     paths: [[[140, 320], [190, 320]]], parts: [[165, "FB2"]] },
   { name: "RX_VDD", layer: "power", from: "FB3 (from 3V3)", to: "U4 VA (11), VD (10)",
     between: "FB3 BLM15AG601SN1D. C32 22 nF (0402B223K500NT) VA to GND and C33 100 nF VD to GND, each at its pin. ≤ 23 mA in digital-audio mode", src: "Si4704/05 p5, p16, Table 12 p18 · bom chain 8", paths: [], parts: [] },
@@ -166,19 +166,23 @@ const NETS = [
   { name: "RX_RST", layer: "ctrl", from: "U1 PB9 / GPIO (46)", to: "U4 RSTB (5)",
     between: "R19 10 kΩ to GND holds U4 in reset until firmware runs; PB9 has no pull at reset. The bootloader’s FDCAN1_TX lifts it once FDCAN starts, which only wakes U4 into its powered-down state", src: "DS14217 Table 26 · AN2606 Table 165 · Si4704/05 p16 · bom chain 8",
     paths: [[[500, 1150], [750, 1150]]], parts: [[610, "R19 10k↓"]] },
-  { name: "I2C_SCL", layer: "ctrl", from: "U1 PB8 / I2C1_SCL (45)", to: "U4 SCLK (7)",
+  { name: "I2C_SCL", layer: "ctrl", from: "U1 PB8 / I2C1_SCL (45)", to: "U4 SCLK (7) · U8 SCL (42)",
     between: "R20 6.8 kΩ pull-up to 3V3 (RC0402FR-076K8L). PB8 is the bootloader’s FDCAN1_RX input: SCL idles high, the bus’s recessive level; U4 is in reset", src: "DS14217 Table 27 p115 (AF4) · AN2606 p386 · Si4704/05 p5 · bom chain 8",
     paths: [[[500, 1190], [750, 1190]]], parts: [[640, "R20 6.8k↑"]] },
-  { name: "I2C_SDA", layer: "ctrl", from: "U1 PB7 / I2C1_SDA (43)", to: "U4 SDIO (8)",
-    between: "R21 6.8 kΩ pull-up to 3V3: SDIO sinks ≤ 500 µA (3.3 V / 6.8 kΩ = 0.49 mA). U4 address 0x11 (SENB to GND)", src: "DS14217 p115 (AF4) · Si4704/05 p5 · AN332 p124 · bom chain 8",
+  { name: "I2C_SDA", layer: "ctrl", from: "U1 PB7 / I2C1_SDA (43)", to: "U4 SDIO (8) · U8 SDA (41)",
+    between: "R21 6.8 kΩ pull-up to 3V3: SDIO sinks ≤ 500 µA (3.3 V / 6.8 kΩ = 0.49 mA). U4 address 0x11 (SENB to GND), U8 0x3C (AD to GND); U8 reads 3.3 V logic from its 5 V supply (logic high ≥ 1.4 V)", src: "DS14217 p115 (AF4) · Si4704/05 p5 · AN332 p124 · bom chain 8",
     paths: [[[500, 1230], [750, 1230]]], parts: [[640, "R21 6.8k↑"]] },
   { name: "BOOT0", layer: "ctrl", from: "SW2 pins 2·2′", to: "U1 PH3-BOOT0 (44)",
     between: "SW2 pins 1·1′ to 3V3; R3 10 kΩ to GND at SW2 (0402WGF1002TCE). Held at plug-in → ROM USB bootloader; otherwise a spare button", src: "Panasonic EVQ-P7 p2 · DS14217 p29, p112 · AN2606 p30 · bom chains 3, 9",
     paths: [[[30, 950], [190, 950]]], parts: [[120, "R3 10k↓"]] },
-  ...[[1, "PA3", "ADC1_IN8", 13, 1030, "p100"], [2, "PA4", "ADC1_IN9", 14, 1070, "p100"], [3, "PA5", "ADC1_IN10", 15, 1110, "p100"]].map(([n, p, adc, pin, y, pg]) => ({
-    name: "WHEEL" + n, layer: "ctrl", from: `RV${n} wiper (2)`, to: `U1 ${p} / ${adc} (${pin})`,
-    between: `RV pin 1 to 3V3, pin 3 to GND, dummy pins to GND pads. C${38 + n} 100 nF to GND at the ADC pin: a charge reservoir for the ADC sample capacitor (≤ 0.25 ms with the pot)` + (n === 3 ? ". PA5 is the bootloader’s SPI1_SCK input; a static wiper voltage never clocks it" : ""), src: `Alps RK10J p3 · DS14217 Table 26 ${pg} · bom chain 9`,
-    paths: [[[30, y], [190, y]]], parts: [[120, `C${38 + n}`]] })),
+  ...[["ENC_A", "A (1)", "PA3 / EXTI3 (13)", 1030, "R30", ""], ["ENC_B", "B (4)", "PA4 / EXTI4 (14)", 1070, "R31", ". PA4 is the bootloader’s SPI1_NSS input: both contacts are open at every detent, so it idles high"],
+      ["ENC_SW", "S, push switch (2)", "PA5 / EXTI5 (15)", 1110, "R32", ". PA5 is the bootloader’s SPI1_SCK input: high unless the wheel is pushed while it runs"]].map(([name, from, to, y, r, note]) => ({
+    name, layer: "ctrl", from: `SW4 ${from}`, to: `U1 ${to}`,
+    between: `${r} 10 kΩ pull-up to 3V3 (0402WGF1002TCE): 0.33 mA through the closed contact, under its 0.5 mA rating. Common C to GND. Debounced in firmware` + note, src: "Mitsumi SIQ p2–3 · DS14217 Table 26 p100 · AN2606 p387 · bom chain 9",
+    paths: [[[30, y], [190, y]]], parts: [[120, `${r} 10k↑`]] })),
+  { name: "LED_SDB", layer: "led", from: "U1 PC13 / GPIO (2)", to: "U8 SDB (36)",
+    between: "R29 100 kΩ to GND at U8 (0402WGF1003TCE): U8 stays shut down (3–5 µA) until firmware runs, so the display adds nothing before USB enumeration. PC13 is analog with no pull at reset", src: "IS31FL3236A p1, p5 · DS14217 Table 26 note 2 · bom chain 9",
+    paths: [[[40, 1280], [190, 1280]]], parts: [[110, "R29 100k↓"]] },
   { name: "LED_R", layer: "led", from: "D1 R cathode (1)", to: "U1 PA0 / TIM2_CH1 (10)",
     between: "R25 510 Ω (0402WGF5100TCE); ≈ 5.3 mA typical. Open-drain, pulls off: the pin sees up to VBUS (FT_fa, 5 V tolerant). PA0 is FT_hat, rated to 5.5 V with its pulls off (DS14217 Table 32 note 5); at reset it is an analog input with no pull, so the LED stays dark", src: "XL-1615RGBC-RF p3–4, p8 · DS14217 Table 26 p99, Table 27 p114 (AF1) · bom chain 9",
     paths: [[[30, 790], [190, 790]]], parts: [[140, "R25 510Ω"]] },
@@ -188,7 +192,7 @@ const NETS = [
   { name: "LED_B", layer: "led", from: "D1 B cathode (4)", to: "U1 PA2 / TIM2_CH3 (12)",
     between: "R27 390 Ω (RC0402FR-07390RL); ≈ 4.6 mA typical. Open-drain, pulls off (FT_ha, 5 V tolerant)", src: "XL-1615RGBC-RF p3–4 · DS14217 Table 26 p99, Table 27 p114 (AF1) · bom chain 9",
     paths: [[[30, 862], [190, 862]]], parts: [[140, "R27 390Ω"]] },
-  { name: "GND", layer: "gnd", from: "J1 A1, A12, B1, B12, shell · U3 GND (2) · U1 VSS (23, 35, 47), VSSA (8), pad · U2 GND (23, 31, 35), DAP, FSK_D2 (5), TrCtl (18)", to: "U7 P/S, CLK, SI, C0.25, GND pins, pad · U5 GND (2) · U4 GND (12), RFGND (3), LPI (4), SENB (6), ROUT (13), LOUT (14), pad · Y2 GND (2) · J2 legs · SW1 pin 3, frame · RV pin 3 · U6, D3–D5 · TP3",
+  { name: "GND", layer: "gnd", from: "J1 A1, A12, B1, B12, shell · U3 GND (2) · U1 VSS (23, 35, 47), VSSA (8), pad · U2 GND (23, 31, 35), DAP, FSK_D2 (5), TrCtl (18)", to: "U7 P/S, CLK, SI, C0.25, GND pins, pad · U5 GND (2) · U4 GND (12), RFGND (3), LPI (4), SENB (6), ROUT (13), LOUT (14), pad · Y2 GND (2) · J2 legs · SW1 pin 3, frame · SW4 common (C), frame tabs · U8 GND (17, 39), AD (37), pad · U6, D3–D5 · TP3",
     between: "Common ground plane. U4 SENB to GND sets I²C address 0x11; ROUT/LOUT grounded (analog outputs off in firmware); U2 DAP must be grounded. TP3 test pad", src: "HRO p1 · AP2112 p2 · DS14217 p86 · LMX2571 p3, p53 · PE43711 Table 9 p28 · Si4704/05 p16 · AN383 p8, p17 · bom chains 1–10", paths: [], parts: [] },
 ];
 
@@ -241,12 +245,13 @@ const U1 = { ref: "U1", title: "STM32U535CEU6", sub: "U1 · UFQFPN48", x0: 220, 
   { side: "L", y: 826, num: "11", name: "PA1 · TIM2_CH2", net: "LED_G", src: "DS14217 Table 26 p99 (FT_hat), Table 27 p114 (AF1)" },
   { side: "L", y: 862, num: "12", name: "PA2 · TIM2_CH3", net: "LED_B", src: "DS14217 Table 26 p99 (FT_ha), Table 27 p114 (AF1)" },
   { side: "L", y: 950, num: "44", name: "PH3-BOOT0", net: "BOOT0", src: "DS14217 p29, p112 · AN2606 p30. No internal pull-down at reset; 10 kΩ holds it low" },
-  { side: "L", y: 1030, num: "13", name: "PA3 · ADC1_IN8", net: "WHEEL1", src: "DS14217 Table 26 p100" },
-  { side: "L", y: 1070, num: "14", name: "PA4 · ADC1_IN9", net: "WHEEL2", src: "DS14217 Table 26 p100 (TT_ha)" },
-  { side: "L", y: 1110, num: "15", name: "PA5 · ADC1_IN10", net: "WHEEL3", src: "DS14217 Table 26 p100" },
+  { side: "L", y: 1030, num: "13", name: "PA3 · EXTI3", net: "ENC_A", src: "DS14217 Table 26 p100. Not a bootloader pin" },
+  { side: "L", y: 1070, num: "14", name: "PA4 · EXTI4", net: "ENC_B", src: "DS14217 Table 26 p100 (TT_ha) · AN2606 p387: bootloader SPI1_NSS, high at every detent" },
+  { side: "L", y: 1110, num: "15", name: "PA5 · EXTI5", net: "ENC_SW", src: "DS14217 Table 26 p100 · AN2606 p387: bootloader SPI1_SCK, high unless the wheel is pushed" },
   { side: "L", y: 1200, num: "37", name: "PA14 SWCLK", layer: "ctrl", ext: ["SWD pad", "+ 3V3, GND, NRST"], src: "DS14217 p108. Backup programming: SWCLK, SWDIO, NRST, 3V3 and GND pads" },
   { side: "L", y: 1240, num: "34", name: "PA13 SWDIO", layer: "ctrl", ext: ["SWD pad", "backup only"], src: "DS14217 p108" },
-  { side: "L", y: 1280, num: "—", name: "PC13 PA6 PB2 PB10 PA15", layer: "ctrl", ext: ["Spare", "pins 2, 16, 20, 21, 38"], src: "DS14217 Figure 10 p86. Left unconnected; PA6 is the bootloader’s SPI1_MISO output (AN2606 p387), so it stays free" },
+  { side: "L", y: 1280, num: "2", name: "PC13 · GPIO", net: "LED_SDB", src: "DS14217 Table 26 note 2: ≤ 2 MHz, not a current source; SDB is a light load. Analog with no pull at reset. Not a bootloader pin" },
+  { side: "L", y: 1160, num: "—", name: "PA6 PB2 PB10 PA15", layer: "ctrl", ext: ["Spare", "pins 16, 20, 21, 38"], src: "DS14217 Figure 10 p86. Left unconnected; PA6 is the bootloader’s SPI1_MISO output (AN2606 p387), so it stays free" },
 ] };
 const Y2 = { ref: "Y2", title: "20 MHz", sub: "Y2 · XO", x0: 620, x1: 690, ty: 568, y0: 485, y1: 600, pw: 30, pins: [
   { side: "R", y: 520, num: "3", name: "", net: "REF20", src: "YSO110TR p2 (pin 3 OUT)" },
@@ -287,9 +292,9 @@ const U7 = { ref: "U7", title: "PE43711", sub: "U7 · step attenuator", x0: 1240
   ...ATT.map(([c, pin, y]) => ({ side: "R", y, num: String(pin), name: c.replace("_", "."), net: "ATT_" + c, src: "PE43711 Table 9 p28, Table 4 p6" })),
   { side: "R", y: 500, num: "GND", name: "4 6–13 15 · pad", layer: "gnd", ext: ["GND", ""], src: "PE43711 Table 9" },
 ] };
-const SW3 = { ref: "SW3", title: "TDP06H1SBD1", sub: "SW3 · 6-pos DIP", x0: 1620, x1: 1740, ty: 515, y0: 270, y1: 540, pw: 34, pins: [
-  ...ATT.map(([c, pin, y, sw, db]) => ({ side: "L", y, num: String(sw), name: db + " dB", net: "ATT_" + c, src: "C&K TDP p3 (SPST ×6). Silkscreen 16 / 8 / 4 / 2 / 1 / 0.5 dB" })),
-  { side: "R", y: 380, num: "COM", name: "", layer: "power", ext: ["▲ 3V3", "other side, all 6"], src: "C&K TDP p3: rated 25 mA; carries 0.33 mA per closed switch" },
+const SW3 = { ref: "SW3", title: "DHN-06-V", sub: "SW3 · 6-pos top-lever DIP", x0: 1620, x1: 1740, ty: 515, y0: 270, y1: 540, pw: 34, pins: [
+  ...ATT.map(([c, pin, y, sw, db]) => ({ side: "L", y, num: String(sw), name: db + " dB", net: "ATT_" + c, src: "Diptronics DHN p1 (SPST ×6). Silkscreen 16 / 8 / 4 / 2 / 1 / 0.5 dB" })),
+  { side: "R", y: 380, num: "COM", name: "", layer: "power", ext: ["▲ 3V3", "other side, all 6"], src: "Diptronics DHN p1: rated 25 mA; carries 0.33 mA per closed switch" },
 ] };
 const U4 = { ref: "U4", title: "Si4705", sub: "U4 · FM receiver · QFN-20", x0: 780, x1: 1030, ty: 1290, y0: 940, y1: 1330, pw: 30, pins: [
   { side: "L", y: 990, num: "17", name: "GPO3/DCLK", net: "RX_SCK", src: "Si4704/05 p16" },
@@ -338,14 +343,30 @@ const SW2 = { ref: "SW2", title: "EVQ-P7", sub: "SW2 · BOOT", x0: -110, x1: 0, 
   { side: "L", y: 950, num: "1 1′", name: "", layer: "power", ext: ["▲ 3V3", ""], src: "Panasonic EVQ-P7 p2 (1–1′ joined)" },
   { side: "R", y: 950, num: "2 2′", name: "", net: "BOOT0", src: "Panasonic EVQ-P7 p2 (2–2′ joined)" },
 ] };
-const RV = { ref: "RV1–RV3", title: "RK10J ×3", sub: "RV1–RV3 · wheels", x0: -110, x1: 0, ty: 1148, y0: 1010, y1: 1170, pw: 30, pins: [
-  { side: "R", y: 1030, num: "2", name: "RV1", net: "WHEEL1", src: "Alps RK10J p3 (pin 2 wiper)" },
-  { side: "R", y: 1070, num: "2", name: "RV2", net: "WHEEL2", src: "Alps RK10J p3" },
-  { side: "R", y: 1110, num: "2", name: "RV3", net: "WHEEL3", src: "Alps RK10J p3" },
-  { side: "L", y: 1040, num: "1", name: "", layer: "power", ext: ["▲ 3V3", "each wheel"], src: "Alps RK10J p3" },
-  { side: "L", y: 1080, num: "3", name: "", layer: "gnd", ext: ["GND", "each wheel"], src: "Alps RK10J p3" },
-  { side: "L", y: 1120, num: "D", name: "", layer: "gnd", ext: ["GND pads", "dummy pins"], src: "Alps RK10J p3 (mounting pins)" },
+const SW4 = { ref: "SW4", title: "SIQ-02FVS3", sub: "SW4 · tuning wheel", x0: -110, x1: 0, ty: 1148, y0: 1010, y1: 1170, pw: 30, pins: [
+  { side: "R", y: 1030, num: "1", name: "A", net: "ENC_A", src: "Mitsumi SIQ p3: terminals A, S, C, B; 15 detents, both contacts open at each detent" },
+  { side: "R", y: 1070, num: "4", name: "B", net: "ENC_B", src: "Mitsumi SIQ p3" },
+  { side: "R", y: 1110, num: "2", name: "S", net: "ENC_SW", src: "Mitsumi SIQ p3: slide switch, worked by pushing the wheel in" },
+  { side: "L", y: 1050, num: "3", name: "C", layer: "gnd", ext: ["GND", "common"], src: "Mitsumi SIQ p3 (circuit: A, B and S switch to C)" },
+  { side: "L", y: 1100, num: "M", name: "", layer: "gnd", ext: ["GND pads", "6 frame tabs"], src: "Mitsumi SIQ p3 (land dimensions: 4 side tabs, 2 angled tabs; 2 unplated locating holes)" },
 ] };
+const U8 = { ref: "U8", title: "IS31FL3236A", sub: "U8 · display driver", x0: -150, x1: 10, ty: 1537, y0: 1220, y1: 1565, pw: 30, pins: [
+  ...[1, 2, 3, 4].map(d => ({ side: "L", y: 1200 + 40 * d, num: `${8 * d - 7}–${8 * d}`, name: `OUT${8 * d - 7}–${8 * d}`, layer: "led",
+    src: `IS31FL3236A p2: OUT${8 * d - 7}–OUT${8 * d} sink DS${d}'s segments A, B, C, D, E, F, G, DP (nets SEG${d}_A … SEG${d}_DP). Constant current, 256-step PWM; order may be permuted in layout` })),
+  { side: "L", y: 1440, num: "31–34", name: "OUT33–36", layer: "led", ext: ["NC", "unused"], src: "IS31FL3236A p2. Unused current sinks, left open (PWM 0)" },
+  { side: "R", y: 1280, num: "36", name: "SDB", net: "LED_SDB", src: "IS31FL3236A p2, p12: low = hardware shutdown" },
+  { side: "R", y: 1340, num: "41", name: "SDA", net: "I2C_SDA", ext: ["◂ I2C_SDA", "U1 PB7 · U4"], src: "IS31FL3236A p2, p5 (VIH ≥ 1.4 V at VCC 5.5 V)" },
+  { side: "R", y: 1385, num: "42", name: "SCL", net: "I2C_SCL", ext: ["◂ I2C_SCL", "U1 PB8 · U4"], src: "IS31FL3236A p2, p5" },
+  { side: "R", y: 1430, num: "38", name: "VCC", layer: "power", ext: ["▲ VBUS", "C42 1µ + C43 100n ↓"], src: "IS31FL3236A p1 (typical circuit: 1 µF + 0.1 µF), p4 (outputs ≤ VCC + 0.3 V, so VCC shares the anodes' VBUS)" },
+  { side: "R", y: 1470, num: "40", name: "R_EXT", layer: "led", ext: ["R28 10k ↓", "7.6 mA max"], src: "IS31FL3236A p10: IMAX = 58.5 × 1.3 V / R_EXT; 2 kΩ minimum" },
+  { side: "R", y: 1510, num: "37", name: "AD, GND", layer: "gnd", ext: ["GND", "AD → 0x3C · 17 39 pad"], src: "IS31FL3236A p2, p6 Table 1 (AD to GND: 0111100)" },
+] };
+const DS = { ref: "DS1–DS4", title: "GS3011AW-B", sub: "DS1–DS4 · digits", x0: -400, x1: -290, ty: 1425, y0: 1220, y1: 1450, pw: 30, pins: [
+  ...[1, 2, 3, 4].map(d => ({ side: "R", y: 1200 + 40 * d, num: `DS${d}`, name: "A–DP", layer: "led",
+    src: `Guangcai GS3011A/CX-X p3: segments A 7, B 6, C 4, D 2, E 1, F 9, G 10, DP 5 to U8 OUT${8 * d - 7}–${8 * d}` })),
+  { side: "R", y: 1400, num: "3 8", name: "", layer: "power", ext: ["▲ VBUS", "anodes"], src: "Guangcai GS3011A/CX-X p3 (common anode, pins 3 and 8). C44 10 µF to GND at the anodes. White VF 3.0 typ / 3.8 V max at 10 mA (p4)" },
+] };
+const BUSES = [1, 2, 3, 4].map(d => ({ y: 1200 + 40 * d }));
 
 // ---- Drawing ----
 const NS = "http://www.w3.org/2000/svg";
@@ -399,7 +420,15 @@ function block(b) {
     clickable(g, `${b.ref} pin ${p.num} ${p.name}`, () => detail(`<b>${b.ref} pin ${p.num} · ${p.name}</b>${p.net ? " — net " + p.net : ""} <span class="muted">(${p.src})</span>`));
   });
 }
-[J1, U3, U1, Y2, U2, U7, SW3, U4, U5, J2, SW1, D1, SW2, RV].forEach(block);
+[J1, U3, U1, Y2, U2, U7, SW3, U4, U5, J2, SW1, D1, SW2, SW4, U8, DS].forEach(block);
+
+// Segment buses U8 → DS1–DS4: eight nets each (SEGd_A … SEGd_DP), drawn as one line per digit
+BUSES.forEach(b => {
+  const g = el("g", { class: "fade" });
+  el("line", { x1: -260, y1: b.y, x2: -180, y2: b.y, stroke: col("led"), "stroke-width": 4 }, g);
+  el("text", { x: -220, y: b.y - 6, "text-anchor": "middle", "font-size": 10, fill: col("led") }, g).textContent = "×8";
+  items.push({ layer: "led", fade: g });
+});
 
 // Nets: polylines, junction dots where a branch starts, inline part markers, net name
 NETS.forEach(n => {
@@ -431,7 +460,7 @@ function render() {
     if (it.fade) it.fade.style.opacity = vis ? 1 : 0;
   });
   document.querySelectorAll("#layers button[data-id]").forEach(b => b.setAttribute("aria-pressed", on.has(b.dataset.id)));
-  try { localStorage.setItem("fm-reva-layers-v1", JSON.stringify([...on])); } catch (e) {}
+  try { localStorage.setItem("fm-revb-layers-v1", JSON.stringify([...on])); } catch (e) {}
 }
 const bar = document.getElementById("layers");
 LAYERS.forEach(l => {
@@ -444,6 +473,6 @@ LAYERS.forEach(l => {
   const b = document.createElement("button"); b.type = "button"; b.className = "util"; b.textContent = t;
   b.setAttribute("aria-pressed", "false"); b.addEventListener("click", () => { f(); render(); }); bar.appendChild(b);
 });
-try { const s = JSON.parse(localStorage.getItem("fm-reva-layers-v1")); if (Array.isArray(s)) { on.clear(); s.forEach(x => on.add(x)); } } catch (e) {}
+try { const s = JSON.parse(localStorage.getItem("fm-revb-layers-v1")); if (Array.isArray(s)) { on.clear(); s.forEach(x => on.add(x)); } } catch (e) {}
 render();
 </script>
