@@ -35,7 +35,8 @@ JLC_FIX = {
 ASCII = {"µ": "u", "Ω": "Ohm", "×": "x"}
 
 pos_csv, out = sys.argv[1], sys.argv[2]
-bom_path = os.path.join(out, "IphoneFM-RevA-BOM.csv")
+N = {"rev-a": "RevA", "rev-b": "RevB"}[os.environ.get("IPHONEFM_REV", "rev-a")]
+bom_path = os.path.join(out, f"IphoneFM-{N}-BOM.csv")
 bom = list(csv.DictReader(open(bom_path, encoding="utf-8")))
 for row in bom:
     for a, b in ASCII.items():
@@ -57,7 +58,7 @@ def order(p):
     return stem, int(p["Ref"][len(stem):])
 
 
-with open(os.path.join(out, "IphoneFM-RevA-CPL.csv"), "w", newline="", encoding="utf-8") as f:
+with open(os.path.join(out, f"IphoneFM-{N}-CPL.csv"), "w", newline="", encoding="utf-8") as f:
     w = csv.writer(f)
     w.writerow(["Designator", "Mid X", "Mid Y", "Layer", "Rotation"])
     for p in sorted(pos, key=order):
@@ -69,7 +70,7 @@ with open(os.path.join(out, "IphoneFM-RevA-CPL.csv"), "w", newline="", encoding=
         x, y = float(p["PosX"]) + dx, float(p["PosY"]) - dy        # the position file's y points up
         w.writerow([p["Ref"], f"{x:.4f}mm", f"{y:.4f}mm", "Top" if p["Side"] == "top" else "Bottom",
                     f"{(rot + turn) % 360:g}"])
-with zipfile.ZipFile(os.path.join(out, "IphoneFM-RevA-gerbers.zip"), "w", zipfile.ZIP_DEFLATED) as z:
+with zipfile.ZipFile(os.path.join(out, f"IphoneFM-{N}-gerbers.zip"), "w", zipfile.ZIP_DEFLATED) as z:
     for p in sorted(glob.glob(os.path.join(out, "gerbers", "*"))):
         if not p.endswith(".pdf"):
             z.write(p, os.path.basename(p))

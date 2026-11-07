@@ -10,6 +10,7 @@ _autosave-*
 fp-info-cache
 *.kicad_prl
 kicad/rev-a/output/
+kicad/rev-b/output/
 kicad/rev-a/.history/
 kicad/rev-a/.kicad-mcp/
 

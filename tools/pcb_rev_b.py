@@ -106,6 +106,9 @@ def set_fields(fp, ref, c):
         if name in ("Footprint",):
             continue
         fp.SetField(name, val)
+        f = fp.GetField(name) if fp.HasField(name) else None   # a new field lands visible on the silkscreen: hidden on the fab layer, as Rev A
+        if f is not None:
+            f.SetVisible(False); f.SetLayer(pcbnew.F_Fab)
     fp.SetPath(pcbnew.KIID_PATH("/" + c["uuid"]))
     fp.SetSheetname("/")
     fp.SetSheetfile("IphoneFM.kicad_sch")

@@ -8,7 +8,7 @@ KiCad, and Rev A's tools (pcb_silk_refs.py, pcb_silk_edge.py, pcb_tag.py) work t
   edge  every silkscreen line of a placed part cut back to 0.2 mm inside the board edge (plus half its width); lines
         and marks wholly outside removed. The library footprints are left as they are.
   tag   the board's tag ("CLAUDE / WAS HERE" over an FM wave, Rev A Phase 7) sat where U8 now is: moved, whole, to the
-        nearest clear spot on the top pour by the same rules as a label.
+        nearest clear spot by the same rules as a label, on the top if one exists, otherwise on the bottom, mirrored.
 Usage (from the repository root):
   "%LOCALAPPDATA%/Programs/KiCad/10.0/bin/python.exe" -u tools/pcb_silk_rev_b.py refs|edge|tag [lay]
 """
@@ -26,7 +26,7 @@ EDGE_GAP, PAD_GAP, SILK_GAP, CRT_GAP, REF_GAP = 0.3, 0.2, 0.2, 0.1, 0.6
 GAPS = (0.1, 0.35, 0.7, 1.1, 1.6, 2.2)
 SLIDE = [s * 0.25 for s in range(-12, 13)]
 LABELLED = ("U", "J", "SW", "DS", "Y", "D1", "TP")
-NEW = ("U8", "DS1", "DS2", "DS3", "DS4", "SW4", "SW3")        # labels to place; the rest keep Rev A's
+NEW = ("U8", "DS1", "DS2", "DS3", "DS4", "SW4", "SW3")   # labels to place; the rest keep Rev A's
 TAG = ("CLAUDE", "WAS HERE")
 MM, ERR = 1e6, pcbnew.FromMM(0.005)
 
@@ -50,34 +50,35 @@ def ink(item, layer):
 
 def is_tag(d):
     """The tag's items: its two texts and the wave's segments (the only board-level silkscreen lines)."""
-    return d.GetLayer() == pcbnew.F_SilkS and (d.GetClass() == "PCB_SHAPE" or
-                                              (d.GetClass() == "PCB_TEXT" and d.GetText() in TAG))
+    return d.GetLayer() in (pcbnew.F_SilkS, pcbnew.B_SilkS) and         (d.GetClass() == "PCB_SHAPE" or (d.GetClass() == "PCB_TEXT" and d.GetText() in TAG))
 
 
-def obstacles(board, skip_refs=(), skip_tag=False):
-    """Top side: exposed copper and via holes (+0.2), courtyards (+0.1), footprint ink (+0.2), visible references."""
+def obstacles(board, skip_refs=(), skip_tag=False, side=pcbnew.F_Cu):
+    """One side: exposed copper and via holes (+0.2), courtyards (+0.1), footprint ink (+0.2), visible references."""
+    SILK = pcbnew.F_SilkS if side == pcbnew.F_Cu else pcbnew.B_SilkS
+    CRT = pcbnew.F_CrtYd if side == pcbnew.F_Cu else pcbnew.B_CrtYd
     copper, crt, silk, refs = [], [], [], {}
     for fp in board.GetFootprints():
         ref = fp.GetReference()
         for p in fp.Pads():
-            if p.IsOnLayer(pcbnew.F_Cu) or p.GetDrillSizeX() > 0:
-                copper.append(ink(p, pcbnew.F_Cu))
-        c = fp.GetCourtyard(pcbnew.F_CrtYd)
+            if p.IsOnLayer(side) or p.GetDrillSizeX() > 0:
+                copper.append(ink(p, side if p.IsOnLayer(side) else p.GetLayerSet().Seq()[0]))
+        c = fp.GetCourtyard(CRT)
         if c.OutlineCount():
             crt.append(poly(c))
         for g in fp.GraphicalItems():
-            if g.GetLayer() == pcbnew.F_SilkS:
-                silk.append(ink(g, pcbnew.F_SilkS))
+            if g.GetLayer() == SILK:
+                silk.append(ink(g, SILK))
         f = fp.Reference()
-        if f.IsVisible() and f.GetLayer() == pcbnew.F_SilkS and ref not in skip_refs:
-            refs[ref] = ink(f, pcbnew.F_SilkS)
+        if f.IsVisible() and f.GetLayer() == SILK and ref not in skip_refs:
+            refs[ref] = ink(f, SILK)
     for t in board.GetTracks():
         if t.GetClass() == "PCB_VIA":
-            copper.append(box(0, 0, 0, 0).union(
-                LineString([(t.GetPosition().x / MM, t.GetPosition().y / MM)] * 2).buffer(t.GetDrillValue() / MM / 2)))
+            copper.append(LineString([(t.GetPosition().x / MM, t.GetPosition().y / MM)] * 2)
+                          .buffer(t.GetDrillValue() / MM / 2))
     for d in board.GetDrawings():
-        if d.GetLayer() == pcbnew.F_SilkS and not (skip_tag and is_tag(d)):
-            silk.append(ink(d, pcbnew.F_SilkS))
+        if d.GetLayer() == SILK and not (skip_tag and is_tag(d)):
+            silk.append(ink(d, SILK))
     inside = box(BOARD[0] + EDGE_GAP, BOARD[1] + EDGE_GAP, BOARD[2] - EDGE_GAP, BOARD[3] - EDGE_GAP)
     return dict(copper=unary_union(copper).buffer(PAD_GAP), crt=unary_union(crt).buffer(CRT_GAP),
                 silk=unary_union(silk).buffer(SILK_GAP), refs=refs, inside=inside, crt_list=crt)
@@ -89,12 +90,20 @@ def step_refs(lay):
             if fp.GetReference() in ("R28", "R29", "R30", "R31", "R32", "C42", "C43", "C44")]
     for fp in hide:
         fp.Reference().SetVisible(False)
+    fields = 0   # B4.2 left the new parts' MPN/LCSC/Manufacturer fields visible on the silkscreen: hidden on F.Fab, as Rev A
+    for fp in board.GetFootprints():
+        for name in ("MPN", "LCSC", "Manufacturer"):
+            f = fp.GetField(name) if fp.HasField(name) else None
+            if f is not None and (f.IsVisible() or f.GetLayer() != pcbnew.F_Fab):
+                f.SetVisible(False); f.SetLayer(pcbnew.F_Fab); fields += 1
+    print(f"{fields} part fields taken off the silkscreen")
     ob = obstacles(board, skip_refs=NEW)
     fixed = unary_union(list(ob["refs"].values())).buffer(REF_GAP)
-    cands = {}
+    cands, orig = {}, {}
     for ref in NEW:
         fp = board.FindFootprintByReference(ref)
         f = fp.Reference()
+        orig[ref] = (f.GetPosition(), f.GetTextAngleDegrees())
         f.SetVisible(True); f.SetLayer(pcbnew.F_SilkS)
         f.SetTextSize(pcbnew.VECTOR2I(pcbnew.FromMM(1.0), pcbnew.FromMM(1.0))); f.SetTextThickness(pcbnew.FromMM(0.15))
         f.SetKeepUpright(False)
@@ -133,13 +142,28 @@ def step_refs(lay):
         f.SetTextAngleDegrees(ang)
         f.SetPosition(pcbnew.VECTOR2I(round(x * MM), round(y * MM)))
         print(f"{ref}: ({x:.2f}, {y:.2f}) {ang} deg")
-    for ref in hidden:
-        board.FindFootprintByReference(ref).Reference().SetVisible(False)
+    for ref in hidden:   # no clear spot: off the silkscreen, where it was (it still prints on the fab layer)
+        f = board.FindFootprintByReference(ref).Reference()
+        f.SetPosition(orig[ref][0]); f.SetTextAngleDegrees(orig[ref][1]); f.SetVisible(False)
     print(f"{len(chosen)} placed; hidden: {', '.join(hidden) or 'none'}; passives hidden: {len(hide)}")
-    # Rev A labels that now clash with something new
+    # a Rev A label that a new part's outline now comes within 0.2 mm of keeps its spot: the outline's stroke is
+    # shortened instead (SW1's label and SW4's wheel, drawn as chords)
     for ref, g in ob["refs"].items():
-        if g.intersects(ob["copper"]) or g.intersects(ob["silk"]) or \
-                any(g.intersects(c[4]) for c in chosen.values()):
+        for new in NEW:
+            for s in board.FindFootprintByReference(new).GraphicalItems():
+                if s.GetLayer() != pcbnew.F_SilkS or s.GetClass() != "PCB_SHAPE" or \
+                        s.GetShape() != pcbnew.SHAPE_T_SEGMENT:
+                    continue
+                line = LineString([(s.GetStart().x / MM, s.GetStart().y / MM), (s.GetEnd().x / MM, s.GetEnd().y / MM)])
+                keep = line.difference(g.buffer(SILK_GAP + s.GetWidth() / MM / 2 + 0.01))
+                if keep.length < line.length - 1e-6:
+                    best = max(getattr(keep, "geoms", [keep]), key=lambda q: q.length)
+                    (ax, ay), (bx, by) = best.coords[0], best.coords[-1]
+                    s.SetStart(pcbnew.VECTOR2I(round(ax * MM), round(ay * MM)))
+                    s.SetEnd(pcbnew.VECTOR2I(round(bx * MM), round(by * MM)))
+                    print(f"  {new} outline stroke shortened {line.length - best.length:.2f} mm for {ref}'s label")
+    for ref, g in ob["refs"].items():
+        if g.intersects(ob["copper"]) or any(g.intersects(c[4]) for c in chosen.values()):
             print("  clash, Rev A label:", ref)
     if lay:
         pcbnew.SaveBoard(PCB, board)
@@ -182,31 +206,66 @@ def step_edge(lay):
 
 
 def step_tag(lay):
+    """The nearest clear spot on the top; failing that (it is the case: the only open stretch of top pour big
+    enough, under SW3, carries B5's ground-joining vias), on the bottom, mirrored so it reads from underneath."""
     board = pcbnew.LoadBoard(PCB)
     items = [d for d in board.GetDrawings() if is_tag(d)]
-    tag = unary_union([ink(d, pcbnew.F_SilkS) for d in items])
-    ob = obstacles(board, skip_tag=True)
-    refs = unary_union(list(ob["refs"].values())).buffer(REF_GAP)
-    block = unary_union([ob["copper"], ob["crt"], ob["silk"], refs])
-    x0, y0, x1, y1 = tag.bounds
-    best = None
-    for i in range(int((BOARD[2] - BOARD[0]) / 0.25)):
-        for j in range(int((BOARD[3] - BOARD[1]) / 0.25)):
-            dx, dy = BOARD[0] + i * 0.25 - x0, BOARD[1] + j * 0.25 - y0
-            g = translate(tag, dx, dy)
-            if not ob["inside"].contains(g) or g.intersects(block):
-                continue
-            d = (dx ** 2 + dy ** 2) ** 0.5
-            if best is None or d < best[0]:
-                best = (d, dx, dy)
-    if best is None:
-        sys.exit("tag: no clear spot")
-    d, dx, dy = best
-    print(f"tag: moved ({dx:+.2f}, {dy:+.2f}) mm to x {x0 + dx:.2f}-{x1 + dx:.2f}, y {y0 + dy:.2f}-{y1 + dy:.2f}")
+    home = unary_union([ink(d, d.GetLayer()) for d in items]).bounds
+    for side, silk in ((pcbnew.F_Cu, pcbnew.F_SilkS), (pcbnew.B_Cu, pcbnew.B_SilkS)):
+        if items[0].GetLayer() != silk:   # flip in place about the tag's own centre line
+            c = pcbnew.VECTOR2I(round((home[0] + home[2]) / 2 * MM), round((home[1] + home[3]) / 2 * MM))
+            for it in items:
+                it.Flip(c, pcbnew.FLIP_DIRECTION_LEFT_RIGHT)
+        tag = unary_union([ink(d, silk) for d in items])
+        ob = obstacles(board, skip_tag=True, side=side)
+        refs = unary_union(list(ob["refs"].values())).buffer(REF_GAP)
+        block = unary_union([ob["copper"], ob["crt"], ob["silk"], refs])
+        x0, y0, x1, y1 = tag.bounds
+        best = None
+        for i in range(int((BOARD[2] - BOARD[0]) / 0.25)):
+            for j in range(int((BOARD[3] - BOARD[1]) / 0.25)):
+                dx, dy = BOARD[0] + i * 0.25 - x0, BOARD[1] + j * 0.25 - y0
+                if best is not None and (dx ** 2 + dy ** 2) ** 0.5 >= best[0]:
+                    continue
+                g = translate(tag, dx, dy)
+                if ob["inside"].contains(g) and not g.intersects(block):
+                    best = ((dx ** 2 + dy ** 2) ** 0.5, dx, dy)
+        name = "top" if side == pcbnew.F_Cu else "bottom"
+        if best is None:
+            print(f"tag: no clear spot on the {name}")
+            continue
+        d, dx, dy = best
+        print(f"tag: {name}, moved ({dx:+.2f}, {dy:+.2f}) mm to x {x0 + dx:.2f}-{x1 + dx:.2f}, "
+              f"y {y0 + dy:.2f}-{y1 + dy:.2f}")
+        if lay:
+            v = pcbnew.VECTOR2I(round(dx * MM), round(dy * MM))
+            for it in items:
+                it.Move(v)
+            pcbnew.SaveBoard(PCB, board)
+            print("saved")
+        break
+    os._exit(0)
+
+
+def step_dot(lay):
+    """SW4's terminal-1 dot (fp_rev_b.py: 1.2 mm out from terminal A) lands between terminal A and R30, which B4.7
+    put straight out from that terminal, and R30's mask opening clips it. On this board it moves to the outer end of
+    the terminal row, 1.2 mm past terminal A's centre (local x -5.2, y 7.7): 0.35 mm from terminal A's pad, 1.4 mm
+    from the frame tab."""
+    board = pcbnew.LoadBoard(PCB)
+    fp = board.FindFootprintByReference("SW4")
+    dot = [g for g in fp.GraphicalItems() if g.GetLayer() == pcbnew.F_SilkS and g.GetClass() == "PCB_SHAPE"
+           and g.GetShape() == pcbnew.SHAPE_T_CIRCLE][0]
+    a = fp.GetOrientation().AsRadians()
+    lx, ly = -5.2, 7.7
+    import math
+    x = fp.GetPosition().x / MM + lx * math.cos(a) + ly * math.sin(a)
+    y = fp.GetPosition().y / MM - lx * math.sin(a) + ly * math.cos(a)
+    c = dot.GetCenter()
+    v = pcbnew.VECTOR2I(round(x * MM) - c.x, round(y * MM) - c.y)
+    dot.Move(v)
+    print(f"SW4 dot: ({c.x / MM:.2f}, {c.y / MM:.2f}) -> ({x:.2f}, {y:.2f})")
     if lay:
-        v = pcbnew.VECTOR2I(round(dx * MM), round(dy * MM))
-        for it in items:
-            it.Move(v)
         pcbnew.SaveBoard(PCB, board)
         print("saved")
     os._exit(0)

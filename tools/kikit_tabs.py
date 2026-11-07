@@ -3,13 +3,20 @@
 on the right edge between R20/R21 and J2. The bottom edge has no 1.5 mm stretch clear of J1, SW1, SW2 and the
 filter, so it gets none. Positions are in millimetres from the board's top-left corner.
 Also adds the three top-side fiducials once the panel is built.
+Rev B (IPHONEFM_REV=rev-b, checked 2026-11-07 the same way): C42, C44 and R28 now sit by the top edge left of SW3, so
+the top's only clear stretch is 29.7-46.5 mm and both top tabs go there; the left edge is clear 0-8.1 mm (above U8's
+row), so the left tab stays at 5.1; the right edge is unchanged.
 Used by tools/pcb_panel.sh: kikit panelize ... --plugin tools/kikit_tabs.py.Tabs"""
+import os
+
 from kikit.annotations import TabAnnotation
 from kikit.plugin import HookPlugin
 from kikit.units import mm
 
 # (edge, position along it in mm, width in mm)
 TABS = [("top", 8.9, 3.0), ("top", 37.5, 3.0), ("left", 5.1, 3.0), ("right", 30.0, 3.0), ("right", 54.0, 3.0)]
+if os.environ.get("IPHONEFM_REV", "rev-a") == "rev-b":
+    TABS = [("top", 33.0, 3.0), ("top", 43.0, 3.0), ("left", 5.1, 3.0), ("right", 30.0, 3.0), ("right", 54.0, 3.0)]
 
 
 class Tabs(HookPlugin):

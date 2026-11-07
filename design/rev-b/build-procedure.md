@@ -176,8 +176,83 @@ pitch per bus (routing-quality standard), checked by `tools/pcb_quality.py --pcb
   - Approved 2026-11-06, including VBUS to pin 8 only, the segment remap with labels on the sheet, and the fan-out
     areas reaching below U8.
 
-## Phase B6 onward: pours, outputs
+## Phase B6: Ground pours (Rev A Phase 6)
 
-As Rev A Phases 6–8: pours and stitching (the left column's stitching is gone; B5.8 joined the north band), DRC and the
-netlist comparison, silkscreen, then the JLC files (the left rail's gap widened for the wheel). The steps are written out
-when Phase B5 is done.
+Rollback point: tag `rev-b-b6-start`. Rev A's tools for Phases 6–8 work through KiCad's live API; the Rev B board is
+not open in KiCad, so their Rev B steps are file edits with KiCad's own Python: `tools/pcb_finish_rev_b.py` (pours) and
+`tools/pcb_silk_rev_b.py` (silkscreen), same rules and numbers as Rev A's.
+
+- [x] B6.1 Pours on both layers, 0.5 mm back from the edge (Rev A 6.1).
+  - Rev A's "GND top" and "GND bottom" carry over unchanged and are refilled after every board edit.
+- [x] B6.2 Stitch the pours (Rev A 6.2).
+  - Done 2026-11-06 (`pcb_finish_rev_b.py stitch`): Rev A's grid (3 mm, 1.5 mm in the RF zones, the same origin and
+    rules), plus one rule for Rev B: no via in a ground SMD pad. 14 vias, where the left column has room again: one by
+    U8's top-left corner, the rest round and under SW4 (Mitsumi's land drawing, p3, marks no keep-out under the body;
+    the frame is ground). With B5.8's six joining vias, 280 vias in all.
+- [x] B6.3 Solid connections (Rev A 6.3).
+  - Rev A's solid pads carry over; DRC finds no pad starved of spokes (B5 joined U8 pin 37 to the exposed pad).
+- [x] B6.4 No dead copper (Rev A 6.4).
+  - One ground network (every fill, pad, track and via joined, by geometry); DRC: no isolated fill, no dangling items.
+- [x] B6.5 Copper balance (Rev A 6.5).
+  - 63% of the top and 79% of the bottom (Rev A 71% and 87%): the display's fine lines take pour on both sides.
+    Roughly balanced for a two-layer 1.6 mm board.
+- [ ] B6.6 **Review checkpoint:** the user reviews the pours, with Phase B7.
+
+## Phase B7: DRC, the netlist comparison and the silkscreen (Rev A Phase 7)
+
+- [x] B7.1 Silkscreen (Rev A 7.1 and its review).
+  - Done 2026-11-07 (`pcb_silk_rev_b.py`):
+    - `edge`: every silkscreen line cut back 0.2 mm inside the edge. SW4's wheel outline is cut where it overhangs (2
+      lines cut back, 22 removed). The digits' pin-1 dots sat past the edge (x 12.61, edge 12.70) and are removed, as
+      Rev A's SW3 dot was; each digit's decimal point shows its turn.
+    - `refs`: Rev A's labelling (major parts only, 1.0 mm text, clear of copper, courtyards and ink). U8, SW3, SW4, DS2
+      and DS4 placed beside their parts; DS1 (TP2/TP3 beside it) and DS3 (U1's corner) have no clear spot and stay on the
+      fab layer only, as Rev A's eight. R28–R32 and C42–C44 off the silkscreen (passives). B4.2 had left the new parts'
+      MPN/LCSC/maker fields visible on the silkscreen: hidden on the fab layer, as Rev A's (and `pcb_rev_b.set_fields`
+      fixed). SW1 keeps its Rev A label: two strokes of SW4's wheel outline shortened 0.15 and 0.21 mm to clear it.
+    - `tag`: Rev A's tag ("CLAUDE / WAS HERE" over an FM wave) sat where U8 now is. No clear spot on the top fits it
+      (the one open stretch, under SW3, carries B5.8's joining vias), so it moved to the bottom, mirrored to read from
+      underneath, the nearest clear spot to its old place (x 13.7–22.6, y 66.8–74.5).
+    - `dot`: SW4's terminal-1 dot sat between terminal A and R30, clipped by R30's mask opening; moved to the outer end
+      of the terminal row, 1.2 mm past terminal A.
+  - Pictures: `silk-b6-top.png`, `gerber-b8-top.png`, `gerber-b8-bottom.png`.
+- [x] B7.2 DRC against the JLC rules, with schematic parity (Rev A 7.1–7.2).
+  - 2026-11-07 (all severities): 0 errors, 0 unconnected, 0 parity differences; no silkscreen findings. The only
+    warnings are footprints that differ from the library: the trimmed edge parts, as Rev A. `pcb_quality.py --pcb`:
+    1154 segments, 0 findings.
+- [x] B7.3 `netcheck.py` and `kicadcheck.py --net --bom --pcb` (Rev A 7.3).
+  - 2026-11-07: netcheck 19 of 19; ERC 0; kicadcheck `--net --bom` 17 of 17, `--pcb --layout none` 13 of 13.
+- [x] B7.4 Holes, rings and widths (Rev A 7.4).
+  - Vias 260 × 0.6/0.3 mm and 20 × 0.4/0.2 mm (U8's fan-out areas only, fab-rules.md "Rev B exception"); tracks 0.127 mm
+    only in those areas, 0.2 mm and up elsewhere. Unplated holes: SW4's two Ø1.6 bosses join Rev A's 0.6, 0.85 and 2.2;
+    the wheels' 1.1 mm slots are gone. No courtyard overlaps.
+- [x] B7.5 Part heights (placement rule M9).
+  - J2 9.5 mm stays tallest; SW4 4.0 (Mitsumi p3 side view), DS1–DS4 3.75, J1 3.26, SW3 now 1.6. M9 updated.
+- [ ] B7.6 **Review checkpoint:** the user reviews the pours, the silkscreen and every check result.
+
+## Phase B8: Outputs (Rev A Phase 8)
+
+`tools/pcb_panel.sh`, `tools/pcb_export.sh`, `tools/jlc_outputs.py` and `tools/kikit_tabs.py` take `IPHONEFM_REV=rev-b`
+(Rev A's outputs unchanged). `tools/pcb_assembly.py --pcb` reads the board file through KiCad's Python.
+
+- [x] B8.1 Gerbers and drill files with JLC's settings (Rev A 8.1).
+  - 2026-11-07 from the panel: `kicad/rev-b/output/jlc/IphoneFM-RevB-gerbers.zip`.
+- [x] B8.1a Assembly drawing.
+  - `kicad/rev-b/output/assembly/IphoneFM-RevB-assembly.pdf`, two A3 pages as Rev A's.
+- [x] B8.2 BOM in JLC's format.
+  - `IphoneFM-RevB-BOM.csv`: 47 lines. Stock is checked at the upload (B8.5).
+- [ ] B8.3 Panel and pick-and-place; every part's rotation checked in JLC's preview.
+  - Panel 2026-11-07 (`IPHONEFM_REV=rev-b sh tools/pcb_panel.sh`): Rev A's frame, rails and gaps (SW4's wheel, 2.76 mm
+    past the left edge, is inside the 9.5 mm gap). Tabs where no courtyard is within 2 mm of the edge: C42, C44 and R28
+    now sit by the top edge, so both top tabs move into the top's one clear stretch (33.0 and 43.0 mm from the left);
+    the left tab stays at 5.1 mm (signal vias of U8's fan-out 0.65 mm in from the edge, 0.4 mm from the mouse-bite
+    holes against the 0.25 mm rule; no other clear stretch on that edge); the right tabs as Rev A. Panel DRC: 0
+    errors, 0 unconnected.
+  - `IphoneFM-RevB-CPL.csv`: 102 parts, matching the BOM. JLC_FIX holds Rev A's parts; the new parts (U8, DS1–DS4,
+    SW4, the new SW3, R28–R32, C42–C44) need checking in JLC's preview, as Rev A's were.
+- [x] B8.4 Read the Gerbers back (Rev A 8.4, `tools/gerber_view.py`).
+  - 2026-11-07: all nine layers and both drill files found. Drill: 260 × 0.3 and 20 × 0.2 mm vias, five 1.4 mm (J2),
+    four 0.6 mm plated slots (J1); unplated 25 × 0.5 mouse bites, 2 × 0.6 (J1), 2 × 0.85 (SW1), 2 × 1.6 (SW4),
+    4 × 2.2 (mounting). Bottom paste empty. Top and bottom drawn as built: `gerber-b8-top.png`, `gerber-b8-bottom.png`.
+- [ ] B8.5 Upload to JLC for a quote, DFM and the rotation check only; the user places the order.
+- [ ] B8.6 **Final review:** commit the project and tag it `rev-b`.

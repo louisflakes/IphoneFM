@@ -31,7 +31,7 @@ Board orientation: looking at the back of the phone, camera at top left. The **t
 | M6 | D1 is top-emitting (0.6 mm tall, XL-1615RGBC-RF p8): top right of the board, under a light pipe in the enclosure's top face | User (2026-10-21); XL-1615RGBC-RF p8 | D1 at the top right |
 | M7 | All parts on the top side; the bottom faces the phone and the magnet ring | HHG p38–39; ADG R31 p279 | Nothing on the bottom |
 | M8 | Through-hole leads stay off the magnet ring (Ø46.0–54.1). Only J2 has them now: 3.5 mm legs, about 1.9 mm out of the bottom of a 1.6 mm board. SW1's two locating posts don't go through | BWSMA-KWE-Z001 p6; MSK12C02 p1; ADG R31 p278–279 | No through-hole leads over the ring |
-| M9 | Tallest top-side parts set the enclosure height: J2 9.5 mm (axis 6.4), SW3 4.1, J1 3.26, RV1–RV3 2.5, SW1 about 1.4 | BWSMA p6; TDP p3; HRO p1; RK10J p2; MSK12C02 p1 | Heights noted for the enclosure |
+| M9 | Tallest top-side parts set the enclosure height: J2 9.5 mm (axis 6.4), SW3 4.1, J1 3.26, RV1–RV3 2.5, SW1 about 1.4. Rev B: J2 9.5, SW4 4.0 (wheel Ø14.5, 2.76 mm past the left edge), DS1–DS4 3.75, J1 3.26, SW3 1.6, SW1 about 1.4 | BWSMA p6; TDP p3; HRO p1; RK10J p2; MSK12C02 p1; Rev B: SIQ p3 (side view), GS3011A/CX-X p2, DHN p41 (front-panel.md) | Heights noted for the enclosure |
 | M10 | Copper at least 0.5 mm from the board edge; the edge parts' actuators and barrels may overhang | Workflow C3; HHG p105, p113 | Edge lines in the tray |
 | M11 | Courtyards clear of each other; main ICs (U1, U2, U4) at least 8 mm apart edge to edge, everything else at least 2 mm, and use the whole board | User (2026-10-20); HHG p37, p39 | Edge-to-edge gaps |
 
