@@ -172,7 +172,9 @@ pitch per bus (routing-quality standard), checked by `tools/pcb_quality.py --pcb
   - Lengths against each net's pad span: no accidental detours. Highest: SEG1_D 1.57× (its step clear of DS1's E pad),
     I2C SDA/SCL 1.5× (round the north band, whole net), LED_SDB 1.38×.
   - Pictures: `routing-b5-u8.png`, `routing-b5-board.png`.
-- [ ] B5.10 **Review checkpoint:** the user reviews the routing.
+- [x] B5.10 **Review checkpoint:** the user reviews the routing.
+  - Approved 2026-11-06, including VBUS to pin 8 only, the segment remap with labels on the sheet, and the fan-out
+    areas reaching below U8.
 
 ## Phase B6 onward: pours, outputs
 
