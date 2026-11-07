@@ -240,7 +240,8 @@ not open in KiCad, so their Rev B steps are file edits with KiCad's own Python: 
 - [x] B8.1a Assembly drawing.
   - `kicad/rev-b/output/assembly/IphoneFM-RevB-assembly.pdf`, two A3 pages as Rev A's.
 - [x] B8.2 BOM in JLC's format.
-  - `IphoneFM-RevB-BOM.csv`: 47 lines. Stock is checked at the upload (B8.5).
+  - `IphoneFM-RevB-BOM.csv`: 47 lines. Stock 2026-11-07: every line covers 6 boards (pre-order-checks.md); U1 global
+    sourcing as Rev A.
 - [ ] B8.3 Panel and pick-and-place; every part's rotation checked in JLC's preview.
   - Panel 2026-11-07 (`IPHONEFM_REV=rev-b sh tools/pcb_panel.sh`): Rev A's frame, rails and gaps (SW4's wheel, 2.76 mm
     past the left edge, is inside the 9.5 mm gap). Tabs where no courtyard is within 2 mm of the edge: C42, C44 and R28
@@ -248,8 +249,10 @@ not open in KiCad, so their Rev B steps are file edits with KiCad's own Python: 
     the left tab stays at 5.1 mm (signal vias of U8's fan-out 0.65 mm in from the edge, 0.4 mm from the mouse-bite
     holes against the 0.25 mm rule; no other clear stretch on that edge); the right tabs as Rev A. Panel DRC: 0
     errors, 0 unconnected.
-  - `IphoneFM-RevB-CPL.csv`: 102 parts, matching the BOM. JLC_FIX holds Rev A's parts; the new parts (U8, DS1–DS4,
-    SW4, the new SW3, R28–R32, C42–C44) need checking in JLC's preview, as Rev A's were.
+  - `IphoneFM-RevB-CPL.csv`: 102 parts, matching the BOM. The new parts' EasyEDA footprints (what JLC's viewer draws)
+    fitted to ours pin by pin, 2026-11-07: U8 and SW3 a 270° turn, SW4 a 2.44 mm origin shift, the digits and
+    passives none (pre-order-checks.md); added to JLC_FIX and the CPL rebuilt. JLC's 3D preview at the upload is the
+    last look.
 - [x] B8.4 Read the Gerbers back (Rev A 8.4, `tools/gerber_view.py`).
   - 2026-11-07: all nine layers and both drill files found. Drill: 260 × 0.3 and 20 × 0.2 mm vias, five 1.4 mm (J2),
     four 0.6 mm plated slots (J1); unplated 25 × 0.5 mouse bites, 2 × 0.6 (J1), 2 × 0.85 (SW1), 2 × 1.6 (SW4),

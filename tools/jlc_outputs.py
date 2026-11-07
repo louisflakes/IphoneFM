@@ -31,6 +31,12 @@ JLC_FIX = {
     "C965840": (180, 0, 0),
     # J2: square legs fit any quarter turn; JLC's model has the barrel toward +x, ours toward -y (seen in JLC's preview)
     "C496551": (90, 0, 0),
+    # Rev B (2026-11-07): fitted the same way to EasyEDA's footprints for these codes (its public component API, which
+    # JLC's placement viewer draws from); worst pin after the fit in brackets. DS1-DS4 (0.00 mm) and the new passives
+    # (pad-size differences under 0.08 mm) need no correction.
+    "C246443": (270, 0, 0),        # U8 QFN-44: JLC's pin 1 bottom-left (0.04 mm; pins 17/39 differ only by our EP joins)
+    "C224997": (270, 0, 0),        # SW3 DHN-06-V (0.23 mm: JLC's rows 6.6 mm apart, Diptronics' 6.15)
+    "C2925423": (0, 0, 2.436),     # SW4: JLC's origin 2.44 mm from the knob centre toward the terminals (0.00 mm)
 }
 ASCII = {"µ": "u", "Ω": "Ohm", "×": "x"}
 
