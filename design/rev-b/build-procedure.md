@@ -111,8 +111,71 @@ taken up here and listed for Phase B5 (routing).
 - [x] B4.10 **Review checkpoint:** the user reviews the placement.
   - Approved 2026-11-06.
 
-## Phase B5 onward: routing, pours, outputs
+## Phase B5: Routing (Rev A Phase 5, for the new parts and the copper B4 took up)
 
-As Rev A Phases 5–8, for the new parts and the copper B4 takes up: local re-routing, pours, DRC and the netlist
-comparison, then the JLC files (the left rail's gap widened for the wheel). The steps are written out when Phase B4 is
-done.
+Rollback point: tag `rev-b-b5-start`. One plan, `tools/pcb_route_rev_b.py lay`, laid as a file edit with KiCad's own
+Python; Rev A copper in its way is taken up by exact position. Lines leave pins straight, bend only by 45° and keep one
+pitch per bus (routing-quality standard), checked by `tools/pcb_quality.py --pcb` alongside DRC.
+
+- [x] B5.1 The digits' two anode pins (3 and 8) are one node inside the part (GS3011A/CX-X p3, "3,8"): declare them a
+  jumper pad group in the footprint, so VBUS reaches each digit at pin 8 only.
+  - Done 2026-11-06: `jumper_pad_groups ("3" "8")` in `tools/fp_rev_b.py`, the library footprint and the four board
+    footprints. Each digit's anode then carries up to 61 mA (8 × 7.6 mA) through one pin.
+- [x] B5.2 Map U8's outputs to the segments in the order their lines leave U8 on the board (netlist.json's note allows
+  it; firmware maps it), so no two lines cross.
+  - Done 2026-11-06. Top-layer bus: pins 12–16, 18–22 (bottom side) to DS1 E, D, C, DP, DS2 E, D, C, DP, DS3 E, D;
+    pins 23–31 (right side) to DS3 C, DS2 B, A, F, G, DS1 B, A, F, G. Bottom-layer bus: pins 11–1 (left side) to DS3 DP,
+    DS4 E, D, C, DP, B, A, F, G, DS3 B, A; pins 33, 32 to DS3 F, G. OUT1, OUT2 (pins 43, 44) and OUT35, OUT36 are open.
+  - The sheet: the 32 segment lines became net labels at both ends (the board order crosses on the sheet;
+    `sch_wire.py` skips them for Rev B), with DS1/DS2 7.6 mm further right and DS3/DS4 10.2 mm further left so the
+    labels face each other (`sch_layout.py`); sheet tools rerun in their order. ERC 0 errors (the two reviewed U4
+    exclusions), `kicadcheck.py --net --bom` 17 of 17; board pad nets updated (`pcb_rev_b.py update`, 34 pads).
+- [x] B5.3 Fan out U8's 32 outputs to DS1–DS4 under the finer rules near U8 (the user's approval 2026-11-06,
+  fab-rules.md "Rev B exception").
+  - Done 2026-11-06. Rule areas "U8 fan-out" and four rules in IphoneFM.kicad_dru: 0.127 mm tracks and gaps, 0.4/0.2 mm
+    vias, 0.2 mm holes to copper.
+    - Top: the bottom side's ten lines leave 1 mm straight and step right together (0.127 mm until on their lanes, so
+      pin 13 clears DS1's E pad); pin 12 runs straight into DS1 E. The right side's nine turn down at 0.254 mm pitch
+      past H1, then step onto the bus. 19 lanes at 0.4 mm between the pad columns; each line peels off in pad order.
+    - Bottom: the left side's 11 pins to two via columns (odd x 14.35, even x 13.55, the even lines between the odd
+      vias), east under U8 and turned down at 0.254 mm; pins 32–33 to vias right of U8 and back under it. The 13 step
+      onto a 0.4 mm bus (x 18.0–22.8) and come up through vias beside DS3's and DS4's pads (x 16.9 and 24.6).
+- [x] B5.4 VBUS to the digits, U8, C42–C44.
+  - Done 2026-11-06. The bottom spine (x 25.6) up to DS1, a via and stub to each digit's pin 8. DS1's pin 8 carries
+    the north band's VBUS east to the x 32.3 riser (Rev A's bottom link at y 77.6 taken up). U8's feed: a bottom riser at
+    x 27.35, clear of H1, the top line under C44 and C42, a via down and a 0.4 mm via between C43 and U8's VCC pin.
+- [x] B5.5 U8's control lines.
+  - Done 2026-11-06. SCL and SDA straight up to 0.4 mm vias (R28 sits over them), SDB to a via and R29, R_EXT into R28,
+    AD into the exposed pad. On the bottom the three run east under the top-edge parts, down x 28.2–29.0 beside DS1,
+    then east between the 3V3 feed and DS2: SDB down to a via at U1 PC13, SCL and SDA to vias on U1–U4's I2C lines at
+    (49.8, 77.4) and (49.0, 78.0).
+- [x] B5.6 3V3 re-joined (B4.8 took up its feed up the left column).
+  - Done 2026-11-06. TP2 to the bottom feed; from TP2 under DS1/DS2's inner pads on the bottom, across between DS2 and
+    DS3 on the top and down the middle of the digits to R31, R32, R30 and on to U3 (and C2); U3 to U2's island through
+    Rev A's link; FB2/C3 up over the I2C lines to the feed; U1's north pins (U1.1, U1.48, C6) by x 41.2.
+- [x] B5.7 The encoder lines and RF_MODE.
+  - Done 2026-11-06. Vias off U1's west pins, a bottom bus at x 27.35–28.55 (more than 1 mm from BOOT0), up beside R31,
+    R32 and R30 to their pull-ups and SW4's terminals. RF_MODE hops the 3V3 link on the top (at CC1/CC2's 0.45 mm
+    pitch) and goes Rev A's way to R17, TP4, SW1 and R18.
+- [x] B5.8 Ground.
+  - Done 2026-11-06. Three vias in U8's exposed pad. The bottom lines close in the pour under U8, so U8's ground leaves
+    by pin 39 (joined to the pad) to a via at the top edge, into the bottom pour between the edge and the SCL line, with
+    R28, C43, R29 and C42's ground pads. The north band's ground (SW3's resistors, TP3, U8) reached the rest through
+    Rev A's stitching in the left column, which the digits now fill: 6 vias where one layer's pour is the north band's
+    and the other's the rest's (by H1, under the LED lines at y 72.75, beside DS2's B pad). 19 Rev A stitching vias and
+    3 dangling ground stubs in the new lines' way taken up.
+- [x] B5.9 Checks.
+  - Done 2026-11-06 (pours refilled): DRC with schematic parity: 0 differences, 0 unconnected, no clearance, track,
+    via or hole errors (silkscreen warnings left for the silkscreen step, as Rev A). `pcb_quality.py --pcb`: 1154
+    segments, 0 findings. One ground network (no isolated pour). `IPHONEFM_REV=rev-b kicadcheck.py --pcb --layout
+    none`: 13 of 13. 410 tracks and 70 vias laid; 31 Rev A items taken up.
+  - Lengths against each net's pad span: no accidental detours. Highest: SEG1_D 1.57× (its step clear of DS1's E pad),
+    I2C SDA/SCL 1.5× (round the north band, whole net), LED_SDB 1.38×.
+  - Pictures: `routing-b5-u8.png`, `routing-b5-board.png`.
+- [ ] B5.10 **Review checkpoint:** the user reviews the routing.
+
+## Phase B6 onward: pours, outputs
+
+As Rev A Phases 6–8: pours and stitching (the left column's stitching is gone; B5.8 joined the north band), DRC and the
+netlist comparison, silkscreen, then the JLC files (the left rail's gap widened for the wheel). The steps are written out
+when Phase B5 is done.

@@ -9,6 +9,7 @@ Usage: python tools/sch_wire.py <chain> [--dry-run]"""
 import heapq
 import json
 import math
+import os
 import re
 import sys
 
@@ -19,6 +20,10 @@ from sch_power import balanced, WIRED_RAILS
 G = 1.27
 UID = "5e1c"
 SKIP = {"NC"}
+# Rev B step B5.2: U8's outputs drive the segments in the order their lines leave U8 on the board, so on the sheet they
+# cross; each end of these nets gets a net label (sch_labels.py) instead of a wire
+if os.environ.get("IPHONEFM_REV") == "rev-b":
+    SKIP |= {f"SEG{d}_{s}" for d in "1234" for s in ("A", "B", "C", "D", "E", "F", "G", "DP")}
 # pins left unwired for the step 1.30 net labels: a part's far side that carries the net on toward another chain
 # nets drawn along a given path instead of routed (absolute mm corners). Chain 6: U7's six control lines run left past
 # their pull-downs, turn down one column each (row k at R_k - 6.35 mm) and step across to SW3's contacts; the inner

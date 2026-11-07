@@ -152,6 +152,25 @@ A step above JLC's minimums, never at them [HHG p15, p63–64]. These are what g
 
 GND gets no class of its own; it's poured on both layers in phase 6.
 
+### Rev B exception: U8's fan-out (step B5.3, the user's approval 2026-11-06)
+
+The rules above are a margin over JLC's minimums, sized for Rev A's finest part (a 0.5 mm-pitch QFN); none of them is
+electrical. U8 (IS31FL3236A, QFN-44) has 0.4 mm pitch and its left side faces the board edge with 1.8 mm to the 0.5 mm
+edge rule: at 0.20 mm tracks and gaps and 0.6/0.3 mm vias only about 26 of its 32 outputs can be routed. Inside rule
+areas named "U8 fan-out" (around U8 on both layers, the bottom layer under DS1 where the bottom bus widens out, and the
+top layer just below U8's bottom pins), in IphoneFM.kicad_dru:
+
+| Rule | JLC minimum | Ours | In the U8 fan-out areas | What is left of the margin |
+|---|---|---|---|---|
+| Copper to copper | 0.10 mm | 0.20 mm | **0.127 mm** | 27% over JLC; at the worst etch tolerance (±20%) about 0.10 mm |
+| Track width | 0.10 mm | 0.20 mm | **0.127 mm** | as above; the segment lines carry at most 7.6 mA (0.10 mm carries about 0.5 A) |
+| Via pad / hole | 0.25 / 0.15 mm (hole 0.2 preferred) | 0.60 / 0.30 mm | **0.40 / 0.20 mm** | JLC's preferred hole; 0.10 mm ring (JLC 0.05, preferred 0.075); the workflow's sizing method [HHG p65–67] gives about 0.45 mm |
+| Hole to copper | 0.20 mm | 0.30 mm | **0.20 mm** | the left side's even-pin lines pass 0.24 mm from the odd-pin via holes |
+
+The 0.50 mm copper-to-edge rule is kept (the outer vias are 0.64 mm from the edge), as is the 0.50 mm hole-to-hole rule.
+Nothing wider fits: a line between two vias 0.8 mm apart leaves 0.4 mm between their pads, and a 0.127 mm line with
+0.127 mm gaps needs 0.38 mm (0.15 mm needs 0.45; a 0.45 mm via pad leaves 0.35).
+
 ## 50 Ω line for the antenna path (step 0.6)
 
 Source: [JLCPCB Impedance Calculator](https://jlcpcb.com/pcb-impedance-calculator), run 2026-10-21. Settings: rigid, 2 layers, 1.6 mm, 1 oz outer copper; 50 Ω, coplanar single-ended (with solder mask), signal on L1 (top), reference L2 (bottom). JLC's stack-up for this is **JLC0216A**: 0.030 mm copper, 1.43 mm FR-4 core, 0.030 mm copper.

@@ -9,7 +9,7 @@ Coordinates are sheet millimetres from the top-left corner (x right, y down), in
 | USB and power | 19–167 | 19–161 | J1, U6, D3, D4, R1, R2, U3, C1–C3 |
 | Controls and LED | 19–167 | 170–401 | SW4 and R30–R32 (Rev B, where Rev A's RV1–RV3 were), SW1, R18, SW2, D1, R25–R27, TP1–TP4 |
 | Clock | 158–288 | 19–90 | Y2, C11, C12, R4 |
-| Display (Rev B) | 158–290 | 300–401 | U8, DS1–DS4, R28, R29, C42–C44: U8's OUT1–16 wired straight across to DS1, DS2 on its right, OUT17–32 to DS3, DS4 (mirrored) on its left |
+| Display (Rev B) | 158–290 | 300–401 | U8, DS1–DS4, R28, R29, C42–C44: DS1, DS2 on U8's right, DS3, DS4 (mirrored) on its left; the 32 segment lines are net labels at both ends (step B5.2: U8's outputs drive the segments in board order, which crosses on the sheet) |
 | MCU | 158–288 | 99–300 | U1, C4–C10, FB2, R6–R8 (at U1 on the board) |
 | Transmit | 297–431 | 19–214 | U2, C13–C26, R5, R9; U7, C27, SW3, R10–R15 |
 | Receive | 297–431 | 223–401 | U4, FB3, C32, C33, R19–R24, C36–C38 |

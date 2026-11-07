@@ -146,6 +146,9 @@ def ds():
     out = head(DS_NAME, "Guangcai GS3011A/CX-X 0.3 in single-digit SMD 7-segment display, 7.3 x 12.0 mm; pads per Guangcai's "
                "soldering pad size (GS3011A/CX-X 2020-09-20 Rev. A p5), pins per p3",
                "7-segment display SMD Guangcai GS3011", -8.6, 8.6)
+    # step B5.1: the two common-anode pins are one node inside the part (GS3011A/CX-X p3, "3,8"), so KiCad may treat
+    # them as joined and the board feeds VBUS to pin 8 only
+    out.append('\t(jumper_pad_groups\n\t\t("3" "8")\n\t)\n')
     out.append(text(None, "${REFERENCE}", 0, 0, "F.Fab", 1.0, 0.15))
     bx, by = 7.3 / 2, 12.0 / 2
     out.append(rect(-bx, -by, bx, by, "F.Fab", FAB))

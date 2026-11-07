@@ -12,10 +12,14 @@ this proves it is tidy (routing-quality standard, 2026-10-25):
   rf      no bottom-layer copper inside RF_BOTTOM_POLYS [AN4169 p12].
 Tracks come from the board open in KiCad; --plan adds the hand-laid runs of a routing script (its RUNS table, top layer)
 so a plan can be scored before any copper goes down.
-Usage (from the repository root): python tools/pcb_quality.py [--plan SCRIPT.py[,SCRIPT.py]] [--nets A,B] [--min-exit 1.0]"""
+Rev B: --pcb FILE reads a board file instead of the board open in KiCad (the project is IPHONEFM_REV's); inside rule
+areas named "U8 fan-out" (the user's approval, 2026-11-06) copper keeps FINE_CLEAR and holes FINE_HOLE.
+Usage (from the repository root): python tools/pcb_quality.py [--pcb FILE] [--plan SCRIPT.py[,SCRIPT.py]] [--nets A,B]
+  [--min-exit 1.0]"""
 import collections
 import importlib.util
 import math
+import os
 import sys
 
 from shapely.geometry import LineString, Point, Polygon, box
@@ -32,13 +36,17 @@ CLEAR = 0.2        # mm, the board's copper clearance
 BUS_GAP = 1.0      # mm, centre-to-centre: closer parallel neighbours count as one bus
 BUS_RUN = 1.0      # mm of side-by-side overlap before two lines count as neighbours
 TOL = 0.01
+FINE_AREA = "U8 fan-out"
+FINE_CLEAR = 0.127  # mm, copper to copper where both items are in a fine area
+FINE_HOLE = 0.2     # mm, hole to copper there
+REV = os.environ.get("IPHONEFM_REV", "rev-a")
 
 
 def net_classes():
     """Net name -> net class, from the project's netclass patterns (plain names and /names)."""
     import json
     import re
-    pro = json.load(open("kicad/rev-a/IphoneFM.kicad_pro", encoding="utf-8"))
+    pro = json.load(open(f"kicad/{REV}/IphoneFM.kicad_pro", encoding="utf-8"))
     pats = [(re.compile("^" + p["pattern"].replace("*", ".*") + "$"), p["netclass"])
             for p in pro["net_settings"].get("netclass_patterns") or []]
 
@@ -65,6 +73,21 @@ def load_plan(path, copper):
             for (x0, y0), (x1, y1) in zip(pts, pts[1:]):
                 out.append(("track", net, {"F.Cu"}, (x0, y0, x1, y1, w / 2), "plan"))
     return out
+
+
+def fine_areas(text):
+    """Rule areas named FINE_AREA: {layer: shapely polygon}."""
+    from kicadcheck import kid, kids, sexpr
+    out = collections.defaultdict(list)
+    for z in kids(sexpr(text), "zone"):
+        name = kid(z, "name")
+        if not name or name[1] != FINE_AREA:
+            continue
+        layers = (kid(z, "layers") or kid(z, "layer"))[1:]
+        pts = [(float(q[1]), float(q[2])) for q in kid(kid(z, "polygon"), "pts")[1:]]
+        for l in layers:
+            out[l].append(Polygon(pts))
+    return {l: unary_union(ps) for l, ps in out.items()}
 
 
 def courtyard_box(text, ref):
@@ -105,8 +128,14 @@ def main():
     a = sys.argv[1:]
     min_exit = float(a[a.index("--min-exit") + 1]) if "--min-exit" in a else MIN_EXIT
     only = set(a[a.index("--nets") + 1].split(",")) if "--nets" in a else None
-    from kipy import KiCad
-    copper = board_copper(KiCad().get_board().get_as_string())
+    if "--pcb" in a:
+        text = open(a[a.index("--pcb") + 1], encoding="utf-8").read()
+    else:
+        from kipy import KiCad
+        text = KiCad().get_board().get_as_string()
+    copper = board_copper(text)
+    areas = fine_areas(text)
+    in_fine = lambda l, shp: l in areas and areas[l].intersects(shp)
     if "--plan" in a:
         plan = []
         for path in a[a.index("--plan") + 1].split(","):
@@ -292,11 +321,12 @@ def main():
     for t in shown:
         net, l, g = t[1], next(iter(t[2])), t[3]
         line = LineString([g[:2], g[2:4]]).buffer(g[4])
+        lf = in_fine(l, line)
         for onet, ol, shp, name in shapes:
             if ol != l or onet == net or (not onet and name == "track"):
                 continue
             d = line.distance(shp)
-            if d < CLEAR - 1e-3:
+            if d < (FINE_CLEAR if lf and in_fine(l, shp) else CLEAR) - 1e-3:
                 found["clear"].append(f"{net} ({g[0]:.2f},{g[1]:.2f})-({g[2]:.2f},{g[3]:.2f}) {d:.2f} mm from {name} ({onet or 'no net'})")
 
     # via
@@ -310,10 +340,11 @@ def main():
         for onet, ol, shp, name in shapes:
             if onet == v[1] or (not onet and name == "track"):
                 continue
+            both = in_fine(ol, disc) and in_fine(ol, shp)
             d = disc.distance(shp)
-            if d < CLEAR - 1e-3 and not (name == "via" and abs(shp.centroid.x - x) < 1e-6 and abs(shp.centroid.y - y) < 1e-6):
+            if d < (FINE_CLEAR if both else CLEAR) - 1e-3 and not (name == "via" and abs(shp.centroid.x - x) < 1e-6 and abs(shp.centroid.y - y) < 1e-6):
                 found["via"].append(f"{v[1]} via at ({x:.2f},{y:.2f}) {d:.2f} mm from {name} ({onet or 'no net'})")
-            elif name != "via" and name != "track" and Point(x, y).buffer(hr).distance(shp) < 0.3 - 1e-3:
+            elif name != "via" and Point(x, y).buffer(hr).distance(shp) < (FINE_HOLE if both else 0.3) - 1e-3 and                     (name != "track" or both):
                 found["via"].append(f"{v[1]} via hole at ({x:.2f},{y:.2f}) under 0.3 mm from {name} ({onet or 'no net'})")
         for hx, hy, ohr, onet in holes:
             dd = math.hypot(hx - x, hy - y)
@@ -321,7 +352,6 @@ def main():
                 found["via"].append(f"{v[1]} via hole at ({x:.2f},{y:.2f}) {dd - hr - ohr:.2f} mm from a hole ({onet or 'no net'})")
 
     # clock
-    text = KiCad().get_board().get_as_string()
     small = [courtyard_box(text, r) for r in CLOCK_SMALL]
     escape = unary_union([box(*b) for b in CLOCK_ESCAPE.values()])
     others = [(c[1], c[2], c[0], (LineString([c[3][:2], c[3][2:4]]).buffer(c[3][4]) if c[0] == "track"

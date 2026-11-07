@@ -25,6 +25,9 @@
 		)
 	)
 	(attr smd)
+	(jumper_pad_groups
+		("3" "8")
+	)
 	(fp_text user "${REFERENCE}"
 		(at 0 0 0)
 		(layer "F.Fab")

@@ -7,7 +7,7 @@
   "pinmap gives every pin of every part and the net it joins; \"NC\" marks a pin left open on purpose. A series part splits a net: the U1 side carries the suffix _MCU, a cathode side _K.",
   "pad_nets join one part and a test pad only, on purpose (the SWD debug pads).",
   "page_segments: the wiring page draws a net through its series parts (a resistor, capacitor, filter or ferrite) as one line; this maps each JSON net segment to the page net it belongs to.",
-  "Rev B (2026-11-06): the front panel. SW4 push-wheel encoder, DS1-DS4 station digits driven by U8, SW3 now a top-lever DIP. U8's OUT1-OUT32 drive the digits in reading order, A to DP; the order may be permuted in layout (firmware maps it)."
+  "Rev B (2026-11-06): the front panel. SW4 push-wheel encoder, DS1-DS4 station digits driven by U8, SW3 now a top-lever DIP. U8's OUT3-OUT34 drive the 32 segments in the order their lines leave U8 on the board (step B5.2; the nets say which OUT drives which segment, and firmware maps it); OUT1, OUT2, OUT35 and OUT36 are open."
  ],
  "parts": [
   {
@@ -2987,67 +2987,67 @@
    "pinmap": {
     "1": {
      "name": "OUT3",
-     "net": "SEG1_C"
+     "net": "SEG3_A"
     },
     "2": {
      "name": "OUT4",
-     "net": "SEG1_D"
+     "net": "SEG3_B"
     },
     "3": {
      "name": "OUT5",
-     "net": "SEG1_E"
+     "net": "SEG4_G"
     },
     "4": {
      "name": "OUT6",
-     "net": "SEG1_F"
+     "net": "SEG4_F"
     },
     "5": {
      "name": "OUT7",
-     "net": "SEG1_G"
+     "net": "SEG4_A"
     },
     "6": {
      "name": "OUT8",
-     "net": "SEG1_DP"
+     "net": "SEG4_B"
     },
     "7": {
      "name": "OUT9",
-     "net": "SEG2_A"
+     "net": "SEG4_DP"
     },
     "8": {
      "name": "OUT10",
-     "net": "SEG2_B"
+     "net": "SEG4_C"
     },
     "9": {
      "name": "OUT11",
-     "net": "SEG2_C"
+     "net": "SEG4_D"
     },
     "10": {
      "name": "OUT12",
-     "net": "SEG2_D"
+     "net": "SEG4_E"
     },
     "11": {
      "name": "OUT13",
-     "net": "SEG2_E"
+     "net": "SEG3_DP"
     },
     "12": {
      "name": "OUT14",
-     "net": "SEG2_F"
+     "net": "SEG1_E"
     },
     "13": {
      "name": "OUT15",
-     "net": "SEG2_G"
+     "net": "SEG1_D"
     },
     "14": {
      "name": "OUT16",
-     "net": "SEG2_DP"
+     "net": "SEG1_C"
     },
     "15": {
      "name": "OUT17",
-     "net": "SEG3_A"
+     "net": "SEG1_DP"
     },
     "16": {
      "name": "OUT18",
-     "net": "SEG3_B"
+     "net": "SEG2_E"
     },
     "17": {
      "name": "GND",
@@ -3055,67 +3055,67 @@
     },
     "18": {
      "name": "OUT19",
-     "net": "SEG3_C"
+     "net": "SEG2_D"
     },
     "19": {
      "name": "OUT20",
-     "net": "SEG3_D"
+     "net": "SEG2_C"
     },
     "20": {
      "name": "OUT21",
-     "net": "SEG3_E"
+     "net": "SEG2_DP"
     },
     "21": {
      "name": "OUT22",
-     "net": "SEG3_F"
+     "net": "SEG3_E"
     },
     "22": {
      "name": "OUT23",
-     "net": "SEG3_G"
+     "net": "SEG3_D"
     },
     "23": {
      "name": "OUT24",
-     "net": "SEG3_DP"
+     "net": "SEG3_C"
     },
     "24": {
      "name": "OUT25",
-     "net": "SEG4_A"
+     "net": "SEG2_B"
     },
     "25": {
      "name": "OUT26",
-     "net": "SEG4_B"
+     "net": "SEG2_A"
     },
     "26": {
      "name": "OUT27",
-     "net": "SEG4_C"
+     "net": "SEG2_F"
     },
     "27": {
      "name": "OUT28",
-     "net": "SEG4_D"
+     "net": "SEG2_G"
     },
     "28": {
      "name": "OUT29",
-     "net": "SEG4_E"
+     "net": "SEG1_B"
     },
     "29": {
      "name": "OUT30",
-     "net": "SEG4_F"
+     "net": "SEG1_A"
     },
     "30": {
      "name": "OUT31",
-     "net": "SEG4_G"
+     "net": "SEG1_F"
     },
     "31": {
      "name": "OUT32",
-     "net": "SEG4_DP"
+     "net": "SEG1_G"
     },
     "32": {
      "name": "OUT33",
-     "net": "NC"
+     "net": "SEG3_G"
     },
     "33": {
      "name": "OUT34",
-     "net": "NC"
+     "net": "SEG3_F"
     },
     "34": {
      "name": "OUT35",
@@ -3155,11 +3155,11 @@
     },
     "43": {
      "name": "OUT1",
-     "net": "SEG1_A"
+     "net": "NC"
     },
     "44": {
      "name": "OUT2",
-     "net": "SEG1_B"
+     "net": "NC"
     },
     "EP": {
      "name": "Exposed pad",
@@ -3404,38 +3404,38 @@
   "ENC_SW": "SW4 push switch to U1 PA5, R32 pull-up",
   "LED_SDB": "U1 PC13 to U8 SDB, R29 pull-down: display off until firmware runs",
   "DRV_REXT": "U8 R_EXT to R28, sets the segment current",
-  "SEG1_A": "U8 OUT1 to DS1 segment A",
-  "SEG1_B": "U8 OUT2 to DS1 segment B",
-  "SEG1_C": "U8 OUT3 to DS1 segment C",
-  "SEG1_D": "U8 OUT4 to DS1 segment D",
-  "SEG1_E": "U8 OUT5 to DS1 segment E",
-  "SEG1_F": "U8 OUT6 to DS1 segment F",
-  "SEG1_G": "U8 OUT7 to DS1 segment G",
-  "SEG1_DP": "U8 OUT8 to DS1 segment DP",
-  "SEG2_A": "U8 OUT9 to DS2 segment A",
-  "SEG2_B": "U8 OUT10 to DS2 segment B",
-  "SEG2_C": "U8 OUT11 to DS2 segment C",
-  "SEG2_D": "U8 OUT12 to DS2 segment D",
-  "SEG2_E": "U8 OUT13 to DS2 segment E",
-  "SEG2_F": "U8 OUT14 to DS2 segment F",
-  "SEG2_G": "U8 OUT15 to DS2 segment G",
-  "SEG2_DP": "U8 OUT16 to DS2 segment DP",
-  "SEG3_A": "U8 OUT17 to DS3 segment A",
-  "SEG3_B": "U8 OUT18 to DS3 segment B",
-  "SEG3_C": "U8 OUT19 to DS3 segment C",
-  "SEG3_D": "U8 OUT20 to DS3 segment D",
-  "SEG3_E": "U8 OUT21 to DS3 segment E",
-  "SEG3_F": "U8 OUT22 to DS3 segment F",
-  "SEG3_G": "U8 OUT23 to DS3 segment G",
-  "SEG3_DP": "U8 OUT24 to DS3 segment DP",
-  "SEG4_A": "U8 OUT25 to DS4 segment A",
-  "SEG4_B": "U8 OUT26 to DS4 segment B",
-  "SEG4_C": "U8 OUT27 to DS4 segment C",
-  "SEG4_D": "U8 OUT28 to DS4 segment D",
-  "SEG4_E": "U8 OUT29 to DS4 segment E",
-  "SEG4_F": "U8 OUT30 to DS4 segment F",
-  "SEG4_G": "U8 OUT31 to DS4 segment G",
-  "SEG4_DP": "U8 OUT32 to DS4 segment DP"
+  "SEG1_A": "U8 OUT30 to DS1 segment A",
+  "SEG1_B": "U8 OUT29 to DS1 segment B",
+  "SEG1_C": "U8 OUT16 to DS1 segment C",
+  "SEG1_D": "U8 OUT15 to DS1 segment D",
+  "SEG1_E": "U8 OUT14 to DS1 segment E",
+  "SEG1_F": "U8 OUT31 to DS1 segment F",
+  "SEG1_G": "U8 OUT32 to DS1 segment G",
+  "SEG1_DP": "U8 OUT17 to DS1 segment DP",
+  "SEG2_A": "U8 OUT26 to DS2 segment A",
+  "SEG2_B": "U8 OUT25 to DS2 segment B",
+  "SEG2_C": "U8 OUT20 to DS2 segment C",
+  "SEG2_D": "U8 OUT19 to DS2 segment D",
+  "SEG2_E": "U8 OUT18 to DS2 segment E",
+  "SEG2_F": "U8 OUT27 to DS2 segment F",
+  "SEG2_G": "U8 OUT28 to DS2 segment G",
+  "SEG2_DP": "U8 OUT21 to DS2 segment DP",
+  "SEG3_A": "U8 OUT3 to DS3 segment A",
+  "SEG3_B": "U8 OUT4 to DS3 segment B",
+  "SEG3_C": "U8 OUT24 to DS3 segment C",
+  "SEG3_D": "U8 OUT23 to DS3 segment D",
+  "SEG3_E": "U8 OUT22 to DS3 segment E",
+  "SEG3_F": "U8 OUT34 to DS3 segment F",
+  "SEG3_G": "U8 OUT33 to DS3 segment G",
+  "SEG3_DP": "U8 OUT13 to DS3 segment DP",
+  "SEG4_A": "U8 OUT7 to DS4 segment A",
+  "SEG4_B": "U8 OUT8 to DS4 segment B",
+  "SEG4_C": "U8 OUT10 to DS4 segment C",
+  "SEG4_D": "U8 OUT11 to DS4 segment D",
+  "SEG4_E": "U8 OUT12 to DS4 segment E",
+  "SEG4_F": "U8 OUT6 to DS4 segment F",
+  "SEG4_G": "U8 OUT5 to DS4 segment G",
+  "SEG4_DP": "U8 OUT9 to DS4 segment DP"
  },
  "pad_nets": [
   "SWCLK",
