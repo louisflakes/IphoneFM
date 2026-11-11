@@ -4,6 +4,7 @@ this proves it is tidy (routing-quality standard, 2026-10-25):
   bend    every bend between two segments of a line turns 45 degrees (no 90 or 135 degree corners);
   exit    a line leaves a fine-pitch pad (an IC or connector) straight along the pad's long axis, outwards, for at
           least MIN_EXIT (pad edge to first bend), unless it reaches its other pad or an escape via within LOCAL;
+          inwards only straight onto its own via under the part, within INWARD_VIA (Rev C, U8's even left pins);
           power nets need only leave straight;
   pitch   parallel neighbours of one net class that run side by side form a bus, and each bus keeps one pitch;
   clear   copper of other nets on the same layer is at least CLEAR away (catches problems in plans, before DRC runs);
@@ -36,6 +37,7 @@ CLEAR = 0.2        # mm, the board's copper clearance
 BUS_GAP = 1.0      # mm, centre-to-centre: closer parallel neighbours count as one bus
 BUS_RUN = 1.0      # mm of side-by-side overlap before two lines count as neighbours
 TOL = 0.01
+INWARD_VIA = 1.0   # mm: longest allowed inward escape onto a via under the part (exit rule, Rev C)
 FINE_AREA = "U8 fan-out"
 FINE_CLEAR = 0.127  # mm, copper to copper where both items are in a fine area
 FINE_HOLE = 0.2     # mm, hole to copper there
@@ -210,6 +212,14 @@ def main():
             d = math.hypot(ox - sx, oy - sy)
             u = ((ox - sx) / d, (oy - sy) / d) if d else axis
             if u[0] * axis[0] + u[1] * axis[1] < 0.999:
+                # Rev C: an inward escape is allowed only straight along the pad's axis, in one segment of at most
+                # INWARD_VIA, onto a via of the pin's own net inside the part's courtyard (U8's even left pins, whose
+                # vias sit between the pin ring and the exposed pad so that no line threads between two vias)
+                inward = u[0] * axis[0] + u[1] * axis[1] < -0.999 and d <= INWARD_VIA + TOL and any(
+                    v[1] == net and abs(v[3][0] - ox) < 1e-3 and abs(v[3][1] - oy) < 1e-3 for v in vias)
+                crt = courtyard_box(text, p[4].split(".")[0]) if inward else None
+                if inward and crt is not None and crt.contains(Point(ox, oy)):
+                    continue
                 found["exit"].append(f"{net} leaves {p[4]} sideways or inwards at ({sx:.2f},{sy:.2f})->({ox:.2f},{oy:.2f})")
                 continue
             # walk the straight run to its first bend, or to another pad

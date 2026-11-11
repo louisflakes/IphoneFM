@@ -259,3 +259,31 @@ not open in KiCad, so their Rev B steps are file edits with KiCad's own Python: 
     4 × 2.2 (mounting). Bottom paste empty. Top and bottom drawn as built: `gerber-b8-top.png`, `gerber-b8-bottom.png`.
 - [ ] B8.5 Upload to JLC for a quote, DFM and the rotation check only; the user places the order.
 - [ ] B8.6 **Final review:** commit the project and tag it `rev-b`.
+
+## Rev C: U8's fan-out on JLC's standard vias (branch `rev-c`, 2026-11-11)
+
+The user's request: try a re-route so the board avoids JLC's high-precision via pricing. At the B8.5 quote, Rev B's
+0.4/0.2 mm fan-out vias brought plugged vias and a 4-wire test, about $51 more for 5 panels; 0.25 mm holes cost the
+same, so only 0.30 mm saves. Everything else is Rev B as reviewed.
+
+- [x] C.1 Re-plan U8's left side for 0.45/0.30 mm vias (`tools/pcb_route_rev_b.py`, laid from the B5 start).
+  - A 0.30 mm hole needs 0.35 mm from its centre to other copper; a line threading between two vias 0.8 mm apart gets
+    0.34. Now no line passes between two vias: odd pins go out to vias at x 14.35, even pins in, past their heels, to
+    vias at x 16.39 between the pin ring and the exposed pad (0.127 mm from both). On the bottom, each column comes
+    down in its own lanes (the higher the via, the further east), then the 13 lines join the bus as before.
+  - The lanes now run 11 9 7 5 3 1 10 8 6 4 2 west to east, so pins 1–10 drive different segments (the digits' pads
+    keep their lanes): netlist.json's U8 pinmap and net notes updated, the sheet's labels moved by the schematic tools,
+    the firmware table in pre-order-checks.md regenerated.
+  - SCL bends left at its toe over the unused pins 43–44, so SDA's via sits up-left of its pin; the pins 32/33 vias and
+    two ground vias by R28/R29 move 0.02–0.05 mm. All 20 fan-out vias are 0.45/0.30 mm; the fan-out rule in
+    IphoneFM.kicad_dru follows.
+  - Quality rule: the even pins leave inwards. `pcb_quality.py` now allows an inward exit only straight along the
+    pad's axis, in one segment of at most 1.0 mm, onto the pin's own via inside the part's courtyard (to review).
+- [x] C.2 Checks, with B6–B7 redone on the new copper (stitching, silkscreen, tag, SW4 dot).
+  - DRC with schematic parity: 0 errors, 0 unconnected, 0 parity; `pcb_quality.py --pcb`: 1144 segments, 0 findings;
+    ERC 0; netcheck 19 of 19; kicadcheck `--net --bom` 17 of 17, `--pcb` 13 of 13; one ground network; copper 63% /
+    79% as before. Drill file: every plated via 0.30 mm (280).
+  - JLC quote with the new Gerbers (2026-11-11): read as a standard board, $7.50 for 5 bare panels (Rev B's vias:
+    $58.53), surface finish aside.
+  - Picture: `routing-c-u8.png`.
+- [ ] C.3 **Review checkpoint:** the user reviews the new fan-out, the inward-exit allowance and the segment remap.

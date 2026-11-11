@@ -34,7 +34,9 @@ BOARD = "kicad/rev-b/IphoneFM.kicad_pcb"
 FINE_W = 0.127                       # tracks inside the U8 fan-out areas
 W = 0.2                              # signals
 PW = 0.4                             # power (VBUS, 3V3)
-FINE_VIA, STD_VIA = (0.4, 0.2), (0.6, 0.3)
+# Rev C: the fan-out's vias are 0.45/0.3 mm, JLC's standard hole (Rev B's 0.4/0.2 is priced as high-precision: plugged
+# vias and a 4-wire test, about $51 more per order); a 0.3 mm hole needs 0.35 mm from its centre to other copper
+FINE_VIA, STD_VIA = (0.45, 0.3), (0.6, 0.3)
 AREA = "U8 fan-out"
 # the rule areas: around U8 on both layers, and the bottom layer under DS1 where the bottom bus widens out
 AREAS = [((T, B), [(13.21, 60.06), (24.55, 60.06), (24.55, 69.6), (13.21, 69.6)]),
@@ -51,7 +53,19 @@ class Plan:
 
     def run(self, net, pts, w=W, layer=T):
         pts = [tuple(round(c, 4) for c in p) for p in pts]
-        self.runs.append((net, layer, pts, w))
+        # drop repeated points, and the joint between a sliver (under 0.05 mm) and the straight run it continues (a jog
+        # bending 0.01 mm after a turn leaves one, which the quality check reads as a bend)
+        out = [p for i, p in enumerate(pts) if i == 0 or math.hypot(p[0] - pts[i - 1][0], p[1] - pts[i - 1][1]) > 1e-6]
+        i = 1
+        while i < len(out) - 1:
+            a, b, c = out[i - 1], out[i], out[i + 1]
+            straight = abs((b[0] - a[0]) * (c[1] - b[1]) - (b[1] - a[1]) * (c[0] - b[0])) < 1e-9 and \
+                (b[0] - a[0]) * (c[0] - b[0]) + (b[1] - a[1]) * (c[1] - b[1]) > 0
+            if straight and min(math.hypot(b[0] - a[0], b[1] - a[1]), math.hypot(c[0] - b[0], c[1] - b[1])) < 0.05:
+                del out[i]
+            else:
+                i += 1
+        self.runs.append((net, layer, out, w))
 
     def via(self, net, x, y, size=STD_VIA):
         self.vias.append((net, round(x, 4), round(y, 4), size))
@@ -137,8 +151,10 @@ def u8_top(k):     # pins 34-44, right to left; toe at y 62.47
 TOP_BUS = [(12, "SEG1_E"), (13, "SEG1_D"), (14, "SEG1_C"), (15, "SEG1_DP"), (16, "SEG2_E"), (18, "SEG2_D"), (19, "SEG2_C"),
            (20, "SEG2_DP"), (21, "SEG3_E"), (22, "SEG3_D"), (23, "SEG3_C"), (24, "SEG2_B"), (25, "SEG2_A"), (26, "SEG2_F"),
            (27, "SEG2_G"), (28, "SEG1_B"), (29, "SEG1_A"), (30, "SEG1_F"), (31, "SEG1_G")]
-BOT_BUS = [(11, "SEG3_DP"), (10, "SEG4_E"), (9, "SEG4_D"), (8, "SEG4_C"), (7, "SEG4_DP"), (6, "SEG4_B"), (5, "SEG4_A"),
-           (4, "SEG4_F"), (3, "SEG4_G"), (2, "SEG3_B"), (1, "SEG3_A"), (33, "SEG3_F"), (32, "SEG3_G")]
+# Rev C: the left side's odd pins and even pins come down in two groups (u8_bottom_bus), so the lanes, west to east,
+# are 11 9 7 5 3 1 10 8 6 4 2; the segments keep their lanes (the digits' pads are where they are)
+BOT_BUS = [(11, "SEG3_DP"), (9, "SEG4_E"), (7, "SEG4_D"), (5, "SEG4_C"), (3, "SEG4_DP"), (1, "SEG4_B"), (10, "SEG4_A"),
+           (8, "SEG4_F"), (6, "SEG4_G"), (4, "SEG3_B"), (2, "SEG3_A"), (33, "SEG3_F"), (32, "SEG3_G")]
 NET = dict(TOP_BUS + BOT_BUS)
 
 # top bus lanes, west to east, 0.4 mm apart; G1 (pin 31) stays on its fan-out lane
@@ -192,30 +208,39 @@ BOT_LANE = {pin: round(18.0 + 0.4 * i, 4) for i, (pin, _) in enumerate(BOT_BUS)}
 VIA_OUT, VIA_IN = 16.9, 24.6        # vias beside the outer and inner pad columns
 
 
+VIA_O, VIA_I = 14.35, 16.39     # Rev C: the left side's via columns, outside the pins and inside their heels
+CLEAR_V = 0.4155                 # via centre to a 0.127 mm line's centre: 0.225 pad + 0.127 gap + 0.0635
+
+
 def u8_bottom_bus():
-    # left side: odd pins to vias at x 14.35, even pins between them to vias at x 13.55 (top layer, 0.127 mm)
+    # left side (Rev C): odd pins out to vias at x 14.35; even pins in, past their heels, to vias at x 16.39 between
+    # the pin ring and the exposed pad (0.127 mm from both). No line passes between two vias, which at 0.8 mm apart
+    # leaves no room for a 0.3 mm hole
     vias = {}
     for k in range(1, 12):
         x, y = u8_left(k)
-        vx = 14.35 if k % 2 else 13.55
+        vx = VIA_O if k % 2 else VIA_I
         P.run(NET[k], [(x, y), (vx, y)], FINE_W)
         P.via(NET[k], vx, y, FINE_VIA)
         vias[k] = (vx, y)
-    # bottom: east under U8's left pins, turned down at 0.254 mm (innermost, pin 11, westmost)
-    order = list(range(11, 0, -1))
-    lanes = [round(15.0 + 0.254 * i, 4) for i in range(len(order))]
-    tips = [0.0 if k % 2 else 14.74 - 13.55 for k in order]   # even lines stay straight past the odd vias
-    turned = turn([vias[k] for k in order], (1, 0), (0, 1), lanes, TURN_P, tips=tips, min_exit=0.0)
-    paths = {k: turned[i] for i, k in enumerate(order)}
-    # pins 33 and 32: out of the right side to vias, back west on the bottom and down under U8's right pins
-    for k, vx in ((33, 21.65), (32, 22.45)):
+    # bottom: each column's lowest line straight down from its via; the others east and turned down at 0.254 mm in
+    # their own lanes, clear of the vias below them (the higher the via, the further east its lane)
+    paths = {11: [vias[11]], 10: [vias[10]]}
+    for col, x0 in (([9, 7, 5, 3, 1], VIA_O), ([8, 6, 4, 2], VIA_I)):
+        lanes = [round(x0 + CLEAR_V + 0.254 * i, 4) for i in range(len(col))]
+        turned = turn([vias[k] for k in col], (1, 0), (0, 1), lanes, (0.8 + 0.254) / math.sqrt(2), min_exit=0.0)
+        paths.update({k: turned[i] for i, k in enumerate(col)})
+    # pins 33 and 32: out of the right side to vias, back west on the bottom and down under U8's right pins. Each via
+    # sits 0.05 mm above its pin's line (a 45-degree step), so the line of the pin below passes CLEAR_V from it
+    for k, vx in ((33, 21.70), (32, 22.50)):
         x, y = u8_right(k)
-        P.run(NET[k], [(x, y), (vx, y)], FINE_W)
-        P.via(NET[k], vx, y, FINE_VIA)
-    paths[33] = [(21.65, 63.47), (20.65, 63.47), (20.3, 63.82)]
-    paths[32] = [(22.45, 63.87), (20.8, 63.87), (20.6, 64.07)]
+        P.run(NET[k], [(x, y), (vx - 0.05, y), (vx, y - 0.05)], FINE_W)
+        P.via(NET[k], vx, y - 0.05, FINE_VIA)
+    paths[33] = [(21.70, 63.42), (20.65, 63.42), (20.3, 63.77)]
+    # 32 steps down first, so its westward line passes below 33's via
+    paths[32] = [(22.50, 63.82), (21.95, 64.37), (20.9, 64.37), (20.6, 64.67)]
     # all 13 step east onto the bus lanes (eastmost first), 0.254 mm apart on the diagonals
-    seq = [32, 33] + list(range(1, 12))
+    seq = [k for k, _ in reversed(BOT_BUS)]
     starts = [(paths[k][-1][0], 68.0) for k in seq]
     jogged = jog(starts, (0, 1), (1, 0), [BOT_LANE[k] - paths[k][-1][0] for k in seq], 0.254)
     for i, k in enumerate(seq):
@@ -259,21 +284,23 @@ def vbus():
 # ---------------------------------------------------------------- B5.5 U8's control lines
 def control():
     # top: SCL and SDA straight up to vias (R28 sits over them), R_EXT up and into R28, SDB to a via and R29, AD inward
-    P.run("/I2C_SCL", [u8_top(42), (16.8, 62.1), (16.3, 61.6)], FINE_W)
+    # Rev C: SCL bends left at its toe, over the unused pins 43-44, so SDA's via can sit up-left of its pin, CLEAR_V
+    # from both SCL and R_EXT (straight above its pin it was 0.4 mm from each)
+    P.run("/I2C_SCL", [u8_top(42), (16.8, 62.45), (16.3, 61.95), (16.3, 61.6)], FINE_W)
     P.via("/I2C_SCL", 16.3, 61.6, FINE_VIA)
-    P.run("/I2C_SDA", [u8_top(41), (17.2, 62.05)], FINE_W)
-    P.via("/I2C_SDA", 17.2, 62.05, FINE_VIA)
+    P.run("/I2C_SDA", [u8_top(41), (17.2, 62.2), (17.15, 62.15)], FINE_W)
+    P.via("/I2C_SDA", 17.15, 62.15, FINE_VIA)
     P.run("/DRV_REXT", [u8_top(40), (17.6, 61.66), (17.3, 61.36), (17.03, 61.36)], FINE_W)
     P.run("/LED_SDB", [u8_top(36), (19.2, 62.05), (19.65, 61.6)], FINE_W)
     P.via("/LED_SDB", 19.2, 62.05, FINE_VIA)
     P.run("GND", [u8_top(37), (18.8, 64.3)], W)
     # bottom: east under the top-edge parts, 0.4 mm apart, turned down at x 28.2 (SDB), 28.6 (SDA), 29.0 (SCL)
-    starts = [(19.4, 61.85), (17.8, 61.45), (16.85, 61.05)]   # each a 45-degree step up out of its via
+    starts = [(19.4, 61.85), (17.85, 61.45), (16.85, 61.05)]   # each a 45-degree step up out of its via
     turned = turn(starts, (1, 0), (0, 1), [28.2, 28.6, 29.0], 0.8 / math.sqrt(2), min_exit=0.0, min_tail=0.4, late=True)
     sdb, sda, scl = turned
     # down past DS1, then east between the 3V3 feed (y 73.75) and DS2: SCL at 75.6, SDA 76.0, SDB 76.4
     P.run("/I2C_SCL", [(16.3, 61.6)] + scl + [(29.0, 75.2), (29.4, 75.6), (49.4, 75.6), (49.8, 76.0), (49.8, 77.4)], W, B)
-    P.run("/I2C_SDA", [(17.2, 62.05)] + sda + [(28.6, 75.6), (29.0, 76.0), (48.6, 76.0), (49.0, 76.4), (49.0, 78.0)], W, B)
+    P.run("/I2C_SDA", [(17.15, 62.15)] + sda +[(28.6, 75.6), (29.0, 76.0), (48.6, 76.0), (49.0, 76.4), (49.0, 78.0)], W, B)
     P.via("/I2C_SCL", 49.8, 77.4)                                           # on U1-U4's SCL line
     P.via("/I2C_SDA", 49.0, 78.0)                                           # on U1-U4's SDA line
     P.run("/LED_SDB", [(19.2, 62.05)] + sdb + [(28.2, 76.0), (28.6, 76.4), (33.1, 76.4), (33.5, 76.8), (33.5, 85.65),
@@ -347,12 +374,13 @@ def ground():
     # the bottom lines close in the pour under U8, so U8's ground (pin 39, joined to the exposed pad) runs up between
     # R_EXT and C43 to a via at the top edge, into the bottom pour between the edge and the SCL line; the top-edge
     # parts' ground pads join it there
-    P.run("GND", [(18.0, 62.97), (18.0, 62.35), (17.9, 62.25), (17.9, 60.8), (17.7, 60.6)], FINE_W)
-    P.via("GND", 17.7, 60.6, FINE_VIA)
-    P.run("GND", [(17.03, 60.34), (17.44, 60.34), (17.7, 60.6)], FINE_W)        # R28.2
-    P.run("GND", [(18.4, 60.39), (17.91, 60.39), (17.7, 60.6)], FINE_W)         # C43.2
-    P.via("GND", 20.52, 60.6, FINE_VIA)
-    P.run("GND", [(19.77, 60.34), (20.26, 60.34), (20.52, 60.6)], FINE_W)       # R29.2
+    # (Rev C: these two vias 0.02 mm higher, CLEAR_V-equivalent from the SCL line under them on the bottom)
+    P.run("GND", [(18.0, 62.97), (18.0, 62.35), (17.9, 62.25), (17.9, 60.78), (17.7, 60.58)], FINE_W)
+    P.via("GND", 17.7, 60.58, FINE_VIA)
+    P.run("GND", [(17.03, 60.34), (17.46, 60.34), (17.7, 60.58)], FINE_W)       # R28.2
+    P.run("GND", [(18.4, 60.39), (17.89, 60.39), (17.7, 60.58)], FINE_W)        # C43.2
+    P.via("GND", 20.52, 60.58, FINE_VIA)
+    P.run("GND", [(19.77, 60.34), (20.28, 60.34), (20.52, 60.58)], FINE_W)      # R29.2
     P.via("GND", 23.85, 60.55, FINE_VIA)
     P.run("GND", [(22.93, 60.55), (23.85, 60.55)], FINE_W)                      # C42.2
     # the north band's ground (SW3's resistors, TP3, U8 and the top-edge parts) reached the rest through Rev A's
@@ -428,6 +456,12 @@ def lay():
                 sys.exit(f"no net {name}")
             nets[name] = n
         return nets[name]
+    # U8's output pads take the segment the plan gives them (netlist.json's pinmap says the same; schematic parity
+    # checks the two agree)
+    u8 = board.FindFootprintByReference("U8")
+    for pad in u8.Pads():
+        if pad.GetNumber().isdigit() and int(pad.GetNumber()) in NET:
+            pad.SetNet(net(NET[int(pad.GetNumber())]))
     n_t = 0
     for name, layer, a, b, w in P.segments():
         t = pcbnew.PCB_TRACK(board)

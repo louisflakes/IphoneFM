@@ -33,8 +33,9 @@
 	(constraint clearance (min 0.15mm)))
 # Rev B step B5.3 (the user's approval, 2026-11-06): U8's fan-out. Our 0.20 mm rules are a margin over JLC's minimums,
 # sized for Rev A's finest part (0.5 mm pitch). U8's 0.4 mm-pitch left side has 1.8 mm to the edge rule, so inside the
-# rule areas named "U8 fan-out" copper keeps 0.127 mm (JLC 0.10), tracks are 0.127 mm (JLC 0.10), vias 0.4/0.2 mm
-# (JLC 0.25/0.15, preferred hole 0.2) and holes 0.2 mm from copper (JLC 0.20); everywhere else the 0.20 mm rules hold.
+# rule areas named "U8 fan-out" copper keeps 0.127 mm (JLC 0.10), tracks are 0.127 mm (JLC 0.10), vias 0.45/0.3 mm
+# (Rev C: JLC's standard 0.3 mm hole, ring 0.075 = JLC's preferred; Rev B had 0.4/0.2, which JLC prices as
+# high-precision) and holes 0.2 mm from copper (JLC 0.20); everywhere else the 0.20 mm rules hold.
 (rule "U8 fan-out: clearance"
 	(condition "A.intersectsArea('U8 fan-out') && B.intersectsArea('U8 fan-out')")
 	(constraint clearance (min 0.127mm)))
@@ -46,6 +47,6 @@
 	(constraint track_width (min 0.127mm)))
 (rule "U8 fan-out: vias"
 	(condition "A.Type == 'Via' && A.intersectsArea('U8 fan-out')")
-	(constraint via_diameter (min 0.4mm))
-	(constraint hole_size (min 0.2mm))
-	(constraint annular_width (min 0.1mm)))
+	(constraint via_diameter (min 0.45mm))
+	(constraint hole_size (min 0.3mm))
+	(constraint annular_width (min 0.075mm)))

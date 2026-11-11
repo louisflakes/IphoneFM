@@ -2987,43 +2987,43 @@
    "pinmap": {
     "1": {
      "name": "OUT3",
-     "net": "SEG3_A"
+     "net": "SEG4_B"
     },
     "2": {
      "name": "OUT4",
-     "net": "SEG3_B"
+     "net": "SEG3_A"
     },
     "3": {
      "name": "OUT5",
-     "net": "SEG4_G"
+     "net": "SEG4_DP"
     },
     "4": {
      "name": "OUT6",
-     "net": "SEG4_F"
+     "net": "SEG3_B"
     },
     "5": {
      "name": "OUT7",
-     "net": "SEG4_A"
+     "net": "SEG4_C"
     },
     "6": {
      "name": "OUT8",
-     "net": "SEG4_B"
+     "net": "SEG4_G"
     },
     "7": {
      "name": "OUT9",
-     "net": "SEG4_DP"
+     "net": "SEG4_D"
     },
     "8": {
      "name": "OUT10",
-     "net": "SEG4_C"
+     "net": "SEG4_F"
     },
     "9": {
      "name": "OUT11",
-     "net": "SEG4_D"
+     "net": "SEG4_E"
     },
     "10": {
      "name": "OUT12",
-     "net": "SEG4_E"
+     "net": "SEG4_A"
     },
     "11": {
      "name": "OUT13",
@@ -3420,22 +3420,22 @@
   "SEG2_F": "U8 OUT27 to DS2 segment F",
   "SEG2_G": "U8 OUT28 to DS2 segment G",
   "SEG2_DP": "U8 OUT21 to DS2 segment DP",
-  "SEG3_A": "U8 OUT3 to DS3 segment A",
-  "SEG3_B": "U8 OUT4 to DS3 segment B",
+  "SEG3_A": "U8 OUT4 to DS3 segment A",
+  "SEG3_B": "U8 OUT6 to DS3 segment B",
   "SEG3_C": "U8 OUT24 to DS3 segment C",
   "SEG3_D": "U8 OUT23 to DS3 segment D",
   "SEG3_E": "U8 OUT22 to DS3 segment E",
   "SEG3_F": "U8 OUT34 to DS3 segment F",
   "SEG3_G": "U8 OUT33 to DS3 segment G",
   "SEG3_DP": "U8 OUT13 to DS3 segment DP",
-  "SEG4_A": "U8 OUT7 to DS4 segment A",
-  "SEG4_B": "U8 OUT8 to DS4 segment B",
-  "SEG4_C": "U8 OUT10 to DS4 segment C",
-  "SEG4_D": "U8 OUT11 to DS4 segment D",
-  "SEG4_E": "U8 OUT12 to DS4 segment E",
-  "SEG4_F": "U8 OUT6 to DS4 segment F",
-  "SEG4_G": "U8 OUT5 to DS4 segment G",
-  "SEG4_DP": "U8 OUT9 to DS4 segment DP"
+  "SEG4_A": "U8 OUT12 to DS4 segment A",
+  "SEG4_B": "U8 OUT3 to DS4 segment B",
+  "SEG4_C": "U8 OUT7 to DS4 segment C",
+  "SEG4_D": "U8 OUT9 to DS4 segment D",
+  "SEG4_E": "U8 OUT11 to DS4 segment E",
+  "SEG4_F": "U8 OUT10 to DS4 segment F",
+  "SEG4_G": "U8 OUT8 to DS4 segment G",
+  "SEG4_DP": "U8 OUT5 to DS4 segment DP"
  },
  "pad_nets": [
   "SWCLK",

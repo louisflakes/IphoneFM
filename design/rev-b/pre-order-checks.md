@@ -1,4 +1,4 @@
-# Rev B pre-order checks (2026-11-07)
+# Rev B pre-order checks (2026-11-07; Rev C fan-out 2026-11-11)
 
 What was checked before ordering, beyond DRC/ERC and the check scripts (build-procedure.md B7), aimed at what could go
 wrong once the boards arrive. Everything below passed unless it says otherwise.
@@ -31,8 +31,8 @@ wrong once the boards arrive. Everything below passed unless it says otherwise.
 | Item | JLC (capabilities page, read 2026-11-07) | Ours |
 |---|---|---|
 | Track / gap, 2-layer | 0.10 / 0.10 mm | 0.127 in U8's fan-out areas, 0.20 elsewhere |
-| Via | 0.15 mm hole / 0.25 mm pad | 0.20 / 0.40 in the fan-out (JLC charges extra for a 0.2 mm hole with a pad under 0.45 mm); 0.30 / 0.60 elsewhere |
-| Via hole to track | 0.20 mm | 0.24 mm at the closest (fan-out) |
+| Via | 0.15 mm hole / 0.25 mm pad; JLC prices any hole under 0.3 mm as high-precision (plugged vias, 4-wire test: about $51 more for 5 panels) | Rev C: 0.30 / 0.45 in the fan-out (ring 0.075, JLC's preferred), 0.30 / 0.60 elsewhere; JLC quotes it as a standard board ($7.50 for 5 bare panels, 2026-11-11) |
+| Via hole to track | 0.20 mm | 0.20 mm at the closest (fan-out: via centre 0.4155 mm from a 0.127 mm line) |
 | Copper to routed edge | 0.20 mm | 0.50 mm |
 | Unplated holes | 0.50 mm min; no tolerance listed | SW4 bosses Ø1.6 (Mitsumi +0.05/−0) for Ø1.55 (−0.05/0) bosses, drawn as Rev A's locating holes |
 | Reflow | ~245 °C lead-free | GS3011: 245 ± 5 °C, 260 max, ≤ 2 passes; SIQ-02FVS3 reflow type; DHN-06-V lead-free solderable |
@@ -64,14 +64,14 @@ PC13 high (SDB). A segment lights when its OUT sinks: the digits are common anod
 
 | Segment | DS1 | DS2 | DS3 | DS4 |
 |---|---|---|---|---|
-| A | OUT30 (pin 29) | OUT26 (pin 25) | OUT3 (pin 1) | OUT7 (pin 5) |
-| B | OUT29 (pin 28) | OUT25 (pin 24) | OUT4 (pin 2) | OUT8 (pin 6) |
-| C | OUT16 (pin 14) | OUT20 (pin 19) | OUT24 (pin 23) | OUT10 (pin 8) |
-| D | OUT15 (pin 13) | OUT19 (pin 18) | OUT23 (pin 22) | OUT11 (pin 9) |
-| E | OUT14 (pin 12) | OUT18 (pin 16) | OUT22 (pin 21) | OUT12 (pin 10) |
-| F | OUT31 (pin 30) | OUT27 (pin 26) | OUT34 (pin 33) | OUT6 (pin 4) |
-| G | OUT32 (pin 31) | OUT28 (pin 27) | OUT33 (pin 32) | OUT5 (pin 3) |
-| DP | OUT17 (pin 15) | OUT21 (pin 20) | OUT13 (pin 11) | OUT9 (pin 7) |
+| A | OUT30 (pin 29) | OUT26 (pin 25) | OUT4 (pin 2) | OUT12 (pin 10) |
+| B | OUT29 (pin 28) | OUT25 (pin 24) | OUT6 (pin 4) | OUT3 (pin 1) |
+| C | OUT16 (pin 14) | OUT20 (pin 19) | OUT24 (pin 23) | OUT7 (pin 5) |
+| D | OUT15 (pin 13) | OUT19 (pin 18) | OUT23 (pin 22) | OUT9 (pin 7) |
+| E | OUT14 (pin 12) | OUT18 (pin 16) | OUT22 (pin 21) | OUT11 (pin 9) |
+| F | OUT31 (pin 30) | OUT27 (pin 26) | OUT34 (pin 33) | OUT10 (pin 8) |
+| G | OUT32 (pin 31) | OUT28 (pin 27) | OUT33 (pin 32) | OUT8 (pin 6) |
+| DP | OUT17 (pin 15) | OUT21 (pin 20) | OUT13 (pin 11) | OUT5 (pin 3) |
 
 DS1 is the digit nearest U8; with the board turned so its right edge is up, the digits read DS1 to DS4 left to
 right. OUT1, OUT2, OUT35 and OUT36 are open. The encoder: A on PA3 and B on PA4 are both open (high) at every detent,

@@ -164,12 +164,19 @@ top layer just below U8's bottom pins), in IphoneFM.kicad_dru:
 |---|---|---|---|---|
 | Copper to copper | 0.10 mm | 0.20 mm | **0.127 mm** | 27% over JLC; at the worst etch tolerance (±20%) about 0.10 mm |
 | Track width | 0.10 mm | 0.20 mm | **0.127 mm** | as above; the segment lines carry at most 7.6 mA (0.10 mm carries about 0.5 A) |
-| Via pad / hole | 0.25 / 0.15 mm (hole 0.2 preferred) | 0.60 / 0.30 mm | **0.40 / 0.20 mm** | JLC's preferred hole; 0.10 mm ring (JLC 0.05, preferred 0.075); the workflow's sizing method [HHG p65–67] gives about 0.45 mm |
-| Hole to copper | 0.20 mm | 0.30 mm | **0.20 mm** | the left side's even-pin lines pass 0.24 mm from the odd-pin via holes |
+| Via pad / hole | 0.25 / 0.15 mm; a hole under 0.30 mm is priced as high-precision | 0.60 / 0.30 mm | **0.45 / 0.30 mm** (Rev C; Rev B had 0.40 / 0.20) | JLC's standard hole; 0.075 mm ring (JLC 0.05, preferred 0.075); the workflow's sizing method [HHG p65–67] gives about 0.45 mm |
+| Hole to copper | 0.20 mm | 0.30 mm | **0.20 mm** | Rev C: no line passes between two vias; the closest holes are 0.20 mm from a line (via centre 0.4155 mm from the line's centre) |
 
 The 0.50 mm copper-to-edge rule is kept (the outer vias are 0.64 mm from the edge), as is the 0.50 mm hole-to-hole rule.
 Nothing wider fits: a line between two vias 0.8 mm apart leaves 0.4 mm between their pads, and a 0.127 mm line with
 0.127 mm gaps needs 0.38 mm (0.15 mm needs 0.45; a 0.45 mm via pad leaves 0.35).
+
+Rev C (2026-11-11, branch `rev-c`): JLC prices any via hole under 0.30 mm as high-precision (plugged vias and a 4-wire
+test, about $51 more for 5 panels). A 0.30 mm hole needs 0.35 mm from its centre to other copper, which a line
+threading between two vias 0.8 mm apart can't give (0.34 mm). So U8's left side was re-planned with no line between
+two vias: odd pins out to vias at x 14.35, even pins in, past their heels, to vias at x 16.39 between the pin ring and
+the exposed pad (0.127 mm from both); each column comes down the bottom in its own lanes. The fan-out vias are
+0.45 / 0.30 mm.
 
 ## 50 Ω line for the antenna path (step 0.6)
 
