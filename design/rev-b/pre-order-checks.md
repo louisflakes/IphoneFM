@@ -89,4 +89,7 @@ lead, tented 0.3 mm vias (standard), Economic assembly, top side, 2 assembled fr
   model for the digits). Matches the pin fits above.
 - Quote: $175.33 (PCB $7.50; Economic PCBA $167.83: components $64.30, extended-part fees $86.52, setup $8.24, the
   rest stencil, SMT, placement confirmation, hand soldering for J2, nitrogen reflow), without U1, U7 and shipping.
-
+- Global sourcing kept for U1 and U7 (the user's decision, 2026-11-11). Looked at: U7 has no in-stock drop-in
+  (PE43711A, same package: JLC 0; PE43712B-Z, JLC 114, is a 5 × 5 mm QFN-32 and would mean re-laying the transmit
+  RF area); U1 could become STM32U535CBU6 / CCU6 (same die and package, 128 / 256 KB flash; JLC 13 / 5), but with U7
+  on global sourcing the order waits either way.
