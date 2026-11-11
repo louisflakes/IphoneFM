@@ -257,7 +257,9 @@ not open in KiCad, so their Rev B steps are file edits with KiCad's own Python: 
   - 2026-11-07: all nine layers and both drill files found. Drill: 260 × 0.3 and 20 × 0.2 mm vias, five 1.4 mm (J2),
     four 0.6 mm plated slots (J1); unplated 25 × 0.5 mouse bites, 2 × 0.6 (J1), 2 × 0.85 (SW1), 2 × 1.6 (SW4),
     4 × 2.2 (mounting). Bottom paste empty. Top and bottom drawn as built: `gerber-b8-top.png`, `gerber-b8-bottom.png`.
-- [ ] B8.5 Upload to JLC for a quote, DFM and the rotation check only; the user places the order.
+- [x] B8.5 Upload to JLC for a quote, DFM and the rotation check only; the user places the order.
+  - Done for Rev C 2026-11-11 (pre-order-checks.md, "JLC upload"): preview matches the pin fits; $175.33 for 2
+    assembled without U1 and U7 (both global sourcing) and shipping. Nothing put in the cart.
 - [ ] B8.6 **Final review:** commit the project and tag it `rev-b`.
 
 ## Rev C: U8's fan-out on JLC's standard vias (branch `rev-c`, 2026-11-11)

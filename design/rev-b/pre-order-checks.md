@@ -76,3 +76,17 @@ PC13 high (SDB). A segment lights when its OUT sinks: the digits are common anod
 DS1 is the digit nearest U8; with the board turned so its right edge is up, the digits read DS1 to DS4 left to
 right. OUT1, OUT2, OUT35 and OUT36 are open. The encoder: A on PA3 and B on PA4 are both open (high) at every detent,
 the push switch on PA5 reads low when pressed.
+
+## JLC upload (Rev C, 2026-11-11)
+
+Gerbers, BOM and CPL uploaded to JLC's quote (not ordered): 2-layer, 90.4 × 78.45 mm panel by customer 1 × 1, HASL with
+lead, tented 0.3 mm vias (standard), Economic assembly, top side, 2 assembled from 5 panels, placement confirmation on.
+
+- BOM: 47 lines matched; U1 (STM32U535) and **U7 (PE43711B-Z, C470929)** short at JLC. U7 had 1,737 at Rev A and now
+  0; DigiKey 398 (2026-11-11), so it goes through JLC global sourcing with U1.
+- Placement preview: U8's pin-1 mark on ours (top-left), SW3's pin 1 on ours with "ON" toward the board's inside, SW4
+  centred on its pads with the bosses on their holes, the digits' centres between their pad columns (JLC has no 3D
+  model for the digits). Matches the pin fits above.
+- Quote: $175.33 (PCB $7.50; Economic PCBA $167.83: components $64.30, extended-part fees $86.52, setup $8.24, the
+  rest stencil, SMT, placement confirmation, hand soldering for J2, nitrogen reflow), without U1, U7 and shipping.
+
