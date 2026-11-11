@@ -286,4 +286,7 @@ same, so only 0.30 mm saves. Everything else is Rev B as reviewed.
   - JLC quote with the new Gerbers (2026-11-11): read as a standard board, $7.50 for 5 bare panels (Rev B's vias:
     $58.53), surface finish aside.
   - Picture: `routing-c-u8.png`.
-- [ ] C.3 **Review checkpoint:** the user reviews the new fan-out, the inward-exit allowance and the segment remap.
+- [x] C.3 **Review checkpoint:** the user reviews the new fan-out, the inward-exit allowance and the segment remap.
+  - Approved 2026-11-11, with the inward escapes. The user's choices: HASL (with lead, as Rev A; ENIG not needed for a
+    prototype, Economic assembly available), and the board renamed Rev C (title blocks Rev C, 2026-11-11; panel rail
+    text and output files IphoneFM-RevC-*; the files stay in the rev-b folders).

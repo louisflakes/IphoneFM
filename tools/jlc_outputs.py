@@ -41,7 +41,8 @@ JLC_FIX = {
 ASCII = {"µ": "u", "Ω": "Ohm", "×": "x"}
 
 pos_csv, out = sys.argv[1], sys.argv[2]
-N = {"rev-a": "RevA", "rev-b": "RevB"}[os.environ.get("IPHONEFM_REV", "rev-a")]
+N = {"rev-a": "RevA", "rev-b": "RevC"}   # the rev-b folder holds Rev C since the fan-out change
+N = N[os.environ.get("IPHONEFM_REV", "rev-a")]
 bom_path = os.path.join(out, f"IphoneFM-{N}-BOM.csv")
 bom = list(csv.DictReader(open(bom_path, encoding="utf-8")))
 for row in bom:

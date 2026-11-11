@@ -9,8 +9,8 @@
 	(paper "A4")
 	(title_block
 		(title "IphoneFM")
-		(date "2026-11-06")
-		(rev "B")
+		(date "2026-11-11")
+		(rev "C")
 		(company "louisflakes")
 		(comment 1 "MagSafe FM transmitter/receiver for iPhone 17 Pro, USB-C audio")
 		(comment 2 "Source of truth: design/rev-b/netlist.json")

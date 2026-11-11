@@ -8,7 +8,7 @@
 # Usage (from the repository root, board saved): [IPHONEFM_REV=rev-b] sh tools/pcb_panel.sh
 REV=${IPHONEFM_REV:-rev-a}
 export IPHONEFM_REV=$REV
-case $REV in rev-a) TITLE="IphoneFM Rev A";; rev-b) TITLE="IphoneFM Rev B";; esac
+case $REV in rev-a) TITLE="IphoneFM Rev A";; rev-b) TITLE="IphoneFM Rev C";; esac   # the rev-b folder holds Rev C since the fan-out change (build-procedure.md)
 D=kicad/$REV
 KIPY="C:/Users/jakep/AppData/Local/Programs/KiCad/10.0/bin/python.exe"
 mkdir -p $D/panel

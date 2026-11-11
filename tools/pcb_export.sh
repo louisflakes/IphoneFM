@@ -5,7 +5,7 @@
 set -e
 REV=${IPHONEFM_REV:-rev-a}
 export IPHONEFM_REV=$REV
-case $REV in rev-a) N=RevA;; rev-b) N=RevB;; esac
+case $REV in rev-a) N=RevA;; rev-b) N=RevC;; esac   # the rev-b folder holds Rev C since the fan-out change
 D=kicad/$REV
 K="C:/Users/jakep/AppData/Local/Programs/KiCad/10.0/bin/kicad-cli.exe"
 PY="C:/Users/jakep/.kicad-mcp/venv/Scripts/python.exe"
